@@ -9,3 +9,7 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+
+# AI instructions
+.claude
+.cursor
