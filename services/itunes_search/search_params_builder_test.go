@@ -9,7 +9,7 @@ import (
 
 func TestNewSearchParams(t *testing.T) {
 	builder := NewSearchParams()
-	
+
 	require.NotNil(t, builder)
 	assert.NotNil(t, builder.params)
 	assert.Equal(t, 0, len(builder.params))

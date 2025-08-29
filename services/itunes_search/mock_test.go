@@ -105,7 +105,6 @@ func TestMock_Search_Album(t *testing.T) {
 		},
 	)
 
-
 	params := NewSearchParams().
 		Term("Jack Johnson").
 		Media("music").
@@ -149,7 +148,6 @@ func TestMock_Search_Movie(t *testing.T) {
 			return resp, nil
 		},
 	)
-
 
 	params := NewSearchParams().
 		Term("Star Wars").
@@ -196,7 +194,6 @@ func TestMock_Search_App(t *testing.T) {
 		},
 	)
 
-
 	params := NewSearchParams().
 		Term("Instagram").
 		Media("software").
@@ -234,7 +231,6 @@ func TestMock_Search_NoResults(t *testing.T) {
 		httpmock.NewBytesResponder(200, mockData),
 	)
 
-
 	params := NewSearchParams().
 		Term("nonexistentxyz123").
 		Media("music").
@@ -259,7 +255,6 @@ func TestMock_Search_HTTPError(t *testing.T) {
 		httpmock.NewStringResponder(404, "Not Found"),
 	)
 
-
 	params := NewSearchParams().
 		Term("test").
 		Build()
@@ -280,7 +275,6 @@ func TestMock_Search_InvalidJSON(t *testing.T) {
 	httpmock.RegisterResponder("GET", BaseSearchURL,
 		httpmock.NewStringResponder(200, "invalid json"),
 	)
-
 
 	params := NewSearchParams().
 		Term("test").
@@ -312,7 +306,6 @@ func TestMock_Lookup_ByID(t *testing.T) {
 			return resp, nil
 		},
 	)
-
 
 	params := NewLookupParams().
 		ID(909253).
@@ -353,7 +346,6 @@ func TestMock_Lookup_MultipleIDs(t *testing.T) {
 			return resp, nil
 		},
 	)
-
 
 	params := NewLookupParams().
 		IDs([]int{909253, 159260351}).
@@ -399,7 +391,6 @@ func TestMock_Lookup_WithEntityFilter(t *testing.T) {
 			return resp, nil
 		},
 	)
-
 
 	params := NewLookupParams().
 		ID(909253).
@@ -448,7 +439,6 @@ func TestMock_Lookup_HTTPError(t *testing.T) {
 		httpmock.NewStringResponder(500, "Internal Server Error"),
 	)
 
-
 	params := NewLookupParams().
 		ID(909253).
 		Build()
@@ -473,7 +463,6 @@ func TestMock_Lookup_NoResults(t *testing.T) {
 	httpmock.RegisterResponder("GET", BaseLookupURL,
 		httpmock.NewBytesResponder(200, mockData),
 	)
-
 
 	params := NewLookupParams().
 		ID(999999999).
@@ -515,7 +504,6 @@ func TestMock_ParameterValidation(t *testing.T) {
 		},
 	)
 
-
 	// Test parameter encoding and validation
 	params := NewSearchParams().
 		Term("Jack Johnson & Friends").
@@ -555,7 +543,6 @@ func TestMock_BuilderChaining(t *testing.T) {
 			return resp, nil
 		},
 	)
-
 
 	// Test method chaining
 	params := NewLookupParams().

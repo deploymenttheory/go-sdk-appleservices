@@ -10,14 +10,14 @@ import (
 )
 
 const (
-	searchTerm     = "Taylor Swift"
-	mediaType      = "music"
-	entityType     = "musicTrack"
-	attributeType  = "artistTerm"
-	countryCode    = "US"
-	resultLimit    = 25
-	languageCode   = "en_us"
-	explicitFlag   = "No"
+	searchTerm    = "Taylor Swift"
+	mediaType     = "music"
+	entityType    = "musicTrack"
+	attributeType = "artistTerm"
+	countryCode   = "US"
+	resultLimit   = 25
+	languageCode  = "en_us"
+	explicitFlag  = "No"
 )
 
 func main() {

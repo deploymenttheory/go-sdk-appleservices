@@ -211,7 +211,7 @@ func TestAcceptance_Search_WithExplicitFilter(t *testing.T) {
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
-	
+
 	// With explicit filter "No", we should get clean results
 	if result.ResultCount > 0 {
 		for _, track := range result.Results {
@@ -311,7 +311,7 @@ func TestAcceptance_Lookup_ByMultipleIDs(t *testing.T) {
 		}
 	}
 
-	assert.Contains(t, artistIDs, int64(909253))  // Jack Johnson
+	assert.Contains(t, artistIDs, int64(909253))    // Jack Johnson
 	assert.Contains(t, artistIDs, int64(159260351)) // Taylor Swift
 }
 
@@ -400,7 +400,7 @@ func TestAcceptance_Lookup_WithLimit(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, result)
 	assert.Greater(t, result.ResultCount, 0)
-	
+
 	// The limit parameter for lookup may not work the same as for search
 	// Just verify we get results - the API may return more than the limit
 	assert.NotEmpty(t, result.Results)
@@ -424,7 +424,7 @@ func TestAcceptance_Search_LargeResults(t *testing.T) {
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
-	assert.Greater(t, result.ResultCount, 5) // Should get many Beatles songs
+	assert.Greater(t, result.ResultCount, 5)      // Should get many Beatles songs
 	assert.LessOrEqual(t, result.ResultCount, 25) // Should respect limit
 	assert.Len(t, result.Results, result.ResultCount)
 

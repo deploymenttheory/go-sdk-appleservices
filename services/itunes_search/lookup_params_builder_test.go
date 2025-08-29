@@ -9,7 +9,7 @@ import (
 
 func TestNewLookupParams(t *testing.T) {
 	builder := NewLookupParams()
-	
+
 	require.NotNil(t, builder)
 	assert.NotNil(t, builder.params)
 	assert.Equal(t, 0, len(builder.params))
@@ -517,10 +517,10 @@ func TestLookupParamsBuilder_ChainedCalls(t *testing.T) {
 
 	expected := map[string]string{
 		"amgArtistId": "468749",
-		"entity":     "album",
-		"limit":      "5",
-		"sort":       "recent",
-		"country":    "US",
+		"entity":      "album",
+		"limit":       "5",
+		"sort":        "recent",
+		"country":     "US",
 	}
 
 	assert.Equal(t, expected, result)

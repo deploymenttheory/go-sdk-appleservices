@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	searchTerm = "Jack Johnson"
-	mediaType  = "music"
+	searchTerm  = "Jack Johnson"
+	mediaType   = "music"
 	resultLimit = 5
 )
 

@@ -12,10 +12,10 @@ import (
 var (
 	customParams = map[string]string{
 		"amgArtistId": "468749,5723",
-		"entity":     "album",
-		"limit":      "10",
-		"sort":       "recent",
-		"country":    "US",
+		"entity":      "album",
+		"limit":       "10",
+		"sort":        "recent",
+		"country":     "US",
 	}
 )
 

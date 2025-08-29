@@ -110,32 +110,32 @@ func TestClient_Search_MockServer(t *testing.T) {
 		ResultCount: 2,
 		Results: []Result{
 			{
-				WrapperType:       "track",
-				Kind:              "song",
-				ArtistID:          909253,
-				ArtistName:        "Jack Johnson",
-				TrackName:         "Imagine",
-				CollectionName:    "Test Album",
-				PrimaryGenreName:  "Rock",
-				Country:           "USA",
-				Currency:          "USD",
-				TrackPrice:        1.29,
-				CollectionPrice:   9.99,
-				ReleaseDate:       "2007-06-11T12:00:00Z",
+				WrapperType:      "track",
+				Kind:             "song",
+				ArtistID:         909253,
+				ArtistName:       "Jack Johnson",
+				TrackName:        "Imagine",
+				CollectionName:   "Test Album",
+				PrimaryGenreName: "Rock",
+				Country:          "USA",
+				Currency:         "USD",
+				TrackPrice:       1.29,
+				CollectionPrice:  9.99,
+				ReleaseDate:      "2007-06-11T12:00:00Z",
 			},
 			{
-				WrapperType:       "track",
-				Kind:              "song",
-				ArtistID:          909253,
-				ArtistName:        "Jack Johnson",
-				TrackName:         "Flake",
-				CollectionName:    "Test Album 2",
-				PrimaryGenreName:  "Rock",
-				Country:           "USA",
-				Currency:          "USD",
-				TrackPrice:        0.99,
-				CollectionPrice:   8.99,
-				ReleaseDate:       "2001-02-06T08:00:00Z",
+				WrapperType:      "track",
+				Kind:             "song",
+				ArtistID:         909253,
+				ArtistName:       "Jack Johnson",
+				TrackName:        "Flake",
+				CollectionName:   "Test Album 2",
+				PrimaryGenreName: "Rock",
+				Country:          "USA",
+				Currency:         "USD",
+				TrackPrice:       0.99,
+				CollectionPrice:  8.99,
+				ReleaseDate:      "2001-02-06T08:00:00Z",
 			},
 		},
 	}
@@ -249,7 +249,7 @@ func TestResult_AllFields(t *testing.T) {
 	err := json.Unmarshal([]byte(jsonData), &result)
 
 	require.NoError(t, err)
-	
+
 	// Test all major fields
 	assert.Equal(t, "track", result.WrapperType)
 	assert.Equal(t, "song", result.Kind)
