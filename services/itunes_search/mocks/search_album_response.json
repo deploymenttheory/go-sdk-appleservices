@@ -1,0 +1,25 @@
+{
+  "resultCount": 1,
+  "results": [
+    {
+      "wrapperType": "collection",
+      "collectionType": "Album",
+      "artistId": 909253,
+      "collectionId": 255144028,
+      "artistName": "Jack Johnson",
+      "collectionName": "In Between Dreams",
+      "collectionCensoredName": "In Between Dreams",
+      "artistViewUrl": "https://music.apple.com/us/artist/jack-johnson/909253",
+      "collectionViewUrl": "https://music.apple.com/us/album/in-between-dreams/255144028",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/37/5a/75/375a7587-8b37-958e-2b4c-c8c1b46ca39b/source/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/37/5a/75/375a7587-8b37-958e-2b4c-c8c1b46ca39b/source/100x100bb.jpg",
+      "collectionPrice": 9.99,
+      "releaseDate": "2005-03-01T08:00:00Z",
+      "collectionExplicitness": "notExplicit",
+      "trackCount": 15,
+      "country": "USA",
+      "currency": "USD",
+      "primaryGenreName": "Rock"
+    }
+  ]
+}

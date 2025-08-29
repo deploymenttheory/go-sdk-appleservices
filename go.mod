@@ -4,6 +4,7 @@ go 1.21
 
 require (
 	github.com/go-resty/resty/v2 v2.16.5
+	github.com/jarcoal/httpmock v1.4.1
 	github.com/stretchr/testify v1.8.1
 	go.uber.org/zap v1.27.0
 )

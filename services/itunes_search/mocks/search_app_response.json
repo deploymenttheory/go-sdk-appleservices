@@ -1,0 +1,65 @@
+{
+  "resultCount": 1,
+  "results": [
+    {
+      "wrapperType": "software",
+      "kind": "software",
+      "artistId": 389801252,
+      "trackId": 389801252,
+      "artistName": "Instagram, Inc.",
+      "trackName": "Instagram",
+      "trackCensoredName": "Instagram",
+      "artistViewUrl": "https://apps.apple.com/us/developer/instagram-inc/id389801252",
+      "trackViewUrl": "https://apps.apple.com/us/app/instagram/id389801252",
+      "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/99/6a/89/996a895f-8d6a-4e4c-4c8e-8e9c4a3e0b9b/source/60x60bb.jpg",
+      "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/99/6a/89/996a895f-8d6a-4e4c-4c8e-8e9c4a3e0b9b/source/100x100bb.jpg",
+      "trackPrice": 0.00,
+      "releaseDate": "2010-10-06T07:00:00Z",
+      "collectionExplicitness": "4+",
+      "trackExplicitness": "4+",
+      "country": "USA",
+      "currency": "USD",
+      "primaryGenreName": "Photo & Video",
+      "contentAdvisoryRating": "4+",
+      "sellerName": "Instagram, Inc.",
+      "features": [
+        "iosUniversal"
+      ],
+      "supportedDevices": [
+        "iPhone5s-iPhone5s",
+        "iPadAir-iPadAir",
+        "iPadAirCellular-iPadAirCellular",
+        "iPadMiniRetina-iPadMiniRetina",
+        "iPadMiniRetinaCellular-iPadMiniRetinaCellular"
+      ],
+      "advisories": [],
+      "isGameCenterEnabled": false,
+      "screenshotUrls": [
+        "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/95/61/ad/9561ad49-8b5e-4a88-4c8e-8e9c4a3e0b9c/source/392x696bb.jpg",
+        "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/b4/4e/2f/b44e2f23-0b5e-4a88-4c8e-8e9c4a3e0b9d/source/392x696bb.jpg"
+      ],
+      "ipadScreenshotUrls": [
+        "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/e7/93/9c/e7939c8e-4d6a-4e4c-4c8e-8e9c4a3e0b9e/source/576x768bb.jpg",
+        "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/f8/28/3f/f8283f12-8d6a-4e4c-4c8e-8e9c4a3e0b9f/source/576x768bb.jpg"
+      ],
+      "bundleId": "com.burbn.instagram",
+      "currentVersionReleaseDate": "2023-12-15T23:15:25Z",
+      "fileSizeBytes": "321126400",
+      "formattedPrice": "Free",
+      "languageCodesISO2A": [
+        "EN",
+        "ES",
+        "FR",
+        "JA"
+      ],
+      "minimumOsVersion": "12.0",
+      "trackContentRating": "4+",
+      "userRatingCount": 9876543,
+      "userRatingCountForCurrentVersion": 123456,
+      "averageUserRating": 4.5,
+      "averageUserRatingForCurrentVersion": 4.7,
+      "version": "307.0",
+      "description": "Bringing you closer to the people and things you love. — Instagram from Meta"
+    }
+  ]
+}

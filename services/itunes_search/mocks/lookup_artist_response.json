@@ -1,0 +1,15 @@
+{
+  "resultCount": 1,
+  "results": [
+    {
+      "wrapperType": "artist",
+      "artistType": "Artist",
+      "artistId": 909253,
+      "artistName": "Jack Johnson",
+      "artistLinkUrl": "https://music.apple.com/us/artist/jack-johnson/909253",
+      "primaryGenreName": "Rock",
+      "primaryGenreId": 21,
+      "radioStationUrl": "https://radio.itunes.apple.com/v1/station/ra.909253"
+    }
+  ]
+}
