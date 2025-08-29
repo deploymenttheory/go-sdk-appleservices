@@ -1,0 +1,69 @@
+title: Status Test Dictionary Value
+description: A test status item dictionary.
+payload:
+  statusitemtype: test.dictionary-value
+  supportedOS:
+    iOS:
+      introduced: '16.0'
+      allowed-enrollments:
+      - supervised
+      - device
+      - user
+      - local
+      allowed-scopes:
+      - system
+      sharedipad:
+        allowed-scopes:
+        - system
+        - user
+    macOS:
+      introduced: '13.0'
+      allowed-enrollments:
+      - supervised
+      - user
+      - local
+      allowed-scopes:
+      - system
+      - user
+    tvOS:
+      introduced: '16.0'
+      allowed-enrollments:
+      - supervised
+      - device
+      - local
+      allowed-scopes:
+      - system
+    visionOS:
+      introduced: '1.1'
+      allowed-enrollments:
+      - supervised
+      - device
+      - user
+      - local
+      allowed-scopes:
+      - system
+    watchOS:
+      introduced: '10.0'
+      allowed-enrollments:
+      - supervised
+      - local
+      allowed-scopes:
+      - system
+payloadkeys:
+- key: test.dictionary-value
+  title: Status item value.
+  type: <dictionary>
+  presence: required
+  content: The test status dictionary value.
+  subkeytype: Dictionary
+  subkeys:
+  - key: key1
+    title: First Key Value
+    type: <string>
+    presence: required
+    content: The value of the first sub-key.
+  - key: key2
+    title: Second Key Value
+    type: <string>
+    presence: optional
+    content: The value of the second sub-key.

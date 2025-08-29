@@ -1,0 +1,57 @@
+title: Status Test Error Value
+description: A test status item for errors.
+payload:
+  statusitemtype: test.error-value
+  supportedOS:
+    iOS:
+      introduced: '16.0'
+      allowed-enrollments:
+      - supervised
+      - device
+      - user
+      - local
+      allowed-scopes:
+      - system
+      sharedipad:
+        allowed-scopes:
+        - system
+        - user
+    macOS:
+      introduced: '13.0'
+      allowed-enrollments:
+      - supervised
+      - user
+      - local
+      allowed-scopes:
+      - system
+      - user
+    tvOS:
+      introduced: '16.0'
+      allowed-enrollments:
+      - supervised
+      - device
+      - local
+      allowed-scopes:
+      - system
+    visionOS:
+      introduced: '1.1'
+      allowed-enrollments:
+      - supervised
+      - device
+      - user
+      - local
+      allowed-scopes:
+      - system
+    watchOS:
+      introduced: '10.0'
+      allowed-enrollments:
+      - supervised
+      - local
+      allowed-scopes:
+      - system
+payloadkeys:
+- key: test.error-value
+  title: Status item value.
+  type: <string>
+  presence: required
+  content: The test status error value.

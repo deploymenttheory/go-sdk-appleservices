@@ -1,0 +1,57 @@
+title: NSExtension Management
+description: ''
+payload:
+  payloadtype: com.apple.NSExtension
+  supportedOS:
+    iOS:
+      introduced: n/a
+    macOS:
+      introduced: '10.13'
+      multiple: true
+      devicechannel: true
+      userchannel: true
+      supervised: false
+      requiresdep: false
+      userapprovedmdm: false
+      allowmanualinstall: true
+      userenrollment:
+        mode: forbidden
+    tvOS:
+      introduced: n/a
+    visionOS:
+      introduced: n/a
+    watchOS:
+      introduced: n/a
+  content: Specifies which NSExtension extensions are to be allowed or disallowed
+    on a system. Extensions can be managed by bundleID allow/deny lists and "extension
+    points".
+payloadkeys:
+- key: AllowedExtensions
+  type: <array>
+  presence: optional
+  content: An array of bundle identifiers for allowed extensions.
+  subkeys:
+  - key: AllowedExtensionsItem
+    type: <string>
+    presence: required
+    content: An extension identifier.
+- key: DeniedExtensions
+  type: <array>
+  presence: optional
+  content: An array of bundle identifiers for extensions that the system doesn't allow
+    to run.
+  subkeys:
+  - key: DeniedExtensionsItem
+    type: <string>
+    presence: required
+    content: An extension identifier.
+- key: DeniedExtensionPoints
+  type: <array>
+  presence: optional
+  content: An array of extension points for extensions that the system doesn't allow
+    to run.
+  subkeys:
+  - key: DeniedExtensionPointsItem
+    type: <string>
+    presence: required
+    content: An extension identifier.

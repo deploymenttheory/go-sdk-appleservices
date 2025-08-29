@@ -1,0 +1,57 @@
+title: Status Test Boolean Value
+description: A test status item boolean.
+payload:
+  statusitemtype: test.boolean-value
+  supportedOS:
+    iOS:
+      introduced: '16.0'
+      allowed-enrollments:
+      - supervised
+      - device
+      - user
+      - local
+      allowed-scopes:
+      - system
+      sharedipad:
+        allowed-scopes:
+        - system
+        - user
+    macOS:
+      introduced: '13.0'
+      allowed-enrollments:
+      - supervised
+      - user
+      - local
+      allowed-scopes:
+      - system
+      - user
+    tvOS:
+      introduced: '16.0'
+      allowed-enrollments:
+      - supervised
+      - device
+      - local
+      allowed-scopes:
+      - system
+    visionOS:
+      introduced: '1.1'
+      allowed-enrollments:
+      - supervised
+      - device
+      - user
+      - local
+      allowed-scopes:
+      - system
+    watchOS:
+      introduced: '10.0'
+      allowed-enrollments:
+      - supervised
+      - local
+      allowed-scopes:
+      - system
+payloadkeys:
+- key: test.boolean-value
+  title: Status item value.
+  type: <boolean>
+  presence: required
+  content: The test status Boolean value.

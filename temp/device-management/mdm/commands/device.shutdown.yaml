@@ -1,0 +1,34 @@
+title: Shut Down Device Command
+description: This command requires the Device Lock access right. The device will shut
+  down immediately.
+payload:
+  requesttype: ShutDownDevice
+  supportedOS:
+    iOS:
+      introduced: '10.3'
+      accessrights: AllowPasscodeRemovalAndLock
+      supervised: true
+      requiresdep: false
+      sharedipad:
+        mode: allowed
+        devicechannel: true
+        userchannel: false
+      userenrollment:
+        mode: forbidden
+    macOS:
+      introduced: '10.13'
+      accessrights: AllowPasscodeRemovalAndLock
+      devicechannel: true
+      userchannel: false
+      supervised: false
+      requiresdep: false
+      userenrollment:
+        mode: forbidden
+    tvOS:
+      introduced: n/a
+    visionOS:
+      introduced: n/a
+    watchOS:
+      introduced: n/a
+  content: This command requires the Device Lock access right. The device will shut
+    down immediately.

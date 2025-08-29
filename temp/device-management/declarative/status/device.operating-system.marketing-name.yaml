@@ -1,0 +1,57 @@
+title: Status Device Operating System Marketing Name
+description: The device's operating system marketing name.
+payload:
+  statusitemtype: device.operating-system.marketing-name
+  supportedOS:
+    iOS:
+      introduced: '15.0'
+      allowed-enrollments:
+      - supervised
+      - device
+      - user
+      - local
+      allowed-scopes:
+      - system
+      sharedipad:
+        allowed-scopes:
+        - system
+        - user
+    macOS:
+      introduced: '13.0'
+      allowed-enrollments:
+      - supervised
+      - user
+      - local
+      allowed-scopes:
+      - system
+      - user
+    tvOS:
+      introduced: '16.0'
+      allowed-enrollments:
+      - supervised
+      - device
+      - local
+      allowed-scopes:
+      - system
+    visionOS:
+      introduced: '1.1'
+      allowed-enrollments:
+      - supervised
+      - device
+      - user
+      - local
+      allowed-scopes:
+      - system
+    watchOS:
+      introduced: '10.0'
+      allowed-enrollments:
+      - supervised
+      - local
+      allowed-scopes:
+      - system
+payloadkeys:
+- key: device.operating-system.marketing-name
+  title: Status item value.
+  type: <string>
+  presence: required
+  content: The operating system's marketing name in use on the device, such as 'Catalina'.
