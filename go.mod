@@ -6,6 +6,7 @@ toolchain go1.24.4
 
 require (
 	github.com/go-resty/resty/v2 v2.16.5
+	github.com/golang-jwt/jwt/v5 v5.3.0
 	github.com/google/go-github/v74 v74.0.0
 	github.com/jarcoal/httpmock v1.4.1
 	github.com/stretchr/testify v1.8.1

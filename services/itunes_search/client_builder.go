@@ -1,7 +1,7 @@
 package itunes_search
 
 import (
-	"github.com/deploymenttheory/go-api-sdk-apple/client"
+	client "github.com/deploymenttheory/go-api-sdk-apple/client/itunes"
 	"go.uber.org/zap"
 )
 

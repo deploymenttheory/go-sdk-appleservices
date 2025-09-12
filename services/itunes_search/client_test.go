@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/deploymenttheory/go-api-sdk-apple/client"
+	client "github.com/deploymenttheory/go-api-sdk-apple/client/itunes"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

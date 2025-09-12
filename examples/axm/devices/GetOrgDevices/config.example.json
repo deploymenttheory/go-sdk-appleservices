@@ -1,0 +1,11 @@
+{
+  "baseUrl": "https://axm-adm-enroll.apple.com",
+  "orgId": "your-organization-id-here",
+  "keyId": "your-key-id-here",
+  "privateKeyPath": "/Users/dafyddwatkins/Desktop/axm-private-key.pem",
+  "timeoutSeconds": 30,
+  "retryCount": 3,
+  "retryDelayMs": 1000,
+  "userAgent": "go-api-sdk-apple-example/1.0.0",
+  "debug": true
+}
