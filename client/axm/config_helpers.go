@@ -68,8 +68,8 @@ func LoadAndTestConfigWithEnvOverrides(configPath string) (AXMConfig, *AXMClient
 
 // ValidateConfig performs basic validation on an AXMConfig
 func ValidateConfig(config AXMConfig) error {
-	if config.OrgID == "" {
-		return fmt.Errorf("orgID is required")
+	if config.ClientID == "" {
+		return fmt.Errorf("clientID is required")
 	}
 
 	if config.KeyID == "" {
@@ -84,7 +84,7 @@ func ValidateConfig(config AXMConfig) error {
 		return fmt.Errorf("baseURL is required")
 	}
 
-	// Test private key parsing - Apple Business Manager API requires ECDSA keys
+	// Test private key parsing - Apple AXM API requires ECDSA keys
 	_, err := parsePrivateKey(config.PrivateKey)
 	if err != nil {
 		return fmt.Errorf("invalid ECDSA private key: %w", err)
@@ -94,10 +94,10 @@ func ValidateConfig(config AXMConfig) error {
 }
 
 // CreateDefaultConfig creates an AXMConfig with sensible defaults
-func CreateDefaultConfig(orgID, keyID, privateKey string) AXMConfig {
+func CreateDefaultConfig(clientID, keyID, privateKey string) AXMConfig {
 	return AXMConfig{
 		BaseURL:    AppleSchoolManagerBaseURL,
-		OrgID:      orgID,
+		ClientID:   clientID,
 		KeyID:      keyID,
 		PrivateKey: privateKey,
 		// Defaults will be set by NewAXMClient
