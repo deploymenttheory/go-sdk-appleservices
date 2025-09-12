@@ -1,4 +1,4 @@
-package client
+package axm2
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ type QueryBuilder struct {
 }
 
 // NewQueryBuilder creates a new query parameter builder
-func (c *AXMClient) NewQueryBuilder() *QueryBuilder {
+func NewQueryBuilder() *QueryBuilder {
 	return &QueryBuilder{
 		params: make(map[string]string),
 	}
