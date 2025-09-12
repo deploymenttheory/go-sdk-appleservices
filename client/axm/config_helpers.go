@@ -106,15 +106,16 @@ func CreateDefaultConfig(clientID, keyID, privateKey string) AXMConfig {
 
 // LoadConfigFromEnv loads configuration from environment variables only
 func LoadConfigFromEnv() (AXMConfig, error) {
-	orgID := os.Getenv("APPLE_ORG_ID")
+	clientID := os.Getenv("APPLE_CLIENT_ID")
 	keyID := os.Getenv("APPLE_KEY_ID")
 	privateKey := os.Getenv("APPLE_PRIVATE_KEY")
 	privateKeyPath := os.Getenv("APPLE_PRIVATE_KEY_PATH")
 	baseURL := os.Getenv("APPLE_BASE_URL")
+	scope := os.Getenv("APPLE_SCOPE")
 
 	// Validate required fields
-	if orgID == "" {
-		return AXMConfig{}, fmt.Errorf("APPLE_ORG_ID environment variable is required")
+	if clientID == "" {
+		return AXMConfig{}, fmt.Errorf("APPLE_CLIENT_ID environment variable is required")
 	}
 
 	if keyID == "" {
@@ -134,11 +135,16 @@ func LoadConfigFromEnv() (AXMConfig, error) {
 		}
 	}
 
-	config := CreateDefaultConfig(orgID, keyID, privateKey)
+	config := CreateDefaultConfig(clientID, keyID, privateKey)
 
 	// Override base URL if provided
 	if baseURL != "" {
 		config.BaseURL = baseURL
+	}
+
+	// Set scope if provided
+	if scope != "" {
+		config.Scope = scope
 	}
 
 	return config, nil
@@ -171,7 +177,7 @@ func QuickStart(configFilePath string) (*AXMClient, error) {
 				return nil, fmt.Errorf("failed to load config from file %s: %w", configFilePath, err)
 			}
 
-			log.Printf("Successfully authenticated with Org ID: %s", config.OrgID)
+			log.Printf("Successfully authenticated with Client ID: %s", config.ClientID)
 			return client, nil
 		}
 	}
@@ -185,7 +191,7 @@ func QuickStart(configFilePath string) (*AXMClient, error) {
 			return nil, fmt.Errorf("failed to load config from default file %s: %w", defaultConfigPath, err)
 		}
 
-		log.Printf("Successfully authenticated with Org ID: %s", config.OrgID)
+		log.Printf("Successfully authenticated with Client ID: %s", config.ClientID)
 		return client, nil
 	}
 
@@ -196,8 +202,9 @@ func QuickStart(configFilePath string) (*AXMClient, error) {
 func PrintConfigSummary(config AXMConfig) {
 	fmt.Printf("Configuration Summary:\n")
 	fmt.Printf("  Base URL: %s\n", config.BaseURL)
-	fmt.Printf("  Org ID: %s\n", config.OrgID)
+	fmt.Printf("  Client ID: %s\n", config.ClientID)
 	fmt.Printf("  Key ID: %s\n", config.KeyID)
+	fmt.Printf("  Scope: %s\n", config.Scope)
 	fmt.Printf("  Timeout: %v\n", config.Timeout)
 	fmt.Printf("  Retry Count: %d\n", config.RetryCount)
 	fmt.Printf("  Retry Delay: %v\n", config.RetryDelay)

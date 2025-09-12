@@ -10,10 +10,11 @@ import (
 // AXMConfigFile represents the JSON configuration file structure
 type AXMConfigFile struct {
 	BaseURL         string `json:"baseUrl,omitempty"`
-	OrgID           string `json:"orgId"`
+	ClientID        string `json:"clientId"`
 	KeyID           string `json:"keyId"`
 	PrivateKey      string `json:"privateKey,omitempty"`
 	PrivateKeyPath  string `json:"privateKeyPath,omitempty"`
+	Scope           string `json:"scope,omitempty"`
 	TimeoutSeconds  int    `json:"timeoutSeconds,omitempty"`
 	RetryCount      int    `json:"retryCount,omitempty"`
 	RetryDelayMs    int    `json:"retryDelayMs,omitempty"`
@@ -43,9 +44,10 @@ func LoadConfigFromFile(filePath string) (AXMConfig, error) {
 
 	// Convert to AXMConfig with defaults
 	config = AXMConfig{
-		OrgID:  configFile.OrgID,
-		KeyID:  configFile.KeyID,
-		Debug:  configFile.Debug,
+		ClientID: configFile.ClientID,
+		KeyID:    configFile.KeyID,
+		Scope:    configFile.Scope,
+		Debug:    configFile.Debug,
 	}
 
 	// Set BaseURL with default
@@ -107,8 +109,8 @@ func LoadConfigFromFileWithEnvOverrides(filePath string) (AXMConfig, error) {
 	}
 
 	// Allow environment variables to override config file values
-	if orgID := os.Getenv("APPLE_ORG_ID"); orgID != "" {
-		config.OrgID = orgID
+	if clientID := os.Getenv("APPLE_CLIENT_ID"); clientID != "" {
+		config.ClientID = clientID
 	}
 
 	if keyID := os.Getenv("APPLE_KEY_ID"); keyID != "" {
@@ -131,9 +133,13 @@ func LoadConfigFromFileWithEnvOverrides(filePath string) (AXMConfig, error) {
 		config.BaseURL = baseURL
 	}
 
+	if scope := os.Getenv("APPLE_SCOPE"); scope != "" {
+		config.Scope = scope
+	}
+
 	// Validate required fields after env overrides
-	if config.OrgID == "" {
-		return config, fmt.Errorf("orgId is required (set in config file or APPLE_ORG_ID env var)")
+	if config.ClientID == "" {
+		return config, fmt.Errorf("clientId is required (set in config file or APPLE_CLIENT_ID env var)")
 	}
 
 	if config.KeyID == "" {
@@ -155,8 +161,9 @@ func SaveConfigToFile(config AXMConfig, filePath string, includePrivateKeyPath s
 
 	configFile := AXMConfigFile{
 		BaseURL:        config.BaseURL,
-		OrgID:          config.OrgID,
+		ClientID:       config.ClientID,
 		KeyID:          config.KeyID,
+		Scope:          config.Scope,
 		TimeoutSeconds: int(config.Timeout.Seconds()),
 		RetryCount:     config.RetryCount,
 		RetryDelayMs:   int(config.RetryDelay.Milliseconds()),
