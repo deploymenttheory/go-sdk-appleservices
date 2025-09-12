@@ -15,8 +15,8 @@ import (
 
 const (
 	// Apple School and Business Manager API base URLs
-	AppleSchoolManagerBaseURL   = "https://axm-adm-enroll.apple.com"
-	AppleBusinessManagerBaseURL = "https://axm-adm-enroll.apple.com"
+	AppleBusinessManagerBaseURL = "https://api-business.apple.com"
+	AppleSchoolManagerBaseURL   = "https://api-school.apple.com"
 
 	// OAuth endpoints
 	TokenEndpoint = "https://account.apple.com/auth/oauth2/token"
@@ -29,6 +29,10 @@ const (
 	
 	// JWT Constants
 	TokenAudience = "https://account.apple.com/auth/oauth2/v2/token"
+	
+	// API Types
+	APITypeABM = "abm" // Apple Business Manager
+	APITypeASM = "asm" // Apple School Manager
 )
 
 // AXMClient represents a client for Apple School and Business Manager API
@@ -43,7 +47,8 @@ type AXMClient struct {
 
 // AXMConfig holds configuration for the AXM client
 type AXMConfig struct {
-	BaseURL    string        // Apple School/Business Manager API base URL
+	BaseURL    string        // Apple School/Business Manager API base URL (optional, will be set based on APIType)
+	APIType    string        // API type: "abm" for Apple Business Manager, "asm" for Apple School Manager
 	ClientID   string        // Client ID from Apple (e.g., "BUSINESSAPI.9703f56c-10ce-4876-8f59-e78e5e23a152")
 	KeyID      string        // Key ID from Apple
 	PrivateKey string        // Private key content (PEM format)
@@ -86,9 +91,29 @@ func NewAXMClient(config AXMConfig) (*AXMClient, error) {
 		logger = zap.NewNop()
 	}
 
-	// Set defaults
+	// Set base URL based on API type
 	if config.BaseURL == "" {
-		config.BaseURL = AppleSchoolManagerBaseURL
+		switch config.APIType {
+		case APITypeABM:
+			config.BaseURL = AppleBusinessManagerBaseURL
+		case APITypeASM:
+			config.BaseURL = AppleSchoolManagerBaseURL
+		default:
+			// Default to ABM if not specified
+			config.BaseURL = AppleBusinessManagerBaseURL
+		}
+	}
+	
+	// Set scope based on API type if not specified
+	if config.Scope == "" {
+		switch config.APIType {
+		case APITypeABM:
+			config.Scope = BusinessScope
+		case APITypeASM:
+			config.Scope = SchoolScope
+		default:
+			config.Scope = BusinessScope
+		}
 	}
 	if config.Timeout == 0 {
 		config.Timeout = 30 * time.Second

@@ -10,6 +10,7 @@ import (
 // AXMConfigFile represents the JSON configuration file structure
 type AXMConfigFile struct {
 	BaseURL        string `json:"baseUrl,omitempty"`
+	APIType        string `json:"apiType"`
 	ClientID       string `json:"clientId"`
 	KeyID          string `json:"keyId"`
 	PrivateKey     string `json:"privateKey,omitempty"`
@@ -45,6 +46,7 @@ func LoadConfigFromFile(filePath string) (AXMConfig, error) {
 	// Convert to AXMConfig (defaults will be set by NewAXMClient)
 	config = AXMConfig{
 		BaseURL:  configFile.BaseURL,
+		APIType:  configFile.APIType,
 		ClientID: configFile.ClientID,
 		KeyID:    configFile.KeyID,
 		Scope:    configFile.Scope,
