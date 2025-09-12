@@ -131,30 +131,48 @@ func NewAXMClient(config AXMConfig) (*AXMClient, error) {
 	return client, nil
 }
 
-// parsePrivateKey parses a PEM-encoded ECDSA private key (Apple Business Manager API requirement)
+// parsePrivateKey parses a PEM-encoded ECDSA private key (Apple AXM API requirement)
 func parsePrivateKey(keyData string) (*ecdsa.PrivateKey, error) {
 	block, _ := pem.Decode([]byte(keyData))
 	if block == nil {
 		return nil, fmt.Errorf("failed to parse PEM block containing the private key")
 	}
 
+	// Try different parsing methods based on block type and fallback on errors
 	switch block.Type {
 	case "EC PRIVATE KEY":
-		return x509.ParseECPrivateKey(block.Bytes)
+		// Try EC private key format first
+		if key, err := x509.ParseECPrivateKey(block.Bytes); err == nil {
+			return key, nil
+		}
+		// Fallback to PKCS#8 if EC parsing fails
+		fallthrough
 	case "PRIVATE KEY":
 		// PKCS#8 format - extract ECDSA key
 		key, err := x509.ParsePKCS8PrivateKey(block.Bytes)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to parse PKCS#8 private key: %w", err)
 		}
 		
 		ecdsaKey, ok := key.(*ecdsa.PrivateKey)
 		if !ok {
-			return nil, fmt.Errorf("private key is not an ECDSA key (found %T). Apple Business Manager API requires ECDSA keys", key)
+			return nil, fmt.Errorf("private key is not an ECDSA key (found %T). Apple AXM API requires ECDSA keys", key)
 		}
 		return ecdsaKey, nil
 	default:
-		return nil, fmt.Errorf("unsupported key type %q. Apple Business Manager API requires ECDSA keys in 'EC PRIVATE KEY' or 'PRIVATE KEY' (PKCS#8) format", block.Type)
+		// For unknown types, try both parsing methods
+		// First try PKCS#8 (most common)
+		if key, err := x509.ParsePKCS8PrivateKey(block.Bytes); err == nil {
+			if ecdsaKey, ok := key.(*ecdsa.PrivateKey); ok {
+				return ecdsaKey, nil
+			}
+		}
+		// Then try EC private key format
+		if key, err := x509.ParseECPrivateKey(block.Bytes); err == nil {
+			return key, nil
+		}
+		
+		return nil, fmt.Errorf("unsupported key type %q or invalid key format. Apple AXM API requires ECDSA keys in 'EC PRIVATE KEY' or 'PRIVATE KEY' (PKCS#8) format", block.Type)
 	}
 }
 
