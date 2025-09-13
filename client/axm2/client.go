@@ -9,6 +9,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/deploymenttheory/go-api-sdk-apple/client/shared"
+	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/mdm_servers"
+	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/org_device_activities"
+	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/org_devices"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"resty.dev/v3"
@@ -20,7 +24,15 @@ type Client struct {
 	tokenProvider *TokenProvider
 	logger        *zap.Logger
 	config        Config
+
+	// Service instances for hierarchical API access
+	orgDevicesService          *org_devices.Service
+	mdmServersService          *mdm_servers.Service
+	orgDeviceActivitiesService *org_device_activities.Service
 }
+
+// Ensure Client implements AXMClient interface at compile time
+var _ AXMClient = (*Client)(nil)
 
 // APIError represents structured API error responses following Resty v3 patterns
 type APIError struct {
@@ -31,17 +43,32 @@ type APIError struct {
 	Errors     []AppleAPIError `json:"errors,omitempty"` // Apple's error format
 }
 
-// AppleAPIError represents Apple's specific error format
+// AppleAPIError represents Apple's specific error format based on official API spec
 type AppleAPIError struct {
-	ID     string `json:"id,omitempty"`
-	Status string `json:"status,omitempty"`
-	Code   string `json:"code,omitempty"`
-	Title  string `json:"title,omitempty"`
-	Detail string `json:"detail,omitempty"`
-	Source *struct {
-		Parameter string `json:"parameter,omitempty"`
-		Pointer   string `json:"pointer,omitempty"`
-	} `json:"source,omitempty"`
+	ID     string       `json:"id,omitempty"`     // The unique ID of a specific instance of an error
+	Status string       `json:"status"`           // The HTTP status code of the error
+	Code   string       `json:"code"`             // A machine-readable code indicating the type of error
+	Title  string       `json:"title"`            // A summary of the error
+	Detail string       `json:"detail"`           // A detailed explanation of the error
+	Source *ErrorSource `json:"source,omitempty"` // Source of the error (parameter or JSON pointer)
+	Links  *ErrorLinks  `json:"links,omitempty"`  // Links related to the error
+	Meta   any          `json:"meta,omitempty"`   // Additional metadata
+}
+
+// ErrorSource represents the source of an error (parameter or JSON pointer)
+type ErrorSource struct {
+	Parameter string `json:"parameter,omitempty"` // Query parameter that produces the error
+	Pointer   string `json:"pointer,omitempty"`   // JSON pointer indicating the location of the error
+}
+
+// ErrorLinks represents links related to error responses
+type ErrorLinks struct {
+	Self string `json:"self,omitempty"`
+}
+
+// ErrorResponse represents the complete error response structure from Apple API
+type ErrorResponse struct {
+	Errors []AppleAPIError `json:"errors"` // An array of one or more errors
 }
 
 func (e *APIError) Error() string {
@@ -67,25 +94,30 @@ func (e *APIError) Error() string {
 	return fmt.Sprintf("API error %d", e.StatusCode)
 }
 
-// Config holds configuration for the AXM client
+// Enhanced Config holds configuration for the AXM client with Resty v3 enhancements
 type Config struct {
-	BaseURL        string        // Apple School/Business Manager API base URL (optional, will be set based on APIType)
-	APIType        string        // API type: "abm" for Apple Business Manager, "asm" for Apple School Manager
-	ClientID       string        // Client ID from Apple
-	KeyID          string        // Key ID from Apple
-	PrivateKey     string        // Private key content (PEM format)
-	Scope          string        // OAuth scope ("business.api" or "school.api")
-	Timeout        time.Duration // HTTP timeout (default: 30s)
-	RetryCount     int           // Number of retries (default: 3)
-	RetryMinWait   time.Duration // Minimum wait time between retries (default: 1s)
-	RetryMaxWait   time.Duration // Maximum wait time between retries (default: 10s)
-	UserAgent      string        // User agent string
-	Debug          bool          // Enable debug logging
-	EnableRetryLog bool          // Enable detailed retry logging (default: true)
+	BaseURL                 string        // Apple School/Business Manager API base URL (optional, will be set based on APIType)
+	APIType                 string        // API type: "abm" for Apple Business Manager, "asm" for Apple School Manager
+	ClientID                string        // Client ID from Apple
+	KeyID                   string        // Key ID from Apple
+	PrivateKey              string        // Private key content (PEM format)
+	Scope                   string        // OAuth scope ("business.api" or "school.api")
+	Timeout                 time.Duration // HTTP timeout (default: 30s)
+	RetryCount              int           // Number of retries (default: 3)
+	RetryMinWait            time.Duration // Minimum wait time between retries (default: 1s)
+	RetryMaxWait            time.Duration // Maximum wait time between retries (default: 10s)
+	UserAgent               string        // User agent string
+	Debug                   bool          // Enable debug logging
+	EnableRetryLog          bool          // Enable detailed retry logging (default: true)
+	DebugLogFormat          string        // Debug log format: "human" or "json" (default: "human")
+	DebugLogBodyLimit       int64         // Debug log body size limit in bytes (default: 1MB)
+	CircuitBreakerEnabled   bool          // Enable circuit breaker (default: false)
+	CircuitBreakerThreshold int           // Circuit breaker failure threshold (default: 5)
+	BackupEndpoints         []string      // Backup API endpoints for load balancing
 }
 
 // NewClient creates a new AXM API client
-func NewClient(config Config) (*Client, error) {
+func NewClient(config Config) (AXMClient, error) {
 	// Configure logger
 	logger, err := configureLogger(config.Debug)
 	if err != nil {
@@ -241,8 +273,31 @@ func NewClient(config Config) (*Client, error) {
 		},
 	)
 
+	// Add response middleware for Apple-specific processing
+	httpClient.AddResponseMiddleware(func(c *resty.Client, resp *resty.Response) error {
+		// Log Apple-specific response headers for debugging
+		if appleTraceID := resp.Header().Get("X-Apple-Trace-ID"); appleTraceID != "" {
+			logger.Debug("Apple trace ID", zap.String("trace_id", appleTraceID))
+		}
+
+		// Handle Apple-specific rate limiting headers
+		if retryAfter := resp.Header().Get("Retry-After"); retryAfter != "" {
+			logger.Info("Apple API rate limit hit", zap.String("retry_after", retryAfter))
+		}
+
+		// Log request tracking information
+		if requestID := resp.Header().Get("X-Request-ID"); requestID != "" {
+			logger.Debug("Apple request ID", zap.String("request_id", requestID))
+		}
+
+		return nil
+	})
+
 	if config.Debug {
 		httpClient.SetDebug(true)
+		// Note: Debug log formatting will be available in future Resty v3 releases
+		// For now, we use the default debug format
+		logger.Debug("Debug logging enabled", zap.String("format", config.DebugLogFormat))
 	}
 
 	// Add custom content-type encoders and decoders for Apple AXM API
@@ -250,7 +305,51 @@ func NewClient(config Config) (*Client, error) {
 
 	client.httpClient = httpClient
 
+	// Initialize service instances
+	client.orgDevicesService = org_devices.NewService(client, logger)
+	client.mdmServersService = mdm_servers.NewService(client, logger)
+	client.orgDeviceActivitiesService = org_device_activities.NewService(client, logger)
+
 	return client, nil
+}
+
+// HealthCheck performs a simple connectivity and authentication check
+func (c *Client) HealthCheck(ctx context.Context) error {
+	c.logger.Debug("Performing health check")
+
+	// Simple HEAD request to base URL to verify connectivity
+	// Apple doesn't provide a specific health endpoint, so we'll test auth
+	resp, err := c.httpClient.R().
+		SetContext(ctx).
+		SetTimeout(10 * time.Second).
+		Head(c.config.BaseURL)
+
+	if err != nil {
+		return fmt.Errorf("health check failed - network error: %w", err)
+	}
+
+	// Check for common error status codes
+	if resp.StatusCode() >= 400 {
+		return fmt.Errorf("health check failed - API returned %d", resp.StatusCode())
+	}
+
+	c.logger.Debug("Health check passed", zap.Int("status_code", resp.StatusCode()))
+	return nil
+}
+
+// GetDiagnostics returns diagnostic information about the client
+func (c *Client) GetDiagnostics() map[string]any {
+	return map[string]any{
+		"base_url":         c.config.BaseURL,
+		"api_type":         c.config.APIType,
+		"retry_count":      c.config.RetryCount,
+		"timeout":          c.config.Timeout.String(),
+		"is_authenticated": c.IsAuthenticated(),
+		"client_id":        c.config.ClientID,
+		"scope":            c.config.Scope,
+		"debug_enabled":    c.config.Debug,
+		"user_agent":       c.config.UserAgent,
+	}
 }
 
 // Close cleans up resources following Resty v3 patterns
@@ -309,6 +408,83 @@ func configureLogger(debug bool) (*zap.Logger, error) {
 	}
 
 	return logger, nil
+}
+
+// DoRequestWithPagination performs a paginated GET request using Resty v3 patterns
+func (c *Client) DoRequestWithPagination(ctx context.Context, endpoint string, newResponseFunc func() shared.PaginatedResponse, opts ...interface{}) (interface{}, error) {
+	var allData interface{}
+	nextURL := endpoint
+	pageCount := 0
+
+	c.logger.Debug("Starting paginated request", zap.String("endpoint", endpoint))
+
+	for nextURL != "" {
+		pageCount++
+		c.logger.Debug("Fetching page", zap.Int("page", pageCount), zap.String("url", nextURL))
+
+		// Create new response instance for this page
+		pageResponse := newResponseFunc()
+		var apiError APIError
+
+		request := &RequestWrapper{req: c.httpClient.R(), parent: c}
+		request.SetContext(ctx).
+			SetResult(pageResponse).
+			SetError(&apiError)
+
+		// Apply RequestOption parameters for first page only
+		if pageCount == 1 && len(opts) > 0 {
+			c.ApplyRequestOptions(request, opts...)
+		}
+
+		response, err := request.Get(nextURL)
+		if err != nil {
+			return nil, fmt.Errorf("failed to execute paginated GET request (page %d): %w", pageCount, err)
+		}
+
+		if response.IsError() {
+			c.logger.Error("API error in paginated request",
+				zap.Int("page", pageCount),
+				zap.Int("status_code", response.StatusCode()),
+				zap.Any("error", apiError))
+			return nil, fmt.Errorf("API error (page %d): %d %s", pageCount, response.StatusCode(), response.String())
+		}
+
+		// For first page, initialize allData with a copy
+		if pageCount == 1 {
+			allData = pageResponse.GetData()
+		} else {
+			// Append current page data to accumulated data
+			if currentPageData := pageResponse.GetData(); currentPageData != nil {
+				switch existingData := allData.(type) {
+				case []OrgDevice:
+					if newData, ok := currentPageData.([]OrgDevice); ok {
+						allData = append(existingData, newData...)
+					}
+				case []MdmServer:
+					if newData, ok := currentPageData.([]MdmServer); ok {
+						allData = append(existingData, newData...)
+					}
+				case []string: // For device IDs
+					if newData, ok := currentPageData.([]string); ok {
+						allData = append(existingData, newData...)
+					}
+				}
+			}
+		}
+
+		// Get next URL for pagination
+		nextURL = pageResponse.GetNextURL()
+
+		c.logger.Debug("Page fetched successfully",
+			zap.Int("page", pageCount),
+			zap.String("next_url", nextURL))
+	}
+
+	c.logger.Info("Successfully completed paginated request",
+		zap.String("endpoint", endpoint),
+		zap.Int("total_pages", pageCount))
+
+	return allData, nil
 }
 
 // DoRequest performs a generic HTTP request using Resty v3 patterns
@@ -459,6 +635,33 @@ func setupContentTypeHandlers(client *resty.Client, logger *zap.Logger) {
 	})
 
 	logger.Debug("Configured custom content-type handlers for Apple AXM API")
+}
+
+// Service accessor methods for hierarchical API access
+
+// OrgDevices returns the organization devices service
+func (c *Client) OrgDevices() OrgDevicesService {
+	return c.orgDevicesService
+}
+
+// MdmServers returns the MDM servers service
+func (c *Client) MdmServers() MdmServersService {
+	return c.mdmServersService
+}
+
+// OrgDeviceActivities returns the organization device activities service
+func (c *Client) OrgDeviceActivities() OrgDeviceActivitiesService {
+	return c.orgDeviceActivitiesService
+}
+
+// ApplyRequestOptions applies client RequestOptions to a service request
+func (c *Client) ApplyRequestOptions(req shared.RequestInterface, opts ...interface{}) {
+	for _, opt := range opts {
+		if requestOption, ok := opt.(RequestOption); ok {
+			rb := &RequestBuilder{req: req}
+			requestOption(rb)
+		}
+	}
 }
 
 // AddContentTypeEncoder adds a custom encoder for a specific content-type

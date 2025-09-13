@@ -22,5 +22,7 @@ const (
 	APITypeASM = "asm" // Apple School Manager
 
 	// API Endpoints
-	OrgDevicesEndpoint = "/v1/orgDevices"
+	OrgDevicesEndpoint          = "/v1/orgDevices"
+	MdmServersEndpoint          = "/v1/mdmServers"
+	OrgDeviceActivitiesEndpoint = "/v1/orgDeviceActivities"
 )
