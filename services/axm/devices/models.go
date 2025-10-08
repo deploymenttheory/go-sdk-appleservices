@@ -30,7 +30,7 @@ type OrgDeviceAttributes struct {
 	EID                 string     `json:"eid,omitempty"`
 	WiFiMACAddress      string     `json:"wifiMacAddress,omitempty"`
 	BluetoothMACAddress string     `json:"bluetoothMacAddress,omitempty"`
-	PurchaseSourceID    string     `json:"purchaseSourceId,omitempty"`
+	PurchaseSourceID    string     `json:"purchaseSourceUid,omitempty"`
 	PurchaseSourceType  string     `json:"purchaseSourceType,omitempty"`
 	AssignedServer      string     `json:"assignedServer,omitempty"`
 }
@@ -162,7 +162,7 @@ const (
 	FieldEID                 = "eid"
 	FieldWiFiMACAddress      = "wifiMacAddress"
 	FieldBluetoothMACAddress = "bluetoothMacAddress"
-	FieldPurchaseSourceID    = "purchaseSourceId"
+	FieldPurchaseSourceUid   = "purchaseSourceUid"
 	FieldPurchaseSourceType  = "purchaseSourceType"
 	FieldAssignedServer      = "assignedServer"
 )

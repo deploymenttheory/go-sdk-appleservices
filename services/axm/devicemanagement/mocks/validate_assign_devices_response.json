@@ -1,0 +1,18 @@
+{
+  "data": {
+    "type": "orgDeviceActivities",
+    "id": "b1481656-b267-480d-b284-a809eed8b041",
+    "attributes": {
+      "status": "IN_PROGRESS",
+      "subStatus": "SUBMITTED",
+      "createdDateTime": "2025-05-05T04:15:43.282Z",
+      "activityType": "ASSIGN_DEVICES"
+    },
+    "links": {
+      "self": "https://api-business.apple.com/v1/orgDeviceActivities/b1481656-b267-480d-b284-a809eed8b041"
+    }
+  },
+  "links": {
+    "self": "https://api-business.apple.com/v1/orgDeviceActivities"
+  }
+}

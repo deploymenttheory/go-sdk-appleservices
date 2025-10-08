@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "type": "orgDevices",
+      "id": "XABC123X0ABC123X0"
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple/v1/mdmServers/1F97349736CF4614A94F624E705841AD/relationships/devices",
+    "next": "https://api-business.apple/v1/mdmServers/1F97349736CF4614A94F624E705841AD/relationships/devices?cursor=MDowOjE3NDYxMTg0NjkzOTc6MTc0NjExODQ2OTM5Nzp0cnVlOmZhbHNlOjE3NDYxMTg0NjkzOTc",
+    "related": "https://api-business.apple/v1/mdmServers/1F97349736CF4614A94F624E705841AD/devices"
+  },
+  "meta": {
+    "paging": {
+      "nextCursor": "MDowOjE3NDYxMTg0NjkzOTc6MTc0NjExODQ2OTM5Nzp0cnVlOmZhbHNlOjE3NDYxMTg0NjkzOTc",
+      "limit": 100
+    }
+  }
+}

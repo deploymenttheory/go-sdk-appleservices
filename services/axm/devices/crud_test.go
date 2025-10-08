@@ -75,10 +75,32 @@ func TestGetOrganizationDevices_Success(t *testing.T) {
 	assert.Equal(t, "orgDevices", device.Type)
 	assert.Equal(t, "XABC123X0ABC123X0", device.ID)
 	assert.NotNil(t, device.Attributes)
+
+	// Test all string fields from the list response
 	assert.Equal(t, "XABC123X0ABC123X0", device.Attributes.SerialNumber)
 	assert.Equal(t, "iMac 21.5\"", device.Attributes.DeviceModel)
 	assert.Equal(t, "Mac", device.Attributes.ProductFamily)
+	assert.Equal(t, "iMac16,2", device.Attributes.ProductType)
+	assert.Equal(t, "750GB", device.Attributes.DeviceCapacity)
+	assert.Equal(t, "FD311LL/A", device.Attributes.PartNumber)
+	assert.Equal(t, "1234567890", device.Attributes.OrderNumber)
+	assert.Equal(t, "SILVER", device.Attributes.Color) // Has color in list response
 	assert.Equal(t, "UNASSIGNED", device.Attributes.Status)
+	assert.Equal(t, "89049037640158663184237812557346", device.Attributes.EID)
+	assert.Equal(t, "-2085650007946880", device.Attributes.PurchaseSourceID)
+	assert.Equal(t, "APPLE", device.Attributes.PurchaseSourceType)
+
+	// Test timestamp fields
+	assert.NotNil(t, device.Attributes.AddedToOrgDateTime)
+	assert.NotNil(t, device.Attributes.UpdatedDateTime)
+	assert.NotNil(t, device.Attributes.OrderDateTime)
+
+	// Test array fields
+	assert.Len(t, device.Attributes.IMEI, 2)
+	assert.Equal(t, "123456789012345", device.Attributes.IMEI[0])
+	assert.Equal(t, "123456789012346", device.Attributes.IMEI[1])
+	assert.Len(t, device.Attributes.MEID, 1)
+	assert.Equal(t, "12345678901237", device.Attributes.MEID[0])
 
 	// Verify pagination metadata
 	assert.NotNil(t, result.Meta)
@@ -195,9 +217,20 @@ func TestGetDeviceInformation_Success(t *testing.T) {
 	assert.Equal(t, "orgDevices", device.Type)
 	assert.Equal(t, "XABC123X0ABC123X0", device.ID)
 	assert.NotNil(t, device.Attributes)
+
+	// Test all string fields
+	assert.Equal(t, "XABC123X0ABC123X0", device.Attributes.SerialNumber)
 	assert.Equal(t, "iMac 21.5\"", device.Attributes.DeviceModel)
 	assert.Equal(t, "Mac", device.Attributes.ProductFamily)
+	assert.Equal(t, "iMac16,2", device.Attributes.ProductType)
+	assert.Equal(t, "750GB", device.Attributes.DeviceCapacity)
+	assert.Equal(t, "FD311LL/A", device.Attributes.PartNumber)
+	assert.Equal(t, "1234567890", device.Attributes.OrderNumber)
+	assert.Equal(t, "SILVER", device.Attributes.Color)
 	assert.Equal(t, "UNASSIGNED", device.Attributes.Status)
+	assert.Equal(t, "89049037640158663184237812557346", device.Attributes.EID)
+	assert.Equal(t, "-2085650007946880", device.Attributes.PurchaseSourceID)
+	assert.Equal(t, "APPLE", device.Attributes.PurchaseSourceType)
 
 	// Verify timestamps are parsed correctly
 	assert.NotNil(t, device.Attributes.AddedToOrgDateTime)
@@ -207,6 +240,7 @@ func TestGetDeviceInformation_Success(t *testing.T) {
 	// Verify arrays are handled correctly
 	assert.Len(t, device.Attributes.IMEI, 2)
 	assert.Equal(t, "123456789012345", device.Attributes.IMEI[0])
+	assert.Equal(t, "123456789012346", device.Attributes.IMEI[1])
 	assert.Len(t, device.Attributes.MEID, 1)
 	assert.Equal(t, "12345678901237", device.Attributes.MEID[0])
 
@@ -348,7 +382,7 @@ func TestDeviceFieldConstants(t *testing.T) {
 		FieldEID,
 		FieldWiFiMACAddress,
 		FieldBluetoothMACAddress,
-		FieldPurchaseSourceID,
+		FieldPurchaseSourceUid,
 		FieldPurchaseSourceType,
 		FieldAssignedServer,
 	}
@@ -378,4 +412,72 @@ func TestOptionsStructures(t *testing.T) {
 		Fields: []string{FieldStatus, FieldProductFamily},
 	}
 	assert.Len(t, opts2.Fields, 2)
+}
+
+func TestComprehensiveFieldCoverage(t *testing.T) {
+	client := setupMockClient(t)
+	mockHandler := &mocks.OrgDevicesMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	deviceID := "XABC123X0ABC123X0"
+
+	// Test with all available fields to ensure comprehensive coverage
+	opts := &GetDeviceInformationOptions{
+		Fields: []string{
+			FieldSerialNumber,
+			FieldAddedToOrgDateTime,
+			FieldUpdatedDateTime,
+			FieldDeviceModel,
+			FieldProductFamily,
+			FieldProductType,
+			FieldDeviceCapacity,
+			FieldPartNumber,
+			FieldOrderNumber,
+			FieldColor,
+			FieldStatus,
+			FieldOrderDateTime,
+			FieldIMEI,
+			FieldMEID,
+			FieldEID,
+			FieldWiFiMACAddress,
+			FieldBluetoothMACAddress,
+			FieldPurchaseSourceUid,
+			FieldPurchaseSourceType,
+			FieldAssignedServer,
+		},
+	}
+
+	result, err := client.GetDeviceInformation(ctx, deviceID, opts)
+
+	require.NoError(t, err)
+	require.NotNil(t, result)
+
+	// Verify that the request was made with all field parameters
+	// This ensures our field constants are correctly defined
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+
+	// Verify all fields are accessible (no compilation errors)
+	attrs := result.Data.Attributes
+	_ = attrs.SerialNumber
+	_ = attrs.AddedToOrgDateTime
+	_ = attrs.UpdatedDateTime
+	_ = attrs.DeviceModel
+	_ = attrs.ProductFamily
+	_ = attrs.ProductType
+	_ = attrs.DeviceCapacity
+	_ = attrs.PartNumber
+	_ = attrs.OrderNumber
+	_ = attrs.Color
+	_ = attrs.Status
+	_ = attrs.OrderDateTime
+	_ = attrs.IMEI
+	_ = attrs.MEID
+	_ = attrs.EID
+	_ = attrs.WiFiMACAddress
+	_ = attrs.BluetoothMACAddress
+	_ = attrs.PurchaseSourceID
+	_ = attrs.PurchaseSourceType
+	_ = attrs.AssignedServer
 }

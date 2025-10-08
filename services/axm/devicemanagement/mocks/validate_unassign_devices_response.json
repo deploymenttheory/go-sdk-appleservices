@@ -1,0 +1,18 @@
+{
+  "data": {
+    "type": "orgDeviceActivities",
+    "id": "c2581757-c368-591e-c395-b919fee9c152",
+    "attributes": {
+      "status": "IN_PROGRESS",
+      "subStatus": "SUBMITTED",
+      "createdDateTime": "2025-05-05T04:15:43.282Z",
+      "activityType": "UNASSIGN_DEVICES"
+    },
+    "links": {
+      "self": "https://api-business.apple.com/v1/orgDeviceActivities/c2581757-c368-591e-c395-b919fee9c152"
+    }
+  },
+  "links": {
+    "self": "https://api-business.apple.com/v1/orgDeviceActivities"
+  }
+}
