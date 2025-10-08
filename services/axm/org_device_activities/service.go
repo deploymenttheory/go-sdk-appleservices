@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/deploymenttheory/go-api-sdk-apple/client/shared"
 	"go.uber.org/zap"
 )
 
@@ -21,8 +20,8 @@ type Service struct {
 
 // HTTPClient interface for making HTTP requests
 type HTTPClient interface {
-	GetHTTPClient() shared.HTTPClientInterface
-	ApplyRequestOptions(req shared.RequestInterface, opts ...interface{})
+	Get(ctx context.Context, endpoint string, result any, opts ...any) error
+	Post(ctx context.Context, endpoint string, body, result any, opts ...any) error
 }
 
 // NewService creates a new org device activities service
@@ -37,7 +36,7 @@ func NewService(client HTTPClient, logger *zap.Logger) *Service {
 // This gets activity information for device management actions that were performed
 // Activities are only available for the past 30 days
 // Apple API endpoint: GET /v1/orgDeviceActivities/{id}
-func (s *Service) GetActivity(ctx context.Context, activityID string, opts ...interface{}) (*OrgDeviceActivity, error) {
+func (s *Service) GetActivity(ctx context.Context, activityID string, opts ...any) (*OrgDeviceActivity, error) {
 	s.logger.Debug("Getting organization device activity", zap.String("activity_id", activityID))
 
 	if activityID == "" {
@@ -47,27 +46,8 @@ func (s *Service) GetActivity(ctx context.Context, activityID string, opts ...in
 	endpoint := fmt.Sprintf("%s/%s", OrgDeviceActivitiesEndpoint, activityID)
 
 	var activityResponse OrgDeviceActivityResponse
-	var errorResponse APIError
-
-	request := s.client.GetHTTPClient().R().
-		SetContext(ctx).
-		SetResult(&activityResponse).
-		SetError(&errorResponse)
-
-	// Apply RequestOption parameters (e.g., field filtering)
-	s.client.ApplyRequestOptions(request, opts...)
-
-	response, err := request.Get(endpoint)
-	if err != nil {
+	if err := s.client.Get(ctx, endpoint, &activityResponse, opts...); err != nil {
 		return nil, fmt.Errorf("failed to get organization device activity: %w", err)
-	}
-
-	if response.IsError() {
-		s.logger.Error("API error getting organization device activity",
-			zap.String("activity_id", activityID),
-			zap.Int("status_code", response.StatusCode()),
-			zap.Any("error", errorResponse))
-		return nil, fmt.Errorf("API error %d: %s", response.StatusCode(), response.String())
 	}
 
 	s.logger.Debug("Successfully retrieved organization device activity",
@@ -135,26 +115,8 @@ func (s *Service) AssignDevices(ctx context.Context, deviceIDs []string, mdmServ
 	request := buildAssignDevicesRequest(deviceIDs, mdmServerID)
 
 	var activityResponse OrgDeviceActivityResponse
-	var errorResponse APIError
-
-	resp, err := s.client.GetHTTPClient().R().
-		SetContext(ctx).
-		SetBody(request).
-		SetResult(&activityResponse).
-		SetError(&errorResponse).
-		Post(OrgDeviceActivitiesEndpoint)
-
-	if err != nil {
+	if err := s.client.Post(ctx, OrgDeviceActivitiesEndpoint, request, &activityResponse); err != nil {
 		return nil, fmt.Errorf("failed to assign devices: %w", err)
-	}
-
-	if resp.IsError() {
-		s.logger.Error("API error assigning devices",
-			zap.Strings("device_ids", deviceIDs),
-			zap.String("mdm_server_id", mdmServerID),
-			zap.Int("status_code", resp.StatusCode()),
-			zap.Any("error", errorResponse))
-		return nil, fmt.Errorf("API error %d: %s", resp.StatusCode(), resp.String())
 	}
 
 	s.logger.Info("Successfully created device assignment activity",
@@ -211,25 +173,8 @@ func (s *Service) UnassignDevices(ctx context.Context, deviceIDs []string) (*Org
 	request := buildUnassignDevicesRequest(deviceIDs)
 
 	var activityResponse OrgDeviceActivityResponse
-	var errorResponse APIError
-
-	resp, err := s.client.GetHTTPClient().R().
-		SetContext(ctx).
-		SetBody(request).
-		SetResult(&activityResponse).
-		SetError(&errorResponse).
-		Post(OrgDeviceActivitiesEndpoint)
-
-	if err != nil {
+	if err := s.client.Post(ctx, OrgDeviceActivitiesEndpoint, request, &activityResponse); err != nil {
 		return nil, fmt.Errorf("failed to unassign devices: %w", err)
-	}
-
-	if resp.IsError() {
-		s.logger.Error("API error unassigning devices",
-			zap.Strings("device_ids", deviceIDs),
-			zap.Int("status_code", resp.StatusCode()),
-			zap.Any("error", errorResponse))
-		return nil, fmt.Errorf("API error %d: %s", resp.StatusCode(), resp.String())
 	}
 
 	s.logger.Info("Successfully created device unassignment activity",

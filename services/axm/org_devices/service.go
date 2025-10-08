@@ -21,9 +21,8 @@ type Service struct {
 
 // HTTPClient interface for making HTTP requests
 type HTTPClient interface {
-	DoRequestWithPagination(ctx context.Context, endpoint string, newResponseFunc func() shared.PaginatedResponse, opts ...interface{}) (interface{}, error)
-	GetHTTPClient() shared.HTTPClientInterface
-	ApplyRequestOptions(req shared.RequestInterface, opts ...interface{})
+	Get(ctx context.Context, endpoint string, result any, opts ...any) error
+	GetWithPagination(ctx context.Context, endpoint string, newResponseFunc func() shared.PaginatedResponse, opts ...any) (any, error)
 }
 
 // NewService creates a new org devices service
@@ -35,11 +34,11 @@ func NewService(client HTTPClient, logger *zap.Logger) *Service {
 }
 
 // GetOrgDevices retrieves organization devices with automatic pagination using centralized helper
-func (s *Service) GetOrgDevices(ctx context.Context, opts ...interface{}) ([]OrgDevice, error) {
+func (s *Service) GetOrgDevices(ctx context.Context, opts ...any) ([]OrgDevice, error) {
 	s.logger.Debug("Getting organization devices with centralized pagination")
 
 	// Use centralized pagination helper
-	result, err := s.client.DoRequestWithPagination(ctx, OrgDevicesEndpoint, func() shared.PaginatedResponse {
+	result, err := s.client.GetWithPagination(ctx, OrgDevicesEndpoint, func() shared.PaginatedResponse {
 		return &OrgDevicesResponse{}
 	}, opts...)
 
@@ -58,8 +57,8 @@ func (s *Service) GetOrgDevices(ctx context.Context, opts ...interface{}) ([]Org
 	return devices, nil
 }
 
-// GetOrgDevice retrieves a single organization device by ID using Resty v3 patterns
-func (s *Service) GetOrgDevice(ctx context.Context, deviceID string, opts ...interface{}) (*OrgDevice, error) {
+// GetOrgDevice retrieves a single organization device by ID using simplified pattern
+func (s *Service) GetOrgDevice(ctx context.Context, deviceID string, opts ...any) (*OrgDevice, error) {
 	s.logger.Debug("Getting organization device", zap.String("device_id", deviceID))
 
 	if deviceID == "" {
@@ -68,28 +67,9 @@ func (s *Service) GetOrgDevice(ctx context.Context, deviceID string, opts ...int
 
 	endpoint := fmt.Sprintf("%s/%s", OrgDevicesEndpoint, deviceID)
 
-	// Use Resty v3 pattern with SetResult for automatic unmarshaling
 	var deviceResponse OrgDeviceResponse
-	var errorResponse APIError
-
-	request := s.client.GetHTTPClient().R().SetContext(ctx).
-		SetResult(&deviceResponse).
-		SetError(&errorResponse)
-
-	// Apply RequestOption parameters via client
-	s.client.ApplyRequestOptions(request, opts...)
-
-	response, err := request.Get(endpoint)
-	if err != nil {
+	if err := s.client.Get(ctx, endpoint, &deviceResponse, opts...); err != nil {
 		return nil, fmt.Errorf("failed to get organization device: %w", err)
-	}
-
-	if response.IsError() {
-		s.logger.Error("API error getting device",
-			zap.String("device_id", deviceID),
-			zap.Int("status_code", response.StatusCode()),
-			zap.Any("error", errorResponse))
-		return nil, fmt.Errorf("API error %d: %s", response.StatusCode(), response.String())
 	}
 
 	s.logger.Debug("Successfully retrieved organization device",
@@ -101,7 +81,7 @@ func (s *Service) GetOrgDevice(ctx context.Context, deviceID string, opts ...int
 
 // GetAssignedMdmServer retrieves the assigned MDM server ID for a specific device
 // Apple API endpoint: GET /v1/orgDevices/{id}/relationships/assignedServer
-func (s *Service) GetAssignedMdmServer(ctx context.Context, deviceID string, opts ...interface{}) (string, error) {
+func (s *Service) GetAssignedMdmServer(ctx context.Context, deviceID string, opts ...any) (string, error) {
 	s.logger.Debug("Getting assigned MDM server for device", zap.String("device_id", deviceID))
 
 	if deviceID == "" {
@@ -111,27 +91,8 @@ func (s *Service) GetAssignedMdmServer(ctx context.Context, deviceID string, opt
 	endpoint := fmt.Sprintf("%s/%s/relationships/assignedServer", OrgDevicesEndpoint, deviceID)
 
 	var linkageResponse OrgDeviceAssignedServerLinkageResponse
-	var errorResponse APIError
-
-	request := s.client.GetHTTPClient().R().
-		SetContext(ctx).
-		SetResult(&linkageResponse).
-		SetError(&errorResponse)
-
-	// Apply RequestOption parameters via client
-	s.client.ApplyRequestOptions(request, opts...)
-
-	response, err := request.Get(endpoint)
-	if err != nil {
+	if err := s.client.Get(ctx, endpoint, &linkageResponse, opts...); err != nil {
 		return "", fmt.Errorf("failed to get device assigned MDM server: %w", err)
-	}
-
-	if response.IsError() {
-		s.logger.Error("API error getting device assigned MDM server",
-			zap.String("device_id", deviceID),
-			zap.Int("status_code", response.StatusCode()),
-			zap.Any("error", errorResponse))
-		return "", fmt.Errorf("API error %d: %s", response.StatusCode(), response.String())
 	}
 
 	if linkageResponse.Data == nil {
@@ -158,7 +119,7 @@ func (s *Service) GetAssignedMdmServer(ctx context.Context, deviceID string, opt
 
 // GetAssignedMdmServerInfo retrieves the assigned device management service information for a device
 // Apple API endpoint: GET /v1/orgDevices/{id}/assignedServer
-func (s *Service) GetAssignedMdmServerInfo(ctx context.Context, deviceID string, opts ...interface{}) (*MdmServer, error) {
+func (s *Service) GetAssignedMdmServerInfo(ctx context.Context, deviceID string, opts ...any) (*MdmServer, error) {
 	s.logger.Debug("Getting assigned MDM server info for device", zap.String("device_id", deviceID))
 
 	if deviceID == "" {
@@ -168,27 +129,8 @@ func (s *Service) GetAssignedMdmServerInfo(ctx context.Context, deviceID string,
 	endpoint := fmt.Sprintf("%s/%s/assignedServer", OrgDevicesEndpoint, deviceID)
 
 	var serverResponse MdmServerResponse
-	var errorResponse APIError
-
-	request := s.client.GetHTTPClient().R().
-		SetContext(ctx).
-		SetResult(&serverResponse).
-		SetError(&errorResponse)
-
-	// Apply RequestOption parameters via client
-	s.client.ApplyRequestOptions(request, opts...)
-
-	response, err := request.Get(endpoint)
-	if err != nil {
+	if err := s.client.Get(ctx, endpoint, &serverResponse, opts...); err != nil {
 		return nil, fmt.Errorf("failed to get device assigned MDM server info: %w", err)
-	}
-
-	if response.IsError() {
-		s.logger.Error("API error getting device assigned MDM server info",
-			zap.String("device_id", deviceID),
-			zap.Int("status_code", response.StatusCode()),
-			zap.Any("error", errorResponse))
-		return nil, fmt.Errorf("API error %d: %s", response.StatusCode(), response.String())
 	}
 
 	s.logger.Debug("Successfully retrieved device assigned MDM server info",

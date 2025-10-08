@@ -21,9 +21,8 @@ type Service struct {
 
 // HTTPClient interface for making HTTP requests
 type HTTPClient interface {
-	DoRequestWithPagination(ctx context.Context, endpoint string, newResponseFunc func() shared.PaginatedResponse, opts ...interface{}) (interface{}, error)
-	GetHTTPClient() shared.HTTPClientInterface
-	ApplyRequestOptions(req shared.RequestInterface, opts ...interface{})
+	Get(ctx context.Context, endpoint string, result any, opts ...any) error
+	GetWithPagination(ctx context.Context, endpoint string, newResponseFunc func() shared.PaginatedResponse, opts ...any) (any, error)
 }
 
 // NewService creates a new MDM servers service
@@ -35,11 +34,11 @@ func NewService(client HTTPClient, logger *zap.Logger) *Service {
 }
 
 // GetMdmServers retrieves a list of device management services in the organization
-func (s *Service) GetMdmServers(ctx context.Context, opts ...interface{}) ([]MdmServer, error) {
+func (s *Service) GetMdmServers(ctx context.Context, opts ...any) ([]MdmServer, error) {
 	s.logger.Debug("Getting MDM servers with centralized pagination")
 
 	// Use centralized pagination helper
-	result, err := s.client.DoRequestWithPagination(ctx, MdmServersEndpoint, func() shared.PaginatedResponse {
+	result, err := s.client.GetWithPagination(ctx, MdmServersEndpoint, func() shared.PaginatedResponse {
 		return &MdmServersResponse{}
 	}, opts...)
 
@@ -59,7 +58,7 @@ func (s *Service) GetMdmServers(ctx context.Context, opts ...interface{}) ([]Mdm
 }
 
 // GetMdmServer retrieves a specific MDM server by ID
-func (s *Service) GetMdmServer(ctx context.Context, serverID string, opts ...interface{}) (*MdmServer, error) {
+func (s *Service) GetMdmServer(ctx context.Context, serverID string, opts ...any) (*MdmServer, error) {
 	s.logger.Debug("Getting MDM server", zap.String("server_id", serverID))
 
 	if serverID == "" {
@@ -69,27 +68,8 @@ func (s *Service) GetMdmServer(ctx context.Context, serverID string, opts ...int
 	endpoint := fmt.Sprintf("%s/%s", MdmServersEndpoint, serverID)
 
 	var serverResponse MdmServerResponse
-	var errorResponse APIError
-
-	request := s.client.GetHTTPClient().R().
-		SetContext(ctx).
-		SetResult(&serverResponse).
-		SetError(&errorResponse)
-
-	// Apply RequestOption parameters via client
-	s.client.ApplyRequestOptions(request, opts...)
-
-	response, err := request.Get(endpoint)
-	if err != nil {
+	if err := s.client.Get(ctx, endpoint, &serverResponse, opts...); err != nil {
 		return nil, fmt.Errorf("failed to get MDM server: %w", err)
-	}
-
-	if response.IsError() {
-		s.logger.Error("API error getting MDM server",
-			zap.String("server_id", serverID),
-			zap.Int("status_code", response.StatusCode()),
-			zap.Any("error", errorResponse))
-		return nil, fmt.Errorf("API error %d: %s", response.StatusCode(), response.String())
 	}
 
 	s.logger.Debug("Successfully retrieved MDM server",
@@ -100,7 +80,7 @@ func (s *Service) GetMdmServer(ctx context.Context, serverID string, opts ...int
 }
 
 // GetDevices retrieves device serial numbers assigned to a specific MDM server
-func (s *Service) GetDevices(ctx context.Context, serverID string, opts ...interface{}) ([]string, error) {
+func (s *Service) GetDevices(ctx context.Context, serverID string, opts ...any) ([]string, error) {
 	s.logger.Debug("Getting devices for MDM server", zap.String("server_id", serverID))
 
 	if serverID == "" {
@@ -119,30 +99,15 @@ func (s *Service) GetDevices(ctx context.Context, serverID string, opts ...inter
 			zap.String("url", nextURL))
 
 		var pageResponse MdmServerDevicesLinkagesResponse
-		var apiError APIError
-
-		request := s.client.GetHTTPClient().R().
-			SetContext(ctx).
-			SetResult(&pageResponse).
-			SetError(&apiError)
-
-		// Apply RequestOption parameters for first page only
+		
+		// Apply options only for first page
+		var requestOpts []any
 		if pageCount == 1 {
-			s.client.ApplyRequestOptions(request, opts...)
+			requestOpts = opts
 		}
-
-		response, err := request.Get(nextURL)
-		if err != nil {
-			return nil, fmt.Errorf("failed to execute GET request for MDM server devices (page %d): %w", pageCount, err)
-		}
-
-		if response.IsError() {
-			s.logger.Error("API error getting MDM server devices",
-				zap.String("server_id", serverID),
-				zap.Int("page", pageCount),
-				zap.Int("status_code", response.StatusCode()),
-				zap.Any("error", apiError))
-			return nil, fmt.Errorf("API error getting MDM server devices (page %d): %d %s", pageCount, response.StatusCode(), response.String())
+		
+		if err := s.client.Get(ctx, nextURL, &pageResponse, requestOpts...); err != nil {
+			return nil, fmt.Errorf("failed to get MDM server devices (page %d): %w", pageCount, err)
 		}
 
 		// Extract device IDs from linkages

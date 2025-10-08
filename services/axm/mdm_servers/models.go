@@ -33,7 +33,7 @@ type MdmServersResponse struct {
 }
 
 // GetData returns the data slice for pagination
-func (r *MdmServersResponse) GetData() interface{} {
+func (r *MdmServersResponse) GetData() any {
 	return r.Data
 }
 
@@ -43,7 +43,7 @@ func (r *MdmServersResponse) GetNextURL() string {
 }
 
 // AppendData appends data from another response for pagination
-func (r *MdmServersResponse) AppendData(data interface{}) {
+func (r *MdmServersResponse) AppendData(data any) {
 	if existingData, ok := data.([]MdmServer); ok {
 		r.Data = append(r.Data, existingData...)
 	}

@@ -34,17 +34,17 @@ func (r *RequestWrapper) SetContext(ctx context.Context) shared.RequestInterface
 	return r
 }
 
-func (r *RequestWrapper) SetResult(result interface{}) shared.RequestInterface {
+func (r *RequestWrapper) SetResult(result any) shared.RequestInterface {
 	r.req.SetResult(result)
 	return r
 }
 
-func (r *RequestWrapper) SetError(err interface{}) shared.RequestInterface {
+func (r *RequestWrapper) SetError(err any) shared.RequestInterface {
 	r.req.SetError(err)
 	return r
 }
 
-func (r *RequestWrapper) SetBody(body interface{}) shared.RequestInterface {
+func (r *RequestWrapper) SetBody(body any) shared.RequestInterface {
 	r.req.SetBody(body)
 	return r
 }

@@ -59,7 +59,7 @@ type OrgDevicesResponse struct {
 }
 
 // GetData returns the data slice for pagination
-func (r *OrgDevicesResponse) GetData() interface{} {
+func (r *OrgDevicesResponse) GetData() any {
 	return r.Data
 }
 
@@ -69,7 +69,7 @@ func (r *OrgDevicesResponse) GetNextURL() string {
 }
 
 // AppendData appends data from another response for pagination
-func (r *OrgDevicesResponse) AppendData(data interface{}) {
+func (r *OrgDevicesResponse) AppendData(data any) {
 	if existingData, ok := data.([]OrgDevice); ok {
 		r.Data = append(r.Data, existingData...)
 	}

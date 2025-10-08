@@ -11,28 +11,28 @@ import (
 // OrgDevicesService provides operations for the /v1/orgDevices endpoint
 type OrgDevicesService interface {
 	// Device listing and details
-	GetOrgDevices(ctx context.Context, opts ...interface{}) ([]OrgDevice, error)
-	GetOrgDevice(ctx context.Context, deviceID string, opts ...interface{}) (*OrgDevice, error)
+	GetOrgDevices(ctx context.Context, opts ...any) ([]OrgDevice, error)
+	GetOrgDevice(ctx context.Context, deviceID string, opts ...any) (*OrgDevice, error)
 
 	// Device assignment relationships
-	GetAssignedMdmServer(ctx context.Context, deviceID string, opts ...interface{}) (string, error)
-	GetAssignedMdmServerInfo(ctx context.Context, deviceID string, opts ...interface{}) (*MdmServer, error)
+	GetAssignedMdmServer(ctx context.Context, deviceID string, opts ...any) (string, error)
+	GetAssignedMdmServerInfo(ctx context.Context, deviceID string, opts ...any) (*MdmServer, error)
 }
 
 // MdmServersService provides operations for the /v1/mdmServers endpoint
 type MdmServersService interface {
 	// MDM server listing and details
-	GetMdmServers(ctx context.Context, opts ...interface{}) ([]MdmServer, error)
-	GetMdmServer(ctx context.Context, serverID string, opts ...interface{}) (*MdmServer, error)
+	GetMdmServers(ctx context.Context, opts ...any) ([]MdmServer, error)
+	GetMdmServer(ctx context.Context, serverID string, opts ...any) (*MdmServer, error)
 
 	// MDM server device relationships
-	GetDevices(ctx context.Context, serverID string, opts ...interface{}) ([]string, error)
+	GetDevices(ctx context.Context, serverID string, opts ...any) ([]string, error)
 }
 
 // OrgDeviceActivitiesService provides operations for the /v1/orgDeviceActivities endpoint
 type OrgDeviceActivitiesService interface {
 	// Activity tracking (read-only, for past 30 days)
-	GetActivity(ctx context.Context, activityID string, opts ...interface{}) (*OrgDeviceActivity, error)
+	GetActivity(ctx context.Context, activityID string, opts ...any) (*OrgDeviceActivity, error)
 
 	// Device assignment operations (POST to /v1/orgDeviceActivities)
 	AssignDevice(ctx context.Context, deviceID, mdmServerID string) (*OrgDeviceActivity, error)
@@ -44,6 +44,13 @@ type OrgDeviceActivitiesService interface {
 // AXMClient defines the main interface for Apple School/Business Manager API client
 // organized by Apple API endpoints
 type AXMClient interface {
+	// Direct HTTP request methods
+	Get(ctx context.Context, endpoint string, result any, opts ...any) error
+	Post(ctx context.Context, endpoint string, body, result any, opts ...any) error
+	
+	// Pagination helper
+	GetWithPagination(ctx context.Context, endpoint string, newResponseFunc func() shared.PaginatedResponse, opts ...any) (any, error)
+
 	// Apple API endpoint services
 	OrgDevices() OrgDevicesService
 	MdmServers() MdmServersService

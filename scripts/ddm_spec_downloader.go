@@ -31,28 +31,28 @@ type RepositoryAnalysis struct {
 }
 
 type ConfigurationSample struct {
-	Type        string                 `json:"type"`
-	Description string                 `json:"description"`
-	SupportedOS map[string]interface{} `json:"supported_os"`
-	Keys        []string               `json:"keys"`
+	Type        string         `json:"type"`
+	Description string         `json:"description"`
+	SupportedOS map[string]any `json:"supported_os"`
+	Keys        []string       `json:"keys"`
 }
 
 type DDMSchema struct {
-	Title       string                 `yaml:"title"`
-	Description string                 `yaml:"description"`
-	Payload     map[string]interface{} `yaml:"payload"`
-	PayloadKeys []PayloadKey           `yaml:"payloadkeys"`
+	Title       string         `yaml:"title"`
+	Description string         `yaml:"description"`
+	Payload     map[string]any `yaml:"payload"`
+	PayloadKeys []PayloadKey   `yaml:"payloadkeys"`
 }
 
 type PayloadKey struct {
-	Key         string                 `yaml:"key"`
-	Title       string                 `yaml:"title"`
-	Type        string                 `yaml:"type"`
-	Presence    string                 `yaml:"presence"`
-	Content     string                 `yaml:"content"`
-	Default     interface{}            `yaml:"default"`
-	Range       map[string]interface{} `yaml:"range"`
-	SupportedOS map[string]interface{} `yaml:"supportedOS"`
+	Key         string         `yaml:"key"`
+	Title       string         `yaml:"title"`
+	Type        string         `yaml:"type"`
+	Presence    string         `yaml:"presence"`
+	Content     string         `yaml:"content"`
+	Default     any            `yaml:"default"`
+	Range       map[string]any `yaml:"range"`
+	SupportedOS map[string]any `yaml:"supportedOS"`
 }
 
 func main() {
@@ -323,13 +323,13 @@ func parseSampleConfigurations(configDir string, samples map[string]Configuratio
 		sample := ConfigurationSample{
 			Type:        fmt.Sprintf("%v", schema.Payload["declarationtype"]),
 			Description: schema.Description,
-			SupportedOS: make(map[string]interface{}),
+			SupportedOS: make(map[string]any),
 			Keys:        make([]string, 0, len(schema.PayloadKeys)),
 		}
 
 		// Extract supported OS info
 		if supportedOS, ok := schema.Payload["supportedOS"]; ok {
-			if osMap, ok := supportedOS.(map[string]interface{}); ok {
+			if osMap, ok := supportedOS.(map[string]any); ok {
 				sample.SupportedOS = osMap
 			}
 		}

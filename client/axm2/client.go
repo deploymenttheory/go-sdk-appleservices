@@ -410,9 +410,82 @@ func configureLogger(debug bool) (*zap.Logger, error) {
 	return logger, nil
 }
 
+// Get performs a GET request with automatic error handling
+func (c *Client) Get(ctx context.Context, endpoint string, result any, opts ...any) error {
+	var apiError APIError
+	
+	request := c.httpClient.R().
+		SetContext(ctx).
+		SetResult(result).
+		SetError(&apiError)
+	
+	// Apply options
+	c.ApplyRequestOptions(&RequestWrapper{req: request, parent: c}, opts...)
+	
+	response, err := request.Get(endpoint)
+	if err != nil {
+		return fmt.Errorf("GET request failed: %w", err)
+	}
+	
+	if response.IsError() {
+		return c.handleAPIError(response, &apiError)
+	}
+	
+	return nil
+}
+
+// Post performs a POST request with automatic error handling
+func (c *Client) Post(ctx context.Context, endpoint string, body, result any, opts ...any) error {
+	var apiError APIError
+	
+	request := c.httpClient.R().
+		SetContext(ctx).
+		SetError(&apiError)
+	
+	if result != nil {
+		request.SetResult(result)
+	}
+	
+	if body != nil {
+		request.SetBody(body)
+	}
+	
+	// Apply options
+	c.ApplyRequestOptions(&RequestWrapper{req: request, parent: c}, opts...)
+	
+	response, err := request.Post(endpoint)
+	if err != nil {
+		return fmt.Errorf("POST request failed: %w", err)
+	}
+	
+	if response.IsError() {
+		return c.handleAPIError(response, &apiError)
+	}
+	
+	return nil
+}
+
+// GetWithPagination performs a paginated GET request
+func (c *Client) GetWithPagination(ctx context.Context, endpoint string, newResponseFunc func() shared.PaginatedResponse, opts ...any) (any, error) {
+	return c.DoRequestWithPagination(ctx, endpoint, func() shared.PaginatedResponse {
+		return newResponseFunc()
+	}, opts...)
+}
+
+// handleAPIError processes API errors consistently
+func (c *Client) handleAPIError(response *resty.Response, apiError *APIError) error {
+	c.logger.Error("API request failed",
+		zap.String("method", response.Request.Method),
+		zap.String("url", response.Request.URL),
+		zap.Int("status_code", response.StatusCode()),
+		zap.Any("error", apiError))
+	return fmt.Errorf("API error %d: %s", response.StatusCode(), response.String())
+}
+
+
 // DoRequestWithPagination performs a paginated GET request using Resty v3 patterns
-func (c *Client) DoRequestWithPagination(ctx context.Context, endpoint string, newResponseFunc func() shared.PaginatedResponse, opts ...interface{}) (interface{}, error) {
-	var allData interface{}
+func (c *Client) DoRequestWithPagination(ctx context.Context, endpoint string, newResponseFunc func() shared.PaginatedResponse, opts ...any) (any, error) {
+	var allData any
 	nextURL := endpoint
 	pageCount := 0
 
@@ -488,7 +561,7 @@ func (c *Client) DoRequestWithPagination(ctx context.Context, endpoint string, n
 }
 
 // DoRequest performs a generic HTTP request using Resty v3 patterns
-func (c *Client) DoRequest(ctx context.Context, method, endpoint string, body interface{}, result interface{}) (*resty.Response, error) {
+func (c *Client) DoRequest(ctx context.Context, method, endpoint string, body any, result any) (*resty.Response, error) {
 	var apiError APIError
 
 	request := c.httpClient.R().
@@ -655,7 +728,7 @@ func (c *Client) OrgDeviceActivities() OrgDeviceActivitiesService {
 }
 
 // ApplyRequestOptions applies client RequestOptions to a service request
-func (c *Client) ApplyRequestOptions(req shared.RequestInterface, opts ...interface{}) {
+func (c *Client) ApplyRequestOptions(req shared.RequestInterface, opts ...any) {
 	for _, opt := range opts {
 		if requestOption, ok := opt.(RequestOption); ok {
 			rb := &RequestBuilder{req: req}
