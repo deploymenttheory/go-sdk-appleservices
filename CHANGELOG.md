@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1](https://github.com/deploymenttheory/go-api-sdk-apple/compare/v0.1.0...v0.1.1) (2025-10-09)
+
+
+### Bug Fixes
+
+* rl pat token var ([ad16e08](https://github.com/deploymenttheory/go-api-sdk-apple/commit/ad16e08f8f03a3e9ecc1a659d388498f14bc4a69))
+* tidy up ([9e878fc](https://github.com/deploymenttheory/go-api-sdk-apple/commit/9e878fc18c9bd8f8c45ecc50f1167d4652627e33))
+
 ## [Unreleased]
 
 ### Added
