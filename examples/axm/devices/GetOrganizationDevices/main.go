@@ -1,0 +1,81 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"log"
+
+	"github.com/deploymenttheory/go-api-sdk-apple/client/axm"
+	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/devices"
+)
+
+func main() {
+	fmt.Println("=== Apple Business Manager Test Example ===")
+
+	keyID := "44f6a58a-xxxx-4cab-xxxx-d071a3c36a42"
+	issuerID := "BUSINESSAPI.3bb3a62b-xxxx-4802-xxxx-a69b86201c5a"
+	privateKeyPEM := `-----BEGIN EC PRIVATE KEY-----
+your-abm-api-key
+-----END EC PRIVATE KEY-----`
+
+	privateKey, err := axm.ParsePrivateKey([]byte(privateKeyPEM))
+	if err != nil {
+		log.Fatalf("Failed to parse private key: %v", err)
+	}
+
+	axmClient, err := axm.NewClientBuilder().
+		WithJWTAuth(keyID, issuerID, privateKey).
+		WithDebug(true).
+		Build()
+
+	if err != nil {
+		log.Fatalf("Failed to create AXM client: %v", err)
+	}
+
+	devicesClient := devices.NewClient(axmClient)
+
+	ctx := context.Background()
+
+	fmt.Println("\nFetching organization devices...")
+
+	options := &devices.GetOrganizationDevicesOptions{
+		Fields: []string{
+			devices.FieldSerialNumber,
+			devices.FieldDeviceModel,
+			devices.FieldStatus,
+		},
+		Limit: 5, // Limit to 5 devices for this example
+	}
+
+	response, err := devicesClient.GetOrganizationDevices(ctx, options)
+	if err != nil {
+		log.Fatalf("Error getting devices: %v", err)
+	}
+
+	fmt.Printf("Found %d devices:\n\n", len(response.Data))
+
+	for i, device := range response.Data {
+		fmt.Printf("Device %d:\n", i+1)
+		fmt.Printf("  ID: %s\n", device.ID)
+		fmt.Printf("  Serial: %s\n", device.Attributes.SerialNumber)
+		fmt.Printf("  Model: %s\n", device.Attributes.DeviceModel)
+		fmt.Printf("  Status: %s\n", device.Attributes.Status)
+		fmt.Println()
+	}
+
+	if axm.HasNextPage(response.Links) {
+		fmt.Println("Note: More devices are available on additional pages.")
+		fmt.Printf("Next page URL: %s\n", response.Links.Next)
+	}
+
+	fmt.Println("=== Full JSON Response ===")
+	jsonData, err := json.MarshalIndent(response, "", "  ")
+	if err != nil {
+		log.Printf("Error marshaling response: %v", err)
+	} else {
+		fmt.Println(string(jsonData))
+	}
+
+	fmt.Println("\n=== Test Complete ===")
+}

@@ -2,6 +2,8 @@ package devices
 
 import (
 	"time"
+
+	"github.com/deploymenttheory/go-api-sdk-apple/client/axm"
 )
 
 // OrgDevice represents a device in the Apple Business Manager system based on the API specification
@@ -30,7 +32,7 @@ type OrgDeviceAttributes struct {
 	EID                 string     `json:"eid,omitempty"`
 	WiFiMACAddress      string     `json:"wifiMacAddress,omitempty"`
 	BluetoothMACAddress string     `json:"bluetoothMacAddress,omitempty"`
-	PurchaseSourceID    string     `json:"purchaseSourceUid,omitempty"`
+	PurchaseSourceUid   string     `json:"purchaseSourceUid,omitempty"`
 	PurchaseSourceType  string     `json:"purchaseSourceType,omitempty"`
 	AssignedServer      string     `json:"assignedServer,omitempty"`
 }
@@ -49,31 +51,11 @@ type OrgDeviceFilter struct {
 	Status        string `json:"status,omitempty"`
 }
 
-// Meta contains pagination and other metadata
-type Meta struct {
-	Paging *Paging `json:"paging,omitempty"`
-}
-
-// Paging contains pagination information
-type Paging struct {
-	Total int `json:"total,omitempty"`
-	Limit int `json:"limit,omitempty"`
-}
-
-// Links contains pagination navigation links
-type Links struct {
-	Self  string `json:"self,omitempty"`
-	First string `json:"first,omitempty"`
-	Next  string `json:"next,omitempty"`
-	Prev  string `json:"prev,omitempty"`
-	Last  string `json:"last,omitempty"`
-}
-
 // OrgDevicesResponse represents the response for getting organization devices
 type OrgDevicesResponse struct {
 	Data  []OrgDevice `json:"data"`
-	Meta  *Meta       `json:"meta,omitempty"`
-	Links *Links      `json:"links,omitempty"`
+	Meta  *axm.Meta   `json:"meta,omitempty"`
+	Links *axm.Links  `json:"links,omitempty"`
 }
 
 // GetOrganizationDevicesOptions represents the query parameters for getting organization devices

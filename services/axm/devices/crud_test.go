@@ -87,7 +87,7 @@ func TestGetOrganizationDevices_Success(t *testing.T) {
 	assert.Equal(t, "SILVER", device.Attributes.Color) // Has color in list response
 	assert.Equal(t, "UNASSIGNED", device.Attributes.Status)
 	assert.Equal(t, "89049037640158663184237812557346", device.Attributes.EID)
-	assert.Equal(t, "-2085650007946880", device.Attributes.PurchaseSourceID)
+	assert.Equal(t, "-2085650007946880", device.Attributes.PurchaseSourceUid)
 	assert.Equal(t, "APPLE", device.Attributes.PurchaseSourceType)
 
 	// Test timestamp fields
@@ -207,7 +207,7 @@ func TestGetDeviceInformation_Success(t *testing.T) {
 		Fields: []string{FieldSerialNumber, FieldDeviceModel, FieldStatus},
 	}
 
-	result, err := client.GetDeviceInformation(ctx, deviceID, opts)
+	result, err := client.GetDeviceInformationByDeviceID(ctx, deviceID, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -229,7 +229,7 @@ func TestGetDeviceInformation_Success(t *testing.T) {
 	assert.Equal(t, "SILVER", device.Attributes.Color)
 	assert.Equal(t, "UNASSIGNED", device.Attributes.Status)
 	assert.Equal(t, "89049037640158663184237812557346", device.Attributes.EID)
-	assert.Equal(t, "-2085650007946880", device.Attributes.PurchaseSourceID)
+	assert.Equal(t, "-2085650007946880", device.Attributes.PurchaseSourceUid)
 	assert.Equal(t, "APPLE", device.Attributes.PurchaseSourceType)
 
 	// Verify timestamps are parsed correctly
@@ -256,7 +256,7 @@ func TestGetDeviceInformation_WithNilOptions(t *testing.T) {
 	ctx := context.Background()
 	deviceID := "XABC123X0ABC123X0"
 
-	result, err := client.GetDeviceInformation(ctx, deviceID, nil)
+	result, err := client.GetDeviceInformationByDeviceID(ctx, deviceID, nil)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -274,7 +274,7 @@ func TestGetDeviceInformation_EmptyDeviceID(t *testing.T) {
 	ctx := context.Background()
 	opts := &GetDeviceInformationOptions{}
 
-	result, err := client.GetDeviceInformation(ctx, "", opts)
+	result, err := client.GetDeviceInformationByDeviceID(ctx, "", opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -294,7 +294,7 @@ func TestGetDeviceInformation_DeviceNotFound(t *testing.T) {
 	deviceID := "NONEXISTENT123"
 	opts := &GetDeviceInformationOptions{}
 
-	result, err := client.GetDeviceInformation(ctx, deviceID, opts)
+	result, err := client.GetDeviceInformationByDeviceID(ctx, deviceID, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -312,7 +312,7 @@ func TestGetDeviceInformation_HTTPError(t *testing.T) {
 	deviceID := "XABC123X0ABC123X0"
 	opts := &GetDeviceInformationOptions{}
 
-	result, err := client.GetDeviceInformation(ctx, deviceID, opts)
+	result, err := client.GetDeviceInformationByDeviceID(ctx, deviceID, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -333,7 +333,7 @@ func TestGetDeviceInformation_ContextCancellation(t *testing.T) {
 	deviceID := "XABC123X0ABC123X0"
 	opts := &GetDeviceInformationOptions{}
 
-	result, err := client.GetDeviceInformation(ctx, deviceID, opts)
+	result, err := client.GetDeviceInformationByDeviceID(ctx, deviceID, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -449,7 +449,7 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 		},
 	}
 
-	result, err := client.GetDeviceInformation(ctx, deviceID, opts)
+	result, err := client.GetDeviceInformationByDeviceID(ctx, deviceID, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -477,7 +477,7 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 	_ = attrs.EID
 	_ = attrs.WiFiMACAddress
 	_ = attrs.BluetoothMACAddress
-	_ = attrs.PurchaseSourceID
+	_ = attrs.PurchaseSourceUid
 	_ = attrs.PurchaseSourceType
 	_ = attrs.AssignedServer
 }

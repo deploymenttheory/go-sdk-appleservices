@@ -22,12 +22,10 @@ func (c *Client) GetOrganizationDevices(ctx context.Context, opts *GetOrganizati
 
 	queryParams := c.client.QueryBuilder()
 
-	// Add fields[orgDevices] parameter
 	if len(opts.Fields) > 0 {
 		queryParams.AddStringSlice("fields[orgDevices]", opts.Fields)
 	}
 
-	// Add limit parameter (max 1000)
 	if opts.Limit > 0 {
 		if opts.Limit > 1000 {
 			opts.Limit = 1000 // Enforce API maximum
@@ -37,7 +35,7 @@ func (c *Client) GetOrganizationDevices(ctx context.Context, opts *GetOrganizati
 
 	var result OrgDevicesResponse
 
-	err := c.client.Get(ctx, endpoint, queryParams.Build(), headers, &result)
+	err := c.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -45,10 +43,10 @@ func (c *Client) GetOrganizationDevices(ctx context.Context, opts *GetOrganizati
 	return &result, nil
 }
 
-// GetDeviceInformation retrieves information about a specific device in an organization
+// GetDeviceInformationByDeviceID retrieves information about a specific device in an organization
 // URL: GET https://api-business.apple.com/v1/orgDevices/{id}
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-orgdevice-information
-func (c *Client) GetDeviceInformation(ctx context.Context, deviceID string, opts *GetDeviceInformationOptions) (*OrgDeviceResponse, error) {
+func (c *Client) GetDeviceInformationByDeviceID(ctx context.Context, deviceID string, opts *GetDeviceInformationOptions) (*OrgDeviceResponse, error) {
 	if deviceID == "" {
 		return nil, fmt.Errorf("device ID is required")
 	}

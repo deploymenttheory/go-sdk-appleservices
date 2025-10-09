@@ -13,6 +13,8 @@ func (c *Client) GetDeviceManagementServices(ctx context.Context, opts *GetMDMSe
 		opts = &GetMDMServersOptions{}
 	}
 
+	endpoint := "/mdmServers"
+
 	queryParams := c.client.QueryBuilder()
 
 	if len(opts.Fields) > 0 {
@@ -32,7 +34,7 @@ func (c *Client) GetDeviceManagementServices(ctx context.Context, opts *GetMDMSe
 	}
 
 	var result MDMServersResponse
-	err := c.client.Get(ctx, "/mdmServers", queryParams.Build(), headers, &result)
+	err := c.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -48,6 +50,13 @@ func (c *Client) GetMDMServerDeviceLinkages(ctx context.Context, mdmServerID str
 		return nil, fmt.Errorf("MDM server ID is required")
 	}
 
+	endpoint := fmt.Sprintf("/mdmServers/%s/relationships/devices", mdmServerID)
+
+	headers := map[string]string{
+		"Accept":       "application/json",
+		"Content-Type": "application/json",
+	}
+
 	if opts == nil {
 		opts = &GetMDMServerDeviceLinkagesOptions{}
 	}
@@ -61,15 +70,9 @@ func (c *Client) GetMDMServerDeviceLinkages(ctx context.Context, mdmServerID str
 		queryParams.AddInt("limit", opts.Limit)
 	}
 
-	endpoint := fmt.Sprintf("/mdmServers/%s/relationships/devices", mdmServerID)
-
-	headers := map[string]string{
-		"Accept":       "application/json",
-		"Content-Type": "application/json",
-	}
-
 	var result MDMServerDevicesLinkagesResponse
-	err := c.client.Get(ctx, endpoint, queryParams.Build(), headers, &result)
+
+	err := c.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -109,6 +112,13 @@ func (c *Client) GetAssignedDeviceManagementServiceInformationByDeviceID(ctx con
 		return nil, fmt.Errorf("device ID is required")
 	}
 
+	endpoint := fmt.Sprintf("/orgDevices/%s/assignedServer", deviceID)
+
+	headers := map[string]string{
+		"Accept":       "application/json",
+		"Content-Type": "application/json",
+	}
+
 	if opts == nil {
 		opts = &GetAssignedServerInfoOptions{}
 	}
@@ -117,13 +127,6 @@ func (c *Client) GetAssignedDeviceManagementServiceInformationByDeviceID(ctx con
 
 	if len(opts.Fields) > 0 {
 		queryParams.AddStringSlice("fields[mdmServers]", opts.Fields)
-	}
-
-	endpoint := fmt.Sprintf("/orgDevices/%s/assignedServer", deviceID)
-
-	headers := map[string]string{
-		"Accept":       "application/json",
-		"Content-Type": "application/json",
 	}
 
 	var result MDMServerResponse
@@ -145,6 +148,8 @@ func (c *Client) AssignDevicesToServer(ctx context.Context, mdmServerID string, 
 	if len(deviceIDs) == 0 {
 		return nil, fmt.Errorf("at least one device ID is required")
 	}
+
+	endpoint := "/orgDeviceActivities"
 
 	deviceLinkages := make([]OrgDeviceActivityDeviceLinkage, len(deviceIDs))
 	for i, deviceID := range deviceIDs {
@@ -180,7 +185,8 @@ func (c *Client) AssignDevicesToServer(ctx context.Context, mdmServerID string, 
 	}
 
 	var result OrgDeviceActivityResponse
-	err := c.client.Post(ctx, "/orgDeviceActivities", request, headers, &result)
+
+	err := c.client.Post(ctx, endpoint, request, headers, &result)
 	if err != nil {
 		return nil, err
 	}
@@ -198,6 +204,8 @@ func (c *Client) UnassignDevicesFromServer(ctx context.Context, mdmServerID stri
 	if len(deviceIDs) == 0 {
 		return nil, fmt.Errorf("at least one device ID is required")
 	}
+
+	endpoint := "/orgDeviceActivities"
 
 	deviceLinkages := make([]OrgDeviceActivityDeviceLinkage, len(deviceIDs))
 	for i, deviceID := range deviceIDs {
@@ -233,7 +241,7 @@ func (c *Client) UnassignDevicesFromServer(ctx context.Context, mdmServerID stri
 	}
 
 	var result OrgDeviceActivityResponse
-	err := c.client.Post(ctx, "/orgDeviceActivities", request, headers, &result)
+	err := c.client.Post(ctx, endpoint, request, headers, &result)
 	if err != nil {
 		return nil, err
 	}

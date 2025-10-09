@@ -2,13 +2,15 @@ package devicemanagement
 
 import (
 	"time"
+
+	"github.com/deploymenttheory/go-api-sdk-apple/client/axm"
 )
 
 // MDMServer represents an MDM server in the Apple Business Manager system
 type MDMServer struct {
-	ID            string                 `json:"id"`
-	Type          string                 `json:"type"`
-	Attributes    *MDMServerAttributes   `json:"attributes,omitempty"`
+	ID            string                  `json:"id"`
+	Type          string                  `json:"type"`
+	Attributes    *MDMServerAttributes    `json:"attributes,omitempty"`
 	Relationships *MDMServerRelationships `json:"relationships,omitempty"`
 }
 
@@ -39,28 +41,8 @@ type MDMServerDevicesLinks struct {
 // MDMServersResponse represents the response for getting MDM servers
 type MDMServersResponse struct {
 	Data  []MDMServer `json:"data"`
-	Meta  *Meta       `json:"meta,omitempty"`
-	Links *Links      `json:"links,omitempty"`
-}
-
-// Meta contains pagination and other metadata
-type Meta struct {
-	Paging *Paging `json:"paging,omitempty"`
-}
-
-// Paging contains pagination information
-type Paging struct {
-	Total int `json:"total,omitempty"`
-	Limit int `json:"limit,omitempty"`
-}
-
-// Links contains pagination navigation links
-type Links struct {
-	Self  string `json:"self,omitempty"`
-	First string `json:"first,omitempty"`
-	Next  string `json:"next,omitempty"`
-	Prev  string `json:"prev,omitempty"`
-	Last  string `json:"last,omitempty"`
+	Meta  *axm.Meta   `json:"meta,omitempty"`
+	Links *axm.Links  `json:"links,omitempty"`
 }
 
 // GetMDMServersOptions represents the query parameters for getting MDM servers
@@ -68,12 +50,10 @@ type GetMDMServersOptions struct {
 	// Field selection - fields to return for mdmServers
 	// Possible values: serverName, serverType, createdDateTime, updatedDateTime, devices
 	Fields []string `json:"fields,omitempty"`
-	
+
 	// Limit the number of included related resources to return (max 1000)
 	Limit int `json:"limit,omitempty"`
 }
-
-
 
 // MDMServerDeviceLinkage represents a device linkage in the MDM server relationships
 type MDMServerDeviceLinkage struct {
@@ -84,19 +64,8 @@ type MDMServerDeviceLinkage struct {
 // MDMServerDevicesLinkagesResponse represents the response for getting device linkages for an MDM server
 type MDMServerDevicesLinkagesResponse struct {
 	Data  []MDMServerDeviceLinkage `json:"data"`
-	Links *Links                   `json:"links,omitempty"`
-	Meta  *MDMServerLinkagesMeta   `json:"meta,omitempty"`
-}
-
-// MDMServerLinkagesMeta contains pagination metadata for device linkages
-type MDMServerLinkagesMeta struct {
-	Paging *MDMServerLinkagesPaging `json:"paging,omitempty"`
-}
-
-// MDMServerLinkagesPaging contains pagination information for device linkages
-type MDMServerLinkagesPaging struct {
-	NextCursor string `json:"nextCursor,omitempty"`
-	Limit      int    `json:"limit,omitempty"`
+	Links *axm.Links               `json:"links,omitempty"`
+	Meta  *axm.Meta                `json:"meta,omitempty"`
 }
 
 // GetMDMServerDeviceLinkagesOptions represents the query parameters for getting MDM server device linkages
@@ -104,8 +73,6 @@ type GetMDMServerDeviceLinkagesOptions struct {
 	// Limit the number of included related resources to return (max 1000)
 	Limit int `json:"limit,omitempty"`
 }
-
-
 
 // OrgDeviceAssignedServerLinkage represents the linkage between a device and its assigned server
 type OrgDeviceAssignedServerLinkage struct {
@@ -127,8 +94,8 @@ type AssignedServerLinks struct {
 
 // MDMServerResponse represents the response for getting a single MDM server
 type MDMServerResponse struct {
-	Data  MDMServer `json:"data"`
-	Links *Links    `json:"links,omitempty"`
+	Data  MDMServer  `json:"data"`
+	Links *axm.Links `json:"links,omitempty"`
 }
 
 // GetAssignedServerInfoOptions represents the query parameters for getting assigned server info
@@ -140,18 +107,18 @@ type GetAssignedServerInfoOptions struct {
 
 // OrgDeviceActivity represents a device activity (assign/unassign operations)
 type OrgDeviceActivity struct {
-	ID         string                        `json:"id"`
-	Type       string                        `json:"type"`
-	Attributes *OrgDeviceActivityAttributes  `json:"attributes,omitempty"`
-	Links      *OrgDeviceActivityLinks       `json:"links,omitempty"`
+	ID         string                       `json:"id"`
+	Type       string                       `json:"type"`
+	Attributes *OrgDeviceActivityAttributes `json:"attributes,omitempty"`
+	Links      *OrgDeviceActivityLinks      `json:"links,omitempty"`
 }
 
 // OrgDeviceActivityAttributes contains the activity attributes
 type OrgDeviceActivityAttributes struct {
-	Status            string     `json:"status,omitempty"`
-	SubStatus         string     `json:"subStatus,omitempty"`
-	CreatedDateTime   *time.Time `json:"createdDateTime,omitempty"`
-	ActivityType      string     `json:"activityType,omitempty"`
+	Status          string     `json:"status,omitempty"`
+	SubStatus       string     `json:"subStatus,omitempty"`
+	CreatedDateTime *time.Time `json:"createdDateTime,omitempty"`
+	ActivityType    string     `json:"activityType,omitempty"`
 }
 
 // OrgDeviceActivityLinks contains activity navigation links
@@ -162,7 +129,7 @@ type OrgDeviceActivityLinks struct {
 // OrgDeviceActivityResponse represents the response for creating an org device activity
 type OrgDeviceActivityResponse struct {
 	Data  OrgDeviceActivity `json:"data"`
-	Links *Links            `json:"links,omitempty"`
+	Links *axm.Links        `json:"links,omitempty"`
 }
 
 // OrgDeviceActivityCreateRequest represents the request for creating a device activity
@@ -173,7 +140,7 @@ type OrgDeviceActivityCreateRequest struct {
 // OrgDeviceActivityData contains the activity data for the request
 type OrgDeviceActivityData struct {
 	Type          string                               `json:"type"`
-	Attributes    OrgDeviceActivityCreateAttributes   `json:"attributes"`
+	Attributes    OrgDeviceActivityCreateAttributes    `json:"attributes"`
 	Relationships OrgDeviceActivityCreateRelationships `json:"relationships"`
 }
 
@@ -225,7 +192,7 @@ const (
 
 // Activity sub-status constants
 const (
-	ActivitySubStatusSubmitted = "SUBMITTED"
+	ActivitySubStatusSubmitted  = "SUBMITTED"
 	ActivitySubStatusProcessing = "PROCESSING"
 )
 
