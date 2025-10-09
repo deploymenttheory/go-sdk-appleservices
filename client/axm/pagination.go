@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"maps"
 	"net/url"
 )
 
@@ -56,13 +57,11 @@ func (c *Client) GetNextPage(ctx context.Context, nextURL string, headers map[st
 		return fmt.Errorf("no next page URL provided")
 	}
 
-	// Parse the next URL to extract path and query parameters
 	parsedURL, err := url.Parse(nextURL)
 	if err != nil {
 		return fmt.Errorf("failed to parse next URL: %w", err)
 	}
 
-	// Extract query parameters
 	queryParams := make(map[string]string)
 	for key, values := range parsedURL.Query() {
 		if len(values) > 0 {
@@ -87,24 +86,19 @@ func HasPrevPage(links *Links) bool {
 // GetAllPages retrieves all pages of results by following pagination links
 func (c *Client) GetAllPages(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, processPage func([]byte) error) error {
 	currentParams := make(map[string]string)
-	for k, v := range queryParams {
-		currentParams[k] = v
-	}
+	maps.Copy(currentParams, queryParams)
 
 	for {
-		// Make request for current page
 		var rawResponse json.RawMessage
 		err := c.GetPaginated(ctx, path, currentParams, headers, &rawResponse)
 		if err != nil {
 			return err
 		}
 
-		// Process the page data
 		if err := processPage(rawResponse); err != nil {
 			return err
 		}
 
-		// Parse response to check for next page
 		var pageInfo struct {
 			Links *Links `json:"links,omitempty"`
 		}
@@ -112,21 +106,16 @@ func (c *Client) GetAllPages(ctx context.Context, path string, queryParams map[s
 			return fmt.Errorf("failed to parse pagination info: %w", err)
 		}
 
-		// Check if there's a next page
 		if !HasNextPage(pageInfo.Links) {
 			break
 		}
 
-		// Extract parameters from next URL
 		nextParams, err := extractParamsFromURL(pageInfo.Links.Next)
 		if err != nil {
 			return fmt.Errorf("failed to parse next URL: %w", err)
 		}
 
-		// Update parameters for next request
-		for k, v := range nextParams {
-			currentParams[k] = v
-		}
+		maps.Copy(currentParams, nextParams)
 	}
 
 	return nil

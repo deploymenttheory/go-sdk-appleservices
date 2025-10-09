@@ -38,7 +38,7 @@ type APIResponse[T any] struct {
 
 // NewClient creates a new Apple Business Manager API client
 func NewClient(config Config) (*Client, error) {
-	// Set defaults
+
 	if config.BaseURL == "" {
 		config.BaseURL = "https://api-business.apple.com/v1"
 	}
@@ -58,15 +58,12 @@ func NewClient(config Config) (*Client, error) {
 		config.Logger = zap.NewNop()
 	}
 
-	// Validate required fields
 	if config.Auth == nil {
 		return nil, fmt.Errorf("auth provider is required")
 	}
 
-	// Create Resty client with v3 best practices
 	httpClient := resty.New()
 
-	// Configure client settings
 	httpClient.
 		SetBaseURL(config.BaseURL).
 		SetTimeout(config.Timeout).
@@ -75,19 +72,15 @@ func NewClient(config Config) (*Client, error) {
 		SetRetryMaxWaitTime(config.RetryWait*10).
 		SetHeader("User-Agent", config.UserAgent)
 
-	// Enable debug mode if requested
 	if config.Debug {
 		httpClient.SetDebug(true)
 	}
 
-	// Add request middleware for logging and auth
 	httpClient.AddRequestMiddleware(func(c *resty.Client, req *resty.Request) error {
-		// Apply authentication
 		if err := config.Auth.ApplyAuth(req); err != nil {
 			return fmt.Errorf("auth failed: %w", err)
 		}
 
-		// Log request
 		config.Logger.Info("API request",
 			zap.String("method", req.Method),
 			zap.String("url", req.URL),
@@ -96,7 +89,6 @@ func NewClient(config Config) (*Client, error) {
 		return nil
 	})
 
-	// Add response middleware for logging and OAuth token refresh
 	httpClient.AddResponseMiddleware(func(c *resty.Client, resp *resty.Response) error {
 		config.Logger.Info("API response",
 			zap.String("method", resp.Request.Method),
@@ -105,7 +97,6 @@ func NewClient(config Config) (*Client, error) {
 			zap.String("status", resp.Status()),
 		)
 
-		// Handle 401 responses for OAuth2Auth by forcing token refresh
 		if resp.StatusCode() == 401 {
 			if oauth2Auth, ok := config.Auth.(*OAuth2Auth); ok {
 				config.Logger.Info("Received 401 response, forcing OAuth token refresh")

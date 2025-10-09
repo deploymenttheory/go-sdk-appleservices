@@ -56,33 +56,41 @@ Complete implementation of the [Apple Business Manager API](https://developer.ap
 - **Context Support**: Context-aware operations for timeouts and cancellation
 
 **Quick Start:**
+
+Get started quickly with multiple client setup options:
+
 ```go
-// Create JWT auth
-auth := client.NewJWTAuth(client.JWTAuthConfig{
-    KeyID:      "YOUR_KEY_ID",
-    IssuerID:   "YOUR_ISSUER_ID",
-    PrivateKey: privateKey,
-})
-
-// Create client
-appleClient, err := apple.NewClient(client.Config{
-    Auth:   auth,
-    Logger: logger,
-    Debug:  true,
-})
-defer appleClient.Close()
-
-// Get devices with pagination
-devices, err := appleClient.Devices().GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
-    Model: devices.ModeliPhone,
-    PaginationOptions: client.PaginationOptions{Limit: 100},
-})
-
-// Iterate through all pages
-for result := range devices.Iterator(ctx) {
-    fmt.Printf("Device: %s\n", result.Item.SerialNumber)
+// Method 1: Simple setup with environment variables
+axmClient, err := axm.NewClientFromEnv()
+if err != nil {
+    log.Fatalf("Failed to create client: %v", err)
 }
+
+// Create service clients
+devicesClient := devices.NewClient(axmClient)
+deviceManagementClient := devicemanagement.NewClient(axmClient)
+
+// Get organization devices
+ctx := context.Background()
+response, err := devicesClient.GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
+    Fields: []string{
+        devices.FieldSerialNumber,
+        devices.FieldDeviceModel,
+        devices.FieldStatus,
+    },
+    Limit: 100,
+})
+
+if err != nil {
+    log.Fatalf("Error getting devices: %v", err)
+}
+
+fmt.Printf("Found %d devices\n", len(response.Data))
 ```
+
+📖 **[Complete Quick Start Guide →](./examples/axm/quick_start.md)**
+
+The guide covers 6 different client setup methods, from simple environment variables to advanced builder patterns with full customization options.
 
 ### Apple Device Management API
 

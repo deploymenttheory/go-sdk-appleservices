@@ -239,18 +239,6 @@ type OAuth2TokenResponse struct {
 	Scope       string `json:"scope"`
 }
 
-// OAuth scope constants
-const (
-	ScopeBusinessAPI = "business.api"
-	ScopeSchoolAPI   = "school.api"
-)
-
-// Default OAuth endpoints
-const (
-	DefaultOAuthTokenURL = "https://account.apple.com/auth/oauth2/token"
-	DefaultOAuthAudience = "https://account.apple.com/auth/oauth2/v2/token"
-)
-
 // NewOAuth2Auth creates a new OAuth 2.0 authentication provider
 func NewOAuth2Auth(config OAuth2Config) (*OAuth2Auth, error) {
 	// Validate required fields

@@ -116,9 +116,7 @@ func NewErrorHandler(logger *zap.Logger) *ErrorHandler {
 func (eh *ErrorHandler) HandleError(resp *resty.Response, errorResp *ErrorResponse) error {
 	statusCode := resp.StatusCode()
 
-	// Handle new ErrorResponse format with errors array
 	if len(errorResp.Errors) > 0 {
-		// Log all errors with enhanced information
 		for i, apiError := range errorResp.Errors {
 			logFields := []zap.Field{
 				zap.Int("error_index", i),
@@ -131,7 +129,6 @@ func (eh *ErrorHandler) HandleError(resp *resty.Response, errorResp *ErrorRespon
 				zap.String("method", resp.Request.Method),
 			}
 
-			// Add source information if available
 			if apiError.Source != nil {
 				if apiError.Source.JsonPointer != nil {
 					logFields = append(logFields, zap.String("source_json_pointer", apiError.Source.JsonPointer.Pointer))
@@ -141,7 +138,6 @@ func (eh *ErrorHandler) HandleError(resp *resty.Response, errorResp *ErrorRespon
 				}
 			}
 
-			// Add links information if available
 			if apiError.Links != nil {
 				if apiError.Links.About != "" {
 					logFields = append(logFields, zap.String("links_about", apiError.Links.About))
@@ -154,7 +150,6 @@ func (eh *ErrorHandler) HandleError(resp *resty.Response, errorResp *ErrorRespon
 				}
 			}
 
-			// Add meta information if available
 			if apiError.Meta != nil && apiError.Meta.AdditionalProperties != nil {
 				logFields = append(logFields, zap.Any("error_meta", apiError.Meta.AdditionalProperties))
 			}
@@ -162,12 +157,10 @@ func (eh *ErrorHandler) HandleError(resp *resty.Response, errorResp *ErrorRespon
 			eh.logger.Error("API request failed", logFields...)
 		}
 
-		// Return the first error
 		firstError := errorResp.Errors[0]
 		return &firstError
 	}
 
-	// Fallback for when no structured errors are provided
 	eh.logger.Error("API request failed (no structured error)",
 		zap.Int("status_code", statusCode),
 		zap.String("url", resp.Request.URL),
@@ -175,7 +168,6 @@ func (eh *ErrorHandler) HandleError(resp *resty.Response, errorResp *ErrorRespon
 		zap.String("response_body", resp.String()),
 	)
 
-	// Return generic error
 	return &APIError{
 		Status: fmt.Sprintf("%d", statusCode),
 		Code:   fmt.Sprintf("HTTP_%d", statusCode),

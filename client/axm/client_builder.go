@@ -73,20 +73,6 @@ func (cb *ClientBuilder) WithJWTAuthFromEnv() *ClientBuilder {
 	return cb.WithJWTAuthFromFile(keyID, issuerID, privateKeyPath)
 }
 
-// WithAPIKeyAuth configures API key authentication
-func (cb *ClientBuilder) WithAPIKeyAuth(apiKey string) *ClientBuilder {
-	// Note: API key auth would be implemented here when supported
-	// For now, this is a placeholder for future implementation
-	return cb
-}
-
-// WithOAuth2Auth configures OAuth 2.0 authentication
-func (cb *ClientBuilder) WithOAuth2Auth(clientID, clientSecret string) *ClientBuilder {
-	// Note: OAuth2 auth would be implemented here when supported
-	// For now, this is a placeholder for future implementation
-	return cb
-}
-
 // WithBaseURL sets the base URL for the API (default: https://api-business.apple.com/v1)
 func (cb *ClientBuilder) WithBaseURL(baseURL string) *ClientBuilder {
 	cb.baseURL = baseURL
