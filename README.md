@@ -72,7 +72,7 @@ deviceManagementClient := devicemanagement.NewClient(axmClient)
 
 // Get organization devices
 ctx := context.Background()
-response, err := devicesClient.GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
+response, err := devicesClient.GetOrganizationDevices(ctx, &devices.RequestQueryOptions{
     Fields: []string{
         devices.FieldSerialNumber,
         devices.FieldDeviceModel,

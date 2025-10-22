@@ -359,7 +359,7 @@ deviceManagementClient := devicemanagement.NewClient(axmClient)
 devices, err := devicesClient.GetOrganizationDevices(ctx, nil)
 
 // Get devices with filtering
-devices, err := devicesClient.GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
+devices, err := devicesClient.GetOrganizationDevices(ctx, &devices.RequestQueryOptions{
     Fields: []string{
         devices.FieldSerialNumber,
         devices.FieldDeviceModel,
@@ -414,7 +414,7 @@ Handle paginated responses:
 
 ```go
 // Get first page
-response, err := devicesClient.GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
+response, err := devicesClient.GetOrganizationDevices(ctx, &devices.RequestQueryOptions{
     Limit: 10,
 })
 

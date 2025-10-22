@@ -73,8 +73,8 @@ type OrgDevicesResponse struct {
 	Links *Links      `json:"links,omitempty"`
 }
 
-// GetOrganizationDevicesOptions represents the query parameters for getting organization devices
-type GetOrganizationDevicesOptions struct {
+// RequestQueryOptions represents the query parameters for getting organization devices
+type RequestQueryOptions struct {
 	// Field selection - fields to return for orgDevices
 	// Possible values: serialNumber, addedToOrgDateTime, updatedDateTime, deviceModel,
 	// productFamily, productType, deviceCapacity, partNumber, orderNumber, color, status,

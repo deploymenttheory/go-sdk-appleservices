@@ -37,7 +37,7 @@ your-abm-api-key
 	// First, get a list of devices to find a device ID to query
 	fmt.Println("\nStep 1: Getting organization devices to find a device ID...")
 
-	listOptions := &devices.GetOrganizationDevicesOptions{
+	listOptions := &devices.RequestQueryOptions{
 		Fields: []string{
 			devices.FieldSerialNumber,
 			devices.FieldDeviceModel,

@@ -59,7 +59,7 @@ func TestGetOrganizationDevices_Success(t *testing.T) {
 	defer mockHandler.CleanupMockState()
 
 	ctx := context.Background()
-	opts := &GetOrganizationDevicesOptions{
+	opts := &RequestQueryOptions{
 		Fields: []string{"serialNumber", "deviceModel", "status"},
 		Limit:  100,
 	}
@@ -134,7 +134,7 @@ func TestGetOrganizationDevices_WithFieldSelection(t *testing.T) {
 	defer mockHandler.CleanupMockState()
 
 	ctx := context.Background()
-	opts := &GetOrganizationDevicesOptions{
+	opts := &RequestQueryOptions{
 		Fields: []string{FieldSerialNumber, FieldDeviceModel, FieldStatus, FieldProductFamily},
 		Limit:  50,
 	}
@@ -162,7 +162,7 @@ func TestGetOrganizationDevices_WithLimitEnforcement(t *testing.T) {
 	defer mockHandler.CleanupMockState()
 
 	ctx := context.Background()
-	opts := &GetOrganizationDevicesOptions{
+	opts := &RequestQueryOptions{
 		Limit: 1500, // Exceeds API maximum of 1000
 	}
 
@@ -185,7 +185,7 @@ func TestGetOrganizationDevices_HTTPError(t *testing.T) {
 	defer mockHandler.CleanupMockState()
 
 	ctx := context.Background()
-	opts := &GetOrganizationDevicesOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetOrganizationDevices(ctx, opts)
 
@@ -353,7 +353,7 @@ func TestGetOrganizationDevices_ContextTimeout(t *testing.T) {
 	// Sleep to ensure timeout
 	time.Sleep(1 * time.Millisecond)
 
-	opts := &GetOrganizationDevicesOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetOrganizationDevices(ctx, opts)
 
@@ -399,8 +399,8 @@ func TestDeviceFieldConstants(t *testing.T) {
 }
 
 func TestOptionsStructures(t *testing.T) {
-	// Test GetOrganizationDevicesOptions
-	opts1 := &GetOrganizationDevicesOptions{
+	// Test RequestQueryOptions
+	opts1 := &RequestQueryOptions{
 		Fields: []string{FieldSerialNumber, FieldDeviceModel},
 		Limit:  100,
 	}

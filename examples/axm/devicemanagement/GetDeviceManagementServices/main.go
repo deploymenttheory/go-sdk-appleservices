@@ -69,7 +69,7 @@ your-abm-api-key
 	// Example 2: Get MDM servers with specific fields
 	fmt.Println("\n=== Example 2: Get MDM Servers with Specific Fields ===")
 
-	options := &devicemanagement.GetMDMServersOptions{
+	options := &devicemanagement.RequestQueryOptions{
 		Fields: []string{
 			"serverName",
 			"serverType",
@@ -101,7 +101,7 @@ your-abm-api-key
 	// Example 3: Get MDM servers with pagination limit
 	fmt.Println("\n=== Example 3: Get MDM Servers with Pagination Limit ===")
 
-	paginationOptions := &devicemanagement.GetMDMServersOptions{
+	paginationOptions := &devicemanagement.RequestQueryOptions{
 		Limit: 5,
 	}
 
@@ -126,7 +126,7 @@ your-abm-api-key
 	// Example 4: Get all available fields
 	fmt.Println("\n=== Example 4: Get MDM Servers with All Available Fields ===")
 
-	allFieldsOptions := &devicemanagement.GetMDMServersOptions{
+	allFieldsOptions := &devicemanagement.RequestQueryOptions{
 		Fields: []string{
 			"serverName",
 			"serverType",
@@ -172,7 +172,7 @@ your-abm-api-key
 	fmt.Println("\n=== Example 5: Error Handling ===")
 
 	// Test with very large limit (should be capped at 1000)
-	largeOptions := &devicemanagement.GetMDMServersOptions{
+	largeOptions := &devicemanagement.RequestQueryOptions{
 		Limit: 5000, // This will be capped at 1000
 	}
 

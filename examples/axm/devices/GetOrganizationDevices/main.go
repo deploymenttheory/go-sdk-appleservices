@@ -34,7 +34,7 @@ your-abm-api-key
 
 	fmt.Println("\nFetching organization devices...")
 
-	options := &devices.GetOrganizationDevicesOptions{
+	options := &devices.RequestQueryOptions{
 		Fields: []string{
 			devices.FieldSerialNumber,
 			devices.FieldDeviceModel,

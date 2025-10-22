@@ -38,7 +38,7 @@ your-abm-api-key
 	// Step 1: Get organization devices to find device IDs
 	fmt.Println("\nStep 1: Getting organization devices to find device IDs...")
 
-	devicesResponse, err := client.Devices.GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
+	devicesResponse, err := client.Devices.GetOrganizationDevices(ctx, &devices.RequestQueryOptions{
 		Fields: []string{
 			devices.FieldSerialNumber,
 			devices.FieldDeviceModel,

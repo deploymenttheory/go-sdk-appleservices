@@ -60,8 +60,8 @@ type MDMServersResponse struct {
 	Links *Links      `json:"links,omitempty"`
 }
 
-// GetMDMServersOptions represents the query parameters for getting MDM servers
-type GetMDMServersOptions struct {
+// RequestQueryOptions represents the query parameters for getting MDM servers
+type RequestQueryOptions struct {
 	// Field selection - fields to return for mdmServers
 	// Possible values: serverName, serverType, createdDateTime, updatedDateTime, devices
 	Fields []string `json:"fields,omitempty"`

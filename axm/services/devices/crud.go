@@ -15,7 +15,7 @@ type (
 		//
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-org-devices
-		GetOrganizationDevices(ctx context.Context, opts *GetOrganizationDevicesOptions) (*OrgDevicesResponse, error)
+		GetOrganizationDevices(ctx context.Context, opts *RequestQueryOptions) (*OrgDevicesResponse, error)
 
 		// GetDeviceInformationByDeviceID retrieves information about a specific device
 		// in an organization.
@@ -46,9 +46,9 @@ func NewService(client interfaces.HTTPClient) *DevicesService {
 // GetOrganizationDevices retrieves a list of devices in an organization that enroll using Automated Device Enrollment
 // URL: GET https://api-business.apple.com/v1/orgDevices
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-org-devices
-func (s *DevicesService) GetOrganizationDevices(ctx context.Context, opts *GetOrganizationDevicesOptions) (*OrgDevicesResponse, error) {
+func (s *DevicesService) GetOrganizationDevices(ctx context.Context, opts *RequestQueryOptions) (*OrgDevicesResponse, error) {
 	if opts == nil {
-		opts = &GetOrganizationDevicesOptions{}
+		opts = &RequestQueryOptions{}
 	}
 
 	endpoint := "/orgDevices"

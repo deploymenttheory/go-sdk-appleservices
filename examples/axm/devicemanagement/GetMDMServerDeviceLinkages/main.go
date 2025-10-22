@@ -38,7 +38,7 @@ your-abm-api-key
 
 	serversResponse, err := client.
 		DeviceManagement.
-		GetDeviceManagementServices(ctx, &devicemanagement.GetMDMServersOptions{
+		GetDeviceManagementServices(ctx, &devicemanagement.RequestQueryOptions{
 			Limit: 5,
 		})
 	if err != nil {

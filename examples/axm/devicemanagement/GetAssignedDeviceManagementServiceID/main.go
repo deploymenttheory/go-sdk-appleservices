@@ -38,7 +38,7 @@ your-abm-api-key
 
 	devicesResponse, err := client.
 		Devices.
-		GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
+		GetOrganizationDevices(ctx, &devices.RequestQueryOptions{
 			Fields: []string{
 				devices.FieldSerialNumber,
 				devices.FieldDeviceModel,

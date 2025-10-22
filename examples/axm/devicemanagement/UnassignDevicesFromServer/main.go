@@ -39,7 +39,7 @@ your-abm-api-key
 
 	serversResponse, err := client.
 		DeviceManagement.
-		GetDeviceManagementServices(ctx, &devicemanagement.GetMDMServersOptions{
+		GetDeviceManagementServices(ctx, &devicemanagement.RequestQueryOptions{
 			Limit: 10,
 		})
 	if err != nil {
@@ -71,7 +71,7 @@ your-abm-api-key
 
 	devicesResponse, err := client.
 		Devices.
-		GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
+		GetOrganizationDevices(ctx, &devices.RequestQueryOptions{
 			Fields: []string{
 				devices.FieldSerialNumber,
 				devices.FieldDeviceModel,

@@ -59,7 +59,7 @@ func TestGetDeviceManagementServices_Success(t *testing.T) {
 	defer mockHandler.CleanupMockState()
 
 	ctx := context.Background()
-	opts := &GetMDMServersOptions{
+	opts := &RequestQueryOptions{
 		Fields: []string{FieldServerName, FieldServerType, FieldCreatedDateTime},
 		Limit:  100,
 	}
@@ -119,7 +119,7 @@ func TestGetDeviceManagementServices_WithLimitEnforcement(t *testing.T) {
 	defer mockHandler.CleanupMockState()
 
 	ctx := context.Background()
-	opts := &GetMDMServersOptions{
+	opts := &RequestQueryOptions{
 		Limit: 1500, // Exceeds API maximum of 1000
 	}
 
@@ -142,7 +142,7 @@ func TestGetDeviceManagementServices_HTTPError(t *testing.T) {
 	defer mockHandler.CleanupMockState()
 
 	ctx := context.Background()
-	opts := &GetMDMServersOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetDeviceManagementServices(ctx, opts)
 
@@ -466,7 +466,7 @@ func TestContextCancellation(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
 
-	opts := &GetMDMServersOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetDeviceManagementServices(ctx, opts)
 
@@ -488,7 +488,7 @@ func TestContextTimeout(t *testing.T) {
 	// Sleep to ensure timeout
 	time.Sleep(1 * time.Millisecond)
 
-	opts := &GetMDMServersOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetDeviceManagementServices(ctx, opts)
 
@@ -535,8 +535,8 @@ func TestActivityConstants(t *testing.T) {
 }
 
 func TestOptionsStructures(t *testing.T) {
-	// Test GetMDMServersOptions
-	opts1 := &GetMDMServersOptions{
+	// Test RequestQueryOptions
+	opts1 := &RequestQueryOptions{
 		Fields: []string{FieldServerName, FieldServerType},
 		Limit:  100,
 	}
@@ -565,7 +565,7 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 	ctx := context.Background()
 
 	// Test with all available fields to ensure comprehensive coverage
-	opts := &GetMDMServersOptions{
+	opts := &RequestQueryOptions{
 		Fields: []string{
 			FieldServerName,
 			FieldServerType,

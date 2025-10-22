@@ -14,7 +14,7 @@ type (
 		//
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-mdm-servers
-		GetDeviceManagementServices(ctx context.Context, opts *GetMDMServersOptions) (*MDMServersResponse, error)
+		GetDeviceManagementServices(ctx context.Context, opts *RequestQueryOptions) (*MDMServersResponse, error)
 
 		// GetMDMServerDeviceLinkages retrieves a list of device IDs assigned to an MDM server
 		//
@@ -68,9 +68,9 @@ func NewService(client interfaces.HTTPClient) *DeviceManagementService {
 // GetDeviceManagementServices retrieves a list of device management services (MDM servers) in an organization
 // URL: GET https://api-business.apple.com/v1/mdmServers
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-mdm-servers
-func (s *DeviceManagementService) GetDeviceManagementServices(ctx context.Context, opts *GetMDMServersOptions) (*MDMServersResponse, error) {
+func (s *DeviceManagementService) GetDeviceManagementServices(ctx context.Context, opts *RequestQueryOptions) (*MDMServersResponse, error) {
 	if opts == nil {
-		opts = &GetMDMServersOptions{}
+		opts = &RequestQueryOptions{}
 	}
 
 	endpoint := "/mdmServers"
