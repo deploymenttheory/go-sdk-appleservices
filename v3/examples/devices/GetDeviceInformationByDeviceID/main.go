@@ -14,7 +14,6 @@ import (
 func main() {
 	fmt.Println("=== Apple Business Manager - Get Device Information Example ===")
 
-	// Use credentials directly for testing
 	keyID := "44f6a58a-xxxx-4cab-xxxx-d071a3c36a42"
 	issuerID := "BUSINESSAPI.3bb3a62b-xxxx-4802-xxxx-a69b86201c5a"
 	privateKeyPEM := `-----BEGIN EC PRIVATE KEY-----
@@ -27,13 +26,11 @@ your-abm-api-key
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	// Create client using GitLab pattern - matches the v3 pattern exactly
 	client, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
 
-	// Create context
 	ctx := context.Background()
 
 	// First, get a list of devices to find a device ID to query

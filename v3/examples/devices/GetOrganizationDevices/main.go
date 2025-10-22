@@ -24,7 +24,6 @@ your-abm-api-key
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	// Create client using GitLab pattern - matches the v3 pattern exactly
 	client, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
