@@ -14,10 +14,12 @@ import (
 func main() {
 	fmt.Println("=== Apple Business Manager Test Example ===")
 
-	keyID := "44f6a58a-xxxx-4cab-xxxx-d071a3c36a42"
-	issuerID := "BUSINESSAPI.3bb3a62b-xxxx-4802-xxxx-a69b86201c5a"
+	keyID := "bd4bd60b-6ddf-4fee-8f85-3ed8f6dc4bd1"
+	issuerID := "BUSINESSAPI.3bb3a62b-6f21-4802-95ad-a69b86201c5a"
 	privateKeyPEM := `-----BEGIN EC PRIVATE KEY-----
-your-abm-api-key
+MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgSVST2uwXoc9Gc87H
+uqq7jYhn+PlsrtxPQebp0LeDXp2hRANCAASBtSEWU1075awq69clg4ZPNdPiAX77
+mdH5iVYM8fVK1mAAk1ewo3YWlhz2GEGuox04Ng5xVrpotMQXo2WQEi9C
 -----END EC PRIVATE KEY-----`
 
 	privateKey, err := client.ParsePrivateKey([]byte(privateKeyPEM))

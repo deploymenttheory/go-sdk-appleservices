@@ -41,7 +41,7 @@ type APIResponse[T any] struct {
 // NewTransport creates a new HTTP transport for Apple Business Manager API
 func NewTransport(config Config) (*Client, error) {
 	if config.BaseURL == "" {
-		config.BaseURL = "https://api-business.apple.com/v1"
+		config.BaseURL = DefaultBaseURL
 	}
 	if config.Timeout == 0 {
 		config.Timeout = 30 * time.Second
@@ -165,12 +165,12 @@ func NewTransportFromEnv() (*Client, error) {
 	}
 
 	config := Config{
-		BaseURL: "https://api-business.apple.com/v1",
+		BaseURL: DefaultBaseURL,
 		Auth: NewJWTAuth(JWTAuthConfig{
 			KeyID:      keyID,
 			IssuerID:   issuerID,
 			PrivateKey: privateKey,
-			Audience:   "appstoreconnect-v1",
+			Audience:   DefaultJWTAudience,
 		}),
 		Timeout:    30 * time.Second,
 		RetryCount: 3,
@@ -199,12 +199,12 @@ func NewTransportFromFile(keyID, issuerID, privateKeyPath string) (*Client, erro
 	}
 
 	config := Config{
-		BaseURL: "https://api-business.apple.com/v1",
+		BaseURL: DefaultBaseURL,
 		Auth: NewJWTAuth(JWTAuthConfig{
 			KeyID:      keyID,
 			IssuerID:   issuerID,
 			PrivateKey: privateKey,
-			Audience:   "appstoreconnect-v1",
+			Audience:   DefaultJWTAudience,
 		}),
 		Timeout:    30 * time.Second,
 		RetryCount: 3,

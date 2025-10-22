@@ -41,10 +41,10 @@ type JWTAuthConfig struct {
 // NewJWTAuth creates a new OAuth 2.0 JWT authentication provider
 func NewJWTAuth(config JWTAuthConfig) *JWTAuth {
 	if config.Audience == "" {
-		config.Audience = "appstoreconnect-v1"
+		config.Audience = DefaultJWTAudience
 	}
 	if config.Scope == "" {
-		config.Scope = "business.api"
+		config.Scope = ScopeBusinessAPI
 	}
 
 	return &JWTAuth{
@@ -96,7 +96,6 @@ func (j *JWTAuth) getAccessToken() (string, error) {
 		return "", fmt.Errorf("failed to exchange for access token: %w", err)
 	}
 
-	// Store the token
 	j.accessToken = tokenResp.AccessToken
 	j.tokenExpiry = time.Now().Add(time.Duration(tokenResp.ExpiresIn) * time.Second)
 
@@ -111,7 +110,7 @@ func (j *JWTAuth) generateClientAssertion() (string, error) {
 	claims := jwt.MapClaims{
 		"iss": j.issuerID,                                       // team_id (issuer)
 		"sub": j.issuerID,                                       // client_id (subject) - same as issuer for Apple
-		"aud": "https://account.apple.com/auth/oauth2/v2/token", // OAuth 2.0 token endpoint
+		"aud": DefaultOAuthTokenEndpoint, // OAuth 2.0 token endpoint
 		"iat": now.Unix(),
 		"exp": now.Add(180 * 24 * time.Hour).Unix(), // Max 180 days as per Apple docs
 		"jti": fmt.Sprintf("%d", now.UnixNano()),    // Unique identifier
@@ -161,7 +160,7 @@ func (j *JWTAuth) exchangeForAccessToken(clientAssertion string) (*TokenResponse
 		SetHeader("Content-Type", "application/x-www-form-urlencoded").
 		SetHeader("Host", "account.apple.com").
 		SetResult(&tokenResp).
-		Post("https://account.apple.com/auth/oauth2/v2/token")
+		Post(DefaultOAuthTokenEndpoint)
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to make token request: %w", err)
@@ -208,4 +207,3 @@ func (a *APIKeyAuth) ApplyAuth(req *resty.Request) error {
 	}
 	return nil
 }
-

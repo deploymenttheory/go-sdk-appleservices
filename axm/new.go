@@ -20,12 +20,12 @@ type Client struct {
 // NewClient creates a new Apple Business Manager client
 func NewClient(keyID, issuerID string, privateKey any) (*Client, error) {
 	config := client.Config{
-		BaseURL: "https://api-business.apple.com/v1",
+		BaseURL: client.DefaultBaseURL,
 		Auth: client.NewJWTAuth(client.JWTAuthConfig{
 			KeyID:      keyID,
 			IssuerID:   issuerID,
 			PrivateKey: privateKey,
-			Audience:   "appstoreconnect-v1",
+			Audience:   client.DefaultJWTAudience,
 		}),
 		Timeout:    30 * time.Second,
 		RetryCount: 3,
