@@ -203,7 +203,7 @@ func TestGetDeviceInformation_Success(t *testing.T) {
 
 	ctx := context.Background()
 	deviceID := "XABC123X0ABC123X0"
-	opts := &GetDeviceInformationOptions{
+	opts := &RequestQueryOptions{
 		Fields: []string{FieldSerialNumber, FieldDeviceModel, FieldStatus},
 	}
 
@@ -272,7 +272,7 @@ func TestGetDeviceInformation_EmptyDeviceID(t *testing.T) {
 	defer mockHandler.CleanupMockState()
 
 	ctx := context.Background()
-	opts := &GetDeviceInformationOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetDeviceInformationByDeviceID(ctx, "", opts)
 
@@ -292,7 +292,7 @@ func TestGetDeviceInformation_DeviceNotFound(t *testing.T) {
 
 	ctx := context.Background()
 	deviceID := "NONEXISTENT123"
-	opts := &GetDeviceInformationOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetDeviceInformationByDeviceID(ctx, deviceID, opts)
 
@@ -310,7 +310,7 @@ func TestGetDeviceInformation_HTTPError(t *testing.T) {
 
 	ctx := context.Background()
 	deviceID := "XABC123X0ABC123X0"
-	opts := &GetDeviceInformationOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetDeviceInformationByDeviceID(ctx, deviceID, opts)
 
@@ -331,7 +331,7 @@ func TestGetDeviceInformation_ContextCancellation(t *testing.T) {
 	cancel()
 
 	deviceID := "XABC123X0ABC123X0"
-	opts := &GetDeviceInformationOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetDeviceInformationByDeviceID(ctx, deviceID, opts)
 
@@ -407,8 +407,8 @@ func TestOptionsStructures(t *testing.T) {
 	assert.Len(t, opts1.Fields, 2)
 	assert.Equal(t, 100, opts1.Limit)
 
-	// Test GetDeviceInformationOptions
-	opts2 := &GetDeviceInformationOptions{
+	// Test RequestQueryOptions
+	opts2 := &RequestQueryOptions{
 		Fields: []string{FieldStatus, FieldProductFamily},
 	}
 	assert.Len(t, opts2.Fields, 2)
@@ -424,7 +424,7 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 	deviceID := "XABC123X0ABC123X0"
 
 	// Test with all available fields to ensure comprehensive coverage
-	opts := &GetDeviceInformationOptions{
+	opts := &RequestQueryOptions{
 		Fields: []string{
 			FieldSerialNumber,
 			FieldAddedToOrgDateTime,

@@ -20,7 +20,7 @@ type (
 		//
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-device-ids-for-a-mdmserver
-		GetMDMServerDeviceLinkages(ctx context.Context, mdmServerID string, opts *GetMDMServerDeviceLinkagesOptions) (*MDMServerDevicesLinkagesResponse, error)
+		GetMDMServerDeviceLinkages(ctx context.Context, mdmServerID string, opts *RequestQueryOptions) (*MDMServerDevicesLinkagesResponse, error)
 
 		// GetAssignedDeviceManagementServiceIDForADevice retrieves the assigned device management service ID linkage for a device
 		//
@@ -105,7 +105,7 @@ func (s *DeviceManagementService) GetDeviceManagementServices(ctx context.Contex
 // GetMDMServerDeviceLinkages retrieves a list of device IDs assigned to an MDM server
 // URL: GET https://api-business.apple.com/v1/mdmServers/{id}/relationships/devices
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-device-ids-for-a-mdmserver
-func (s *DeviceManagementService) GetMDMServerDeviceLinkages(ctx context.Context, mdmServerID string, opts *GetMDMServerDeviceLinkagesOptions) (*MDMServerDevicesLinkagesResponse, error) {
+func (s *DeviceManagementService) GetMDMServerDeviceLinkages(ctx context.Context, mdmServerID string, opts *RequestQueryOptions) (*MDMServerDevicesLinkagesResponse, error) {
 	if mdmServerID == "" {
 		return nil, fmt.Errorf("MDM server ID is required")
 	}
@@ -118,7 +118,7 @@ func (s *DeviceManagementService) GetMDMServerDeviceLinkages(ctx context.Context
 	}
 
 	if opts == nil {
-		opts = &GetMDMServerDeviceLinkagesOptions{}
+		opts = &RequestQueryOptions{}
 	}
 
 	queryParams := s.client.QueryBuilder()

@@ -160,7 +160,7 @@ func TestGetMDMServerDeviceLinkages_Success(t *testing.T) {
 
 	ctx := context.Background()
 	serverID := "1F97349736CF4614A94F624E705841AD"
-	opts := &GetMDMServerDeviceLinkagesOptions{
+	opts := &RequestQueryOptions{
 		Limit: 100,
 	}
 
@@ -189,7 +189,7 @@ func TestGetMDMServerDeviceLinkages_EmptyServerID(t *testing.T) {
 	defer mockHandler.CleanupMockState()
 
 	ctx := context.Background()
-	opts := &GetMDMServerDeviceLinkagesOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetMDMServerDeviceLinkages(ctx, "", opts)
 
@@ -543,8 +543,8 @@ func TestOptionsStructures(t *testing.T) {
 	assert.Len(t, opts1.Fields, 2)
 	assert.Equal(t, 100, opts1.Limit)
 
-	// Test GetMDMServerDeviceLinkagesOptions
-	opts2 := &GetMDMServerDeviceLinkagesOptions{
+	// Test RequestQueryOptions
+	opts2 := &RequestQueryOptions{
 		Limit: 50,
 	}
 	assert.Equal(t, 50, opts2.Limit)

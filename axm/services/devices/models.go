@@ -86,12 +86,6 @@ type RequestQueryOptions struct {
 	Limit int `json:"limit,omitempty"`
 }
 
-// GetDeviceInformationOptions represents the query parameters for getting device information
-type GetDeviceInformationOptions struct {
-	// Field selection for the device information response
-	Fields []string `json:"fields,omitempty"`
-}
-
 // Legacy Device struct for backward compatibility
 type Device struct {
 	SerialNumber       string    `json:"serial_number"`

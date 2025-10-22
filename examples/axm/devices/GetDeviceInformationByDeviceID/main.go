@@ -65,7 +65,7 @@ your-abm-api-key
 	// Example 1: Get all available fields
 	fmt.Println("\n=== Example 1: Get All Available Device Information ===")
 
-	allFieldsOptions := &devices.GetDeviceInformationOptions{
+	allFieldsOptions := &devices.RequestQueryOptions{
 		Fields: []string{
 			devices.FieldSerialNumber,
 			devices.FieldDeviceModel,
@@ -119,7 +119,7 @@ your-abm-api-key
 	// Example 2: Get only specific fields
 	fmt.Println("\n=== Example 2: Get Only Specific Fields ===")
 
-	specificFieldsOptions := &devices.GetDeviceInformationOptions{
+	specificFieldsOptions := &devices.RequestQueryOptions{
 		Fields: []string{
 			devices.FieldSerialNumber,
 			devices.FieldDeviceModel,
@@ -176,7 +176,7 @@ your-abm-api-key
 		for i, dev := range devicesResponse.Data[:min(3, len(devicesResponse.Data))] {
 			fmt.Printf("\nDevice %d (ID: %s):\n", i+1, dev.ID)
 
-			info, err := client.Devices.GetDeviceInformationByDeviceID(ctx, dev.ID, &devices.GetDeviceInformationOptions{
+			info, err := client.Devices.GetDeviceInformationByDeviceID(ctx, dev.ID, &devices.RequestQueryOptions{
 				Fields: []string{
 					devices.FieldSerialNumber,
 					devices.FieldDeviceModel,

@@ -83,12 +83,6 @@ type MDMServerDevicesLinkagesResponse struct {
 	Meta  *Meta                    `json:"meta,omitempty"`
 }
 
-// GetMDMServerDeviceLinkagesOptions represents the query parameters for getting MDM server device linkages
-type GetMDMServerDeviceLinkagesOptions struct {
-	// Limit the number of included related resources to return (max 1000)
-	Limit int `json:"limit,omitempty"`
-}
-
 // OrgDeviceAssignedServerLinkage represents the linkage between a device and its assigned server
 type OrgDeviceAssignedServerLinkage struct {
 	Type string `json:"type"` // Should be "mdmServers"

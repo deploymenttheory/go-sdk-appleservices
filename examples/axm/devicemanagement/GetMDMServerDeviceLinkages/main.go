@@ -92,7 +92,7 @@ your-abm-api-key
 	// Example 2: Get device linkages with specific limit
 	fmt.Println("\n=== Example 2: Get Device Linkages with Limit ===")
 
-	limitOptions := &devicemanagement.GetMDMServerDeviceLinkagesOptions{
+	limitOptions := &devicemanagement.RequestQueryOptions{
 		Limit: 10,
 	}
 
@@ -114,7 +114,7 @@ your-abm-api-key
 	// Example 3: Get device linkages with small limit for pagination demo
 	fmt.Println("\n=== Example 3: Pagination Demo (Small Limit) ===")
 
-	smallLimitOptions := &devicemanagement.GetMDMServerDeviceLinkagesOptions{
+	smallLimitOptions := &devicemanagement.RequestQueryOptions{
 		Limit: 3,
 	}
 
@@ -158,7 +158,7 @@ your-abm-api-key
 	// Example 6: Test with maximum limit
 	fmt.Println("\n=== Example 6: Test with Maximum Limit ===")
 
-	maxLimitOptions := &devicemanagement.GetMDMServerDeviceLinkagesOptions{
+	maxLimitOptions := &devicemanagement.RequestQueryOptions{
 		Limit: 1000, // API maximum
 	}
 
@@ -173,7 +173,7 @@ your-abm-api-key
 	// Example 7: Test with over-maximum limit (should be capped)
 	fmt.Println("\n=== Example 7: Test with Over-Maximum Limit (Should be Capped) ===")
 
-	overMaxOptions := &devicemanagement.GetMDMServerDeviceLinkagesOptions{
+	overMaxOptions := &devicemanagement.RequestQueryOptions{
 		Limit: 5000, // This should be capped at 1000
 	}
 

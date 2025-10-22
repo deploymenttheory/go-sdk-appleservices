@@ -22,7 +22,7 @@ type (
 		//
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-orgdevice-information
-		GetDeviceInformationByDeviceID(ctx context.Context, deviceID string, opts *GetDeviceInformationOptions) (*OrgDeviceResponse, error)
+		GetDeviceInformationByDeviceID(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*OrgDeviceResponse, error)
 	}
 
 	// DevicetService handles communication with the device
@@ -84,7 +84,7 @@ func (s *DevicesService) GetOrganizationDevices(ctx context.Context, opts *Reque
 // GetDeviceInformationByDeviceID retrieves information about a specific device in an organization
 // URL: GET https://api-business.apple.com/v1/orgDevices/{id}
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-orgdevice-information
-func (s *DevicesService) GetDeviceInformationByDeviceID(ctx context.Context, deviceID string, opts *GetDeviceInformationOptions) (*OrgDeviceResponse, error) {
+func (s *DevicesService) GetDeviceInformationByDeviceID(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*OrgDeviceResponse, error) {
 	if deviceID == "" {
 		return nil, fmt.Errorf("device ID is required")
 	}
@@ -97,7 +97,7 @@ func (s *DevicesService) GetDeviceInformationByDeviceID(ctx context.Context, dev
 	}
 
 	if opts == nil {
-		opts = &GetDeviceInformationOptions{}
+		opts = &RequestQueryOptions{}
 	}
 
 	queryParams := s.client.QueryBuilder()
