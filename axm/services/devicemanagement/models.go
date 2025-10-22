@@ -2,24 +2,7 @@ package devicemanagement
 
 import "time"
 
-// Shared types for pagination and links
-type Meta struct {
-	Paging *Paging `json:"paging,omitempty"`
-}
-
-type Paging struct {
-	Total      int    `json:"total,omitempty"`
-	Limit      int    `json:"limit,omitempty"`
-	NextCursor string `json:"nextCursor,omitempty"`
-}
-
-type Links struct {
-	Self  string `json:"self,omitempty"`
-	First string `json:"first,omitempty"`
-	Next  string `json:"next,omitempty"`
-	Prev  string `json:"prev,omitempty"`
-	Last  string `json:"last,omitempty"`
-}
+// ====== MDM SERVER TYPES ======
 
 // MDMServer represents an MDM server in the Apple Business Manager system
 type MDMServer struct {
@@ -53,21 +36,26 @@ type MDMServerDevicesLinks struct {
 	Self string `json:"self,omitempty"`
 }
 
-// MDMServersResponse represents the response for getting MDM servers
-type MDMServersResponse struct {
+// ResponseMDMServers represents the response for getting MDM servers
+type ResponseMDMServers struct {
 	Data  []MDMServer `json:"data"`
 	Meta  *Meta       `json:"meta,omitempty"`
 	Links *Links      `json:"links,omitempty"`
 }
 
-// RequestQueryOptions represents the query parameters for getting MDM servers
-type RequestQueryOptions struct {
-	// Field selection - fields to return for mdmServers
-	// Possible values: serverName, serverType, createdDateTime, updatedDateTime, devices
-	Fields []string `json:"fields,omitempty"`
+// MDMServerResponse represents the response for getting a single MDM server
+type MDMServerResponse struct {
+	Data  MDMServer `json:"data"`
+	Links *Links    `json:"links,omitempty"`
+}
 
-	// Limit the number of included related resources to return (max 1000)
-	Limit int `json:"limit,omitempty"`
+// ====== DEVICE LINKAGE TYPES ======
+
+// ResponseMDMServerDevicesLinkages represents the response for getting device linkages for an MDM server
+type ResponseMDMServerDevicesLinkages struct {
+	Data  []MDMServerDeviceLinkage `json:"data"`
+	Links *Links                   `json:"links,omitempty"`
+	Meta  *Meta                    `json:"meta,omitempty"`
 }
 
 // MDMServerDeviceLinkage represents a device linkage in the MDM server relationships
@@ -76,11 +64,10 @@ type MDMServerDeviceLinkage struct {
 	ID   string `json:"id"`   // Device ID
 }
 
-// MDMServerDevicesLinkagesResponse represents the response for getting device linkages for an MDM server
-type MDMServerDevicesLinkagesResponse struct {
-	Data  []MDMServerDeviceLinkage `json:"data"`
-	Links *Links                   `json:"links,omitempty"`
-	Meta  *Meta                    `json:"meta,omitempty"`
+// ResponseOrgDeviceAssignedServerLinkage represents the response for getting assigned server linkage
+type ResponseOrgDeviceAssignedServerLinkage struct {
+	Data  OrgDeviceAssignedServerLinkage `json:"data"`
+	Links *AssignedServerLinks           `json:"links,omitempty"`
 }
 
 // OrgDeviceAssignedServerLinkage represents the linkage between a device and its assigned server
@@ -89,23 +76,13 @@ type OrgDeviceAssignedServerLinkage struct {
 	ID   string `json:"id"`   // MDM Server ID
 }
 
-// OrgDeviceAssignedServerLinkageResponse represents the response for getting assigned server linkage
-type OrgDeviceAssignedServerLinkageResponse struct {
-	Data  OrgDeviceAssignedServerLinkage `json:"data"`
-	Links *AssignedServerLinks           `json:"links,omitempty"`
-}
-
 // AssignedServerLinks contains linkage navigation links
 type AssignedServerLinks struct {
 	Self    string `json:"self,omitempty"`
 	Related string `json:"related,omitempty"`
 }
 
-// MDMServerResponse represents the response for getting a single MDM server
-type MDMServerResponse struct {
-	Data  MDMServer `json:"data"`
-	Links *Links    `json:"links,omitempty"`
-}
+// ====== DEVICE ACTIVITY TYPES ======
 
 // OrgDeviceActivity represents a device activity (assign/unassign operations)
 type OrgDeviceActivity struct {
@@ -128,11 +105,13 @@ type OrgDeviceActivityLinks struct {
 	Self string `json:"self,omitempty"`
 }
 
-// OrgDeviceActivityResponse represents the response for creating an org device activity
-type OrgDeviceActivityResponse struct {
+// ResponseOrgDeviceActivity represents the response for creating an org device activity
+type ResponseOrgDeviceActivity struct {
 	Data  OrgDeviceActivity `json:"data"`
 	Links *Links            `json:"links,omitempty"`
 }
+
+// ====== DEVICE ACTIVITY REQUEST TYPES ======
 
 // OrgDeviceActivityCreateRequest represents the request for creating a device activity
 type OrgDeviceActivityCreateRequest struct {
@@ -177,4 +156,37 @@ type OrgDeviceActivityDevicesRelationship struct {
 type OrgDeviceActivityDeviceLinkage struct {
 	Type string `json:"type"` // Should be "orgDevices"
 	ID   string `json:"id"`   // Device ID
+}
+
+// ====== SHARED TYPES ======
+
+// Meta represents pagination metadata
+type Meta struct {
+	Paging *Paging `json:"paging,omitempty"`
+}
+
+// Paging contains pagination information
+type Paging struct {
+	Total      int    `json:"total,omitempty"`
+	Limit      int    `json:"limit,omitempty"`
+	NextCursor string `json:"nextCursor,omitempty"`
+}
+
+// Links contains navigation links for API responses
+type Links struct {
+	Self  string `json:"self,omitempty"`
+	First string `json:"first,omitempty"`
+	Next  string `json:"next,omitempty"`
+	Prev  string `json:"prev,omitempty"`
+	Last  string `json:"last,omitempty"`
+}
+
+// RequestQueryOptions represents the query parameters for getting MDM servers
+type RequestQueryOptions struct {
+	// Field selection - fields to return for mdmServers
+	// Possible values: serverName, serverType, createdDateTime, updatedDateTime, devices
+	Fields []string `json:"fields,omitempty"`
+
+	// Limit the number of included related resources to return (max 1000)
+	Limit int `json:"limit,omitempty"`
 }

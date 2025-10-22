@@ -14,19 +14,19 @@ type (
 		//
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-mdm-servers
-		GetDeviceManagementServices(ctx context.Context, opts *RequestQueryOptions) (*MDMServersResponse, error)
+		GetDeviceManagementServices(ctx context.Context, opts *RequestQueryOptions) (*ResponseMDMServers, error)
 
 		// GetMDMServerDeviceLinkages retrieves a list of device IDs assigned to an MDM server
 		//
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-device-ids-for-a-mdmserver
-		GetMDMServerDeviceLinkages(ctx context.Context, mdmServerID string, opts *RequestQueryOptions) (*MDMServerDevicesLinkagesResponse, error)
+		GetMDMServerDeviceLinkages(ctx context.Context, mdmServerID string, opts *RequestQueryOptions) (*ResponseMDMServerDevicesLinkages, error)
 
 		// GetAssignedDeviceManagementServiceIDForADevice retrieves the assigned device management service ID linkage for a device
 		//
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-the-assigned-server-id-for-an-orgdevice
-		GetAssignedDeviceManagementServiceIDForADevice(ctx context.Context, deviceID string) (*OrgDeviceAssignedServerLinkageResponse, error)
+		GetAssignedDeviceManagementServiceIDForADevice(ctx context.Context, deviceID string) (*ResponseOrgDeviceAssignedServerLinkage, error)
 
 		// GetAssignedDeviceManagementServiceInformationByDeviceID retrieves the assigned device management service information for a device
 		//
@@ -38,13 +38,13 @@ type (
 		//
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/create-an-orgdeviceactivity
-		AssignDevicesToServer(ctx context.Context, mdmServerID string, deviceIDs []string) (*OrgDeviceActivityResponse, error)
+		AssignDevicesToServer(ctx context.Context, mdmServerID string, deviceIDs []string) (*ResponseOrgDeviceActivity, error)
 
 		// UnassignDevicesFromServer unassigns devices from an MDM server
 		//
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/create-an-orgdeviceactivity
-		UnassignDevicesFromServer(ctx context.Context, mdmServerID string, deviceIDs []string) (*OrgDeviceActivityResponse, error)
+		UnassignDevicesFromServer(ctx context.Context, mdmServerID string, deviceIDs []string) (*ResponseOrgDeviceActivity, error)
 	}
 
 	// DeviceManagementService handles communication with the device management
@@ -68,7 +68,7 @@ func NewService(client interfaces.HTTPClient) *DeviceManagementService {
 // GetDeviceManagementServices retrieves a list of device management services (MDM servers) in an organization
 // URL: GET https://api-business.apple.com/v1/mdmServers
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-mdm-servers
-func (s *DeviceManagementService) GetDeviceManagementServices(ctx context.Context, opts *RequestQueryOptions) (*MDMServersResponse, error) {
+func (s *DeviceManagementService) GetDeviceManagementServices(ctx context.Context, opts *RequestQueryOptions) (*ResponseMDMServers, error) {
 	if opts == nil {
 		opts = &RequestQueryOptions{}
 	}
@@ -93,7 +93,7 @@ func (s *DeviceManagementService) GetDeviceManagementServices(ctx context.Contex
 		"Content-Type": "application/json",
 	}
 
-	var result MDMServersResponse
+	var result ResponseMDMServers
 	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, &result)
 	if err != nil {
 		return nil, err
@@ -105,7 +105,7 @@ func (s *DeviceManagementService) GetDeviceManagementServices(ctx context.Contex
 // GetMDMServerDeviceLinkages retrieves a list of device IDs assigned to an MDM server
 // URL: GET https://api-business.apple.com/v1/mdmServers/{id}/relationships/devices
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-device-ids-for-a-mdmserver
-func (s *DeviceManagementService) GetMDMServerDeviceLinkages(ctx context.Context, mdmServerID string, opts *RequestQueryOptions) (*MDMServerDevicesLinkagesResponse, error) {
+func (s *DeviceManagementService) GetMDMServerDeviceLinkages(ctx context.Context, mdmServerID string, opts *RequestQueryOptions) (*ResponseMDMServerDevicesLinkages, error) {
 	if mdmServerID == "" {
 		return nil, fmt.Errorf("MDM server ID is required")
 	}
@@ -130,7 +130,7 @@ func (s *DeviceManagementService) GetMDMServerDeviceLinkages(ctx context.Context
 		queryParams.AddInt("limit", opts.Limit)
 	}
 
-	var result MDMServerDevicesLinkagesResponse
+	var result ResponseMDMServerDevicesLinkages
 
 	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, &result)
 	if err != nil {
@@ -143,7 +143,7 @@ func (s *DeviceManagementService) GetMDMServerDeviceLinkages(ctx context.Context
 // GetAssignedDeviceManagementServiceIDForADevice retrieves the assigned device management service ID linkage for a device
 // URL: GET https://api-business.apple.com/v1/orgDevices/{id}/relationships/assignedServer
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-the-assigned-server-id-for-an-orgdevice
-func (s *DeviceManagementService) GetAssignedDeviceManagementServiceIDForADevice(ctx context.Context, deviceID string) (*OrgDeviceAssignedServerLinkageResponse, error) {
+func (s *DeviceManagementService) GetAssignedDeviceManagementServiceIDForADevice(ctx context.Context, deviceID string) (*ResponseOrgDeviceAssignedServerLinkage, error) {
 	if deviceID == "" {
 		return nil, fmt.Errorf("device ID is required")
 	}
@@ -155,7 +155,7 @@ func (s *DeviceManagementService) GetAssignedDeviceManagementServiceIDForADevice
 		"Content-Type": "application/json",
 	}
 
-	var result OrgDeviceAssignedServerLinkageResponse
+	var result ResponseOrgDeviceAssignedServerLinkage
 	err := s.client.Get(ctx, endpoint, nil, headers, &result)
 	if err != nil {
 		return nil, err
@@ -201,7 +201,7 @@ func (s *DeviceManagementService) GetAssignedDeviceManagementServiceInformationB
 // AssignDevicesToServer assigns devices to an MDM server
 // URL: POST https://api-business.apple.com/v1/orgDeviceActivities
 // https://developer.apple.com/documentation/applebusinessmanagerapi/create-an-orgdeviceactivity
-func (s *DeviceManagementService) AssignDevicesToServer(ctx context.Context, mdmServerID string, deviceIDs []string) (*OrgDeviceActivityResponse, error) {
+func (s *DeviceManagementService) AssignDevicesToServer(ctx context.Context, mdmServerID string, deviceIDs []string) (*ResponseOrgDeviceActivity, error) {
 	if mdmServerID == "" {
 		return nil, fmt.Errorf("MDM server ID is required")
 	}
@@ -244,7 +244,7 @@ func (s *DeviceManagementService) AssignDevicesToServer(ctx context.Context, mdm
 		"Content-Type": "application/json",
 	}
 
-	var result OrgDeviceActivityResponse
+	var result ResponseOrgDeviceActivity
 
 	err := s.client.Post(ctx, endpoint, request, headers, &result)
 	if err != nil {
@@ -257,7 +257,7 @@ func (s *DeviceManagementService) AssignDevicesToServer(ctx context.Context, mdm
 // UnassignDevicesFromServer unassigns devices from an MDM server
 // URL: POST https://api-business.apple.com/v1/orgDeviceActivities
 // https://developer.apple.com/documentation/applebusinessmanagerapi/create-an-orgdeviceactivity
-func (s *DeviceManagementService) UnassignDevicesFromServer(ctx context.Context, mdmServerID string, deviceIDs []string) (*OrgDeviceActivityResponse, error) {
+func (s *DeviceManagementService) UnassignDevicesFromServer(ctx context.Context, mdmServerID string, deviceIDs []string) (*ResponseOrgDeviceActivity, error) {
 	if mdmServerID == "" {
 		return nil, fmt.Errorf("MDM server ID is required")
 	}
@@ -300,7 +300,7 @@ func (s *DeviceManagementService) UnassignDevicesFromServer(ctx context.Context,
 		"Content-Type": "application/json",
 	}
 
-	var result OrgDeviceActivityResponse
+	var result ResponseOrgDeviceActivity
 	err := s.client.Post(ctx, endpoint, request, headers, &result)
 	if err != nil {
 		return nil, err
