@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/deploymenttheory/go-api-sdk-apple/client/axm"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/devicemanagement"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/axm"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/devicemanagement"
 )
 
 func main() {
@@ -26,18 +26,11 @@ your-abm-api-key
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	// Create AXM client
-	axmClient, err := axm.NewClientBuilder().
-		WithJWTAuth(keyID, issuerID, privateKey).
-		WithDebug(true).
-		Build()
-
+	// Create client using GitLab pattern - matches the v3 pattern exactly
+	client, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
-		log.Fatalf("Failed to create AXM client: %v", err)
+		log.Fatalf("Failed to create client: %v", err)
 	}
-
-	// Create device management service client
-	dmClient := devicemanagement.NewClient(axmClient)
 
 	// Create context
 	ctx := context.Background()
@@ -45,7 +38,7 @@ your-abm-api-key
 	// Step 1: Get MDM servers to find an MDM server ID
 	fmt.Println("\nStep 1: Getting MDM servers to find an MDM server ID...")
 
-	serversResponse, err := dmClient.GetDeviceManagementServices(ctx, &devicemanagement.GetMDMServersOptions{
+	serversResponse, err := client.DeviceManagement.GetDeviceManagementServices(ctx, &devicemanagement.GetMDMServersOptions{
 		Limit: 5,
 	})
 	if err != nil {
@@ -72,7 +65,7 @@ your-abm-api-key
 	// Example 1: Get all device linkages for MDM server (default options)
 	fmt.Println("\n=== Example 1: Get All Device Linkages (Default Options) ===")
 
-	linkagesResponse, err := dmClient.GetMDMServerDeviceLinkages(ctx, mdmServerID, nil)
+	linkagesResponse, err := client.DeviceManagement.GetMDMServerDeviceLinkages(ctx, mdmServerID, nil)
 	if err != nil {
 		log.Printf("Error getting device linkages: %v", err)
 	} else {
@@ -85,7 +78,7 @@ your-abm-api-key
 		}
 
 		// Check pagination
-		if axm.HasNextPage(linkagesResponse.Links) {
+		if linkagesResponse.Links != nil && linkagesResponse.Links.Next != "" {
 			fmt.Println("More device linkages available on next page!")
 		}
 
@@ -106,7 +99,7 @@ your-abm-api-key
 		Limit: 10,
 	}
 
-	limitedResponse, err := dmClient.GetMDMServerDeviceLinkages(ctx, mdmServerID, limitOptions)
+	limitedResponse, err := client.DeviceManagement.GetMDMServerDeviceLinkages(ctx, mdmServerID, limitOptions)
 	if err != nil {
 		log.Printf("Error getting limited device linkages: %v", err)
 	} else {
@@ -116,7 +109,7 @@ your-abm-api-key
 			fmt.Printf("  %d. Device ID: %s (Type: %s)\n", i+1, linkage.ID, linkage.Type)
 		}
 
-		if axm.HasNextPage(limitedResponse.Links) {
+		if limitedResponse.Links != nil && limitedResponse.Links.Next != "" {
 			fmt.Printf("Next page URL: %s\n", limitedResponse.Links.Next)
 		}
 	}
@@ -128,7 +121,7 @@ your-abm-api-key
 		Limit: 3,
 	}
 
-	paginationResponse, err := dmClient.GetMDMServerDeviceLinkages(ctx, mdmServerID, smallLimitOptions)
+	paginationResponse, err := client.DeviceManagement.GetMDMServerDeviceLinkages(ctx, mdmServerID, smallLimitOptions)
 	if err != nil {
 		log.Printf("Error getting paginated device linkages: %v", err)
 	} else {
@@ -139,7 +132,7 @@ your-abm-api-key
 		}
 
 		// Demonstrate pagination
-		if axm.HasNextPage(paginationResponse.Links) {
+		if paginationResponse.Links != nil && paginationResponse.Links.Next != "" {
 			fmt.Println("\nFetching next page...")
 
 			// Note: In a real application, you would use the client's GetNextPage method
@@ -152,7 +145,7 @@ your-abm-api-key
 	fmt.Println("\n=== Example 4: Error Handling (Invalid MDM Server ID) ===")
 
 	invalidServerID := "invalid-mdm-server-id"
-	_, err = dmClient.GetMDMServerDeviceLinkages(ctx, invalidServerID, nil)
+	_, err = client.DeviceManagement.GetMDMServerDeviceLinkages(ctx, invalidServerID, nil)
 	if err != nil {
 		fmt.Printf("Expected error for invalid MDM server ID: %v\n", err)
 	}
@@ -160,7 +153,7 @@ your-abm-api-key
 	// Example 5: Error handling - empty MDM server ID
 	fmt.Println("\n=== Example 5: Error Handling (Empty MDM Server ID) ===")
 
-	_, err = dmClient.GetMDMServerDeviceLinkages(ctx, "", nil)
+	_, err = client.DeviceManagement.GetMDMServerDeviceLinkages(ctx, "", nil)
 	if err != nil {
 		fmt.Printf("Expected error for empty MDM server ID: %v\n", err)
 	}
@@ -172,7 +165,7 @@ your-abm-api-key
 		Limit: 1000, // API maximum
 	}
 
-	maxResponse, err := dmClient.GetMDMServerDeviceLinkages(ctx, mdmServerID, maxLimitOptions)
+	maxResponse, err := client.DeviceManagement.GetMDMServerDeviceLinkages(ctx, mdmServerID, maxLimitOptions)
 	if err != nil {
 		log.Printf("Error with max limit: %v", err)
 	} else {
@@ -187,7 +180,7 @@ your-abm-api-key
 		Limit: 5000, // This should be capped at 1000
 	}
 
-	cappedResponse, err := dmClient.GetMDMServerDeviceLinkages(ctx, mdmServerID, overMaxOptions)
+	cappedResponse, err := client.DeviceManagement.GetMDMServerDeviceLinkages(ctx, mdmServerID, overMaxOptions)
 	if err != nil {
 		log.Printf("Error with over-max limit: %v", err)
 	} else {

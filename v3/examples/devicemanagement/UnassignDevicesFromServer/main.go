@@ -7,9 +7,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/deploymenttheory/go-api-sdk-apple/client/axm"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/devicemanagement"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/devices"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/axm"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/devicemanagement"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/devices"
 )
 
 func main() {
@@ -28,19 +28,11 @@ your-abm-api-key
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	// Create AXM client
-	axmClient, err := axm.NewClientBuilder().
-		WithJWTAuth(keyID, issuerID, privateKey).
-		WithDebug(true).
-		Build()
-
+	// Create client using GitLab pattern - matches the v3 pattern exactly
+	client, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
-		log.Fatalf("Failed to create AXM client: %v", err)
+		log.Fatalf("Failed to create client: %v", err)
 	}
-
-	// Create service clients
-	dmClient := devicemanagement.NewClient(axmClient)
-	devicesClient := devices.NewClient(axmClient)
 
 	// Create context
 	ctx := context.Background()
@@ -48,7 +40,7 @@ your-abm-api-key
 	// Step 1: Get MDM servers
 	fmt.Println("\nStep 1: Getting available MDM servers...")
 
-	serversResponse, err := dmClient.GetDeviceManagementServices(ctx, &devicemanagement.GetMDMServersOptions{
+	serversResponse, err := client.DeviceManagement.GetDeviceManagementServices(ctx, &devicemanagement.GetMDMServersOptions{
 		Limit: 10,
 	})
 	if err != nil {
@@ -80,7 +72,7 @@ your-abm-api-key
 	// Step 2: Get organization devices
 	fmt.Println("\nStep 2: Getting organization devices...")
 
-	devicesResponse, err := devicesClient.GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
+	devicesResponse, err := client.Devices.GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
 		Fields: []string{
 			devices.FieldSerialNumber,
 			devices.FieldDeviceModel,
@@ -105,7 +97,7 @@ your-abm-api-key
 
 	for _, device := range devicesResponse.Data {
 		// Check if device is assigned to our target server
-		serverLinkage, err := dmClient.GetAssignedDeviceManagementServiceIDForADevice(ctx, device.ID)
+		serverLinkage, err := client.DeviceManagement.GetAssignedDeviceManagementServiceIDForADevice(ctx, device.ID)
 		if err != nil {
 			continue // Skip devices with errors
 		}
@@ -129,7 +121,7 @@ your-abm-api-key
 			deviceIDsToAssign = append(deviceIDsToAssign, devicesResponse.Data[i].ID)
 		}
 
-		_, err = dmClient.AssignDevicesToServer(ctx, targetMDMServerID, deviceIDsToAssign)
+		_, err = client.DeviceManagement.AssignDevicesToServer(ctx, targetMDMServerID, deviceIDsToAssign)
 		if err != nil {
 			log.Printf("Error assigning devices for demo: %v", err)
 		} else {
@@ -154,7 +146,7 @@ your-abm-api-key
 
 		singleDeviceIDs := []string{singleDevice.ID}
 
-		unassignResponse, err := dmClient.UnassignDevicesFromServer(ctx, targetMDMServerID, singleDeviceIDs)
+		unassignResponse, err := client.DeviceManagement.UnassignDevicesFromServer(ctx, targetMDMServerID, singleDeviceIDs)
 		if err != nil {
 			log.Printf("Error unassigning single device: %v", err)
 		} else {
@@ -189,7 +181,7 @@ your-abm-api-key
 			fmt.Printf("  - %s (Serial: %s)\n", device.ID, device.Attributes.SerialNumber)
 		}
 
-		multipleUnassignResponse, err := dmClient.UnassignDevicesFromServer(ctx, targetMDMServerID, multipleDeviceIDs)
+		multipleUnassignResponse, err := client.DeviceManagement.UnassignDevicesFromServer(ctx, targetMDMServerID, multipleDeviceIDs)
 		if err != nil {
 			log.Printf("Error unassigning multiple devices: %v", err)
 		} else {
@@ -218,7 +210,7 @@ your-abm-api-key
 		// Wait a moment for the unassignment to process
 		time.Sleep(2 * time.Second)
 
-		serverLinkage, err := dmClient.GetAssignedDeviceManagementServiceIDForADevice(ctx, deviceToCheck.ID)
+		serverLinkage, err := client.DeviceManagement.GetAssignedDeviceManagementServiceIDForADevice(ctx, deviceToCheck.ID)
 		if err != nil {
 			fmt.Printf("✓ Device appears to be unassigned (no server linkage found)\n")
 		} else {
@@ -239,7 +231,7 @@ your-abm-api-key
 		invalidServerID := "invalid-mdm-server-id"
 		testDeviceIDs := []string{assignedDevices[0].ID}
 
-		_, err = dmClient.UnassignDevicesFromServer(ctx, invalidServerID, testDeviceIDs)
+		_, err = client.DeviceManagement.UnassignDevicesFromServer(ctx, invalidServerID, testDeviceIDs)
 		if err != nil {
 			fmt.Printf("Expected error for invalid MDM server ID '%s': %v\n", invalidServerID, err)
 		}
@@ -251,7 +243,7 @@ your-abm-api-key
 	if len(assignedDevices) > 0 {
 		testDeviceIDs := []string{assignedDevices[0].ID}
 
-		_, err = dmClient.UnassignDevicesFromServer(ctx, "", testDeviceIDs)
+		_, err = client.DeviceManagement.UnassignDevicesFromServer(ctx, "", testDeviceIDs)
 		if err != nil {
 			fmt.Printf("Expected error for empty MDM server ID: %v\n", err)
 		}
@@ -261,7 +253,7 @@ your-abm-api-key
 	fmt.Println("\n=== Example 6: Error Handling (Empty Device IDs) ===")
 
 	emptyDeviceIDs := []string{}
-	_, err = dmClient.UnassignDevicesFromServer(ctx, targetMDMServerID, emptyDeviceIDs)
+	_, err = client.DeviceManagement.UnassignDevicesFromServer(ctx, targetMDMServerID, emptyDeviceIDs)
 	if err != nil {
 		fmt.Printf("Expected error for empty device IDs: %v\n", err)
 	}
@@ -270,7 +262,7 @@ your-abm-api-key
 	fmt.Println("\n=== Example 7: Error Handling (Invalid Device IDs) ===")
 
 	invalidDeviceIDs := []string{"invalid-device-id-1", "invalid-device-id-2"}
-	_, err = dmClient.UnassignDevicesFromServer(ctx, targetMDMServerID, invalidDeviceIDs)
+	_, err = client.DeviceManagement.UnassignDevicesFromServer(ctx, targetMDMServerID, invalidDeviceIDs)
 	if err != nil {
 		fmt.Printf("Expected error for invalid device IDs: %v\n", err)
 	}
@@ -284,7 +276,7 @@ your-abm-api-key
 
 		// Check initial status
 		fmt.Printf("Initial status check...\n")
-		initialLinkage, err := dmClient.GetAssignedDeviceManagementServiceIDForADevice(ctx, trackingDevice.ID)
+		initialLinkage, err := client.DeviceManagement.GetAssignedDeviceManagementServiceIDForADevice(ctx, trackingDevice.ID)
 		if err != nil {
 			fmt.Printf("  Error checking initial status: %v\n", err)
 		} else {
@@ -294,7 +286,7 @@ your-abm-api-key
 		// Perform unassignment
 		fmt.Printf("Performing unassignment...\n")
 		trackingDeviceIDs := []string{trackingDevice.ID}
-		unassignResponse, err := dmClient.UnassignDevicesFromServer(ctx, targetMDMServerID, trackingDeviceIDs)
+		unassignResponse, err := client.DeviceManagement.UnassignDevicesFromServer(ctx, targetMDMServerID, trackingDeviceIDs)
 		if err != nil {
 			fmt.Printf("  Unassignment error: %v\n", err)
 		} else {
@@ -304,7 +296,7 @@ your-abm-api-key
 		// Check final status
 		fmt.Printf("Final status check (after 3 seconds)...\n")
 		time.Sleep(3 * time.Second)
-		finalLinkage, err := dmClient.GetAssignedDeviceManagementServiceIDForADevice(ctx, trackingDevice.ID)
+		finalLinkage, err := client.DeviceManagement.GetAssignedDeviceManagementServiceIDForADevice(ctx, trackingDevice.ID)
 		if err != nil {
 			fmt.Printf("  ✓ Device appears to be unassigned (no linkage found)\n")
 		} else {
@@ -322,7 +314,7 @@ your-abm-api-key
 	// Get all devices assigned to the target server
 	fmt.Printf("Getting all devices assigned to server %s for bulk unassignment...\n", targetServerName)
 
-	serverDeviceLinkages, err := dmClient.GetMDMServerDeviceLinkages(ctx, targetMDMServerID, &devicemanagement.GetMDMServerDeviceLinkagesOptions{
+	serverDeviceLinkages, err := client.DeviceManagement.GetMDMServerDeviceLinkages(ctx, targetMDMServerID, &devicemanagement.GetMDMServerDeviceLinkagesOptions{
 		Limit: 100,
 	})
 	if err != nil {
@@ -340,7 +332,7 @@ your-abm-api-key
 			}
 
 			fmt.Printf("Performing bulk unassignment of %d devices...\n", len(bulkDeviceIDs))
-			bulkUnassignResponse, err := dmClient.UnassignDevicesFromServer(ctx, targetMDMServerID, bulkDeviceIDs)
+			bulkUnassignResponse, err := client.DeviceManagement.UnassignDevicesFromServer(ctx, targetMDMServerID, bulkDeviceIDs)
 			if err != nil {
 				log.Printf("Error in bulk unassignment: %v", err)
 			} else {
@@ -356,7 +348,7 @@ your-abm-api-key
 	if len(assignedDevices) > 0 {
 		// Perform one more unassignment for JSON demo
 		jsonDemoDeviceIDs := []string{assignedDevices[0].ID}
-		jsonResponse, err := dmClient.UnassignDevicesFromServer(ctx, targetMDMServerID, jsonDemoDeviceIDs)
+		jsonResponse, err := client.DeviceManagement.UnassignDevicesFromServer(ctx, targetMDMServerID, jsonDemoDeviceIDs)
 		if err != nil {
 			log.Printf("Error in JSON demo unassignment: %v", err)
 		} else {

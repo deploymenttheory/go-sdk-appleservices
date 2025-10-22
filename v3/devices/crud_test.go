@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/deploymenttheory/go-api-sdk-apple/client/axm"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/devices/mocks"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/client"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/devices/mocks"
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -15,12 +15,12 @@ import (
 )
 
 // setupMockClient creates a client with httpmock enabled
-func setupMockClient(t *testing.T) *Client {
+func setupMockClient(t *testing.T) *DevicesService {
 	// Create a mock auth provider
 	mockAuth := &MockAuthProvider{}
 
-	// Create AXM client config
-	config := axm.Config{
+	// Create client config
+	config := client.Config{
 		BaseURL:    "https://api-business.apple.com/v1",
 		Auth:       mockAuth,
 		Logger:     zap.NewNop(),
@@ -28,20 +28,20 @@ func setupMockClient(t *testing.T) *Client {
 		RetryCount: 0, // Disable retries for tests
 	}
 
-	// Create AXM client
-	axmClient, err := axm.NewClient(config)
+	// Create core client
+	coreClient, err := client.NewClient(config)
 	require.NoError(t, err)
 
 	// Activate httpmock for the client's HTTP client
-	httpmock.ActivateNonDefault(axmClient.GetHTTPClient().Client())
+	httpmock.ActivateNonDefault(coreClient.GetHTTPClient().Client())
 
 	// Setup cleanup
 	t.Cleanup(func() {
 		httpmock.DeactivateAndReset()
 	})
 
-	// Create devices client
-	return NewClient(axmClient)
+	// Create devices service
+	return NewService(coreClient)
 }
 
 // MockAuthProvider implements the AuthProvider interface for testing

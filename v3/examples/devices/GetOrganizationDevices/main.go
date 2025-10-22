@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/deploymenttheory/go-api-sdk-apple/client/axm"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/devices"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/axm"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/devices"
 )
 
 func main() {
@@ -24,16 +24,11 @@ your-abm-api-key
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	axmClient, err := axm.NewClientBuilder().
-		WithJWTAuth(keyID, issuerID, privateKey).
-		WithDebug(true).
-		Build()
-
+	// Create client using GitLab pattern - matches the v3 pattern exactly
+	client, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
-		log.Fatalf("Failed to create AXM client: %v", err)
+		log.Fatalf("Failed to create client: %v", err)
 	}
-
-	devicesClient := devices.NewClient(axmClient)
 
 	ctx := context.Background()
 
@@ -48,7 +43,7 @@ your-abm-api-key
 		Limit: 5, // Limit to 5 devices for this example
 	}
 
-	response, err := devicesClient.GetOrganizationDevices(ctx, options)
+	response, err := client.Devices.GetOrganizationDevices(ctx, options)
 	if err != nil {
 		log.Fatalf("Error getting devices: %v", err)
 	}
@@ -64,7 +59,7 @@ your-abm-api-key
 		fmt.Println()
 	}
 
-	if axm.HasNextPage(response.Links) {
+	if response.Links != nil && response.Links.Next != "" {
 		fmt.Println("Note: More devices are available on additional pages.")
 		fmt.Printf("Next page URL: %s\n", response.Links.Next)
 	}

@@ -6,9 +6,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/deploymenttheory/go-api-sdk-apple/client/axm"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/devicemanagement"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/devices"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/axm"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/devices"
 )
 
 func main() {
@@ -27,19 +26,11 @@ your-abm-api-key
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	// Create AXM client
-	axmClient, err := axm.NewClientBuilder().
-		WithJWTAuth(keyID, issuerID, privateKey).
-		WithDebug(true).
-		Build()
-
+	// Create client using GitLab pattern - matches the v3 pattern exactly
+	client, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
-		log.Fatalf("Failed to create AXM client: %v", err)
+		log.Fatalf("Failed to create client: %v", err)
 	}
-
-	// Create service clients
-	dmClient := devicemanagement.NewClient(axmClient)
-	devicesClient := devices.NewClient(axmClient)
 
 	// Create context
 	ctx := context.Background()
@@ -47,7 +38,7 @@ your-abm-api-key
 	// Step 1: Get organization devices to find device IDs
 	fmt.Println("\nStep 1: Getting organization devices to find device IDs...")
 
-	devicesResponse, err := devicesClient.GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
+	devicesResponse, err := client.Devices.GetOrganizationDevices(ctx, &devices.GetOrganizationDevicesOptions{
 		Fields: []string{
 			devices.FieldSerialNumber,
 			devices.FieldDeviceModel,
@@ -74,7 +65,7 @@ your-abm-api-key
 	fmt.Printf("Checking device: %s (Serial: %s, Model: %s)\n",
 		deviceID, firstDevice.Attributes.SerialNumber, firstDevice.Attributes.DeviceModel)
 
-	assignedServerResponse, err := dmClient.GetAssignedDeviceManagementServiceIDForADevice(ctx, deviceID)
+	assignedServerResponse, err := client.DeviceManagement.GetAssignedDeviceManagementServiceIDForADevice(ctx, deviceID)
 	if err != nil {
 		log.Printf("Error getting assigned server ID for device %s: %v", deviceID, err)
 	} else {
@@ -97,7 +88,7 @@ your-abm-api-key
 		device := devicesResponse.Data[i]
 		fmt.Printf("\nDevice %d: %s (Serial: %s)\n", i+1, device.ID, device.Attributes.SerialNumber)
 
-		serverLinkage, err := dmClient.GetAssignedDeviceManagementServiceIDForADevice(ctx, device.ID)
+		serverLinkage, err := client.DeviceManagement.GetAssignedDeviceManagementServiceIDForADevice(ctx, device.ID)
 		if err != nil {
 			fmt.Printf("  Error: %v\n", err)
 			continue
@@ -114,7 +105,7 @@ your-abm-api-key
 	fmt.Println("\n=== Example 3: Error Handling (Invalid Device ID) ===")
 
 	invalidDeviceID := "invalid-device-id-12345"
-	_, err = dmClient.GetAssignedDeviceManagementServiceIDForADevice(ctx, invalidDeviceID)
+	_, err = client.DeviceManagement.GetAssignedDeviceManagementServiceIDForADevice(ctx, invalidDeviceID)
 	if err != nil {
 		fmt.Printf("Expected error for invalid device ID '%s': %v\n", invalidDeviceID, err)
 	}
@@ -122,7 +113,7 @@ your-abm-api-key
 	// Example 4: Error handling - empty device ID
 	fmt.Println("\n=== Example 4: Error Handling (Empty Device ID) ===")
 
-	_, err = dmClient.GetAssignedDeviceManagementServiceIDForADevice(ctx, "")
+	_, err = client.DeviceManagement.GetAssignedDeviceManagementServiceIDForADevice(ctx, "")
 	if err != nil {
 		fmt.Printf("Expected error for empty device ID: %v\n", err)
 	}
@@ -137,7 +128,7 @@ your-abm-api-key
 	fmt.Printf("Checking all %d devices for server assignments...\n", len(devicesResponse.Data))
 
 	for i, device := range devicesResponse.Data {
-		serverLinkage, err := dmClient.GetAssignedDeviceManagementServiceIDForADevice(ctx, device.ID)
+		serverLinkage, err := client.DeviceManagement.GetAssignedDeviceManagementServiceIDForADevice(ctx, device.ID)
 		if err != nil {
 			errorCount++
 			fmt.Printf("  Device %d (%s): ERROR - %v\n", i+1, device.Attributes.SerialNumber, err)
@@ -163,7 +154,7 @@ your-abm-api-key
 	fmt.Println("\n=== Example 6: Get Server Details for Assigned Devices ===")
 
 	// Get MDM servers for reference
-	serversResponse, err := dmClient.GetDeviceManagementServices(ctx, nil)
+	serversResponse, err := client.DeviceManagement.GetDeviceManagementServices(ctx, nil)
 	if err != nil {
 		log.Printf("Error getting MDM servers: %v", err)
 	} else {
@@ -179,7 +170,7 @@ your-abm-api-key
 		for i := 0; i < min(3, len(devicesResponse.Data)); i++ {
 			device := devicesResponse.Data[i]
 
-			serverLinkage, err := dmClient.GetAssignedDeviceManagementServiceIDForADevice(ctx, device.ID)
+			serverLinkage, err := client.DeviceManagement.GetAssignedDeviceManagementServiceIDForADevice(ctx, device.ID)
 			if err != nil {
 				fmt.Printf("  Device %s: Error - %v\n", device.Attributes.SerialNumber, err)
 				continue

@@ -7,8 +7,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/deploymenttheory/go-api-sdk-apple/client/axm"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/devicemanagement"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/axm"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/devicemanagement"
 )
 
 func main() {
@@ -27,18 +27,11 @@ your-abm-api-key
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	// Create AXM client
-	axmClient, err := axm.NewClientBuilder().
-		WithJWTAuth(keyID, issuerID, privateKey).
-		WithDebug(true).
-		Build()
-
+	// Create client using GitLab pattern - matches the v3 pattern exactly
+	client, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
-		log.Fatalf("Failed to create AXM client: %v", err)
+		log.Fatalf("Failed to create client: %v", err)
 	}
-
-	// Create device management service client
-	dmClient := devicemanagement.NewClient(axmClient)
 
 	// Create context
 	ctx := context.Background()
@@ -46,7 +39,7 @@ your-abm-api-key
 	// Example 1: Get all MDM servers with default options
 	fmt.Println("\n=== Example 1: Get All MDM Servers (Default Options) ===")
 
-	response, err := dmClient.GetDeviceManagementServices(ctx, nil)
+	response, err := client.DeviceManagement.GetDeviceManagementServices(ctx, nil)
 	if err != nil {
 		log.Printf("Error getting MDM servers: %v", err)
 	} else {
@@ -70,7 +63,7 @@ your-abm-api-key
 		}
 
 		// Check pagination
-		if axm.HasNextPage(response.Links) {
+		if response.Links != nil && response.Links.Next != "" {
 			fmt.Println("More MDM servers available on next page!")
 		}
 	}
@@ -87,7 +80,7 @@ your-abm-api-key
 		Limit: 10,
 	}
 
-	response, err = dmClient.GetDeviceManagementServices(ctx, options)
+	response, err = client.DeviceManagement.GetDeviceManagementServices(ctx, options)
 	if err != nil {
 		log.Printf("Error getting MDM servers with options: %v", err)
 	} else {
@@ -114,13 +107,13 @@ your-abm-api-key
 		Limit: 5,
 	}
 
-	paginatedResponse, err := dmClient.GetDeviceManagementServices(ctx, paginationOptions)
+	paginatedResponse, err := client.DeviceManagement.GetDeviceManagementServices(ctx, paginationOptions)
 	if err != nil {
 		log.Printf("Error getting paginated MDM servers: %v", err)
 	} else {
 		fmt.Printf("Retrieved %d MDM servers (limit: %d)\n", len(paginatedResponse.Data), paginationOptions.Limit)
 
-		if axm.HasNextPage(paginatedResponse.Links) {
+		if paginatedResponse.Links != nil && paginatedResponse.Links.Next != "" {
 			fmt.Printf("Next page available: %s\n", paginatedResponse.Links.Next)
 		}
 
@@ -145,7 +138,7 @@ your-abm-api-key
 		},
 	}
 
-	allFieldsResponse, err := dmClient.GetDeviceManagementServices(ctx, allFieldsOptions)
+	allFieldsResponse, err := client.DeviceManagement.GetDeviceManagementServices(ctx, allFieldsOptions)
 	if err != nil {
 		log.Printf("Error getting MDM servers with all fields: %v", err)
 	} else {
@@ -185,7 +178,7 @@ your-abm-api-key
 		Limit: 5000, // This will be capped at 1000
 	}
 
-	largeResponse, err := dmClient.GetDeviceManagementServices(ctx, largeOptions)
+	largeResponse, err := client.DeviceManagement.GetDeviceManagementServices(ctx, largeOptions)
 	if err != nil {
 		log.Printf("Error with large limit: %v", err)
 	} else {

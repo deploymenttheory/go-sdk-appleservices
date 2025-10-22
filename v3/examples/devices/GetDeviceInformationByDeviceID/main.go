@@ -7,8 +7,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/deploymenttheory/go-api-sdk-apple/client/axm"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/axm/devices"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/axm"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/devices"
 )
 
 func main() {
@@ -27,18 +27,11 @@ your-abm-api-key
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	// Create AXM client using the builder with direct credentials
-	axmClient, err := axm.NewClientBuilder().
-		WithJWTAuth(keyID, issuerID, privateKey).
-		WithDebug(true).
-		Build()
-
+	// Create client using GitLab pattern - matches the v3 pattern exactly
+	client, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
-		log.Fatalf("Failed to create AXM client: %v", err)
+		log.Fatalf("Failed to create client: %v", err)
 	}
-
-	// Create devices service client
-	devicesClient := devices.NewClient(axmClient)
 
 	// Create context
 	ctx := context.Background()
@@ -55,7 +48,7 @@ your-abm-api-key
 		Limit: 5,
 	}
 
-	devicesResponse, err := devicesClient.GetOrganizationDevices(ctx, listOptions)
+	devicesResponse, err := client.Devices.GetOrganizationDevices(ctx, listOptions)
 	if err != nil {
 		log.Fatalf("Error getting organization devices: %v", err)
 	}
@@ -89,7 +82,7 @@ your-abm-api-key
 		},
 	}
 
-	deviceInfo, err := devicesClient.GetDeviceInformationByDeviceID(ctx, deviceID, allFieldsOptions)
+	deviceInfo, err := client.Devices.GetDeviceInformationByDeviceID(ctx, deviceID, allFieldsOptions)
 	if err != nil {
 		log.Fatalf("Error getting device information: %v", err)
 	}
@@ -136,7 +129,7 @@ your-abm-api-key
 		},
 	}
 
-	specificDeviceInfo, err := devicesClient.GetDeviceInformationByDeviceID(ctx, deviceID, specificFieldsOptions)
+	specificDeviceInfo, err := client.Devices.GetDeviceInformationByDeviceID(ctx, deviceID, specificFieldsOptions)
 	if err != nil {
 		log.Printf("Error getting specific device information: %v", err)
 	} else {
@@ -150,7 +143,7 @@ your-abm-api-key
 	// Example 3: Get device information with no field filtering (all fields)
 	fmt.Println("\n=== Example 3: Get Device Information (No Field Filtering) ===")
 
-	noFilterDeviceInfo, err := devicesClient.GetDeviceInformationByDeviceID(ctx, deviceID, nil)
+	noFilterDeviceInfo, err := client.Devices.GetDeviceInformationByDeviceID(ctx, deviceID, nil)
 	if err != nil {
 		log.Printf("Error getting unfiltered device information: %v", err)
 	} else {
@@ -162,7 +155,7 @@ your-abm-api-key
 	fmt.Println("\n=== Example 4: Error Handling (Non-existent Device) ===")
 
 	fakeDeviceID := "non-existent-device-id"
-	_, err = devicesClient.GetDeviceInformationByDeviceID(ctx, fakeDeviceID, nil)
+	_, err = client.Devices.GetDeviceInformationByDeviceID(ctx, fakeDeviceID, nil)
 	if err != nil {
 		fmt.Printf("Expected error for non-existent device: %v\n", err)
 	}
@@ -185,7 +178,7 @@ your-abm-api-key
 		for i, dev := range devicesResponse.Data[:min(3, len(devicesResponse.Data))] {
 			fmt.Printf("\nDevice %d (ID: %s):\n", i+1, dev.ID)
 
-			info, err := devicesClient.GetDeviceInformationByDeviceID(ctx, dev.ID, &devices.GetDeviceInformationOptions{
+			info, err := client.Devices.GetDeviceInformationByDeviceID(ctx, dev.ID, &devices.GetDeviceInformationOptions{
 				Fields: []string{
 					devices.FieldSerialNumber,
 					devices.FieldDeviceModel,
