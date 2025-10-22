@@ -99,9 +99,9 @@ func NewTransport(config Config) (*Client, error) {
 		)
 
 		if resp.StatusCode() == 401 {
-			if oauth2Auth, ok := config.Auth.(*OAuth2Auth); ok {
-				config.Logger.Info("Received 401 response, forcing OAuth token refresh")
-				oauth2Auth.ForceRefresh()
+			if jwtAuth, ok := config.Auth.(*JWTAuth); ok {
+				config.Logger.Info("Received 401 response, forcing JWT token refresh")
+				jwtAuth.ForceRefresh()
 			}
 		}
 

@@ -57,35 +57,69 @@ Complete implementation of the [Apple Business Manager API](https://developer.ap
 
 **Quick Start:**
 
-Get started quickly with multiple client setup options:
+Get started quickly with the GitLab-style client pattern:
 
 ```go
-// Method 1: Simple setup with environment variables
-axmClient, err := axm.NewClientFromEnv()
-if err != nil {
-    log.Fatalf("Failed to create client: %v", err)
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    
+    "github.com/deploymenttheory/go-api-sdk-apple/axm"
+    "github.com/deploymenttheory/go-api-sdk-apple/axm/client"
+    "github.com/deploymenttheory/go-api-sdk-apple/axm/services/devices"
+    "github.com/deploymenttheory/go-api-sdk-apple/axm/services/devicemanagement"
+)
+
+func main() {
+    // Method 1: Direct client creation (GitLab-style)
+    // Parse private key from PEM format
+    privateKey, err := client.ParsePrivateKey([]byte(privateKeyPEM))
+    if err != nil {
+        log.Fatalf("Failed to parse private key: %v", err)
+    }
+    
+    client, err := axm.NewClient("your-key-id", "your-issuer-id", privateKey)
+    if err != nil {
+        log.Fatalf("Failed to create client: %v", err)
+    }
+
+    // Method 2: From environment variables
+    // client, err := axm.NewClientFromEnv()
+    // Expects: APPLE_KEY_ID, APPLE_ISSUER_ID, APPLE_PRIVATE_KEY_PATH
+
+    // Method 3: From file
+    // client, err := axm.NewClientFromFile("key-id", "issuer-id", "/path/to/key.p8")
+
+    ctx := context.Background()
+
+    // Get organization devices - GitLab-style access
+    response, err := client.Devices.GetOrganizationDevices(ctx, &devices.RequestQueryOptions{
+        Fields: []string{
+            devices.FieldSerialNumber,
+            devices.FieldDeviceModel,
+            devices.FieldStatus,
+        },
+        Limit: 100,
+    })
+    if err != nil {
+        log.Fatalf("Error getting devices: %v", err)
+    }
+
+    fmt.Printf("Found %d devices\n", len(response.Data))
+
+    // Get device management services - GitLab-style access
+    services, err := client.DeviceManagement.GetDeviceManagementServices(ctx, &devicemanagement.RequestQueryOptions{
+        Limit: 10,
+    })
+    if err != nil {
+        log.Fatalf("Error getting services: %v", err)
+    }
+
+    fmt.Printf("Found %d MDM servers\n", len(services.Data))
 }
-
-// Create service clients
-devicesClient := devices.NewClient(axmClient)
-deviceManagementClient := devicemanagement.NewClient(axmClient)
-
-// Get organization devices
-ctx := context.Background()
-response, err := devicesClient.GetOrganizationDevices(ctx, &devices.RequestQueryOptions{
-    Fields: []string{
-        devices.FieldSerialNumber,
-        devices.FieldDeviceModel,
-        devices.FieldStatus,
-    },
-    Limit: 100,
-})
-
-if err != nil {
-    log.Fatalf("Error getting devices: %v", err)
-}
-
-fmt.Printf("Found %d devices\n", len(response.Data))
 ```
 
 📖 **[Complete Quick Start Guide →](./examples/axm/quick_start.md)**
