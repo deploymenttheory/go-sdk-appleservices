@@ -122,7 +122,7 @@ your-abm-api-key
 	// Example 2: Get assigned server information with specific fields
 	fmt.Println("\n=== Example 2: Get Assigned Server Information (Specific Fields) ===")
 
-	specificFieldsOptions := &devicemanagement.GetAssignedServerInfoOptions{
+	specificFieldsOptions := &devicemanagement.RequestQueryOptions{
 		Fields: []string{
 			"serverName",
 			"serverType",
@@ -157,7 +157,7 @@ your-abm-api-key
 		device := devicesResponse.Data[i]
 		fmt.Printf("\nDevice %d: %s (Serial: %s)\n", i+1, device.ID, device.Attributes.SerialNumber)
 
-		serverInfo, err := client.DeviceManagement.GetAssignedDeviceManagementServiceInformationByDeviceID(ctx, device.ID, &devicemanagement.GetAssignedServerInfoOptions{
+		serverInfo, err := client.DeviceManagement.GetAssignedDeviceManagementServiceInformationByDeviceID(ctx, device.ID, &devicemanagement.RequestQueryOptions{
 			Fields: []string{
 				"serverName",
 				"serverType",
@@ -181,7 +181,7 @@ your-abm-api-key
 	// Example 4: Get server information with all available fields
 	fmt.Println("\n=== Example 4: Get Server Information (All Available Fields) ===")
 
-	allFieldsOptions := &devicemanagement.GetAssignedServerInfoOptions{
+	allFieldsOptions := &devicemanagement.RequestQueryOptions{
 		Fields: []string{
 			"serverName",
 			"serverType",

@@ -107,13 +107,6 @@ type MDMServerResponse struct {
 	Links *Links    `json:"links,omitempty"`
 }
 
-// GetAssignedServerInfoOptions represents the query parameters for getting assigned server info
-type GetAssignedServerInfoOptions struct {
-	// Field selection - fields to return for mdmServers
-	// Possible values: serverName, serverType, createdDateTime, updatedDateTime, devices
-	Fields []string `json:"fields,omitempty"`
-}
-
 // OrgDeviceActivity represents a device activity (assign/unassign operations)
 type OrgDeviceActivity struct {
 	ID         string                       `json:"id"`

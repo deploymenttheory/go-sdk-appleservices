@@ -271,7 +271,7 @@ func TestGetAssignedDeviceManagementServiceInformationByDeviceID_Success(t *test
 
 	ctx := context.Background()
 	deviceID := "DVVS36G1YD3JKQNI"
-	opts := &GetAssignedServerInfoOptions{
+	opts := &RequestQueryOptions{
 		Fields: []string{FieldServerName, FieldServerType},
 	}
 
@@ -306,7 +306,7 @@ func TestGetAssignedDeviceManagementServiceInformationByDeviceID_EmptyDeviceID(t
 	defer mockHandler.CleanupMockState()
 
 	ctx := context.Background()
-	opts := &GetAssignedServerInfoOptions{}
+	opts := &RequestQueryOptions{}
 
 	result, err := client.GetAssignedDeviceManagementServiceInformationByDeviceID(ctx, "", opts)
 
@@ -549,8 +549,8 @@ func TestOptionsStructures(t *testing.T) {
 	}
 	assert.Equal(t, 50, opts2.Limit)
 
-	// Test GetAssignedServerInfoOptions
-	opts3 := &GetAssignedServerInfoOptions{
+	// Test RequestQueryOptions
+	opts3 := &RequestQueryOptions{
 		Fields: []string{FieldServerName, FieldCreatedDateTime},
 	}
 	assert.Len(t, opts3.Fields, 2)

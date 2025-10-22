@@ -32,7 +32,7 @@ type (
 		//
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-the-assigned-server-information-for-an-orgdevice
-		GetAssignedDeviceManagementServiceInformationByDeviceID(ctx context.Context, deviceID string, opts *GetAssignedServerInfoOptions) (*MDMServerResponse, error)
+		GetAssignedDeviceManagementServiceInformationByDeviceID(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*MDMServerResponse, error)
 
 		// AssignDevicesToServer assigns devices to an MDM server
 		//
@@ -167,7 +167,7 @@ func (s *DeviceManagementService) GetAssignedDeviceManagementServiceIDForADevice
 // GetAssignedDeviceManagementServiceInformationByDeviceID retrieves the assigned device management service information for a device
 // URL: GET https://api-business.apple.com/v1/orgDevices/{id}/assignedServer
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-the-assigned-server-information-for-an-orgdevice
-func (s *DeviceManagementService) GetAssignedDeviceManagementServiceInformationByDeviceID(ctx context.Context, deviceID string, opts *GetAssignedServerInfoOptions) (*MDMServerResponse, error) {
+func (s *DeviceManagementService) GetAssignedDeviceManagementServiceInformationByDeviceID(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*MDMServerResponse, error) {
 	if deviceID == "" {
 		return nil, fmt.Errorf("device ID is required")
 	}
@@ -180,7 +180,7 @@ func (s *DeviceManagementService) GetAssignedDeviceManagementServiceInformationB
 	}
 
 	if opts == nil {
-		opts = &GetAssignedServerInfoOptions{}
+		opts = &RequestQueryOptions{}
 	}
 
 	queryParams := s.client.QueryBuilder()
