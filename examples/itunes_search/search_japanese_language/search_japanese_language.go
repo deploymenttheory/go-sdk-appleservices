@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	client "github.com/deploymenttheory/go-api-sdk-apple/client/itunes"
+	client "github.com/deploymenttheory/go-api-sdk-apple/itunes"
 	"github.com/deploymenttheory/go-api-sdk-apple/services/itunes_search"
 )
 

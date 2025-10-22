@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	client "github.com/deploymenttheory/go-api-sdk-apple/client/itunes"
+	client "github.com/deploymenttheory/go-api-sdk-apple/itunes"
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
