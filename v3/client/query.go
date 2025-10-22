@@ -1,14 +1,20 @@
-package axm
+package client
 
 import (
 	"strconv"
 	"time"
+
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/interfaces"
 )
 
 // QueryBuilder provides a fluent interface for building query parameters
 type QueryBuilder struct {
 	params map[string]string
 }
+
+// Ensure QueryBuilder implements the interface
+var _ interfaces.QueryBuilder = (*QueryBuilder)(nil)
+var _ interfaces.ServiceQueryBuilder = (*QueryBuilder)(nil)
 
 // NewQueryBuilder creates a new query builder
 func NewQueryBuilder() *QueryBuilder {
@@ -18,7 +24,7 @@ func NewQueryBuilder() *QueryBuilder {
 }
 
 // AddString adds a string parameter if the value is not empty
-func (qb *QueryBuilder) AddString(key, value string) *QueryBuilder {
+func (qb *QueryBuilder) AddString(key, value string) interfaces.QueryBuilder {
 	if value != "" {
 		qb.params[key] = value
 	}
@@ -26,7 +32,7 @@ func (qb *QueryBuilder) AddString(key, value string) *QueryBuilder {
 }
 
 // AddInt adds an integer parameter if the value is greater than 0
-func (qb *QueryBuilder) AddInt(key string, value int) *QueryBuilder {
+func (qb *QueryBuilder) AddInt(key string, value int) interfaces.QueryBuilder {
 	if value > 0 {
 		qb.params[key] = strconv.Itoa(value)
 	}
@@ -34,7 +40,7 @@ func (qb *QueryBuilder) AddInt(key string, value int) *QueryBuilder {
 }
 
 // AddInt64 adds an int64 parameter if the value is greater than 0
-func (qb *QueryBuilder) AddInt64(key string, value int64) *QueryBuilder {
+func (qb *QueryBuilder) AddInt64(key string, value int64) interfaces.QueryBuilder {
 	if value > 0 {
 		qb.params[key] = strconv.FormatInt(value, 10)
 	}
@@ -42,13 +48,13 @@ func (qb *QueryBuilder) AddInt64(key string, value int64) *QueryBuilder {
 }
 
 // AddBool adds a boolean parameter
-func (qb *QueryBuilder) AddBool(key string, value bool) *QueryBuilder {
+func (qb *QueryBuilder) AddBool(key string, value bool) interfaces.QueryBuilder {
 	qb.params[key] = strconv.FormatBool(value)
 	return qb
 }
 
 // AddTime adds a time parameter in RFC3339 format if the time is not zero
-func (qb *QueryBuilder) AddTime(key string, value time.Time) *QueryBuilder {
+func (qb *QueryBuilder) AddTime(key string, value time.Time) interfaces.QueryBuilder {
 	if !value.IsZero() {
 		qb.params[key] = value.Format(time.RFC3339)
 	}
@@ -56,7 +62,7 @@ func (qb *QueryBuilder) AddTime(key string, value time.Time) *QueryBuilder {
 }
 
 // AddStringSlice adds a string slice parameter as comma-separated values
-func (qb *QueryBuilder) AddStringSlice(key string, values []string) *QueryBuilder {
+func (qb *QueryBuilder) AddStringSlice(key string, values []string) interfaces.QueryBuilder {
 	if len(values) > 0 {
 		// Join multiple values with comma
 		result := ""
@@ -76,7 +82,7 @@ func (qb *QueryBuilder) AddStringSlice(key string, values []string) *QueryBuilde
 }
 
 // AddIntSlice adds an integer slice parameter as comma-separated values
-func (qb *QueryBuilder) AddIntSlice(key string, values []int) *QueryBuilder {
+func (qb *QueryBuilder) AddIntSlice(key string, values []int) interfaces.QueryBuilder {
 	if len(values) > 0 {
 		result := ""
 		for i, v := range values {
@@ -91,13 +97,13 @@ func (qb *QueryBuilder) AddIntSlice(key string, values []int) *QueryBuilder {
 }
 
 // AddCustom adds a custom parameter with any value
-func (qb *QueryBuilder) AddCustom(key, value string) *QueryBuilder {
+func (qb *QueryBuilder) AddCustom(key, value string) interfaces.QueryBuilder {
 	qb.params[key] = value
 	return qb
 }
 
 // AddIfNotEmpty adds a parameter only if the value is not empty
-func (qb *QueryBuilder) AddIfNotEmpty(key, value string) *QueryBuilder {
+func (qb *QueryBuilder) AddIfNotEmpty(key, value string) interfaces.QueryBuilder {
 	if value != "" {
 		qb.params[key] = value
 	}
@@ -105,7 +111,7 @@ func (qb *QueryBuilder) AddIfNotEmpty(key, value string) *QueryBuilder {
 }
 
 // AddIfTrue adds a parameter only if the condition is true
-func (qb *QueryBuilder) AddIfTrue(condition bool, key, value string) *QueryBuilder {
+func (qb *QueryBuilder) AddIfTrue(condition bool, key, value string) interfaces.QueryBuilder {
 	if condition {
 		qb.params[key] = value
 	}
@@ -113,7 +119,7 @@ func (qb *QueryBuilder) AddIfTrue(condition bool, key, value string) *QueryBuild
 }
 
 // Merge merges parameters from another query builder or map
-func (qb *QueryBuilder) Merge(other map[string]string) *QueryBuilder {
+func (qb *QueryBuilder) Merge(other map[string]string) interfaces.QueryBuilder {
 	for k, v := range other {
 		qb.params[k] = v
 	}
@@ -121,7 +127,7 @@ func (qb *QueryBuilder) Merge(other map[string]string) *QueryBuilder {
 }
 
 // Remove removes a parameter
-func (qb *QueryBuilder) Remove(key string) *QueryBuilder {
+func (qb *QueryBuilder) Remove(key string) interfaces.QueryBuilder {
 	delete(qb.params, key)
 	return qb
 }
@@ -166,7 +172,7 @@ func (qb *QueryBuilder) BuildString() string {
 }
 
 // Clear removes all parameters
-func (qb *QueryBuilder) Clear() *QueryBuilder {
+func (qb *QueryBuilder) Clear() interfaces.QueryBuilder {
 	qb.params = make(map[string]string)
 	return qb
 }

@@ -1,4 +1,4 @@
-package axm
+package client
 
 import (
 	"context"
@@ -11,7 +11,7 @@ import (
 // Supports query parameters, custom headers, and automatic response parsing.
 //
 // This method uses Resty's SetQueryParam for URL parameters and SetHeader for custom headers.
-// The response is automatically unmarshaled into the provided result interface{}.
+// The response is automatically unmarshaled into the provided result any.
 //
 // Reference: https://resty.dev/docs/request-query-params/
 // Reference: https://resty.dev/docs/response-auto-parse/

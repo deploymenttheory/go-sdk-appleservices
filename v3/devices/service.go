@@ -4,17 +4,41 @@ import (
 	"context"
 	"fmt"
 
-	core "github.com/deploymenttheory/go-api-sdk-apple/v3/core"
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/interfaces"
 )
 
-// Service provides device operations for Apple Business Manager
-type Service struct {
-	client core.HTTPClient
-}
+type (
+	// DevicesServiceInterface defines the interface for device operations.
+	DevicesServiceInterface interface {
+		// GetOrganizationDevices retrieves a list of devices in an organization
+		// that enroll using Automated Device Enrollment.
+		//
+		// Apple Business Manager API docs:
+		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-org-devices
+		GetOrganizationDevices(ctx context.Context, opts *GetOrganizationDevicesOptions) (*OrgDevicesResponse, error)
+
+		// GetDeviceInformationByDeviceID retrieves information about a specific device
+		// in an organization.
+		//
+		// Apple Business Manager API docs:
+		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-orgdevice-information
+		GetDeviceInformationByDeviceID(ctx context.Context, deviceID string, opts *GetDeviceInformationOptions) (*OrgDeviceResponse, error)
+	}
+
+	// DevicetService handles communication with the device
+	// related methods of the Apple Business Manager API.
+	//
+	// Apple Business Manager API docs: https://developer.apple.com/documentation/applebusinessmanagerapi/
+	DevicesService struct {
+		client interfaces.HTTPClient
+	}
+)
+
+var _ DevicesServiceInterface = (*DevicesService)(nil)
 
 // NewService creates a new devices service
-func NewService(client core.HTTPClient) *Service {
-	return &Service{
+func NewService(client interfaces.HTTPClient) *DevicesService {
+	return &DevicesService{
 		client: client,
 	}
 }
@@ -22,7 +46,7 @@ func NewService(client core.HTTPClient) *Service {
 // GetOrganizationDevices retrieves a list of devices in an organization that enroll using Automated Device Enrollment
 // URL: GET https://api-business.apple.com/v1/orgDevices
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-org-devices
-func (s *Service) GetOrganizationDevices(ctx context.Context, opts *GetOrganizationDevicesOptions) (*OrgDevicesResponse, error) {
+func (s *DevicesService) GetOrganizationDevices(ctx context.Context, opts *GetOrganizationDevicesOptions) (*OrgDevicesResponse, error) {
 	if opts == nil {
 		opts = &GetOrganizationDevicesOptions{}
 	}
@@ -60,7 +84,7 @@ func (s *Service) GetOrganizationDevices(ctx context.Context, opts *GetOrganizat
 // GetDeviceInformationByDeviceID retrieves information about a specific device in an organization
 // URL: GET https://api-business.apple.com/v1/orgDevices/{id}
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-orgdevice-information
-func (s *Service) GetDeviceInformationByDeviceID(ctx context.Context, deviceID string, opts *GetDeviceInformationOptions) (*OrgDeviceResponse, error) {
+func (s *DevicesService) GetDeviceInformationByDeviceID(ctx context.Context, deviceID string, opts *GetDeviceInformationOptions) (*OrgDeviceResponse, error) {
 	if deviceID == "" {
 		return nil, fmt.Errorf("device ID is required")
 	}

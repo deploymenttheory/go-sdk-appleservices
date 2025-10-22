@@ -1,4 +1,4 @@
-package axm
+package client
 
 // OAuth scope constants
 const (

@@ -1,22 +1,22 @@
-package axm
+package client
 
 import (
-	"context"
 	"fmt"
+	"os"
 	"time"
 
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/interfaces"
 	"go.uber.org/zap"
 	"resty.dev/v3"
 )
 
-// Client represents the main Apple Business Manager API client with embedded services
+// Client represents the main Apple Business Manager API client
 type Client struct {
 	httpClient   *resty.Client
 	logger       *zap.Logger
 	auth         AuthProvider
 	errorHandler *ErrorHandler
 	baseURL      string
-
 }
 
 // Config holds configuration for the client
@@ -121,50 +121,11 @@ func NewClient(config Config) (*Client, error) {
 	return client, nil
 }
 
-// HTTPClient interface that services will use
-type HTTPClient interface {
-	Get(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, result any) error
-	Post(ctx context.Context, path string, body any, headers map[string]string, result any) error
-	PostWithQuery(ctx context.Context, path string, queryParams map[string]string, body any, headers map[string]string, result any) error
-	Put(ctx context.Context, path string, body any, headers map[string]string, result any) error
-	Patch(ctx context.Context, path string, body any, headers map[string]string, result any) error
-	Delete(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, result any) error
-	DeleteWithBody(ctx context.Context, path string, body any, headers map[string]string, result any) error
-	PostMultipart(ctx context.Context, path string, files map[string]string, fields map[string]string, result any) error
-	GetPaginated(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, result any) error
-	GetNextPage(ctx context.Context, nextURL string, headers map[string]string, result any) error
-	GetAllPages(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, processPage func([]byte) error) error
-	QueryBuilder() ServiceQueryBuilder
-}
-
-// ServiceQueryBuilder defines the query builder contract for services
-type ServiceQueryBuilder interface {
-	AddString(key, value string) *QueryBuilder
-	AddInt(key string, value int) *QueryBuilder
-	AddInt64(key string, value int64) *QueryBuilder
-	AddBool(key string, value bool) *QueryBuilder
-	AddTime(key string, value time.Time) *QueryBuilder
-	AddStringSlice(key string, values []string) *QueryBuilder
-	AddIntSlice(key string, values []int) *QueryBuilder
-	AddCustom(key, value string) *QueryBuilder
-	AddIfNotEmpty(key, value string) *QueryBuilder
-	AddIfTrue(condition bool, key, value string) *QueryBuilder
-	Merge(other map[string]string) *QueryBuilder
-	Remove(key string) *QueryBuilder
-	Has(key string) bool
-	Get(key string) string
-	Build() map[string]string
-	BuildString() string
-	Clear() *QueryBuilder
-	Count() int
-	IsEmpty() bool
-}
-
 // Ensure Client implements HTTPClient interface
-var _ HTTPClient = (*Client)(nil)
+var _ interfaces.HTTPClient = (*Client)(nil)
 
 // QueryBuilder returns a new query builder instance
-func (c *Client) QueryBuilder() ServiceQueryBuilder {
+func (c *Client) QueryBuilder() interfaces.ServiceQueryBuilder {
 	return NewQueryBuilder()
 }
 
@@ -179,4 +140,77 @@ func (c *Client) Close() error {
 		c.httpClient.Close()
 	}
 	return nil
+}
+
+// NewClientFromEnv creates a client using environment variables
+// Expects: APPLE_KEY_ID, APPLE_ISSUER_ID, APPLE_PRIVATE_KEY_PATH
+func NewClientFromEnv() (*Client, error) {
+	keyID := os.Getenv("APPLE_KEY_ID")
+	issuerID := os.Getenv("APPLE_ISSUER_ID")
+	privateKeyPath := os.Getenv("APPLE_PRIVATE_KEY_PATH")
+
+	if keyID == "" {
+		return nil, fmt.Errorf("APPLE_KEY_ID environment variable is required")
+	}
+	if issuerID == "" {
+		return nil, fmt.Errorf("APPLE_ISSUER_ID environment variable is required")
+	}
+	if privateKeyPath == "" {
+		return nil, fmt.Errorf("APPLE_PRIVATE_KEY_PATH environment variable is required")
+	}
+
+	privateKey, err := LoadPrivateKeyFromFile(privateKeyPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load private key: %w", err)
+	}
+
+	config := Config{
+		BaseURL: "https://api-business.apple.com/v1",
+		Auth: NewJWTAuth(JWTAuthConfig{
+			KeyID:      keyID,
+			IssuerID:   issuerID,
+			PrivateKey: privateKey,
+			Audience:   "appstoreconnect-v1",
+		}),
+		Timeout:    30 * time.Second,
+		RetryCount: 3,
+		RetryWait:  1 * time.Second,
+		UserAgent:  "go-api-sdk-apple/3.0.0",
+	}
+
+	return NewClient(config)
+}
+
+// NewClientFromFile creates a client using credentials from files
+func NewClientFromFile(keyID, issuerID, privateKeyPath string) (*Client, error) {
+	if keyID == "" {
+		return nil, fmt.Errorf("keyID is required")
+	}
+	if issuerID == "" {
+		return nil, fmt.Errorf("issuerID is required")
+	}
+	if privateKeyPath == "" {
+		return nil, fmt.Errorf("privateKeyPath is required")
+	}
+
+	privateKey, err := LoadPrivateKeyFromFile(privateKeyPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load private key: %w", err)
+	}
+
+	config := Config{
+		BaseURL: "https://api-business.apple.com/v1",
+		Auth: NewJWTAuth(JWTAuthConfig{
+			KeyID:      keyID,
+			IssuerID:   issuerID,
+			PrivateKey: privateKey,
+			Audience:   "appstoreconnect-v1",
+		}),
+		Timeout:    30 * time.Second,
+		RetryCount: 3,
+		RetryWait:  1 * time.Second,
+		UserAgent:  "go-api-sdk-apple/3.0.0",
+	}
+
+	return NewClient(config)
 }

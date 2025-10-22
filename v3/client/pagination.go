@@ -1,4 +1,4 @@
-package axm
+package client
 
 import (
 	"context"
@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"maps"
 	"net/url"
+
+	"github.com/deploymenttheory/go-api-sdk-apple/v3/interfaces"
 )
 
 // Meta contains pagination metadata matching Apple's API format
@@ -36,7 +38,7 @@ type PaginationOptions struct {
 }
 
 // AddToQueryBuilder adds pagination options to a query builder
-func (opts *PaginationOptions) AddToQueryBuilder(qb ServiceQueryBuilder) ServiceQueryBuilder {
+func (opts *PaginationOptions) AddToQueryBuilder(qb interfaces.ServiceQueryBuilder) interfaces.ServiceQueryBuilder {
 	if opts == nil {
 		return qb
 	}

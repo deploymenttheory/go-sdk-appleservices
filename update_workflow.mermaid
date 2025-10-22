@@ -1,0 +1,94 @@
+graph LR
+    %% ============ EVENT TRIGGERS ============
+    JAMFRelease(["JAMF Release<br/>Every 6 Weeks"]) --> ClassifyAPI{New API<br/>or<br/>Migration?}
+    Incident(["Incident Reported<br/>Bug Found"]) --> ClassifyIncident{Source of<br/>Issue?}
+    
+    %% ============ NEW API PATH (No Legacy) ============
+    ClassifyAPI -->|New API| VersionCheck{API Version<br/>Bump or<br/>Field Change?}
+    
+    VersionCheck -->|Field Change| SchemaChange["Apply Schema Change<br/>+ State Migration"]
+    SchemaChange --> ApplyV1State["State Migration<br/>from Previous<br/>Version Available"]
+    
+    VersionCheck -->|Version Bump| CreateNewResource["Create New Resource<br/>jamfpro_thing_v#<br/>Framework SDK"]
+    CreateNewResource --> AddStateMig["Add State Migration<br/>from v-1<br/>Where Applicable"]
+    AddStateMig --> ApplyV1State
+    
+    ApplyV1State --> AddValidation["Add Validation Check<br/>Minimum JAMF Version<br/>= API Introduction Version"]
+    AddValidation --> TestNew["Test & Validate<br/>Against New API"]
+    TestNew --> CodeReviewNew{Quality<br/>Checks<br/>Pass?}
+    
+    CodeReviewNew -->|No| RemediateNew["Fix Issues"]
+    RemediateNew --> TestNew
+    
+    CodeReviewNew -->|Yes| ReleaseNew["Release Resource"]
+    ReleaseNew --> NewSuccess(("New Resource<br/>Available"))
+    
+    %% ============ MIGRATION PATH (With Legacy) ============
+    ClassifyAPI -->|Migration| CheckCRUDParity{Full CRUD<br/>Parity with<br/>Current API?}
+    
+    CheckCRUDParity -->|No| PartialImpl["Document<br/>Gaps"]
+    PartialImpl -->|Wait for Full<br/>CRUD Parity| JAMFRelease
+    
+    CheckCRUDParity -->|Yes| DetermineSDK["Determine Current<br/>Resource SDK Type<br/>SDKv2 or<br/>Framework?"]
+    
+    DetermineSDK --> MigVersionCheck{API Version<br/>Bump or<br/>Field Change?}
+    
+    MigVersionCheck -->|Field Change<br/>Keep Current SDK| MigSchemaChange["Apply Schema Change<br/>+ State Migration<br/>Using Current SDK"]
+    MigSchemaChange --> MigApplyState["State Migration<br/>from Previous<br/>Version Available"]
+    
+    MigVersionCheck -->|Version Bump<br/>Framework SDK| CreateMigResource["Create New Resource<br/>jamfpro_thing_v#<br/>Framework SDK"]
+    CreateMigResource --> AddMigState["Add State Migration<br/>from Current Version"]
+    AddMigState --> MigApplyState
+    
+    %% ============ MIGRATE PATH VALIDATION & TESTING ============
+    MigApplyState --> AddMigValidation["Add Validation Check<br/>Minimum JAMF Version<br/>= New API Version"]
+    AddMigValidation --> AddDepWarning["Add Deprecation Warning<br/>to Old Resource Code"]
+    AddDepWarning --> TestMigration["Test & Validate<br/>Against New API<br/>"]
+    TestMigration --> CodeReviewMig{Quality<br/>Checks<br/>Pass?}
+    
+    CodeReviewMig -->|No| RemediateMig["Fix Issues"]
+    RemediateMig --> TestMigration
+    
+    CodeReviewMig -->|Yes| ReleaseMigration["Release Migration<br/>Resource<br/>+ Deprecation Notice<br/>in Release Notes"]
+    
+    %% ============ NEW RESOURCE & OLD RESOURCE PARALLEL PATHS ============
+    ReleaseMigration --> NewResourcePath["New Resource / Datasource<br/>definition:<br/>Ready for Use"]
+    ReleaseMigration --> OldResourcePath["Old Resource / Datasource<br/>definition:<br/>Begin Maintenance<br/>Window"]
+    
+    %% ============ NEW RESOURCE LIFECYCLE ============
+    NewResourcePath --> NewSuccess(("New Resource<br/>Available in<br/>Provider"))
+    
+    %% ============ OLD RESOURCE DEPRECATION LIFECYCLE ============
+    OldResourcePath --> MaintStart["Maintain Both<br/>Old & New<br/>Resources"]
+    MaintStart --> MaintenanceWindow["6-Month Support<br/>Window n-1<br/>Users Migrate State"]
+    MaintenanceWindow --> ReleaseCheck{Release Date<br/>on/after<br/>Deprecation Date?}
+    
+    ReleaseCheck -->|No| MaintenanceWindow
+    ReleaseCheck -->|Yes| RemoveOld["Remove Old<br/>Resource/DataSource"]
+    RemoveOld --> MigSuccess(("Old Resource<br/>Removed<br/>Migration Complete"))
+    
+    %% ============ INCIDENT HANDLING PATH ============
+    ClassifyIncident -->|Provider Bug| ProviderFix["Apply Hotfix<br/>to Provider Code<br/>using current tf sdk"]
+    ClassifyIncident -->|JAMF Bug| JAMFBugPath["Investigate &<br/>Create Workaround"]
+    
+    ProviderFix --> IncidentTest["Test Fix"]
+    JAMFBugPath --> IncidentTest
+    IncidentTest --> IncidentRelease["Release Patch"]
+    IncidentRelease --> IncidentResolved(("Incident<br/>Resolved"))
+    
+    %% ============ STYLING ============
+    classDef eventTrigger fill:#e1f5ff,stroke:#01579b,stroke-width:2px
+    classDef decision fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef process fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef version fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    classDef validation fill:#ffe0b2,stroke:#e65100,stroke-width:2px
+    classDef maintenance fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    classDef outcome fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+    
+    class JAMFRelease,Incident eventTrigger
+    class ClassifyAPI,ClassifyIncident,VersionCheck,CheckCRUDParity,CodeReviewNew,CodeReviewMig,ReleaseCheck decision
+    class SchemaChange,PartialImpl,AddValidation,AddMigValidation,ProviderFix,JAMFBugPath,IncidentTest,IncidentRelease process
+    class CreateNewResource,AddStateMig,CreateMigResource,AddMigState,TestNew,RemediateNew,ReleaseNew,TestMigration,RemediateMig,ReleaseMigration version
+    class ApplyV1State,AddValidation,AddMigValidation,DeprecationNotice,DeprecationWarning validation
+    class MaintStart,MaintenanceWindow,RemoveOld maintenance
+    class NewSuccess,MigSuccess,IncidentResolved outcome

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #34495e; }
+      .text { font-family: Arial, sans-serif; font-size: 12px; fill: #2c3e50; }
+      .small-text { font-family: Arial, sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .box { fill: #ecf0f1; stroke: #bdc3c7; stroke-width: 2; rx: 8; }
+      .client-box { fill: #e8f5e8; stroke: #27ae60; stroke-width: 2; rx: 8; }
+      .service-box { fill: #e8f4fd; stroke: #3498db; stroke-width: 2; rx: 8; }
+      .interface-box { fill: #fef9e7; stroke: #f39c12; stroke-width: 2; rx: 8; }
+      .auth-box { fill: #fdeaea; stroke: #e74c3c; stroke-width: 2; rx: 8; }
+      .api-box { fill: #f4e6f7; stroke: #9b59b6; stroke-width: 2; rx: 8; }
+      .arrow { stroke: #34495e; stroke-width: 2; marker-end: url(#arrowhead); }
+      .dependency-arrow { stroke: #7f8c8d; stroke-width: 1; stroke-dasharray: 5,5; marker-end: url(#arrowhead-light); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34495e" />
+    </marker>
+    <marker id="arrowhead-light" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7f8c8d" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" class="title">Apple Business Manager API SDK v3 Architecture</text>
+  <text x="600" y="55" text-anchor="middle" class="small-text">GitLab-style Go SDK for Apple Business Manager API</text>
+
+  <!-- Main AXM Client Package -->
+  <rect x="450" y="80" width="300" height="120" class="client-box"/>
+  <text x="600" y="105" text-anchor="middle" class="subtitle">axm.Client</text>
+  <text x="460" y="125" class="text">• NewClient(keyID, issuerID, privateKey)</text>
+  <text x="460" y="140" class="text">• NewClientFromFile()</text>
+  <text x="460" y="155" class="text">• NewClientFromEnv()</text>
+  <text x="460" y="170" class="text">• DeviceManagement Service</text>
+  <text x="460" y="185" class="text">• Devices Service</text>
+
+  <!-- Core Client Package -->
+  <rect x="100" y="250" width="280" height="160" class="box"/>
+  <text x="240" y="275" text-anchor="middle" class="subtitle">client.Client</text>
+  <text x="110" y="295" class="text">• HTTP Client (Resty v3)</text>
+  <text x="110" y="310" class="text">• Authentication Provider</text>
+  <text x="110" y="325" class="text">• Error Handler</text>
+  <text x="110" y="340" class="text">• Query Builder</text>
+  <text x="110" y="355" class="text">• Pagination Support</text>
+  <text x="110" y="370" class="text">• Request/Response Methods:</text>
+  <text x="120" y="385" class="small-text">GET, POST, PUT, PATCH, DELETE</text>
+  <text x="120" y="400" class="small-text">Multipart, Paginated Requests</text>
+
+  <!-- Interfaces Package -->
+  <rect x="450" y="250" width="300" height="100" class="interface-box"/>
+  <text x="600" y="275" text-anchor="middle" class="subtitle">interfaces</text>
+  <text x="460" y="295" class="text">• HTTPClient Interface</text>
+  <text x="460" y="310" class="text">• ServiceQueryBuilder Interface</text>
+  <text x="460" y="325" class="text">• QueryBuilder Interface</text>
+  <text x="460" y="340" class="small-text">Prevents import cycles, enables testing</text>
+
+  <!-- Authentication -->
+  <rect x="820" y="250" width="280" height="160" class="auth-box"/>
+  <text x="960" y="275" text-anchor="middle" class="subtitle">Authentication</text>
+  <text x="830" y="295" class="text">• JWT Auth (Primary)</text>
+  <text x="840" y="310" class="small-text">- OAuth 2.0 Client Credentials</text>
+  <text x="840" y="325" class="small-text">- ES256 Signing</text>
+  <text x="840" y="340" class="small-text">- Token Management</text>
+  <text x="830" y="355" class="text">• OAuth2 Auth</text>
+  <text x="830" y="370" class="text">• API Key Auth</text>
+  <text x="830" y="385" class="text">• Private Key Support:</text>
+  <text x="840" y="400" class="small-text">RSA &amp; ECDSA</text>
+
+  <!-- Device Management Service -->
+  <rect x="100" y="470" width="300" height="140" class="service-box"/>
+  <text x="250" y="495" text-anchor="middle" class="subtitle">devicemanagement.Service</text>
+  <text x="110" y="515" class="text">• GetDeviceManagementServices()</text>
+  <text x="110" y="530" class="text">• GetMDMServerDeviceLinkages()</text>
+  <text x="110" y="545" class="text">• GetAssignedDeviceManagementServiceID()</text>
+  <text x="110" y="560" class="text">• AssignDevicesToServer()</text>
+  <text x="110" y="575" class="text">• UnassignDevicesFromServer()</text>
+  <text x="110" y="590" class="small-text">Implements DeviceManagementServiceInterface</text>
+
+  <!-- Devices Service -->
+  <rect x="450" y="470" width="300" height="140" class="service-box"/>
+  <text x="600" y="495" text-anchor="middle" class="subtitle">devices.Service</text>
+  <text x="460" y="515" class="text">• GetOrganizationDevices()</text>
+  <text x="460" y="530" class="text">• GetDeviceInformationByDeviceID()</text>
+  <text x="460" y="550" class="text">Features:</text>
+  <text x="470" y="565" class="small-text">- Automated Device Enrollment</text>
+  <text x="470" y="580" class="small-text">- Device Information Retrieval</text>
+  <text x="460" y="595" class="small-text">Implements DevicesServiceInterface</text>
+
+  <!-- Apple Business Manager API -->
+  <rect x="800" y="470" width="300" height="140" class="api-box"/>
+  <text x="950" y="495" text-anchor="middle" class="subtitle">Apple Business Manager API</text>
+  <text x="810" y="515" class="text">Base URL: api-business.apple.com/v1</text>
+  <text x="810" y="535" class="text">Endpoints:</text>
+  <text x="820" y="550" class="small-text">• /mdmServers</text>
+  <text x="820" y="565" class="small-text">• /orgDevices</text>
+  <text x="820" y="580" class="small-text">• /orgDeviceActivities</text>
+  <text x="810" y="595" class="small-text">RESTful JSON API with pagination</text>
+
+  <!-- Utility Components -->
+  <rect x="100" y="650" width="200" height="80" class="box"/>
+  <text x="200" y="675" text-anchor="middle" class="subtitle">Utilities</text>
+  <text x="110" y="695" class="text">• Query Builder</text>
+  <text x="110" y="710" class="text">• Pagination Handler</text>
+  <text x="110" y="725" class="small-text">Fluent API for URL params</text>
+
+  <rect x="350" y="650" width="200" height="80" class="box"/>
+  <text x="450" y="675" text-anchor="middle" class="subtitle">Error Handling</text>
+  <text x="360" y="695" class="text">• Structured API Errors</text>
+  <text x="360" y="710" class="text">• HTTP Error Mapping</text>
+  <text x="360" y="725" class="small-text">JSON:API compliant</text>
+
+  <rect x="600" y="650" width="200" height="80" class="box"/>
+  <text x="700" y="675" text-anchor="middle" class="subtitle">Data Models</text>
+  <text x="610" y="695" class="text">• Request/Response Types</text>
+  <text x="610" y="710" class="text">• Domain Models</text>
+  <text x="610" y="725" class="small-text">JSON marshaling support</text>
+
+  <rect x="850" y="650" width="200" height="80" class="box"/>
+  <text x="950" y="675" text-anchor="middle" class="subtitle">Examples</text>
+  <text x="860" y="695" class="text">• Basic Usage</text>
+  <text x="860" y="710" class="text">• Device Management</text>
+  <text x="860" y="725" class="small-text">Sample implementations</text>
+
+  <!-- Arrows showing relationships -->
+  <!-- AXM to Core Client -->
+  <line x1="550" y1="200" x2="280" y2="250" class="arrow"/>
+  
+  <!-- AXM to Services -->
+  <line x1="500" y1="200" x2="250" y2="470" class="arrow"/>
+  <line x1="650" y1="200" x2="600" y2="470" class="arrow"/>
+  
+  <!-- Core Client to Auth -->
+  <line x1="380" y1="310" x2="820" y2="310" class="arrow"/>
+  
+  <!-- Services to Interfaces -->
+  <line x1="400" y1="540" x2="450" y2="300" class="dependency-arrow"/>
+  <line x1="600" y1="470" x2="600" y2="350" class="dependency-arrow"/>
+  
+  <!-- Services to API -->
+  <line x1="750" y1="540" x2="800" y2="540" class="arrow"/>
+  
+  <!-- Core Client to Utilities -->
+  <line x1="200" y1="410" x2="200" y2="650" class="dependency-arrow"/>
+  <line x1="320" y1="410" x2="450" y2="650" class="dependency-arrow"/>
+
+  <!-- Legend -->
+  <rect x="50" y="750" width="700" height="40" fill="none" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="60" y="770" class="small-text">Legend:</text>
+  <line x1="120" y1="765" x2="150" y2="765" class="arrow"/>
+  <text x="155" y="770" class="small-text">Direct dependency</text>
+  <line x1="260" y1="765" x2="290" y2="765" class="dependency-arrow"/>
+  <text x="295" y="770" class="small-text">Interface dependency</text>
+  <rect x="420" y="760" width="15" height="10" class="client-box"/>
+  <text x="440" y="770" class="small-text">Main Client</text>
+  <rect x="520" y="760" width="15" height="10" class="service-box"/>
+  <text x="540" y="770" class="small-text">Services</text>
+  <rect x="600" y="760" width="15" height="10" class="interface-box"/>
+  <text x="620" y="770" class="small-text">Interfaces</text>
+  <rect x="680" y="760" width="15" height="10" class="auth-box"/>
+  <text x="700" y="770" class="small-text">Auth</text>
+</svg>
