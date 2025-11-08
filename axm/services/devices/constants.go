@@ -68,3 +68,30 @@ const (
 	ProductFamilyiPad   = "iPad"
 	ProductFamilyMac    = "Mac"
 )
+
+// AppleCare coverage field constants for field selection
+const (
+	FieldAppleCareStatus                 = "status"
+	FieldAppleCarePaymentType            = "paymentType"
+	FieldAppleCareDescription            = "description"
+	FieldAppleCareAgreementNumber        = "agreementNumber"
+	FieldAppleCareStartDateTime          = "startDateTime"
+	FieldAppleCareEndDateTime            = "endDateTime"
+	FieldAppleCareIsRenewable            = "isRenewable"
+	FieldAppleCareIsCanceled             = "isCanceled"
+	FieldAppleCareContractCancelDateTime = "contractCancelDateTime"
+)
+
+// AppleCare coverage status constants
+const (
+	AppleCareStatusActive   = "ACTIVE"
+	AppleCareStatusInactive = "INACTIVE"
+	AppleCareStatusExpired  = "EXPIRED"
+)
+
+// AppleCare payment type constants
+const (
+	PaymentTypeNone            = "NONE"
+	PaymentTypeSubscription    = "SUBSCRIPTION"
+	PaymentTypeABESubscription = "ABE_SUBSCRIPTION"
+)

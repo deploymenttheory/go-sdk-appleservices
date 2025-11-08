@@ -86,18 +86,29 @@ type RequestQueryOptions struct {
 	Limit int `json:"limit,omitempty"`
 }
 
-// Legacy Device struct for backward compatibility
-type Device struct {
-	SerialNumber       string    `json:"serial_number"`
-	Model              string    `json:"model"`
-	Description        string    `json:"description"`
-	Color              string    `json:"color"`
-	AssetTag           string    `json:"asset_tag"`
-	ProfileStatus      string    `json:"profile_status"`
-	ProfileUUID        string    `json:"profile_uuid"`
-	ProfileAssignTime  time.Time `json:"profile_assign_time"`
-	DeviceAssignedBy   string    `json:"device_assigned_by"`
-	DeviceAssignedDate time.Time `json:"device_assigned_date"`
-	OpType             string    `json:"op_type,omitempty"`
-	OpDate             time.Time `json:"op_date,omitempty"`
+// AppleCareCoverage represents AppleCare coverage for a device
+type AppleCareCoverage struct {
+	ID         string                       `json:"id"`
+	Type       string                       `json:"type"`
+	Attributes *AppleCareCoverageAttributes `json:"attributes,omitempty"`
+}
+
+// AppleCareCoverageAttributes contains the AppleCare coverage attributes
+type AppleCareCoverageAttributes struct {
+	Status                 string     `json:"status,omitempty"`
+	PaymentType            string     `json:"paymentType,omitempty"`
+	Description            string     `json:"description,omitempty"`
+	AgreementNumber        *string    `json:"agreementNumber,omitempty"`
+	StartDateTime          *time.Time `json:"startDateTime,omitempty"`
+	EndDateTime            *time.Time `json:"endDateTime,omitempty"`
+	IsRenewable            bool       `json:"isRenewable,omitempty"`
+	IsCanceled             bool       `json:"isCanceled,omitempty"`
+	ContractCancelDateTime *time.Time `json:"contractCancelDateTime,omitempty"`
+}
+
+// AppleCareCoverageResponse represents the response for getting AppleCare coverage
+type AppleCareCoverageResponse struct {
+	Data  []AppleCareCoverage `json:"data"`
+	Links *Links              `json:"links,omitempty"`
+	Meta  *Meta               `json:"meta,omitempty"`
 }

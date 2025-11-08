@@ -72,7 +72,7 @@
   <rect x="100" y="470" width="300" height="140" class="service-box"/>
   <text x="250" y="495" text-anchor="middle" class="subtitle">devicemanagement.Service</text>
   <text x="110" y="515" class="text">• GetDeviceManagementServices()</text>
-  <text x="110" y="530" class="text">• GetMDMServerDeviceLinkages()</text>
+  <text x="110" y="530" class="text">• GetDeviceSerialNumbersForDeviceManagementService()</text>
   <text x="110" y="545" class="text">• GetAssignedDeviceManagementServiceID()</text>
   <text x="110" y="560" class="text">• AssignDevicesToServer()</text>
   <text x="110" y="575" class="text">• UnassignDevicesFromServer()</text>

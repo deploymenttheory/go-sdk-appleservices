@@ -127,6 +127,48 @@ func (m *OrgDevicesMock) RegisterMocks() {
 
 		return httpmock.NewJsonResponse(200, responseObj)
 	})
+
+	// GET /orgDevices/{id}/appleCareCoverage - Get AppleCare coverage for device
+	httpmock.RegisterResponder("GET", `=~^https://api-business\.apple\.com/v1/orgDevices/[^/]+/appleCareCoverage$`, func(req *http.Request) (*http.Response, error) {
+		parts := strings.Split(req.URL.Path, "/")
+		deviceID := parts[len(parts)-2]
+
+		mockState.Lock()
+		_, exists := mockState.orgDevices[deviceID]
+		mockState.Unlock()
+
+		if !exists {
+			return httpmock.NewStringResponse(404, `{"errors":[{"status":"404","code":"RESOURCE_NOT_FOUND","title":"Device Not Found","detail":"The requested device was not found"}]}`), nil
+		}
+
+		// Load the mock response template
+		mockData, err := loadMockResponse("validate_get_applecare_coverage.json")
+		if err != nil {
+			return httpmock.NewStringResponse(500, `{"errors":[{"status":"500","code":"INTERNAL_ERROR","title":"Internal Server Error","detail":"Failed to load mock data"}]}`), nil
+		}
+
+		var responseObj map[string]any
+		if err := json.Unmarshal(mockData, &responseObj); err != nil {
+			return httpmock.NewStringResponse(500, `{"errors":[{"status":"500","code":"INTERNAL_ERROR","title":"Internal Server Error","detail":"Failed to parse mock data"}]}`), nil
+		}
+
+		// Handle query parameters
+		query := req.URL.Query()
+
+		// Handle fields parameter
+		if fields := query.Get("fields[appleCareCoverage]"); fields != "" {
+			// In a real implementation, we would filter fields here
+			// For mock purposes, we'll just validate the parameter exists
+		}
+
+		// Handle limit parameter
+		if limit := query.Get("limit"); limit != "" {
+			// In a real implementation, we would apply pagination here
+			// For mock purposes, we'll just validate the parameter exists
+		}
+
+		return httpmock.NewJsonResponse(200, responseObj)
+	})
 }
 
 // RegisterErrorMocks registers mock responders that return error responses
@@ -142,6 +184,11 @@ func (m *OrgDevicesMock) RegisterErrorMocks() {
 
 	// GET /orgDevices/{id} - Return not found error
 	httpmock.RegisterResponder("GET", `=~^https://api-business\.apple\.com/v1/orgDevices/[^/]+$`, func(req *http.Request) (*http.Response, error) {
+		return httpmock.NewStringResponse(404, `{"errors":[{"status":"404","code":"RESOURCE_NOT_FOUND","title":"Device Not Found","detail":"The requested device was not found"}]}`), nil
+	})
+
+	// GET /orgDevices/{id}/appleCareCoverage - Return not found error
+	httpmock.RegisterResponder("GET", `=~^https://api-business\.apple\.com/v1/orgDevices/[^/]+/appleCareCoverage$`, func(req *http.Request) (*http.Response, error) {
 		return httpmock.NewStringResponse(404, `{"errors":[{"status":"404","code":"RESOURCE_NOT_FOUND","title":"Device Not Found","detail":"The requested device was not found"}]}`), nil
 	})
 }

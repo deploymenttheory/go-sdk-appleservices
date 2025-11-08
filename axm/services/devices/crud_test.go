@@ -481,3 +481,232 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 	_ = attrs.PurchaseSourceType
 	_ = attrs.AssignedServer
 }
+
+func TestGetAppleCareInformation_Success(t *testing.T) {
+	client := setupMockClient(t)
+	mockHandler := &mocks.OrgDevicesMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	deviceID := "XABC123X0ABC123X0"
+	opts := &RequestQueryOptions{
+		Fields: []string{FieldAppleCareStatus, FieldAppleCarePaymentType, FieldAppleCareDescription},
+		Limit:  100,
+	}
+
+	result, err := client.GetAppleCareInformationByDeviceID(ctx, deviceID, opts)
+
+	require.NoError(t, err)
+	require.NotNil(t, result)
+	assert.NotEmpty(t, result.Data)
+
+	// Verify we have multiple AppleCare coverage entries
+	assert.Len(t, result.Data, 3)
+
+	// Verify first coverage (Limited Warranty)
+	coverage1 := result.Data[0]
+	assert.Equal(t, "appleCareCoverage", coverage1.Type)
+	assert.Equal(t, "XABC123X0ABC123X0", coverage1.ID)
+	assert.NotNil(t, coverage1.Attributes)
+	assert.Equal(t, "ACTIVE", coverage1.Attributes.Status)
+	assert.Equal(t, "NONE", coverage1.Attributes.PaymentType)
+	assert.Equal(t, "Limited Warranty", coverage1.Attributes.Description)
+	assert.False(t, coverage1.Attributes.IsRenewable)
+	assert.False(t, coverage1.Attributes.IsCanceled)
+	assert.NotNil(t, coverage1.Attributes.StartDateTime)
+	assert.NotNil(t, coverage1.Attributes.EndDateTime)
+	assert.Nil(t, coverage1.Attributes.AgreementNumber)
+	assert.Nil(t, coverage1.Attributes.ContractCancelDateTime)
+
+	// Verify second coverage (AppleCare+)
+	coverage2 := result.Data[1]
+	assert.Equal(t, "appleCareCoverage", coverage2.Type)
+	assert.Equal(t, "0000000001", coverage2.ID)
+	assert.NotNil(t, coverage2.Attributes)
+	assert.Equal(t, "ACTIVE", coverage2.Attributes.Status)
+	assert.Equal(t, "SUBSCRIPTION", coverage2.Attributes.PaymentType)
+	assert.Equal(t, "AppleCare+", coverage2.Attributes.Description)
+	assert.True(t, coverage2.Attributes.IsRenewable)
+	assert.False(t, coverage2.Attributes.IsCanceled)
+	assert.NotNil(t, coverage2.Attributes.AgreementNumber)
+
+	// Verify third coverage (AppleCare+ for Business Essentials)
+	coverage3 := result.Data[2]
+	assert.Equal(t, "appleCareCoverage", coverage3.Type)
+	assert.Equal(t, "abe-XABC123X0ABC123X0", coverage3.ID)
+	assert.NotNil(t, coverage3.Attributes)
+	assert.Equal(t, "ACTIVE", coverage3.Attributes.Status)
+	assert.Equal(t, "ABE_SUBSCRIPTION", coverage3.Attributes.PaymentType)
+	assert.Equal(t, "AppleCare+ for Business Essentials", coverage3.Attributes.Description)
+	assert.True(t, coverage3.Attributes.IsRenewable)
+	assert.Nil(t, coverage3.Attributes.EndDateTime)
+
+	// Verify pagination metadata
+	assert.NotNil(t, result.Meta)
+	assert.NotNil(t, result.Links)
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+func TestGetAppleCareInformation_WithNilOptions(t *testing.T) {
+	client := setupMockClient(t)
+	mockHandler := &mocks.OrgDevicesMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	deviceID := "XABC123X0ABC123X0"
+
+	result, err := client.GetAppleCareInformationByDeviceID(ctx, deviceID, nil)
+
+	require.NoError(t, err)
+	require.NotNil(t, result)
+	assert.NotEmpty(t, result.Data)
+	assert.Len(t, result.Data, 3)
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+func TestGetAppleCareInformation_EmptyDeviceID(t *testing.T) {
+	client := setupMockClient(t)
+	mockHandler := &mocks.OrgDevicesMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	opts := &RequestQueryOptions{}
+
+	result, err := client.GetAppleCareInformationByDeviceID(ctx, "", opts)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	assert.Contains(t, err.Error(), "device ID is required")
+
+	// No HTTP call should be made
+	assert.Equal(t, 0, httpmock.GetTotalCallCount())
+}
+
+func TestGetAppleCareInformation_DeviceNotFound(t *testing.T) {
+	client := setupMockClient(t)
+	mockHandler := &mocks.OrgDevicesMock{}
+	mockHandler.RegisterErrorMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	deviceID := "NONEXISTENT123"
+	opts := &RequestQueryOptions{}
+
+	result, err := client.GetAppleCareInformationByDeviceID(ctx, deviceID, opts)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+func TestGetAppleCareInformation_WithFieldSelection(t *testing.T) {
+	client := setupMockClient(t)
+	mockHandler := &mocks.OrgDevicesMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	deviceID := "XABC123X0ABC123X0"
+	opts := &RequestQueryOptions{
+		Fields: []string{
+			FieldAppleCareStatus,
+			FieldAppleCarePaymentType,
+			FieldAppleCareDescription,
+			FieldAppleCareStartDateTime,
+			FieldAppleCareEndDateTime,
+			FieldAppleCareIsRenewable,
+			FieldAppleCareIsCanceled,
+		},
+	}
+
+	result, err := client.GetAppleCareInformationByDeviceID(ctx, deviceID, opts)
+
+	require.NoError(t, err)
+	require.NotNil(t, result)
+	assert.NotEmpty(t, result.Data)
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+func TestGetAppleCareInformation_WithLimitEnforcement(t *testing.T) {
+	client := setupMockClient(t)
+	mockHandler := &mocks.OrgDevicesMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	deviceID := "XABC123X0ABC123X0"
+	opts := &RequestQueryOptions{
+		Limit: 1500, // Exceeds API maximum of 1000
+	}
+
+	result, err := client.GetAppleCareInformationByDeviceID(ctx, deviceID, opts)
+
+	require.NoError(t, err)
+	require.NotNil(t, result)
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+func TestGetAppleCareInformation_ContextCancellation(t *testing.T) {
+	client := setupMockClient(t)
+	mockHandler := &mocks.OrgDevicesMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	// Create a context that's already cancelled
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+
+	deviceID := "XABC123X0ABC123X0"
+	opts := &RequestQueryOptions{}
+
+	result, err := client.GetAppleCareInformationByDeviceID(ctx, deviceID, opts)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	assert.Contains(t, err.Error(), "context canceled")
+}
+
+func TestAppleCareFieldConstants(t *testing.T) {
+	// Test that AppleCare field constants are properly defined
+	expectedFields := []string{
+		FieldAppleCareStatus,
+		FieldAppleCarePaymentType,
+		FieldAppleCareDescription,
+		FieldAppleCareAgreementNumber,
+		FieldAppleCareStartDateTime,
+		FieldAppleCareEndDateTime,
+		FieldAppleCareIsRenewable,
+		FieldAppleCareIsCanceled,
+		FieldAppleCareContractCancelDateTime,
+	}
+
+	for _, field := range expectedFields {
+		assert.NotEmpty(t, field, "AppleCare field constant should not be empty")
+	}
+
+	// Test specific field values
+	assert.Equal(t, "status", FieldAppleCareStatus)
+	assert.Equal(t, "paymentType", FieldAppleCarePaymentType)
+	assert.Equal(t, "description", FieldAppleCareDescription)
+	assert.Equal(t, "agreementNumber", FieldAppleCareAgreementNumber)
+}
+
+func TestAppleCareStatusConstants(t *testing.T) {
+	// Test AppleCare status constants
+	assert.Equal(t, "ACTIVE", AppleCareStatusActive)
+	assert.Equal(t, "INACTIVE", AppleCareStatusInactive)
+	assert.Equal(t, "EXPIRED", AppleCareStatusExpired)
+
+	// Test payment type constants
+	assert.Equal(t, "NONE", PaymentTypeNone)
+	assert.Equal(t, "SUBSCRIPTION", PaymentTypeSubscription)
+	assert.Equal(t, "ABE_SUBSCRIPTION", PaymentTypeABESubscription)
+}

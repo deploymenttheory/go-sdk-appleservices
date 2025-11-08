@@ -331,7 +331,7 @@ your-abm-api-key
 
 	serverDeviceLinkages, err := client.
 		DeviceManagement.
-		GetMDMServerDeviceLinkages(ctx, targetMDMServerID, &devicemanagement.RequestQueryOptions{
+		GetDeviceSerialNumbersForDeviceManagementService(ctx, targetMDMServerID, &devicemanagement.RequestQueryOptions{
 			Limit: 100,
 		})
 	if err != nil {

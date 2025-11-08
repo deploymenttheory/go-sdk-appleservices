@@ -23,6 +23,13 @@ type (
 		// Apple Business Manager API docs:
 		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-orgdevice-information
 		GetDeviceInformationByDeviceID(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*OrgDeviceResponse, error)
+
+		// GetAppleCareInformationByDeviceID retrieves AppleCare coverage information
+		// for a specific device.
+		//
+		// Apple Business Manager API docs:
+		// https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-apple-care-coverage-for-an-orgdevice
+		GetAppleCareInformationByDeviceID(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*AppleCareCoverageResponse, error)
 	}
 
 	// DevicetService handles communication with the device
@@ -109,6 +116,48 @@ func (s *DevicesService) GetDeviceInformationByDeviceID(ctx context.Context, dev
 	var result OrgDeviceResponse
 
 	err := s.client.Get(ctx, endpoint, queryParams.Build(), headers, &result)
+	if err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+// GetAppleCareInformationByDeviceID retrieves AppleCare coverage information for a specific device
+// URL: GET https://api-business.apple.com/v1/orgDevices/{id}/appleCareCoverage
+// https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-apple-care-coverage-for-an-orgdevice
+func (s *DevicesService) GetAppleCareInformationByDeviceID(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*AppleCareCoverageResponse, error) {
+	if deviceID == "" {
+		return nil, fmt.Errorf("device ID is required")
+	}
+
+	endpoint := "/orgDevices/" + deviceID + "/appleCareCoverage"
+
+	headers := map[string]string{
+		"Accept":       "application/json",
+		"Content-Type": "application/json",
+	}
+
+	if opts == nil {
+		opts = &RequestQueryOptions{}
+	}
+
+	queryParams := s.client.QueryBuilder()
+
+	if len(opts.Fields) > 0 {
+		queryParams.AddStringSlice("fields[appleCareCoverage]", opts.Fields)
+	}
+
+	if opts.Limit > 0 {
+		if opts.Limit > 1000 {
+			opts.Limit = 1000 // Enforce API maximum
+		}
+		queryParams.AddInt("limit", opts.Limit)
+	}
+
+	var result AppleCareCoverageResponse
+
+	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, &result)
 	if err != nil {
 		return nil, err
 	}

@@ -152,7 +152,7 @@ func TestGetDeviceManagementServices_HTTPError(t *testing.T) {
 	assert.Equal(t, 4, httpmock.GetTotalCallCount()) // 1 original + 3 retries
 }
 
-func TestGetMDMServerDeviceLinkages_Success(t *testing.T) {
+func TestGetDeviceSerialNumbersForDeviceManagementService_Success(t *testing.T) {
 	client := setupMockClient(t)
 	mockHandler := &mocks.DeviceManagementMock{}
 	mockHandler.RegisterMocks()
@@ -164,7 +164,7 @@ func TestGetMDMServerDeviceLinkages_Success(t *testing.T) {
 		Limit: 100,
 	}
 
-	result, err := client.GetMDMServerDeviceLinkages(ctx, serverID, opts)
+	result, err := client.GetDeviceSerialNumbersForDeviceManagementService(ctx, serverID, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -182,7 +182,7 @@ func TestGetMDMServerDeviceLinkages_Success(t *testing.T) {
 	assert.Equal(t, 1, httpmock.GetTotalCallCount())
 }
 
-func TestGetMDMServerDeviceLinkages_EmptyServerID(t *testing.T) {
+func TestGetDeviceSerialNumbersForDeviceManagementService_EmptyServerID(t *testing.T) {
 	client := setupMockClient(t)
 	mockHandler := &mocks.DeviceManagementMock{}
 	mockHandler.RegisterMocks()
@@ -191,7 +191,7 @@ func TestGetMDMServerDeviceLinkages_EmptyServerID(t *testing.T) {
 	ctx := context.Background()
 	opts := &RequestQueryOptions{}
 
-	result, err := client.GetMDMServerDeviceLinkages(ctx, "", opts)
+	result, err := client.GetDeviceSerialNumbersForDeviceManagementService(ctx, "", opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -201,7 +201,7 @@ func TestGetMDMServerDeviceLinkages_EmptyServerID(t *testing.T) {
 	assert.Equal(t, 0, httpmock.GetTotalCallCount())
 }
 
-func TestGetMDMServerDeviceLinkages_WithNilOptions(t *testing.T) {
+func TestGetDeviceSerialNumbersForDeviceManagementService_WithNilOptions(t *testing.T) {
 	client := setupMockClient(t)
 	mockHandler := &mocks.DeviceManagementMock{}
 	mockHandler.RegisterMocks()
@@ -210,7 +210,7 @@ func TestGetMDMServerDeviceLinkages_WithNilOptions(t *testing.T) {
 	ctx := context.Background()
 	serverID := "1F97349736CF4614A94F624E705841AD"
 
-	result, err := client.GetMDMServerDeviceLinkages(ctx, serverID, nil)
+	result, err := client.GetDeviceSerialNumbersForDeviceManagementService(ctx, serverID, nil)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
