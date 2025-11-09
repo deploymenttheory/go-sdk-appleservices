@@ -1,0 +1,483 @@
+{
+  "apps": [
+    {
+      "app_path": "/Applications/Company Portal.app",
+      "bundle_id": "com.microsoft.CompanyPortalMac",
+      "component_count": 1,
+      "components": [
+        {
+          "app_path": "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app",
+          "bundle_id": "com.microsoft.autoupdate2",
+          "name": "Microsoft AutoUpdate",
+          "package_identifier": "com.microsoft.package.Microsoft_AutoUpdate.app",
+          "version": "4.80.25092610"
+        }
+      ],
+      "detected": "2025-10-31T12:38:59.822899",
+      "direct_url": "https://officecdn.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/CompanyPortal-Installer.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=853070",
+      "etag": "\"0xFA8BD4C5FFDA026FA6721AC958DC4B47613CDFDE982B206737A52CF16BA8AD94\"",
+      "install_kb": 264722,
+      "last_modified": "Wed, 08 Oct 2025 16:07:06 GMT",
+      "name": "Company Portal",
+      "num_files": 1140,
+      "package_identifier": "com.microsoft.CompanyPortalMac",
+      "sha256": "5a740461bc25d3c28046d4b7b9614edb14eb67c9142dbf8d53ceda459eec6bb9",
+      "size_bytes": 86842811,
+      "size_mb": 82.82,
+      "type": "application",
+      "version": "5.2508.1"
+    },
+    {
+      "app_path": "/Applications/Microsoft Excel.app",
+      "bundle_id": "com.microsoft.Excel",
+      "component_count": 2,
+      "components": [
+        {
+          "app_path": "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app",
+          "bundle_id": "com.microsoft.autoupdate2",
+          "name": "Microsoft AutoUpdate",
+          "package_identifier": "com.microsoft.package.Microsoft_AutoUpdate.app",
+          "version": "4.81.25101344"
+        },
+        {
+          "app_path": null,
+          "bundle_id": null,
+          "name": "licensing",
+          "package_identifier": "com.microsoft.pkg.licensing",
+          "version": "16.102.25110228"
+        }
+      ],
+      "detected": "2025-11-04T18:37:44.058059",
+      "direct_url": "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Excel_16.102.25110228_Installer.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=525135",
+      "etag": "\"0xC65BF2AF6436F9995374AF66B30232CA439D49C8109197AED9202FFCB1687503\"",
+      "install_kb": 2387982,
+      "last_modified": "Tue, 04 Nov 2025 16:40:19 GMT",
+      "name": "Microsoft Excel",
+      "num_files": 43206,
+      "package_identifier": "com.microsoft.Excel",
+      "sha256": "f3a3a088bfd1c81776fb6a9de655a34326ae66beb53f06ca0da53ae3c178a5ec",
+      "size_bytes": 1099751498,
+      "size_mb": 1048.8,
+      "type": "application",
+      "version": "16.102.25110228"
+    },
+    {
+      "app_path": "/Applications/OneDrive.app",
+      "bundle_id": "com.microsoft.OneDrive",
+      "detected": "2025-10-31T18:52:28.868754",
+      "direct_url": "https://oneclient.sfx.ms/Mac/Installers/25.184.0921.0004/universal/OneDrive.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=823060",
+      "etag": "\"af65b4d68c4628d2f481d1a0e426db15:1759862058.566227\"",
+      "install_kb": 1181646,
+      "last_modified": "Tue, 07 Oct 2025 18:34:18 GMT",
+      "name": "Microsoft OneDrive",
+      "num_files": 2906,
+      "package_identifier": "com.microsoft.OneDrive",
+      "sha256": "c8e2f57a159f1c67ecad1d2028134e4209e799f0392b35835963e90f7f605cb2",
+      "size_bytes": 329298762,
+      "size_mb": 314.04,
+      "type": "application",
+      "version": "25.184.921"
+    },
+    {
+      "app_path": "/Applications/Microsoft Outlook.app",
+      "bundle_id": "com.microsoft.Outlook",
+      "component_count": 2,
+      "components": [
+        {
+          "app_path": "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app",
+          "bundle_id": "com.microsoft.autoupdate2",
+          "name": "Microsoft AutoUpdate",
+          "package_identifier": "com.microsoft.package.Microsoft_AutoUpdate.app",
+          "version": "4.80.25073044"
+        },
+        {
+          "app_path": null,
+          "bundle_id": null,
+          "name": "licensing",
+          "package_identifier": "com.microsoft.pkg.licensing",
+          "version": "16.102.25101223"
+        }
+      ],
+      "detected": "2025-10-31T21:21:46.297954",
+      "direct_url": "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Outlook_16.102.25101223_Installer.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=525137",
+      "etag": "\"0xBCB2B5E684567DD47FA3975F43BB77C6867FB6F111DD94E4EE96B5980ACA94DC\"",
+      "install_kb": 2608470,
+      "last_modified": "Tue, 14 Oct 2025 16:38:14 GMT",
+      "name": "Microsoft Outlook",
+      "num_files": 55778,
+      "package_identifier": "com.microsoft.Outlook",
+      "sha256": "07264bf018208b93eac0447efc574037dd5d47a34861313729cfe56044485d13",
+      "size_bytes": 1331179301,
+      "size_mb": 1269.51,
+      "type": "application",
+      "version": "16.102.25101223"
+    },
+    {
+      "app_path": "/Applications/Microsoft PowerPoint.app",
+      "bundle_id": "com.microsoft.Powerpoint",
+      "component_count": 2,
+      "components": [
+        {
+          "app_path": "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app",
+          "bundle_id": "com.microsoft.autoupdate2",
+          "name": "Microsoft AutoUpdate",
+          "package_identifier": "com.microsoft.package.Microsoft_AutoUpdate.app",
+          "version": "4.81.25101344"
+        },
+        {
+          "app_path": null,
+          "bundle_id": null,
+          "name": "licensing",
+          "package_identifier": "com.microsoft.pkg.licensing",
+          "version": "16.102.25102623"
+        }
+      ],
+      "detected": "2025-10-31T21:19:56.972514",
+      "direct_url": "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_PowerPoint_16.102.25102623_Installer.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=525136",
+      "etag": "\"0x3D6E556682C544F7E6374A445522A6506678E64F85778CAC581820CE1B41850C\"",
+      "install_kb": 2032623,
+      "last_modified": "Tue, 28 Oct 2025 15:54:12 GMT",
+      "name": "Microsoft PowerPoint",
+      "num_files": 32002,
+      "package_identifier": "com.microsoft.Powerpoint",
+      "sha256": "63d4515755adee49d8ac1165ba9ee4b8c424144d7b791ee4d99fce2df4565137",
+      "size_bytes": 974737295,
+      "size_mb": 929.58,
+      "type": "application",
+      "version": "16.102.25102623"
+    },
+    {
+      "app_path": "/Applications/Visual Studio Code.app",
+      "bundle_id": "com.microsoft.VSCode",
+      "detected": "2025-10-31T18:45:23.263560",
+      "direct_url": "https://vscode.download.prss.microsoft.com/dbazure/download/stable/7d842fb85a0275a4a8e4d7e040d2625abbf7f084/VSCode-darwin-universal.zip",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=2156837",
+      "etag": "\"0x3772B91DE557B1EFA688ED9DF01DE6EE87E4AF53B330B314DD8EAC39E5D05C29\"",
+      "install_kb": null,
+      "last_modified": "Tue, 14 Oct 2025 23:18:32 GMT",
+      "name": "Visual Studio Code",
+      "num_files": null,
+      "package_identifier": "com.microsoft.VSCode",
+      "sha256": "7adfbeb55ef3c2da0afae5d25fe6aaf4fd79cf66b4f781d81bd20b88837938fe",
+      "size_bytes": 259731853,
+      "size_mb": 247.7,
+      "type": "application",
+      "version": "1.105.1"
+    },
+    {
+      "app_path": "/Applications/Microsoft Word.app",
+      "bundle_id": "com.microsoft.Word",
+      "component_count": 2,
+      "components": [
+        {
+          "app_path": "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app",
+          "bundle_id": "com.microsoft.autoupdate2",
+          "name": "Microsoft AutoUpdate",
+          "package_identifier": "com.microsoft.package.Microsoft_AutoUpdate.app",
+          "version": "4.81.25101344"
+        },
+        {
+          "app_path": null,
+          "bundle_id": null,
+          "name": "licensing",
+          "package_identifier": "com.microsoft.pkg.licensing",
+          "version": "16.102.25110228"
+        }
+      ],
+      "detected": "2025-11-04T18:37:16.072006",
+      "direct_url": "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Word_16.102.25110228_Installer.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=525134",
+      "etag": "\"0xB1119005ED29183B293A32CD854974DA1232227BFDFE2012B73F70D86B1CDFB8\"",
+      "install_kb": 2582039,
+      "last_modified": "Tue, 04 Nov 2025 16:38:45 GMT",
+      "name": "Microsoft Word",
+      "num_files": 50615,
+      "package_identifier": "com.microsoft.Word",
+      "sha256": "cfe42ce805a9f082a55a1f16bc4c69e8b9aa8626e0555b27540fb0985e4b3fdd",
+      "size_bytes": 1328837397,
+      "size_mb": 1267.28,
+      "type": "application",
+      "version": "16.102.25110228"
+    },
+    {
+      "app_path": "/Applications/Microsoft Edge.app",
+      "bundle_id": "com.microsoft.edgemac",
+      "detected": "2025-11-06T21:16:51.405449",
+      "direct_url": "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/99d2f1f6-1009-4e0b-bd37-4db143a6d322/MicrosoftEdge-142.0.3595.65.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=2093504",
+      "etag": "\"jSfJrqERqMGstVCp7kr4sIQQPHs=\"",
+      "install_kb": 938892,
+      "last_modified": "Thu, 06 Nov 2025 20:42:18 GMT",
+      "name": "Microsoft Edge",
+      "num_files": 1178,
+      "package_identifier": "com.microsoft.edgemac",
+      "sha256": "da1183c6f48a8a73e3c5d86128f75d56ac375f5f5a4ba56ba41b536b803b44e9",
+      "size_bytes": 416347817,
+      "size_mb": 397.06,
+      "type": "application",
+      "version": "142.0.3595.65"
+    },
+    {
+      "app_path": "/Library/Intune/Microsoft Intune Agent.app",
+      "bundle_id": "com.microsoft.intuneMDMAgent",
+      "detected": "2025-10-31T15:51:46.540015",
+      "direct_url": "—",
+      "download_url": "—",
+      "etag": "0x8DDF46661533BAD",
+      "install_kb": 29806,
+      "last_modified": "Mon, 15 Sep 2025 14:44:31 GMT",
+      "name": "Intune Agent",
+      "num_files": 118,
+      "package_identifier": "com.microsoft.intuneMDMAgent",
+      "sha256": "—",
+      "size_bytes": 11406012,
+      "size_mb": 10.88,
+      "type": "application",
+      "version": "2508.9.0"
+    },
+    {
+      "app_path": "/Applications/Microsoft 365 Copilot.app",
+      "bundle_id": "com.microsoft.m365copilot",
+      "component_count": 1,
+      "components": [
+        {
+          "app_path": "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app",
+          "bundle_id": "com.microsoft.autoupdate2",
+          "name": "Microsoft AutoUpdate",
+          "package_identifier": "com.microsoft.package.Microsoft_AutoUpdate.app",
+          "version": "4.79.25033028"
+        }
+      ],
+      "detected": "2025-11-06T12:04:45.700594",
+      "direct_url": "https://m365copilotformac.blob.core.windows.net/releases/Microsoft_365_Copilot_universal_1.2511.0301_Installer.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=2325438",
+      "etag": "0x8DE1D2334402A3C",
+      "install_kb": 1124954,
+      "last_modified": "Thu, 06 Nov 2025 10:56:57 GMT",
+      "name": "M365 Copilot",
+      "num_files": 1590,
+      "package_identifier": "com.microsoft.m365copilot",
+      "sha256": "c8825287e10bd09bb735dd3b9fcef8f85e201fcea22fc0865ea25f934f06c0c0",
+      "size_bytes": 336109295,
+      "size_mb": 320.54,
+      "type": "application",
+      "version": "1.2511.0301"
+    },
+    {
+      "component_count": 9,
+      "components": [
+        {
+          "app_path": "/Applications/OneDrive.app",
+          "bundle_id": "com.microsoft.OneDrive",
+          "name": "OneDrive",
+          "package_identifier": "com.microsoft.OneDrive",
+          "version": "24.244.1204"
+        },
+        {
+          "app_path": "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app",
+          "bundle_id": "com.microsoft.autoupdate2",
+          "name": "Microsoft AutoUpdate",
+          "package_identifier": "com.microsoft.package.Microsoft_AutoUpdate.app",
+          "version": "4.80.25073044"
+        },
+        {
+          "app_path": "/Applications/Microsoft Excel.app",
+          "bundle_id": "com.microsoft.Excel",
+          "name": "Microsoft Excel",
+          "package_identifier": "com.microsoft.package.Microsoft_Excel.app",
+          "version": "16.102.25101223"
+        },
+        {
+          "app_path": "/Applications/Microsoft OneNote.app",
+          "bundle_id": "com.microsoft.onenote.mac",
+          "name": "Microsoft OneNote",
+          "package_identifier": "com.microsoft.package.Microsoft_OneNote.app",
+          "version": "16.102.25101223"
+        },
+        {
+          "app_path": "/Applications/Microsoft Outlook.app",
+          "bundle_id": "com.microsoft.Outlook",
+          "name": "Microsoft Outlook",
+          "package_identifier": "com.microsoft.package.Microsoft_Outlook.app",
+          "version": "16.102.25101223"
+        },
+        {
+          "app_path": "/Applications/Microsoft PowerPoint.app",
+          "bundle_id": "com.microsoft.Powerpoint",
+          "name": "Microsoft PowerPoint",
+          "package_identifier": "com.microsoft.package.Microsoft_PowerPoint.app",
+          "version": "16.102.25101223"
+        },
+        {
+          "app_path": "/Applications/Microsoft Word.app",
+          "bundle_id": "com.microsoft.Word",
+          "name": "Microsoft Word",
+          "package_identifier": "com.microsoft.package.Microsoft_Word.app",
+          "version": "16.102.25101223"
+        },
+        {
+          "app_path": null,
+          "bundle_id": null,
+          "name": "licensing",
+          "package_identifier": "com.microsoft.pkg.licensing",
+          "version": "16.102.25101223"
+        },
+        {
+          "app_path": "/private/tmp/com.microsoft.wdav.shim/Microsoft Defender Shim.app/Contents/MacOS/Microsoft Defender Shim.app",
+          "bundle_id": "com.microsoft.wdav.shim",
+          "name": "Microsoft Defender Shim",
+          "package_identifier": "com.microsoft.wdav.shim",
+          "version": "101.24080.0001"
+        }
+      ],
+      "detected": "2025-10-31T12:49:58.303758",
+      "direct_url": "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_365_and_Office_16.102.25101223_Installer.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=525133",
+      "etag": "\"0x922CCB95DFC3397043CC4731A3B2E36325DE6EB5948D3384FC4C1924A0D6F100\"",
+      "last_modified": "Tue, 14 Oct 2025 20:17:37 GMT",
+      "name": "Office 365 for Mac",
+      "package_identifier": "com.microsoft.office.suite",
+      "sha256": "dcd0571a4c641e831c6db331c136eca514791119c1ffc30403c11d7aaad9df95",
+      "size_bytes": 2676884454,
+      "size_mb": 2552.88,
+      "type": "application",
+      "version": "16.102.25101223"
+    },
+    {
+      "app_path": "/Applications/Microsoft OneNote.app",
+      "bundle_id": "com.microsoft.onenote.mac",
+      "detected": "2025-11-04T18:37:55.959811",
+      "direct_url": "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_OneNote_16.102.25110228_Updater.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=820886",
+      "etag": "\"0x74CF3EBB956D7287472C0F30872E140CCCF5F46CE8230CA0D32A9293C55F66A2\"",
+      "install_kb": 1365042,
+      "last_modified": "Tue, 04 Nov 2025 16:42:21 GMT",
+      "name": "Microsoft OneNote",
+      "num_files": 22286,
+      "package_identifier": "com.microsoft.onenote.mac",
+      "sha256": "6b3cc8305cdcebcf1de403939005afabd17cc1d76e61d590b81a743444c4e7c1",
+      "size_bytes": 617043637,
+      "size_mb": 588.46,
+      "type": "application",
+      "version": "16.102.25110228"
+    },
+    {
+      "app_path": "/Applications/Windows App.app",
+      "bundle_id": "com.microsoft.rdc.macos",
+      "component_count": 1,
+      "components": [
+        {
+          "app_path": "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app",
+          "bundle_id": "com.microsoft.autoupdate2",
+          "name": "Microsoft AutoUpdate",
+          "package_identifier": "com.microsoft.package.Microsoft_AutoUpdate.app",
+          "version": "4.77.24121924"
+        }
+      ],
+      "detected": "2025-11-03T23:50:37.257950",
+      "direct_url": "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Windows_App_11.2.7_installer.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=868963",
+      "etag": "\"0x463F34602F55CE9AAD7936518A7236663B9110B3F483B9220B327F0735349C80\"",
+      "install_kb": 263359,
+      "last_modified": "Mon, 03 Nov 2025 22:13:41 GMT",
+      "name": "Windows App",
+      "num_files": 403,
+      "package_identifier": "com.microsoft.rdc.macos",
+      "sha256": "6d69e9d5ab2bdeb2efd63ceb70af423fe6362397390a4b30ecb0f1e60bcbd4cc",
+      "size_bytes": 139320768,
+      "size_mb": 132.87,
+      "type": "application",
+      "version": "11.2.7"
+    },
+    {
+      "app_path": "/Applications/Microsoft Teams.app",
+      "bundle_id": "com.microsoft.teams2",
+      "component_count": 2,
+      "components": [
+        {
+          "app_path": null,
+          "bundle_id": null,
+          "name": "MSTeamsAudioDevice",
+          "package_identifier": "com.microsoft.MSTeamsAudioDevice",
+          "version": "2025.30.0"
+        },
+        {
+          "app_path": "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app",
+          "bundle_id": "com.microsoft.autoupdate2",
+          "name": "Microsoft AutoUpdate",
+          "package_identifier": "com.microsoft.package.Microsoft_AutoUpdate.app",
+          "version": "4.80.25073044"
+        }
+      ],
+      "detected": "2025-11-06T07:03:55.076600",
+      "direct_url": "https://statics.teams.cdn.office.net/production-osx/enterprise/webview2/lkg/MicrosoftTeams.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=2249065",
+      "etag": "\"0x8DE1CA4D494F919\"",
+      "install_kb": 1186900,
+      "last_modified": "Wed, 05 Nov 2025 19:52:19 GMT",
+      "name": "Microsoft Teams",
+      "num_files": 1197,
+      "package_identifier": "com.microsoft.teams2",
+      "sha256": "0d7f4ed037e0ed8832e1892f0587e0e336abbc0e6376059bfcb58f278ffcab48",
+      "size_bytes": 381532736,
+      "size_mb": 363.86,
+      "type": "application",
+      "version": "25290.302.4044.3989"
+    },
+    {
+      "app_path": "/Applications/Microsoft Defender.app",
+      "bundle_id": "com.microsoft.wdav",
+      "component_count": 4,
+      "components": [
+        {
+          "app_path": "/Library/Application Support/Microsoft/DLP/com.microsoft.dlp.agent.app",
+          "bundle_id": "com.microsoft.dlp.agent",
+          "name": "com.microsoft.dlp.agent",
+          "package_identifier": "com.microsoft.dlp.agent",
+          "version": "1.25082.101"
+        },
+        {
+          "app_path": "/Library/Application Support/Microsoft/DLP/com.microsoft.dlp.daemon.app",
+          "bundle_id": "com.microsoft.dlp.daemon",
+          "name": "com.microsoft.dlp.daemon",
+          "package_identifier": "com.microsoft.dlp.daemon",
+          "version": "1.25082.101"
+        },
+        {
+          "app_path": "/Library/Application Support/Microsoft/DLP/com.microsoft.dlp.ux.app",
+          "bundle_id": "com.microsoft.dlp.ux",
+          "name": "com.microsoft.dlp.ux",
+          "package_identifier": "com.microsoft.dlp.ux",
+          "version": "1.25082.101"
+        },
+        {
+          "app_path": "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app",
+          "bundle_id": "com.microsoft.autoupdate2",
+          "name": "Microsoft AutoUpdate",
+          "package_identifier": "com.microsoft.package.Microsoft_AutoUpdate.app",
+          "version": "4.79.25033028"
+        }
+      ],
+      "detected": "2025-10-31T12:49:26.525464",
+      "direct_url": "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/wdav.pkg",
+      "download_url": "https://go.microsoft.com/fwlink/?linkid=2097502",
+      "etag": "\"0x41CB1E7FD71CCB4BE14FA39552B5A6EF8FFE0434FBBB559781C214CDD7EF99F5\"",
+      "install_kb": 1143275,
+      "last_modified": "Mon, 06 Oct 2025 23:20:27 GMT",
+      "name": "Defender for Mac",
+      "num_files": 1433,
+      "package_identifier": "com.microsoft.wdav",
+      "sha256": "b8f06f2b4ad0b2b0697fac6bef18c5aa280dc05efa8276038c8f90b8c7dbac92",
+      "size_bytes": 424936245,
+      "size_mb": 405.25,
+      "type": "application",
+      "version": "101.25082.0006"
+    }
+  ],
+  "generated": "2025-11-08 20:01:19"
+}
