@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0](https://github.com/deploymenttheory/go-api-sdk-apple/compare/v0.2.0...v0.3.0) (2025-11-09)
+
+
+### Features
+
+* add microsoft_mac_apps_version_tracker ([0ea6555](https://github.com/deploymenttheory/go-api-sdk-apple/commit/0ea65555a7012c48901a4d10466f7e6f9bcd1eee))
+* added func Get AppleCare Coverage Information for a Device with tests and examples ([0f0d252](https://github.com/deploymenttheory/go-api-sdk-apple/commit/0f0d2521f48d053960ee5e54f064d038297b37e4))
+
 ## [0.2.0](https://github.com/deploymenttheory/go-api-sdk-apple/compare/v0.1.1...v0.2.0) (2025-10-22)
 
 
