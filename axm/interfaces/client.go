@@ -16,10 +16,10 @@ type HTTPClient interface {
 	Delete(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, result any) error
 	DeleteWithBody(ctx context.Context, path string, body any, headers map[string]string, result any) error
 	PostMultipart(ctx context.Context, path string, files map[string]string, fields map[string]string, result any) error
-	GetPaginated(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, result any) error
-	GetNextPage(ctx context.Context, nextURL string, headers map[string]string, result any) error
-	GetAllPages(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, processPage func([]byte) error) error
 	QueryBuilder() ServiceQueryBuilder
+	
+	// Pagination method - loops through all pages, calling mergePage callback for each
+	GetPaginated(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, mergePage func(pageData []byte) error) error
 }
 
 // ServiceQueryBuilder defines the query builder contract for services

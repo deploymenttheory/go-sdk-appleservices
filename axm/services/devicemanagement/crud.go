@@ -2,6 +2,7 @@ package devicemanagement
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/interfaces"
@@ -93,13 +94,24 @@ func (s *DeviceManagementService) GetDeviceManagementServices(ctx context.Contex
 		"Content-Type": "application/json",
 	}
 
-	var result ResponseMDMServers
-	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, &result)
+	var allServers []MDMServer
+
+	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, func(pageData []byte) error {
+		var pageResponse ResponseMDMServers
+		if err := json.Unmarshal(pageData, &pageResponse); err != nil {
+			return fmt.Errorf("failed to unmarshal page: %w", err)
+		}
+		allServers = append(allServers, pageResponse.Data...)
+		return nil
+	})
+
 	if err != nil {
 		return nil, err
 	}
 
-	return &result, nil
+	return &ResponseMDMServers{
+		Data: allServers,
+	}, nil
 }
 
 // GetDeviceSerialNumbersForDeviceManagementService retrieves a list of device IDs assigned to an MDM server
@@ -130,14 +142,24 @@ func (s *DeviceManagementService) GetDeviceSerialNumbersForDeviceManagementServi
 		queryParams.AddInt("limit", opts.Limit)
 	}
 
-	var result ResponseMDMServerDevicesLinkages
+	var allDevices []MDMServerDeviceLinkage
 
-	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, &result)
+	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, func(pageData []byte) error {
+		var pageResponse ResponseMDMServerDevicesLinkages
+		if err := json.Unmarshal(pageData, &pageResponse); err != nil {
+			return fmt.Errorf("failed to unmarshal page: %w", err)
+		}
+		allDevices = append(allDevices, pageResponse.Data...)
+		return nil
+	})
+
 	if err != nil {
 		return nil, err
 	}
 
-	return &result, nil
+	return &ResponseMDMServerDevicesLinkages{
+		Data: allDevices,
+	}, nil
 }
 
 // GetAssignedDeviceManagementServiceIDForADevice retrieves the assigned device management service ID linkage for a device

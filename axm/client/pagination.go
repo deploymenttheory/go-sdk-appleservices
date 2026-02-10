@@ -48,31 +48,47 @@ func (opts *PaginationOptions) AddToQueryBuilder(qb interfaces.ServiceQueryBuild
 		AddString("cursor", opts.Cursor)
 }
 
-// GetPaginated executes a paginated GET request
-func (c *Client) GetPaginated(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, result any) error {
-	return c.Get(ctx, path, queryParams, headers, result)
-}
+// GetPaginated executes a paginated GET request, automatically looping through all pages.
+// The mergePage callback receives raw JSON for each page and handles unmarshaling and merging.
+func (c *Client) GetPaginated(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, mergePage func(pageData []byte) error) error {
+	currentParams := make(map[string]string)
+	maps.Copy(currentParams, queryParams)
 
-// GetNextPage extracts the next page URL from links and makes a request
-func (c *Client) GetNextPage(ctx context.Context, nextURL string, headers map[string]string, result any) error {
-	if nextURL == "" {
-		return fmt.Errorf("no next page URL provided")
-	}
-
-	parsedURL, err := url.Parse(nextURL)
-	if err != nil {
-		return fmt.Errorf("failed to parse next URL: %w", err)
-	}
-
-	queryParams := make(map[string]string)
-	for key, values := range parsedURL.Query() {
-		if len(values) > 0 {
-			queryParams[key] = values[0]
+	for {
+		var rawResponse json.RawMessage
+		err := c.Get(ctx, path, currentParams, headers, &rawResponse)
+		if err != nil {
+			return err
 		}
+
+		// CRUD function handles unmarshaling and merging
+		if err := mergePage(rawResponse); err != nil {
+			return err
+		}
+
+		// Extract pagination info to check for next page
+		var pageInfo struct {
+			Links *Links `json:"links,omitempty"`
+		}
+		if err := json.Unmarshal(rawResponse, &pageInfo); err != nil {
+			return fmt.Errorf("failed to parse pagination info: %w", err)
+		}
+
+		// No more pages available
+		if !HasNextPage(pageInfo.Links) {
+			break
+		}
+
+		// Extract parameters from next page URL
+		nextParams, err := extractParamsFromURL(pageInfo.Links.Next)
+		if err != nil {
+			return fmt.Errorf("failed to parse next URL: %w", err)
+		}
+
+		maps.Copy(currentParams, nextParams)
 	}
 
-	// Make the request using the path and extracted parameters
-	return c.Get(ctx, parsedURL.Path, queryParams, headers, result)
+	return nil
 }
 
 // HasNextPage checks if there is a next page available
@@ -83,44 +99,6 @@ func HasNextPage(links *Links) bool {
 // HasPrevPage checks if there is a previous page available
 func HasPrevPage(links *Links) bool {
 	return links != nil && links.Prev != ""
-}
-
-// GetAllPages retrieves all pages of results by following pagination links
-func (c *Client) GetAllPages(ctx context.Context, path string, queryParams map[string]string, headers map[string]string, processPage func([]byte) error) error {
-	currentParams := make(map[string]string)
-	maps.Copy(currentParams, queryParams)
-
-	for {
-		var rawResponse json.RawMessage
-		err := c.GetPaginated(ctx, path, currentParams, headers, &rawResponse)
-		if err != nil {
-			return err
-		}
-
-		if err := processPage(rawResponse); err != nil {
-			return err
-		}
-
-		var pageInfo struct {
-			Links *Links `json:"links,omitempty"`
-		}
-		if err := json.Unmarshal(rawResponse, &pageInfo); err != nil {
-			return fmt.Errorf("failed to parse pagination info: %w", err)
-		}
-
-		if !HasNextPage(pageInfo.Links) {
-			break
-		}
-
-		nextParams, err := extractParamsFromURL(pageInfo.Links.Next)
-		if err != nil {
-			return fmt.Errorf("failed to parse next URL: %w", err)
-		}
-
-		maps.Copy(currentParams, nextParams)
-	}
-
-	return nil
 }
 
 // extractParamsFromURL extracts query parameters from a URL string

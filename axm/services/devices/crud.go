@@ -2,6 +2,7 @@ package devices
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/interfaces"
@@ -78,14 +79,24 @@ func (s *DevicesService) GetOrganizationDevices(ctx context.Context, opts *Reque
 		queryParams.AddInt("limit", opts.Limit)
 	}
 
-	var result OrgDevicesResponse
+	var allDevices []OrgDevice
 
-	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, &result)
+	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, func(pageData []byte) error {
+		var pageResponse OrgDevicesResponse
+		if err := json.Unmarshal(pageData, &pageResponse); err != nil {
+			return fmt.Errorf("failed to unmarshal page: %w", err)
+		}
+		allDevices = append(allDevices, pageResponse.Data...)
+		return nil
+	})
+
 	if err != nil {
 		return nil, err
 	}
 
-	return &result, nil
+	return &OrgDevicesResponse{
+		Data: allDevices,
+	}, nil
 }
 
 // GetDeviceInformationByDeviceID retrieves information about a specific device in an organization
@@ -155,12 +166,22 @@ func (s *DevicesService) GetAppleCareInformationByDeviceID(ctx context.Context, 
 		queryParams.AddInt("limit", opts.Limit)
 	}
 
-	var result AppleCareCoverageResponse
+	var allCoverage []AppleCareCoverage
 
-	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, &result)
+	err := s.client.GetPaginated(ctx, endpoint, queryParams.Build(), headers, func(pageData []byte) error {
+		var pageResponse AppleCareCoverageResponse
+		if err := json.Unmarshal(pageData, &pageResponse); err != nil {
+			return fmt.Errorf("failed to unmarshal page: %w", err)
+		}
+		allCoverage = append(allCoverage, pageResponse.Data...)
+		return nil
+	})
+
 	if err != nil {
 		return nil, err
 	}
 
-	return &result, nil
+	return &AppleCareCoverageResponse{
+		Data: allCoverage,
+	}, nil
 }
