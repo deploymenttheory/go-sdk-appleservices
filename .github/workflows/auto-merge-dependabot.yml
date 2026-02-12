@@ -1,25 +1,32 @@
 name: Auto-Merge Dependabot
 
+
 on:
   pull_request:
+    branches: [main]
+
+permissions:
+  pull-requests: write
+  contents: write
 
 jobs:
-  auto-merge:
+  dependabot-merge:
     name: '🤖 Auto-Merge Dependabot'
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+
+    if: ${{ github.actor == 'dependabot[bot]' }}
+
     steps:
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@21025c705c08248db411dc16f3619e6b5f9ea21a # v2.5.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Harden Runner
-        uses: step-security/harden-runner@v2.14.0
-        with:
-          egress-policy: audit
-
-      - uses: actions/checkout@v6.0.1
-        with:
-          fetch-depth: 0
-          
-      - uses: ahmadnassri/action-dependabot-auto-merge@v2.6.6
-        with:
-          target: minor
-          github-token: ${{ secrets.DEPENDABOT_PAT }}
+      - name: Enable auto-merge for Dependabot PRs
+        # Only if version bump is not a major version change
+        if: ${{steps.metadata.outputs.update-type != 'version-update:semver-major'}}
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
