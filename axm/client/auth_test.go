@@ -96,7 +96,7 @@ func TestJWTAuth_GenerateClientAssertion_ECDSA(t *testing.T) {
 	}
 
 	// Parse the JWT to verify structure
-	token, err := jwt.Parse(assertion, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.Parse(assertion, func(token *jwt.Token) (any, error) {
 		return &privateKey.PublicKey, nil
 	})
 
@@ -157,7 +157,7 @@ func TestJWTAuth_GenerateClientAssertion_RSA(t *testing.T) {
 	}
 
 	// Parse the JWT to verify structure
-	token, err := jwt.Parse(assertion, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.Parse(assertion, func(token *jwt.Token) (any, error) {
 		return &privateKey.PublicKey, nil
 	})
 
@@ -490,18 +490,18 @@ func TestJWTAuth_GenerateClientAssertion_ExpirationTime(t *testing.T) {
 	}
 
 	claims := token.Claims.(jwt.MapClaims)
-	
+
 	exp, ok := claims["exp"].(float64)
 	if !ok {
 		t.Fatal("exp claim is not numeric")
 	}
 
 	expTime := time.Unix(int64(exp), 0)
-	
+
 	// Should expire in approximately 180 days
 	expectedExpiration := beforeGeneration.Add(180 * 24 * time.Hour)
 	diff := expTime.Sub(expectedExpiration).Abs()
-	
+
 	// Allow 1 minute variance for test execution time
 	if diff > time.Minute {
 		t.Errorf("Expiration time differs from expected by %v", diff)

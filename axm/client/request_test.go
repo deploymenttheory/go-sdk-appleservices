@@ -233,7 +233,7 @@ func TestClient_HTTPError(t *testing.T) {
 	client := setupMockClient(t)
 
 	httpmock.RegisterResponder("GET", "https://api-business.apple.com/v1/test",
-		httpmock.NewJsonResponderOrPanic(404, map[string]interface{}{
+		httpmock.NewJsonResponderOrPanic(404, map[string]any{
 			"errors": []map[string]string{
 				{
 					"status": "404",
@@ -433,7 +433,7 @@ func TestClient_HTTPErrorStatuses(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			client := setupMockClient(t)
 
-			errorResponse := map[string]interface{}{
+			errorResponse := map[string]any{
 				"errors": []map[string]string{
 					{
 						"status": string(rune(tt.statusCode)),
