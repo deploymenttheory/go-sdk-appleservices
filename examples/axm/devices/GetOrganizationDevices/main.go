@@ -45,7 +45,7 @@ mdH5iVYM8fVK1mAAk1ewo3YWlhz2GEGuox04Ng5xVrpotMQXo2WQEi9C
 		Limit: 5, // Limit to 5 devices for this example
 	}
 
-	response, err := client.Devices.GetOrganizationDevices(ctx, options)
+	response, err := client.Devices.GetOrganizationDevicesV1(ctx, options)
 	if err != nil {
 		log.Fatalf("Error getting devices: %v", err)
 	}

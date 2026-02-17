@@ -46,7 +46,7 @@ your-abm-api-key
 		Limit: 5,
 	}
 
-	devicesResponse, err := client.Devices.GetOrganizationDevices(ctx, listOptions)
+	devicesResponse, err := client.Devices.GetOrganizationDevicesV1(ctx, listOptions)
 	if err != nil {
 		log.Fatalf("Error getting organization devices: %v", err)
 	}
@@ -80,7 +80,7 @@ your-abm-api-key
 		Limit: 100,
 	}
 
-	coverageInfo, err := client.Devices.GetAppleCareInformationByDeviceID(ctx, deviceID, allFieldsOptions)
+	coverageInfo, err := client.Devices.GetAppleCareInformationByDeviceIDV1(ctx, deviceID, allFieldsOptions)
 	if err != nil {
 		log.Fatalf("Error getting AppleCare coverage information: %v", err)
 	}
@@ -132,7 +132,7 @@ your-abm-api-key
 		},
 	}
 
-	specificCoverageInfo, err := client.Devices.GetAppleCareInformationByDeviceID(ctx, deviceID, specificFieldsOptions)
+	specificCoverageInfo, err := client.Devices.GetAppleCareInformationByDeviceIDV1(ctx, deviceID, specificFieldsOptions)
 	if err != nil {
 		log.Printf("Error getting specific AppleCare coverage information: %v", err)
 	} else {
@@ -149,7 +149,7 @@ your-abm-api-key
 	// Example 3: Get AppleCare coverage with no field filtering (all fields)
 	fmt.Println("\n=== Example 3: Get AppleCare Coverage (No Field Filtering) ===")
 
-	noFilterCoverageInfo, err := client.Devices.GetAppleCareInformationByDeviceID(ctx, deviceID, nil)
+	noFilterCoverageInfo, err := client.Devices.GetAppleCareInformationByDeviceIDV1(ctx, deviceID, nil)
 	if err != nil {
 		log.Printf("Error getting unfiltered AppleCare coverage information: %v", err)
 	} else {
@@ -219,7 +219,7 @@ your-abm-api-key
 	fmt.Println("\n=== Example 6: Error Handling (Non-existent Device) ===")
 
 	fakeDeviceID := "non-existent-device-id"
-	_, err = client.Devices.GetAppleCareInformationByDeviceID(ctx, fakeDeviceID, nil)
+	_, err = client.Devices.GetAppleCareInformationByDeviceIDV1(ctx, fakeDeviceID, nil)
 	if err != nil {
 		fmt.Printf("Expected error for non-existent device: %v\n", err)
 	}
@@ -283,7 +283,7 @@ your-abm-api-key
 		for i, dev := range devicesResponse.Data[:min(3, len(devicesResponse.Data))] {
 			fmt.Printf("Device %d (Serial: %s):\n", i+1, dev.Attributes.SerialNumber)
 
-			coverage, err := client.Devices.GetAppleCareInformationByDeviceID(ctx, dev.ID, &devices.RequestQueryOptions{
+			coverage, err := client.Devices.GetAppleCareInformationByDeviceIDV1(ctx, dev.ID, &devices.RequestQueryOptions{
 				Fields: []string{
 					devices.FieldAppleCareDescription,
 					devices.FieldAppleCareStatus,

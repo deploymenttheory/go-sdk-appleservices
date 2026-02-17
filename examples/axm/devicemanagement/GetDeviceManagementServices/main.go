@@ -37,7 +37,7 @@ your-abm-api-key
 	// Example 1: Get all MDM servers with default options
 	fmt.Println("\n=== Example 1: Get All MDM Servers (Default Options) ===")
 
-	response, err := client.DeviceManagement.GetDeviceManagementServices(ctx, nil)
+	response, err := client.DeviceManagement.GetDeviceManagementServicesV1(ctx, nil)
 	if err != nil {
 		log.Printf("Error getting MDM servers: %v", err)
 	} else {
@@ -78,7 +78,7 @@ your-abm-api-key
 		Limit: 10,
 	}
 
-	response, err = client.DeviceManagement.GetDeviceManagementServices(ctx, options)
+	response, err = client.DeviceManagement.GetDeviceManagementServicesV1(ctx, options)
 	if err != nil {
 		log.Printf("Error getting MDM servers with options: %v", err)
 	} else {
@@ -105,7 +105,7 @@ your-abm-api-key
 		Limit: 5,
 	}
 
-	paginatedResponse, err := client.DeviceManagement.GetDeviceManagementServices(ctx, paginationOptions)
+	paginatedResponse, err := client.DeviceManagement.GetDeviceManagementServicesV1(ctx, paginationOptions)
 	if err != nil {
 		log.Printf("Error getting paginated MDM servers: %v", err)
 	} else {
@@ -136,7 +136,7 @@ your-abm-api-key
 		},
 	}
 
-	allFieldsResponse, err := client.DeviceManagement.GetDeviceManagementServices(ctx, allFieldsOptions)
+	allFieldsResponse, err := client.DeviceManagement.GetDeviceManagementServicesV1(ctx, allFieldsOptions)
 	if err != nil {
 		log.Printf("Error getting MDM servers with all fields: %v", err)
 	} else {
@@ -176,7 +176,7 @@ your-abm-api-key
 		Limit: 5000, // This will be capped at 1000
 	}
 
-	largeResponse, err := client.DeviceManagement.GetDeviceManagementServices(ctx, largeOptions)
+	largeResponse, err := client.DeviceManagement.GetDeviceManagementServicesV1(ctx, largeOptions)
 	if err != nil {
 		log.Printf("Error with large limit: %v", err)
 	} else {

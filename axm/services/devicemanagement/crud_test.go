@@ -19,17 +19,19 @@ func setupMockClient(t *testing.T) *DeviceManagementService {
 	// Create a mock auth provider
 	mockAuth := &MockAuthProvider{}
 
-	// Create client config
-	config := client.Config{
-		BaseURL:    "https://api-business.apple.com/v1",
-		Auth:       mockAuth,
-		Logger:     zap.NewNop(),
-		Debug:      false,
-		RetryCount: 0, // Disable retries for tests
-	}
+	// Create dummy private key for testing (using a mock)
+	// We'll override auth with our mock provider
+	dummyKey := "dummy-key"
 
-	// Create core client
-	coreClient, err := client.NewTransport(config)
+	// Create core client with mock auth override
+	coreClient, err := client.NewTransport(
+		"test-key-id",
+		"test-issuer-id",
+		dummyKey,
+		client.WithAuth(mockAuth),
+		client.WithLogger(zap.NewNop()),
+		client.WithRetryCount(0), // Disable retries for tests
+	)
 	require.NoError(t, err)
 
 	// Activate httpmock for the client's HTTP client
@@ -64,7 +66,7 @@ func TestGetDeviceManagementServices_Success(t *testing.T) {
 		Limit:  100,
 	}
 
-	result, err := client.GetDeviceManagementServices(ctx, opts)
+	result, err := client.GetDeviceManagementServicesV1(ctx, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -103,7 +105,7 @@ func TestGetDeviceManagementServices_WithNilOptions(t *testing.T) {
 
 	ctx := context.Background()
 
-	result, err := client.GetDeviceManagementServices(ctx, nil)
+	result, err := client.GetDeviceManagementServicesV1(ctx, nil)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -123,7 +125,7 @@ func TestGetDeviceManagementServices_WithLimitEnforcement(t *testing.T) {
 		Limit: 1500, // Exceeds API maximum of 1000
 	}
 
-	result, err := client.GetDeviceManagementServices(ctx, opts)
+	result, err := client.GetDeviceManagementServicesV1(ctx, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -144,7 +146,7 @@ func TestGetDeviceManagementServices_HTTPError(t *testing.T) {
 	ctx := context.Background()
 	opts := &RequestQueryOptions{}
 
-	result, err := client.GetDeviceManagementServices(ctx, opts)
+	result, err := client.GetDeviceManagementServicesV1(ctx, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -164,7 +166,7 @@ func TestGetDeviceSerialNumbersForDeviceManagementService_Success(t *testing.T) 
 		Limit: 100,
 	}
 
-	result, err := client.GetDeviceSerialNumbersForDeviceManagementService(ctx, serverID, opts)
+	result, err := client.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, serverID, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -191,7 +193,7 @@ func TestGetDeviceSerialNumbersForDeviceManagementService_EmptyServerID(t *testi
 	ctx := context.Background()
 	opts := &RequestQueryOptions{}
 
-	result, err := client.GetDeviceSerialNumbersForDeviceManagementService(ctx, "", opts)
+	result, err := client.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, "", opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -210,7 +212,7 @@ func TestGetDeviceSerialNumbersForDeviceManagementService_WithNilOptions(t *test
 	ctx := context.Background()
 	serverID := "1F97349736CF4614A94F624E705841AD"
 
-	result, err := client.GetDeviceSerialNumbersForDeviceManagementService(ctx, serverID, nil)
+	result, err := client.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, serverID, nil)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -228,7 +230,7 @@ func TestGetAssignedDeviceManagementServiceIDForADevice_Success(t *testing.T) {
 	ctx := context.Background()
 	deviceID := "DVVS36G1YD3JKQNI"
 
-	result, err := client.GetAssignedDeviceManagementServiceIDForADevice(ctx, deviceID)
+	result, err := client.GetAssignedDeviceManagementServiceIDForADeviceV1(ctx, deviceID)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -253,7 +255,7 @@ func TestGetAssignedDeviceManagementServiceIDForADevice_EmptyDeviceID(t *testing
 
 	ctx := context.Background()
 
-	result, err := client.GetAssignedDeviceManagementServiceIDForADevice(ctx, "")
+	result, err := client.GetAssignedDeviceManagementServiceIDForADeviceV1(ctx, "")
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -275,7 +277,7 @@ func TestGetAssignedDeviceManagementServiceInformationByDeviceID_Success(t *test
 		Fields: []string{FieldServerName, FieldServerType},
 	}
 
-	result, err := client.GetAssignedDeviceManagementServiceInformationByDeviceID(ctx, deviceID, opts)
+	result, err := client.GetAssignedDeviceManagementServiceInformationByDeviceIDV1(ctx, deviceID, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -308,7 +310,7 @@ func TestGetAssignedDeviceManagementServiceInformationByDeviceID_EmptyDeviceID(t
 	ctx := context.Background()
 	opts := &RequestQueryOptions{}
 
-	result, err := client.GetAssignedDeviceManagementServiceInformationByDeviceID(ctx, "", opts)
+	result, err := client.GetAssignedDeviceManagementServiceInformationByDeviceIDV1(ctx, "", opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -328,7 +330,7 @@ func TestAssignDevicesToServer_Success(t *testing.T) {
 	serverID := "1F97349736CF4614A94F624E705841AD"
 	deviceIDs := []string{"XABC123X0ABC123X0", "YDEF456Y1DEF456Y1"}
 
-	result, err := client.AssignDevicesToServer(ctx, serverID, deviceIDs)
+	result, err := client.AssignDevicesToServerV1(ctx, serverID, deviceIDs)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -360,7 +362,7 @@ func TestAssignDevicesToServer_EmptyServerID(t *testing.T) {
 	ctx := context.Background()
 	deviceIDs := []string{"XABC123X0ABC123X0"}
 
-	result, err := client.AssignDevicesToServer(ctx, "", deviceIDs)
+	result, err := client.AssignDevicesToServerV1(ctx, "", deviceIDs)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -379,7 +381,7 @@ func TestAssignDevicesToServer_EmptyDeviceIDs(t *testing.T) {
 	ctx := context.Background()
 	serverID := "1F97349736CF4614A94F624E705841AD"
 
-	result, err := client.AssignDevicesToServer(ctx, serverID, []string{})
+	result, err := client.AssignDevicesToServerV1(ctx, serverID, []string{})
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -399,7 +401,7 @@ func TestUnassignDevicesFromServer_Success(t *testing.T) {
 	serverID := "1F97349736CF4614A94F624E705841AD"
 	deviceIDs := []string{"XABC123X0ABC123X0"}
 
-	result, err := client.UnassignDevicesFromServer(ctx, serverID, deviceIDs)
+	result, err := client.UnassignDevicesFromServerV1(ctx, serverID, deviceIDs)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)
@@ -427,7 +429,7 @@ func TestUnassignDevicesFromServer_EmptyServerID(t *testing.T) {
 	ctx := context.Background()
 	deviceIDs := []string{"XABC123X0ABC123X0"}
 
-	result, err := client.UnassignDevicesFromServer(ctx, "", deviceIDs)
+	result, err := client.UnassignDevicesFromServerV1(ctx, "", deviceIDs)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -446,7 +448,7 @@ func TestUnassignDevicesFromServer_EmptyDeviceIDs(t *testing.T) {
 	ctx := context.Background()
 	serverID := "1F97349736CF4614A94F624E705841AD"
 
-	result, err := client.UnassignDevicesFromServer(ctx, serverID, []string{})
+	result, err := client.UnassignDevicesFromServerV1(ctx, serverID, []string{})
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -468,7 +470,7 @@ func TestContextCancellation(t *testing.T) {
 
 	opts := &RequestQueryOptions{}
 
-	result, err := client.GetDeviceManagementServices(ctx, opts)
+	result, err := client.GetDeviceManagementServicesV1(ctx, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -490,7 +492,7 @@ func TestContextTimeout(t *testing.T) {
 
 	opts := &RequestQueryOptions{}
 
-	result, err := client.GetDeviceManagementServices(ctx, opts)
+	result, err := client.GetDeviceManagementServicesV1(ctx, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -575,7 +577,7 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 		},
 	}
 
-	result, err := client.GetDeviceManagementServices(ctx, opts)
+	result, err := client.GetDeviceManagementServicesV1(ctx, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, result)

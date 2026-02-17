@@ -19,18 +19,6 @@ type Client struct {
 	baseURL      string
 }
 
-// Config holds configuration for the client
-type Config struct {
-	BaseURL    string
-	Auth       AuthProvider
-	Logger     *zap.Logger
-	Timeout    time.Duration
-	RetryCount int
-	RetryWait  time.Duration
-	UserAgent  string
-	Debug      bool
-}
-
 // APIResponse represents the standard API response structure
 type APIResponse[T any] struct {
 	Data  []T   `json:"data"`
@@ -38,51 +26,66 @@ type APIResponse[T any] struct {
 	Links Links `json:"links"`
 }
 
-// NewTransport creates a new HTTP transport for Apple Business Manager API
-func NewTransport(config Config) (*Client, error) {
-	if config.BaseURL == "" {
-		config.BaseURL = DefaultBaseURL
+// NewTransport creates a new HTTP transport for Apple Business Manager API.
+// This is an internal function - users should use axm.NewClient() instead.
+func NewTransport(keyID, issuerID string, privateKey any, options ...ClientOption) (*Client, error) {
+	// Validate required parameters
+	if keyID == "" {
+		return nil, fmt.Errorf("keyID is required")
 	}
-	if config.Timeout == 0 {
-		config.Timeout = 30 * time.Second
+	if issuerID == "" {
+		return nil, fmt.Errorf("issuerID is required")
 	}
-	if config.RetryCount == 0 {
-		config.RetryCount = 3
-	}
-	if config.RetryWait == 0 {
-		config.RetryWait = 1 * time.Second
-	}
-	if config.UserAgent == "" {
-		config.UserAgent = "go-api-sdk-apple/3.0.0"
-	}
-	if config.Logger == nil {
-		config.Logger = zap.NewNop()
+	if privateKey == nil {
+		return nil, fmt.Errorf("privateKey is required")
 	}
 
-	if config.Auth == nil {
-		return nil, fmt.Errorf("auth provider is required")
-	}
+	logger := zap.NewNop()
 
+	// Create JWT authentication provider
+	auth := NewJWTAuth(JWTAuthConfig{
+		KeyID:      keyID,
+		IssuerID:   issuerID,
+		PrivateKey: privateKey,
+		Audience:   DefaultJWTAudience,
+		Scope:      ScopeBusinessAPI,
+	})
+
+	// Create resty HTTP client with defaults
 	httpClient := resty.New()
-
 	httpClient.
-		SetBaseURL(config.BaseURL).
-		SetTimeout(config.Timeout).
-		SetRetryCount(config.RetryCount).
-		SetRetryWaitTime(config.RetryWait).
-		SetRetryMaxWaitTime(config.RetryWait*10).
-		SetHeader("User-Agent", config.UserAgent)
+		SetBaseURL(DefaultBaseURL).
+		SetTimeout(30*time.Second).
+		SetRetryCount(3).
+		SetRetryWaitTime(1*time.Second).
+		SetRetryMaxWaitTime(10*time.Second).
+		SetHeader("User-Agent", DefaultUserAgent)
 
-	if config.Debug {
-		httpClient.SetDebug(true)
+	errorHandler := NewErrorHandler(logger)
+
+	// Create client instance
+	client := &Client{
+		httpClient:   httpClient,
+		logger:       logger,
+		auth:         auth,
+		errorHandler: errorHandler,
+		baseURL:      DefaultBaseURL,
 	}
 
+	// Apply any additional options
+	for _, option := range options {
+		if err := option(client); err != nil {
+			return nil, fmt.Errorf("failed to apply client option: %w", err)
+		}
+	}
+
+	// Setup authentication middleware (after options to use configured logger)
 	httpClient.AddRequestMiddleware(func(c *resty.Client, req *resty.Request) error {
-		if err := config.Auth.ApplyAuth(req); err != nil {
+		if err := client.auth.ApplyAuth(req); err != nil {
 			return fmt.Errorf("auth failed: %w", err)
 		}
 
-		config.Logger.Info("API request",
+		client.logger.Info("API request",
 			zap.String("method", req.Method),
 			zap.String("url", req.URL),
 		)
@@ -91,7 +94,7 @@ func NewTransport(config Config) (*Client, error) {
 	})
 
 	httpClient.AddResponseMiddleware(func(c *resty.Client, resp *resty.Response) error {
-		config.Logger.Info("API response",
+		client.logger.Info("API response",
 			zap.String("method", resp.Request.Method),
 			zap.String("url", resp.Request.URL),
 			zap.Int("status_code", resp.StatusCode()),
@@ -99,8 +102,8 @@ func NewTransport(config Config) (*Client, error) {
 		)
 
 		if resp.StatusCode() == 401 {
-			if jwtAuth, ok := config.Auth.(*JWTAuth); ok {
-				config.Logger.Info("Received 401 response, forcing JWT token refresh")
+			if jwtAuth, ok := client.auth.(*JWTAuth); ok {
+				client.logger.Info("Received 401 response, forcing JWT token refresh")
 				jwtAuth.ForceRefresh()
 			}
 		}
@@ -108,15 +111,9 @@ func NewTransport(config Config) (*Client, error) {
 		return nil
 	})
 
-	errorHandler := NewErrorHandler(config.Logger)
-
-	client := &Client{
-		httpClient:   httpClient,
-		logger:       config.Logger,
-		auth:         config.Auth,
-		errorHandler: errorHandler,
-		baseURL:      config.BaseURL,
-	}
+	client.logger.Info("Apple Business Manager API client created",
+		zap.String("issuer_id", issuerID),
+		zap.String("base_url", client.baseURL))
 
 	return client, nil
 }
@@ -144,7 +141,7 @@ func (c *Client) Close() error {
 
 // NewTransportFromEnv creates a transport using environment variables
 // Expects: APPLE_KEY_ID, APPLE_ISSUER_ID, APPLE_PRIVATE_KEY_PATH
-func NewTransportFromEnv() (*Client, error) {
+func NewTransportFromEnv(options ...ClientOption) (*Client, error) {
 	keyID := os.Getenv("APPLE_KEY_ID")
 	issuerID := os.Getenv("APPLE_ISSUER_ID")
 	privateKeyPath := os.Getenv("APPLE_PRIVATE_KEY_PATH")
@@ -164,25 +161,11 @@ func NewTransportFromEnv() (*Client, error) {
 		return nil, fmt.Errorf("failed to load private key: %w", err)
 	}
 
-	config := Config{
-		BaseURL: DefaultBaseURL,
-		Auth: NewJWTAuth(JWTAuthConfig{
-			KeyID:      keyID,
-			IssuerID:   issuerID,
-			PrivateKey: privateKey,
-			Audience:   DefaultJWTAudience,
-		}),
-		Timeout:    30 * time.Second,
-		RetryCount: 3,
-		RetryWait:  1 * time.Second,
-		UserAgent:  "go-api-sdk-apple/3.0.0",
-	}
-
-	return NewTransport(config)
+	return NewTransport(keyID, issuerID, privateKey, options...)
 }
 
 // NewTransportFromFile creates a transport using credentials from files
-func NewTransportFromFile(keyID, issuerID, privateKeyPath string) (*Client, error) {
+func NewTransportFromFile(keyID, issuerID, privateKeyPath string, options ...ClientOption) (*Client, error) {
 	if keyID == "" {
 		return nil, fmt.Errorf("keyID is required")
 	}
@@ -198,19 +181,5 @@ func NewTransportFromFile(keyID, issuerID, privateKeyPath string) (*Client, erro
 		return nil, fmt.Errorf("failed to load private key: %w", err)
 	}
 
-	config := Config{
-		BaseURL: DefaultBaseURL,
-		Auth: NewJWTAuth(JWTAuthConfig{
-			KeyID:      keyID,
-			IssuerID:   issuerID,
-			PrivateKey: privateKey,
-			Audience:   DefaultJWTAudience,
-		}),
-		Timeout:    30 * time.Second,
-		RetryCount: 3,
-		RetryWait:  1 * time.Second,
-		UserAgent:  "go-api-sdk-apple/3.0.0",
-	}
-
-	return NewTransport(config)
+	return NewTransport(keyID, issuerID, privateKey, options...)
 }

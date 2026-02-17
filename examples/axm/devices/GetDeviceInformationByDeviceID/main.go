@@ -46,7 +46,7 @@ your-abm-api-key
 		Limit: 5,
 	}
 
-	devicesResponse, err := client.Devices.GetOrganizationDevices(ctx, listOptions)
+	devicesResponse, err := client.Devices.GetOrganizationDevicesV1(ctx, listOptions)
 	if err != nil {
 		log.Fatalf("Error getting organization devices: %v", err)
 	}
@@ -80,7 +80,7 @@ your-abm-api-key
 		},
 	}
 
-	deviceInfo, err := client.Devices.GetDeviceInformationByDeviceID(ctx, deviceID, allFieldsOptions)
+	deviceInfo, err := client.Devices.GetDeviceInformationByDeviceIDV1(ctx, deviceID, allFieldsOptions)
 	if err != nil {
 		log.Fatalf("Error getting device information: %v", err)
 	}
@@ -127,7 +127,7 @@ your-abm-api-key
 		},
 	}
 
-	specificDeviceInfo, err := client.Devices.GetDeviceInformationByDeviceID(ctx, deviceID, specificFieldsOptions)
+	specificDeviceInfo, err := client.Devices.GetDeviceInformationByDeviceIDV1(ctx, deviceID, specificFieldsOptions)
 	if err != nil {
 		log.Printf("Error getting specific device information: %v", err)
 	} else {
@@ -141,7 +141,7 @@ your-abm-api-key
 	// Example 3: Get device information with no field filtering (all fields)
 	fmt.Println("\n=== Example 3: Get Device Information (No Field Filtering) ===")
 
-	noFilterDeviceInfo, err := client.Devices.GetDeviceInformationByDeviceID(ctx, deviceID, nil)
+	noFilterDeviceInfo, err := client.Devices.GetDeviceInformationByDeviceIDV1(ctx, deviceID, nil)
 	if err != nil {
 		log.Printf("Error getting unfiltered device information: %v", err)
 	} else {
@@ -153,7 +153,7 @@ your-abm-api-key
 	fmt.Println("\n=== Example 4: Error Handling (Non-existent Device) ===")
 
 	fakeDeviceID := "non-existent-device-id"
-	_, err = client.Devices.GetDeviceInformationByDeviceID(ctx, fakeDeviceID, nil)
+	_, err = client.Devices.GetDeviceInformationByDeviceIDV1(ctx, fakeDeviceID, nil)
 	if err != nil {
 		fmt.Printf("Expected error for non-existent device: %v\n", err)
 	}
@@ -176,7 +176,7 @@ your-abm-api-key
 		for i, dev := range devicesResponse.Data[:min(3, len(devicesResponse.Data))] {
 			fmt.Printf("\nDevice %d (ID: %s):\n", i+1, dev.ID)
 
-			info, err := client.Devices.GetDeviceInformationByDeviceID(ctx, dev.ID, &devices.RequestQueryOptions{
+			info, err := client.Devices.GetDeviceInformationByDeviceIDV1(ctx, dev.ID, &devices.RequestQueryOptions{
 				Fields: []string{
 					devices.FieldSerialNumber,
 					devices.FieldDeviceModel,

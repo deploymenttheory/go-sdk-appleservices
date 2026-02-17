@@ -108,10 +108,10 @@ func (j *JWTAuth) generateClientAssertion() (string, error) {
 
 	// Create client assertion claims as per Apple's OAuth 2.0 spec
 	claims := jwt.MapClaims{
-		"iss": j.issuerID,                                       // team_id (issuer)
-		"sub": j.issuerID,                                       // client_id (subject) - same as issuer for Apple
-		"aud": DefaultOAuthTokenEndpoint, // OAuth 2.0 token endpoint
-		"iat": now.Unix(),
+		"iss": j.issuerID,                           // team_id (issuer)
+		"sub": j.issuerID,                           // client_id (subject) - same as issuer for Apple
+		"aud": DefaultOAuthTokenEndpoint,            // OAuth 2.0 token endpoint
+		"iat": now.Unix(),                           // Issued at time
 		"exp": now.Add(180 * 24 * time.Hour).Unix(), // Max 180 days as per Apple docs
 		"jti": fmt.Sprintf("%d", now.UnixNano()),    // Unique identifier
 	}

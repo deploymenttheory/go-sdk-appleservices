@@ -9,6 +9,15 @@ import (
 	"resty.dev/v3"
 )
 
+// Common error types
+var (
+	ErrNoNextPage      = fmt.Errorf("no next page available")
+	ErrInvalidCursor   = fmt.Errorf("invalid pagination cursor")
+	ErrAuthFailed      = fmt.Errorf("authentication failed")
+	ErrRateLimited     = fmt.Errorf("rate limit exceeded")
+	ErrInvalidResponse = fmt.Errorf("invalid response format")
+)
+
 // APIError represents a single error from the Apple Business Manager API
 type APIError struct {
 	ID     string          `json:"id,omitempty"`
@@ -175,12 +184,3 @@ func (eh *ErrorHandler) HandleError(resp *resty.Response, errorResp *ErrorRespon
 		Detail: fmt.Sprintf("HTTP %d: %s", statusCode, http.StatusText(statusCode)),
 	}
 }
-
-// Common error types
-var (
-	ErrNoNextPage      = fmt.Errorf("no next page available")
-	ErrInvalidCursor   = fmt.Errorf("invalid pagination cursor")
-	ErrAuthFailed      = fmt.Errorf("authentication failed")
-	ErrRateLimited     = fmt.Errorf("rate limit exceeded")
-	ErrInvalidResponse = fmt.Errorf("invalid response format")
-)

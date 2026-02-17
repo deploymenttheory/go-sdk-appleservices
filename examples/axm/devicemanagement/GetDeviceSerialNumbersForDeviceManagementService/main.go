@@ -38,7 +38,7 @@ your-abm-api-key
 
 	serversResponse, err := client.
 		DeviceManagement.
-		GetDeviceManagementServices(ctx, &devicemanagement.RequestQueryOptions{
+		GetDeviceManagementServicesV1(ctx, &devicemanagement.RequestQueryOptions{
 			Limit: 5,
 		})
 	if err != nil {
@@ -64,7 +64,7 @@ your-abm-api-key
 	// Example 1: Get all device linkages for MDM server (default options)
 	fmt.Println("\n=== Example 1: Get All Device Linkages (Default Options) ===")
 
-	linkagesResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementService(ctx, mdmServerID, nil)
+	linkagesResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, nil)
 	if err != nil {
 		log.Printf("Error getting device linkages: %v", err)
 	} else {
@@ -96,7 +96,7 @@ your-abm-api-key
 		Limit: 10,
 	}
 
-	limitedResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementService(ctx, mdmServerID, limitOptions)
+	limitedResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, limitOptions)
 	if err != nil {
 		log.Printf("Error getting limited device linkages: %v", err)
 	} else {
@@ -118,7 +118,7 @@ your-abm-api-key
 		Limit: 3,
 	}
 
-	paginationResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementService(ctx, mdmServerID, smallLimitOptions)
+	paginationResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, smallLimitOptions)
 	if err != nil {
 		log.Printf("Error getting paginated device linkages: %v", err)
 	} else {
@@ -142,7 +142,7 @@ your-abm-api-key
 	fmt.Println("\n=== Example 4: Error Handling (Invalid MDM Server ID) ===")
 
 	invalidServerID := "invalid-mdm-server-id"
-	_, err = client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementService(ctx, invalidServerID, nil)
+	_, err = client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, invalidServerID, nil)
 	if err != nil {
 		fmt.Printf("Expected error for invalid MDM server ID: %v\n", err)
 	}
@@ -150,7 +150,7 @@ your-abm-api-key
 	// Example 5: Error handling - empty MDM server ID
 	fmt.Println("\n=== Example 5: Error Handling (Empty MDM Server ID) ===")
 
-	_, err = client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementService(ctx, "", nil)
+	_, err = client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, "", nil)
 	if err != nil {
 		fmt.Printf("Expected error for empty MDM server ID: %v\n", err)
 	}
@@ -162,7 +162,7 @@ your-abm-api-key
 		Limit: 1000, // API maximum
 	}
 
-	maxResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementService(ctx, mdmServerID, maxLimitOptions)
+	maxResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, maxLimitOptions)
 	if err != nil {
 		log.Printf("Error with max limit: %v", err)
 	} else {
@@ -177,7 +177,7 @@ your-abm-api-key
 		Limit: 5000, // This should be capped at 1000
 	}
 
-	cappedResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementService(ctx, mdmServerID, overMaxOptions)
+	cappedResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, overMaxOptions)
 	if err != nil {
 		log.Printf("Error with over-max limit: %v", err)
 	} else {
