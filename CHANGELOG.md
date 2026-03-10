@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1](https://github.com/deploymenttheory/go-api-sdk-apple/compare/v0.3.0...v0.3.1) (2026-02-17)
+
+
+### Bug Fixes
+
+* Apple Business Manager client methods to support optional configuration options ([d60be52](https://github.com/deploymenttheory/go-api-sdk-apple/commit/d60be52417b5d73c449a37a9b2c496f75257fab2))
+* pagination methods in client and services ([7576d4f](https://github.com/deploymenttheory/go-api-sdk-apple/commit/7576d4f9a3143dabb0c3c1ca00284030b73cb0e5))
+
 ## [0.3.0](https://github.com/deploymenttheory/go-api-sdk-apple/compare/v0.2.0...v0.3.0) (2025-11-09)
 
 
