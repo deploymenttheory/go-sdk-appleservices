@@ -13,6 +13,7 @@ import (
 
 	"github.com/jarcoal/httpmock"
 	"go.uber.org/zap"
+	"resty.dev/v3"
 )
 
 func TestNewTransport_Success(t *testing.T) {
@@ -292,6 +293,13 @@ func TestNewTransport_HTTPClientConfiguration(t *testing.T) {
 	}
 }
 
+// MockAuthProvider implements AuthProvider for testing.
+type MockAuthProvider struct{}
+
+func (m *MockAuthProvider) ApplyAuth(req *resty.Request) error {
+	return nil
+}
+
 func TestNewTransport_AuthMiddlewareSetup(t *testing.T) {
 	privateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	if err != nil {
@@ -319,9 +327,10 @@ func TestNewTransport_AuthMiddlewareSetup(t *testing.T) {
 	httpmock.RegisterResponder("GET", "https://api-business.apple.com/v1/test",
 		httpmock.NewJsonResponderOrPanic(200, map[string]string{"status": "ok"}))
 
-	// Make a request - should trigger auth middleware
+	// Make a request via NewRequest - should trigger auth middleware
 	var result map[string]string
-	_ = client.Get(context.Background(), "/v1/test", nil, nil, &result)
+	ctx := context.Background()
+	_, _ = client.NewRequest(ctx).SetResult(&result).Get("/v1/test")
 
 	// If we get here without panic, auth middleware was set up correctly
 }

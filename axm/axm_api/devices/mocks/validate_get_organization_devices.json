@@ -41,12 +41,10 @@
     }
   ],
   "links": {
-    "self": "https://api-business.apple.com/v1/orgDevices",
-    "next": "https://api-business.apple.com/v1/orgDevices?cursor=MDowOjE3NDYxMTM4OTI1OTA6MTc0NjExMzg5MjU5MDp0cnVlOmZhbHNlOjE3NDYxMTM4OTI1OTA"
+    "self": "https://api-business.apple.com/v1/orgDevices"
   },
   "meta": {
     "paging": {
-      "nextCursor": "MDowOjE3NDYxMTM4OTI1OTA6MTc0NjExMzg5MjU5MDp0cnVlOmZhbHNlOjE3NDYxMTM4OTI1OTA",
       "limit": 100
     }
   }

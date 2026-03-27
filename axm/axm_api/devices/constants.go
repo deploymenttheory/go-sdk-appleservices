@@ -1,10 +1,5 @@
 package devices
 
-// API Version
-const (
-	APIVersionV1 = "/v1"
-)
-
 // ProfileStatus constants for device profile status
 const (
 	ProfileStatusEmpty    = "empty"

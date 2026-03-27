@@ -5,74 +5,82 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/deploymenttheory/go-api-sdk-apple/axm"
-	"github.com/deploymenttheory/go-api-sdk-apple/axm/client"
-	"github.com/deploymenttheory/go-api-sdk-apple/axm/services/devices"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devices"
 )
 
 func main() {
-	fmt.Println("=== Apple Business Manager Test Example ===")
+	fmt.Println("=== Apple Business Manager - Get Organization Devices ===")
 
-	keyID := "bd4bd60b-6ddf-4fee-8f85-3ed8f6dc4bd1"
-	issuerID := "BUSINESSAPI.3bb3a62b-6f21-4802-95ad-a69b86201c5a"
+	keyID := "44f6a58a-xxxx-4cab-xxxx-d071a3c36a42"
+	issuerID := "BUSINESSAPI.3bb3a62b-xxxx-4802-xxxx-a69b86201c5a"
 	privateKeyPEM := `-----BEGIN EC PRIVATE KEY-----
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgSVST2uwXoc9Gc87H
-uqq7jYhn+PlsrtxPQebp0LeDXp2hRANCAASBtSEWU1075awq69clg4ZPNdPiAX77
-mdH5iVYM8fVK1mAAk1ewo3YWlhz2GEGuox04Ng5xVrpotMQXo2WQEi9C
+your-abm-api-key
 -----END EC PRIVATE KEY-----`
 
-	privateKey, err := client.ParsePrivateKey([]byte(privateKeyPEM))
+	privateKey, err := axm.ParsePrivateKey([]byte(privateKeyPEM))
 	if err != nil {
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	client, err := axm.NewClient(keyID, issuerID, privateKey)
+	c, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
 
 	ctx := context.Background()
 
-	fmt.Println("\nFetching organization devices...")
-
-	options := &devices.RequestQueryOptions{
+	opts := &devices.RequestQueryOptions{
 		Fields: []string{
 			devices.FieldSerialNumber,
 			devices.FieldDeviceModel,
+			devices.FieldProductFamily,
 			devices.FieldStatus,
+			devices.FieldAddedToOrgDateTime,
+			devices.FieldUpdatedDateTime,
 		},
-		Limit: 5, // Limit to 5 devices for this example
+		Limit: 100,
 	}
 
-	response, err := client.Devices.GetOrganizationDevicesV1(ctx, options)
+	response, _, err := c.AXMAPI.Devices.GetOrganizationDevicesV1(ctx, opts)
 	if err != nil {
-		log.Fatalf("Error getting devices: %v", err)
+		log.Fatalf("Error getting organization devices: %v", err)
 	}
 
-	fmt.Printf("Found %d devices:\n\n", len(response.Data))
+	fmt.Printf("Found %d devices\n", len(response.Data))
 
 	for i, device := range response.Data {
-		fmt.Printf("Device %d:\n", i+1)
+		fmt.Printf("\nDevice %d:\n", i+1)
 		fmt.Printf("  ID: %s\n", device.ID)
-		fmt.Printf("  Serial: %s\n", device.Attributes.SerialNumber)
-		fmt.Printf("  Model: %s\n", device.Attributes.DeviceModel)
-		fmt.Printf("  Status: %s\n", device.Attributes.Status)
-		fmt.Println()
+		fmt.Printf("  Type: %s\n", device.Type)
+		if device.Attributes != nil {
+			fmt.Printf("  Serial: %s\n", device.Attributes.SerialNumber)
+			fmt.Printf("  Model: %s\n", device.Attributes.DeviceModel)
+			fmt.Printf("  Family: %s\n", device.Attributes.ProductFamily)
+			fmt.Printf("  Status: %s\n", device.Attributes.Status)
+			if device.Attributes.AddedToOrgDateTime != nil {
+				fmt.Printf("  Added: %s\n", device.Attributes.AddedToOrgDateTime.Format(time.RFC3339))
+			}
+			if device.Attributes.UpdatedDateTime != nil {
+				fmt.Printf("  Updated: %s\n", device.Attributes.UpdatedDateTime.Format(time.RFC3339))
+			}
+		}
 	}
 
 	if response.Links != nil && response.Links.Next != "" {
-		fmt.Println("Note: More devices are available on additional pages.")
-		fmt.Printf("Next page URL: %s\n", response.Links.Next)
+		fmt.Printf("\nNext page: %s\n", response.Links.Next)
 	}
 
-	fmt.Println("=== Full JSON Response ===")
+	if response.Meta != nil && response.Meta.Paging != nil {
+		fmt.Printf("Pagination - Limit: %d\n", response.Meta.Paging.Limit)
+	}
+
 	jsonData, err := json.MarshalIndent(response, "", "  ")
 	if err != nil {
-		log.Printf("Error marshaling response: %v", err)
-	} else {
-		fmt.Println(string(jsonData))
+		log.Fatalf("Error marshaling response: %v", err)
 	}
-
-	fmt.Println("\n=== Test Complete ===")
+	fmt.Println("\nFull JSON response:")
+	fmt.Println(string(jsonData))
 }

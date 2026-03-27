@@ -1,18 +1,21 @@
 package axm
 
 import (
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devicemanagement"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devices"
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/client"
-	"github.com/deploymenttheory/go-api-sdk-apple/axm/services/devicemanagement"
-	"github.com/deploymenttheory/go-api-sdk-apple/axm/services/devices"
 )
 
-// Client provides unified access to all Apple Business Manager API services
+// Client is the main entry point for the Apple Business Manager API SDK.
 type Client struct {
-	*client.Client
+	transport *client.Transport
+	AXMAPI    *AXMAPIClient
+}
 
-	// Imports for services
-	DeviceManagement devicemanagement.DeviceManagementServiceInterface
-	Devices          devices.DevicesServiceInterface
+// AXMAPIClient groups all Apple Business Manager API services.
+type AXMAPIClient struct {
+	Devices          *devices.DevicesService
+	DeviceManagement *devicemanagement.DeviceManagementService
 }
 
 // NewClient creates a new Apple Business Manager client.
@@ -22,15 +25,17 @@ type Client struct {
 //   - privateKey: Your Apple Developer private key (*rsa.PrivateKey or *ecdsa.PrivateKey)
 //   - options: Optional configuration options (WithLogger, WithTimeout, etc.)
 func NewClient(keyID, issuerID string, privateKey any, options ...client.ClientOption) (*Client, error) {
-	coreClient, err := client.NewTransport(keyID, issuerID, privateKey, options...)
+	transport, err := client.NewTransport(keyID, issuerID, privateKey, options...)
 	if err != nil {
 		return nil, err
 	}
 
 	return &Client{
-		Client:           coreClient,
-		DeviceManagement: devicemanagement.NewService(coreClient),
-		Devices:          devices.NewService(coreClient),
+		transport: transport,
+		AXMAPI: &AXMAPIClient{
+			Devices:          devices.NewService(transport),
+			DeviceManagement: devicemanagement.NewService(transport),
+		},
 	}, nil
 }
 
@@ -53,14 +58,16 @@ func NewClientFromFile(keyID, issuerID, privateKeyPath string, options ...client
 // Parameters:
 //   - options: Optional configuration options (WithLogger, WithTimeout, etc.)
 func NewClientFromEnv(options ...client.ClientOption) (*Client, error) {
-	coreClient, err := client.NewTransportFromEnv(options...)
+	transport, err := client.NewTransportFromEnv(options...)
 	if err != nil {
 		return nil, err
 	}
 
 	return &Client{
-		Client:           coreClient,
-		DeviceManagement: devicemanagement.NewService(coreClient),
-		Devices:          devices.NewService(coreClient),
+		transport: transport,
+		AXMAPI: &AXMAPIClient{
+			Devices:          devices.NewService(transport),
+			DeviceManagement: devicemanagement.NewService(transport),
+		},
 	}, nil
 }

@@ -8,12 +8,11 @@ import (
 	"time"
 
 	"github.com/deploymenttheory/go-api-sdk-apple/axm"
-	"github.com/deploymenttheory/go-api-sdk-apple/axm/client"
-	"github.com/deploymenttheory/go-api-sdk-apple/axm/services/devicemanagement"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devicemanagement"
 )
 
 func main() {
-	fmt.Println("=== Apple Business Manager - Get Device Management Services Example ===")
+	fmt.Println("=== Apple Business Manager - Get Device Management Services ===")
 
 	keyID := "44f6a58a-xxxx-4cab-xxxx-d071a3c36a42"
 	issuerID := "BUSINESSAPI.3bb3a62b-xxxx-4802-xxxx-a69b86201c5a"
@@ -21,178 +20,62 @@ func main() {
 your-abm-api-key
 -----END EC PRIVATE KEY-----`
 
-	// Parse the private key
-	privateKey, err := client.ParsePrivateKey([]byte(privateKeyPEM))
+	privateKey, err := axm.ParsePrivateKey([]byte(privateKeyPEM))
 	if err != nil {
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	client, err := axm.NewClient(keyID, issuerID, privateKey)
+	c, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
 
 	ctx := context.Background()
 
-	// Example 1: Get all MDM servers with default options
-	fmt.Println("\n=== Example 1: Get All MDM Servers (Default Options) ===")
-
-	response, err := client.DeviceManagement.GetDeviceManagementServicesV1(ctx, nil)
-	if err != nil {
-		log.Printf("Error getting MDM servers: %v", err)
-	} else {
-		fmt.Printf("Found %d MDM servers\n", len(response.Data))
-
-		for i, server := range response.Data {
-			fmt.Printf("MDM Server %d:\n", i+1)
-			fmt.Printf("  ID: %s\n", server.ID)
-			fmt.Printf("  Type: %s\n", server.Type)
-			if server.Attributes != nil {
-				fmt.Printf("  Name: %s\n", server.Attributes.ServerName)
-				fmt.Printf("  Server Type: %s\n", server.Attributes.ServerType)
-				if server.Attributes.CreatedDateTime != nil {
-					fmt.Printf("  Created: %s\n", server.Attributes.CreatedDateTime.Format(time.RFC3339))
-				}
-				if server.Attributes.UpdatedDateTime != nil {
-					fmt.Printf("  Updated: %s\n", server.Attributes.UpdatedDateTime.Format(time.RFC3339))
-				}
-			}
-			fmt.Println()
-		}
-
-		// Check pagination
-		if response.Links != nil && response.Links.Next != "" {
-			fmt.Println("More MDM servers available on next page!")
-		}
-	}
-
-	// Example 2: Get MDM servers with specific fields
-	fmt.Println("\n=== Example 2: Get MDM Servers with Specific Fields ===")
-
-	options := &devicemanagement.RequestQueryOptions{
+	opts := &devicemanagement.RequestQueryOptions{
 		Fields: []string{
-			"serverName",
-			"serverType",
-			"createdDateTime",
+			devicemanagement.FieldServerName,
+			devicemanagement.FieldServerType,
+			devicemanagement.FieldCreatedDateTime,
+			devicemanagement.FieldUpdatedDateTime,
 		},
-		Limit: 10,
+		Limit: 100,
 	}
 
-	response, err = client.DeviceManagement.GetDeviceManagementServicesV1(ctx, options)
+	response, _, err := c.AXMAPI.DeviceManagement.GetDeviceManagementServicesV1(ctx, opts)
 	if err != nil {
-		log.Printf("Error getting MDM servers with options: %v", err)
-	} else {
-		fmt.Printf("Found %d MDM servers (limited to %d)\n", len(response.Data), options.Limit)
+		log.Fatalf("Error getting MDM servers: %v", err)
+	}
 
-		for i, server := range response.Data {
-			fmt.Printf("MDM Server %d:\n", i+1)
-			fmt.Printf("  ID: %s\n", server.ID)
-			if server.Attributes != nil {
-				fmt.Printf("  Name: %s\n", server.Attributes.ServerName)
-				fmt.Printf("  Type: %s\n", server.Attributes.ServerType)
-				if server.Attributes.CreatedDateTime != nil {
-					fmt.Printf("  Created: %s\n", server.Attributes.CreatedDateTime.Format(time.RFC3339))
-				}
+	fmt.Printf("Found %d MDM servers\n", len(response.Data))
+
+	for i, server := range response.Data {
+		fmt.Printf("\nMDM Server %d:\n", i+1)
+		fmt.Printf("  ID: %s\n", server.ID)
+		fmt.Printf("  Type: %s\n", server.Type)
+		if server.Attributes != nil {
+			fmt.Printf("  Name: %s\n", server.Attributes.ServerName)
+			fmt.Printf("  Server Type: %s\n", server.Attributes.ServerType)
+			if server.Attributes.CreatedDateTime != nil {
+				fmt.Printf("  Created: %s\n", server.Attributes.CreatedDateTime.Format(time.RFC3339))
 			}
-			fmt.Println()
-		}
-	}
-
-	// Example 3: Get MDM servers with pagination limit
-	fmt.Println("\n=== Example 3: Get MDM Servers with Pagination Limit ===")
-
-	paginationOptions := &devicemanagement.RequestQueryOptions{
-		Limit: 5,
-	}
-
-	paginatedResponse, err := client.DeviceManagement.GetDeviceManagementServicesV1(ctx, paginationOptions)
-	if err != nil {
-		log.Printf("Error getting paginated MDM servers: %v", err)
-	} else {
-		fmt.Printf("Retrieved %d MDM servers (limit: %d)\n", len(paginatedResponse.Data), paginationOptions.Limit)
-
-		if paginatedResponse.Links != nil && paginatedResponse.Links.Next != "" {
-			fmt.Printf("Next page available: %s\n", paginatedResponse.Links.Next)
-		}
-
-		if paginatedResponse.Meta != nil && paginatedResponse.Meta.Paging != nil {
-			fmt.Printf("Pagination info - Limit: %d\n", paginatedResponse.Meta.Paging.Limit)
-			if paginatedResponse.Meta.Paging.Total > 0 {
-				fmt.Printf("Total servers: %d\n", paginatedResponse.Meta.Paging.Total)
+			if server.Attributes.UpdatedDateTime != nil {
+				fmt.Printf("  Updated: %s\n", server.Attributes.UpdatedDateTime.Format(time.RFC3339))
 			}
 		}
-	}
-
-	// Example 4: Get all available fields
-	fmt.Println("\n=== Example 4: Get MDM Servers with All Available Fields ===")
-
-	allFieldsOptions := &devicemanagement.RequestQueryOptions{
-		Fields: []string{
-			"serverName",
-			"serverType",
-			"createdDateTime",
-			"updatedDateTime",
-			"devices",
-		},
-	}
-
-	allFieldsResponse, err := client.DeviceManagement.GetDeviceManagementServicesV1(ctx, allFieldsOptions)
-	if err != nil {
-		log.Printf("Error getting MDM servers with all fields: %v", err)
-	} else {
-		fmt.Printf("Retrieved %d MDM servers with all fields\n", len(allFieldsResponse.Data))
-
-		for i, server := range allFieldsResponse.Data {
-			fmt.Printf("Complete MDM Server %d Info:\n", i+1)
-			fmt.Printf("  ID: %s\n", server.ID)
-			fmt.Printf("  Type: %s\n", server.Type)
-
-			if server.Attributes != nil {
-				fmt.Printf("  Server Name: %s\n", server.Attributes.ServerName)
-				fmt.Printf("  Server Type: %s\n", server.Attributes.ServerType)
-
-				if server.Attributes.CreatedDateTime != nil {
-					fmt.Printf("  Created: %s\n", server.Attributes.CreatedDateTime.Format(time.RFC3339))
-				}
-
-				if server.Attributes.UpdatedDateTime != nil {
-					fmt.Printf("  Updated: %s\n", server.Attributes.UpdatedDateTime.Format(time.RFC3339))
-				}
-			}
-
-			if server.Relationships != nil && server.Relationships.Devices != nil {
-				fmt.Printf("  Devices Relationship: %+v\n", server.Relationships.Devices)
-			}
-
-			fmt.Println()
+		if server.Relationships != nil && server.Relationships.Devices != nil {
+			fmt.Printf("  Devices Link: %s\n", server.Relationships.Devices.Links.Self)
 		}
 	}
 
-	// Example 5: Error handling - test with invalid options
-	fmt.Println("\n=== Example 5: Error Handling ===")
-
-	// Test with very large limit (should be capped at 1000)
-	largeOptions := &devicemanagement.RequestQueryOptions{
-		Limit: 5000, // This will be capped at 1000
+	if response.Links != nil && response.Links.Next != "" {
+		fmt.Printf("\nNext page: %s\n", response.Links.Next)
 	}
 
-	largeResponse, err := client.DeviceManagement.GetDeviceManagementServicesV1(ctx, largeOptions)
+	jsonData, err := json.MarshalIndent(response, "", "  ")
 	if err != nil {
-		log.Printf("Error with large limit: %v", err)
-	} else {
-		fmt.Printf("Large limit test - Retrieved %d servers (requested limit was capped)\n", len(largeResponse.Data))
+		log.Fatalf("Error marshaling response: %v", err)
 	}
-
-	// Example 6: Pretty print JSON response
-	fmt.Println("\n=== Example 6: Full JSON Response ===")
-	if response != nil {
-		jsonData, err := json.MarshalIndent(response, "", "  ")
-		if err != nil {
-			log.Printf("Error marshaling response to JSON: %v", err)
-		} else {
-			fmt.Println(string(jsonData))
-		}
-	}
-
-	fmt.Println("\n=== Example Complete ===")
+	fmt.Println("\nFull JSON response:")
+	fmt.Println(string(jsonData))
 }

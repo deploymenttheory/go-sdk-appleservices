@@ -7,12 +7,11 @@ import (
 	"log"
 
 	"github.com/deploymenttheory/go-api-sdk-apple/axm"
-	"github.com/deploymenttheory/go-api-sdk-apple/axm/client"
-	"github.com/deploymenttheory/go-api-sdk-apple/axm/services/devicemanagement"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devicemanagement"
 )
 
 func main() {
-	fmt.Println("=== Apple Business Manager - Get MDM Server Device Linkages Example ===")
+	fmt.Println("=== Apple Business Manager - Get Device Serial Numbers for Device Management Service ===")
 
 	keyID := "44f6a58a-xxxx-4cab-xxxx-d071a3c36a42"
 	issuerID := "BUSINESSAPI.3bb3a62b-xxxx-4802-xxxx-a69b86201c5a"
@@ -20,181 +19,51 @@ func main() {
 your-abm-api-key
 -----END EC PRIVATE KEY-----`
 
-	// Parse the private key
-	privateKey, err := client.ParsePrivateKey([]byte(privateKeyPEM))
+	privateKey, err := axm.ParsePrivateKey([]byte(privateKeyPEM))
 	if err != nil {
 		log.Fatalf("Failed to parse private key: %v", err)
 	}
 
-	client, err := axm.NewClient(keyID, issuerID, privateKey)
+	c, err := axm.NewClient(keyID, issuerID, privateKey)
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
 
 	ctx := context.Background()
 
-	// Step 1: Get MDM servers to find an MDM server ID
-	fmt.Println("\nStep 1: Getting MDM servers to find an MDM server ID...")
+	mdmServerID := "1F97349736CF4614A94F624E705841AD"
 
-	serversResponse, err := client.
-		DeviceManagement.
-		GetDeviceManagementServicesV1(ctx, &devicemanagement.RequestQueryOptions{
-			Limit: 5,
-		})
+	opts := &devicemanagement.RequestQueryOptions{
+		Limit: 100,
+	}
+
+	response, _, err := c.AXMAPI.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, opts)
 	if err != nil {
-		log.Fatalf("Error getting MDM servers: %v", err)
+		log.Fatalf("Error getting device serial numbers: %v", err)
 	}
 
-	if len(serversResponse.Data) == 0 {
-		log.Fatalf("No MDM servers found in organization")
+	fmt.Printf("Found %d devices assigned to MDM server %s\n", len(response.Data), mdmServerID)
+
+	for i, linkage := range response.Data {
+		fmt.Printf("  %d. Device ID: %s (Type: %s)\n", i+1, linkage.ID, linkage.Type)
 	}
 
-	mdmServerID := serversResponse.Data[0].ID
-	serverName := ""
-	if serversResponse.Data[0].Attributes != nil {
-		serverName = serversResponse.Data[0].Attributes.ServerName
+	if response.Links != nil && response.Links.Next != "" {
+		fmt.Printf("\nNext page: %s\n", response.Links.Next)
 	}
 
-	fmt.Printf("Using MDM Server ID: %s", mdmServerID)
-	if serverName != "" {
-		fmt.Printf(" (Name: %s)", serverName)
+	if response.Meta != nil && response.Meta.Paging != nil {
+		fmt.Printf("\nPagination - Limit: %d", response.Meta.Paging.Limit)
+		if response.Meta.Paging.NextCursor != "" {
+			fmt.Printf(", Next Cursor: %s", response.Meta.Paging.NextCursor)
+		}
+		fmt.Println()
 	}
-	fmt.Println()
 
-	// Example 1: Get all device linkages for MDM server (default options)
-	fmt.Println("\n=== Example 1: Get All Device Linkages (Default Options) ===")
-
-	linkagesResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, nil)
+	jsonData, err := json.MarshalIndent(response, "", "  ")
 	if err != nil {
-		log.Printf("Error getting device linkages: %v", err)
-	} else {
-		fmt.Printf("Found %d device linkages for MDM server %s\n", len(linkagesResponse.Data), mdmServerID)
-
-		for i, linkage := range linkagesResponse.Data {
-			fmt.Printf("Device Linkage %d:\n", i+1)
-			fmt.Printf("  Type: %s\n", linkage.Type)
-			fmt.Printf("  Device ID: %s\n", linkage.ID)
-		}
-
-		if linkagesResponse.Links != nil && linkagesResponse.Links.Next != "" {
-			fmt.Println("More device linkages available on next page!")
-		}
-
-		if linkagesResponse.Meta != nil && linkagesResponse.Meta.Paging != nil {
-			fmt.Printf("Pagination - Limit: %d", linkagesResponse.Meta.Paging.Limit)
-			if linkagesResponse.Meta.Paging.NextCursor != "" {
-				fmt.Printf(", Next Cursor: %s", linkagesResponse.Meta.Paging.NextCursor)
-			}
-			fmt.Println()
-		}
+		log.Fatalf("Error marshaling response: %v", err)
 	}
-
-	// Example 2: Get device linkages with specific limit
-	fmt.Println("\n=== Example 2: Get Device Linkages with Limit ===")
-
-	limitOptions := &devicemanagement.RequestQueryOptions{
-		Limit: 10,
-	}
-
-	limitedResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, limitOptions)
-	if err != nil {
-		log.Printf("Error getting limited device linkages: %v", err)
-	} else {
-		fmt.Printf("Retrieved %d device linkages (limit: %d)\n", len(limitedResponse.Data), limitOptions.Limit)
-
-		for i, linkage := range limitedResponse.Data {
-			fmt.Printf("  %d. Device ID: %s (Type: %s)\n", i+1, linkage.ID, linkage.Type)
-		}
-
-		if limitedResponse.Links != nil && limitedResponse.Links.Next != "" {
-			fmt.Printf("Next page URL: %s\n", limitedResponse.Links.Next)
-		}
-	}
-
-	// Example 3: Get device linkages with small limit for pagination demo
-	fmt.Println("\n=== Example 3: Pagination Demo (Small Limit) ===")
-
-	smallLimitOptions := &devicemanagement.RequestQueryOptions{
-		Limit: 3,
-	}
-
-	paginationResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, smallLimitOptions)
-	if err != nil {
-		log.Printf("Error getting paginated device linkages: %v", err)
-	} else {
-		fmt.Printf("Page 1: Retrieved %d device linkages\n", len(paginationResponse.Data))
-
-		for i, linkage := range paginationResponse.Data {
-			fmt.Printf("  %d. Device ID: %s\n", i+1, linkage.ID)
-		}
-
-		// Demonstrate pagination
-		if paginationResponse.Links != nil && paginationResponse.Links.Next != "" {
-			fmt.Println("\nFetching next page...")
-
-			// Note: In a real application, you would use the client's GetNextPage method
-			// or extract cursor from the next URL for subsequent requests
-			fmt.Printf("Next page would be available at: %s\n", paginationResponse.Links.Next)
-		}
-	}
-
-	// Example 4: Error handling - invalid MDM server ID
-	fmt.Println("\n=== Example 4: Error Handling (Invalid MDM Server ID) ===")
-
-	invalidServerID := "invalid-mdm-server-id"
-	_, err = client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, invalidServerID, nil)
-	if err != nil {
-		fmt.Printf("Expected error for invalid MDM server ID: %v\n", err)
-	}
-
-	// Example 5: Error handling - empty MDM server ID
-	fmt.Println("\n=== Example 5: Error Handling (Empty MDM Server ID) ===")
-
-	_, err = client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, "", nil)
-	if err != nil {
-		fmt.Printf("Expected error for empty MDM server ID: %v\n", err)
-	}
-
-	// Example 6: Test with maximum limit
-	fmt.Println("\n=== Example 6: Test with Maximum Limit ===")
-
-	maxLimitOptions := &devicemanagement.RequestQueryOptions{
-		Limit: 1000, // API maximum
-	}
-
-	maxResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, maxLimitOptions)
-	if err != nil {
-		log.Printf("Error with max limit: %v", err)
-	} else {
-		fmt.Printf("Max limit test - Retrieved %d device linkages (limit: %d)\n",
-			len(maxResponse.Data), maxLimitOptions.Limit)
-	}
-
-	// Example 7: Test with over-maximum limit (should be capped)
-	fmt.Println("\n=== Example 7: Test with Over-Maximum Limit (Should be Capped) ===")
-
-	overMaxOptions := &devicemanagement.RequestQueryOptions{
-		Limit: 5000, // This should be capped at 1000
-	}
-
-	cappedResponse, err := client.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, overMaxOptions)
-	if err != nil {
-		log.Printf("Error with over-max limit: %v", err)
-	} else {
-		fmt.Printf("Over-max limit test - Retrieved %d device linkages (requested: %d, should be capped at 1000)\n",
-			len(cappedResponse.Data), overMaxOptions.Limit)
-	}
-
-	// Example 8: Pretty print JSON response
-	fmt.Println("\n=== Example 8: Full JSON Response ===")
-	if linkagesResponse != nil {
-		jsonData, err := json.MarshalIndent(linkagesResponse, "", "  ")
-		if err != nil {
-			log.Printf("Error marshaling response to JSON: %v", err)
-		} else {
-			fmt.Println(string(jsonData))
-		}
-	}
-
-	fmt.Println("\n=== Example Complete ===")
+	fmt.Println("\nFull JSON response:")
+	fmt.Println(string(jsonData))
 }

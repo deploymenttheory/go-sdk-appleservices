@@ -1,10 +1,5 @@
 package devicemanagement
 
-// API Version
-const (
-	APIVersionV1 = "/v1"
-)
-
 // Activity type constants
 const (
 	ActivityTypeAssignDevices   = "ASSIGN_DEVICES"

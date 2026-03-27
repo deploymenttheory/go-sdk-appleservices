@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "type": "orgDevices",
+      "id": "XABC123X0ABC123X0"
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple.com/v1/mdmServers/1F97349736CF4614A94F624E705841AD/relationships/devices",
+    "related": "https://api-business.apple.com/v1/mdmServers/1F97349736CF4614A94F624E705841AD/devices"
+  },
+  "meta": {
+    "paging": {
+      "limit": 100
+    }
+  }
+}

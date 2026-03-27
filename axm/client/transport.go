@@ -1,17 +1,18 @@
 package client
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"time"
 
-	"github.com/deploymenttheory/go-api-sdk-apple/axm/interfaces"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/constants"
 	"go.uber.org/zap"
 	"resty.dev/v3"
 )
 
-// Client represents the main Apple Business Manager API client
-type Client struct {
+// Transport represents the main Apple Business Manager API transport layer.
+type Transport struct {
 	httpClient   *resty.Client
 	logger       *zap.Logger
 	auth         AuthProvider
@@ -19,7 +20,10 @@ type Client struct {
 	baseURL      string
 }
 
-// APIResponse represents the standard API response structure
+// Ensure Transport implements Client interface.
+var _ Client = (*Transport)(nil)
+
+// APIResponse represents the standard API response structure.
 type APIResponse[T any] struct {
 	Data  []T   `json:"data"`
 	Meta  Meta  `json:"meta"`
@@ -28,8 +32,7 @@ type APIResponse[T any] struct {
 
 // NewTransport creates a new HTTP transport for Apple Business Manager API.
 // This is an internal function - users should use axm.NewClient() instead.
-func NewTransport(keyID, issuerID string, privateKey any, options ...ClientOption) (*Client, error) {
-	// Validate required parameters
+func NewTransport(keyID, issuerID string, privateKey any, options ...ClientOption) (*Transport, error) {
 	if keyID == "" {
 		return nil, fmt.Errorf("keyID is required")
 	}
@@ -42,19 +45,17 @@ func NewTransport(keyID, issuerID string, privateKey any, options ...ClientOptio
 
 	logger := zap.NewNop()
 
-	// Create JWT authentication provider
 	auth := NewJWTAuth(JWTAuthConfig{
 		KeyID:      keyID,
 		IssuerID:   issuerID,
 		PrivateKey: privateKey,
-		Audience:   DefaultJWTAudience,
-		Scope:      ScopeBusinessAPI,
+		Audience:   constants.DefaultJWTAudience,
+		Scope:      constants.ScopeBusinessAPI,
 	})
 
-	// Create resty HTTP client with defaults
 	httpClient := resty.New()
 	httpClient.
-		SetBaseURL(DefaultBaseURL).
+		SetBaseURL(constants.DefaultBaseURL).
 		SetTimeout(30*time.Second).
 		SetRetryCount(3).
 		SetRetryWaitTime(1*time.Second).
@@ -63,29 +64,26 @@ func NewTransport(keyID, issuerID string, privateKey any, options ...ClientOptio
 
 	errorHandler := NewErrorHandler(logger)
 
-	// Create client instance
-	client := &Client{
+	transport := &Transport{
 		httpClient:   httpClient,
 		logger:       logger,
 		auth:         auth,
 		errorHandler: errorHandler,
-		baseURL:      DefaultBaseURL,
+		baseURL:      constants.DefaultBaseURL,
 	}
 
-	// Apply any additional options
 	for _, option := range options {
-		if err := option(client); err != nil {
+		if err := option(transport); err != nil {
 			return nil, fmt.Errorf("failed to apply client option: %w", err)
 		}
 	}
 
-	// Setup authentication middleware (after options to use configured logger)
 	httpClient.AddRequestMiddleware(func(c *resty.Client, req *resty.Request) error {
-		if err := client.auth.ApplyAuth(req); err != nil {
+		if err := transport.auth.ApplyAuth(req); err != nil {
 			return fmt.Errorf("auth failed: %w", err)
 		}
 
-		client.logger.Info("API request",
+		transport.logger.Info("API request",
 			zap.String("method", req.Method),
 			zap.String("url", req.URL),
 		)
@@ -94,7 +92,7 @@ func NewTransport(keyID, issuerID string, privateKey any, options ...ClientOptio
 	})
 
 	httpClient.AddResponseMiddleware(func(c *resty.Client, resp *resty.Response) error {
-		client.logger.Info("API response",
+		transport.logger.Info("API response",
 			zap.String("method", resp.Request.Method),
 			zap.String("url", resp.Request.URL),
 			zap.Int("status_code", resp.StatusCode()),
@@ -102,8 +100,8 @@ func NewTransport(keyID, issuerID string, privateKey any, options ...ClientOptio
 		)
 
 		if resp.StatusCode() == 401 {
-			if jwtAuth, ok := client.auth.(*JWTAuth); ok {
-				client.logger.Info("Received 401 response, forcing JWT token refresh")
+			if jwtAuth, ok := transport.auth.(*JWTAuth); ok {
+				transport.logger.Info("Received 401 response, forcing JWT token refresh")
 				jwtAuth.ForceRefresh()
 			}
 		}
@@ -111,39 +109,168 @@ func NewTransport(keyID, issuerID string, privateKey any, options ...ClientOptio
 		return nil
 	})
 
-	client.logger.Info("Apple Business Manager API client created",
+	transport.logger.Info("Apple Business Manager API client created",
 		zap.String("issuer_id", issuerID),
-		zap.String("base_url", client.baseURL))
+		zap.String("base_url", transport.baseURL))
 
-	return client, nil
+	return transport, nil
 }
 
-// Ensure Client implements HTTPClient interface
-var _ interfaces.HTTPClient = (*Client)(nil)
+// NewRequest returns a new RequestBuilder for constructing API requests.
+func (t *Transport) NewRequest(ctx context.Context) *RequestBuilder {
+	return &RequestBuilder{
+		req:      t.httpClient.R().SetContext(ctx),
+		executor: t,
+	}
+}
 
-// QueryBuilder returns a new query builder instance
-func (c *Client) QueryBuilder() interfaces.ServiceQueryBuilder {
+// QueryBuilder returns a new query builder instance.
+func (t *Transport) QueryBuilder() *QueryBuilder {
 	return NewQueryBuilder()
 }
 
-// GetHTTPClient returns the underlying HTTP client for testing purposes
-func (c *Client) GetHTTPClient() *resty.Client {
-	return c.httpClient
+// GetLogger returns the configured logger.
+func (t *Transport) GetLogger() *zap.Logger {
+	return t.logger
 }
 
-// Close closes the HTTP client and cleans up resources
-func (c *Client) Close() error {
-	if c.httpClient != nil {
-		c.httpClient.Close()
+// GetHTTPClient returns the underlying HTTP client for testing purposes.
+func (t *Transport) GetHTTPClient() *resty.Client {
+	return t.httpClient
+}
+
+// Close closes the HTTP client and cleans up resources.
+func (t *Transport) Close() error {
+	if t.httpClient != nil {
+		t.httpClient.Close()
 	}
 	return nil
 }
 
-// NewTransportFromEnv creates a transport using environment variables
-// Expects: APPLE_KEY_ID, APPLE_ISSUER_ID, APPLE_PRIVATE_KEY_PATH
-func NewTransportFromEnv(options ...ClientOption) (*Client, error) {
+// execute implements requestExecutor — handles all HTTP method routing and error processing.
+func (t *Transport) execute(req *resty.Request, method, path string, result any) (*resty.Response, error) {
+	var apiErr ErrorResponse
+	req.SetError(&apiErr)
+
+	if result != nil {
+		req.SetResult(result)
+	}
+
+	var resp *resty.Response
+	var err error
+
+	switch method {
+	case "GET":
+		resp, err = req.Get(path)
+	case "POST":
+		resp, err = req.Post(path)
+	case "PUT":
+		resp, err = req.Put(path)
+	case "PATCH":
+		resp, err = req.Patch(path)
+	case "DELETE":
+		resp, err = req.Delete(path)
+	default:
+		return nil, fmt.Errorf("unsupported HTTP method: %s", method)
+	}
+
+	if err != nil {
+		return nil, fmt.Errorf("request failed: %w", err)
+	}
+
+	if resp.IsError() {
+		return resp, t.errorHandler.HandleError(resp, &apiErr)
+	}
+
+	return resp, nil
+}
+
+// executeGetBytes implements requestExecutor — returns raw response bytes without JSON unmarshaling.
+func (t *Transport) executeGetBytes(req *resty.Request, path string) (*resty.Response, []byte, error) {
+	resp, err := t.execute(req, "GET", path, nil)
+	if err != nil {
+		return resp, nil, err
+	}
+	return resp, resp.Bytes(), nil
+}
+
+// executePaginated implements requestExecutor — cursor-based pagination loop.
+func (t *Transport) executePaginated(req *resty.Request, path string, mergePage func([]byte) error) (*resty.Response, error) {
+	// Capture initial query params from the request
+	currentParams := make(map[string]string)
+	for k, v := range req.QueryParams {
+		if len(v) > 0 {
+			currentParams[k] = v[0]
+		}
+	}
+
+	var lastResp *resty.Response
+
+	for {
+		// Build a fresh request for each page (reuse auth, headers)
+		pageReq := t.httpClient.R().SetContext(req.Context())
+		for k, v := range req.Header {
+			if len(v) > 0 {
+				pageReq.SetHeader(k, v[0])
+			}
+		}
+		for k, v := range currentParams {
+			if v != "" {
+				pageReq.SetQueryParam(k, v)
+			}
+		}
+
+		var apiErr ErrorResponse
+		pageReq.SetError(&apiErr)
+
+		resp, err := pageReq.Get(path)
+		if err != nil {
+			return resp, fmt.Errorf("request failed: %w", err)
+		}
+		if resp.IsError() {
+			return resp, t.errorHandler.HandleError(resp, &apiErr)
+		}
+
+		lastResp = resp
+		rawResponse := resp.Bytes()
+
+		if err := mergePage(rawResponse); err != nil {
+			return resp, err
+		}
+
+		// Extract pagination info to check for next page
+		var pageInfo struct {
+			Links *Links `json:"links,omitempty"`
+		}
+		if err := parseJSON(rawResponse, &pageInfo); err != nil {
+			return resp, fmt.Errorf("failed to parse pagination info: %w", err)
+		}
+
+		if !HasNextPage(pageInfo.Links) {
+			break
+		}
+
+		nextParams, err := extractParamsFromURL(pageInfo.Links.Next)
+		if err != nil {
+			return resp, fmt.Errorf("failed to parse next URL: %w", err)
+		}
+
+		for k, v := range nextParams {
+			currentParams[k] = v
+		}
+	}
+
+	return lastResp, nil
+}
+
+// NewTransportFromEnv creates a transport using environment variables.
+// Requires APPLE_KEY_ID and APPLE_ISSUER_ID plus exactly one of:
+//   - APPLE_PRIVATE_KEY_PEM  — PEM-encoded private key supplied inline
+//   - APPLE_PRIVATE_KEY_PATH — path to a PEM private key file
+func NewTransportFromEnv(options ...ClientOption) (*Transport, error) {
 	keyID := os.Getenv("APPLE_KEY_ID")
 	issuerID := os.Getenv("APPLE_ISSUER_ID")
+	privateKeyPEM := os.Getenv("APPLE_PRIVATE_KEY_PEM")
 	privateKeyPath := os.Getenv("APPLE_PRIVATE_KEY_PATH")
 
 	if keyID == "" {
@@ -152,20 +279,30 @@ func NewTransportFromEnv(options ...ClientOption) (*Client, error) {
 	if issuerID == "" {
 		return nil, fmt.Errorf("APPLE_ISSUER_ID environment variable is required")
 	}
-	if privateKeyPath == "" {
-		return nil, fmt.Errorf("APPLE_PRIVATE_KEY_PATH environment variable is required")
-	}
 
-	privateKey, err := LoadPrivateKeyFromFile(privateKeyPath)
-	if err != nil {
-		return nil, fmt.Errorf("failed to load private key: %w", err)
+	var privateKey any
+	var err error
+
+	switch {
+	case privateKeyPEM != "":
+		privateKey, err = ParsePrivateKey([]byte(privateKeyPEM))
+		if err != nil {
+			return nil, fmt.Errorf("failed to parse APPLE_PRIVATE_KEY_PEM: %w", err)
+		}
+	case privateKeyPath != "":
+		privateKey, err = LoadPrivateKeyFromFile(privateKeyPath)
+		if err != nil {
+			return nil, fmt.Errorf("failed to load private key from APPLE_PRIVATE_KEY_PATH: %w", err)
+		}
+	default:
+		return nil, fmt.Errorf("either APPLE_PRIVATE_KEY_PEM or APPLE_PRIVATE_KEY_PATH environment variable is required")
 	}
 
 	return NewTransport(keyID, issuerID, privateKey, options...)
 }
 
-// NewTransportFromFile creates a transport using credentials from files
-func NewTransportFromFile(keyID, issuerID, privateKeyPath string, options ...ClientOption) (*Client, error) {
+// NewTransportFromFile creates a transport using credentials from files.
+func NewTransportFromFile(keyID, issuerID, privateKeyPath string, options ...ClientOption) (*Transport, error) {
 	if keyID == "" {
 		return nil, fmt.Errorf("keyID is required")
 	}

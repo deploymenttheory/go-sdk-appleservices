@@ -9,12 +9,12 @@ import (
 	"go.uber.org/zap"
 )
 
-// ClientOption is a function type for configuring the Client
-type ClientOption func(*Client) error
+// ClientOption is a function type for configuring the Transport.
+type ClientOption func(*Transport) error
 
 // WithBaseURL sets the base URL for API requests to a custom endpoint.
 func WithBaseURL(urlStr string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if urlStr == "" {
 			return fmt.Errorf("base URL cannot be empty")
 		}
@@ -26,7 +26,7 @@ func WithBaseURL(urlStr string) ClientOption {
 
 // WithLogger can be used to configure a custom logger.
 func WithLogger(logger *zap.Logger) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if logger == nil {
 			return fmt.Errorf("logger cannot be nil")
 		}
@@ -38,7 +38,7 @@ func WithLogger(logger *zap.Logger) ClientOption {
 
 // WithAuth sets the authentication provider for the client.
 func WithAuth(auth AuthProvider) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if auth == nil {
 			return fmt.Errorf("auth provider cannot be nil")
 		}
@@ -50,7 +50,7 @@ func WithAuth(auth AuthProvider) ClientOption {
 
 // WithTimeout sets the timeout for all HTTP requests.
 func WithTimeout(timeout time.Duration) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if timeout < 0 {
 			return fmt.Errorf("timeout cannot be negative")
 		}
@@ -62,7 +62,7 @@ func WithTimeout(timeout time.Duration) ClientOption {
 
 // WithRetryCount sets the maximum number of retries for failed requests.
 func WithRetryCount(retryCount int) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if retryCount < 0 {
 			return fmt.Errorf("retry count cannot be negative")
 		}
@@ -72,10 +72,10 @@ func WithRetryCount(retryCount int) ClientOption {
 	}
 }
 
-// WithRetryWaitTime sets the default wait time between retry attempts
-// This is the initial/minimum wait time before the first retry
+// WithRetryWaitTime sets the default wait time between retry attempts.
+// This is the initial/minimum wait time before the first retry.
 func WithRetryWaitTime(retryWait time.Duration) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if retryWait < 0 {
 			return fmt.Errorf("retry wait time cannot be negative")
 		}
@@ -85,10 +85,10 @@ func WithRetryWaitTime(retryWait time.Duration) ClientOption {
 	}
 }
 
-// WithRetryMaxWaitTime sets the maximum wait time between retry attempts
-// The wait time increases exponentially with each retry up to this maximum
+// WithRetryMaxWaitTime sets the maximum wait time between retry attempts.
+// The wait time increases exponentially with each retry up to this maximum.
 func WithRetryMaxWaitTime(maxWait time.Duration) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if maxWait < 0 {
 			return fmt.Errorf("retry max wait time cannot be negative")
 		}
@@ -100,7 +100,7 @@ func WithRetryMaxWaitTime(maxWait time.Duration) ClientOption {
 
 // WithUserAgent sets a custom user agent string for all requests.
 func WithUserAgent(userAgent string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if userAgent == "" {
 			return fmt.Errorf("user agent cannot be empty")
 		}
@@ -110,10 +110,10 @@ func WithUserAgent(userAgent string) ClientOption {
 	}
 }
 
-// WithCustomAgent allows appending a custom identifier to the default user agent
-// Format: "go-api-sdk-apple/3.0.0; <customAgent>"
+// WithCustomAgent allows appending a custom identifier to the default user agent.
+// Format: "go-api-sdk-apple/1.0.0; <customAgent>"
 func WithCustomAgent(customAgent string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		enhancedUA := fmt.Sprintf("%s; %s", DefaultUserAgent, customAgent)
 		c.httpClient.SetHeader("User-Agent", enhancedUA)
 		c.logger.Info("Custom agent configured", zap.String("user_agent", enhancedUA))
@@ -123,7 +123,7 @@ func WithCustomAgent(customAgent string) ClientOption {
 
 // WithDebug enables debug mode for the HTTP client.
 func WithDebug() ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		c.httpClient.SetDebug(true)
 		c.logger.Info("Debug mode enabled")
 		return nil
@@ -132,7 +132,7 @@ func WithDebug() ClientOption {
 
 // WithErrorHandler sets a custom error handler.
 func WithErrorHandler(handler *ErrorHandler) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if handler == nil {
 			return fmt.Errorf("error handler cannot be nil")
 		}
@@ -142,29 +142,29 @@ func WithErrorHandler(handler *ErrorHandler) ClientOption {
 	}
 }
 
-// WithGlobalHeader sets a global header that will be included in all requests
-// Per-request headers will override global headers with the same key
+// WithGlobalHeader sets a global header that will be included in all requests.
+// Per-request headers will override global headers with the same key.
 func WithGlobalHeader(key, value string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		c.httpClient.SetHeader(key, value)
 		c.logger.Info("Global header configured", zap.String("key", key), zap.String("value", value))
 		return nil
 	}
 }
 
-// WithGlobalHeaders sets multiple global headers at once
+// WithGlobalHeaders sets multiple global headers at once.
 func WithGlobalHeaders(headers map[string]string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		c.httpClient.SetHeaders(headers)
 		c.logger.Info("Multiple global headers configured", zap.Int("count", len(headers)))
 		return nil
 	}
 }
 
-// WithProxy sets an HTTP proxy for all requests
+// WithProxy sets an HTTP proxy for all requests.
 // Example: "http://proxy.company.com:8080" or "socks5://127.0.0.1:1080"
 func WithProxy(proxyURL string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if proxyURL == "" {
 			return fmt.Errorf("proxy URL cannot be empty")
 		}
@@ -174,10 +174,10 @@ func WithProxy(proxyURL string) ClientOption {
 	}
 }
 
-// WithTLSClientConfig sets custom TLS configuration
+// WithTLSClientConfig sets custom TLS configuration.
 // Use this for custom certificate validation, minimum TLS version, etc.
 func WithTLSClientConfig(tlsConfig *tls.Config) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		c.httpClient.SetTLSClientConfig(tlsConfig)
 		c.logger.Info("TLS client config configured",
 			zap.Uint16("min_version", tlsConfig.MinVersion),
@@ -186,10 +186,10 @@ func WithTLSClientConfig(tlsConfig *tls.Config) ClientOption {
 	}
 }
 
-// WithClientCertificate sets a client certificate for mutual TLS authentication
-// Loads certificate from PEM-encoded files
+// WithClientCertificate sets a client certificate for mutual TLS authentication.
+// Loads certificate from PEM-encoded files.
 func WithClientCertificate(certFile, keyFile string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		c.httpClient.SetCertificateFromFile(certFile, keyFile)
 		c.logger.Info("Client certificate configured",
 			zap.String("cert_file", certFile),
@@ -198,48 +198,48 @@ func WithClientCertificate(certFile, keyFile string) ClientOption {
 	}
 }
 
-// WithClientCertificateFromString sets a client certificate from PEM-encoded strings
+// WithClientCertificateFromString sets a client certificate from PEM-encoded strings.
 func WithClientCertificateFromString(certPEM, keyPEM string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		c.httpClient.SetCertificateFromString(certPEM, keyPEM)
 		c.logger.Info("Client certificate configured from string")
 		return nil
 	}
 }
 
-// WithRootCertificates adds custom root CA certificates for server validation
-// Useful for private CAs or self-signed certificates
+// WithRootCertificates adds custom root CA certificates for server validation.
+// Useful for private CAs or self-signed certificates.
 func WithRootCertificates(pemFilePaths ...string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		c.httpClient.SetClientRootCertificates(pemFilePaths...)
 		c.logger.Info("Root certificates configured", zap.Int("count", len(pemFilePaths)))
 		return nil
 	}
 }
 
-// WithRootCertificateFromString adds a custom root CA certificate from PEM string
+// WithRootCertificateFromString adds a custom root CA certificate from PEM string.
 func WithRootCertificateFromString(pemContent string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		c.httpClient.SetClientRootCertificateFromString(pemContent)
 		c.logger.Info("Root certificate configured from string")
 		return nil
 	}
 }
 
-// WithTransport sets a custom HTTP transport (http.RoundTripper)
-// Use this for advanced transport customization beyond TLS/proxy
+// WithTransport sets a custom HTTP transport (http.RoundTripper).
+// Use this for advanced transport customization beyond TLS/proxy.
 func WithTransport(transport http.RoundTripper) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		c.httpClient.SetTransport(transport)
 		c.logger.Info("Custom transport configured")
 		return nil
 	}
 }
 
-// WithInsecureSkipVerify disables TLS certificate verification (USE WITH CAUTION)
-// This should ONLY be used for testing/development with self-signed certificates
+// WithInsecureSkipVerify disables TLS certificate verification (USE WITH CAUTION).
+// This should ONLY be used for testing/development with self-signed certificates.
 func WithInsecureSkipVerify() ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		tlsConfig := &tls.Config{
 			InsecureSkipVerify: true,
 		}
@@ -249,10 +249,10 @@ func WithInsecureSkipVerify() ClientOption {
 	}
 }
 
-// WithMinTLSVersion sets the minimum TLS version for connections
+// WithMinTLSVersion sets the minimum TLS version for connections.
 // Common values: tls.VersionTLS12, tls.VersionTLS13
 func WithMinTLSVersion(minVersion uint16) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		tlsConfig := &tls.Config{
 			MinVersion: minVersion,
 		}
@@ -277,19 +277,19 @@ func WithMinTLSVersion(minVersion uint16) ClientOption {
 	}
 }
 
-// WithAPIVersion sets a custom API version if needed for future API versions
+// WithAPIVersion sets a custom API version if needed for future API versions.
 func WithAPIVersion(version string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		c.logger.Info("API version configured", zap.String("api_version", version))
 		// Currently Apple Business Manager API doesn't version in the URL, but
-		// this option is here for future compatibility
+		// this option is here for future compatibility.
 		return nil
 	}
 }
 
-// WithAudience sets a custom JWT audience (default: "appstoreconnect-v1")
+// WithAudience sets a custom JWT audience (default: "appstoreconnect-v1").
 func WithAudience(audience string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if jwtAuth, ok := c.auth.(*JWTAuth); ok {
 			jwtAuth.audience = audience
 			c.logger.Info("JWT audience configured", zap.String("audience", audience))
@@ -298,9 +298,9 @@ func WithAudience(audience string) ClientOption {
 	}
 }
 
-// WithScope sets a custom JWT scope (default: "business.api" or "school.api")
+// WithScope sets a custom JWT scope (default: "business.api" or "school.api").
 func WithScope(scope string) ClientOption {
-	return func(c *Client) error {
+	return func(c *Transport) error {
 		if jwtAuth, ok := c.auth.(*JWTAuth); ok {
 			jwtAuth.scope = scope
 			c.logger.Info("JWT scope configured", zap.String("scope", scope))
