@@ -78,6 +78,8 @@ func TestAcceptance_DeviceManagement_GetDeviceManagementServices(t *testing.T) {
 	})
 
 	// --- Pagination ---
+	// Note: GetDeviceManagementServicesV1 fetches all pages automatically, so Limit
+	// controls page size sent to the API, not the total result count returned here.
 	t.Run("WithPaginationLimit", func(t *testing.T) {
 		ctx3, cancel3 := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer cancel3()
@@ -87,7 +89,9 @@ func TestAcceptance_DeviceManagement_GetDeviceManagementServices(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, resp.StatusCode())
-		assert.LessOrEqual(t, len(result.Data), 1)
+		require.NotNil(t, result)
+		assert.NotEmpty(t, result.Data, "organization should have at least one MDM server")
+		acc.LogTestSuccess(t, "GetDeviceManagementServicesV1 (limit=1 page size): %d total server(s) across all pages", len(result.Data))
 	})
 }
 

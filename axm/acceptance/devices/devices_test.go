@@ -73,6 +73,8 @@ func TestAcceptance_Devices_GetOrganizationDevices(t *testing.T) {
 	})
 
 	// --- Pagination ---
+	// Note: GetOrganizationDevicesV1 fetches all pages automatically, so Limit
+	// controls page size sent to the API, not the total result count returned here.
 	t.Run("WithPaginationLimit", func(t *testing.T) {
 		acc.LogTestStage(t, "List", "Getting organization devices with limit")
 
@@ -87,11 +89,8 @@ func TestAcceptance_Devices_GetOrganizationDevices(t *testing.T) {
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, resp.StatusCode())
 		require.NotNil(t, result)
-		assert.LessOrEqual(t, len(result.Data), 2, "result should respect the page limit")
-
-		if result.Links != nil && result.Links.Next != "" {
-			acc.LogTestSuccess(t, "Pagination: next page available at %s", result.Links.Next)
-		}
+		assert.NotEmpty(t, result.Data, "organization should have at least one device")
+		acc.LogTestSuccess(t, "GetOrganizationDevicesV1 (limit=2 page size): %d total device(s) across all pages", len(result.Data))
 	})
 }
 
