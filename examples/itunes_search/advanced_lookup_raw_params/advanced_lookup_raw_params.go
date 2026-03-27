@@ -1,45 +1,41 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 
-	client "github.com/deploymenttheory/go-api-sdk-apple/itunes"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/itunes_search"
-)
-
-var (
-	customParams = map[string]string{
-		"amgArtistId": "468749,5723",
-		"entity":      "album",
-		"limit":       "10",
-		"sort":        "recent",
-		"country":     "US",
-	}
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes/itunes_api/search"
 )
 
 func main() {
-	baseClient := client.NewClient(client.Config{
-		Debug: true,
-	})
-	defer baseClient.Close()
-
-	itunesClient := itunes_search.NewClient(baseClient)
-
-	fmt.Println("=== Advanced Lookup with Raw Parameters Example ===")
-	fmt.Println("Using custom parameter map for advanced lookup:")
-
-	response, err := itunesClient.Lookup(customParams)
+	c, err := itunes.NewClient(itunes.WithDebug())
 	if err != nil {
-		log.Printf("Error performing advanced lookup: %v", err)
-		return
+		log.Fatalf("Error creating iTunes client: %v", err)
+	}
+	defer c.Close()
+
+	ctx := context.Background()
+
+	fmt.Println("=== Advanced Lookup Example ===")
+	fmt.Println("Looking up recent albums for multiple artists (Jack Johnson + Weezer) in the US:")
+
+	result, _, err := c.ItunesAPI.Search.LookupV1(ctx, &search.LookupOptions{
+		AMGArtistIDs: []string{"468749", "5723"},
+		Entity:       search.EntityAlbum,
+		Limit:        10,
+		Sort:         search.SortRecent,
+		Country:      "US",
+	})
+	if err != nil {
+		log.Fatalf("Error performing advanced lookup: %v", err)
 	}
 
-	jsonData, err := json.MarshalIndent(response, "", "  ")
+	jsonData, err := json.MarshalIndent(result, "", "  ")
 	if err != nil {
-		log.Printf("Error marshaling response to JSON: %v", err)
-		return
+		log.Fatalf("Error marshaling response to JSON: %v", err)
 	}
 
 	fmt.Println(string(jsonData))

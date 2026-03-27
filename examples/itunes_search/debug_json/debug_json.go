@@ -1,55 +1,52 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 
-	client "github.com/deploymenttheory/go-api-sdk-apple/itunes"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/itunes_search"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes/itunes_api/search"
 )
 
 func main() {
-	baseClient := client.NewClient(client.Config{
-		Debug: true,
-	})
-	defer baseClient.Close()
+	c, err := itunes.NewClient(itunes.WithDebug())
+	if err != nil {
+		log.Fatalf("Error creating iTunes client: %v", err)
+	}
+	defer c.Close()
 
-	itunesClient := itunes_search.NewClient(baseClient)
+	ctx := context.Background()
 
 	fmt.Println("=== Debug JSON Parsing ===")
 
-	params := itunes_search.NewSearchParams().
-		Term("Jack Johnson").
-		Media("music").
-		Limit(2).
-		Build()
-
-	// Test with our normal search method
-	response, err := itunesClient.Search(params)
+	result, _, err := c.ItunesAPI.Search.SearchV1(ctx, &search.SearchOptions{
+		Term:  "Jack Johnson",
+		Media: search.MediaMusic,
+		Limit: 2,
+	})
 	if err != nil {
-		log.Printf("Error: %v", err)
-		return
+		log.Fatalf("Error: %v", err)
 	}
 
-	jsonData, _ := json.MarshalIndent(response, "", "  ")
+	jsonData, err := json.MarshalIndent(result, "", "  ")
+	if err != nil {
+		log.Fatalf("Error marshaling response: %v", err)
+	}
 	fmt.Printf("Parsed Response: %s\n", string(jsonData))
 
-	// Test with raw JSON string
-	rawJSON := `{
- "resultCount":2,
- "results": [
-{"wrapperType":"track", "kind":"song", "artistId":909253, "collectionId":255144028, "trackId":255145362, "artistName":"Jack Johnson", "collectionName":"Test Album", "trackName":"Test Song", "releaseDate":"2007-06-11T12:00:00Z", "primaryGenreName":"Rock"}
-]
-}`
+	// Verify manual JSON round-trip using the SDK model type.
+	rawJSON := `{"resultCount":1,"results":[{"wrapperType":"track","kind":"song","artistId":909253,"artistName":"Jack Johnson","trackName":"Test Song","primaryGenreName":"Rock"}]}`
 
-	var testResponse itunes_search.SearchResponse
-	err = json.Unmarshal([]byte(rawJSON), &testResponse)
-	if err != nil {
-		log.Printf("JSON Parse Error: %v", err)
-		return
+	var parsed search.SearchResponse
+	if err := json.Unmarshal([]byte(rawJSON), &parsed); err != nil {
+		log.Fatalf("JSON parse error: %v", err)
 	}
 
-	testJSON, _ := json.MarshalIndent(testResponse, "", "  ")
+	testJSON, err := json.MarshalIndent(parsed, "", "  ")
+	if err != nil {
+		log.Fatalf("Error marshaling test parse: %v", err)
+	}
 	fmt.Printf("Test Parse Response: %s\n", string(testJSON))
 }

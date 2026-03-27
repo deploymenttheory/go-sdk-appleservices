@@ -1,47 +1,39 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 
-	client "github.com/deploymenttheory/go-api-sdk-apple/itunes"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/itunes_search"
-)
-
-const (
-	searchTerm  = "Jack Johnson"
-	mediaType   = "music"
-	resultLimit = 5
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes/itunes_api/search"
 )
 
 func main() {
-	baseClient := client.NewClient(client.Config{
-		Debug: true,
-	})
-	defer baseClient.Close()
+	c, err := itunes.NewClient(itunes.WithDebug())
+	if err != nil {
+		log.Fatalf("Error creating iTunes client: %v", err)
+	}
+	defer c.Close()
 
-	itunesClient := itunes_search.NewClient(baseClient)
+	ctx := context.Background()
 
 	fmt.Println("=== Basic Search Example ===")
-	fmt.Printf("Searching for '%s' %s with limit %d:\n", searchTerm, mediaType, resultLimit)
+	fmt.Println("Searching for 'Jack Johnson' music with limit 5:")
 
-	params := itunes_search.NewSearchParams().
-		Term(searchTerm).
-		Media(mediaType).
-		Limit(resultLimit).
-		Build()
-
-	response, err := itunesClient.Search(params)
+	result, _, err := c.ItunesAPI.Search.SearchV1(ctx, &search.SearchOptions{
+		Term:  "Jack Johnson",
+		Media: search.MediaMusic,
+		Limit: 5,
+	})
 	if err != nil {
-		log.Printf("Error searching for music: %v", err)
-		return
+		log.Fatalf("Error searching for music: %v", err)
 	}
 
-	jsonData, err := json.MarshalIndent(response, "", "  ")
+	jsonData, err := json.MarshalIndent(result, "", "  ")
 	if err != nil {
-		log.Printf("Error marshaling response to JSON: %v", err)
-		return
+		log.Fatalf("Error marshaling response to JSON: %v", err)
 	}
 
 	fmt.Println(string(jsonData))

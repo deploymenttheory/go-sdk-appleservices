@@ -1,10 +1,73 @@
-package itunes_search
+package search
 
+// SearchOptions configures a request to the iTunes Search endpoint.
+// At minimum Term must be set.
+type SearchOptions struct {
+	// Term is the URL-encoded text string you want to search for.
+	Term string
+	// Country is the two-letter ISO 3166-1 country code (e.g. "us", "gb").
+	Country string
+	// Media is the media type to search for (e.g. "music", "movie", "software").
+	// Defaults to "all" when empty.
+	Media string
+	// Entity is the type of results to return (e.g. "song", "album", "musicArtist").
+	Entity string
+	// Attribute is the attribute to search within (e.g. "artistTerm", "titleTerm").
+	Attribute string
+	// Callback is the name of the JavaScript callback function for JSONP.
+	Callback string
+	// Limit is the number of results to return. Maximum is 200. Defaults to 50.
+	Limit int
+	// Lang is the language to use (e.g. "en_us", "ja_jp"). Defaults to "en_us".
+	Lang string
+	// Version is the iTunes Search API version (1 or 2). Defaults to 2.
+	Version int
+	// Explicit controls whether explicit content is returned ("Yes" / "No").
+	Explicit string
+}
+
+// LookupOptions configures a request to the iTunes Lookup endpoint.
+// At least one identifier field must be set.
+type LookupOptions struct {
+	// ID looks up a single item by its iTunes ID.
+	ID int
+	// IDs looks up multiple items by their iTunes IDs (comma-joined).
+	IDs []int
+	// UPC looks up an album or video by its UPC barcode.
+	UPC string
+	// EAN looks up an album by its European Article Number.
+	EAN string
+	// ISRC looks up a song by its International Standard Recording Code.
+	ISRC string
+	// ISBN looks up a book by its International Standard Book Number.
+	ISBN string
+	// AMGArtistID looks up an artist by their All Music Guide artist ID.
+	AMGArtistID string
+	// AMGArtistIDs looks up multiple artists by their AMG artist IDs.
+	AMGArtistIDs []string
+	// AMGAlbumID looks up an album by its AMG album ID.
+	AMGAlbumID string
+	// AMGAlbumIDs looks up multiple albums by their AMG album IDs.
+	AMGAlbumIDs []string
+	// AMGVideoID looks up a video by its AMG video ID.
+	AMGVideoID string
+	// Entity is the type of related content to return alongside the lookup result.
+	Entity string
+	// Limit is the maximum number of results to return. Maximum is 200.
+	Limit int
+	// Sort sorts results by a field (e.g. "recent").
+	Sort string
+	// Country is the two-letter ISO 3166-1 country code to scope the lookup.
+	Country string
+}
+
+// SearchResponse is the top-level response from both the Search and Lookup endpoints.
 type SearchResponse struct {
 	ResultCount int      `json:"resultCount"`
 	Results     []Result `json:"results"`
 }
 
+// Result represents a single item returned by the iTunes Search or Lookup API.
 type Result struct {
 	WrapperType                        string   `json:"wrapperType,omitempty"`
 	Kind                               string   `json:"kind,omitempty"`
@@ -45,6 +108,7 @@ type Result struct {
 	CollectionHDRentalPrice            float64  `json:"collectionHdRentalPrice,omitempty"`
 	TrackHDRentalPrice                 float64  `json:"trackHdRentalPrice,omitempty"`
 	LongDescription                    string   `json:"longDescription,omitempty"`
+	ShortDescription                   string   `json:"shortDescription,omitempty"`
 	HasITunesExtras                    bool     `json:"hasITunesExtras,omitempty"`
 	SellerName                         string   `json:"sellerName,omitempty"`
 	Features                           []string `json:"features,omitempty"`
@@ -58,7 +122,6 @@ type Result struct {
 	CollectionArtistName               string   `json:"collectionArtistName,omitempty"`
 	CollectionArtistViewURL            string   `json:"collectionArtistViewUrl,omitempty"`
 	Description                        string   `json:"description,omitempty"`
-	ShortDescription                   string   `json:"shortDescription,omitempty"`
 	Version                            string   `json:"version,omitempty"`
 	FileSizeBytes                      string   `json:"fileSizeBytes,omitempty"`
 	MinimumOSVersion                   string   `json:"minimumOsVersion,omitempty"`
@@ -69,7 +132,7 @@ type Result struct {
 	FormattedPrice                     string   `json:"formattedPrice,omitempty"`
 	Price                              float64  `json:"price,omitempty"`
 	BundleID                           string   `json:"bundleId,omitempty"`
-	GenreIDS                           []string `json:"genreIds,omitempty"`
+	GenreIDs                           []string `json:"genreIds,omitempty"`
 	Genres                             []string `json:"genres,omitempty"`
 	LanguageCodesISO2A                 []string `json:"languageCodesISO2A,omitempty"`
 }

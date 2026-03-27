@@ -1,4 +1,4 @@
-name: go | Acceptance Tests
+name: go | AXM | Acceptance Tests
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   acceptance-tests:
-    name: '🧪 Run Acceptance Tests'
+    name: '🧪 Run AXM Acceptance Tests'
     runs-on: ubuntu-24.04-arm
 
     steps:
@@ -42,7 +42,7 @@ jobs:
           go mod verify
           echo "::endgroup::"
 
-      - name: Run Acceptance Tests
+      - name: Run AXM Acceptance Tests
         env:
           APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
           APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
@@ -51,20 +51,20 @@ jobs:
           AXM_VERBOSE: 'true'
           AXM_REQUEST_TIMEOUT: '30s'
         run: |
-          echo "::group::🧪 Acceptance Tests Setup"
+          echo "::group::🧪 AXM Acceptance Tests Setup"
           echo "========================================================================"
-          echo "  Running Acceptance Tests"
+          echo "  Running AXM Acceptance Tests"
           echo "  skip_destructive=${{ inputs.skip_destructive }}"
           echo "========================================================================"
           echo "::endgroup::"
           echo ""
 
-          go test -v -timeout 5m ./axm/acceptance/... 2>&1 | tee acceptance_output.txt
+          go test -v -timeout 5m ./axm/acceptance/... 2>&1 | tee axm_acceptance_output.txt
 
       - name: Upload Test Output
         if: always()
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
-          name: acceptance-test-output
-          path: acceptance_output.txt
+          name: axm-acceptance-test-output
+          path: axm_acceptance_output.txt
           retention-days: 7

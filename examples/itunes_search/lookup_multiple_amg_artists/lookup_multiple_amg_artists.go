@@ -1,43 +1,37 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 
-	client "github.com/deploymenttheory/go-api-sdk-apple/itunes"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/itunes_search"
-)
-
-var (
-	amgArtistIDs = []string{"468749", "5723"}
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes/itunes_api/search"
 )
 
 func main() {
-	baseClient := client.NewClient(client.Config{
-		Debug: true,
-	})
-	defer baseClient.Close()
+	c, err := itunes.NewClient(itunes.WithDebug())
+	if err != nil {
+		log.Fatalf("Error creating iTunes client: %v", err)
+	}
+	defer c.Close()
 
-	itunesClient := itunes_search.NewClient(baseClient)
+	ctx := context.Background()
 
 	fmt.Println("=== Lookup Multiple AMG Artist IDs Example ===")
-	fmt.Printf("Looking up multiple artists by AMG artist IDs (%v):\n", amgArtistIDs)
+	fmt.Println("Looking up multiple artists by AMG artist IDs (468749, 5723):")
 
-	params := itunes_search.NewLookupParams().
-		AMGArtistIDs(amgArtistIDs).
-		Build()
-
-	response, err := itunesClient.Lookup(params)
+	result, _, err := c.ItunesAPI.Search.LookupV1(ctx, &search.LookupOptions{
+		AMGArtistIDs: []string{"468749", "5723"},
+	})
 	if err != nil {
-		log.Printf("Error looking up multiple AMG artist IDs: %v", err)
-		return
+		log.Fatalf("Error looking up multiple AMG artist IDs: %v", err)
 	}
 
-	jsonData, err := json.MarshalIndent(response, "", "  ")
+	jsonData, err := json.MarshalIndent(result, "", "  ")
 	if err != nil {
-		log.Printf("Error marshaling response to JSON: %v", err)
-		return
+		log.Fatalf("Error marshaling response to JSON: %v", err)
 	}
 
 	fmt.Println(string(jsonData))

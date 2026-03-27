@@ -1,53 +1,42 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 
-	client "github.com/deploymenttheory/go-api-sdk-apple/itunes"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/itunes_search"
-)
-
-const (
-	searchTerm   = "tech talk"
-	mediaType    = "podcast"
-	entityType   = "podcast"
-	countryCode  = "US"
-	resultLimit  = 10
-	languageCode = "en_us"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes/itunes_api/search"
 )
 
 func main() {
-	baseClient := client.NewClient(client.Config{
-		Debug: true,
-	})
-	defer baseClient.Close()
+	c, err := itunes.NewClient(itunes.WithDebug())
+	if err != nil {
+		log.Fatalf("Error creating iTunes client: %v", err)
+	}
+	defer c.Close()
 
-	itunesClient := itunes_search.NewClient(baseClient)
+	ctx := context.Background()
 
 	fmt.Println("=== Podcast Search Example ===")
-	fmt.Printf("Searching for podcasts with term '%s':\n", searchTerm)
+	fmt.Println("Searching for podcasts with term 'tech talk':")
 
-	params := itunes_search.NewSearchParams().
-		Term(searchTerm).
-		Media(mediaType).
-		Entity(entityType).
-		Country(countryCode).
-		Limit(resultLimit).
-		Lang(languageCode).
-		Build()
-
-	response, err := itunesClient.Search(params)
+	result, _, err := c.ItunesAPI.Search.SearchV1(ctx, &search.SearchOptions{
+		Term:    "tech talk",
+		Media:   search.MediaPodcast,
+		Entity:  search.EntityPodcast,
+		Country: "US",
+		Limit:   10,
+		Lang:    "en_us",
+	})
 	if err != nil {
-		log.Printf("Error searching for podcasts: %v", err)
-		return
+		log.Fatalf("Error searching for podcasts: %v", err)
 	}
 
-	jsonData, err := json.MarshalIndent(response, "", "  ")
+	jsonData, err := json.MarshalIndent(result, "", "  ")
 	if err != nil {
-		log.Printf("Error marshaling response to JSON: %v", err)
-		return
+		log.Fatalf("Error marshaling response to JSON: %v", err)
 	}
 
 	fmt.Println(string(jsonData))

@@ -1,43 +1,37 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 
-	client "github.com/deploymenttheory/go-api-sdk-apple/itunes"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/itunes_search"
-)
-
-const (
-	amgArtistID = "468749"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes/itunes_api/search"
 )
 
 func main() {
-	baseClient := client.NewClient(client.Config{
-		Debug: true,
-	})
-	defer baseClient.Close()
+	c, err := itunes.NewClient(itunes.WithDebug())
+	if err != nil {
+		log.Fatalf("Error creating iTunes client: %v", err)
+	}
+	defer c.Close()
 
-	itunesClient := itunes_search.NewClient(baseClient)
+	ctx := context.Background()
 
 	fmt.Println("=== Lookup by AMG Artist ID Example ===")
-	fmt.Printf("Looking up Jack Johnson by AMG artist ID (%s):\n", amgArtistID)
+	fmt.Println("Looking up Jack Johnson by AMG artist ID (468749):")
 
-	params := itunes_search.NewLookupParams().
-		AMGArtistID(amgArtistID).
-		Build()
-
-	response, err := itunesClient.Lookup(params)
+	result, _, err := c.ItunesAPI.Search.LookupV1(ctx, &search.LookupOptions{
+		AMGArtistID: "468749",
+	})
 	if err != nil {
-		log.Printf("Error looking up AMG artist ID %s: %v", amgArtistID, err)
-		return
+		log.Fatalf("Error looking up AMG artist ID: %v", err)
 	}
 
-	jsonData, err := json.MarshalIndent(response, "", "  ")
+	jsonData, err := json.MarshalIndent(result, "", "  ")
 	if err != nil {
-		log.Printf("Error marshaling response to JSON: %v", err)
-		return
+		log.Fatalf("Error marshaling response to JSON: %v", err)
 	}
 
 	fmt.Println(string(jsonData))

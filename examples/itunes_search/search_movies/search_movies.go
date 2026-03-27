@@ -1,55 +1,43 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 
-	client "github.com/deploymenttheory/go-api-sdk-apple/itunes"
-	"github.com/deploymenttheory/go-api-sdk-apple/services/itunes_search"
-)
-
-const (
-	searchTerm   = "star wars"
-	mediaType    = "movie"
-	entityType   = "movie"
-	countryCode  = "US"
-	resultLimit  = 10
-	languageCode = "en_us"
-	explicitFlag = "Yes"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes"
+	"github.com/deploymenttheory/go-api-sdk-apple/itunes/itunes_api/search"
 )
 
 func main() {
-	baseClient := client.NewClient(client.Config{
-		Debug: true,
-	})
-	defer baseClient.Close()
+	c, err := itunes.NewClient(itunes.WithDebug())
+	if err != nil {
+		log.Fatalf("Error creating iTunes client: %v", err)
+	}
+	defer c.Close()
 
-	itunesClient := itunes_search.NewClient(baseClient)
+	ctx := context.Background()
 
 	fmt.Println("=== Movie Search Example ===")
-	fmt.Printf("Searching for movies with term '%s':\n", searchTerm)
+	fmt.Println("Searching for movies with term 'star wars':")
 
-	params := itunes_search.NewSearchParams().
-		Term(searchTerm).
-		Media(mediaType).
-		Entity(entityType).
-		Country(countryCode).
-		Limit(resultLimit).
-		Lang(languageCode).
-		Explicit(explicitFlag).
-		Build()
-
-	response, err := itunesClient.Search(params)
+	result, _, err := c.ItunesAPI.Search.SearchV1(ctx, &search.SearchOptions{
+		Term:     "star wars",
+		Media:    search.MediaMovie,
+		Entity:   search.EntityMovie,
+		Country:  "US",
+		Limit:    10,
+		Lang:     "en_us",
+		Explicit: search.ExplicitYes,
+	})
 	if err != nil {
-		log.Printf("Error searching for movies: %v", err)
-		return
+		log.Fatalf("Error searching for movies: %v", err)
 	}
 
-	jsonData, err := json.MarshalIndent(response, "", "  ")
+	jsonData, err := json.MarshalIndent(result, "", "  ")
 	if err != nil {
-		log.Printf("Error marshaling response to JSON: %v", err)
-		return
+		log.Fatalf("Error marshaling response to JSON: %v", err)
 	}
 
 	fmt.Println(string(jsonData))

@@ -1,12 +1,12 @@
-name: go | Unit Tests
+name: go | iTunes | Unit Tests
 
 on:
   workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
-      - '.github/workflows/unit-tests.yml'
-      - '**/*.go'
+      - '.github/workflows/itunes-unit-tests.yml'
+      - 'itunes/**/*.go'
       - 'go.mod'
       - 'go.sum'
 
@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   unit-tests:
-    name: '🧪 Run Unit Tests'
+    name: '🧪 Run iTunes Unit Tests'
     runs-on: ubuntu-24.04-arm
     if: github.event.pull_request.draft == false
 
@@ -46,16 +46,16 @@ jobs:
           go mod verify
           echo "::endgroup::"
 
-      - name: Run Unit Tests
+      - name: Run iTunes Unit Tests
         run: |
-          echo "::group::🧪 Unit Tests Setup"
+          echo "::group::🧪 iTunes Unit Tests Setup"
           echo "========================================================================"
-          echo "  Running Unit Tests with Coverage"
+          echo "  Running iTunes Unit Tests with Coverage"
           echo "========================================================================"
           echo "::endgroup::"
           echo ""
 
-          go test -v -race -coverprofile=coverage.out -covermode=atomic $(go list ./... | grep -v '/acceptance' | grep -v '/examples' | grep -v '/recipes') 2>&1 | tee test_output.txt
+          go test -v -race -coverprofile=coverage.out -covermode=atomic $(go list ./itunes/... | grep -v '/acceptance') 2>&1 | tee test_output.txt
 
           echo ""
           echo "::group::📊 Coverage Summary"
@@ -67,18 +67,12 @@ jobs:
         run: |
           echo "::group::📈 Test Statistics"
           echo "========================================================================"
-          echo "  Unit Test Statistics by Package"
+          echo "  iTunes Unit Test Statistics by Package"
           echo "========================================================================"
           echo ""
 
-          # Count tests per package from verbose output
           grep "^--- " test_output.txt | awk '
           {
-            # Lines look like: --- PASS: TestFoo_Bar (0.00s)
-            result = $2
-            # Extract test name (3rd field, strip trailing colon)
-            test_name = $3
-            sub(/:$/, "", test_name)
             total_tests++
           }
           END {
@@ -86,20 +80,18 @@ jobs:
           }
           ' 2> test_stats_totals.txt
 
-          # Count by package
           grep "^ok\|^FAIL" test_output.txt | awk '
           {
             status = $1
             pkg = $2
-            # Strip module prefix
-            sub(/.*\/axm\//, "axm/", pkg)
+            sub(/.*\/itunes\//, "itunes/", pkg)
             printf "%-60s %s\n", pkg, status
           }
           ' | sort
 
           echo ""
           printf "%-60s %s\n" "========================================" "====="
-          grep "TOTAL_TESTS:" test_stats_totals.txt | awk -F: '{printf "%-60s %5d\n", "Total Unit Tests:", $2}'
+          grep "TOTAL_TESTS:" test_stats_totals.txt | awk -F: '{printf "%-60s %5d\n", "Total iTunes Unit Tests:", $2}'
           printf "%-60s %s\n" "========================================" "====="
 
           rm -f test_output.txt test_stats_totals.txt
@@ -121,8 +113,8 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN || '' }}
           slug: deploymenttheory/go-sdk-appleservices
           files: ./coverage.out
-          flags: unittests
-          name: codecov-umbrella
+          flags: itunes-unittests
+          name: codecov-itunes
           fail_ci_if_error: false
           verbose: true
 
@@ -130,7 +122,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
-          name: coverage-report
+          name: itunes-coverage-report
           path: coverage.out
           retention-days: 30
 
@@ -146,7 +138,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
-          name: artifact
+          name: itunes-artifact
           path: wr_actions
 
       - name: Get run url
@@ -167,5 +159,5 @@ jobs:
               issue_number: ${{ github.event.pull_request.number }},
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `<b>🧪 Unit Test Failure</b> \n\n This pull request contains failing unit tests which need to be addressed [here](${runUrl}) .`
+              body: `<b>🧪 iTunes Unit Test Failure</b> \n\n This pull request contains failing iTunes unit tests which need to be addressed [here](${runUrl}) .`
             })
