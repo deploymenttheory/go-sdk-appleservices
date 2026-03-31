@@ -10,25 +10,25 @@ import (
 	"resty.dev/v3"
 )
 
-// DevicesService handles communication with the device
+// Devices handles communication with the device
 // related methods of the Apple Business Manager API.
 //
 // Apple Business Manager API docs: https://developer.apple.com/documentation/applebusinessmanagerapi/
-type DevicesService struct {
-	client client.Client
-}
+type (
+	Devices struct {
+		client client.Client
+	}
+)
 
 // NewService creates a new devices service.
-func NewService(c client.Client) *DevicesService {
-	return &DevicesService{
-		client: c,
-	}
+func NewService(c client.Client) *Devices {
+	return &Devices{client: c}
 }
 
-// GetOrganizationDevicesV1 retrieves a list of devices in an organization that enroll using Automated Device Enrollment.
+// GetV1 retrieves a list of devices in an organization that enroll using Automated Device Enrollment.
 // URL: GET https://api-business.apple.com/v1/orgDevices
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-org-devices
-func (s *DevicesService) GetOrganizationDevicesV1(ctx context.Context, opts *RequestQueryOptions) (*OrgDevicesResponse, *resty.Response, error) {
+func (s *Devices) GetV1(ctx context.Context, opts *RequestQueryOptions) (*OrgDevicesResponse, *resty.Response, error) {
 	if opts == nil {
 		opts = &RequestQueryOptions{}
 	}
@@ -76,10 +76,10 @@ func (s *DevicesService) GetOrganizationDevicesV1(ctx context.Context, opts *Req
 	}, resp, nil
 }
 
-// GetDeviceInformationByDeviceIDV1 retrieves information about a specific device in an organization.
+// GetByDeviceIDV1 retrieves information about a specific device in an organization.
 // URL: GET https://api-business.apple.com/v1/orgDevices/{id}
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-orgdevice-information
-func (s *DevicesService) GetDeviceInformationByDeviceIDV1(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*OrgDeviceResponse, *resty.Response, error) {
+func (s *Devices) GetByDeviceIDV1(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*OrgDeviceResponse, *resty.Response, error) {
 	if deviceID == "" {
 		return nil, nil, fmt.Errorf("device ID is required")
 	}
@@ -112,10 +112,10 @@ func (s *DevicesService) GetDeviceInformationByDeviceIDV1(ctx context.Context, d
 	return &result, resp, nil
 }
 
-// GetAppleCareInformationByDeviceIDV1 retrieves AppleCare coverage information for a specific device.
+// GetAppleCareByDeviceIDV1 retrieves AppleCare coverage information for a specific device.
 // URL: GET https://api-business.apple.com/v1/orgDevices/{id}/appleCareCoverage
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-apple-care-coverage-for-an-orgdevice
-func (s *DevicesService) GetAppleCareInformationByDeviceIDV1(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*AppleCareCoverageResponse, *resty.Response, error) {
+func (s *Devices) GetAppleCareByDeviceIDV1(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*AppleCareCoverageResponse, *resty.Response, error) {
 	if deviceID == "" {
 		return nil, nil, fmt.Errorf("device ID is required")
 	}

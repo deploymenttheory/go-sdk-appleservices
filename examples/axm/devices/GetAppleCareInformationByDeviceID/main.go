@@ -49,7 +49,7 @@ your-abm-api-key
 		Limit: 100,
 	}
 
-	response, _, err := c.AXMAPI.Devices.GetAppleCareInformationByDeviceIDV1(ctx, deviceID, opts)
+	response, _, err := c.AXMAPI.Devices.GetAppleCareByDeviceIDV1(ctx, deviceID, opts)
 	if err != nil {
 		log.Fatalf("Error getting AppleCare information for device %s: %v", deviceID, err)
 	}

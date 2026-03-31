@@ -29,7 +29,7 @@ func TestAcceptance_Devices_GetOrganizationDevices(t *testing.T) {
 		ctx1, cancel1 := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer cancel1()
 
-		result, resp, err := svc.GetOrganizationDevicesV1(ctx1, nil)
+		result, resp, err := svc.GetV1(ctx1, nil)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -57,7 +57,7 @@ func TestAcceptance_Devices_GetOrganizationDevices(t *testing.T) {
 			Limit: 10,
 		}
 
-		result, resp, err := svc.GetOrganizationDevicesV1(ctx2, opts)
+		result, resp, err := svc.GetV1(ctx2, opts)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -83,7 +83,7 @@ func TestAcceptance_Devices_GetOrganizationDevices(t *testing.T) {
 
 		opts := &devices.RequestQueryOptions{Limit: 2}
 
-		result, resp, err := svc.GetOrganizationDevicesV1(ctx3, opts)
+		result, resp, err := svc.GetV1(ctx3, opts)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -109,7 +109,7 @@ func TestAcceptance_Devices_GetDeviceInformationByDeviceID(t *testing.T) {
 	listCtx, listCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 	defer listCancel()
 
-	list, _, err := svc.GetOrganizationDevicesV1(listCtx, &devices.RequestQueryOptions{
+	list, _, err := svc.GetV1(listCtx, &devices.RequestQueryOptions{
 		Fields: []string{devices.FieldSerialNumber},
 		Limit:  1,
 	})
@@ -126,7 +126,7 @@ func TestAcceptance_Devices_GetDeviceInformationByDeviceID(t *testing.T) {
 		ctx1, cancel1 := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer cancel1()
 
-		result, resp, err := svc.GetDeviceInformationByDeviceIDV1(ctx1, deviceID, nil)
+		result, resp, err := svc.GetByDeviceIDV1(ctx1, deviceID, nil)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -152,7 +152,7 @@ func TestAcceptance_Devices_GetDeviceInformationByDeviceID(t *testing.T) {
 			},
 		}
 
-		result, resp, err := svc.GetDeviceInformationByDeviceIDV1(ctx2, deviceID, opts)
+		result, resp, err := svc.GetByDeviceIDV1(ctx2, deviceID, opts)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -182,7 +182,7 @@ func TestAcceptance_Devices_GetAppleCareInformationByDeviceID(t *testing.T) {
 	listCtx, listCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 	defer listCancel()
 
-	list, _, err := svc.GetOrganizationDevicesV1(listCtx, &devices.RequestQueryOptions{
+	list, _, err := svc.GetV1(listCtx, &devices.RequestQueryOptions{
 		Fields: []string{devices.FieldSerialNumber},
 		Limit:  1,
 	})
@@ -212,7 +212,7 @@ func TestAcceptance_Devices_GetAppleCareInformationByDeviceID(t *testing.T) {
 			Limit: 100,
 		}
 
-		result, resp, err := svc.GetAppleCareInformationByDeviceIDV1(ctx1, deviceID, opts)
+		result, resp, err := svc.GetAppleCareByDeviceIDV1(ctx1, deviceID, opts)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -236,7 +236,7 @@ func TestAcceptance_Devices_GetAppleCareInformationByDeviceID(t *testing.T) {
 		ctx2, cancel2 := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer cancel2()
 
-		result, resp, err := svc.GetAppleCareInformationByDeviceIDV1(ctx2, deviceID, nil)
+		result, resp, err := svc.GetAppleCareByDeviceIDV1(ctx2, deviceID, nil)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -259,13 +259,13 @@ func TestAcceptance_Devices_ValidationErrors(t *testing.T) {
 	ctx := context.Background()
 
 	t.Run("GetDeviceInformation_EmptyID", func(t *testing.T) {
-		_, _, err := svc.GetDeviceInformationByDeviceIDV1(ctx, "", nil)
+		_, _, err := svc.GetByDeviceIDV1(ctx, "", nil)
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), "device ID is required")
 	})
 
 	t.Run("GetAppleCareInformation_EmptyID", func(t *testing.T) {
-		_, _, err := svc.GetAppleCareInformationByDeviceIDV1(ctx, "", nil)
+		_, _, err := svc.GetAppleCareByDeviceIDV1(ctx, "", nil)
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), "device ID is required")
 	})
@@ -285,7 +285,7 @@ func TestAcceptance_Devices_ContextCancellation(t *testing.T) {
 	defer cancel()
 	time.Sleep(1 * time.Millisecond) // ensure timeout has elapsed
 
-	_, _, err := svc.GetOrganizationDevicesV1(ctx, nil)
+	_, _, err := svc.GetV1(ctx, nil)
 	require.Error(t, err)
 	assert.Contains(t, err.Error(), "context deadline exceeded")
 }

@@ -58,7 +58,7 @@ your-abm-api-key
 		},
 	}
 
-	response, _, err := c.AXMAPI.Devices.GetDeviceInformationByDeviceIDV1(ctx, deviceID, opts)
+	response, _, err := c.AXMAPI.Devices.GetByDeviceIDV1(ctx, deviceID, opts)
 	if err != nil {
 		log.Fatalf("Error getting device information for %s: %v", deviceID, err)
 	}

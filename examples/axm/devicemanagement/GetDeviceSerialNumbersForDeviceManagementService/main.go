@@ -37,7 +37,7 @@ your-abm-api-key
 		Limit: 100,
 	}
 
-	response, _, err := c.AXMAPI.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, mdmServerID, opts)
+	response, _, err := c.AXMAPI.DeviceManagement.GetDeviceSerialNumbersByServerIDV1(ctx, mdmServerID, opts)
 	if err != nil {
 		log.Fatalf("Error getting device serial numbers: %v", err)
 	}

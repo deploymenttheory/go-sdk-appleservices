@@ -10,25 +10,25 @@ import (
 	"resty.dev/v3"
 )
 
-// DeviceManagementService handles communication with the device management
+// DeviceManagement handles communication with the device management
 // related methods of the Apple Business Manager API.
 //
 // Apple Business Manager API docs: https://developer.apple.com/documentation/applebusinessmanagerapi/
-type DeviceManagementService struct {
-	client client.Client
-}
+type (
+	DeviceManagement struct {
+		client client.Client
+	}
+)
 
 // NewService creates a new device management service.
-func NewService(c client.Client) *DeviceManagementService {
-	return &DeviceManagementService{
-		client: c,
-	}
+func NewService(c client.Client) *DeviceManagement {
+	return &DeviceManagement{client: c}
 }
 
-// GetDeviceManagementServicesV1 retrieves a list of device management services (MDM servers) in an organization.
+// GetV1 retrieves a list of device management services (MDM servers) in an organization.
 // URL: GET https://api-business.apple.com/v1/mdmServers
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-device-management-services
-func (s *DeviceManagementService) GetDeviceManagementServicesV1(ctx context.Context, opts *RequestQueryOptions) (*ResponseMDMServers, *resty.Response, error) {
+func (s *DeviceManagement) GetV1(ctx context.Context, opts *RequestQueryOptions) (*ResponseMDMServers, *resty.Response, error) {
 	if opts == nil {
 		opts = &RequestQueryOptions{}
 	}
@@ -76,10 +76,10 @@ func (s *DeviceManagementService) GetDeviceManagementServicesV1(ctx context.Cont
 	}, resp, nil
 }
 
-// GetDeviceSerialNumbersForDeviceManagementServiceV1 retrieves a list of device IDs assigned to an MDM server.
+// GetDeviceSerialNumbersByServerIDV1 retrieves a list of device IDs assigned to an MDM server.
 // URL: GET https://api-business.apple.com/v1/mdmServers/{id}/relationships/devices
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-device-ids-for-a-device-management-service
-func (s *DeviceManagementService) GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx context.Context, mdmServerID string, opts *RequestQueryOptions) (*ResponseMDMServerDevicesLinkages, *resty.Response, error) {
+func (s *DeviceManagement) GetDeviceSerialNumbersByServerIDV1(ctx context.Context, mdmServerID string, opts *RequestQueryOptions) (*ResponseMDMServerDevicesLinkages, *resty.Response, error) {
 	if mdmServerID == "" {
 		return nil, nil, fmt.Errorf("MDM server ID is required")
 	}
@@ -129,10 +129,10 @@ func (s *DeviceManagementService) GetDeviceSerialNumbersForDeviceManagementServi
 	}, resp, nil
 }
 
-// GetAssignedDeviceManagementServiceIDForADeviceV1 retrieves the assigned device management service ID linkage for a device.
+// GetAssignedServerIDByDeviceIDV1 retrieves the assigned device management service ID linkage for a device.
 // URL: GET https://api-business.apple.com/v1/orgDevices/{id}/relationships/assignedServer
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-the-assigned-device-management-service-id-for-an-orgdevice
-func (s *DeviceManagementService) GetAssignedDeviceManagementServiceIDForADeviceV1(ctx context.Context, deviceID string) (*ResponseOrgDeviceAssignedServerLinkage, *resty.Response, error) {
+func (s *DeviceManagement) GetAssignedServerIDByDeviceIDV1(ctx context.Context, deviceID string) (*ResponseOrgDeviceAssignedServerLinkage, *resty.Response, error) {
 	if deviceID == "" {
 		return nil, nil, fmt.Errorf("device ID is required")
 	}
@@ -154,10 +154,10 @@ func (s *DeviceManagementService) GetAssignedDeviceManagementServiceIDForADevice
 	return &result, resp, nil
 }
 
-// GetAssignedDeviceManagementServiceInformationByDeviceIDV1 retrieves the assigned device management service information for a device.
+// GetAssignedServerInfoByDeviceIDV1 retrieves the assigned device management service information for a device.
 // URL: GET https://api-business.apple.com/v1/orgDevices/{id}/assignedServer
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-the-assigned-device-management-service-information-for-an-orgdevice
-func (s *DeviceManagementService) GetAssignedDeviceManagementServiceInformationByDeviceIDV1(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*MDMServerResponse, *resty.Response, error) {
+func (s *DeviceManagement) GetAssignedServerInfoByDeviceIDV1(ctx context.Context, deviceID string, opts *RequestQueryOptions) (*MDMServerResponse, *resty.Response, error) {
 	if deviceID == "" {
 		return nil, nil, fmt.Errorf("device ID is required")
 	}
@@ -190,10 +190,10 @@ func (s *DeviceManagementService) GetAssignedDeviceManagementServiceInformationB
 	return &result, resp, nil
 }
 
-// AssignDevicesToServerV1 assigns devices to an MDM server.
+// AssignDevicesV1 assigns devices to an MDM server.
 // URL: POST https://api-business.apple.com/v1/orgDeviceActivities
 // https://developer.apple.com/documentation/applebusinessmanagerapi/create-an-orgdeviceactivity
-func (s *DeviceManagementService) AssignDevicesToServerV1(ctx context.Context, mdmServerID string, deviceIDs []string) (*ResponseOrgDeviceActivity, *resty.Response, error) {
+func (s *DeviceManagement) AssignDevicesV1(ctx context.Context, mdmServerID string, deviceIDs []string) (*ResponseOrgDeviceActivity, *resty.Response, error) {
 	if mdmServerID == "" {
 		return nil, nil, fmt.Errorf("MDM server ID is required")
 	}
@@ -245,10 +245,10 @@ func (s *DeviceManagementService) AssignDevicesToServerV1(ctx context.Context, m
 	return &result, resp, nil
 }
 
-// UnassignDevicesFromServerV1 unassigns devices from an MDM server.
+// UnassignDevicesV1 unassigns devices from an MDM server.
 // URL: POST https://api-business.apple.com/v1/orgDeviceActivities
 // https://developer.apple.com/documentation/applebusinessmanagerapi/create-an-orgdeviceactivity
-func (s *DeviceManagementService) UnassignDevicesFromServerV1(ctx context.Context, mdmServerID string, deviceIDs []string) (*ResponseOrgDeviceActivity, *resty.Response, error) {
+func (s *DeviceManagement) UnassignDevicesV1(ctx context.Context, mdmServerID string, deviceIDs []string) (*ResponseOrgDeviceActivity, *resty.Response, error) {
 	if mdmServerID == "" {
 		return nil, nil, fmt.Errorf("MDM server ID is required")
 	}

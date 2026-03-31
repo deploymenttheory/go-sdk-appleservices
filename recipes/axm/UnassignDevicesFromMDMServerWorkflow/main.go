@@ -39,7 +39,7 @@ your-abm-api-key
 	// Step 1: Discover available MDM servers
 	fmt.Println("\nStep 1: Discovering available MDM servers...")
 
-	serversResponse, _, err := c.AXMAPI.DeviceManagement.GetDeviceManagementServicesV1(ctx, &devicemanagement.RequestQueryOptions{
+	serversResponse, _, err := c.AXMAPI.DeviceManagement.GetV1(ctx, &devicemanagement.RequestQueryOptions{
 		Fields: []string{
 			devicemanagement.FieldServerName,
 			devicemanagement.FieldServerType,
@@ -74,7 +74,7 @@ your-abm-api-key
 	// Step 2: List devices assigned to the target server
 	fmt.Printf("\nStep 2: Listing devices assigned to %s...\n", targetServerName)
 
-	deviceLinkages, _, err := c.AXMAPI.DeviceManagement.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, targetServer.ID, &devicemanagement.RequestQueryOptions{
+	deviceLinkages, _, err := c.AXMAPI.DeviceManagement.GetDeviceSerialNumbersByServerIDV1(ctx, targetServer.ID, &devicemanagement.RequestQueryOptions{
 		Limit: 100,
 	})
 	if err != nil {
@@ -104,7 +104,7 @@ your-abm-api-key
 
 	fmt.Printf("\nStep 3: Unassigning %d devices from %s...\n", maxToUnassign, targetServerName)
 
-	unassignResponse, _, err := c.AXMAPI.DeviceManagement.UnassignDevicesFromServerV1(ctx, targetServer.ID, deviceIDsToUnassign)
+	unassignResponse, _, err := c.AXMAPI.DeviceManagement.UnassignDevicesV1(ctx, targetServer.ID, deviceIDsToUnassign)
 	if err != nil {
 		log.Fatalf("Error unassigning devices: %v", err)
 	}
@@ -120,7 +120,7 @@ your-abm-api-key
 
 	unassignedCount := 0
 	for _, deviceID := range deviceIDsToUnassign {
-		linkage, _, err := c.AXMAPI.DeviceManagement.GetAssignedDeviceManagementServiceIDForADeviceV1(ctx, deviceID)
+		linkage, _, err := c.AXMAPI.DeviceManagement.GetAssignedServerIDByDeviceIDV1(ctx, deviceID)
 		if err != nil {
 			// Error likely means no server assigned — success
 			unassignedCount++
