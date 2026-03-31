@@ -44,7 +44,7 @@ your-abm-api-key
 		Limit: 100,
 	}
 
-	response, _, err := c.AXMAPI.Devices.GetOrganizationDevicesV1(ctx, opts)
+	response, _, err := c.AXMAPI.Devices.GetV1(ctx, opts)
 	if err != nil {
 		log.Fatalf("Error getting organization devices: %v", err)
 	}

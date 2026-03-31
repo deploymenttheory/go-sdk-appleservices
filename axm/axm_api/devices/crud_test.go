@@ -15,7 +15,7 @@ import (
 )
 
 // setupMockClient creates a client with httpmock enabled
-func setupMockClient(t *testing.T) *DevicesService {
+func setupMockClient(t *testing.T) *Devices {
 	// Create a mock auth provider
 	mockAuth := &MockAuthProvider{}
 
@@ -66,7 +66,7 @@ func TestGetOrganizationDevices_Success(t *testing.T) {
 		Limit:  100,
 	}
 
-	result, resp, err := client.GetOrganizationDevicesV1(ctx, opts)
+	result, resp, err := client.GetV1(ctx, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -122,7 +122,7 @@ func TestGetOrganizationDevices_WithNilOptions(t *testing.T) {
 
 	ctx := context.Background()
 
-	result, resp, err := client.GetOrganizationDevicesV1(ctx, nil)
+	result, resp, err := client.GetV1(ctx, nil)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -145,7 +145,7 @@ func TestGetOrganizationDevices_WithFieldSelection(t *testing.T) {
 		Limit:  50,
 	}
 
-	result, resp, err := client.GetOrganizationDevicesV1(ctx, opts)
+	result, resp, err := client.GetV1(ctx, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -174,7 +174,7 @@ func TestGetOrganizationDevices_WithLimitEnforcement(t *testing.T) {
 		Limit: 1500, // Exceeds API maximum of 1000
 	}
 
-	result, resp, err := client.GetOrganizationDevicesV1(ctx, opts)
+	result, resp, err := client.GetV1(ctx, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -197,7 +197,7 @@ func TestGetOrganizationDevices_HTTPError(t *testing.T) {
 	ctx := context.Background()
 	opts := &RequestQueryOptions{}
 
-	result, _, err := client.GetOrganizationDevicesV1(ctx, opts)
+	result, _, err := client.GetV1(ctx, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -217,7 +217,7 @@ func TestGetDeviceInformation_Success(t *testing.T) {
 		Fields: []string{FieldSerialNumber, FieldDeviceModel, FieldStatus},
 	}
 
-	result, resp, err := client.GetDeviceInformationByDeviceIDV1(ctx, deviceID, opts)
+	result, resp, err := client.GetByDeviceIDV1(ctx, deviceID, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -268,7 +268,7 @@ func TestGetDeviceInformation_WithNilOptions(t *testing.T) {
 	ctx := context.Background()
 	deviceID := "XABC123X0ABC123X0"
 
-	result, resp, err := client.GetDeviceInformationByDeviceIDV1(ctx, deviceID, nil)
+	result, resp, err := client.GetByDeviceIDV1(ctx, deviceID, nil)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -288,7 +288,7 @@ func TestGetDeviceInformation_EmptyDeviceID(t *testing.T) {
 	ctx := context.Background()
 	opts := &RequestQueryOptions{}
 
-	result, _, err := client.GetDeviceInformationByDeviceIDV1(ctx, "", opts)
+	result, _, err := client.GetByDeviceIDV1(ctx, "", opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -308,7 +308,7 @@ func TestGetDeviceInformation_DeviceNotFound(t *testing.T) {
 	deviceID := "NONEXISTENT123"
 	opts := &RequestQueryOptions{}
 
-	result, _, err := client.GetDeviceInformationByDeviceIDV1(ctx, deviceID, opts)
+	result, _, err := client.GetByDeviceIDV1(ctx, deviceID, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -326,7 +326,7 @@ func TestGetDeviceInformation_HTTPError(t *testing.T) {
 	deviceID := "XABC123X0ABC123X0"
 	opts := &RequestQueryOptions{}
 
-	result, _, err := client.GetDeviceInformationByDeviceIDV1(ctx, deviceID, opts)
+	result, _, err := client.GetByDeviceIDV1(ctx, deviceID, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -347,7 +347,7 @@ func TestGetDeviceInformation_ContextCancellation(t *testing.T) {
 	deviceID := "XABC123X0ABC123X0"
 	opts := &RequestQueryOptions{}
 
-	result, _, err := client.GetDeviceInformationByDeviceIDV1(ctx, deviceID, opts)
+	result, _, err := client.GetByDeviceIDV1(ctx, deviceID, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -369,7 +369,7 @@ func TestGetOrganizationDevices_ContextTimeout(t *testing.T) {
 
 	opts := &RequestQueryOptions{}
 
-	result, _, err := client.GetOrganizationDevicesV1(ctx, opts)
+	result, _, err := client.GetV1(ctx, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -463,7 +463,7 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 		},
 	}
 
-	result, resp, err := client.GetDeviceInformationByDeviceIDV1(ctx, deviceID, opts)
+	result, resp, err := client.GetByDeviceIDV1(ctx, deviceID, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -511,7 +511,7 @@ func TestGetAppleCareInformation_Success(t *testing.T) {
 		Limit:  100,
 	}
 
-	result, resp, err := client.GetAppleCareInformationByDeviceIDV1(ctx, deviceID, opts)
+	result, resp, err := client.GetAppleCareByDeviceIDV1(ctx, deviceID, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -576,7 +576,7 @@ func TestGetAppleCareInformation_WithNilOptions(t *testing.T) {
 	ctx := context.Background()
 	deviceID := "XABC123X0ABC123X0"
 
-	result, resp, err := client.GetAppleCareInformationByDeviceIDV1(ctx, deviceID, nil)
+	result, resp, err := client.GetAppleCareByDeviceIDV1(ctx, deviceID, nil)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -597,7 +597,7 @@ func TestGetAppleCareInformation_EmptyDeviceID(t *testing.T) {
 	ctx := context.Background()
 	opts := &RequestQueryOptions{}
 
-	result, _, err := client.GetAppleCareInformationByDeviceIDV1(ctx, "", opts)
+	result, _, err := client.GetAppleCareByDeviceIDV1(ctx, "", opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -617,7 +617,7 @@ func TestGetAppleCareInformation_DeviceNotFound(t *testing.T) {
 	deviceID := "NONEXISTENT123"
 	opts := &RequestQueryOptions{}
 
-	result, _, err := client.GetAppleCareInformationByDeviceIDV1(ctx, deviceID, opts)
+	result, _, err := client.GetAppleCareByDeviceIDV1(ctx, deviceID, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)
@@ -645,7 +645,7 @@ func TestGetAppleCareInformation_WithFieldSelection(t *testing.T) {
 		},
 	}
 
-	result, resp, err := client.GetAppleCareInformationByDeviceIDV1(ctx, deviceID, opts)
+	result, resp, err := client.GetAppleCareByDeviceIDV1(ctx, deviceID, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -668,7 +668,7 @@ func TestGetAppleCareInformation_WithLimitEnforcement(t *testing.T) {
 		Limit: 1500, // Exceeds API maximum of 1000
 	}
 
-	result, resp, err := client.GetAppleCareInformationByDeviceIDV1(ctx, deviceID, opts)
+	result, resp, err := client.GetAppleCareByDeviceIDV1(ctx, deviceID, opts)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -691,7 +691,7 @@ func TestGetAppleCareInformation_ContextCancellation(t *testing.T) {
 	deviceID := "XABC123X0ABC123X0"
 	opts := &RequestQueryOptions{}
 
-	result, _, err := client.GetAppleCareInformationByDeviceIDV1(ctx, deviceID, opts)
+	result, _, err := client.GetAppleCareByDeviceIDV1(ctx, deviceID, opts)
 
 	require.Error(t, err)
 	assert.Nil(t, result)

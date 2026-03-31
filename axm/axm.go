@@ -14,8 +14,8 @@ type Client struct {
 
 // AXMAPIClient groups all Apple Business Manager API services.
 type AXMAPIClient struct {
-	Devices          *devices.DevicesService
-	DeviceManagement *devicemanagement.DeviceManagementService
+	Devices          *devices.Devices
+	DeviceManagement *devicemanagement.DeviceManagement
 }
 
 // NewClient creates a new Apple Business Manager client.

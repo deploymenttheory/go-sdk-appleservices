@@ -31,7 +31,7 @@ func TestAcceptance_DeviceManagement_GetDeviceManagementServices(t *testing.T) {
 		ctx1, cancel1 := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer cancel1()
 
-		result, resp, err := svc.GetDeviceManagementServicesV1(ctx1, nil)
+		result, resp, err := svc.GetV1(ctx1, nil)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -39,7 +39,7 @@ func TestAcceptance_DeviceManagement_GetDeviceManagementServices(t *testing.T) {
 		require.NotNil(t, result)
 		assert.NotEmpty(t, result.Data, "organization should have at least one MDM server")
 
-		acc.LogTestSuccess(t, "GetDeviceManagementServicesV1: found %d MDM server(s)", len(result.Data))
+		acc.LogTestSuccess(t, "GetV1: found %d MDM server(s)", len(result.Data))
 	})
 
 	// --- Field selection ---
@@ -59,7 +59,7 @@ func TestAcceptance_DeviceManagement_GetDeviceManagementServices(t *testing.T) {
 			Limit: 10,
 		}
 
-		result, resp, err := svc.GetDeviceManagementServicesV1(ctx2, opts)
+		result, resp, err := svc.GetV1(ctx2, opts)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -74,7 +74,7 @@ func TestAcceptance_DeviceManagement_GetDeviceManagementServices(t *testing.T) {
 			}
 		}
 
-		acc.LogTestSuccess(t, "GetDeviceManagementServicesV1 (fields): %d server(s)", len(result.Data))
+		acc.LogTestSuccess(t, "GetV1 (fields): %d server(s)", len(result.Data))
 	})
 
 	// --- Pagination ---
@@ -84,14 +84,14 @@ func TestAcceptance_DeviceManagement_GetDeviceManagementServices(t *testing.T) {
 		ctx3, cancel3 := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer cancel3()
 
-		result, resp, err := svc.GetDeviceManagementServicesV1(ctx3, &devicemanagement.RequestQueryOptions{Limit: 1})
+		result, resp, err := svc.GetV1(ctx3, &devicemanagement.RequestQueryOptions{Limit: 1})
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, resp.StatusCode())
 		require.NotNil(t, result)
 		assert.NotEmpty(t, result.Data, "organization should have at least one MDM server")
-		acc.LogTestSuccess(t, "GetDeviceManagementServicesV1 (limit=1 page size): %d total server(s) across all pages", len(result.Data))
+		acc.LogTestSuccess(t, "GetV1 (limit=1 page size): %d total server(s) across all pages", len(result.Data))
 	})
 }
 
@@ -115,14 +115,14 @@ func TestAcceptance_DeviceManagement_GetDeviceSerialNumbers(t *testing.T) {
 		ctx1, cancel1 := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer cancel1()
 
-		result, resp, err := svc.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx1, serverID, nil)
+		result, resp, err := svc.GetDeviceSerialNumbersByServerIDV1(ctx1, serverID, nil)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, resp.StatusCode())
 		require.NotNil(t, result)
 
-		acc.LogTestSuccess(t, "GetDeviceSerialNumbersForDeviceManagementServiceV1: %d device(s) on server %q",
+		acc.LogTestSuccess(t, "GetDeviceSerialNumbersByServerIDV1: %d device(s) on server %q",
 			len(result.Data), serverName)
 	})
 
@@ -130,7 +130,7 @@ func TestAcceptance_DeviceManagement_GetDeviceSerialNumbers(t *testing.T) {
 		ctx2, cancel2 := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer cancel2()
 
-		result, resp, err := svc.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx2, serverID,
+		result, resp, err := svc.GetDeviceSerialNumbersByServerIDV1(ctx2, serverID,
 			&devicemanagement.RequestQueryOptions{Limit: 5})
 
 		require.NoError(t, err)
@@ -159,7 +159,7 @@ func TestAcceptance_DeviceManagement_GetAssignedServiceIDForDevice(t *testing.T)
 	ctx1, cancel1 := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 	defer cancel1()
 
-	result, resp, err := svc.GetAssignedDeviceManagementServiceIDForADeviceV1(ctx1, deviceID)
+	result, resp, err := svc.GetAssignedServerIDByDeviceIDV1(ctx1, deviceID)
 
 	require.NoError(t, err)
 	require.NotNil(t, resp)
@@ -169,10 +169,10 @@ func TestAcceptance_DeviceManagement_GetAssignedServiceIDForDevice(t *testing.T)
 	assert.NotNil(t, result.Data)
 
 	if result.Data.ID != "" {
-		acc.LogTestSuccess(t, "GetAssignedDeviceManagementServiceIDForADeviceV1: device %s → server %s",
+		acc.LogTestSuccess(t, "GetAssignedServerIDByDeviceIDV1: device %s → server %s",
 			deviceID, result.Data.ID)
 	} else {
-		acc.LogTestSuccess(t, "GetAssignedDeviceManagementServiceIDForADeviceV1: device %s has no assigned server", deviceID)
+		acc.LogTestSuccess(t, "GetAssignedServerIDByDeviceIDV1: device %s has no assigned server", deviceID)
 	}
 }
 
@@ -195,7 +195,7 @@ func TestAcceptance_DeviceManagement_GetAssignedServiceInfoForDevice(t *testing.
 		ctx1, cancel1 := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer cancel1()
 
-		result, resp, err := svc.GetAssignedDeviceManagementServiceInformationByDeviceIDV1(ctx1, deviceID, nil)
+		result, resp, err := svc.GetAssignedServerInfoByDeviceIDV1(ctx1, deviceID, nil)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -205,7 +205,7 @@ func TestAcceptance_DeviceManagement_GetAssignedServiceInfoForDevice(t *testing.
 		assert.NotNil(t, result.Data.Attributes)
 
 		if result.Data.Attributes != nil {
-			acc.LogTestSuccess(t, "GetAssignedDeviceManagementServiceInformationByDeviceIDV1: server=%q type=%s",
+			acc.LogTestSuccess(t, "GetAssignedServerInfoByDeviceIDV1: server=%q type=%s",
 				result.Data.Attributes.ServerName, result.Data.Attributes.ServerType)
 		}
 	})
@@ -222,7 +222,7 @@ func TestAcceptance_DeviceManagement_GetAssignedServiceInfoForDevice(t *testing.
 			},
 		}
 
-		result, resp, err := svc.GetAssignedDeviceManagementServiceInformationByDeviceIDV1(ctx2, deviceID, opts)
+		result, resp, err := svc.GetAssignedServerInfoByDeviceIDV1(ctx2, deviceID, opts)
 
 		require.NoError(t, err)
 		require.NotNil(t, resp)
@@ -258,7 +258,7 @@ func TestAcceptance_DeviceManagement_AssignUnassign_Lifecycle(t *testing.T) {
 	listCtx, listCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 	defer listCancel()
 
-	devList, _, err := devSvc.GetOrganizationDevicesV1(listCtx, &devices.RequestQueryOptions{
+	devList, _, err := devSvc.GetV1(listCtx, &devices.RequestQueryOptions{
 		Fields: []string{devices.FieldSerialNumber},
 		Limit:  20,
 	})
@@ -267,7 +267,7 @@ func TestAcceptance_DeviceManagement_AssignUnassign_Lifecycle(t *testing.T) {
 	var unassignedDeviceID string
 	for _, dev := range devList.Data {
 		chkCtx, chkCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
-		linkage, _, linkErr := svc.GetAssignedDeviceManagementServiceIDForADeviceV1(chkCtx, dev.ID)
+		linkage, _, linkErr := svc.GetAssignedServerIDByDeviceIDV1(chkCtx, dev.ID)
 		chkCancel()
 		if linkErr != nil || (linkage != nil && linkage.Data.ID == "") {
 			unassignedDeviceID = dev.ID
@@ -285,7 +285,7 @@ func TestAcceptance_DeviceManagement_AssignUnassign_Lifecycle(t *testing.T) {
 	acc.Cleanup(t, func() {
 		cleanCtx, cleanCancel := context.WithTimeout(context.Background(), 15*time.Second)
 		defer cleanCancel()
-		_, _, unassignErr := svc.UnassignDevicesFromServerV1(cleanCtx, serverID, []string{unassignedDeviceID})
+		_, _, unassignErr := svc.UnassignDevicesV1(cleanCtx, serverID, []string{unassignedDeviceID})
 		acc.LogCleanupError(t, "device assignment", fmt.Sprintf("device=%s server=%s", unassignedDeviceID, serverID), unassignErr)
 	})
 
@@ -297,7 +297,7 @@ func TestAcceptance_DeviceManagement_AssignUnassign_Lifecycle(t *testing.T) {
 	assignCtx, assignCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 	defer assignCancel()
 
-	assignResp, assignHTTPResp, err := svc.AssignDevicesToServerV1(assignCtx, serverID, []string{unassignedDeviceID})
+	assignResp, assignHTTPResp, err := svc.AssignDevicesV1(assignCtx, serverID, []string{unassignedDeviceID})
 
 	require.NoError(t, err, "AssignDevicesToServerV1 should succeed")
 	require.NotNil(t, assignHTTPResp)
@@ -317,7 +317,7 @@ func TestAcceptance_DeviceManagement_AssignUnassign_Lifecycle(t *testing.T) {
 	assigned := acc.PollUntil(t, 15*time.Second, 2*time.Second, func() bool {
 		chkCtx, chkCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer chkCancel()
-		linkage, _, err := svc.GetAssignedDeviceManagementServiceIDForADeviceV1(chkCtx, unassignedDeviceID)
+		linkage, _, err := svc.GetAssignedServerIDByDeviceIDV1(chkCtx, unassignedDeviceID)
 		return err == nil && linkage != nil && linkage.Data.ID == serverID
 	})
 
@@ -335,7 +335,7 @@ func TestAcceptance_DeviceManagement_AssignUnassign_Lifecycle(t *testing.T) {
 	unassignCtx, unassignCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 	defer unassignCancel()
 
-	unassignResp, unassignHTTPResp, err := svc.UnassignDevicesFromServerV1(unassignCtx, serverID, []string{unassignedDeviceID})
+	unassignResp, unassignHTTPResp, err := svc.UnassignDevicesV1(unassignCtx, serverID, []string{unassignedDeviceID})
 
 	require.NoError(t, err, "UnassignDevicesFromServerV1 should succeed")
 	require.NotNil(t, unassignHTTPResp)
@@ -354,7 +354,7 @@ func TestAcceptance_DeviceManagement_AssignUnassign_Lifecycle(t *testing.T) {
 	unassigned := acc.PollUntil(t, 15*time.Second, 2*time.Second, func() bool {
 		chkCtx, chkCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 		defer chkCancel()
-		linkage, _, err := svc.GetAssignedDeviceManagementServiceIDForADeviceV1(chkCtx, unassignedDeviceID)
+		linkage, _, err := svc.GetAssignedServerIDByDeviceIDV1(chkCtx, unassignedDeviceID)
 		return err != nil || (linkage != nil && linkage.Data.ID == "")
 	})
 
@@ -377,43 +377,43 @@ func TestAcceptance_DeviceManagement_ValidationErrors(t *testing.T) {
 	ctx := context.Background()
 
 	t.Run("GetDeviceSerialNumbers_EmptyServerID", func(t *testing.T) {
-		_, _, err := svc.GetDeviceSerialNumbersForDeviceManagementServiceV1(ctx, "", nil)
+		_, _, err := svc.GetDeviceSerialNumbersByServerIDV1(ctx, "", nil)
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), "MDM server ID is required")
 	})
 
 	t.Run("GetAssignedServiceID_EmptyDeviceID", func(t *testing.T) {
-		_, _, err := svc.GetAssignedDeviceManagementServiceIDForADeviceV1(ctx, "")
+		_, _, err := svc.GetAssignedServerIDByDeviceIDV1(ctx, "")
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), "device ID is required")
 	})
 
 	t.Run("GetAssignedServiceInfo_EmptyDeviceID", func(t *testing.T) {
-		_, _, err := svc.GetAssignedDeviceManagementServiceInformationByDeviceIDV1(ctx, "", nil)
+		_, _, err := svc.GetAssignedServerInfoByDeviceIDV1(ctx, "", nil)
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), "device ID is required")
 	})
 
 	t.Run("AssignDevices_EmptyServerID", func(t *testing.T) {
-		_, _, err := svc.AssignDevicesToServerV1(ctx, "", []string{"DEVICE123"})
+		_, _, err := svc.AssignDevicesV1(ctx, "", []string{"DEVICE123"})
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), "MDM server ID is required")
 	})
 
 	t.Run("AssignDevices_EmptyDeviceIDs", func(t *testing.T) {
-		_, _, err := svc.AssignDevicesToServerV1(ctx, "SERVER123", []string{})
+		_, _, err := svc.AssignDevicesV1(ctx, "SERVER123", []string{})
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), "at least one device ID is required")
 	})
 
 	t.Run("UnassignDevices_EmptyServerID", func(t *testing.T) {
-		_, _, err := svc.UnassignDevicesFromServerV1(ctx, "", []string{"DEVICE123"})
+		_, _, err := svc.UnassignDevicesV1(ctx, "", []string{"DEVICE123"})
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), "MDM server ID is required")
 	})
 
 	t.Run("UnassignDevices_EmptyDeviceIDs", func(t *testing.T) {
-		_, _, err := svc.UnassignDevicesFromServerV1(ctx, "SERVER123", []string{})
+		_, _, err := svc.UnassignDevicesV1(ctx, "SERVER123", []string{})
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), "at least one device ID is required")
 	})
@@ -425,12 +425,12 @@ func TestAcceptance_DeviceManagement_ValidationErrors(t *testing.T) {
 
 // requireFirstMDMServer fetches the first MDM server in the org and skips the
 // test when none exist.
-func requireFirstMDMServer(t *testing.T, _ *devicemanagement.DeviceManagementService, ctx context.Context) (serverID, serverName string) {
+func requireFirstMDMServer(t *testing.T, _ *devicemanagement.DeviceManagement, ctx context.Context) (serverID, serverName string) {
 	t.Helper()
 	listCtx, listCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 	defer listCancel()
 
-	result, _, err := acc.Client.AXMAPI.DeviceManagement.GetDeviceManagementServicesV1(listCtx,
+	result, _, err := acc.Client.AXMAPI.DeviceManagement.GetV1(listCtx,
 		&devicemanagement.RequestQueryOptions{
 			Fields: []string{devicemanagement.FieldServerName},
 			Limit:  1,
@@ -455,7 +455,7 @@ func requireFirstDeviceID(t *testing.T, ctx context.Context) string {
 	listCtx, listCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 	defer listCancel()
 
-	list, _, err := acc.Client.AXMAPI.Devices.GetOrganizationDevicesV1(listCtx,
+	list, _, err := acc.Client.AXMAPI.Devices.GetV1(listCtx,
 		&devices.RequestQueryOptions{
 			Fields: []string{devices.FieldSerialNumber},
 			Limit:  1,
@@ -469,12 +469,12 @@ func requireFirstDeviceID(t *testing.T, ctx context.Context) string {
 
 // requireAssignedDevice finds and returns the ID of a device that has an assigned
 // MDM server, along with the server ID. Skips the test when none are found.
-func requireAssignedDevice(t *testing.T, svc *devicemanagement.DeviceManagementService, ctx context.Context) (deviceID, serverID string) {
+func requireAssignedDevice(t *testing.T, svc *devicemanagement.DeviceManagement, ctx context.Context) (deviceID, serverID string) {
 	t.Helper()
 	listCtx, listCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
 	defer listCancel()
 
-	devList, _, err := acc.Client.AXMAPI.Devices.GetOrganizationDevicesV1(listCtx,
+	devList, _, err := acc.Client.AXMAPI.Devices.GetV1(listCtx,
 		&devices.RequestQueryOptions{
 			Fields: []string{devices.FieldSerialNumber},
 			Limit:  20,
@@ -483,7 +483,7 @@ func requireAssignedDevice(t *testing.T, svc *devicemanagement.DeviceManagementS
 
 	for _, dev := range devList.Data {
 		chkCtx, chkCancel := context.WithTimeout(ctx, acc.Config.RequestTimeout)
-		linkage, _, linkErr := svc.GetAssignedDeviceManagementServiceIDForADeviceV1(chkCtx, dev.ID)
+		linkage, _, linkErr := svc.GetAssignedServerIDByDeviceIDV1(chkCtx, dev.ID)
 		chkCancel()
 		if linkErr == nil && linkage != nil && linkage.Data.ID != "" {
 			return dev.ID, linkage.Data.ID

@@ -43,7 +43,7 @@ your-abm-api-key
 		},
 	}
 
-	response, _, err := c.AXMAPI.DeviceManagement.GetAssignedDeviceManagementServiceInformationByDeviceIDV1(ctx, deviceID, opts)
+	response, _, err := c.AXMAPI.DeviceManagement.GetAssignedServerInfoByDeviceIDV1(ctx, deviceID, opts)
 	if err != nil {
 		log.Fatalf("Error getting assigned server information for device %s: %v", deviceID, err)
 	}

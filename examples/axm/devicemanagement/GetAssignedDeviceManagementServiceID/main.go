@@ -32,7 +32,7 @@ your-abm-api-key
 
 	deviceID := "XABC123X0ABC123X0"
 
-	response, _, err := c.AXMAPI.DeviceManagement.GetAssignedDeviceManagementServiceIDForADeviceV1(ctx, deviceID)
+	response, _, err := c.AXMAPI.DeviceManagement.GetAssignedServerIDByDeviceIDV1(ctx, deviceID)
 	if err != nil {
 		log.Fatalf("Error getting assigned server ID for device %s: %v", deviceID, err)
 	}

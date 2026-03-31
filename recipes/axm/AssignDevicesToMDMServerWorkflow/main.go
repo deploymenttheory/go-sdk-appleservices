@@ -41,7 +41,7 @@ your-abm-api-key
 	// Step 1: Discover available MDM servers
 	fmt.Println("\nStep 1: Discovering available MDM servers...")
 
-	serversResponse, _, err := c.AXMAPI.DeviceManagement.GetDeviceManagementServicesV1(ctx, &devicemanagement.RequestQueryOptions{
+	serversResponse, _, err := c.AXMAPI.DeviceManagement.GetV1(ctx, &devicemanagement.RequestQueryOptions{
 		Fields: []string{
 			devicemanagement.FieldServerName,
 			devicemanagement.FieldServerType,
@@ -76,7 +76,7 @@ your-abm-api-key
 	// Step 2: List organization devices
 	fmt.Println("\nStep 2: Listing organization devices...")
 
-	devicesResponse, _, err := c.AXMAPI.Devices.GetOrganizationDevicesV1(ctx, &devices.RequestQueryOptions{
+	devicesResponse, _, err := c.AXMAPI.Devices.GetV1(ctx, &devices.RequestQueryOptions{
 		Fields: []string{
 			devices.FieldSerialNumber,
 			devices.FieldDeviceModel,
@@ -96,7 +96,7 @@ your-abm-api-key
 	var unassignedDevices []devices.OrgDevice
 
 	for _, device := range devicesResponse.Data {
-		linkage, _, err := c.AXMAPI.DeviceManagement.GetAssignedDeviceManagementServiceIDForADeviceV1(ctx, device.ID)
+		linkage, _, err := c.AXMAPI.DeviceManagement.GetAssignedServerIDByDeviceIDV1(ctx, device.ID)
 		if err != nil {
 			// Error likely means no server assigned
 			unassignedDevices = append(unassignedDevices, device)
@@ -135,7 +135,7 @@ your-abm-api-key
 		fmt.Printf("  - %s (Serial: %s)\n", device.ID, serialNumber)
 	}
 
-	assignResponse, _, err := c.AXMAPI.DeviceManagement.AssignDevicesToServerV1(ctx, targetServer.ID, deviceIDsToAssign)
+	assignResponse, _, err := c.AXMAPI.DeviceManagement.AssignDevicesV1(ctx, targetServer.ID, deviceIDsToAssign)
 	if err != nil {
 		log.Fatalf("Error assigning devices: %v", err)
 	}
@@ -151,7 +151,7 @@ your-abm-api-key
 
 	assignedCount := 0
 	for _, device := range unassignedDevices[:maxToAssign] {
-		linkage, _, err := c.AXMAPI.DeviceManagement.GetAssignedDeviceManagementServiceIDForADeviceV1(ctx, device.ID)
+		linkage, _, err := c.AXMAPI.DeviceManagement.GetAssignedServerIDByDeviceIDV1(ctx, device.ID)
 		if err != nil {
 			fmt.Printf("  Device %s: could not verify\n", device.ID)
 			continue

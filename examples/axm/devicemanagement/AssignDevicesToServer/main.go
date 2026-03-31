@@ -37,7 +37,7 @@ your-abm-api-key
 		"YDEF456Y1DEF456Y1",
 	}
 
-	response, _, err := c.AXMAPI.DeviceManagement.AssignDevicesToServerV1(ctx, mdmServerID, deviceIDs)
+	response, _, err := c.AXMAPI.DeviceManagement.AssignDevicesV1(ctx, mdmServerID, deviceIDs)
 	if err != nil {
 		log.Fatalf("Error assigning devices to server: %v", err)
 	}
