@@ -91,7 +91,7 @@ func TestGetOrganizationDevices_Success(t *testing.T) {
 	assert.Equal(t, "SILVER", device.Attributes.Color) // Has color in list response
 	assert.Equal(t, "UNASSIGNED", device.Attributes.Status)
 	assert.Equal(t, "89049037640158663184237812557346", device.Attributes.EID)
-	assert.Equal(t, "-2085650007946880", device.Attributes.PurchaseSourceUid)
+	assert.Equal(t, "-2085650007946880", device.Attributes.PurchaseSourceId)
 	assert.Equal(t, "APPLE", device.Attributes.PurchaseSourceType)
 
 	// Test timestamp fields
@@ -241,7 +241,7 @@ func TestGetDeviceInformation_Success(t *testing.T) {
 	assert.Equal(t, "SILVER", device.Attributes.Color)
 	assert.Equal(t, "UNASSIGNED", device.Attributes.Status)
 	assert.Equal(t, "89049037640158663184237812557346", device.Attributes.EID)
-	assert.Equal(t, "-2085650007946880", device.Attributes.PurchaseSourceUid)
+	assert.Equal(t, "-2085650007946880", device.Attributes.PurchaseSourceId)
 	assert.Equal(t, "APPLE", device.Attributes.PurchaseSourceType)
 
 	// Verify timestamps are parsed correctly
@@ -396,7 +396,7 @@ func TestDeviceFieldConstants(t *testing.T) {
 		FieldEID,
 		FieldWiFiMACAddress,
 		FieldBluetoothMACAddress,
-		FieldPurchaseSourceUid,
+		FieldPurchaseSourceId,
 		FieldPurchaseSourceType,
 		FieldAssignedServer,
 	}
@@ -457,7 +457,7 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 			FieldEID,
 			FieldWiFiMACAddress,
 			FieldBluetoothMACAddress,
-			FieldPurchaseSourceUid,
+			FieldPurchaseSourceId,
 			FieldPurchaseSourceType,
 			FieldAssignedServer,
 		},
@@ -493,7 +493,7 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 	_ = attrs.EID
 	_ = attrs.WiFiMACAddress
 	_ = attrs.BluetoothMACAddress
-	_ = attrs.PurchaseSourceUid
+	_ = attrs.PurchaseSourceId
 	_ = attrs.PurchaseSourceType
 	_ = attrs.AssignedServer
 }

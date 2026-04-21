@@ -47,7 +47,8 @@ type OrgDeviceAttributes struct {
 	EID                 string     `json:"eid,omitempty"`
 	WiFiMACAddress      string     `json:"wifiMacAddress,omitempty"`
 	BluetoothMACAddress string     `json:"bluetoothMacAddress,omitempty"`
-	PurchaseSourceUid   string     `json:"purchaseSourceUid,omitempty"`
+	EthernetMACAddress  []string   `json:"ethernetMacAddress,omitempty"`
+	PurchaseSourceId    string     `json:"purchaseSourceId,omitempty"`
 	PurchaseSourceType  string     `json:"purchaseSourceType,omitempty"`
 	AssignedServer      string     `json:"assignedServer,omitempty"`
 }
@@ -78,8 +79,8 @@ type RequestQueryOptions struct {
 	// Field selection - fields to return for orgDevices
 	// Possible values: serialNumber, addedToOrgDateTime, updatedDateTime, deviceModel,
 	// productFamily, productType, deviceCapacity, partNumber, orderNumber, color, status,
-	// orderDateTime, imei, meid, eid, wifiMacAddress, bluetoothMacAddress, purchaseSourceId,
-	// purchaseSourceType, assignedServer
+	// orderDateTime, imei, meid, eid, wifiMacAddress, bluetoothMacAddress, ethernetMacAddress,
+	// purchaseSourceId, purchaseSourceType, assignedServer
 	Fields []string `json:"fields,omitempty"`
 
 	// Limit the number of included related resources to return (max 1000)

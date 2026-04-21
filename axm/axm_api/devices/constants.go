@@ -51,7 +51,8 @@ const (
 	FieldEID                 = "eid"
 	FieldWiFiMACAddress      = "wifiMacAddress"
 	FieldBluetoothMACAddress = "bluetoothMacAddress"
-	FieldPurchaseSourceUid   = "purchaseSourceUid"
+	FieldEthernetMACAddress  = "ethernetMacAddress"
+	FieldPurchaseSourceId    = "purchaseSourceId"
 	FieldPurchaseSourceType  = "purchaseSourceType"
 	FieldAssignedServer      = "assignedServer"
 )
