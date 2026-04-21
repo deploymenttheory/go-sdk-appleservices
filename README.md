@@ -4,11 +4,11 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/deploymenttheory/go-api-sdk-apple)](https://goreportcard.com/report/github.com/deploymenttheory/go-api-sdk-apple)
 [![License](https://img.shields.io/github/license/deploymenttheory/go-api-sdk-apple)](https://github.com/deploymenttheory/go-api-sdk-apple/blob/main/LICENSE)
 
-This repo offers a collection of Go based SDKs and tools for interacting with various Apple API services and device management services, including:
+A collection of Go SDKs for interacting with Apple API services and device management infrastructure:
 
-- iTunes Search API
-- Apple Business Manager / Apple School Manager API
-- Apple Device Management API (MDM)
+- **iTunes Search API** — search and lookup across the iTunes, App Store, iBooks Store, and Mac App Store
+- **Apple Business Manager / Apple School Manager API** — device inventory and MDM server management
+- **Apple Update CDN** — firmware discovery and IPSW download for macOS, iOS, and iPadOS
 
 ## Features
 
@@ -20,19 +20,23 @@ This repo offers a collection of Go based SDKs and tools for interacting with va
 - Extensive test coverage
 - Complete examples for all supported operations
 
+---
+
 ## Supported Services
 
 ### iTunes Search API
 
-The SDK provides a complete implementation of the [iTunes Search API](https://performance-partners.apple.com/search-api), allowing you to:
+Complete implementation of the [iTunes Search API](https://performance-partners.apple.com/search-api):
 
 - Search for content across iTunes, App Store, iBooks Store, and Mac App Store
 - Look up content by ID, UPC, EAN, ISRC, or ISBN
 - Filter results by media type, entity, country, and more
 
+---
+
 ### Apple Business Manager / Apple School Manager API
 
-Complete implementation of the [Apple Business Manager API](https://developer.apple.com/documentation/applebusinessmanagerapi) with modern Go practices:
+Complete implementation of the [Apple Business Manager API](https://developer.apple.com/documentation/applebusinessmanagerapi):
 
 **Devices API:**
 - Get organization devices with filtering and pagination
@@ -47,17 +51,12 @@ Complete implementation of the [Apple Business Manager API](https://developer.ap
 - Track device activity operations
 
 **Key Features:**
-- **Centralized Architecture**: Unified error handling, pagination, and query building
-- **Resty v3 Integration**: Built on latest Resty v3 with best practices
-- **JWT Authentication**: Built-in Apple JWT token generation and management
-- **Structured Logging**: Comprehensive request/response logging with zap
-- **Type Safety**: Full generics support with structured response models
-- **Pagination**: Automatic pagination with iterators and collectors
-- **Context Support**: Context-aware operations for timeouts and cancellation
+- JWT authentication — built-in Apple JWT token generation and management
+- Structured logging — comprehensive request/response logging with zap
+- Type-safe structured response models
+- Context-aware operations for timeouts and cancellation
 
 **Quick Start:**
-
-Get started quickly with the GitLab-style client pattern:
 
 ```go
 package main
@@ -122,22 +121,118 @@ func main() {
 
 📖 **[Complete Quick Start Guide →](./examples/axm/quick_start.md)**
 
-### Apple Device Management API
+---
 
-Integration with [Apple Device Management](https://developer.apple.com/documentation/devicemanagement) for:
+### Apple Update CDN
 
-- Mobile Device Management (MDM) operations
-- Configuration profile management
-- App and book distribution
-- Declarative device management
+Firmware discovery and IPSW download across macOS, iOS, and iPadOS — no authentication required.
+
+The SDK spans three external APIs:
+
+| Service | Host | Purpose |
+|---------|------|---------|
+| ipsw.me API | `api.ipsw.me` | Firmware discovery with CDN download URLs, checksums, signing status |
+| Apple GDMF API | `gdmf.apple.com` | Official Apple feed of currently-signed firmware versions |
+| Apple CDN | `updates.cdn-apple.com` | URL parsing, HEAD metadata, streaming IPSW downloads |
+
+**Firmware discovery (ipsw.me API):**
+- `ListAllFirmwareV3` — all device platforms unfiltered
+- `ListAllMacFirmwareV3` / `ListAllIOSFirmwareV3` / `ListAllIPadOSFirmwareV3` — per-platform filtered lists
+- `ListUniqueMacFirmwareVersionsV3` / `ListUniqueIOSFirmwareVersionsV3` / `ListUniqueIPadOSFirmwareVersionsV3` — deduplicated versions sorted newest-first
+- `GetByDeviceV4` — firmware history for a specific model identifier (e.g. `"Mac14,3"`, `"iPhone15,2"`, `"iPad14,4"`) with SHA-256 checksums
+
+**Apple GDMF (signed version feed):**
+- `GetPublicVersionsV2` — Apple's authoritative list of currently-signed versions for macOS, iOS, and visionOS including posting/expiration dates and supported device lists
+
+**CDN utilities:**
+- `ParseURL` — parse an IPSW CDN URL into its structural components (no HTTP request)
+- `GetFileMetadataV1` — HEAD request returning SHA-1, SHA-256, file size, and last-modified without downloading the file
+- `DownloadFileV1` — streaming IPSW download with SHA-1/SHA-256 verification and progress callback
+
+**Quick Start:**
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "os"
+    "path/filepath"
+
+    "github.com/deploymenttheory/go-api-sdk-apple/apple_update_cdn"
+    "github.com/deploymenttheory/go-api-sdk-apple/apple_update_cdn/tools/download_progress"
+)
+
+func main() {
+    c, err := apple_update_cdn.NewDefaultClient()
+    if err != nil {
+        log.Fatalf("Failed to create client: %v", err)
+    }
+    defer c.Close()
+
+    ctx := context.Background()
+
+    // List all unique macOS firmware versions, newest first.
+    versions, _, err := c.AppleUpdateCDNAPI.Firmware.ListUniqueMacFirmwareVersionsV3(ctx)
+    if err != nil {
+        log.Fatalf("Error listing firmware: %v", err)
+    }
+
+    fmt.Printf("Found %d unique macOS versions\n", len(versions))
+    for _, fw := range versions[:3] {
+        fmt.Printf("  %s (%s) signed=%v\n", fw.Version, fw.BuildID, fw.Signed)
+    }
+
+    // Download the latest signed macOS IPSW with a progress bar.
+    latest := versions[0]
+    destPath := filepath.Join(os.TempDir(), filepath.Base(latest.URL))
+
+    bar := download_progress.New(os.Stderr)
+    progressFn := func(written, total int64) {
+        bar.Callback(filepath.Base(destPath))(written, total)
+    }
+
+    result, _, err := c.AppleUpdateCDNAPI.CDN.DownloadFileV1(ctx, latest.URL, destPath, progressFn)
+    if err != nil {
+        log.Fatalf("Download failed: %v", err)
+    }
+
+    fmt.Printf("\nDownloaded %.2f GB in %s — verified=%v\n",
+        float64(result.BytesWritten)/1e9, result.Duration.Round(1e9), result.Verified)
+}
+```
+
+**Download behaviour:**
+- Issues a HEAD request first to obtain expected size and checksums
+- Streams the response body directly to disk — the full file is never held in memory
+- Computes SHA-1 and SHA-256 simultaneously during streaming via `io.MultiWriter`
+- Removes the partial file and returns an error on checksum mismatch or GET failure
+- Creates the destination directory automatically if it does not exist
+- macOS IPSW files are typically 15–22 GB; ensure sufficient free space
+
+---
 
 ## Examples
 
-Explore the [examples directory](./examples) for comprehensive examples of using the SDK with different Apple services.
+The [examples directory](./examples) contains a runnable `main.go` for every SDK function:
+
+```
+examples/
+├── axm/                    Apple Business Manager
+│   ├── devices/
+│   └── devicemanagement/
+├── apple_update_cdn/       Apple Update CDN
+│   ├── firmware/           ipsw.me firmware discovery
+│   ├── gdmf/               Apple signed-version feed
+│   └── cdn/                URL parsing, metadata, download
+└── itunes_search/          iTunes Search API
+```
+
+---
 
 ## Documentation
-
-For detailed documentation, see:
 
 - [Go Reference Documentation](https://pkg.go.dev/github.com/deploymenttheory/go-api-sdk-apple)
 - [iTunes Search API Documentation](https://performance-partners.apple.com/search-api)
