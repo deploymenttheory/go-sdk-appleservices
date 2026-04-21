@@ -1,0 +1,37 @@
+{
+  "name": "Mac mini (M2, 2023)",
+  "identifier": "Mac14,3",
+  "boardconfig": "J473AP",
+  "platform": "REALBRIDGE",
+  "cpid": 35200,
+  "bdid": 12,
+  "boards": ["J473AP"],
+  "firmwares": [
+    {
+      "identifier": "Mac14,3",
+      "version": "15.3",
+      "buildid": "24D60",
+      "sha1sum": "abc123def456abc123def456abc123def456abc1",
+      "md5sum": "fedcba9876543210fedcba9876543210",
+      "sha256sum": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890ab",
+      "filesize": 19734779897,
+      "url": "https://updates.cdn-apple.com/2025WinterFCS/fullrestores/122-12345/AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/UniversalMac_15.3_24D60_Restore.ipsw",
+      "releasedate": "2025-01-27T00:00:00Z",
+      "uploaddate": "2025-01-25T00:00:00Z",
+      "signed": true
+    },
+    {
+      "identifier": "Mac14,3",
+      "version": "15.2",
+      "buildid": "24C101",
+      "sha1sum": "aabbccddeeff0011aabbccddeeff0011aabbccdd",
+      "md5sum": "11223344556677889900aabbccddeeff",
+      "sha256sum": "fedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321fe",
+      "filesize": 19500000000,
+      "url": "https://updates.cdn-apple.com/2024FallFCS/fullrestores/122-11111/BBBBBBBB-CCCC-DDDD-EEEE-FFFFFFFFFFFF/UniversalMac_15.2_24C101_Restore.ipsw",
+      "releasedate": "2024-12-11T00:00:00Z",
+      "uploaddate": "2024-12-09T00:00:00Z",
+      "signed": false
+    }
+  ]
+}

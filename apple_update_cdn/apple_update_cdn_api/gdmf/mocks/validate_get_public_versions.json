@@ -1,0 +1,49 @@
+{
+  "PublicAssetSets": {
+    "iOS": [
+      {
+        "ProductVersion": "18.3",
+        "Build": "22D60",
+        "PostingDate": "2025-01-27",
+        "ExpirationDate": "2025-05-01",
+        "SupportedDevices": ["iPhone15,2", "iPhone15,3", "iPhone16,1"]
+      }
+    ],
+    "macOS": [
+      {
+        "ProductVersion": "15.3",
+        "Build": "24D60",
+        "PostingDate": "2025-01-27",
+        "ExpirationDate": "2025-05-01",
+        "SupportedDevices": ["J473AP", "J316cAP", "Mac-1E7E29AD0135F9BC"]
+      }
+    ],
+    "visionOS": [
+      {
+        "ProductVersion": "2.3",
+        "Build": "22N330",
+        "PostingDate": "2025-01-27",
+        "ExpirationDate": "2025-05-01",
+        "SupportedDevices": ["RealityDevice14,1"]
+      }
+    ]
+  },
+  "AssetSets": {
+    "iOS": [],
+    "macOS": [
+      {
+        "ProductVersion": "15.3.1",
+        "Build": "24D70",
+        "PostingDate": "2025-02-05",
+        "ExpirationDate": "2025-05-15",
+        "SupportedDevices": ["J473AP", "J316cAP"]
+      }
+    ],
+    "visionOS": []
+  },
+  "PublicBackgroundSecurityImprovements": {
+    "iOS": [],
+    "macOS": [],
+    "visionOS": []
+  }
+}
