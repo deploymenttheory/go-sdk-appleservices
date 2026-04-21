@@ -66,37 +66,35 @@ import (
     "context"
     "fmt"
     "log"
-    
+
     "github.com/deploymenttheory/go-api-sdk-apple/axm"
-    "github.com/deploymenttheory/go-api-sdk-apple/axm/client"
-    "github.com/deploymenttheory/go-api-sdk-apple/axm/services/devices"
-    "github.com/deploymenttheory/go-api-sdk-apple/axm/services/devicemanagement"
+    "github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devicemanagement"
+    "github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devices"
 )
 
 func main() {
-    // Method 1: Direct client creation (GitLab-style)
-    // Parse private key from PEM format
-    privateKey, err := client.ParsePrivateKey([]byte(privateKeyPEM))
+    // Method 1: Direct client creation — parse private key from PEM
+    privateKey, err := axm.ParsePrivateKey([]byte(privateKeyPEM))
     if err != nil {
         log.Fatalf("Failed to parse private key: %v", err)
     }
-    
-    client, err := axm.NewClient("your-key-id", "your-issuer-id", privateKey)
+
+    c, err := axm.NewClient("your-key-id", "your-issuer-id", privateKey)
     if err != nil {
         log.Fatalf("Failed to create client: %v", err)
     }
 
     // Method 2: From environment variables
-    // client, err := axm.NewClientFromEnv()
+    // c, err := axm.NewClientFromEnv()
     // Expects: APPLE_KEY_ID, APPLE_ISSUER_ID, APPLE_PRIVATE_KEY_PATH
 
     // Method 3: From file
-    // client, err := axm.NewClientFromFile("key-id", "issuer-id", "/path/to/key.p8")
+    // c, err := axm.NewClientFromFile("key-id", "issuer-id", "/path/to/key.p8")
 
     ctx := context.Background()
 
-    // Get organization devices - GitLab-style access
-    response, err := client.Devices.GetOrganizationDevices(ctx, &devices.RequestQueryOptions{
+    // Get organization devices
+    response, _, err := c.AXMAPI.Devices.GetV1(ctx, &devices.RequestQueryOptions{
         Fields: []string{
             devices.FieldSerialNumber,
             devices.FieldDeviceModel,
@@ -110,21 +108,19 @@ func main() {
 
     fmt.Printf("Found %d devices\n", len(response.Data))
 
-    // Get device management services - GitLab-style access
-    services, err := client.DeviceManagement.GetDeviceManagementServices(ctx, &devicemanagement.RequestQueryOptions{
+    // Get device management services
+    mdmServers, _, err := c.AXMAPI.DeviceManagement.GetV1(ctx, &devicemanagement.RequestQueryOptions{
         Limit: 10,
     })
     if err != nil {
-        log.Fatalf("Error getting services: %v", err)
+        log.Fatalf("Error getting MDM servers: %v", err)
     }
 
-    fmt.Printf("Found %d MDM servers\n", len(services.Data))
+    fmt.Printf("Found %d MDM servers\n", len(mdmServers.Data))
 }
 ```
 
 📖 **[Complete Quick Start Guide →](./examples/axm/quick_start.md)**
-
-The guide covers 6 different client setup methods, from simple environment variables to advanced builder patterns with full customization options.
 
 ### Apple Device Management API
 
