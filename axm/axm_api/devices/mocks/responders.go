@@ -238,7 +238,7 @@ func (m *OrgDevicesMock) seedTestDevice() {
 			"imei":               []string{"123456789012345", "123456789012346"},
 			"meid":               []string{"12345678901237"},
 			"eid":                "89049037640158663184237812557346",
-			"purchaseSourceUid":  "-2085650007946880",
+			"purchaseSourceId":   "-2085650007946880",
 			"purchaseSourceType": "APPLE",
 		},
 		"relationships": map[string]any{

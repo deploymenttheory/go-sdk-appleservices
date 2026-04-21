@@ -53,7 +53,7 @@ your-abm-api-key
 			devices.FieldEID,
 			devices.FieldWiFiMACAddress,
 			devices.FieldBluetoothMACAddress,
-			devices.FieldPurchaseSourceUid,
+			devices.FieldPurchaseSourceId,
 			devices.FieldPurchaseSourceType,
 		},
 	}
@@ -104,8 +104,8 @@ your-abm-api-key
 		if device.Attributes.BluetoothMACAddress != "" {
 			fmt.Printf("  Bluetooth MAC: %s\n", device.Attributes.BluetoothMACAddress)
 		}
-		if device.Attributes.PurchaseSourceUid != "" {
-			fmt.Printf("  Purchase Source UID: %s\n", device.Attributes.PurchaseSourceUid)
+		if device.Attributes.PurchaseSourceId != "" {
+			fmt.Printf("  Purchase Source ID: %s\n", device.Attributes.PurchaseSourceId)
 		}
 		if device.Attributes.PurchaseSourceType != "" {
 			fmt.Printf("  Purchase Source Type: %s\n", device.Attributes.PurchaseSourceType)
