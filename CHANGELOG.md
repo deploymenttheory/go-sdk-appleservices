@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.3.1...v0.4.0) (2026-04-21)
+
+
+### Features
+
+* add apple_update_cdn SDK for firmware discovery and IPSW downloads ([6e02b88](https://github.com/deploymenttheory/go-sdk-appleservices/commit/6e02b88b5400c8ca729507c54abdc8103746133e))
+
+
+### Bug Fixes
+
+* update device attribute constants and field names ([7ef7c7a](https://github.com/deploymenttheory/go-sdk-appleservices/commit/7ef7c7a12c67f32aef21e8b483047c03673131d9))
+* update device attribute constants and field names ([23d8521](https://github.com/deploymenttheory/go-sdk-appleservices/commit/23d8521902126bfe7f9c6d04de349814de683b3e))
+* update README for API client usage ([87d759b](https://github.com/deploymenttheory/go-sdk-appleservices/commit/87d759b0adad26c24dd1f330189dfa3cf79d000b))
+* update README for API client usage ([468a261](https://github.com/deploymenttheory/go-sdk-appleservices/commit/468a261c221dfe6a6110fc252da3539a7315c136))
+
 ## [0.3.1](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.3.0...v0.3.1) (2026-03-29)
 
 
