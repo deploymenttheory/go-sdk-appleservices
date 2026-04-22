@@ -1,0 +1,22 @@
+[
+  {
+    "Product": "stable",
+    "Releases": [
+      {
+        "ReleaseVersion": "147.0.3912.72",
+        "PublishedTime": "2026-04-18T12:00:00Z",
+        "Platform": "MacOS",
+        "Architecture": "universal",
+        "Artifacts": [
+          {
+            "ArtifactName": "pkg",
+            "Location": "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/test/MicrosoftEdge-147.0.3912.72.pkg",
+            "SizeInBytes": 452345678,
+            "Hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "HashAlgorithm": "SHA256"
+          }
+        ]
+      }
+    ]
+  }
+]

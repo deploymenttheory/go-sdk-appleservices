@@ -1,0 +1,18 @@
+{
+  "resultCount": 1,
+  "results": [
+    {
+      "trackId": 462054704,
+      "trackName": "Microsoft Word",
+      "bundleId": "com.microsoft.Word",
+      "version": "16.108.0",
+      "currentVersionReleaseDate": "2026-04-19T10:00:00Z",
+      "minimumOsVersion": "14.0",
+      "releaseNotes": "Various bug fixes and performance improvements.",
+      "artworkUrl512": "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/a0/9d/b1/a09db1f1-word-icon.png/512x512bb.jpg",
+      "trackViewUrl": "https://apps.apple.com/us/app/microsoft-word/id462054704?mt=12",
+      "price": 0.0,
+      "sellerName": "Microsoft Corporation"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "resultCount": 1,
+  "results": [
+    {
+      "trackId": 586447913,
+      "trackName": "Microsoft Word",
+      "bundleId": "com.microsoft.Office.Word",
+      "version": "2.108.0",
+      "currentVersionReleaseDate": "2026-04-19T10:00:00Z",
+      "minimumOsVersion": "16.0",
+      "releaseNotes": "Various bug fixes and performance improvements.",
+      "artworkUrl512": "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/a0/9d/b1/word-ios-icon.png/512x512bb.jpg",
+      "trackViewUrl": "https://apps.apple.com/us/app/microsoft-word/id586447913",
+      "price": 0.0,
+      "sellerName": "Microsoft Corporation"
+    }
+  ]
+}
