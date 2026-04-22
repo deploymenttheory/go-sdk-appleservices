@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Title</key>
+		<string>Microsoft Word</string>
+		<key>Update Version</key>
+		<string>16.108.26041915</string>
+		<key>Short Version</key>
+		<string>16.108.1</string>
+		<key>Full Version</key>
+		<string>16.108.26041915</string>
+		<key>Minimum OS</key>
+		<string>14.0</string>
+		<key>Location</key>
+		<string>https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Word_16.108.26041915_Updater.pkg</string>
+		<key>App Only Location</key>
+		<string>https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Word_16.108.26041915_AppOnly_Updater.pkg</string>
+		<key>Hash</key>
+		<string>abc123def456abc123def456abc123def456abc123def=</string>
+		<key>Hash SHA-256</key>
+		<string>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</string>
+		<key>App Only Hash</key>
+		<string>xyz789abc123xyz789abc123xyz789abc123xyz789abc=</string>
+		<key>App Only Hash SHA-256</key>
+		<string>a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3</string>
+		<key>Date</key>
+		<string>04/19/2026</string>
+	</dict>
+</array>
+</plist>

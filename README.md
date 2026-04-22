@@ -4,11 +4,12 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/deploymenttheory/go-api-sdk-apple)](https://goreportcard.com/report/github.com/deploymenttheory/go-api-sdk-apple)
 [![License](https://img.shields.io/github/license/deploymenttheory/go-api-sdk-apple)](https://github.com/deploymenttheory/go-api-sdk-apple/blob/main/LICENSE)
 
-A collection of Go SDKs for interacting with Apple API services and device management infrastructure:
+A collection of Go SDKs for interacting with Apple API services, device management infrastructure, and Microsoft software update feeds:
 
 - **iTunes Search API** — search and lookup across the iTunes, App Store, iBooks Store, and Mac App Store
 - **Apple Business Manager / Apple School Manager API** — device inventory and MDM server management
 - **Apple Update CDN** — firmware discovery and IPSW download for macOS, iOS, and iPadOS
+- **Microsoft Updates** — macOS standalone app updates, Edge channels, OneDrive rings, App Store versions, and Office CVE history
 
 ## Features
 
@@ -214,20 +215,106 @@ func main() {
 
 ---
 
+### Microsoft Updates
+
+Tracks Microsoft software releases for macOS and iOS from official Microsoft endpoints — no authentication required. Replicates the data-collection logic of the [MOFA project](https://github.com/cocopuff2u/MOFA) in pure Go.
+
+The SDK spans multiple external APIs:
+
+| Sub-service | Host | Purpose |
+|---|---|---|
+| `standalone` | `officecdnmac.microsoft.com` | Production Office CDN — plist XML per app |
+| `standalone_beta` | `officecdnmac.microsoft.com` | Insider Fast (beta) channel |
+| `standalone_preview` | `officecdnmac.microsoft.com` | Insider Slow (preview) channel |
+| `edge` | `edgeupdates.microsoft.com` | Edge stable / beta / dev / canary |
+| `onedrive` | `g.live.com` + fwlink redirects | OneDrive distribution rings |
+| `appstore_macos` | `itunes.apple.com` | Microsoft apps in the macOS App Store |
+| `appstore_ios` | `itunes.apple.com` | Microsoft apps in the iOS App Store |
+| `update_history` | `learn.microsoft.com` | Office for Mac release table (HTML) |
+| `cve_history` | `learn.microsoft.com` | Office for Mac CVE/security notes (HTML) |
+
+**Standalone apps tracked (17):** Word, Excel, PowerPoint, Outlook, OneNote, Teams, Skype for Business, Defender (Endpoint/Consumer/Shim), Intune Company Portal, Microsoft AutoUpdate, Windows App, Microsoft 365 Copilot, Quick Assist, Remote Help, Licensing Helper Tool.
+
+**Quick Start:**
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    microsoft_updates "github.com/deploymenttheory/go-api-sdk-apple/microsoft_updates"
+)
+
+func main() {
+    c, err := microsoft_updates.NewDefaultClient()
+    if err != nil {
+        log.Fatalf("Failed to create client: %v", err)
+    }
+    defer c.Close()
+
+    ctx := context.Background()
+
+    // Get latest production standalone app versions from the Microsoft CDN.
+    resp, err := c.MicrosoftUpdatesAPI.Standalone.GetLatestV1(ctx)
+    if err != nil {
+        log.Fatalf("Error getting standalone apps: %v", err)
+    }
+    for _, pkg := range resp.Packages {
+        fmt.Printf("%-40s %s\n", pkg.Title, pkg.FullVersion)
+    }
+
+    // Get Microsoft Edge across all four channels.
+    edge, err := c.MicrosoftUpdatesAPI.Edge.GetAllChannelsV1(ctx)
+    if err != nil {
+        log.Fatalf("Error getting Edge channels: %v", err)
+    }
+    fmt.Printf("Edge stable: %s\n", edge.Stable.Version)
+    fmt.Printf("Edge canary: %s\n", edge.Canary.Version)
+
+    // Get OneDrive version per distribution ring.
+    od, err := c.MicrosoftUpdatesAPI.OneDrive.GetAllRingsV1(ctx)
+    if err != nil {
+        log.Fatalf("Error getting OneDrive rings: %v", err)
+    }
+    for _, ring := range od.Rings {
+        fmt.Printf("OneDrive %-20s %s\n", ring.Ring, ring.Version)
+    }
+
+    // Get Office CVE history.
+    cves, err := c.MicrosoftUpdatesAPI.CVEHistory.GetCVEHistoryV1(ctx)
+    if err != nil {
+        log.Fatalf("Error getting CVE history: %v", err)
+    }
+    fmt.Printf("CVE history entries: %d\n", len(cves.Entries))
+}
+```
+
+---
+
 ## Examples
 
 The [examples directory](./examples) contains a runnable `main.go` for every SDK function:
 
 ```
 examples/
-├── axm/                    Apple Business Manager
+├── axm/                         Apple Business Manager
 │   ├── devices/
 │   └── devicemanagement/
-├── apple_update_cdn/       Apple Update CDN
-│   ├── firmware/           ipsw.me firmware discovery
-│   ├── gdmf/               Apple signed-version feed
-│   └── cdn/                URL parsing, metadata, download
-└── itunes_search/          iTunes Search API
+├── apple_update_cdn/            Apple Update CDN
+│   ├── firmware/                ipsw.me firmware discovery
+│   ├── gdmf/                    Apple signed-version feed
+│   └── cdn/                     URL parsing, metadata, download
+├── itunes_search/               iTunes Search API
+└── microsoft_updates/           Microsoft Updates
+    ├── standalone/              CDN app versions (production/beta/preview)
+    ├── edge/                    Edge channel versions
+    ├── onedrive/                OneDrive distribution rings
+    ├── appstore/                macOS and iOS App Store versions
+    ├── update_history/          Office for Mac update history
+    └── cve_history/             Office CVE/security release notes
 ```
 
 ---
@@ -238,6 +325,7 @@ examples/
 - [iTunes Search API Documentation](https://performance-partners.apple.com/search-api)
 - [Apple Business Manager API Documentation](https://developer.apple.com/documentation/applebusinessmanagerapi)
 - [Apple Device Management Documentation](https://developer.apple.com/documentation/devicemanagement)
+- [Microsoft Office CDN (MOFA reference)](https://github.com/cocopuff2u/MOFA)
 
 ## Contributing
 

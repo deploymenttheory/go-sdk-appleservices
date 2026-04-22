@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MicrosoftUpdateCatalog>
+  <UpdateInfo>
+    <AppID>ONDR18</AppID>
+    <Version>26.062.0402</Version>
+    <BuildVersion>26.062.0402.0001</BuildVersion>
+    <PackageURL>https://oneclient.sfx.ms/Mac/Installers/26.062.0402.0001/universal/OneDrive.pkg</PackageURL>
+  </UpdateInfo>
+</MicrosoftUpdateCatalog>
