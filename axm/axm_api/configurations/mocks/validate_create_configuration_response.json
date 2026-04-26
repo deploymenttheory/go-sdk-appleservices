@@ -1,0 +1,25 @@
+{
+  "data": {
+    "type": "configurations",
+    "id": "config-new-456",
+    "attributes": {
+      "type": "CUSTOM_SETTING",
+      "name": "AirPlay Security Settings",
+      "configuredForPlatforms": [
+        "PLATFORM_IOS"
+      ],
+      "customSettingsValues": {
+        "configurationProfile": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>...",
+        "filename": "Airplay.mobileconfig"
+      },
+      "createdDateTime": "2024-06-15T10:30:00Z",
+      "updatedDateTime": "2024-06-15T10:30:00Z"
+    },
+    "links": {
+      "self": "https://api-business.apple.com/v1/configurations/config-new-456"
+    }
+  },
+  "links": {
+    "self": "https://api-business.apple.com/v1/configurations/config-new-456"
+  }
+}

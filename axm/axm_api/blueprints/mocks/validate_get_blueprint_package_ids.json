@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "type": "packages",
+      "id": "pkg-12345"
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/packages"
+  },
+  "meta": {
+    "paging": {
+      "limit": 100
+    }
+  }
+}

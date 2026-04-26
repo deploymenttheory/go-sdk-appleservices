@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "type": "users",
+      "id": "1234567890",
+      "attributes": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "middleName": "A",
+        "status": "ACTIVE",
+        "managedAppleAccount": "john.doe@appleid.example.com",
+        "isExternalUser": false,
+        "roleOuList": [
+          {
+            "roleName": "Administrator",
+            "ouId": "OU123456"
+          }
+        ],
+        "email": "john.doe@example.com",
+        "employeeNumber": "EMP001",
+        "costCenter": "CC100",
+        "division": "Engineering",
+        "department": "IT",
+        "jobTitle": "Software Engineer",
+        "startDateTime": "2023-01-15T08:00:00Z",
+        "createdDateTime": "2023-01-10T10:30:00Z",
+        "updatedDateTime": "2024-06-01T14:22:00Z",
+        "phoneNumbers": [
+          {
+            "phoneNumber": "+1-555-123-4567",
+            "type": "WORK"
+          }
+        ]
+      },
+      "links": {
+        "self": "https://api-business.apple.com/v1/users/1234567890"
+      }
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple.com/v1/users"
+  },
+  "meta": {
+    "paging": {
+      "limit": 100
+    }
+  }
+}

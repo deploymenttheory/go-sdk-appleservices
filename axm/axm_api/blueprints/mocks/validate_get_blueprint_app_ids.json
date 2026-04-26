@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "type": "apps",
+      "id": "361309726"
+    },
+    {
+      "type": "apps",
+      "id": "409201541"
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/apps"
+  },
+  "meta": {
+    "paging": {
+      "limit": 100
+    }
+  }
+}

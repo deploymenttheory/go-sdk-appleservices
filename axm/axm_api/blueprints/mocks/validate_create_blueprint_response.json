@@ -1,0 +1,52 @@
+{
+  "data": {
+    "type": "blueprints",
+    "id": "blueprint-new-123",
+    "attributes": {
+      "name": "Marketing Team Blueprint",
+      "description": "Apps and settings for marketing team members",
+      "status": "ACTIVE",
+      "appLicenseDeficient": false,
+      "createdDateTime": "2024-06-15T10:30:00Z",
+      "updatedDateTime": "2024-06-15T10:30:00Z"
+    },
+    "relationships": {
+      "userGroups": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-new-123/relationships/userGroups"
+        }
+      },
+      "orgDevices": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-new-123/relationships/orgDevices"
+        }
+      },
+      "packages": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-new-123/relationships/packages"
+        }
+      },
+      "configurations": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-new-123/relationships/configurations"
+        }
+      },
+      "users": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-new-123/relationships/users"
+        }
+      },
+      "apps": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-new-123/relationships/apps"
+        }
+      }
+    },
+    "links": {
+      "self": "https://api-business.apple.com/v1/blueprints/blueprint-new-123"
+    }
+  },
+  "links": {
+    "self": "https://api-business.apple.com/v1/blueprints/blueprint-new-123"
+  }
+}
