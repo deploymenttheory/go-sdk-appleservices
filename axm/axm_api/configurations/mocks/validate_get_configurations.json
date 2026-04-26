@@ -1,0 +1,47 @@
+{
+  "data": [
+    {
+      "type": "configurations",
+      "id": "config-12345",
+      "attributes": {
+        "type": "CUSTOM_SETTING",
+        "name": "Wi-Fi Configuration",
+        "configuredForPlatforms": [
+          "PLATFORM_IOS",
+          "PLATFORM_MACOS"
+        ],
+        "customSettingsValues": null,
+        "createdDateTime": "2024-01-15T10:30:00Z",
+        "updatedDateTime": "2024-06-01T14:22:00Z"
+      },
+      "links": {
+        "self": "https://api-business.apple.com/v1/configurations/config-12345"
+      }
+    },
+    {
+      "type": "configurations",
+      "id": "config-2345",
+      "attributes": {
+        "type": "AIR_DROP",
+        "name": "Air Drop Configuration",
+        "configuredForPlatforms": [
+          "PLATFORM_IOS"
+        ],
+        "customSettingsValues": null,
+        "createdDateTime": "2024-01-15T10:30:00Z",
+        "updatedDateTime": "2024-06-01T14:22:00Z"
+      },
+      "links": {
+        "self": "https://api-business.apple.com/v1/configurations/config-2345"
+      }
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple.com/v1/configurations"
+  },
+  "meta": {
+    "paging": {
+      "limit": 2
+    }
+  }
+}

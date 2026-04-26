@@ -7,7 +7,7 @@
 A collection of Go SDKs for interacting with Apple API services, device management infrastructure, and Microsoft software update feeds:
 
 - **iTunes Search API** — search and lookup across the iTunes, App Store, iBooks Store, and Mac App Store
-- **Apple Business Manager / Apple School Manager API** — device inventory and MDM server management
+- **Apple Business Manager / Apple School Manager API** — device inventory and MDM server management - [Apple Business Manager API Changelog](https://developer.apple.com/documentation/apple-school-and-business-manager-api/apple-school-manager-and-apple-business-api-changelog)
 - **Apple Update CDN** — firmware discovery and IPSW download for macOS, iOS, and iPadOS
 - **Microsoft Updates** — macOS standalone app updates, Edge channels, OneDrive rings, App Store versions, and Office CVE history
 

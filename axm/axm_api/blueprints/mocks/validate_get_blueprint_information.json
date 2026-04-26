@@ -1,0 +1,58 @@
+{
+  "data": {
+    "type": "blueprints",
+    "id": "blueprint-12345",
+    "attributes": {
+      "name": "Engineering Onboarding",
+      "description": "Standard apps for engineering team",
+      "status": "ACTIVE",
+      "appLicenseDeficient": false,
+      "createdDateTime": "2024-01-15T10:30:00Z",
+      "updatedDateTime": "2024-06-01T14:22:00Z"
+    },
+    "relationships": {
+      "apps": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/apps",
+          "related": "https://api-business.apple.com/v1/blueprints/blueprint-12345/apps"
+        }
+      },
+      "users": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/users",
+          "related": "https://api-business.apple.com/v1/blueprints/blueprint-12345/users"
+        }
+      },
+      "packages": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/packages",
+          "related": "https://api-business.apple.com/v1/blueprints/blueprint-12345/packages"
+        }
+      },
+      "userGroups": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/userGroups",
+          "related": "https://api-business.apple.com/v1/blueprints/blueprint-12345/userGroups"
+        }
+      },
+      "orgDevices": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/orgDevices",
+          "related": "https://api-business.apple.com/v1/blueprints/blueprint-12345/orgDevices"
+        }
+      },
+      "configurations": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/configurations",
+          "related": "https://api-business.apple.com/v1/blueprints/blueprint-12345/configurations"
+        }
+      }
+    },
+    "links": {
+      "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345"
+    }
+  },
+  "links": {
+    "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "type": "users",
+      "id": "1234567890"
+    },
+    {
+      "type": "users",
+      "id": "0987654321"
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/users"
+  },
+  "meta": {
+    "paging": {
+      "limit": 100
+    }
+  }
+}

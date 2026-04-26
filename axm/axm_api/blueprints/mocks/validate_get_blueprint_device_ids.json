@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "type": "orgDevices",
+      "id": "ABC123DEF456"
+    },
+    {
+      "type": "orgDevices",
+      "id": "XYZ789GHI012"
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/orgDevices"
+  },
+  "meta": {
+    "paging": {
+      "limit": 100
+    }
+  }
+}

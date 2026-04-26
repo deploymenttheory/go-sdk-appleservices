@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "type": "auditEvents",
+      "id": "event-12345",
+      "attributes": {
+        "eventDateTime": "2026-02-14T12:00:00Z",
+        "type": "DEVICE_ADDED_TO_ORG",
+        "category": "DEVICE_INVENTORY",
+        "actorType": "USER",
+        "actorId": "user-abc123",
+        "actorName": "elana.landot@melardclothing.com",
+        "subjectType": "DEVICE",
+        "subjectId": "device-xyz789",
+        "subjectName": "MacBook Pro",
+        "outcome": "SUCCESS",
+        "groupId": "group-001",
+        "eventDataPropertyKey": "eventDataDeviceAddedToOrg",
+        "eventDataDeviceAddedToOrg": {
+          "serialNumber": "C02X1234ABCD",
+          "purchaseSourceType": "APPLE",
+          "purchaseSourceId": "order-56789"
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple.com/v1/auditEvents?filter[startTimestamp]=2026-02-14T00:00:00Z&filter[endTimestamp]=2026-02-14T23:59:59Z"
+  },
+  "meta": {
+    "paging": {
+      "nextCursor": "",
+      "limit": 100
+    }
+  }
+}

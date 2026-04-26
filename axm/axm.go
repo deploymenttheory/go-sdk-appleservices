@@ -1,8 +1,15 @@
 package axm
 
 import (
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/apps"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/auditevents"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/blueprints"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/configurations"
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devicemanagement"
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devices"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/packages"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/usergroups"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/users"
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/client"
 )
 
@@ -16,6 +23,13 @@ type Client struct {
 type AXMAPIClient struct {
 	Devices          *devices.Devices
 	DeviceManagement *devicemanagement.DeviceManagement
+	AuditEvents      *auditevents.AuditEvents
+	Users            *users.Users
+	UserGroups       *usergroups.UserGroups
+	Apps             *apps.Apps
+	Packages         *packages.Packages
+	Configurations   *configurations.Configurations
+	Blueprints       *blueprints.Blueprints
 }
 
 // NewClient creates a new Apple Business Manager client.
@@ -35,6 +49,13 @@ func NewClient(keyID, issuerID string, privateKey any, options ...client.ClientO
 		AXMAPI: &AXMAPIClient{
 			Devices:          devices.NewService(transport),
 			DeviceManagement: devicemanagement.NewService(transport),
+			AuditEvents:      auditevents.NewService(transport),
+			Users:            users.NewService(transport),
+			UserGroups:       usergroups.NewService(transport),
+			Apps:             apps.NewService(transport),
+			Packages:         packages.NewService(transport),
+			Configurations:   configurations.NewService(transport),
+			Blueprints:       blueprints.NewService(transport),
 		},
 	}, nil
 }
@@ -68,6 +89,13 @@ func NewClientFromEnv(options ...client.ClientOption) (*Client, error) {
 		AXMAPI: &AXMAPIClient{
 			Devices:          devices.NewService(transport),
 			DeviceManagement: devicemanagement.NewService(transport),
+			AuditEvents:      auditevents.NewService(transport),
+			Users:            users.NewService(transport),
+			UserGroups:       usergroups.NewService(transport),
+			Apps:             apps.NewService(transport),
+			Packages:         packages.NewService(transport),
+			Configurations:   configurations.NewService(transport),
+			Blueprints:       blueprints.NewService(transport),
 		},
 	}, nil
 }

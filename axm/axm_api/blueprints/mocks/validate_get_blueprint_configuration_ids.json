@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "type": "configurations",
+      "id": "config-12345"
+    },
+    {
+      "type": "configurations",
+      "id": "config-67890"
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple.com/v1/blueprints/blueprint-12345/relationships/configurations"
+  },
+  "meta": {
+    "paging": {
+      "limit": 100
+    }
+  }
+}
