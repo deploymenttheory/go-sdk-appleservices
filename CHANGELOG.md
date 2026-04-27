@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.4.0...v0.5.0) (2026-04-27)
+
+
+### Features
+
+* enhance Apple Business Manager SDK with new API endpoints and s… ([f4c9d8f](https://github.com/deploymenttheory/go-sdk-appleservices/commit/f4c9d8f256f8fada24d614dcab7a612e5e96da0d))
+* enhance Apple Business Manager SDK with new API endpoints and services ([c4cd610](https://github.com/deploymenttheory/go-sdk-appleservices/commit/c4cd6108022da47bfe40c029906df5e24eb24ce1))
+
 ## [0.4.0](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.3.1...v0.4.0) (2026-04-21)
 
 
