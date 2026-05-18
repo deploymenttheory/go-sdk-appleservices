@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "developerLogUrl": "https://notary-artifacts-prod.s3.amazonaws.com/prod/2efe2717-52ef-43a5-96dc-0797e4ca1041/developer_log.json?X-Amz-Security-Token=example"
+    },
+    "id": "2efe2717-52ef-43a5-96dc-0797e4ca1041",
+    "type": "submissionsLog"
+  },
+  "meta": {}
+}
