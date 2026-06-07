@@ -76,6 +76,128 @@ func (s *DeviceManagement) GetV1(ctx context.Context, opts *RequestQueryOptions)
 	}, resp, nil
 }
 
+// GetByMDMServerIDV1 retrieves information about a specific device management service.
+// URL: GET https://api-business.apple.com/v1/mdmServers/{id}
+// https://developer.apple.com/documentation/applebusinessmanagerapi/get-device-management-service-information
+func (s *DeviceManagement) GetByMDMServerIDV1(ctx context.Context, serverID string, opts *RequestQueryOptions) (*MDMServerResponse, *resty.Response, error) {
+	if serverID == "" {
+		return nil, nil, fmt.Errorf("MDM server ID is required")
+	}
+
+	if opts == nil {
+		opts = &RequestQueryOptions{}
+	}
+
+	endpoint := fmt.Sprintf(constants.EndpointMDMServers+"/%s", serverID)
+
+	params := s.client.QueryBuilder()
+
+	if len(opts.Fields) > 0 {
+		params.AddStringSlice("fields[mdmServers]", opts.Fields)
+	}
+
+	var result MDMServerResponse
+
+	resp, err := s.client.NewRequest(ctx).
+		SetHeader("Accept", constants.ApplicationJSON).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetQueryParams(params.Build()).
+		SetResult(&result).
+		Get(endpoint)
+
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return &result, resp, nil
+}
+
+// CreateMDMServerV1 creates a new device management service in an organization.
+// URL: POST https://api-business.apple.com/v1/mdmServers
+// https://developer.apple.com/documentation/applebusinessmanagerapi/create-a-device-management-service
+// Note: serverName and serverCertificate are required.
+func (s *DeviceManagement) CreateMDMServerV1(ctx context.Context, req *MDMServerCreateRequest) (*MDMServerResponse, *resty.Response, error) {
+	if req == nil {
+		return nil, nil, fmt.Errorf("request is required")
+	}
+	if req.Data.Attributes.ServerName == "" {
+		return nil, nil, fmt.Errorf("serverName is required")
+	}
+	if req.Data.Attributes.ServerCertificate.Name == "" {
+		return nil, nil, fmt.Errorf("serverCertificate.name is required")
+	}
+	if req.Data.Attributes.ServerCertificate.Data == "" {
+		return nil, nil, fmt.Errorf("serverCertificate.data is required")
+	}
+
+	var result MDMServerResponse
+
+	resp, err := s.client.NewRequest(ctx).
+		SetHeader("Accept", constants.ApplicationJSON).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetBody(req).
+		SetResult(&result).
+		Post(constants.EndpointMDMServers)
+
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return &result, resp, nil
+}
+
+// UpdateMDMServerByIDV1 updates an existing device management service in an organization.
+// URL: PATCH https://api-business.apple.com/v1/mdmServers/{id}
+// https://developer.apple.com/documentation/applebusinessmanagerapi/update-a-device-management-service
+func (s *DeviceManagement) UpdateMDMServerByIDV1(ctx context.Context, serverID string, req *MDMServerUpdateRequest) (*MDMServerResponse, *resty.Response, error) {
+	if serverID == "" {
+		return nil, nil, fmt.Errorf("MDM server ID is required")
+	}
+	if req == nil {
+		return nil, nil, fmt.Errorf("request is required")
+	}
+
+	endpoint := fmt.Sprintf(constants.EndpointMDMServers+"/%s", serverID)
+
+	var result MDMServerResponse
+
+	resp, err := s.client.NewRequest(ctx).
+		SetHeader("Accept", constants.ApplicationJSON).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetBody(req).
+		SetResult(&result).
+		Patch(endpoint)
+
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return &result, resp, nil
+}
+
+// DeleteMDMServerByIDV1 deletes a device management service from an organization.
+// URL: DELETE https://api-business.apple.com/v1/mdmServers/{id}
+// https://developer.apple.com/documentation/applebusinessmanagerapi/delete-a-device-management-service
+// Note: A server with devices assigned cannot be deleted. Returns 204 No Content on success.
+func (s *DeviceManagement) DeleteMDMServerByIDV1(ctx context.Context, serverID string) (*resty.Response, error) {
+	if serverID == "" {
+		return nil, fmt.Errorf("MDM server ID is required")
+	}
+
+	endpoint := fmt.Sprintf(constants.EndpointMDMServers+"/%s", serverID)
+
+	resp, err := s.client.NewRequest(ctx).
+		SetHeader("Accept", constants.ApplicationJSON).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		Delete(endpoint)
+
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
+}
+
 // GetDeviceSerialNumbersByServerIDV1 retrieves a list of device IDs assigned to an MDM server.
 // URL: GET https://api-business.apple.com/v1/mdmServers/{id}/relationships/devices
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-all-device-ids-for-a-device-management-service

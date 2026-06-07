@@ -1,0 +1,28 @@
+{
+  "data": {
+    "type": "mdmServers",
+    "id": "2A87349736CF4614A94F624E705841BE",
+    "attributes": {
+      "serverName": "Marketing Team MDM",
+      "serverType": "MDM",
+      "enableMdmDisownFlag": true,
+      "status": "ACTIVE",
+      "deviceCount": 0,
+      "createdDateTime": "2026-06-01T10:30:00Z",
+      "updatedDateTime": "2026-06-01T10:30:00Z"
+    },
+    "relationships": {
+      "devices": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/mdmServers/2A87349736CF4614A94F624E705841BE/relationships/devices"
+        }
+      }
+    },
+    "links": {
+      "self": "https://api-business.apple.com/v1/mdmServers/2A87349736CF4614A94F624E705841BE"
+    }
+  },
+  "links": {
+    "self": "https://api-business.apple.com/v1/mdmServers/2A87349736CF4614A94F624E705841BE"
+  }
+}
