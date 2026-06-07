@@ -21,9 +21,21 @@ const (
 
 // MDM Server field constants for field selection
 const (
-	FieldServerName      = "serverName"
-	FieldServerType      = "serverType"
-	FieldCreatedDateTime = "createdDateTime"
-	FieldUpdatedDateTime = "updatedDateTime"
-	FieldDevices         = "devices"
+	FieldServerName             = "serverName"
+	FieldServerType             = "serverType"
+	FieldEnableMdmDisownFlag    = "enableMdmDisownFlag"
+	FieldDefaultProductFamilies = "defaultProductFamilies"
+	FieldStatus                 = "status"
+	FieldDeviceCount            = "deviceCount"
+	FieldLastConnectedDateTime  = "lastConnectedDateTime"
+	FieldLastConnectedIp        = "lastConnectedIp"
+	FieldCreatedDateTime        = "createdDateTime"
+	FieldUpdatedDateTime        = "updatedDateTime"
+	FieldDevices                = "devices"
+)
+
+// MDM server status constants
+const (
+	MDMServerStatusActive   = "ACTIVE"
+	MDMServerStatusInactive = "INACTIVE"
 )

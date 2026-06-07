@@ -584,11 +584,16 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 
 	ctx := context.Background()
 
-	// Test with all available fields to ensure comprehensive coverage
 	opts := &RequestQueryOptions{
 		Fields: []string{
 			FieldServerName,
 			FieldServerType,
+			FieldEnableMdmDisownFlag,
+			FieldDefaultProductFamilies,
+			FieldStatus,
+			FieldDeviceCount,
+			FieldLastConnectedDateTime,
+			FieldLastConnectedIp,
 			FieldCreatedDateTime,
 			FieldUpdatedDateTime,
 			FieldDevices,
@@ -602,17 +607,433 @@ func TestComprehensiveFieldCoverage(t *testing.T) {
 	assert.Equal(t, 200, resp.StatusCode())
 	require.NotNil(t, result)
 
-	// Verify that the request was made with all field parameters
-	// This ensures our field constants are correctly defined
 	assert.Equal(t, 1, httpmock.GetTotalCallCount())
 
-	// Verify all fields are accessible (no compilation errors)
 	if len(result.Data) > 0 {
 		attrs := result.Data[0].Attributes
 		_ = attrs.ServerName
 		_ = attrs.ServerType
+		_ = attrs.EnableMdmDisownFlag
+		_ = attrs.DefaultProductFamilies
+		_ = attrs.Status
+		_ = attrs.DeviceCount
+		_ = attrs.LastConnectedDateTime
+		_ = attrs.LastConnectedIp
 		_ = attrs.CreatedDateTime
 		_ = attrs.UpdatedDateTime
 		_ = attrs.Devices
 	}
+}
+
+// ====== GetByMDMServerIDV1 tests ======
+
+func TestGetDeviceManagementServiceByID_Success(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	opts := &RequestQueryOptions{
+		Fields: []string{FieldServerName, FieldServerType, FieldStatus},
+	}
+
+	result, resp, err := svc.GetByMDMServerIDV1(ctx, "1F97349736CF4614A94F624E705841AD", opts)
+
+	require.NoError(t, err)
+	require.NotNil(t, resp)
+	assert.Equal(t, 200, resp.StatusCode())
+	require.NotNil(t, result)
+
+	server := result.Data
+	assert.Equal(t, "mdmServers", server.Type)
+	assert.Equal(t, "1F97349736CF4614A94F624E705841AD", server.ID)
+	require.NotNil(t, server.Attributes)
+	assert.Equal(t, "Production MDM", server.Attributes.ServerName)
+	assert.Equal(t, "MDM", server.Attributes.ServerType)
+	assert.Equal(t, MDMServerStatusActive, server.Attributes.Status)
+	assert.Equal(t, 128, server.Attributes.DeviceCount)
+	assert.False(t, server.Attributes.EnableMdmDisownFlag)
+	assert.Contains(t, server.Attributes.DefaultProductFamilies, "MAC")
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+func TestGetDeviceManagementServiceByID_WithNilOptions(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+
+	result, resp, err := svc.GetByMDMServerIDV1(ctx, "1F97349736CF4614A94F624E705841AD", nil)
+
+	require.NoError(t, err)
+	require.NotNil(t, resp)
+	assert.Equal(t, 200, resp.StatusCode())
+	require.NotNil(t, result)
+	assert.Equal(t, "1F97349736CF4614A94F624E705841AD", result.Data.ID)
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+func TestGetDeviceManagementServiceByID_EmptyServerID(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+
+	result, _, err := svc.GetByMDMServerIDV1(ctx, "", nil)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	assert.Contains(t, err.Error(), "MDM server ID is required")
+
+	assert.Equal(t, 0, httpmock.GetTotalCallCount())
+}
+
+func TestGetDeviceManagementServiceByID_NotFound(t *testing.T) {
+	svc := setupMockClient(t)
+	httpmock.Reset()
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterErrorMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+
+	result, resp, err := svc.GetByMDMServerIDV1(ctx, "NONEXISTENT", nil)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	require.NotNil(t, resp)
+	assert.Equal(t, 404, resp.StatusCode())
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+// ====== CreateMDMServerV1 tests ======
+
+func TestCreateDeviceManagementService_Success(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	req := &MDMServerCreateRequest{
+		Data: MDMServerCreateRequestData{
+			Type: "mdmServers",
+			Attributes: MDMServerCreateRequestAttributes{
+				ServerName: "Marketing Team MDM",
+				ServerCertificate: MDMServerCertificate{
+					Name: "marketing-mdm.cer",
+					Data: "MIIDXTCCAkWgAwIBAgIJALxxxxxxx...",
+				},
+				EnableMdmDisownFlag: true,
+			},
+		},
+	}
+
+	result, resp, err := svc.CreateMDMServerV1(ctx, req)
+
+	require.NoError(t, err)
+	require.NotNil(t, resp)
+	assert.Equal(t, 201, resp.StatusCode())
+	require.NotNil(t, result)
+
+	server := result.Data
+	assert.Equal(t, "mdmServers", server.Type)
+	assert.Equal(t, "2A87349736CF4614A94F624E705841BE", server.ID)
+	require.NotNil(t, server.Attributes)
+	assert.Equal(t, "Marketing Team MDM", server.Attributes.ServerName)
+	assert.True(t, server.Attributes.EnableMdmDisownFlag)
+	assert.Equal(t, MDMServerStatusActive, server.Attributes.Status)
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+func TestCreateDeviceManagementService_NilRequest(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+
+	result, _, err := svc.CreateMDMServerV1(ctx, nil)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	assert.Contains(t, err.Error(), "request is required")
+
+	assert.Equal(t, 0, httpmock.GetTotalCallCount())
+}
+
+func TestCreateDeviceManagementService_MissingServerName(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	req := &MDMServerCreateRequest{
+		Data: MDMServerCreateRequestData{
+			Type: "mdmServers",
+			Attributes: MDMServerCreateRequestAttributes{
+				ServerCertificate: MDMServerCertificate{
+					Name: "cert.cer",
+					Data: "MIIDXTCCAkWg...",
+				},
+			},
+		},
+	}
+
+	result, _, err := svc.CreateMDMServerV1(ctx, req)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	assert.Contains(t, err.Error(), "serverName is required")
+
+	assert.Equal(t, 0, httpmock.GetTotalCallCount())
+}
+
+func TestCreateDeviceManagementService_MissingCertificateName(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	req := &MDMServerCreateRequest{
+		Data: MDMServerCreateRequestData{
+			Type: "mdmServers",
+			Attributes: MDMServerCreateRequestAttributes{
+				ServerName: "Test MDM",
+				ServerCertificate: MDMServerCertificate{
+					Data: "MIIDXTCCAkWg...",
+				},
+			},
+		},
+	}
+
+	result, _, err := svc.CreateMDMServerV1(ctx, req)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	assert.Contains(t, err.Error(), "serverCertificate.name is required")
+
+	assert.Equal(t, 0, httpmock.GetTotalCallCount())
+}
+
+func TestCreateDeviceManagementService_MissingCertificateData(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	req := &MDMServerCreateRequest{
+		Data: MDMServerCreateRequestData{
+			Type: "mdmServers",
+			Attributes: MDMServerCreateRequestAttributes{
+				ServerName: "Test MDM",
+				ServerCertificate: MDMServerCertificate{
+					Name: "cert.cer",
+				},
+			},
+		},
+	}
+
+	result, _, err := svc.CreateMDMServerV1(ctx, req)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	assert.Contains(t, err.Error(), "serverCertificate.data is required")
+
+	assert.Equal(t, 0, httpmock.GetTotalCallCount())
+}
+
+// ====== UpdateMDMServerByIDV1 tests ======
+
+func TestUpdateDeviceManagementService_Success(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	enableDisown := true
+	req := &MDMServerUpdateRequest{
+		Data: MDMServerUpdateRequestData{
+			Type: "mdmServers",
+			ID:   "1F97349736CF4614A94F624E705841AD",
+			Attributes: MDMServerUpdateRequestAttributes{
+				ServerName:          "Production MDM Updated",
+				EnableMdmDisownFlag: &enableDisown,
+			},
+		},
+	}
+
+	result, resp, err := svc.UpdateMDMServerByIDV1(ctx, "1F97349736CF4614A94F624E705841AD", req)
+
+	require.NoError(t, err)
+	require.NotNil(t, resp)
+	assert.Equal(t, 200, resp.StatusCode())
+	require.NotNil(t, result)
+
+	server := result.Data
+	assert.Equal(t, "1F97349736CF4614A94F624E705841AD", server.ID)
+	require.NotNil(t, server.Attributes)
+	assert.Equal(t, "Production MDM Updated", server.Attributes.ServerName)
+	assert.True(t, server.Attributes.EnableMdmDisownFlag)
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+func TestUpdateDeviceManagementService_EmptyServerID(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	req := &MDMServerUpdateRequest{
+		Data: MDMServerUpdateRequestData{
+			Type: "mdmServers",
+			Attributes: MDMServerUpdateRequestAttributes{
+				ServerName: "Updated Name",
+			},
+		},
+	}
+
+	result, _, err := svc.UpdateMDMServerByIDV1(ctx, "", req)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	assert.Contains(t, err.Error(), "MDM server ID is required")
+
+	assert.Equal(t, 0, httpmock.GetTotalCallCount())
+}
+
+func TestUpdateDeviceManagementService_NilRequest(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+
+	result, _, err := svc.UpdateMDMServerByIDV1(ctx, "1F97349736CF4614A94F624E705841AD", nil)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	assert.Contains(t, err.Error(), "request is required")
+
+	assert.Equal(t, 0, httpmock.GetTotalCallCount())
+}
+
+func TestUpdateDeviceManagementService_NotFound(t *testing.T) {
+	svc := setupMockClient(t)
+	httpmock.Reset()
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterErrorMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+	req := &MDMServerUpdateRequest{
+		Data: MDMServerUpdateRequestData{
+			Type: "mdmServers",
+			ID:   "NONEXISTENT",
+			Attributes: MDMServerUpdateRequestAttributes{
+				ServerName: "Updated Name",
+			},
+		},
+	}
+
+	result, resp, err := svc.UpdateMDMServerByIDV1(ctx, "NONEXISTENT", req)
+
+	require.Error(t, err)
+	assert.Nil(t, result)
+	require.NotNil(t, resp)
+	assert.Equal(t, 404, resp.StatusCode())
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+// ====== DeleteMDMServerByIDV1 tests ======
+
+func TestDeleteDeviceManagementService_Success(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+
+	resp, err := svc.DeleteMDMServerByIDV1(ctx, "1F97349736CF4614A94F624E705841AD")
+
+	require.NoError(t, err)
+	require.NotNil(t, resp)
+	assert.Equal(t, 204, resp.StatusCode())
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+func TestDeleteDeviceManagementService_EmptyServerID(t *testing.T) {
+	svc := setupMockClient(t)
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+
+	resp, err := svc.DeleteMDMServerByIDV1(ctx, "")
+
+	require.Error(t, err)
+	assert.Nil(t, resp)
+	assert.Contains(t, err.Error(), "MDM server ID is required")
+
+	assert.Equal(t, 0, httpmock.GetTotalCallCount())
+}
+
+func TestDeleteDeviceManagementService_NotFound(t *testing.T) {
+	svc := setupMockClient(t)
+	httpmock.Reset()
+	mockHandler := &mocks.DeviceManagementMock{}
+	mockHandler.RegisterErrorMocks()
+	defer mockHandler.CleanupMockState()
+
+	ctx := context.Background()
+
+	resp, err := svc.DeleteMDMServerByIDV1(ctx, "NONEXISTENT")
+
+	require.Error(t, err)
+	require.NotNil(t, resp)
+	assert.Equal(t, 404, resp.StatusCode())
+
+	assert.Equal(t, 1, httpmock.GetTotalCallCount())
+}
+
+// ====== New field and status constants tests ======
+
+func TestMDMServerFieldConstants(t *testing.T) {
+	assert.Equal(t, "serverName", FieldServerName)
+	assert.Equal(t, "serverType", FieldServerType)
+	assert.Equal(t, "enableMdmDisownFlag", FieldEnableMdmDisownFlag)
+	assert.Equal(t, "defaultProductFamilies", FieldDefaultProductFamilies)
+	assert.Equal(t, "status", FieldStatus)
+	assert.Equal(t, "deviceCount", FieldDeviceCount)
+	assert.Equal(t, "lastConnectedDateTime", FieldLastConnectedDateTime)
+	assert.Equal(t, "lastConnectedIp", FieldLastConnectedIp)
+	assert.Equal(t, "createdDateTime", FieldCreatedDateTime)
+	assert.Equal(t, "updatedDateTime", FieldUpdatedDateTime)
+	assert.Equal(t, "devices", FieldDevices)
+}
+
+func TestMDMServerStatusConstants(t *testing.T) {
+	assert.Equal(t, "ACTIVE", MDMServerStatusActive)
+	assert.Equal(t, "INACTIVE", MDMServerStatusInactive)
 }

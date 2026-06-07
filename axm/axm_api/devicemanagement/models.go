@@ -14,11 +14,17 @@ type MDMServer struct {
 
 // MDMServerAttributes contains the MDM server attributes
 type MDMServerAttributes struct {
-	ServerName      string     `json:"serverName,omitempty"`
-	ServerType      string     `json:"serverType,omitempty"`
-	CreatedDateTime *time.Time `json:"createdDateTime,omitempty"`
-	UpdatedDateTime *time.Time `json:"updatedDateTime,omitempty"`
-	Devices         []string   `json:"devices,omitempty"`
+	ServerName             string     `json:"serverName,omitempty"`
+	ServerType             string     `json:"serverType,omitempty"`
+	EnableMdmDisownFlag    bool       `json:"enableMdmDisownFlag,omitempty"`
+	DefaultProductFamilies []string   `json:"defaultProductFamilies,omitempty"`
+	Status                 string     `json:"status,omitempty"`
+	DeviceCount            int        `json:"deviceCount,omitempty"`
+	LastConnectedDateTime  *time.Time `json:"lastConnectedDateTime,omitempty"`
+	LastConnectedIp        string     `json:"lastConnectedIp,omitempty"`
+	CreatedDateTime        *time.Time `json:"createdDateTime,omitempty"`
+	UpdatedDateTime        *time.Time `json:"updatedDateTime,omitempty"`
+	Devices                []string   `json:"devices,omitempty"`
 }
 
 // MDMServerRelationships contains the MDM server relationships
@@ -47,6 +53,53 @@ type ResponseMDMServers struct {
 type MDMServerResponse struct {
 	Data  MDMServer `json:"data"`
 	Links *Links    `json:"links,omitempty"`
+}
+
+// ====== MDM SERVER REQUEST TYPES ======
+
+// MDMServerCertificate represents a server certificate for MDM server creation
+type MDMServerCertificate struct {
+	Name string `json:"name"`
+	Data string `json:"data"`
+}
+
+// MDMServerCreateRequest is the request body for creating a new MDM server
+type MDMServerCreateRequest struct {
+	Data MDMServerCreateRequestData `json:"data"`
+}
+
+// MDMServerCreateRequestData is the data object for an MDM server create request
+type MDMServerCreateRequestData struct {
+	Type       string                          `json:"type"` // must be "mdmServers"
+	Attributes MDMServerCreateRequestAttributes `json:"attributes"`
+}
+
+// MDMServerCreateRequestAttributes contains the attributes for creating an MDM server.
+// ServerName and ServerCertificate are required.
+type MDMServerCreateRequestAttributes struct {
+	ServerName          string               `json:"serverName"`
+	ServerCertificate   MDMServerCertificate `json:"serverCertificate"`
+	EnableMdmDisownFlag bool                 `json:"enableMdmDisownFlag,omitempty"`
+}
+
+// MDMServerUpdateRequest is the request body for updating an MDM server
+type MDMServerUpdateRequest struct {
+	Data MDMServerUpdateRequestData `json:"data"`
+}
+
+// MDMServerUpdateRequestData is the data object for an MDM server update request
+type MDMServerUpdateRequestData struct {
+	Type       string                          `json:"type"` // must be "mdmServers"
+	ID         string                          `json:"id"`
+	Attributes MDMServerUpdateRequestAttributes `json:"attributes"`
+}
+
+// MDMServerUpdateRequestAttributes contains the attributes for updating an MDM server.
+// Only provided fields are changed.
+type MDMServerUpdateRequestAttributes struct {
+	ServerName             string   `json:"serverName,omitempty"`
+	EnableMdmDisownFlag    *bool    `json:"enableMdmDisownFlag,omitempty"`
+	DefaultProductFamilies []string `json:"defaultProductFamilies,omitempty"`
 }
 
 // ====== DEVICE LINKAGE TYPES ======

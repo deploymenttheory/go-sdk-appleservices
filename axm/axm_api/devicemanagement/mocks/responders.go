@@ -5,10 +5,23 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 
 	"github.com/jarcoal/httpmock"
 )
+
+// splitPath splits a URL path into non-empty segments.
+func splitPath(path string) []string {
+	parts := strings.Split(path, "/")
+	result := make([]string, 0, len(parts))
+	for _, p := range parts {
+		if p != "" {
+			result = append(result, p)
+		}
+	}
+	return result
+}
 
 var mockState struct {
 	sync.Mutex
@@ -83,6 +96,92 @@ func (m *DeviceManagementMock) RegisterMocks() {
 		}
 
 		return httpmock.NewJsonResponse(200, responseObj)
+	})
+
+	// GET /mdmServers/{id} - Get a specific MDM server by ID
+	httpmock.RegisterResponder("GET", `=~^https://api-business\.apple\.com/v1/mdmServers/[^/]+$`, func(req *http.Request) (*http.Response, error) {
+		parts := splitPath(req.URL.Path)
+		serverID := parts[len(parts)-1]
+
+		mockState.Lock()
+		_, exists := mockState.mdmServers[serverID]
+		mockState.Unlock()
+
+		if !exists {
+			return httpmock.NewStringResponse(404, `{"errors":[{"status":"404","code":"RESOURCE_NOT_FOUND","title":"MDM Server Not Found","detail":"The requested MDM server was not found"}]}`), nil
+		}
+
+		mockData, err := loadMockResponse("validate_get_mdm_server.json")
+		if err != nil {
+			return httpmock.NewStringResponse(500, `{"errors":[{"status":"500","code":"INTERNAL_ERROR","title":"Internal Server Error","detail":"Failed to load mock data"}]}`), nil
+		}
+
+		var responseObj map[string]any
+		if err := json.Unmarshal(mockData, &responseObj); err != nil {
+			return httpmock.NewStringResponse(500, `{"errors":[{"status":"500","code":"INTERNAL_ERROR","title":"Internal Server Error","detail":"Failed to parse mock data"}]}`), nil
+		}
+
+		return httpmock.NewJsonResponse(200, responseObj)
+	})
+
+	// POST /mdmServers - Create a new MDM server
+	httpmock.RegisterResponder("POST", "https://api-business.apple.com/v1/mdmServers", func(req *http.Request) (*http.Response, error) {
+		mockData, err := loadMockResponse("validate_create_mdm_server_response.json")
+		if err != nil {
+			return httpmock.NewStringResponse(500, `{"errors":[{"status":"500","code":"INTERNAL_ERROR","title":"Internal Server Error","detail":"Failed to load mock data"}]}`), nil
+		}
+
+		var responseObj map[string]any
+		if err := json.Unmarshal(mockData, &responseObj); err != nil {
+			return httpmock.NewStringResponse(500, `{"errors":[{"status":"500","code":"INTERNAL_ERROR","title":"Internal Server Error","detail":"Failed to parse mock data"}]}`), nil
+		}
+
+		return httpmock.NewJsonResponse(201, responseObj)
+	})
+
+	// PATCH /mdmServers/{id} - Update an MDM server
+	httpmock.RegisterResponder("PATCH", `=~^https://api-business\.apple\.com/v1/mdmServers/[^/]+$`, func(req *http.Request) (*http.Response, error) {
+		parts := splitPath(req.URL.Path)
+		serverID := parts[len(parts)-1]
+
+		mockState.Lock()
+		_, exists := mockState.mdmServers[serverID]
+		mockState.Unlock()
+
+		if !exists {
+			return httpmock.NewStringResponse(404, `{"errors":[{"status":"404","code":"RESOURCE_NOT_FOUND","title":"MDM Server Not Found","detail":"The requested MDM server was not found"}]}`), nil
+		}
+
+		mockData, err := loadMockResponse("validate_update_mdm_server_response.json")
+		if err != nil {
+			return httpmock.NewStringResponse(500, `{"errors":[{"status":"500","code":"INTERNAL_ERROR","title":"Internal Server Error","detail":"Failed to load mock data"}]}`), nil
+		}
+
+		var responseObj map[string]any
+		if err := json.Unmarshal(mockData, &responseObj); err != nil {
+			return httpmock.NewStringResponse(500, `{"errors":[{"status":"500","code":"INTERNAL_ERROR","title":"Internal Server Error","detail":"Failed to parse mock data"}]}`), nil
+		}
+
+		return httpmock.NewJsonResponse(200, responseObj)
+	})
+
+	// DELETE /mdmServers/{id} - Delete an MDM server
+	httpmock.RegisterResponder("DELETE", `=~^https://api-business\.apple\.com/v1/mdmServers/[^/]+$`, func(req *http.Request) (*http.Response, error) {
+		parts := splitPath(req.URL.Path)
+		serverID := parts[len(parts)-1]
+
+		mockState.Lock()
+		_, exists := mockState.mdmServers[serverID]
+		if exists {
+			delete(mockState.mdmServers, serverID)
+		}
+		mockState.Unlock()
+
+		if !exists {
+			return httpmock.NewStringResponse(404, `{"errors":[{"status":"404","code":"RESOURCE_NOT_FOUND","title":"MDM Server Not Found","detail":"The requested MDM server was not found"}]}`), nil
+		}
+
+		return httpmock.NewStringResponse(204, ""), nil
 	})
 
 	// GET /mdmServers/{id}/relationships/devices - Get MDM server device linkages
@@ -199,6 +298,26 @@ func (m *DeviceManagementMock) RegisterErrorMocks() {
 	// GET /mdmServers - Return error
 	httpmock.RegisterResponder("GET", "https://api-business.apple.com/v1/mdmServers", func(req *http.Request) (*http.Response, error) {
 		return httpmock.NewStringResponse(500, `{"errors":[{"status":"500","code":"INTERNAL_ERROR","title":"Internal Server Error","detail":"Mock error for testing"}]}`), nil
+	})
+
+	// GET /mdmServers/{id} - Return not found error
+	httpmock.RegisterResponder("GET", `=~^https://api-business\.apple\.com/v1/mdmServers/[^/]+$`, func(req *http.Request) (*http.Response, error) {
+		return httpmock.NewStringResponse(404, `{"errors":[{"status":"404","code":"RESOURCE_NOT_FOUND","title":"MDM Server Not Found","detail":"The requested MDM server was not found"}]}`), nil
+	})
+
+	// POST /mdmServers - Return error
+	httpmock.RegisterResponder("POST", "https://api-business.apple.com/v1/mdmServers", func(req *http.Request) (*http.Response, error) {
+		return httpmock.NewStringResponse(400, `{"errors":[{"status":"400","code":"BAD_REQUEST","title":"Bad Request","detail":"Mock error for testing"}]}`), nil
+	})
+
+	// PATCH /mdmServers/{id} - Return not found error
+	httpmock.RegisterResponder("PATCH", `=~^https://api-business\.apple\.com/v1/mdmServers/[^/]+$`, func(req *http.Request) (*http.Response, error) {
+		return httpmock.NewStringResponse(404, `{"errors":[{"status":"404","code":"RESOURCE_NOT_FOUND","title":"MDM Server Not Found","detail":"The requested MDM server was not found"}]}`), nil
+	})
+
+	// DELETE /mdmServers/{id} - Return not found error
+	httpmock.RegisterResponder("DELETE", `=~^https://api-business\.apple\.com/v1/mdmServers/[^/]+$`, func(req *http.Request) (*http.Response, error) {
+		return httpmock.NewStringResponse(404, `{"errors":[{"status":"404","code":"RESOURCE_NOT_FOUND","title":"MDM Server Not Found","detail":"The requested MDM server was not found"}]}`), nil
 	})
 
 	// GET /mdmServers/{id}/relationships/devices - Return not found error

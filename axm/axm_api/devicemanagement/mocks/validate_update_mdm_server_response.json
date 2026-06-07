@@ -1,0 +1,31 @@
+{
+  "data": {
+    "type": "mdmServers",
+    "id": "1F97349736CF4614A94F624E705841AD",
+    "attributes": {
+      "serverName": "Production MDM Updated",
+      "serverType": "MDM",
+      "enableMdmDisownFlag": true,
+      "defaultProductFamilies": ["IPAD", "IPHONE", "MAC"],
+      "status": "ACTIVE",
+      "deviceCount": 128,
+      "lastConnectedDateTime": "2026-06-01T08:14:23Z",
+      "lastConnectedIp": "203.0.113.5",
+      "createdDateTime": "2025-05-01T03:21:44Z",
+      "updatedDateTime": "2026-06-07T10:00:00Z"
+    },
+    "relationships": {
+      "devices": {
+        "links": {
+          "self": "https://api-business.apple.com/v1/mdmServers/1F97349736CF4614A94F624E705841AD/relationships/devices"
+        }
+      }
+    },
+    "links": {
+      "self": "https://api-business.apple.com/v1/mdmServers/1F97349736CF4614A94F624E705841AD"
+    }
+  },
+  "links": {
+    "self": "https://api-business.apple.com/v1/mdmServers/1F97349736CF4614A94F624E705841AD"
+  }
+}
