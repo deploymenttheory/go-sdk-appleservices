@@ -1,0 +1,103 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.ManagedClient.preferences",
+  "title": "Managed Preferences",
+  "description": "The payload that configures managed preferences.",
+  "payload": {
+    "payloadtype": "com.apple.ManagedClient.preferences",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "PayloadContent",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "The dictionary containing app preference domains. The key names are application preference domain identifiers (for example, `com.example.my-app`), or the string `.GlobalPreferences` for the global domain. The values are the corresponding forced and set-once preferences.",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003cdictionary\u003e",
+          "presence": "required",
+          "content": "The dictionary containing app preference domains.",
+          "subkeytype": "PreferenceDomain",
+          "subkeys": [
+            {
+              "key": "Forced",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The dictionary of forced settings.",
+              "subkeys": [
+                {
+                  "key": "Settings",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "required",
+                  "subkeys": [
+                    {
+                      "key": "mcx_preference_settings",
+                      "type": "\u003cdictionary\u003e",
+                      "presence": "required",
+                      "content": "The dictionary of settings.",
+                      "subkeys": [
+                        {
+                          "key": "ANY",
+                          "type": "\u003cany\u003e",
+                          "presence": "optional",
+                          "content": "The setting/value pairs."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "Set-Once",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The dictionary of one-time settings.",
+              "subkeys": [
+                {
+                  "key": "Settings",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "required",
+                  "subkeys": [
+                    {
+                      "key": "mcx_preference_settings",
+                      "type": "\u003cdictionary\u003e",
+                      "presence": "required",
+                      "content": "The dictionary of settings.",
+                      "subkeys": [
+                        {
+                          "key": "ANY",
+                          "type": "\u003cany\u003e",
+                          "presence": "optional",
+                          "content": "The setting/value pairs."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "category": "mdm/checkin",
+  "name": "tokenupdate",
+  "title": "Token Update",
+  "description": "Updates the token for a device on the server.",
+  "payload": {
+    "requesttype": "TokenUpdate",
+    "content": "Check-in protocol token update request and response.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "10.2"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "NotOnConsole",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "content": "If `true`, the device isn't on-console.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "10.11"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "MessageType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "TokenUpdate"
+      ],
+      "content": "The message type, which requires a value of `TokenUpdate`."
+    },
+    {
+      "key": "Topic",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The topic the device subscribes to."
+    },
+    {
+      "key": "UDID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The device's UDID (unique device identifier). The system requires this value if the enrollment type is a device enrollment.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "EnrollmentID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The per-enrollment identifier for the device. The system requires this value if the enrollment type is a user enrollment.\n\nAvailable in iOS 13 and later, macOS 10.15 and later, and visionOS 2 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        },
+        "macOS": {
+          "introduced": "10.15"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {},
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "EnrollmentUserID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The per-enrollment identifier for the user. The system requires this value if the enrollment type is a user enrollment on the user channel.\n\nAvailable in macOS 10.15 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "10.15"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "UserShortName",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "For macOS, this value is the short name of the user.\n\nFor Shared iPad, this value is the Managed Apple Account identifier of the user on Shared iPad. It indicates that the token is for the user channel.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.3"
+        },
+        "macOS": {},
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "UserID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "For macOS, this value is the ID of the user.\n\nFor Shared iPad, this value is `FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF` to indicate that authentication doesn't occur.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.3"
+        },
+        "macOS": {},
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "UserLongName",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The full name of the user.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {},
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Token",
+      "type": "\u003cdata\u003e",
+      "presence": "required",
+      "content": "The push token for the device."
+    },
+    {
+      "key": "PushMagic",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The magic string to include in the push notification message."
+    },
+    {
+      "key": "UnlockToken",
+      "type": "\u003cdata\u003e",
+      "presence": "optional",
+      "content": "The data to use to unlock the device. If provided, the server needs to retain this data and send it when trying to implement `Clear-Passcode-Command`.",
+      "supportedOS": {
+        "iOS": {
+          "accessrights": "AllowPasscodeRemovalAndLock"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "accessrights": "AllowPasscodeRemovalAndLock"
+        },
+        "watchOS": {
+          "accessrights": "AllowPasscodeRemovalAndLock"
+        }
+      }
+    },
+    {
+      "key": "AwaitingConfiguration",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true` from the device channel, the device is awaiting a `Device-Configured-Command` command before proceeding through Setup Assistant.\n\nIf `true` from the user channel (Shared iPad only), the device is awaiting a `User-Configured-Command` command before proceeding through Setup Assistant.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.0"
+        },
+        "macOS": {
+          "introduced": "10.11"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

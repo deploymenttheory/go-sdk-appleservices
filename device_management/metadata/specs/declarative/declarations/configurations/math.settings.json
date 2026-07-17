@@ -1,0 +1,152 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "math.settings",
+  "title": "Math Settings",
+  "description": "The declaration to configure the math and calculator apps.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.math.settings",
+    "apply": "combined",
+    "content": "Configures the built-in math and calculator app settings.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "18.0"
+      },
+      "macOS": {
+        "introduced": "15.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Calculator",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "If present, configures the built-in Calculator app.",
+      "subkeys": [
+        {
+          "key": "BasicMode",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "If present, configures the basic mode of the calculator. Basic mode is always enabled.",
+          "subkeys": [
+            {
+              "key": "AddSquareRoot",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "combinetype": "boolean-or",
+              "content": "Add the square root button to the basic calculator by replacing the +/- button. Normally, the square root button is available in scientific mode, so this key can be used to make it available when the scientific mode is restricted."
+            }
+          ]
+        },
+        {
+          "key": "ScientificMode",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "If present, configures the scientific mode of the calculator. If not present, scientific mode is enabled.",
+          "subkeys": [
+            {
+              "key": "Enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "combinetype": "boolean-and",
+              "content": "Controls whether the mode is enabled."
+            }
+          ]
+        },
+        {
+          "key": "ProgrammerMode",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "If present, configures the programmer mode of the calculator. If not present, programmer mode is enabled.",
+          "subkeys": [
+            {
+              "key": "Enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "combinetype": "boolean-and",
+              "content": "Controls whether the mode is enabled."
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "MathNotesMode",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "If present, configures the Math Notes mode of the calculator. If not present, Math Notes mode is enabled.",
+          "subkeys": [
+            {
+              "key": "Enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "combinetype": "boolean-and",
+              "content": "Controls whether the mode is enabled."
+            }
+          ]
+        },
+        {
+          "key": "InputModes",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "If present, controls global input options of the calculator. If not present, all input modes are enabled.",
+          "subkeys": [
+            {
+              "key": "UnitConversion",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "combinetype": "boolean-and",
+              "content": "Configures whether unit conversions are enabled."
+            },
+            {
+              "key": "RPN",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "combinetype": "boolean-and",
+              "content": "Configures whether RPN input is enabled.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "SystemBehavior",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "If present, configures math behavior in the system.",
+      "subkeys": [
+        {
+          "key": "KeyboardSuggestions",
+          "type": "\u003cboolean\u003e",
+          "presence": "required",
+          "combinetype": "boolean-and",
+          "content": "Controls whether keyboard suggestions include math solutions. This key is also supported by the keyboard.settings configuration."
+        },
+        {
+          "key": "MathNotes",
+          "type": "\u003cboolean\u003e",
+          "presence": "required",
+          "combinetype": "boolean-and",
+          "content": "Controls whether Math Notes is allowed in other apps such as Notes."
+        }
+      ]
+    }
+  ]
+}

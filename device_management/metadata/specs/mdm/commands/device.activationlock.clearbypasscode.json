@@ -1,0 +1,30 @@
+{
+  "category": "mdm/commands",
+  "name": "device.activationlock.clearbypasscode",
+  "title": "Clear Activation Lock Bypass Code Command",
+  "description": "Clear the Activation Lock bypass code on a device.",
+  "payload": {
+    "requesttype": "ClearActivationLockBypassCode",
+    "content": "Clears the Activation Lock bypass code from the device.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "7.1",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "10.15",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "2.0",
+        "accessrights": "None"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.declarations",
+  "title": "Declarations",
+  "description": "The payload that applies a set of declarations to the device through the Settings app.",
+  "payload": {
+    "payloadtype": "com.apple.declarations",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "17.0"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "17.0"
+      },
+      "visionOS": {
+        "introduced": "1.0"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Declarations",
+      "title": "Declarations",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "The set of declarations to apply. The array items are Base64-encoded data representations of the declaration JSON data.",
+      "subkeys": [
+        {
+          "key": "DeclarationsItem",
+          "title": "Declarations Content Item",
+          "type": "\u003cdata\u003e",
+          "presence": "required",
+          "content": "An item in the declarations list"
+        }
+      ]
+    }
+  ]
+}

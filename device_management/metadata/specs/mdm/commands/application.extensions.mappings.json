@@ -1,0 +1,63 @@
+{
+  "category": "mdm/commands",
+  "name": "application.extensions.mappings",
+  "title": "NSExtension Mappings Command",
+  "description": "Get a list of the installed extensions for a user on a device.",
+  "payload": {
+    "requesttype": "NSExtensionMappings",
+    "content": "This command returns information about installed extensions for a user.\nThe purpose of this command is to allow the server to build a mapping of\nextension identifiers to extension points to provide a UI for generating\n\"com.apple.NSExtension\" payloads.\nRequires \"Query Installed Apps\" right; supported on user channel only",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.13",
+        "accessrights": "QueryInstalledApps"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "responsekeys": [
+    {
+      "key": "Extensions",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries that contains information about extensions on the device.",
+      "subkeys": [
+        {
+          "key": "ExtensionsItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that contains information about an extension.",
+          "subkeys": [
+            {
+              "key": "Identifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The identifier of the extension."
+            },
+            {
+              "key": "ExtensionPoint",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The `NSExtensionPointIdentifier` for the extension."
+            },
+            {
+              "key": "DisplayName",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The display name of the extension."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "keyboard.settings",
+  "title": "Keyboard Settings",
+  "description": "The declaration to configure keyboard settings.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.keyboard.settings",
+    "apply": "combined",
+    "content": "Configures keyboard settings.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "26.4"
+      },
+      "macOS": {
+        "introduced": "26.4"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AllowAutoCorrection",
+      "title": "Allow Auto-Correction",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables auto-correction.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowDefinitionLookup",
+      "title": "Allow Definition Lookup",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables definition lookup."
+    },
+    {
+      "key": "AllowDictation",
+      "title": "Allow Dictation",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables dictation."
+    },
+    {
+      "key": "AllowMathKeyboardSuggestions",
+      "title": "Allow Math Keyboard Suggestions",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables keyboard suggestions that include math solutions. This key is also supported by the math.settings configuration."
+    },
+    {
+      "key": "AllowPredictiveText",
+      "title": "Allow Predictive Text",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables predictive text.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowSlideToType",
+      "title": "Allow Slide to Type",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables slide to type.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowSpellCheck",
+      "title": "Allow Spell Check",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables spell check.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowTextReplacement",
+      "title": "Allow Text Replacement",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables text replacement.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

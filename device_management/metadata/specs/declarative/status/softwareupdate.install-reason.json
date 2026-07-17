@@ -1,0 +1,71 @@
+{
+  "category": "declarative/status",
+  "name": "softwareupdate.install-reason",
+  "title": "Status Software Update Install Reason",
+  "description": "A status report of the reason for a pending software update on the device.",
+  "payload": {
+    "statusitemtype": "softwareupdate.install-reason",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "17.0"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "18.4"
+      },
+      "visionOS": {
+        "introduced": "26.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "softwareupdate.install-reason",
+      "title": "The software update install reason state.",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "Details about the reason for a pending software update.",
+      "subkeytype": "Dictionary",
+      "subkeys": [
+        {
+          "key": "reason",
+          "title": "The software update install reason state.",
+          "type": "\u003carray\u003e",
+          "presence": "required",
+          "content": "A list of reasons for the pending software update. An empty list indicates that no software update is pending.",
+          "subkeys": [
+            {
+              "key": "softwareupdate-reason",
+              "title": "The software update install reason.",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "system-settings",
+                "install-tonight",
+                "auto-update",
+                "notification",
+                "setup-assistant",
+                "command-line",
+                "mdm",
+                "declaration"
+              ],
+              "content": "The software update install reason state:\n  * system-settings - software update was triggered via Settings.app\n  * install-tonight - software update was triggered via install tonight action\n  * auto-update - software update was triggered via an automatic update\n  * notification - software update was triggered via user notification action\n  * setup-assistant - software update was triggered via Setup Assistant\n  * command-line - software update was triggered via `softwareupdate` command line tool\n  * mdm - software update was triggered via an MDM command\n  * declaration - software update was triggered via a declarative device management configuration"
+            }
+          ]
+        },
+        {
+          "key": "declaration-id",
+          "title": "The identifier of the declaration causing the software update to occur.",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The identifier of the declaration that caused the software update to occur. This key is present only if the `reason` array contains the `declaration` value."
+        }
+      ]
+    }
+  ]
+}

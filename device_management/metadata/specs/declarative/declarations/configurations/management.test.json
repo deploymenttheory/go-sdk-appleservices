@@ -1,0 +1,70 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "management.test",
+  "title": "Management:Test",
+  "description": "The declaration to test declarative device management.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.management.test",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Echo",
+      "title": "Status Echo",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The string to echo back in a status response reason."
+    },
+    {
+      "key": "EchoDataAssetReference",
+      "title": "Status Echo from Asset",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The string to read from a data asset to echo back in status response reason description.",
+      "assettypes": [
+        "com.apple.asset.data"
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "17.0"
+        },
+        "macOS": {
+          "introduced": "14.0"
+        },
+        "tvOS": {
+          "introduced": "17.0"
+        }
+      }
+    },
+    {
+      "key": "ReturnStatus",
+      "title": "Status to Return",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "Installed",
+        "Failed",
+        "Unlocked"
+      ],
+      "default": "Installed",
+      "content": "The status the system reports back when the device implements the configuration. Use this to override the normal `success` result."
+    }
+  ]
+}

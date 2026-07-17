@@ -1,0 +1,105 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "safari.extensions.settings",
+  "title": "Safari:Extension Settings",
+  "description": "The declaration to configure Safari Extensions.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.safari.extensions.settings",
+    "apply": "combined",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "18.0"
+      },
+      "macOS": {
+        "introduced": "15.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "26.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ManagedExtensions",
+      "title": "Managed Extensions",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The dictionary of managed extensions settings. Each key in the dictionary represents a composed identifier for a specific managed extension, or you can specify a single \"*\" character to match any extension. The dictionary values represent the settings that Safari applies to each extension that matches the key. In order for the extension to be managed, its host app needs to be present on the device.\n\nThe composed identifier of a managed extension uses the format \"Identifier (TeamIdentifier)\", for example \"com.example.app (ABCD1234)\". Use `codesign -dv \u003cpath_to_appex\u003e` to show the information you need to generate this string on macOS, using the path to the extension bundle located in the \"PlugIns\" folder inside the app bundle. For other platforms, request this information from the app developer.",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The dictionary that defines the settings for a managed extension. Each key represents a specific managed extension, or you can specify a single \"*\" character to match any extension.",
+          "subkeytype": "ExtensionDictionary",
+          "subkeys": [
+            {
+              "key": "State",
+              "title": "Extension state",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "Allowed",
+                "AlwaysOn",
+                "AlwaysOff"
+              ],
+              "combinetype": "enum-last",
+              "content": "Controls whether an extension is allowed.\n* `Allowed` - The user is allowed to turn the extension on or off.\n* `AlwaysOn` - The extension will always be on.\n* `AlwaysOff` - The extension will always be off."
+            },
+            {
+              "key": "PrivateBrowsing",
+              "title": "Private Browsing state",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "Allowed",
+                "AlwaysOn",
+                "AlwaysOff"
+              ],
+              "combinetype": "enum-last",
+              "content": "Controls whether an extension is allowed in Private Browsing.\n* `Allowed` - The user is allowed to turn the extension on or off in Private Browsing.\n* `AlwaysOn` - The extension will always be on in Private Browsing if the extension is on outside of Private Browsing.\n* `AlwaysOff` - The extension will never be on in Private Browsing."
+            },
+            {
+              "key": "AllowedDomains",
+              "title": "Allowed domains",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "combinetype": "set-union",
+              "content": "Controls the domains and sub-domains the extension is granted access to.",
+              "subkeys": [
+                {
+                  "key": "Domain",
+                  "title": "Domain",
+                  "type": "\u003cstring\u003e",
+                  "content": "A domain or set of sub-domains where the extension is allowed"
+                }
+              ]
+            },
+            {
+              "key": "DeniedDomains",
+              "title": "Denied domains",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "combinetype": "set-union",
+              "content": "Controls the domains and sub-domains the extension isn't allowed to access.",
+              "subkeys": [
+                {
+                  "key": "Domain",
+                  "title": "Domain",
+                  "type": "\u003cstring\u003e",
+                  "content": "A domain or set of sub-domains where the extension is not allowed"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

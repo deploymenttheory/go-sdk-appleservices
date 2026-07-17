@@ -1,0 +1,59 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.airplay.security",
+  "title": "AirPlay Security",
+  "description": "The payload that configures Apple TV for a particular style of AirPlay security.",
+  "payload": {
+    "payloadtype": "com.apple.airplay.security",
+    "content": "Manages the AirPlay Security settings on Apple TV (Settings \u003e AirPlay \u003e Security). Use this payload to lock Apple TV to a particular style of AirPlay security. The setting can enable/disable an on-screen passcode, or require a specific password phrase.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "11.0"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "SecurityType",
+      "title": "Security Type",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "PASSCODE_ONCE",
+        "PASSCODE_ALWAYS",
+        "PASSWORD"
+      ],
+      "content": "The security policy for AirPlay. Allowed values:\n\n- `PASSCODE_ONCE`: Requires an onscreen passcode on first connection from a device. Subsequent connections from the same device aren't prompted.\n- `PASSCODE_ALWAYS`: Requires an onscreen passcode for every AirPlay connection. After an AirPlay connection ends, the system allows reconnecting within 30 seconds without a password.\n- `PASSWORD`: Requires the passphrase set for `Password`.\n\n\u003e Note:\n\u003e `NONE` was deprecated in tvOS 11.3. Existing profiles that use `NONE` get the `PASSWORD_ONCE` behavior."
+    },
+    {
+      "key": "AccessType",
+      "title": "Access Type",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "ANY",
+        "WIFI_ONLY"
+      ],
+      "content": "The access policy for AirPlay.\n\n`ANY` allows connections from both Ethernet, Wi-Fi, and Apple Wireless Direct Link.\n\n`WIFI_ONLY` allows connections only from devices on the same Ethernet or Wi-Fi network as Apple TV."
+    },
+    {
+      "key": "Password",
+      "title": "Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The AirPlay password; required if `SecurityType` is `PASSWORD`."
+    }
+  ]
+}

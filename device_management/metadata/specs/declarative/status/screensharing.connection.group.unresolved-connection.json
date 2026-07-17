@@ -1,0 +1,75 @@
+{
+  "category": "declarative/status",
+  "name": "screensharing.connection.group.unresolved-connection",
+  "title": "Status Screen Sharing Connection Group Unresolved Connections",
+  "description": "Information about connection groups with member connection references that the system couldn't resolve.",
+  "payload": {
+    "statusitemtype": "screensharing.connection.group.unresolved-connection",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "14.1"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "screensharing.connection.group.unresolved-connection",
+      "title": "Connection Groups status",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "A status item that contains an array of unresolved connection groups.",
+      "subkeytype": "UnresolvedGroup",
+      "subkeys": [
+        {
+          "key": "unresolved_group",
+          "type": "\u003cdictionary\u003e",
+          "content": "A status item that contains an unresolved connection group.",
+          "subkeys": [
+            {
+              "key": "identifier",
+              "title": "Unique identifier of the connection group.",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The unique `ConnectionGroupUUID` identifier of the connection group."
+            },
+            {
+              "key": "_removed",
+              "title": "Indicates removal of the unresolved connection group.",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system removed the unresolved connection group and only this key and the `identifier` key are present in the status item object."
+            },
+            {
+              "key": "unresolved_connections",
+              "title": "Unique identifiers of unresolved connections.",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "An array of `ConnectionUUID` values specified in the `Members` key in the group's declaration for the unresolved connections.",
+              "subkeys": [
+                {
+                  "key": "ConnectionUUID",
+                  "title": "Connection Unique Identifier",
+                  "type": "\u003cstring\u003e",
+                  "content": "The unique identifier (i.e., ConnectionUUID) of a connection which could not be resolved."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

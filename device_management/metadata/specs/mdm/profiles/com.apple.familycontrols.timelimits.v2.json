@@ -1,0 +1,215 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.familycontrols.timelimits.v2",
+  "title": "Parental Controls: Time Limits",
+  "description": "The payload that configures parental control time limits.",
+  "payload": {
+    "payloadtype": "com.apple.familycontrols.timelimits.v2",
+    "content": "Parental controls time limits.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "familyControlsEnabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "content": "If `true`, enables time limits."
+    },
+    {
+      "key": "time-limits",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The time limits to enforce if `familyControlsEnabled` is enabled.",
+      "subkeys": [
+        {
+          "key": "weekday-allowance",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The weekday allowance settings.",
+          "subkeytype": "Allowance",
+          "subkeys": [
+            {
+              "key": "enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, enable these settings."
+            },
+            {
+              "key": "rangeType",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "rangelist": [
+                0,
+                1
+              ],
+              "content": "The type of day range, which has the following possible values:\n\n- `0`: Weekday\n- `1`: Weekend"
+            },
+            {
+              "key": "start",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The curfew start time, in the format '%d:%d:%d'."
+            },
+            {
+              "key": "end",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The curfew end time, in the format `%d:%d:%d`."
+            },
+            {
+              "key": "secondsPerDay",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The allowance for that day, in seconds."
+            }
+          ]
+        },
+        {
+          "key": "weekday-curfew",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The weekday curfew settings.",
+          "subkeytype": "Allowance",
+          "subkeys": [
+            {
+              "key": "enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, enable these settings."
+            },
+            {
+              "key": "rangeType",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "rangelist": [
+                0,
+                1
+              ],
+              "content": "The type of day range, which has the following possible values:\n\n- `0`: Weekday\n- `1`: Weekend"
+            },
+            {
+              "key": "start",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The curfew start time, in the format '%d:%d:%d'."
+            },
+            {
+              "key": "end",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The curfew end time, in the format `%d:%d:%d`."
+            },
+            {
+              "key": "secondsPerDay",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The allowance for that day, in seconds."
+            }
+          ]
+        },
+        {
+          "key": "weekend-allowance",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The weekend allowance settings.",
+          "subkeytype": "Allowance",
+          "subkeys": [
+            {
+              "key": "enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, enable these settings."
+            },
+            {
+              "key": "rangeType",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "rangelist": [
+                0,
+                1
+              ],
+              "content": "The type of day range, which has the following possible values:\n\n- `0`: Weekday\n- `1`: Weekend"
+            },
+            {
+              "key": "start",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The curfew start time, in the format '%d:%d:%d'."
+            },
+            {
+              "key": "end",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The curfew end time, in the format `%d:%d:%d`."
+            },
+            {
+              "key": "secondsPerDay",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The allowance for that day, in seconds."
+            }
+          ]
+        },
+        {
+          "key": "weekend-curfew",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The weekend curfew settings.",
+          "subkeytype": "Allowance",
+          "subkeys": [
+            {
+              "key": "enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, enable these settings."
+            },
+            {
+              "key": "rangeType",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "rangelist": [
+                0,
+                1
+              ],
+              "content": "The type of day range, which has the following possible values:\n\n- `0`: Weekday\n- `1`: Weekend"
+            },
+            {
+              "key": "start",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The curfew start time, in the format '%d:%d:%d'."
+            },
+            {
+              "key": "end",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The curfew end time, in the format `%d:%d:%d`."
+            },
+            {
+              "key": "secondsPerDay",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The allowance for that day, in seconds."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

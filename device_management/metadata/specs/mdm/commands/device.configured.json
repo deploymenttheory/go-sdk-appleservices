@@ -1,0 +1,31 @@
+{
+  "category": "mdm/commands",
+  "name": "device.configured",
+  "title": "Device Configured Command",
+  "description": "Inform the device that it can allow the user to continue in Setup Assistant.",
+  "payload": {
+    "requesttype": "DeviceConfigured",
+    "content": "Informs the device that it can continue past DEP enrollment. Only works on devices in DEP that have their cloud configuration set to await configuration.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.0",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "10.11",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "10.2",
+        "accessrights": "None"
+      },
+      "visionOS": {
+        "introduced": "2.0",
+        "accessrights": "None"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  }
+}

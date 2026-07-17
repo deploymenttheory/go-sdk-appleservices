@@ -1,0 +1,86 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "screensharing.connection",
+  "title": "Screen Sharing:Connection",
+  "description": "The declaration to configure a connection to a screen-sharing host.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.screensharing.connection",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ConnectionUUID",
+      "title": "Unique Identifier",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "A unique identifier for this connection when it's in a connection group."
+    },
+    {
+      "key": "DisplayName",
+      "title": "The name of the connection.",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The name of the connection."
+    },
+    {
+      "key": "HostName",
+      "title": "Host Name",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The host name or IP address of the Mac that hosts the screen-sharing connection."
+    },
+    {
+      "key": "Port",
+      "title": "TCP Port",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The TCP port number on the host to initiate the connection."
+    },
+    {
+      "key": "DisplayConfiguration",
+      "title": "Display Configuration",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "The display configuration for this connection.",
+      "subkeys": [
+        {
+          "key": "DisplayType",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "rangelist": [
+            "Virtual1",
+            "Virtual2"
+          ],
+          "content": "The type of display for the connection, which has these allowed values:\n\n- `Virtual1`: Create one virtual display.\n- `Virtual2`: Create two virtual displays."
+        }
+      ]
+    },
+    {
+      "key": "AuthenticationCredentialsAssetReference",
+      "title": "Authentication Credentials Asset Reference",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The identifier of an asset declaration that contains the required credentials for this connection to authenticate with the screen-sharing server. Set the corresponding asset type to `com.apple.asset.credential.userpassword`.",
+      "assettypes": [
+        "com.apple.asset.credential.userpassword"
+      ]
+    }
+  ]
+}

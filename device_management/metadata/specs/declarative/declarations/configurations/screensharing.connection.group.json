@@ -1,0 +1,56 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "screensharing.connection.group",
+  "title": "Screen Sharing:Connection Group",
+  "description": "The declaration to configure a group of screen-sharing connections.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.screensharing.connection.group",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ConnectionGroupUUID",
+      "title": "Unique Identifier",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "A unique identifier for this connection group."
+    },
+    {
+      "key": "GroupName",
+      "title": "Group Name",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The name of the connection group."
+    },
+    {
+      "key": "Members",
+      "title": "Group Members",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of `ConnectionUUID`s that represent connections declared in `ScreenSharingConnection` configurations that are members of this group.",
+      "subkeys": [
+        {
+          "key": "ConnectionUUID",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    }
+  ]
+}

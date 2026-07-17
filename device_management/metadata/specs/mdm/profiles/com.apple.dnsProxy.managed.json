@@ -1,0 +1,73 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.dnsProxy.managed",
+  "title": "DNS Proxy",
+  "description": "The payload that configures DNS proxies.",
+  "payload": {
+    "payloadtype": "com.apple.dnsProxy.managed",
+    "content": "As of iOS 15.0 this payload can be installed on unsupervised devices via MDM and can only be installed via MDM. As of iOS 16.0, this can be installed on user enrollments via MDM if DNSProxyUUID is specified.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "11.0"
+      },
+      "macOS": {
+        "introduced": "10.15"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AppBundleIdentifier",
+      "title": "App Bundle Identifier",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The bundle identifier of the app containing the DNS proxy network extension."
+    },
+    {
+      "key": "ProviderBundleIdentifier",
+      "title": "Provider Bundle Identifier",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The bundle identifier of the DNS proxy network extension to use. Declaring the bundle identifier is useful for apps that contain more than one DNS proxy extension."
+    },
+    {
+      "key": "ProviderConfiguration",
+      "title": "Provider Configuration",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The dictionary of vendor-specific configuration items.",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003cany\u003e",
+          "presence": "optional",
+          "content": "Key/value pairs."
+        }
+      ]
+    },
+    {
+      "key": "DNSProxyUUID",
+      "title": "DNS Proxy UUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A globally unique identifier for this DNS proxy configuration. The proxy processes DNS lookups traffic for managed apps with the same `DNSProxyUUID` in their app attributes. This key is required for user enrollment.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "16.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

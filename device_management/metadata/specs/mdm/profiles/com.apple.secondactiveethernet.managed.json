@@ -1,0 +1,34 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.secondactiveethernet.managed",
+  "title": "802.1X: Second Active Ethernet",
+  "description": "The payload that configures the second wired, active Ethernet interface.",
+  "payload": {
+    "payloadtype": "com.apple.secondactiveethernet.managed",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ANY",
+      "type": "\u003cany\u003e",
+      "presence": "optional",
+      "content": "Keys relevant to 802.1x configuration.  User enrollment payloads do not support the various proxy keys including ProxyType, ProxyServer, ProxyServerPort, ProxyUsername, ProxyPassword,, ProxyPACURL and ProxyPACFallbackAllowed."
+    }
+  ]
+}

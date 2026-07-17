@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "passcode.is-compliant",
+  "title": "Status Passcode Compliance",
+  "description": "A status report of passcode compliance.",
+  "payload": {
+    "statusitemtype": "passcode.is-compliant",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "16.0"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "passcode.is-compliant",
+      "title": "Status item value.",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "content": "If `true`, the passcode is in compliance with all passcode policies set on the device. If `false`, the passcode isn't in compliance with one or more passcode policies set on the device. When there are no passcode policies on the device, this value `true`."
+    }
+  ]
+}

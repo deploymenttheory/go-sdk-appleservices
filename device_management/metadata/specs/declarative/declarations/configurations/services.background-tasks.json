@@ -1,0 +1,91 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "services.background-tasks",
+  "title": "Services Background Tasks",
+  "description": "The declaration to configure background tasks.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.services.background-tasks",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "15.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "TaskType",
+      "title": "Task Type",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The unique identifier of the set of background tasks managed with this configuration. This should be a reverse DNS style identifier. The system uses this identifier to differentiate between tasks in different configurations."
+    },
+    {
+      "key": "TaskDescription",
+      "title": "Task Description",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A description of the set of background tasks managed by this configuration."
+    },
+    {
+      "key": "ExecutableAssetReference",
+      "title": "Executable Asset Reference",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "Specifies the identifier of an asset declaration containing a reference to the files to be used for the background task configuration. The corresponding asset must be of type `com.apple.asset.data`.\n\nThe referenced data must be a zip archive of an entire directory, that will be expanded and stored in a well known location for the background task. The asset's \"ContentType\" and \"Hash-SHA-256\" keys in the \"Reference\" key are required.\n\nThis file should contain background task executables, scripts, and configuration files, but not the `launchd` configuration files.",
+      "assettypes": [
+        "com.apple.asset.data"
+      ]
+    },
+    {
+      "key": "LaunchdConfigurations",
+      "title": "Launchd Configurations",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of `launchd` configuration files used to run the background tasks.",
+      "subkeys": [
+        {
+          "key": "launchd-item",
+          "type": "\u003cdictionary\u003e",
+          "presence": "required",
+          "content": "A dictionary of launchd configurations.",
+          "subkeys": [
+            {
+              "key": "FileAssetReference",
+              "title": "File Asset Reference",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "Specifies the identifier of an asset declaration containing a reference to the launchd configuration file for the background task. The referenced data must be a property list file conforming to the launchd.plist format. The asset's \"ContentType\" and \"Hash-SHA-256\" keys in the \"Reference\" key are required.",
+              "assettypes": [
+                "com.apple.asset.data"
+              ]
+            },
+            {
+              "key": "Context",
+              "title": "Launchd Context",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "daemon",
+                "agent"
+              ],
+              "content": "Indicates whether the launchd configuration file is applied to the system daemon, or system agent domain."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

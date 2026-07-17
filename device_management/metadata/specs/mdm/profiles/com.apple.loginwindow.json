@@ -1,0 +1,235 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.loginwindow",
+  "title": "Login Window",
+  "description": "The payload that configures Login Window behavior.",
+  "payload": {
+    "payloadtype": "com.apple.loginwindow",
+    "content": "The com.apple.loginwindow payload creates managed preferences on macOS for system/device profiles.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "SHOWFULLNAME",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system shows the name and password dialog. If `false`, the system displays a list of users."
+    },
+    {
+      "key": "HideLocalUsers",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system shows only network and system users when showing a user list."
+    },
+    {
+      "key": "IncludeNetworkUser",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system shows network users when showing a user list."
+    },
+    {
+      "key": "HideAdminUsers",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system hides administrator users when showing a user list."
+    },
+    {
+      "key": "SHOWOTHERUSERS_MANAGED",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system displays \"Other...\" when it shows a list of users."
+    },
+    {
+      "key": "AdminHostInfo",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "HostName",
+        "SystemVersion",
+        "IPAddress"
+      ],
+      "content": "The admin host info. If present in the payload, the system displays its value in the Login Window as additional computer information. Before macOS 10.10, this string could only contain host name, system version, or IP address. After macOS 10.10, setting this key to any value allows the user to click the time area of the menu bar to toggle through various computer information values."
+    },
+    {
+      "key": "AllowList",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "The list of user GUIDs or group GUIDs of users that the system allows to log in. An asterisk (`*`) string specifies all users or groups. This only applies to network accounts and mobile accounts.",
+      "subkeys": [
+        {
+          "key": "AllowListItem",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "A user or group GUID."
+        }
+      ]
+    },
+    {
+      "key": "DenyList",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "The list of user GUIDs or group GUIDs of users that the system disallows to log in. This list takes priority over the list in the `AllowList` key. This only applies to network accounts and mobile accounts.",
+      "subkeys": [
+        {
+          "key": "DenyListItem",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "A user or group GUID."
+        }
+      ]
+    },
+    {
+      "key": "HideMobileAccounts",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system hides mobile account users in a user list. In some cases, mobile users show up as network users."
+    },
+    {
+      "key": "ShutDownDisabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables the Shut Down button."
+    },
+    {
+      "key": "RestartDisabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables the Restart item."
+    },
+    {
+      "key": "SleepDisabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables the Sleep button."
+    },
+    {
+      "key": "DisableConsoleAccess",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disregards the `\u003econsole` special user name, which provides a command line UI."
+    },
+    {
+      "key": "LoginwindowText",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The text to display in the Login Window."
+    },
+    {
+      "key": "ShutDownDisabledWhileLoggedIn",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables the Shut Down menu item when the user is logged in."
+    },
+    {
+      "key": "RestartDisabledWhileLoggedIn",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables the Restart menu item when the user is logged in."
+    },
+    {
+      "key": "PowerOffDisabledWhileLoggedIn",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables the Power Off menu item when the user is logged in."
+    },
+    {
+      "key": "LogOutDisabledWhileLoggedIn",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables the Log Out menu item when the user is logged in. Available in macOS 10.13 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13"
+        }
+      }
+    },
+    {
+      "key": "DisableScreenLockImmediate",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables the immediate Screen Lock functions. Available in macOS 10.13 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13"
+        }
+      }
+    },
+    {
+      "key": "showInputMenu",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system shows the Input Menu in the Login Window.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.8"
+        }
+      }
+    },
+    {
+      "key": "DisableFDEAutoLogin",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables the automatic login option when using FileVault.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "AutologinUsername",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user short name for an existing user to set up auto login.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "14.0"
+        }
+      }
+    },
+    {
+      "key": "AutologinPassword",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "An optional user password to set up auto login. This must match the `AutologinUsername` user's current password.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "14.0"
+        }
+      }
+    }
+  ]
+}

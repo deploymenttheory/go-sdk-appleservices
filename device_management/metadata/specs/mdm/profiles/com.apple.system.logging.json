@@ -1,0 +1,88 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.system.logging",
+  "title": "System Logging",
+  "description": "The payload that configures system logging.",
+  "payload": {
+    "payloadtype": "com.apple.system.logging",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.12"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Processes",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "Not to be used.",
+      "subkeytype": "Item",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003cany\u003e",
+          "presence": "optional",
+          "content": "TBD"
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Subsystems",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary enabling the logging level for subsystems. See `Customizing Logging Behavior While Debugging` for more details about the format of the dictionary.",
+      "subkeytype": "Item",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003cany\u003e",
+          "presence": "optional",
+          "content": "TBD"
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "System",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "This dictionary has one key, `Enable-Private-Data`. Setting that value to `true` enables private data logging for the entire system.",
+      "subkeytype": "Item",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003cany\u003e",
+          "presence": "optional",
+          "content": "TBD"
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

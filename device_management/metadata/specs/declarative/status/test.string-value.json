@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "test.string-value",
+  "title": "Status Test String Value",
+  "description": "A test status item for a string.",
+  "payload": {
+    "statusitemtype": "test.string-value",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "16.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "test.string-value",
+      "title": "Status item value.",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The test status string value."
+    }
+  ]
+}

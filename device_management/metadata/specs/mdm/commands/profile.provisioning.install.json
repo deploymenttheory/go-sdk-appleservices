@@ -1,0 +1,40 @@
+{
+  "category": "mdm/commands",
+  "name": "profile.provisioning.install",
+  "title": "Install Provisioning Profile Command",
+  "description": "Install a provisioning profile on a device.",
+  "payload": {
+    "requesttype": "InstallProvisioningProfile",
+    "content": "This command allows the server to install a provisioning profile. No error occurs if the provisioning profile is already installed. This command requires the Provisioning Profile Installation and Removal right. On macOS, this command is for iOS and iPadOS style provisioning profiles only.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0",
+        "accessrights": "AllowProvisioningInstallationRemoval"
+      },
+      "macOS": {
+        "introduced": "11.0",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "10.2",
+        "accessrights": "AllowProvisioningInstallationRemoval"
+      },
+      "visionOS": {
+        "introduced": "1.1",
+        "accessrights": "AllowProvisioningInstallationRemoval"
+      },
+      "watchOS": {
+        "introduced": "10.0",
+        "accessrights": "AllowProvisioningInstallationRemoval"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ProvisioningProfile",
+      "type": "\u003cdata\u003e",
+      "presence": "required",
+      "content": "The provisioning profile."
+    }
+  ]
+}

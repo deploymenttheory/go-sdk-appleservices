@@ -1,0 +1,95 @@
+{
+  "category": "declarative/status",
+  "name": "account.list.carddav",
+  "title": "Status Account List CardDAV",
+  "description": "A status report of the client's Contacts accounts.",
+  "payload": {
+    "statusitemtype": "account.list.carddav",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "16.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "account.list.carddav",
+      "title": "Status item value.",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "A list of status values for the Contacts accounts.",
+      "subkeytype": "Account",
+      "subkeys": [
+        {
+          "key": "status_value",
+          "type": "\u003cdictionary\u003e",
+          "content": "A status report of the client's Contacts account details.",
+          "subkeys": [
+            {
+              "key": "identifier",
+              "title": "Unique identifier of the account.",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The unique identifier for the account."
+            },
+            {
+              "key": "_removed",
+              "title": "Indicates removal of the account.",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the account is removed and the status item object only contains this key and the `identifier` key."
+            },
+            {
+              "key": "declaration-identifier",
+              "title": "Identifier of the declaration that installed the account.",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The identifier of the declaration that installed the account. Only present if a declaration installed the account."
+            },
+            {
+              "key": "visible-name",
+              "title": "Account name",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The name of the account."
+            },
+            {
+              "key": "hostname",
+              "title": "Account hostname",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The server host name for the account."
+            },
+            {
+              "key": "port",
+              "title": "Server Port",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The server port for the account."
+            },
+            {
+              "key": "username",
+              "title": "Account username",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The user name for the account."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

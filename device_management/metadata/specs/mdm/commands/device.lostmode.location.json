@@ -1,0 +1,107 @@
+{
+  "category": "mdm/commands",
+  "name": "device.lostmode.location",
+  "title": "Device Location Command",
+  "description": "Request the location of a device when in Lost Mode.",
+  "payload": {
+    "requesttype": "DeviceLocation",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.3",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "responsekeys": [
+    {
+      "key": "Latitude",
+      "type": "\u003creal\u003e",
+      "presence": "required",
+      "content": "The latitude of the device's location."
+    },
+    {
+      "key": "Longitude",
+      "type": "\u003creal\u003e",
+      "presence": "required",
+      "content": "The longitude of the device's location."
+    },
+    {
+      "key": "HorizontalAccuracy",
+      "type": "\u003creal\u003e",
+      "presence": "required",
+      "content": "The radius of uncertainty for the location in meters, which is a negative value if the horizontal accuracy is unknown.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.3"
+        }
+      }
+    },
+    {
+      "key": "VerticalAccuracy",
+      "type": "\u003creal\u003e",
+      "presence": "required",
+      "content": "The accuracy of the altitude value in meters, which is a negative value if the vertical accuracy is unknown.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.3"
+        }
+      }
+    },
+    {
+      "key": "Altitude",
+      "type": "\u003creal\u003e",
+      "presence": "required",
+      "content": "The altitude of the device's location, which is a negative value if the altitude is unknown.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.3"
+        }
+      }
+    },
+    {
+      "key": "Speed",
+      "type": "\u003creal\u003e",
+      "presence": "required",
+      "content": "The speed of the device in meters per second, which is a negative value if the speed is unknown.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.3"
+        }
+      }
+    },
+    {
+      "key": "Course",
+      "type": "\u003creal\u003e",
+      "presence": "required",
+      "content": "The direction the device is traveling, which is a negative value if the course is unknown.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.3"
+        }
+      }
+    },
+    {
+      "key": "Timestamp",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The RFC 3339 timestamp of when the server determines the location of the device.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.3"
+        }
+      }
+    }
+  ]
+}

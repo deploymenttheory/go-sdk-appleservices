@@ -8,6 +8,7 @@ A collection of Go SDKs for interacting with Apple API services, device manageme
 
 - **iTunes Search API** — search and lookup across the iTunes, App Store, iBooks Store, and Mac App Store
 - **Apple Business Manager / Apple School Manager API** — device inventory and MDM server management - [Apple Business Manager API Changelog](https://developer.apple.com/documentation/apple-school-and-business-manager-api/apple-school-manager-and-apple-business-api-changelog)
+- **Apple Device Management (MDM / DDM)** — typed, spec-validated construction of MDM command plists, configuration profiles and Declarative Device Management JSON, generated from [apple/device-management](https://github.com/apple/device-management)
 - **Apple Update CDN** — firmware discovery and IPSW download for macOS, iOS, and iPadOS
 - **Microsoft Updates** — macOS standalone app updates, Edge channels, OneDrive rings, App Store versions, and Office CVE history
 
@@ -121,6 +122,72 @@ func main() {
 ```
 
 📖 **[Complete Quick Start Guide →](./examples/axm/quick_start.md)**
+
+---
+
+### Apple Device Management (MDM / DDM)
+
+A generated SDK built from Apple's canonical schema repo
+[apple/device-management](https://github.com/apple/device-management):
+typed Go values in, spec-validated Apple config out. No authentication or
+network — the SDK *produces and validates* management artifacts; your MDM
+server delivers them.
+
+**What it covers:**
+- **MDM commands** (`mdm/commands`) — every command as a typed payload struct; emitted as command plists
+- **Configuration profiles** (`mdm/profiles`) — every payload type; emitted as `.mobileconfig` plists with the envelope assembled for you
+- **DDM declarations** (`ddm/configurations`, `ddm/assets`, `ddm/activations`, `ddm/management`) — emitted as declaration JSON
+
+**The spec is honoured:** required keys are value fields, optional keys are
+pointers; allowed values are typed enums with constants; every payload's
+`Validate()` enforces rangelists, numeric ranges, formats, cardinality and
+`<url>`/`<hostname>`/`<email>` subtypes before anything is emitted. The
+schema pipeline (pinned upstream commit → committed snapshots → offline
+deterministic codegen → weekly semantic-diff PRs) tracks Apple's moving
+target.
+
+**Quick Start:**
+
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+
+    "github.com/deploymenttheory/go-api-sdk-apple/device_management/ddm"
+    "github.com/deploymenttheory/go-api-sdk-apple/device_management/ddm/configurations"
+    "github.com/deploymenttheory/go-api-sdk-apple/device_management/mdm"
+    "github.com/deploymenttheory/go-api-sdk-apple/device_management/mdm/commands"
+    "github.com/deploymenttheory/go-api-sdk-apple/device_management/ptr"
+)
+
+func main() {
+    // MDM command plist.
+    cmd, err := mdm.NewCommand(&commands.DeviceLock{
+        Message: ptr.To("Locked by IT"),
+        PIN:     ptr.To("123456"),
+    })
+    if err != nil {
+        log.Fatalf("build command: %v", err)
+    }
+    fmt.Println(string(cmd))
+
+    // DDM declaration JSON — validation rejects out-of-spec values
+    // (MinimumLength allows 0-16 per Apple's schema).
+    decl, err := ddm.BuildDeclaration("com.example.passcode",
+        &configurations.PasscodeSettings{
+            RequirePasscode: ptr.To(true),
+            MinimumLength:   ptr.To(int64(12)),
+        })
+    if err != nil {
+        log.Fatalf("build declaration: %v", err)
+    }
+    fmt.Println(string(decl))
+}
+```
+
+📖 **[Full device_management documentation →](./device_management/README.md)**
 
 ---
 
@@ -303,6 +370,10 @@ examples/
 ├── axm/                         Apple Business Manager
 │   ├── devices/
 │   └── devicemanagement/
+├── device_management/           Apple MDM / DDM config generation
+│   ├── commands/                MDM command plists
+│   ├── profiles/                .mobileconfig profiles
+│   └── ddm/                     DDM declarations and activation sets
 ├── apple_update_cdn/            Apple Update CDN
 │   ├── firmware/                ipsw.me firmware discovery
 │   ├── gdmf/                    Apple signed-version feed
@@ -325,6 +396,7 @@ examples/
 - [iTunes Search API Documentation](https://performance-partners.apple.com/search-api)
 - [Apple Business Manager API Documentation](https://developer.apple.com/documentation/applebusinessmanagerapi)
 - [Apple Device Management Documentation](https://developer.apple.com/documentation/devicemanagement)
+- [Apple device-management schema repo (source of the generated MDM/DDM SDK)](https://github.com/apple/device-management)
 - [Microsoft Office CDN (MOFA reference)](https://github.com/cocopuff2u/MOFA)
 
 ## Contributing

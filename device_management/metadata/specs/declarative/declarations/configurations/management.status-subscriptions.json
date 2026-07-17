@@ -1,0 +1,52 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "management.status-subscriptions",
+  "title": "Management:Status Subscriptions",
+  "description": "The declaration to configure status subscriptions.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.management.status-subscriptions",
+    "apply": "combined",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "StatusItems",
+      "title": "Status Items",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "combinetype": "set-union",
+      "content": "An array of status items that the device notifies subscribers about.",
+      "subkeys": [
+        {
+          "key": "StatusItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "The declaration for configuring a specific status subscription.",
+          "subkeys": [
+            {
+              "key": "Name",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The name of the status item to send to subscribers."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+name: go | Device Management | Unit Tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - '.github/workflows/device-management-unit-tests.yml'
+      - 'device_management/**/*.go'
+      - 'go.mod'
+      - 'go.sum'
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  unit-tests:
+    name: '🧪 Run Device Management Unit Tests'
+    runs-on: ubuntu-24.04-arm
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Check Out
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Set up Go
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
+        with:
+          go-version-file: 'go.mod'
+          cache-dependency-path: 'go.sum'
+          cache: true
+
+      - name: Build everything (including all generated packages)
+        run: go build ./device_management/...
+
+      - name: Vet
+        run: go vet ./device_management/...
+
+      - name: Run Device Management Unit Tests
+        run: |
+          go test -v -race -coverprofile=coverage.out -covermode=atomic ./device_management/... 2>&1 | tee test_output.txt
+          echo "::group::📊 Coverage Summary"
+          go tool cover -func=coverage.out | tail -1
+          echo "::endgroup::"
+
+      - name: Upload coverage reports to Codecov
+        if: always()
+        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN || '' }}
+          slug: deploymenttheory/go-sdk-appleservices
+          files: ./coverage.out
+          flags: device-management-unittests
+          name: codecov-device-management
+          fail_ci_if_error: false
+
+  regen:
+    name: '⚙️ Regeneration determinism gate'
+    runs-on: ubuntu-24.04-arm
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Check Out
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Set up Go
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
+        with:
+          go-version-file: 'go.mod'
+          cache-dependency-path: 'go.sum'
+          cache: true
+
+      - name: Regenerate the SDK surface from committed snapshots
+        run: go run ./device_management/cmd/gendm
+
+      - name: Generated output must match the committed tree
+        run: |
+          git add -N device_management
+          git diff --exit-code --stat -- device_management

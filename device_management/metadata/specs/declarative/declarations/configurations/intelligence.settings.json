@@ -1,0 +1,231 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "intelligence.settings",
+  "title": "Intelligence Settings",
+  "description": "The declaration to configure Apple Intelligence settings.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.intelligence.settings",
+    "apply": "combined",
+    "content": "Configures Apple Intelligence settings.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "26.4"
+      },
+      "macOS": {
+        "introduced": "26.4"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "26.4"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AllowAppleIntelligenceReport",
+      "title": "Allow Apple Intelligence Report",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables Apple Intelligence Report."
+    },
+    {
+      "key": "AllowGenmoji",
+      "title": "Allow Genmoji",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables Genmoji."
+    },
+    {
+      "key": "AllowImagePlayground",
+      "title": "Allow Image Playground",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables Image Playground."
+    },
+    {
+      "key": "AllowImageWand",
+      "title": "Allow Image Wand",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables Image Wand.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowPersonalizedHandwritingResults",
+      "title": "Allow Personalized Handwriting Results",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables Personalized Handwriting Results.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowVisualIntelligenceSummary",
+      "title": "Allow Visual Intelligence Summary",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables Visual Intelligence Summary.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowWritingTools",
+      "title": "Allow Writing Tools",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables Writing Tools."
+    },
+    {
+      "key": "Apps",
+      "title": "Apps",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "If present, configures app-specific Intelligence features.",
+      "subkeys": [
+        {
+          "key": "Mail",
+          "title": "Mail",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "If present, configures Mail Intelligence features.",
+          "subkeys": [
+            {
+              "key": "AllowSmartReplies",
+              "title": "Allow Smart Replies",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "combinetype": "boolean-and",
+              "content": "If `false`, disables Mail Smart Replies."
+            },
+            {
+              "key": "AllowSummary",
+              "title": "Allow Summary",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "combinetype": "boolean-and",
+              "content": "If `false`, disables Mail Summary."
+            }
+          ]
+        },
+        {
+          "key": "Notes",
+          "title": "Notes",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "If present, configures Notes Intelligence features.",
+          "subkeys": [
+            {
+              "key": "AllowTranscription",
+              "title": "Allow Transcription",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "combinetype": "boolean-and",
+              "content": "If `false`, disables Notes Transcription.",
+              "supportedOS": {
+                "visionOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "AllowTranscriptionSummary",
+              "title": "Allow Transcription Summary",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "combinetype": "boolean-and",
+              "content": "If `false`, disables Notes Transcription Summary.",
+              "supportedOS": {
+                "visionOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "key": "Safari",
+          "title": "Safari",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "If present, configures Safari intelligence features.",
+          "subkeys": [
+            {
+              "key": "AllowSummary",
+              "title": "Allow Summary",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "combinetype": "boolean-and",
+              "content": "If `false`, disables Safari Summary."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ForceOnDeviceOnlyDictation",
+      "title": "Force On-Device Only Dictation",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "combinetype": "boolean-or",
+      "content": "If `true`, forces On-Device Only Dictation."
+    },
+    {
+      "key": "ForceOnDeviceOnlyTranslation",
+      "title": "Force On-Device Only Translation",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "combinetype": "boolean-or",
+      "content": "If `true`, forces On-Device Only Translation.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

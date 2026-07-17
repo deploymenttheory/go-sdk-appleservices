@@ -1,0 +1,93 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.caldav.account",
+  "title": "CalDAV",
+  "description": "The payload that configures a Calendar account.",
+  "payload": {
+    "payloadtype": "com.apple.caldav.account",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "CalDAVAccountDescription",
+      "title": "Account Description",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The description of the account."
+    },
+    {
+      "key": "CalDAVHostName",
+      "title": "Account Hostname",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The server's address."
+    },
+    {
+      "key": "CalDAVUsername",
+      "title": "Account Username",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user name for logins. If this profile is part of a non-interactive install, the system requires this field."
+    },
+    {
+      "key": "CalDAVPassword",
+      "title": "Account Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user's password. Only use this in encrypted profiles."
+    },
+    {
+      "key": "CalDAVPrincipalURL",
+      "title": "Principal URL",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The base URL to the user's calendar."
+    },
+    {
+      "key": "CalDAVUseSSL",
+      "title": "Use SSL",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the system enables SSL."
+    },
+    {
+      "key": "CalDAVPort",
+      "title": "Port Number",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The server's port."
+    },
+    {
+      "key": "VPNUUID",
+      "title": "VPNUUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

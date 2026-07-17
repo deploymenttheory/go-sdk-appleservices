@@ -1,0 +1,60 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.shareddeviceconfiguration",
+  "title": "Lock Screen Message",
+  "description": "The payload that configures a Lock Screen message.",
+  "payload": {
+    "payloadtype": "com.apple.shareddeviceconfiguration",
+    "content": "Allows admins to specify optional text displayed on the Login Window and Lock Screen (i.e. a footnote and Asset Tag Information).",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.3"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AssetTagInformation",
+      "title": "Asset Tag",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The asset tag information for the device, displayed in the Login Window and Lock Screen."
+    },
+    {
+      "key": "IfLostReturnToMessage",
+      "title": "If Lost message",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "Deprecated. Use `LockScreenFootnote` instead.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.3",
+          "deprecated": "9.3.1"
+        }
+      }
+    },
+    {
+      "key": "LockScreenFootnote",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The footnote displayed in the Login Window and Lock Screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.3.1"
+        }
+      }
+    }
+  ]
+}

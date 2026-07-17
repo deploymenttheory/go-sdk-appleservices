@@ -1,0 +1,65 @@
+{
+  "category": "mdm/commands",
+  "name": "passcode.firmware.set",
+  "title": "Set Firmware Password Command",
+  "description": "Change or clear the firmware password on a device.",
+  "payload": {
+    "requesttype": "SetFirmwarePassword",
+    "content": "Changes or clears the firmware password for the device. Requires the \"Device lock and passcode removal right\". This command is not available on a Mac with Apple silicon.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.13",
+        "accessrights": "DeviceLockAndRemovePasscode"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "CurrentPassword",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The current password, which you must set if the device has a firmware password."
+    },
+    {
+      "key": "NewPassword",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The new firmware password. Set to an empty string to clear the password. The characters in this value must consist of low-ASCII, printable characters (`0x20` through `0x7E`) to ensure that all characters are enterable on the EFI login screen."
+    },
+    {
+      "key": "AllowOroms",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enable ROMs."
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "SetFirmwarePassword",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "A dictionary containing the results of the command.",
+      "subkeys": [
+        {
+          "key": "PasswordChanged",
+          "type": "\u003cboolean\u003e",
+          "presence": "required",
+          "content": "If `true`, the password change succeeded."
+        }
+      ]
+    }
+  ]
+}

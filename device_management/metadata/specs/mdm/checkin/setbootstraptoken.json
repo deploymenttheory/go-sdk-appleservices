@@ -1,0 +1,51 @@
+{
+  "category": "mdm/checkin",
+  "name": "setbootstraptoken",
+  "title": "Set Bootstrap Token",
+  "description": "Sends the bootstrap token to the server.",
+  "payload": {
+    "requesttype": "SetBootstrapToken",
+    "content": "Check-in protocol set bootstrap token data request and response.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "26.0"
+      },
+      "macOS": {
+        "introduced": "10.15"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "26.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "MessageType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "SetBootstrapToken"
+      ],
+      "content": "The message type, which requires a value of `SetBootstrapToken`."
+    },
+    {
+      "key": "BootstrapToken",
+      "type": "\u003cdata\u003e",
+      "presence": "optional",
+      "content": "The device's bootstrap token data. If this field is missing or zero length, the server needs to remove the bootstrap token for this device."
+    },
+    {
+      "key": "AwaitingConfiguration",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the device is awaiting a `Device-Configured-Command` command before proceeding through Setup Assistant."
+    }
+  ]
+}

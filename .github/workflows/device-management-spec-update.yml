@@ -1,0 +1,73 @@
+name: go | Device Management | Spec Update
+
+# Weekly check for changes in Apple's device-management schema repo. The
+# latest upstream commit is fetched, snapshots and generated code are
+# refreshed, and a PR is opened whose body is the semantic spec diff.
+# Adopting a drop permanently still means bumping the pinned commit in
+# device_management/cmd/fetchspec/main.go.
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Mondays 09:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Check Out
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Set up Go
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
+        with:
+          go-version-file: 'go.mod'
+          cache-dependency-path: 'go.sum'
+          cache: true
+
+      - name: Snapshot the current spec tree
+        run: cp -r device_management/metadata/specs /tmp/specs-old
+
+      - name: Fetch the latest upstream specs
+        run: go run ./device_management/cmd/fetchspec -discover
+
+      - name: Regenerate the SDK surface
+        run: go run ./device_management/cmd/gendm
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if git diff --quiet -- device_management; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Render the semantic spec diff
+        if: steps.diff.outputs.changed == 'true'
+        run: go run ./device_management/cmd/specdiff -old /tmp/specs-old > /tmp/specdiff.md
+
+      - name: Verify the refreshed tree
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          go build ./device_management/...
+          go test ./device_management/...
+
+      - name: Open pull request
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
+        with:
+          branch: chore/device-management-spec-update
+          title: 'chore(device_management): refresh Apple device-management specs and generated SDK'
+          commit-message: 'chore(device_management): refresh Apple device-management specs and generated SDK'
+          add-paths: |
+            device_management/
+          body-path: /tmp/specdiff.md

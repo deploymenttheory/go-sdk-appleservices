@@ -1,0 +1,44 @@
+{
+  "category": "mdm/commands",
+  "name": "application.validate",
+  "title": "Validate Applications Command",
+  "description": "Force validation of developer and universal provisioning profiles for enterprise apps.",
+  "payload": {
+    "requesttype": "ValidateApplications",
+    "content": "This command allows the server to query for installed 3rd party applications.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.2",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "10.2",
+        "accessrights": "AllowAppInstallation"
+      },
+      "visionOS": {
+        "introduced": "1.1",
+        "accessrights": "AllowAppInstallation"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Identifiers",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "The bundle identifiers of the enterprise apps to include for validation of associated provisioning profiles, if you choose to provide them. Otherwise, validation occurs for the provisioning profiles for the installed managed apps.",
+      "subkeys": [
+        {
+          "key": "IdentifiersItem",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    }
+  ]
+}

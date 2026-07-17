@@ -1,0 +1,708 @@
+{
+  "category": "mdm/commands",
+  "name": "information.security",
+  "title": "Security Info Command",
+  "description": "Get security-related information about a device.",
+  "payload": {
+    "requesttype": "SecurityInfo",
+    "content": "This command queries the device for security-related information. Queries are available if the MDM host has the Security Query right.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0",
+        "accessrights": "AllowQuerySecurity"
+      },
+      "macOS": {
+        "introduced": "10.7",
+        "accessrights": "AllowQuerySecurity"
+      },
+      "tvOS": {
+        "introduced": "9.0",
+        "accessrights": "AllowQuerySecurity"
+      },
+      "visionOS": {
+        "introduced": "1.1",
+        "accessrights": "AllowQuerySecurity"
+      },
+      "watchOS": {
+        "introduced": "10.0",
+        "accessrights": "AllowQuerySecurity"
+      }
+    }
+  },
+  "responsekeys": [
+    {
+      "key": "SecurityInfo",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "A dictionary that contains security-related information.",
+      "subkeys": [
+        {
+          "key": "HardwareEncryptionCaps",
+          "type": "\u003cinteger\u003e",
+          "content": "An integer that indicates the underlying hardware encryption capabilities of the device, which is one of the following values:\n\n- `1`: Block-level encryption\n- `2`: File-level encryption\n- `3`: Both block-level and file-level encryption\n\n\u003e Important:\n\u003e For a device to have data protection, `HardwareEncryptionCaps` must be `3` and `PasscodePresent` must `true`.\n\nThis value is available in iOS 4 and later, and tvOS 6 and later.",
+          "supportedOS": {
+            "macOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "PasscodePresent",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, the device has a passcode. This key doesn't apply to User-Enrolled devices. This value is available in iOS 4 and later, and tvOS 6 and later.",
+          "supportedOS": {
+            "iOS": {},
+            "macOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {}
+          }
+        },
+        {
+          "key": "PasscodeCompliant",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, the user's passcode is compliant with all requirements on the device, including Exchange and other accounts. This value is available in iOS 4 and later, and tvOS 6 and later.",
+          "supportedOS": {
+            "macOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "PasscodeCompliantWithProfiles",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, the user's passcode is compliant with requirements from profiles. This key doesn't apply to User-Enrolled devices. This value is available in iOS 4 and later, and tvOS 6 and later.",
+          "supportedOS": {
+            "iOS": {},
+            "macOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {}
+          }
+        },
+        {
+          "key": "PasscodeLockGracePeriod",
+          "type": "\u003cinteger\u003e",
+          "content": "The user preference for the number of seconds before a locked screen requires the device passcode to unlock it. This value is only available for Shared iPad.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "9.3.2"
+            },
+            "macOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {}
+          }
+        },
+        {
+          "key": "PasscodeLockGracePeriodEnforced",
+          "type": "\u003cinteger\u003e",
+          "content": "The enforced value for the number of seconds before a locked screen requires the device passcode to unlock it. If a device has a passcode, changing `PasscodeLockGracePeriod` to a larger value doesn't take effect until the user logs out or removes the passcode. This value is only available for Shared iPad.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "9.3.2"
+            },
+            "macOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {}
+          }
+        },
+        {
+          "key": "AutoLockTime",
+          "type": "\u003cinteger\u003e",
+          "content": "The number of seconds before a device goes to sleep after being idle. This value is only available on Shared iPad in iOS 17 and later.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "17.0"
+            },
+            "macOS": {
+              "introduced": "n/a"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "FDE_Enabled",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, the device has enabled FileVault full disk encryption (FDE). This value is available in macOS 10.9 and later.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "10.9"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "FDE_HasPersonalRecoveryKey",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, FileVault FDE has a personal recovery key. This value is available in macOS 10.9 and later.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "10.9"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "FDE_HasInstitutionalRecoveryKey",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, FileVault FDE has an institutional recovery key. This value is available in macOS 10.9 and later.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "10.9"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "FDE_PersonalRecoveryKeyCMS",
+          "type": "\u003cdata\u003e",
+          "content": "If the FileVault personal recovery key has enabled escrow with a recovery key, this value contains the key. The certificate from the `FDERecoveryKeyEscrow` profile encrypts the key and wraps it as CMS data. This value is available in macOS 10.13 and later.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "10.13"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "FDE_PersonalRecoveryKeyDeviceKey",
+          "type": "\u003cstring\u003e",
+          "content": "If the FileVault personal recovery key has enabled escrow with a recovery key, this value is the device serial number. This is the value that displays to the user at the EFI Login Window as part of the help message if they enter their password incorrectly three times. The server also uses this value as an index when saving the device personal recovery key. This replaces the `recordNumber` that the server returned in the previous escrow mechanism. This value is available in macOS 10.13 and later.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "10.13"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "SystemIntegrityProtectionEnabled",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, System Integrity Protection (SIP) is active on the device. This value is available in macOS 10.12 and later.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "10.12"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "FirewallSettings",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that contains the firewall settings. This value is available in macOS 10.12 and later.",
+          "subkeys": [
+            {
+              "key": "FirewallEnabled",
+              "type": "\u003cboolean\u003e",
+              "content": "If `true`, the firewall is on."
+            },
+            {
+              "key": "BlockAllIncoming",
+              "type": "\u003cboolean\u003e",
+              "content": "If `true`, the firewall blocks all incoming connections."
+            },
+            {
+              "key": "StealthMode",
+              "type": "\u003cboolean\u003e",
+              "content": "If true, stealth mode is active for the firewall."
+            },
+            {
+              "key": "Applications",
+              "type": "\u003carray\u003e",
+              "content": "An array of dictionaries that describes the allowed applications.",
+              "subkeys": [
+                {
+                  "key": "ApplicationsItem",
+                  "type": "\u003cdictionary\u003e",
+                  "content": "A dictionary that describes the allowed apps.",
+                  "subkeys": [
+                    {
+                      "key": "Allowed",
+                      "type": "\u003cboolean\u003e",
+                      "content": "If `true`, the app is an allowed app."
+                    },
+                    {
+                      "key": "BundleID",
+                      "type": "\u003cstring\u003e",
+                      "content": "The app's bundle identifier."
+                    },
+                    {
+                      "key": "Name",
+                      "type": "\u003cstring\u003e",
+                      "content": "The app's display name if it's determinable from the `BundleID`."
+                    }
+                  ]
+                }
+              ],
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.12"
+                }
+              }
+            },
+            {
+              "key": "LoggingEnabled",
+              "type": "\u003cboolean\u003e",
+              "content": "If `true`, logging is enabled.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "12.0"
+                }
+              }
+            },
+            {
+              "key": "LoggingOption",
+              "type": "\u003cstring\u003e",
+              "rangelist": [
+                "throttled",
+                "brief",
+                "detail"
+              ],
+              "content": "The type of logging emitted by the firewall.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "12.0"
+                }
+              }
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "10.12"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "FirmwarePasswordStatus",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that contains the status of the EFI firmware password. This value is available in macOS 10.13 and later.",
+          "subkeys": [
+            {
+              "key": "PasswordExists",
+              "type": "\u003cboolean\u003e",
+              "content": "If `true`, the device has an EFI firmware password."
+            },
+            {
+              "key": "ChangePending",
+              "type": "\u003cboolean\u003e",
+              "content": "If `true`, a firmware password change is pending. A device restart is necessary for this change to take effect. Until then, additional attempts to change the password fail.\n\n\u003e Note:\n\u003e If `true`, the other values show the current state of the device, not the state after a restart."
+            },
+            {
+              "key": "AllowOroms",
+              "type": "\u003cboolean\u003e",
+              "content": "If `true`, enable ROMs."
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "10.13"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "ManagementStatus",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that contains the status of the device's MDM enrollment.",
+          "subkeys": [
+            {
+              "key": "EnrolledViaDEP",
+              "type": "\u003cboolean\u003e",
+              "content": "If `true`, the device enrolled in MDM through the Device Enrollment Program (DEP). This value is available in macOS 10.13.2 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                },
+                "visionOS": {
+                  "introduced": "n/a"
+                },
+                "watchOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "UserApprovedEnrollment",
+              "type": "\u003cboolean\u003e",
+              "content": "If `true`, the enrollment was user-approved. If `false`, the device may reject certain security-sensitive payloads or commands. This value is available in macOS 10.13.2 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                },
+                "visionOS": {
+                  "introduced": "n/a"
+                },
+                "watchOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "IsUserEnrollment",
+              "type": "\u003cboolean\u003e",
+              "content": "If `true`, the device is user-enrolled. This value is available in iOS 13 and later, and macOS 10.15 and later.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.15"
+                }
+              }
+            },
+            {
+              "key": "IsActivationLockManageable",
+              "type": "\u003cboolean\u003e",
+              "content": "If `true`, the type of enrollment allows the MDM to manage Activation Lock for this device. This value is available in macOS 10.15 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                },
+                "macOS": {
+                  "introduced": "10.15"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                },
+                "visionOS": {
+                  "introduced": "n/a"
+                },
+                "watchOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "13.0"
+            },
+            "macOS": {
+              "introduced": "10.13.2"
+            },
+            "tvOS": {
+              "introduced": "13.0"
+            }
+          }
+        },
+        {
+          "key": "SecureBoot",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that contains the device's Secure Boot settings. This value is available in macOS 10.15 and later.",
+          "subkeys": [
+            {
+              "key": "SecureBootLevel",
+              "type": "\u003cstring\u003e",
+              "rangelist": [
+                "off",
+                "medium",
+                "full",
+                "not supported"
+              ],
+              "content": "The security level for the bootable operating system versions."
+            },
+            {
+              "key": "ExternalBootLevel",
+              "type": "\u003cstring\u003e",
+              "rangelist": [
+                "allowed",
+                "disallowed",
+                "not supported"
+              ],
+              "content": "The device's external boot level, which indicates whether it allows booting from an external device, disallows it, or doesn't support it."
+            },
+            {
+              "key": "ReducedSecurity",
+              "type": "\u003carray\u003e",
+              "content": "Reports which security features the user disables in `recoveryOS`. This property is only present for a Mac with Apple silicon when `SecureBootLevel` is `medium`.\n\nAvailable in iOS 11 and later.",
+              "subkeys": [
+                {
+                  "key": "ReducedSecurityItems",
+                  "type": "\u003cstring\u003e",
+                  "subkeys": [
+                    {
+                      "key": "AllowsAnyAppleSignedOS",
+                      "type": "\u003cstring\u003e",
+                      "content": "If 'true', allows any signed version of trusted system software from Apple to run."
+                    },
+                    {
+                      "key": "AllowsUserKextApproval",
+                      "type": "\u003cstring\u003e",
+                      "content": "If 'true', the user has control over kernel extensions."
+                    },
+                    {
+                      "key": "AllowsMDM",
+                      "type": "\u003cstring\u003e",
+                      "content": "If 'true', the MDM server controls kernel extensions and software updates."
+                    }
+                  ]
+                }
+              ],
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "11.0"
+                }
+              }
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "10.15"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "RemoteDesktopEnabled",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, Remote Desktop is active on the device. This value is available in macOS 10.14.4 and later.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "10.14.4"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "AuthenticatedRootVolumeEnabled",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, the system booted using an Authenticated Root Volume. This value is available in macOS 11 and later.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "11.0"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "BootstrapTokenAllowedForAuthentication",
+          "type": "\u003cstring\u003e",
+          "rangelist": [
+            "allowed",
+            "disallowed",
+            "not supported"
+          ],
+          "content": "This value specifies whether the Secure Enclave Processor (SEP) supports and allows secure operations to use the Bootstrap Token. The value is automatically set for devices enrolled through the Device Enrollment Program (DEP). The user can also manually set this value in the RecoveryOS.\n\nThis value is available for a Mac with Apple silicon in macOS 11 and later. Not available for user enrollment.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "11.0"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "BootstrapTokenRequiredForSoftwareUpdate",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, the device can accept a Bootstrap Token from the MDM server instead of prompting for user authentication prior to installation. This only applies when `BootstrapTokenAllowedForAuthentication` is `true` in the `SecurityInfo` response.\n\nThis value is available for a Mac with Apple silicon in macOS 11 and later. Not available for user enrollment.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "11.0"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "BootstrapTokenRequiredForKernelExtensionApproval",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, the device can accept a Bootstrap Token from the MDM server instead of prompting for user authentication prior to enabling kernel extensions. This includes enabling kexts through the `com.apple.syspolicy.kernel-extension-policy` payload or triggering the `RestartDevice` command with `RebuildKernelCache` set to `true`. This only applies when `BootstrapTokenAllowedForAuthentication` is `true` in the `SecurityInfo` response.\n\nThis value is available for a Mac with Apple silicon in macOS 11 and later. Not available for user enrollment.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "11.0"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "IsRecoveryLockEnabled",
+          "type": "\u003cboolean\u003e",
+          "content": "If `true`, a password is required to enter recovery (see `SetRecoveryLockCommand`). Available in macOS 11.5 and later and only on a Mac with Apple silicon.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {
+              "introduced": "11.5"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

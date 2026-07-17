@@ -1,0 +1,495 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.AssetCache.managed",
+  "title": "Content Caching",
+  "description": "The payload that configures the Content Caching service.",
+  "payload": {
+    "payloadtype": "com.apple.AssetCache.managed",
+    "content": "Configures the Content Caching service.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.13.4"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AllowCacheDelete",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If true, the system purges content from the cache automatically when it needs disk space for other apps when free disk space runs low on the computer. Set to `false` to maximize effectiveness of Content Caching. Available in macOS 10.15 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.15"
+        }
+      }
+    },
+    {
+      "key": "AllowPersonalCaching",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the system caches the user's iCloud data. Changes to this value don't have an immediate effect. Clients may take some time, such as hours or days, to react to changes.\n\n\u003e Note:\n\u003e At least one of the `AllowPersonalCaching` or `AllowSharedCaching` keys need to be `true`.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "AllowSharedCaching",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the system caches non-iCloud content, such as apps and software updates. Changes to this value don't have an immediate effect. Clients may take some time, such as hours or days, to react to changes.\n\n\u003e Note:\n\u003e At least one of the `AllowPersonalCaching` or `AllowSharedCaching` keys need to be `true`.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "AutoActivation",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system automatically activates the content cache when possible and prevents disabling it. If `allowContentCaching` is `false`, `AutoActivation` is also `false`.\n\nRemoving a profile that set `AutoActivation` to `true` doesn't deactivate the Content Cache.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "AutoEnableTetheredCaching",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system automatically enables Internet connection sharing when possible and prevent disabling Internet connection sharing. `DenyTetheredCaching` overrides `AutoEnableTetheredCaching`. Tethered caching requires Content Caching.\n\nAvailable in macOS 10.15.4 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.15.4"
+        }
+      }
+    },
+    {
+      "key": "CacheLimit",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "default": 0,
+      "content": "The maximum number of bytes of disk space to use for the content cache. Set to `0` for unlimited disk space.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "DataPath",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "default": "/Library/Application Support/Apple/AssetCache/Data",
+      "content": "The path to the directory used to store cached content. Changing this setting manually doesn't automatically move cached content from the old location to the new one. To move content automatically, use the Sharing preference's Content Caching pane. The value must be (or end with) `/Library/Application Support/Apple/AssetCache/Data`.\n\nThe system creates a directory and its intermediates for the given data path if it doesn't already exist. The directory is owned by `_assetcache:_assetcache` and has mode 0750. Its immediate parent directory (`.../Library/Application Support/Apple/AssetCache`) is owned by `_assetcache:_assetcache` and has mode `0755`.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "DenyTetheredCaching",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables tethered caching.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "DisplayAlerts",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, Content Caching displays exceptional conditions (alerts) as system notifications in the upper corner of the screen. Alerts were automatically displayed starting in macOS 10.13. In macOS 10.15 the alerts are off by default, but still available through this setting. Available in macOS 10.15 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.15"
+        }
+      }
+    },
+    {
+      "key": "KeepAwake",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system prevents the computer from sleeping as long as Content Caching is on (System Preferences \u003e Sharing \u003e Content Caching is on). Customers who want Content Caching to be as available as much as possible should turn this setting on. Available in macOS 10.15 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.15"
+        }
+      }
+    },
+    {
+      "key": "ListenRanges",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of dictionaries that describe a range of client IP addresses to serve.",
+      "subkeytype": "Ranges",
+      "subkeys": [
+        {
+          "key": "RangesItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A range of IP addresses to cache.",
+          "subkeys": [
+            {
+              "key": "type",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "IPv4",
+                "IPv6"
+              ],
+              "default": "IPv4",
+              "content": "The IP address type.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            },
+            {
+              "key": "first",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The first IP address in the range.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            },
+            {
+              "key": "last",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The last IP address in the range.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "ListenRangesOnly",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the content cache provides content to the clients in the `ListenRanges`.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "ListenWithPeersAndParents",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the content cache provides content to the clients in the union of the `ListenRanges`, `PeerListenRanges` and `Parents`.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "LocalSubnetsOnly",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the content cache offers content to clients only on the same immediate local network only. No content is offered to clients on other networks reachable by the content cache. If `LocalSubnetsOnly` is `true`, the system ignores `ListenRanges`.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "LogClientIdentity",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the Content Cache logs the IP address and port number of the clients that request content.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "Parents",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of the local IP addresses of other content caches that this cache should download from or upload to, instead of downloading from or uploading to Apple directly. The system ignores invalid addresses and addresses of computers that aren't content caches. The system skips Parent caches that become unavailable. If all parent content caches become unavailable, the content cache downloads from or uploads to Apple directly, until a parent content cache becomes available again.",
+      "subkeys": [
+        {
+          "key": "ParentsItem",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "An IP address."
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "ParentSelectionPolicy",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "first-available",
+        "url-path-hash",
+        "random",
+        "round-robin",
+        "sticky-available"
+      ],
+      "default": "round-robin",
+      "content": "The policy to implement when choosing among more than one configured parent content cache. With every policy, the system skips parent caches that are temporarily unavailable. Allowed values:\n\n- `first-available`: Always use the first available parent in the Parents list. Use this policy to designate permanent primary, secondary, and subsequent parents.\n- `url-path-hash`: Hash the path part of the requested URL so that the same parent is always used for the same URL. This is useful for maximizing the size of the combined caches of     the parents.\n- `random`: Choose a parent at random. Use this policy for load balancing.\n- `round-robin`: Rotate through the parents in order. Use this policy for load balancing.\n- `sticky-available`: Use the first available parent in the Parents list until it becomes unavailable, then advance to the next one. Use this policy for designating floating primary, secondary, and subsequent parents.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "PeerFilterRanges",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of dictionaries describing a range of peer IP addresses that the content cache uses to filter its list of peers to query for content. The content cache only queries peers in `PeerFilterRanges`. When `PeerFilterRanges` is an empty array, the content cache doesn't query any peers.",
+      "subkeytype": "Ranges",
+      "subkeys": [
+        {
+          "key": "RangesItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A range of IP addresses to cache.",
+          "subkeys": [
+            {
+              "key": "type",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "IPv4",
+                "IPv6"
+              ],
+              "default": "IPv4",
+              "content": "The IP address type.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            },
+            {
+              "key": "first",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The first IP address in the range.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            },
+            {
+              "key": "last",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The last IP address in the range.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "PeerListenRanges",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of dictionaries describing a range of peer IP addresses the content cache responds to. When `PeerListenRanges` is an empty array, the content cache responds with an error to all cache queries.",
+      "subkeytype": "Ranges",
+      "subkeys": [
+        {
+          "key": "RangesItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A range of IP addresses to cache.",
+          "subkeys": [
+            {
+              "key": "type",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "IPv4",
+                "IPv6"
+              ],
+              "default": "IPv4",
+              "content": "The IP address type.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            },
+            {
+              "key": "first",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The first IP address in the range.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            },
+            {
+              "key": "last",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The last IP address in the range.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "PeerLocalSubnetsOnly",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the content cache only peers with other content caches on the same immediate local network, rather than with content caches that use the same public IP address as the device. When `PeerLocalSubnetsOnly` is `true`, it overrides the configuration of `PeerFilterRanges` and `PeerListenRanges`. If the network changes, the local network peering restrictions update appropriately. If `false`, the content cache defers to `PeerFilterRanges` and `PeerListenRanges` for configuring the peering restrictions.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "Port",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "default": 0,
+      "content": "The TCP port number on which the content cache accepts requests for uploads or downloads. Set to `0` to pick a random, available port.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    },
+    {
+      "key": "PublicRanges",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of dictionaries describing a range of public IP addresses that the cloud servers should use for matching clients to content caches.",
+      "subkeytype": "Ranges",
+      "subkeys": [
+        {
+          "key": "RangesItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A range of IP addresses to cache.",
+          "subkeys": [
+            {
+              "key": "type",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "IPv4",
+                "IPv6"
+              ],
+              "default": "IPv4",
+              "content": "The IP address type.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            },
+            {
+              "key": "first",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The first IP address in the range.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            },
+            {
+              "key": "last",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The last IP address in the range.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.13.4"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    }
+  ]
+}

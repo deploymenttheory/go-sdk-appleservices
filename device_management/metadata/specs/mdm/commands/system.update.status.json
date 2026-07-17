@@ -1,0 +1,150 @@
+{
+  "category": "mdm/commands",
+  "name": "system.update.status",
+  "title": "OS Update Status Command",
+  "description": "Get the status of operating-system updates on a device.",
+  "payload": {
+    "requesttype": "OSUpdateStatus",
+    "content": "Queries the device for the status of software updates.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.0",
+        "deprecated": "26.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "10.11.5",
+        "deprecated": "26.0",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "12.0",
+        "deprecated": "26.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "responsekeys": [
+    {
+      "key": "OSUpdateStatus",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries that describes the statuses of software updates. The array is empty if there are no software updates currently in progress.\nThis command only returns the status for System Applications and Configuration Data updates when a software update is managed by a Declarative Device Management `SoftwareUpdateEnforcementSpecific` configuration.",
+      "subkeys": [
+        {
+          "key": "OSUpdateStatusItem",
+          "type": "\u003cdictionary\u003e",
+          "presence": "required",
+          "content": "A dictionary that describes the status of a software update.",
+          "subkeys": [
+            {
+              "key": "ProductKey",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The product key that represents the update."
+            },
+            {
+              "key": "IsDownloaded",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, the update has finished downloading."
+            },
+            {
+              "key": "DownloadPercentComplete",
+              "type": "\u003creal\u003e",
+              "presence": "required",
+              "content": "A floating-point number between `0.0` and `1.0` that indicates the download progress as a percentage."
+            },
+            {
+              "key": "Status",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The status of the update, which is one of the following values:\n\n- `Idle`: The update is idle.\n- `Downloading`: The software update is downloading and subsequently preparing.\n- `Installing`: The software update is installing."
+            },
+            {
+              "key": "MaxDeferrals",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The number of times a user can defer this OS update.\n\nAvailable in macOS 12.3 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                },
+                "macOS": {
+                  "introduced": "12.3"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "DeferralsRemaining",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The number of remaining user deferrals for this OS update.\n\nAvailable in macOS 12.3 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                },
+                "macOS": {
+                  "introduced": "12.3"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "NextScheduledInstall",
+              "type": "\u003cdate\u003e",
+              "presence": "optional",
+              "content": "The date of the next attempt at installing this OS update.\n\nAvailable in macOS 12.3 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                },
+                "macOS": {
+                  "introduced": "12.3"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "PastNotifications",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The dates/times when the OS notified the user about installing this OS update.\n\nAvailable in macOS 12.3 and later.",
+              "subkeys": [
+                {
+                  "key": "PastNotificationDate",
+                  "title": "Past Notification Date",
+                  "type": "\u003cdate\u003e"
+                }
+              ],
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                },
+                "macOS": {
+                  "introduced": "12.3"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

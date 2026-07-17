@@ -1,0 +1,49 @@
+{
+  "category": "declarative/status",
+  "name": "statusreason",
+  "title": "Status Reason",
+  "description": "Provides details about an error for an item in a status report.",
+  "payload": {
+    "declarationtype": "status-reason",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "code",
+      "title": "Error Code",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The error code for this error."
+    },
+    {
+      "key": "description",
+      "title": "Error Description",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A description of this error."
+    },
+    {
+      "key": "details",
+      "title": "Error Details",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary that contains additional details about the error."
+    }
+  ]
+}

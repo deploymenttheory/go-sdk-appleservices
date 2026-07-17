@@ -1,0 +1,381 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.MCX(EnergySaver)",
+  "title": "Energy Saver",
+  "description": "The payload that configures Energy Saver settings.",
+  "payload": {
+    "payloadtype": "com.apple.MCX",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "com.apple.EnergySaver.desktop.ACPower",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The settings for a desktop computer.",
+      "subkeytype": "PowerSettings",
+      "subkeys": [
+        {
+          "key": "Display Sleep Timer",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "range": {
+            "min": 0,
+            "max": 180
+          },
+          "content": "The display sleep time, in minutes. A value of 0 means never."
+        },
+        {
+          "key": "Disk Sleep Timer",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "range": {
+            "min": 0,
+            "max": 180
+          },
+          "content": "The disk sleep time, in minutes. A value of 0 means never."
+        },
+        {
+          "key": "System Sleep Timer",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "range": {
+            "min": 0,
+            "max": 180
+          },
+          "content": "System sleep time, in minutes. A value of 0 means never."
+        },
+        {
+          "key": "Reduce Processor Speed",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "May not be available on all systems."
+        },
+        {
+          "key": "Dynamic Power Step",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "May not be available on all systems."
+        },
+        {
+          "key": "Wake on LAN",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "If `true`, enables \"Wake for network access.\""
+        },
+        {
+          "key": "Wake On Modem Ring",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "If `true`, enables \"Wake for modem ring.\""
+        },
+        {
+          "key": "Automatic Restart On Power Loss",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "If `true`, enables \"Start up automatically after a power failure.\""
+        }
+      ]
+    },
+    {
+      "key": "com.apple.EnergySaver.portable.ACPower",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The settings for a laptop computer using AC power.",
+      "subkeytype": "PowerSettings",
+      "subkeys": [
+        {
+          "key": "Display Sleep Timer",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "range": {
+            "min": 0,
+            "max": 180
+          },
+          "content": "The display sleep time, in minutes. A value of 0 means never."
+        },
+        {
+          "key": "Disk Sleep Timer",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "range": {
+            "min": 0,
+            "max": 180
+          },
+          "content": "The disk sleep time, in minutes. A value of 0 means never."
+        },
+        {
+          "key": "System Sleep Timer",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "range": {
+            "min": 0,
+            "max": 180
+          },
+          "content": "System sleep time, in minutes. A value of 0 means never."
+        },
+        {
+          "key": "Reduce Processor Speed",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "May not be available on all systems."
+        },
+        {
+          "key": "Dynamic Power Step",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "May not be available on all systems."
+        },
+        {
+          "key": "Wake on LAN",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "If `true`, enables \"Wake for network access.\""
+        },
+        {
+          "key": "Wake On Modem Ring",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "If `true`, enables \"Wake for modem ring.\""
+        },
+        {
+          "key": "Automatic Restart On Power Loss",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "If `true`, enables \"Start up automatically after a power failure.\""
+        }
+      ]
+    },
+    {
+      "key": "com.apple.EnergySaver.portable.BatteryPower",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The settings for a laptop computer using battery power.",
+      "subkeytype": "PowerSettings",
+      "subkeys": [
+        {
+          "key": "Display Sleep Timer",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "range": {
+            "min": 0,
+            "max": 180
+          },
+          "content": "The display sleep time, in minutes. A value of 0 means never."
+        },
+        {
+          "key": "Disk Sleep Timer",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "range": {
+            "min": 0,
+            "max": 180
+          },
+          "content": "The disk sleep time, in minutes. A value of 0 means never."
+        },
+        {
+          "key": "System Sleep Timer",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "range": {
+            "min": 0,
+            "max": 180
+          },
+          "content": "System sleep time, in minutes. A value of 0 means never."
+        },
+        {
+          "key": "Reduce Processor Speed",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "May not be available on all systems."
+        },
+        {
+          "key": "Dynamic Power Step",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "May not be available on all systems."
+        },
+        {
+          "key": "Wake on LAN",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "If `true`, enables \"Wake for network access.\""
+        },
+        {
+          "key": "Wake On Modem Ring",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "If `true`, enables \"Wake for modem ring.\""
+        },
+        {
+          "key": "Automatic Restart On Power Loss",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            0,
+            1
+          ],
+          "content": "If `true`, enables \"Start up automatically after a power failure.\""
+        }
+      ]
+    },
+    {
+      "key": "com.apple.EnergySaver.desktop.Schedule",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The schedule for turning a computer on and off.",
+      "subkeytype": "EnergySaver Schedule",
+      "subkeys": [
+        {
+          "key": "RepeatingPowerOn",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The schedule for turning the device on.",
+          "subkeytype": "RepeatingPowerItem",
+          "subkeys": [
+            {
+              "key": "eventtype",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "wake",
+                "poweron",
+                "wakepoweron",
+                "sleep",
+                "shutdown",
+                "restart"
+              ],
+              "content": "The type of action defined by this schedule."
+            },
+            {
+              "key": "weekdays",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "One or more days of the week in an unsigned integer bitmap:\n\n- `1` = Mon\n- `2` = Tue\n- `4` = Wed\n- `8` = Thu\n- `16` = Fri\n- `32` = Sat\n- `64` = Sun"
+            },
+            {
+              "key": "time",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The time, in minutes, since midnight."
+            }
+          ]
+        },
+        {
+          "key": "RepeatingPowerOff",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The schedule for turning the device off.",
+          "subkeytype": "RepeatingPowerItem",
+          "subkeys": [
+            {
+              "key": "eventtype",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "wake",
+                "poweron",
+                "wakepoweron",
+                "sleep",
+                "shutdown",
+                "restart"
+              ],
+              "content": "The type of action defined by this schedule."
+            },
+            {
+              "key": "weekdays",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "One or more days of the week in an unsigned integer bitmap:\n\n- `1` = Mon\n- `2` = Tue\n- `4` = Wed\n- `8` = Thu\n- `16` = Fri\n- `32` = Sat\n- `64` = Sun"
+            },
+            {
+              "key": "time",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The time, in minutes, since midnight."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "SleepDisabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, disables sleep."
+    }
+  ]
+}

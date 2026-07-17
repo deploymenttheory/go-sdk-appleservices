@@ -1,0 +1,94 @@
+{
+  "category": "mdm/checkin",
+  "name": "returntoservice",
+  "title": "Return To Service",
+  "description": "Gets the return-to-service configuration from the server.",
+  "payload": {
+    "requesttype": "ReturnToService",
+    "content": "Check-in protocol send ReturnToService request.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "26.0"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "26.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "MessageType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "ReturnToService"
+      ],
+      "content": "The message type, which requires a value of `ReturnToService`."
+    },
+    {
+      "key": "UDID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The device's UDID (unique device identifier). The system requires this value if the enrollment type is a device enrollment."
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "PreserveDataPlan",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the device preserves the data plan on an iPhone or iPad with eSIM functionality, if one exists. This value is available in iOS 26.4 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "26.4"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ReturnToService",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "A dictionary containing the configuration for return to service.",
+      "subkeys": [
+        {
+          "key": "Enabled",
+          "title": "Use return to service",
+          "type": "\u003cboolean\u003e",
+          "presence": "required",
+          "content": "If `true`, the device automatically erases itself and then performs reenrollment."
+        },
+        {
+          "key": "WiFiProfileData",
+          "type": "\u003cdata\u003e",
+          "presence": "optional",
+          "content": "The Wi-Fi profile that installs after erasure when using return to service. This is required when the device doesn't have Ethernet access."
+        },
+        {
+          "key": "MDMProfileData",
+          "type": "\u003cdata\u003e",
+          "presence": "optional",
+          "content": "The MDM profile that installs after erasure when using return to service. If provided, the device uses this profile directly instead of fetching it from the server. This key is required if the device's Automated Device Enrollment profile contains the `configuration-web-url` key.\n\nThe device always downloads the Automated Device Enrollment profile even when this key is present, so the supervision identity, MDM removability, and other settings still apply. However, the device doesn't use the specified URL in the Automated Device Enrollment profile to fetch the MDM profile."
+        },
+        {
+          "key": "BootstrapToken",
+          "type": "\u003cdata\u003e",
+          "presence": "optional",
+          "content": "The system uses the bootstrap token for return to service with app preservation. Required when Automated Device Enrollment enables return to service for the device.\n\nIf the bootstrap token isn't present, the device performs a full erasure and a regular return to service, and can't preserve any data for app preservation."
+        }
+      ]
+    }
+  ]
+}

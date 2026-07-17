@@ -1,0 +1,157 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.homescreenlayout",
+  "title": "Home Screen Layout",
+  "description": "The payload that configures the Home Screen layout.",
+  "payload": {
+    "payloadtype": "com.apple.homescreenlayout",
+    "content": "The payload defines a layout of apps, folders, \u0026 web clips for the Home screen.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.3"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "11.0"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Dock",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of dictionaries, each of which must conform to the icon dictionary format. If this key isn't present, the user's Dock is empty.",
+      "subkeytype": "IconItem",
+      "subkeys": [
+        {
+          "key": "IconItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "An array of dictionaries that conform to the icon dictionary format.",
+          "subkeys": [
+            {
+              "key": "Type",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "Application",
+                "Folder",
+                "WebClip"
+              ],
+              "content": "The type of the Dock item."
+            },
+            {
+              "key": "DisplayName",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The human-readable string shown to the user. This setting is valid only if the type is `Folder`."
+            },
+            {
+              "key": "BundleID",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The bundle identifier of the app. This setting is required if the type is `Application`."
+            },
+            {
+              "key": "Pages",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "An array of arrays of dictionaries, each conforming to the icon dictionary format. This setting is valid only if the type is `Folder`.",
+              "subkeytype": "PagesItem",
+              "subkeys": [
+                {
+                  "key": "PagesItem",
+                  "type": "\u003carray\u003e",
+                  "subkeytype": "IconItem"
+                }
+              ]
+            },
+            {
+              "key": "URL",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The URL of the existing web clip for this item. This setting is required if `type` is `WebClip`. If more than one web clip exists with the same URL, the behavior is undefined.\n\nSpecifying a web clip in this payload doesn't create the web clip. Use the `WebClip` payload to create a web clip.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "11.3"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Pages",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of arrays of dictionaries, each of which must conform to the icon dictionary format.",
+      "subkeytype": "PagesItem",
+      "subkeys": [
+        {
+          "key": "PagesItem",
+          "type": "\u003carray\u003e",
+          "subkeytype": "IconItem",
+          "subkeys": [
+            {
+              "key": "IconItem",
+              "type": "\u003cdictionary\u003e",
+              "content": "An array of dictionaries that conform to the icon dictionary format.",
+              "subkeys": [
+                {
+                  "key": "Type",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "rangelist": [
+                    "Application",
+                    "Folder",
+                    "WebClip"
+                  ],
+                  "content": "The type of the Dock item."
+                },
+                {
+                  "key": "DisplayName",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The human-readable string shown to the user. This setting is valid only if the type is `Folder`."
+                },
+                {
+                  "key": "BundleID",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The bundle identifier of the app. This setting is required if the type is `Application`."
+                },
+                {
+                  "key": "Pages",
+                  "type": "\u003carray\u003e",
+                  "presence": "optional",
+                  "content": "An array of arrays of dictionaries, each conforming to the icon dictionary format. This setting is valid only if the type is `Folder`.",
+                  "subkeytype": "PagesItem"
+                },
+                {
+                  "key": "URL",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The URL of the existing web clip for this item. This setting is required if `type` is `WebClip`. If more than one web clip exists with the same URL, the behavior is undefined.\n\nSpecifying a web clip in this payload doesn't create the web clip. Use the `WebClip` payload to create a web clip.",
+                  "supportedOS": {
+                    "iOS": {
+                      "introduced": "11.3"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

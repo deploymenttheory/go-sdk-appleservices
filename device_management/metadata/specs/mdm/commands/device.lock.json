@@ -1,0 +1,95 @@
+{
+  "category": "mdm/commands",
+  "name": "device.lock",
+  "title": "Device Lock Command",
+  "description": "Remotely and immediately lock a device.",
+  "payload": {
+    "requesttype": "DeviceLock",
+    "content": "This command allows the server to immediately lock the device. This command requires the Device Lock and Passcode Removal right.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0",
+        "accessrights": "AllowPasscodeRemovalAndLock"
+      },
+      "macOS": {
+        "introduced": "10.7",
+        "accessrights": "AllowPasscodeRemovalAndLock"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "2.0",
+        "accessrights": "AllowPasscodeRemovalAndLock"
+      },
+      "watchOS": {
+        "introduced": "10.0",
+        "accessrights": "AllowPasscodeRemovalAndLock"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Message",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The message to display on the Lock Screen of the device. This value doesn't apply to a Shared iPad device. This value is available in iOS 4 and later, and macOS 10.14 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        },
+        "macOS": {
+          "introduced": "10.14"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "PhoneNumber",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The phone number to display on the Lock Screen. This value doesn't apply to a Shared iPad device. This value is available in iOS 7 and later and macOS 11.5 and later (for a Mac with Apple silicon only).",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        },
+        "macOS": {
+          "introduced": "11.5"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "PIN",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The six-character PIN for Find My. This value is available in macOS 10.8 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "10.8"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "MessageResult",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The message result if the command includes a message or phone number, which is one of the following values:\n\n- `Success`: The message displayed successfully.\n- `DeviceInLostMode`: The device is in Lost Mode.\n- `NoPasscodeSet`: The message didn't display because there isn't a set passcode.\n- `Unknown`: An unknown error occurred."
+    }
+  ]
+}

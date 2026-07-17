@@ -1,0 +1,99 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.security.pkcs12",
+  "title": "Certificate (PKCS #12)",
+  "description": "The payload that configures a PKCS #12-formatted certificate.",
+  "payload": {
+    "payloadtype": "com.apple.security.pkcs12",
+    "content": "Password-protected identity certificate. Only one certificate may be included.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "9.0"
+      },
+      "visionOS": {
+        "introduced": "1.0"
+      },
+      "watchOS": {
+        "introduced": "3.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "PayloadCertificateFileName",
+      "title": "Payload Certificate Filename",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The file name of the enclosed certificate."
+    },
+    {
+      "key": "PayloadContent",
+      "title": "Payload Certificate Data",
+      "type": "\u003cdata\u003e",
+      "presence": "required",
+      "content": "The binary representation of the payload, encoded in Base64."
+    },
+    {
+      "key": "Password",
+      "title": "Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The password to the identity."
+    },
+    {
+      "key": "AllowAllAppsAccess",
+      "title": "Allow All Apps Access",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system allows apps access to the private key. Available in macOS 10.10 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "10.10"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "KeyIsExtractable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system doesn't tag the private key data as extractable in the keychain.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "10.15"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.systempolicy.control",
+  "title": "System Policy Control",
+  "description": "The payload that configures the system policy for assessments.",
+  "payload": {
+    "payloadtype": "com.apple.systempolicy.control",
+    "content": "Provides a way of enabling System Policy assessment processing. This corresponds to the Gatekeeper UI in the Security pref pane.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.8"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "EnableAssessment",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "content": "If `true`, enables Gatekeeper. If `false`, disables Gatekeeper."
+    },
+    {
+      "key": "AllowIdentifiedDevelopers",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "content": "If `true`, enables Gatekeeper's \"Mac App Store and identified developers\" option.\n\nIf `false`, enables Gatekeeper's \"Mac App Store\" option.\n\nIf the value of `EnableAssessment` isn't set to `true`, this key has no effect."
+    },
+    {
+      "key": "EnableXProtectMalwareUpload",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "content": "If `false`, prevents Gatekeeper from prompting the user to upload blocked malware to Apple for purposes of improving malware detection.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "15.0"
+        }
+      }
+    }
+  ]
+}

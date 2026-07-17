@@ -1,0 +1,51 @@
+{
+  "category": "mdm/commands",
+  "name": "media.remove",
+  "title": "Remove Media Command",
+  "description": "Remove a previously installed book from a device.",
+  "payload": {
+    "requesttype": "RemoveMedia",
+    "content": "This command allows an MDM server to remove managed media. This command returns Acknowledged even if the item is not found.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "8.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "MediaType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "Book"
+      ],
+      "content": "The media type, which can only be `Book`."
+    },
+    {
+      "key": "iTunesStoreID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The book's iTunes Store identifier."
+    },
+    {
+      "key": "PersistentID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The book's persistent identifier in reverse-DNS form; for example, `com.acme.manuals.training`."
+    }
+  ]
+}

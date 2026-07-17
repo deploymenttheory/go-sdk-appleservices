@@ -1,0 +1,147 @@
+{
+  "category": "mdm/commands",
+  "name": "application.install.enterprise",
+  "title": "Install Enterprise Application Command",
+  "description": "Install an enterprise app on a device.",
+  "payload": {
+    "requesttype": "InstallEnterpriseApplication",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.13.6",
+        "accessrights": "AllowAppInstallation"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Manifest",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary that specifies where to download the app. This value uses the `ManifestURL` format.",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003cany\u003e",
+          "presence": "optional",
+          "content": "A dictionary that specifies where to download the app. This value uses the `ManifestURL` format."
+        }
+      ]
+    },
+    {
+      "key": "ManifestURL",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The URL of the app manifest, which needs to begin with `https:`. The manifest is returned as a property list that uses the `ManifestURL` format."
+    },
+    {
+      "key": "ManifestURLPinningCerts",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of DER-encoded certificates to pin the connection when fetching the `ManifestURL`.",
+      "subkeys": [
+        {
+          "key": "ManifestURLPinningCertsItem",
+          "type": "\u003cdata\u003e",
+          "presence": "required",
+          "content": "A certificate in DER-encoded format."
+        }
+      ]
+    },
+    {
+      "key": "PinningRevocationCheckRequired",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, certificate revocation checks require a positive response when using certificate pinning with `ManifestURLPinningCerts`."
+    },
+    {
+      "key": "InstallAsManaged",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, install the app as a managed app. Otherwise, the system installs the app as unmanaged. If you reinstall a manged app and omit this value or set it to `false`, the app becomes unmanaged.\n\nFor manifest-based installs, if `true`, the system only considers apps installed in `/Applications` as managed. In macOS 11 through 13, the system requires that the `pkg` only contains a single signed app.\n\nAvailable in macOS 11 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "11.0"
+        }
+      }
+    },
+    {
+      "key": "ManagementFlags",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "rangelist": [
+        1
+      ],
+      "content": "The management flags. The possible values are:\n\n- `1`: If `InstallAsManaged` is `true`, remove the app upon removal of the MDM profile.\n\nAvailable in macOS 11 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "11.0"
+        }
+      }
+    },
+    {
+      "key": "Configuration",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary that contains the initial configuration of the app, if you choose to provide it. Available in macOS 11 and later.",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003cany\u003e",
+          "presence": "optional",
+          "content": "An app configuration."
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "11.0"
+        }
+      }
+    },
+    {
+      "key": "ChangeManagementState",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "Managed"
+      ],
+      "content": "The change management state. This value doesn't work with the user enrollments. The only possible value is:\n\n- `Managed`: Take management of the app if the user installed it already and `InstallAsManaged` is `true`.\n\nAvailable in macOS 11 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "11.0"
+        }
+      }
+    },
+    {
+      "key": "iOSApp",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the app is an iOS app that can run on a Mac with Apple silicon in macOS 11 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "11.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,562 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.eas.account",
+  "title": "Exchange ActiveSync",
+  "description": "The payload that configures Exchange ActiveSync accounts.",
+  "payload": {
+    "payloadtype": "com.apple.eas.account",
+    "content": "This payload configures an Exchange Active Sync account on an iOS device for Mail, Contacts, Calendars, Reminders, and Notes.\nUpdating this payload overrides any settings that the user customized, such as EnableMail/Contacts/Calendars/Reminders/Notes and MailNumberOfPastDaysToSync.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "EmailAddress",
+      "title": "Email Address",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The full email address for the account. If not present in the payload, the device prompts for this string during profile installation."
+    },
+    {
+      "key": "Host",
+      "title": "Exchange ActiveSync Host",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The Exchange server host name or IP address."
+    },
+    {
+      "key": "SSL",
+      "title": "Use SSL",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables SSL for authentication."
+    },
+    {
+      "key": "OAuth",
+      "title": "Use OAuth",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables OAuth for authentication. If enabled, don't specify a password.\n\nAvailable only in iOS 12.0 and above.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        }
+      }
+    },
+    {
+      "key": "UserName",
+      "title": "User",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "This user name for this Exchange account. Required for noninteractive installations like MDM in iOS."
+    },
+    {
+      "key": "Password",
+      "title": "Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The password of the account. Use only with encrypted profiles."
+    },
+    {
+      "key": "Certificate",
+      "title": "Authentication Credential",
+      "type": "\u003cdata\u003e",
+      "presence": "optional",
+      "content": "The `.p12` identity certificate in NSData blob format, for accounts that allow authentication via certificate.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        }
+      }
+    },
+    {
+      "key": "CertificateName",
+      "title": "Authentication Credential Name",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The name or description of the certificate.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        }
+      }
+    },
+    {
+      "key": "CertificatePassword",
+      "title": "Authentication Credential Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The password necessary for the `.p12` identity certificate. Used with mandatory encryption of profiles."
+    },
+    {
+      "key": "PreventMove",
+      "title": "Prevent Move",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system prevents moving messages from out of this email account into another account. This setting also prevents forwarding or replying from an account other than the recipient of the message.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "5.0"
+        }
+      }
+    },
+    {
+      "key": "PreventAppSheet",
+      "title": "Prevent App Sheet",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, prevents this account from sending mail in any app other than the Apple Mail app.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "5.0"
+        }
+      }
+    },
+    {
+      "key": "PayloadCertificateUUID",
+      "title": "Payload Certificate UUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$",
+      "content": "The UUID of the certificate payload within the same profile to use for the identity credential. If this field is present, the Certificate field isn't used."
+    },
+    {
+      "key": "SMIMEEnabled",
+      "title": "S/MIME Enabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables S/MIME encryption. In iOS 10.0 and later, this key is ignored. Use `SMIMESigningEnabled` instead.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "5.0",
+          "deprecated": "10.0"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "SMIMESigningEnabled",
+      "title": "S/MIME Signing Enabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables S/MIME signing for this account. Available in iOS 10.0 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.3"
+        }
+      }
+    },
+    {
+      "key": "SMIMESigningCertificateUUID",
+      "title": "S/MIME Signing Certificate",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$",
+      "content": "The UUID of the identity certificate used to sign messages sent from this account.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "5.0"
+        }
+      }
+    },
+    {
+      "key": "SMIMEEncryptionEnabled",
+      "title": "S/MIME Encryption Enabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables S/MIME encryption for this account. Available in iOS 10.0 and later. As of iOS 12.0, this key is deprecated. Use `SMIMEEncryptByDefault` instead.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.3",
+          "deprecated": "12.0"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "SMIMEEncryptionCertificateUUID",
+      "title": "S/MIME Encryption Certificate",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$",
+      "content": "The payload UUID of the identity certificate used to decrypt messages sent to this account. The system attaches the public certificate to outgoing mail to allow the user to receive encrypted mail. When the user sends encrypted mail, the system uses the public certificate to encrypt the copy of the mail in the user's Sent mailbox.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "5.0"
+        }
+      }
+    },
+    {
+      "key": "SMIMEEnablePerMessageSwitch",
+      "title": "S/MIME Enable Per-Message Switch",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system displays the per-message encryption switch in the Mail Compose UI.\n\nAvailable in iOS 8.0 and later. As of iOS 12.0, this key is deprecated. Use `SMIMEEnableEncryptionPerMessageSwitch` instead.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "8.0",
+          "deprecated": "12.0"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "disableMailRecentsSyncing",
+      "title": "Disable Mail Recents Syncing",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system excludes this account from Recent Addresses syncing."
+    },
+    {
+      "key": "MailNumberOfPastDaysToSync",
+      "title": "Past Days of Mail to Sync",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "rangelist": [
+        0,
+        1,
+        3,
+        7,
+        14,
+        31
+      ],
+      "default": 7,
+      "content": "The number of days in the past to sync mail on the device.\n\nFor no limit, use the value `0`."
+    },
+    {
+      "key": "HeaderMagic",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The value of the `X-Apple-Config-Magic` header in each EAS HTTP request.",
+      "supportedOS": {
+        "iOS": {
+          "deprecated": "7.0"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "CommunicationServiceRules",
+      "title": "Communication Service Rules",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The communication service handler rules for this account.",
+      "subkeys": [
+        {
+          "key": "DefaultServiceHandlers",
+          "title": "Default Service Handlers",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The default handlers to use for contacts from this account.",
+          "subkeys": [
+            {
+              "key": "AudioCall",
+              "title": "App for audio calls",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The bundle identifier of the default application to use for audio calls made to contacts from this account.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "10.0"
+                }
+              }
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "10.0"
+            }
+          }
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.0"
+        }
+      }
+    },
+    {
+      "key": "allowMailDrop",
+      "title": "Allow Mail Drop",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables this account to use Mail Drop.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.2"
+        }
+      }
+    },
+    {
+      "key": "SMIMESigningUserOverrideable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the user can turn S/MIME signing on or off in Settings. Available in iOS 12.0 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        }
+      }
+    },
+    {
+      "key": "SMIMESigningCertificateUUIDUserOverrideable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the user can select the signing identity. Available in iOS 12.0 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        }
+      }
+    },
+    {
+      "key": "SMIMEEncryptByDefault",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables S/MIME encryption by default. If `SMIMEEnableEncryptionPerMessageSwitch` is `false`, the user can't change this default. Available in iOS 12.0 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        }
+      }
+    },
+    {
+      "key": "SMIMEEncryptByDefaultUserOverrideable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables encryption by default and the user can't change it. Available in iOS 12.0 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        }
+      }
+    },
+    {
+      "key": "SMIMEEncryptionCertificateUUIDUserOverrideable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the user can select the S/MIME encryption identity, and encryption is on.Available in iOS 12.0 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        }
+      }
+    },
+    {
+      "key": "SMIMEEnableEncryptionPerMessageSwitch",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system displays the per-message encryption switch in the Mail Compose UI. Available in iOS 12.0 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        }
+      }
+    },
+    {
+      "key": "EnableMail",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system disables the Mail service for this account. The user can reenable Mail service in Settings unless `EnableMailUserOverridable` is `false`.\n\n\u003e Note:\n\u003e At least of the following fields needs to be `true`: `EnableMail`, `EnableContacts`, `EnableCalendars`, `EnableReminders`, and `EnableNotes`.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "EnableContacts",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system disables the Contacts service for this account. The user can reenable Contacts service in Settings unless `EnableContactsUserOverridable` is `false`.\n\n\u003e Note:\n\u003e At least of the following fields needs to be `true`: `EnableMail`, `EnableContacts`, `EnableCalendars`, `EnableReminders`, and `EnableNotes`.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "EnableCalendars",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system disables the Calendars service for this account. The user can reenable Calendars service in Settings unless `EnableCalendarsUserOverridable` is `false`.\n\n\u003e Note:\n\u003e At least of the following fields needs to be `true`: `EnableMail`, `EnableContacts`, `EnableCalendars`, `EnableReminders`, and `EnableNotes`.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "EnableReminders",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system disables the Reminders service for this account. The user can reenable Reminders service in Settings unless `EnableRemindersUserOverridable` is `false`.\n\n\u003e Note:\n\u003e At least of the following fields needs to be `true`: `EnableMail`, `EnableContacts`, `EnableCalendars`, `EnableReminders`, and `EnableNotes`.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "EnableNotes",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system disables the Notes service for this account. The user can reenable Notes service in Settings unless `EnableNotesUserOverridable` is `false`.\n\n\u003e Note:\n\u003e At least of the following fields needs to be `true`: `EnableMail`, `EnableContacts`, `EnableCalendars`, `EnableReminders`, and `EnableNotes`.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "EnableMailUserOverridable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system prevents the user from changing the state of the Mail service for this account in Settings.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "EnableContactsUserOverridable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system prevents the user from changing the state of the Contacts service for this account in Settings.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "EnableCalendarsUserOverridable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system prevents the user from changing the state of the Calendars service for this account in Settings.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "EnableRemindersUserOverridable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system prevents the user from changing the state of the Reminders service for this account in Settings.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "EnableNotesUserOverridable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, prevents the user from changing the state of the Notes service for this account in Settings.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "OAuthSignInURL",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The URL that this account should use for signing in through OAuth. Ignored unless `OAuth` is `true`. If you specify this URL, auto-discovery isn't used for this account, so you need to also specify a host.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "OAuthTokenRequestURL",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The URL that this account should use for token requests through OAuth. Ignored unless `OAuth` is `true`.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        }
+      }
+    },
+    {
+      "key": "OverridePreviousPassword",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system overrides the previous user/EAS password with the new EAS password in the payload. Available in iOS 14 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.0"
+        }
+      }
+    },
+    {
+      "key": "VPNUUID",
+      "title": "VPNUUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.0"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "category": "mdm/commands",
+  "name": "device.shutdown",
+  "title": "Shut Down Device Command",
+  "description": "Remotely and immediately shut down a device.",
+  "payload": {
+    "requesttype": "ShutDownDevice",
+    "content": "This command requires the Device Lock access right. The device will shut down immediately.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "10.3",
+        "accessrights": "AllowPasscodeRemovalAndLock"
+      },
+      "macOS": {
+        "introduced": "10.13",
+        "accessrights": "AllowPasscodeRemovalAndLock"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  }
+}

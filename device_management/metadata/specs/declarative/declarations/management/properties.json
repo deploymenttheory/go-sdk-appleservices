@@ -1,0 +1,35 @@
+{
+  "category": "declarative/declarations/management",
+  "name": "properties",
+  "title": "Management:Properties",
+  "description": "The declaration to configure the properties on the device.",
+  "payload": {
+    "declarationtype": "com.apple.management.properties",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "16.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ANY",
+      "title": "Property",
+      "type": "\u003cany\u003e",
+      "presence": "optional",
+      "content": "Each entry represents a property key/value."
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "category": "mdm/checkin",
+  "name": "checkout",
+  "title": "Check Out",
+  "description": "Responds to the removal of the MDM enrollment profile from a device.",
+  "payload": {
+    "requesttype": "CheckOut",
+    "content": "Check-in protocol check out request and response.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "10.2"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "MessageType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "CheckOut"
+      ],
+      "content": "The message type, which requires a value of `CheckOut`."
+    },
+    {
+      "key": "Topic",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The topic the device subscribes to."
+    },
+    {
+      "key": "UDID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The device's UDID (unique device identifier). The system requires this value if the enrollment type is a device enrollment.",
+      "supportedOS": {
+        "iOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "EnrollmentID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The per-enrollment identifier for the device. The system requires this value if the enrollment type is a user enrollment.\n\nAvailable in iOS 13 and later, macOS 10.15 and later, and visionOS 2 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        },
+        "macOS": {
+          "introduced": "10.15"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {},
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

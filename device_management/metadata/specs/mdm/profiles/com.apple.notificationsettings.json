@@ -1,0 +1,175 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.notificationsettings",
+  "title": "Notifications",
+  "description": "The payload that configures notifications.",
+  "payload": {
+    "payloadtype": "com.apple.notificationsettings",
+    "content": "A notification settings payload specifies the restriction enforced notification settings for apps using their bundle identifier. The profile specifies notification settings by bundle identifier (even for apps that aren’t installed on the device yet), and those settings will always be enforced.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.3"
+      },
+      "macOS": {
+        "introduced": "10.15"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "NotificationSettings",
+      "title": "Notification Settings",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of notification settings dictionaries.",
+      "subkeys": [
+        {
+          "key": "NotificationSettingsItem",
+          "title": "Notification Setting",
+          "type": "\u003cdictionary\u003e",
+          "subkeys": [
+            {
+              "key": "BundleIdentifier",
+              "title": "App Bundle Identifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The bundle identifier of the app to which to apply these notification settings.\n\nAvailable in iOS 9.3 and later and macOS 10.15 and later."
+            },
+            {
+              "key": "NotificationsEnabled",
+              "title": "Enable Notifications",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "content": "If `true`, enables notifications for this app.\n\nAvailable in iOS 9.3 and later and macOS 10.15 and later."
+            },
+            {
+              "key": "ShowInNotificationCenter",
+              "title": "Show in Notification Center",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "content": "If `true`, enables notifications in the notification center for this app.\n\nAvailable in iOS 9.3 and later and macOS 10.15 and later."
+            },
+            {
+              "key": "ShowInLockScreen",
+              "title": "Show in Lock Screen",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "content": "If `true`, enables notifications on the Lock Screen for this app.\n\nAvailable in iOS 9.3 and later and macOS 10.15 and later."
+            },
+            {
+              "key": "AlertType",
+              "title": "Alert Type",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "rangelist": [
+                0,
+                1,
+                2
+              ],
+              "default": 1,
+              "content": "The type of alert for notifications for this app:\n\n- `0`: None\n- `1`: Temporary Banner\n- `2`: Persistent Banner\n\nAvailable in iOS 9.3 and later and macOS 10.15 and later."
+            },
+            {
+              "key": "BadgesEnabled",
+              "title": "Badges Enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "content": "If `true`, enables badges for this app.\n\nAvailable in iOS 9.3 and later and macOS 10.15 and later."
+            },
+            {
+              "key": "SoundsEnabled",
+              "title": "Sounds Enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "content": "If `true`, enables sounds for this app."
+            },
+            {
+              "key": "ShowInCarPlay",
+              "title": "Show in CarPlay",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "content": "If `true`, enables notifications in CarPlay for this app.\n\nAvailable in iOS 12 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "12.0"
+                },
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "CriticalAlertEnabled",
+              "title": "Critical Alert Enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, enables critical alerts that can ignore Do Not Disturb and ringer settings for this app.\n\nAvailable in iOS 12 and later and macOS 10.15 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "12.0"
+                }
+              }
+            },
+            {
+              "key": "GroupingType",
+              "title": "Grouping Type",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "rangelist": [
+                0,
+                1,
+                2
+              ],
+              "default": 0,
+              "content": "The type of grouping for notifications for this app:\n\n- `0`: Automatic: Group notifications into app-specified groups.\n- `1`: By app: Group notifications into one group.\n- `2`: Off: Don't group notifications.\n\nAvailable in iOS 12 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "12.0"
+                },
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "PreviewType",
+              "title": "Preview Type",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "rangelist": [
+                0,
+                1,
+                2
+              ],
+              "content": "The type previews for notifications. This key overrides the value at Settings\u003eNotifications\u003eShow Previews.\n\n- `0` - Always: Previews will be shown when the device is locked and unlocked\n- `1` - When Unlocked: Previews will only be shown when the device is unlocked\n- `2` - Never: Previews will never be shown\n\nAvailable in iOS 14 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "14.0"
+                },
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

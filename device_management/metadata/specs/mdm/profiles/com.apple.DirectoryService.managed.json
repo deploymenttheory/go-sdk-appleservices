@@ -1,0 +1,370 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.DirectoryService.managed",
+  "title": "Directory Service",
+  "description": "The payload that configures an Active Directory (AD) domain.",
+  "payload": {
+    "payloadtype": "com.apple.DirectoryService.managed",
+    "content": "In macOS 10.9 and later, a configuration profile can be used to configure macOS to join an Active Directory (AD) domain. Advanced AD options available via Directory Utility or the dsconfigad command line tool can also be set using a configuration profile.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.8"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "HostName",
+      "title": "HostName",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The Active Directory domain to join."
+    },
+    {
+      "key": "UserName",
+      "title": "UserName",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user name of the account for the domain."
+    },
+    {
+      "key": "Password",
+      "title": "Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The password of the account for the domain."
+    },
+    {
+      "key": "ClientID",
+      "title": "Client ID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The client's identifier."
+    },
+    {
+      "key": "Description",
+      "title": "Description",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The directory service description."
+    },
+    {
+      "key": "ADOrganizationalUnit",
+      "title": "ADOrganizationalUnit",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The organizational unit to add the joining computer object to."
+    },
+    {
+      "key": "ADMountStyle",
+      "title": "ADMountStyle",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The network home protocol to use: `afp` or `smb`."
+    },
+    {
+      "key": "ADCreateMobileAccountAtLoginFlag",
+      "title": "ADCreateMobileAccountAtLoginFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADCreateMobileAccountAtLogin` key.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "ADCreateMobileAccountAtLogin",
+      "title": "ADCreateMobileAccountAtLogin",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system creates a mobile account at login."
+    },
+    {
+      "key": "ADWarnUserBeforeCreatingMAFlag",
+      "title": "ADWarnUserBeforeCreatingMAFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADWarnUserBeforeCreatingMA` key.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "ADWarnUserBeforeCreatingMA",
+      "title": "ADWarnUserBeforeCreatingMA",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the warning before creating the mobile account."
+    },
+    {
+      "key": "ADForceHomeLocalFlag",
+      "title": "ADForceHomeLocalFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADForceHomeLocal` key.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "ADForceHomeLocal",
+      "title": "ADForceHomeLocal",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system forces a local home directory."
+    },
+    {
+      "key": "ADUseWindowsUNCPathFlag",
+      "title": "ADUseWindowsUNCPathFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADUseWindowsUNCPath` key.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "ADUseWindowsUNCPath",
+      "title": "ADUseWindowsUNCPath",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system uses the UNC path from Active Directory to derive the network home location."
+    },
+    {
+      "key": "ADAllowMultiDomainAuthFlag",
+      "title": "ADAllowMultiDomainAuthFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADAllowMultiDomainAuth` key.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "ADAllowMultiDomainAuth",
+      "title": "ADAllowMultiDomainAuth",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system allows authentication from any domain in the namespace."
+    },
+    {
+      "key": "ADDefaultUserShellFlag",
+      "title": "ADDefaultUserShellFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADDefaultUserShell` key."
+    },
+    {
+      "key": "ADDefaultUserShell",
+      "title": "ADDefaultUserShell",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The default user shell."
+    },
+    {
+      "key": "ADMapUIDAttributeFlag",
+      "title": "ADMapUIDAttributeFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADMapUIDAttribute` key."
+    },
+    {
+      "key": "ADMapUIDAttribute",
+      "title": "ADMapUIDAttribute",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The map UID to attribute."
+    },
+    {
+      "key": "ADMapGIDAttributeFlag",
+      "title": "ADMapGIDAttributeFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADMapGIDAttribute` key."
+    },
+    {
+      "key": "ADMapGIDAttribute",
+      "title": "ADMapGIDAttribute",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The map GID to attribute."
+    },
+    {
+      "key": "ADMapGGIDAttributeFlag",
+      "title": "ADMapGGIDAttributeFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADMapGGIDAttributeFlag` key."
+    },
+    {
+      "key": "ADMapGGIDAttribute",
+      "title": "ADMapGGIDAttribute",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The map group GID to attribute."
+    },
+    {
+      "key": "ADPreferredDCServerFlag",
+      "title": "ADPreferredDCServerFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADPreferredDCServer` key."
+    },
+    {
+      "key": "ADPreferredDCServer",
+      "title": "ADPreferredDCServer",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The preferred domain server."
+    },
+    {
+      "key": "ADDomainAdminGroupListFlag",
+      "title": "ADDomainAdminGroupListFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADDomainAdminGroupList` key."
+    },
+    {
+      "key": "ADDomainAdminGroupList",
+      "title": "ADDomainAdminGroupList",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "The list of Active Directory groups with admin access.",
+      "subkeys": [
+        {
+          "key": "ADDomainAdminGroupListItem",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    },
+    {
+      "key": "ADNamespaceFlag",
+      "title": "ADNamespaceFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADNamespace` key."
+    },
+    {
+      "key": "ADNamespace",
+      "title": "ADNamespace",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The primary user account naming convention; either `forest` or `domain`."
+    },
+    {
+      "key": "ADPacketSignFlag",
+      "title": "ADPacketSignFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADPacketSign` key.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.8"
+        }
+      }
+    },
+    {
+      "key": "ADPacketSign",
+      "title": "ADPacketSign",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The packet signing policy."
+    },
+    {
+      "key": "ADPacketEncryptFlag",
+      "title": "ADPacketEncryptFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADPacketEncrypt` key."
+    },
+    {
+      "key": "ADPacketEncrypt",
+      "title": "ADPacketEncrypt",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The packet encryption policy."
+    },
+    {
+      "key": "ADRestrictDDNSFlag",
+      "title": "ADRestrictDDNSFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADRestrictDDNS` key."
+    },
+    {
+      "key": "ADRestrictDDNS",
+      "title": "ADRestrictDDNS",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of strings that represent the interfaces allowed for dynamic DNS updates, such as en0 and en1.",
+      "subkeys": [
+        {
+          "key": "ADRestrictDDNSItem",
+          "type": "\u003cstring\u003e"
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.8"
+        }
+      }
+    },
+    {
+      "key": "ADTrustChangePassIntervalDaysFlag",
+      "title": "ADTrustChangePassIntervalDaysFlag",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables the `ADTrustChangePassIntervalDays` key."
+    },
+    {
+      "key": "ADTrustChangePassIntervalDays",
+      "title": "ADTrustChangePassIntervalDays",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The number of days before requiring a change of the computer trust account password. Set to `0` to disable the feature."
+    }
+  ]
+}

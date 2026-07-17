@@ -1,0 +1,150 @@
+{
+  "category": "mdm/commands",
+  "name": "user.list",
+  "title": "User List Command",
+  "description": "Get a list of users with active accounts on a device.",
+  "payload": {
+    "requesttype": "UserList",
+    "content": "This command allows the server to query for a list of users that have an active account on the device.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.3",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "10.13",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "responsekeys": [
+    {
+      "key": "Users",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of user dictionaries that contains information about the active accounts.",
+      "subkeys": [
+        {
+          "key": "UsersItem",
+          "type": "\u003cdictionary\u003e",
+          "presence": "required",
+          "content": "A dictionary that contains information about an active account on a device.",
+          "subkeys": [
+            {
+              "key": "UserName",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The user name for the account. In macOS, this is the short name of the user account. This value is available in iOS 9.3 and later, and macOS 10.13 and later."
+            },
+            {
+              "key": "FullName",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The user's full name. This value is available in macOS 10.13 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "UID",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "content": "The user's unique identifier. This value is available in macOS 10.13 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "UserGUID",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The user's `GeneratedUID`. This value is available in macOS 10.13 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "IsLoggedIn",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, the user is currently logged in on the device. This value is available in iOS 9.3 and later, and macOS 10.13 and later."
+            },
+            {
+              "key": "HasDataToSync",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, the user has data to sync to the cloud. This value is available in iOS 9.3 and later.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "DataQuota",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "content": "If present, the user's data quota in bytes. This isn't present if the account doesn't enforce a quota. This value is available in iOS 9.3 and later.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "DataUsed",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "content": "The amount of data, in bytes, that the user has used. This value is available in iOS 9.3 and later.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "MobileAccount",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, the account is a mobile account. This value is available in macOS 10.13 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "HasSecureToken",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, the user currently has a secure token set. This value is available in macOS 11 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                },
+                "macOS": {
+                  "introduced": "11.0"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

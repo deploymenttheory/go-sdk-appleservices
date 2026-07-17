@@ -1,0 +1,106 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.finder",
+  "title": "Finder",
+  "description": "The payload that configures Finder settings.",
+  "payload": {
+    "payloadtype": "com.apple.finder",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ProhibitBurn",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables the Finder's burn support."
+    },
+    {
+      "key": "InterfaceLevel",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "Simple",
+        "Full"
+      ],
+      "content": "Specifies whether Finder should operate in Simple or Full mode.",
+      "supportedOS": {
+        "macOS": {
+          "removed": "10.15"
+        }
+      }
+    },
+    {
+      "key": "ProhibitConnectTo",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables Connect to Server."
+    },
+    {
+      "key": "ProhibitEject",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables Eject."
+    },
+    {
+      "key": "ProhibitGoToFolder",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system disables Go to Folder."
+    },
+    {
+      "key": "ShowExternalHardDrivesOnDesktop",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system doesn't show external hard drives on the Desktop."
+    },
+    {
+      "key": "ShowHardDrivesOnDesktop",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `false`, the system doesn't show internal hard drives on the Desktop."
+    },
+    {
+      "key": "ShowMountedServersOnDesktop",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `false`, the system doesn't show mounted file servers on the Desktop."
+    },
+    {
+      "key": "ShowRemovableMediaOnDesktop",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system doesn't show removable media items on the Desktop."
+    },
+    {
+      "key": "WarnOnEmptyTrash",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system doesn't warn the user before emptying the trash."
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "category": "mdm/commands",
+  "name": "media.install",
+  "title": "Install Media Command",
+  "description": "Install a book on a device.",
+  "payload": {
+    "requesttype": "InstallMedia",
+    "content": "This command allows the server to install a book on a device. If the book is already being managed, this command will update the book.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "8.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "10.9",
+        "deprecated": "11.0",
+        "removed": "11.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "iTunesStoreID",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The book's iTunes Store identifier."
+    },
+    {
+      "key": "MediaURL",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The URL to retrieve the book. This value is available in iOS 8 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "MediaType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "Book"
+      ],
+      "content": "The media type, which can only be `Book`."
+    },
+    {
+      "key": "PersistentID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The book's persistent identifier in reverse-DNS form; for example, `com.acme.manuals.training`. This value is available in iOS 8 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Kind",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "pdf",
+        "epub",
+        "ibooks"
+      ],
+      "content": "The kind of the media, which can be one of the following values:\n\n- `pdf`: A PDF file\n- `epub`: An EPUB file in `gzip` format.\n- `ibooks`: An iBooks Author file in `gzip` format.\n\nIf you omit this value, its value is the file extension in the URL. This value is available in iOS 8 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Version",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The book's version number. This value is available in iOS 8 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Author",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The name of the book's author. This value is available in iOS 8 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Title",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The book's title. This value is available in iOS 8 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "iTunesStoreID",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The book's iTunes Store identifier, if present in the command."
+    },
+    {
+      "key": "MediaURL",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The URL to retrieve the book, if present in the command. This value is available in iOS 8 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "PersistentID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The book's persistent identifier, if present in the command. This value is available in iOS 8 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "MediaType",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The media type, which can only be `Book`."
+    },
+    {
+      "key": "State",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "Queued",
+        "PromptingForLogin",
+        "Updating",
+        "Installing",
+        "Managed",
+        "ManagedButUninstalled",
+        "Installed",
+        "Uninstalled",
+        "Failed",
+        "Unknown"
+      ],
+      "content": "The installation state of this book. The `Failed` and `Unknown` states are transient and the device only reports them once. Books from the Book Store report their state as `Installed` instead of `Managed`."
+    },
+    {
+      "key": "RejectionReason",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "CouldNotVerifyITunesStoreID",
+        "PurchaseNotFound",
+        "AppStoreDisabled",
+        "WrongMediaType",
+        "DownloadInvalid",
+        "EnterpriseBooksNotSupportedInMultiUser"
+      ],
+      "content": "The reason, if installation fails, which is one of the following values:\n\n- `CouldNotVerifyITunesStoreID`: The `iTunesStoreID` is invalid.\n- `PurchaseNotFound`: The Volume Purchase Program (VPP) license isn't in the user's history.\n- `AppStoreDisabled`: App Store isn't available on the device.\n- `WrongMediaType`: The media type is invalid. The only valid type is `Book`.\n- `DownloadInvalid`: The URL doesn't lead to a valid book.\n- `EnterpriseBooksNotSupportedInMultiUser`: Multiuser mode doesn't support enterprise books."
+    }
+  ]
+}

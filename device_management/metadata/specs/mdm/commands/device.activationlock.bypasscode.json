@@ -1,0 +1,38 @@
+{
+  "category": "mdm/commands",
+  "name": "device.activationlock.bypasscode",
+  "title": "Activation Lock Bypass Code Command",
+  "description": "Get the code to bypass Activation Lock on a device.",
+  "payload": {
+    "requesttype": "ActivationLockBypassCode",
+    "content": "Retrieves the Activation Lock bypass code from the device. This bypass code is only available for 15 days after supervision.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "7.1",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "10.15",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "2.0",
+        "accessrights": "None"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "responsekeys": [
+    {
+      "key": "ActivationLockBypassCode",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The Activation Lock bypass code if it's available."
+    }
+  ]
+}

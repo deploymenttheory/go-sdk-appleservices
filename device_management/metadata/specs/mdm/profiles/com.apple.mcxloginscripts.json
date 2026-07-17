@@ -1,0 +1,99 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.mcxloginscripts",
+  "title": "Login Window: Scripts",
+  "description": "The payload that configures scripts to run at login and logout.",
+  "payload": {
+    "payloadtype": "com.apple.mcxloginscripts",
+    "content": "Login and logout managed script handling",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "loginscripts",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of one or more dictionaries of scripts to run at user login time.",
+      "subkeytype": "ScriptsItems",
+      "subkeys": [
+        {
+          "key": "ScriptsItems",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary of login scripts.",
+          "subkeys": [
+            {
+              "key": "filename",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The filename for display purposes."
+            },
+            {
+              "key": "filedata",
+              "type": "\u003cdata\u003e",
+              "presence": "required",
+              "content": "The UTF-8 encoded data object representing the executable script."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "logoutscripts",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of one or more dictionaries of scripts to run at user logout time.",
+      "subkeytype": "ScriptsItems",
+      "subkeys": [
+        {
+          "key": "ScriptsItems",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary of login scripts.",
+          "subkeys": [
+            {
+              "key": "filename",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The filename for display purposes."
+            },
+            {
+              "key": "filedata",
+              "type": "\u003cdata\u003e",
+              "presence": "required",
+              "content": "The UTF-8 encoded data object representing the executable script."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "skipLoginHook",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system doesn't execute the login scripts during login."
+    },
+    {
+      "key": "skipLogoutHook",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system doesn't execute the logout scripts during logout."
+    }
+  ]
+}

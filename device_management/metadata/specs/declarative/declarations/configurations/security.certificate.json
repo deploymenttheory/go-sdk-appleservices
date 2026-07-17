@@ -1,0 +1,39 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "security.certificate",
+  "title": "Security:Certificate",
+  "description": "The declaration to add a certificate to the device.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.security.certificate",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "17.0"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "17.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "CredentialAssetReference",
+      "title": "Credential asset reference",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The identifier of an asset declaration that contains the certificate to install.",
+      "assettypes": [
+        "com.apple.asset.credential.certificate"
+      ]
+    }
+  ]
+}

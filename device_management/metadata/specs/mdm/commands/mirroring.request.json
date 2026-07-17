@@ -1,0 +1,63 @@
+{
+  "category": "mdm/commands",
+  "name": "mirroring.request",
+  "title": "Request Mirroring Command",
+  "description": "Prompt the user to share their screen using AirPlay Mirroring.",
+  "payload": {
+    "requesttype": "RequestMirroring",
+    "content": "This command prompts the user to share their screen using AirPlay Mirroring.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "7.0",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "10.10",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "DestinationName",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The name of the AirPlay Mirroring destination."
+    },
+    {
+      "key": "DestinationDeviceID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The hardware address of the AirPlay Mirroring destination that identifies the device, in the format `xx:xx:xx:xx:xx`. This value isn't case-sensitive. Not available for Apple TV devices running tvOS 18 or later, use `DestinationName` instead."
+    },
+    {
+      "key": "ScanTime",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The number of seconds, from `10` to `300`, for the device to spend searching for the destination. The default value is `30`."
+    },
+    {
+      "key": "Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The screen-sharing password that the device uses when connecting to the destination."
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "MirroringResult",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The result of the request. One of these values:\n\n- `Prompting`: The user is receiving a prompt to share their screen.\n- `DestinationNotFound`: The device is unable to reach the destination.\n- `Cancelled`: The user canceled the request.\n- `Unknown`: An unknown error occurred."
+    }
+  ]
+}

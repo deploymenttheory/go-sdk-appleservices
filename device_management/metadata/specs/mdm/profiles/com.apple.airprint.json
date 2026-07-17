@@ -1,0 +1,103 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.airprint",
+  "title": "AirPrint",
+  "description": "The payload that configures AirPrint printer discoverability in the user's printer list.",
+  "payload": {
+    "payloadtype": "com.apple.airprint",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "7.0"
+      },
+      "macOS": {
+        "introduced": "10.10"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "2.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AirPrint",
+      "title": "Air print",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of AirPrint printers that are presented to the user.",
+      "subkeys": [
+        {
+          "key": "AirPrintItem",
+          "title": "Identifier",
+          "type": "\u003cdictionary\u003e",
+          "subkeys": [
+            {
+              "key": "IPAddress",
+              "title": "IP Address",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The IP address or hostname of the AirPrint destination.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "7.0"
+                }
+              }
+            },
+            {
+              "key": "ResourcePath",
+              "title": "Resource Path",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The resource path associated with the printer. This path corresponds to the `rp` parameter of the `_ipps.tcp` Bonjour record. For example:\n\n- `printers/Canon_MG5300_series`\n- `printers/Xerox_Phaser_7600`\n- `ipp/print`\n- `Epson_IPP_Printer`",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "7.0"
+                }
+              }
+            },
+            {
+              "key": "Port",
+              "title": "Port Number",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "range": {
+                "min": 0,
+                "max": 65535
+              },
+              "content": "The listening port of the AirPrint destination. Available only in iOS 11 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "11.0"
+                },
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "ForceTLS",
+              "title": "Force TLS",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, AirPrint connections are secured by Transport Layer Security (TLS). Available only in iOS 11 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "11.0"
+                },
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

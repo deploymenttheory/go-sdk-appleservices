@@ -1,0 +1,112 @@
+{
+  "category": "mdm/commands",
+  "name": "application.extensions.listactive",
+  "title": "Active NSExtensions Command",
+  "description": "Get a list of active extensions for a user on a device.",
+  "payload": {
+    "requesttype": "ActiveNSExtensions",
+    "content": "Returns information about the active NSExtensions for a particular user.\nNSExtensions are installed and enabled at the user level. There is no concept of \"device\" NSExtensions.\nRequires \"Query Installed Apps\" right; supported on user channel only.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.13",
+        "accessrights": "QueryInstalledApps"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "FilterExtensionPoints",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of extension points. If you choose to provide this value, the response only includes the app extensions for the extension points you specify.",
+      "subkeys": [
+        {
+          "key": "FilterExtensionPointsItem",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "Extensions",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries that contains information about active extensions on the device.",
+      "subkeys": [
+        {
+          "key": "ExtensionsItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that contains information about an extension.",
+          "subkeys": [
+            {
+              "key": "Identifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The identifier of the extension."
+            },
+            {
+              "key": "ExtensionPoint",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The `NSExtensionPointIdentifier` for the extension."
+            },
+            {
+              "key": "DisplayName",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The extension's display name."
+            },
+            {
+              "key": "ContainerDisplayName",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The display name of the container."
+            },
+            {
+              "key": "ContainerIdentifier",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The identifier of the container."
+            },
+            {
+              "key": "Path",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The path to the extension."
+            },
+            {
+              "key": "Version",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The version of the extension."
+            },
+            {
+              "key": "UserElection",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "Default",
+                "Use",
+                "Ignore"
+              ],
+              "content": "The user-selected state of the extension, which a user sets in the Extensions preference pane in System Preferences."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

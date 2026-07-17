@@ -1,0 +1,159 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.ews.account",
+  "title": "Exchange Web Services",
+  "description": "The payload that configures an Exchange Web Services accounts.",
+  "payload": {
+    "payloadtype": "com.apple.ews.account",
+    "content": "For macOS 10.9 and higher, an Exchange Web services (EWS) account is configured with support for Mail, Contacts, Calendar, Notes and Reminders. macOS 10.7-10.8 only supported Contacts.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "EmailAddress",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The full email address for the account. If the email address string isn't present in the payload, the device prompts for it during profile installation."
+    },
+    {
+      "key": "Host",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The Exchange server host name or IP address. Ignored if using OAuth."
+    },
+    {
+      "key": "SSL",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the system enables SSL."
+    },
+    {
+      "key": "OAuth",
+      "title": "Use OAuth",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables OAuth for authentication. Don't specify a password if `OAuth` is `true`. Available in macOS 10.14 and later",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.14"
+        }
+      }
+    },
+    {
+      "key": "OAuthSignInURL",
+      "title": "URL for OAuth sign-in",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The URL to load into a web view for authentication through OAuth when autodiscovery isn't used. This setting requires a `Host` value.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.14"
+        }
+      }
+    },
+    {
+      "key": "UserName",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user name for this Exchange account. Required for noninteractive installation, such as through MDM. If missing, the system prompts the user for it during interactive profile installation."
+    },
+    {
+      "key": "Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The password of the account. Use only with encrypted profiles."
+    },
+    {
+      "key": "PayloadCertificateUUID",
+      "title": "Payload Certificate UUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$",
+      "content": "The UUID of the certificate payload within the same profile to use for the identity credential. Supported on macOS 10.12 or later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.12"
+        }
+      }
+    },
+    {
+      "key": "AuthenticationCertificateUUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The UUID of the certificate payload within the same profile to use for the identity credential. Supported on macOS 10.11 or later. On macOS 10.12 or later use the PayloadCertificateUUID.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.11"
+        }
+      }
+    },
+    {
+      "key": "allowMailDrop",
+      "title": "Allow Mail Drop",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables Mail Drop.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.12"
+        }
+      }
+    },
+    {
+      "key": "Path",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The server path."
+    },
+    {
+      "key": "Port",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The server port number."
+    },
+    {
+      "key": "ExternalHost",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The external server address."
+    },
+    {
+      "key": "ExternalSSL",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the system enables SSL for connections to the external server."
+    },
+    {
+      "key": "ExternalPath",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The external server path."
+    },
+    {
+      "key": "ExternalPort",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The external server port number."
+    }
+  ]
+}

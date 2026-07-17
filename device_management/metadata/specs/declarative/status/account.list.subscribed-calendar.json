@@ -1,0 +1,95 @@
+{
+  "category": "declarative/status",
+  "name": "account.list.subscribed-calendar",
+  "title": "Status Account List Subscribed Calendar",
+  "description": "A status report of the client's subscribed calendars.",
+  "payload": {
+    "statusitemtype": "account.list.subscribed-calendar",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "16.0"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "account.list.subscribed-calendar",
+      "title": "Status item value.",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "A list of status values for the subscribed calendars.",
+      "subkeytype": "Account",
+      "subkeys": [
+        {
+          "key": "status_value",
+          "type": "\u003cdictionary\u003e",
+          "content": "A status report of the client's subscribed calendar details.",
+          "subkeys": [
+            {
+              "key": "identifier",
+              "title": "Unique identifier of the subscribed calendar.",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The unique identifier for the subscribed calendar."
+            },
+            {
+              "key": "_removed",
+              "title": "Indicates removal of the subscribed calendar.",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the subscribed calendar is removed and the status item object only contains this key and the `identifier` key."
+            },
+            {
+              "key": "declaration-identifier",
+              "title": "Identifier of the declaration that installed the subscribed calendar.",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The identifier of the declaration that installed the subscribed calendar. Only present if a declaration installed the subscribed calendar."
+            },
+            {
+              "key": "visible-name",
+              "title": "Subscribed calendar name",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The name of the subscribed calendar."
+            },
+            {
+              "key": "calendar-url",
+              "title": "Subscribed calendar URL",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The URL of the subscribed calendar."
+            },
+            {
+              "key": "username",
+              "title": "Subscribed calendar username",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The user name for authenticating with the subscribed calendar."
+            },
+            {
+              "key": "is-enabled",
+              "title": "Is the calendar enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "content": "A Boolean value that indicates whether the Calendar app displays this subscribed calendar."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

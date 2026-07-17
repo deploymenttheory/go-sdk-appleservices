@@ -1,0 +1,38 @@
+{
+  "category": "mdm/commands",
+  "name": "passcode.clear",
+  "title": "Clear Passcode Command",
+  "description": "Remove the passcode from a device.",
+  "payload": {
+    "requesttype": "ClearPasscode",
+    "content": "This command allows the server to clear the passcode on the device. This command requires the Device Lock and Passcode Removal right.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0",
+        "accessrights": "AllowPasscodeRemovalAndLock"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1",
+        "accessrights": "AllowPasscodeRemovalAndLock"
+      },
+      "watchOS": {
+        "introduced": "10.0",
+        "accessrights": "AllowPasscodeRemovalAndLock"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "UnlockToken",
+      "type": "\u003cdata\u003e",
+      "presence": "required",
+      "content": "The unlock token value that the device provides in its `TokenUpdateMessage` check-in message."
+    }
+  ]
+}

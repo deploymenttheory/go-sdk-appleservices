@@ -1,0 +1,142 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.vpn.managed.appmapping",
+  "title": "App-to-App-Layer VPN Mapping",
+  "description": "The payload that configures per-app VPN settings.",
+  "payload": {
+    "payloadtype": "com.apple.vpn.managed.appmapping",
+    "content": "This payload is only valid on macOS.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.9"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AppLayerVPNMapping",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "The array of VPN mapping dictionaries.",
+      "subkeys": [
+        {
+          "key": "AppLayerVPNMappingItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary defining a per-app VPN relationship.",
+          "subkeys": [
+            {
+              "key": "Identifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The bundle identifier of the app using the per-app VPN."
+            },
+            {
+              "key": "VPNUUID",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The identifier of the per-app VPN payload, which defines the per-app VPN that the app uses. See the `VPNUUID` key of the `AppLayerVPN` payload."
+            },
+            {
+              "key": "DesignatedRequirement",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The code signature designated requirement of the app using the per-app VPN.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.10"
+                }
+              }
+            },
+            {
+              "key": "SigningIdentifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The code signature signing identifier of the app using the per-app VPN.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.10"
+                }
+              }
+            },
+            {
+              "key": "Path",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The file-system path of the executable using the per-app VPN.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.15"
+                }
+              }
+            },
+            {
+              "key": "MatchTools",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "An array of dictionaries. Each dictionary specifies a per-app VPN rule. Use this property to restrict this per-app VPN rule to only match the app's spawned _helper tool_ network traffic.\n\nFor example, to match network traffic that the `curl` command generates when run from the Terminal.app, create an app mapping payload for Terminal.app and set the payload's `MatchTools` key to an array that contains a dictionary that matches the `curl` command-line tool.\n\nIf you don't specify the `MatchTools` key, this per-app VPN rule matches all network traffic that the matching app and its spawned helper tools generate.",
+              "subkeys": [
+                {
+                  "key": "MatchToolsItem",
+                  "type": "\u003cdictionary\u003e",
+                  "content": "Specifies a per-app VPN rule to match network traffic that the app's spawned command-line tool generates.",
+                  "subkeys": [
+                    {
+                      "key": "DesignatedRequirement",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "The code signature designated requirement of the command-line tool using the per-app VPN.",
+                      "supportedOS": {
+                        "macOS": {
+                          "introduced": "10.15.4"
+                        }
+                      }
+                    },
+                    {
+                      "key": "SigningIdentifier",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "The code signature signing identifier of the command-line tool using the per-app VPN.",
+                      "supportedOS": {
+                        "macOS": {
+                          "introduced": "10.15.4"
+                        }
+                      }
+                    },
+                    {
+                      "key": "Path",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "content": "The file-system path of the command-line tool using the per-app VPN.",
+                      "supportedOS": {
+                        "macOS": {
+                          "introduced": "10.15.4"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "10.15.4"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

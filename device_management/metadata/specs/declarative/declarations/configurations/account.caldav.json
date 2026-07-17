@@ -1,0 +1,68 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "account.caldav",
+  "title": "Account:CalDAV",
+  "description": "The declaration to configure a Calendar account.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.account.caldav",
+    "apply": "multiple",
+    "content": "A CalDAV configuration defines a CalDAV calendar and reminders account for a user.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "VisibleName",
+      "title": "Account Name",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The name that apps show to the user for this calendar account. If not present, the system generates a suitable default."
+    },
+    {
+      "key": "HostName",
+      "title": "Server Host Name",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The hostname or IP address of the CalDAV server."
+    },
+    {
+      "key": "Port",
+      "title": "Server Port",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The port number for the CalDAV server."
+    },
+    {
+      "key": "Path",
+      "title": "Server Path",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The path for the CalDAV server."
+    },
+    {
+      "key": "AuthenticationCredentialsAssetReference",
+      "title": "Authentication Credentials Asset Reference",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The identifier of an asset declaration that contains the credentials for this account. Set the corresponding asset type to `CredentialUserNameAndPassword`.",
+      "assettypes": [
+        "com.apple.asset.credential.userpassword"
+      ]
+    }
+  ]
+}
