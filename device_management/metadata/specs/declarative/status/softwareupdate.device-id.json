@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "softwareupdate.device-id",
+  "title": "Status Software Update Device ID",
+  "description": "A status report of the device's update device ID.",
+  "payload": {
+    "statusitemtype": "softwareupdate.device-id",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "18.0"
+      },
+      "macOS": {
+        "introduced": "15.0"
+      },
+      "tvOS": {
+        "introduced": "18.4"
+      },
+      "visionOS": {
+        "introduced": "26.4"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "softwareupdate.device-id",
+      "title": "The device's software update device ID.",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The device identifier to use when looking up available software updates via `https://gdmf.apple.com/v2/pmv`."
+    }
+  ]
+}

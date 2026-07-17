@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "test.integer-value",
+  "title": "Status Test Integer Value",
+  "description": "A test status item for an integer.",
+  "payload": {
+    "statusitemtype": "test.integer-value",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "16.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "test.integer-value",
+      "title": "Status item value.",
+      "type": "\u003cinteger\u003e",
+      "presence": "required",
+      "content": "The test status integer value."
+    }
+  ]
+}

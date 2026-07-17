@@ -1,0 +1,36 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.conferenceroomdisplay",
+  "title": "Conference Room Display",
+  "description": "The payload that configures Conference Room Display mode for Apple TV.",
+  "payload": {
+    "payloadtype": "com.apple.conferenceroomdisplay",
+    "content": "Configures an Apple TV to enter Conference Room Display mode, and restrictions exit from that mode",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "10.2"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Message",
+      "title": "Custom message",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The custom message displayed on the screen in Conference Room Display mode."
+    }
+  ]
+}

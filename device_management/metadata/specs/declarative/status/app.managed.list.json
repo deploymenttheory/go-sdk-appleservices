@@ -1,0 +1,247 @@
+{
+  "category": "declarative/status",
+  "name": "app.managed.list",
+  "title": "Status App Managed List",
+  "description": "The device's declarative managed apps.",
+  "payload": {
+    "statusitemtype": "app.managed.list",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "17.2"
+      },
+      "macOS": {
+        "introduced": "26.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "2.4"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "app.managed.list",
+      "title": "Status item value.",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries that describe the device's declarative managed apps.",
+      "subkeytype": "App",
+      "subkeys": [
+        {
+          "key": "status_value",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that describes a declarative managed app.",
+          "subkeys": [
+            {
+              "key": "identifier",
+              "title": "Unique identifier of the app.",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The app's bundle id, which is unique."
+            },
+            {
+              "key": "_removed",
+              "title": "Indicates removal of the app.",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system removed the app and only this key and the `identifier` key are present in the status item object."
+            },
+            {
+              "key": "declaration-identifier",
+              "title": "Identifier of the declaration that controls the app.",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The identifier of the declaration that controls the app."
+            },
+            {
+              "key": "name",
+              "title": "App name",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The name of the app."
+            },
+            {
+              "key": "external-version-id",
+              "title": "External version identifier",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The app's external version identifier. You can also retrieve this value from the App Store. For more information, see `Apps and Books for Organizations`.\n\nIf the current external version identifier of an app on the App Store doesn't match the external version identifier reported by the device, there may be an app update available for the device."
+            },
+            {
+              "key": "version",
+              "title": "Version",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The version of the app."
+            },
+            {
+              "key": "short-version",
+              "title": "Short version",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The short version of the app."
+            },
+            {
+              "key": "state",
+              "title": "Managed application list status",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "optional",
+                "queued",
+                "not-present",
+                "prompting-for-consent",
+                "prompting-for-login",
+                "prompting-for-management",
+                "downloading",
+                "installing",
+                "managed",
+                "managed-but-uninstalled",
+                "failed"
+              ],
+              "content": "The status of the app, which has the following possible values:\n\n- `optional`: The app is optional and the user has to trigger its installation.\n- `queued`: The system has started installation of the app.\n- `not-present`: Management of the app occurs after it is installed.\n- `prompting-for-consent`: The system is displaying a prompt to the user to proceed with app installation.\n- `prompting-for-login`: The system is displaying an App Store sign-in prompt to the user to allow app installation.\n- `prompting-for-management`: The system is displaying a prompt to the user to allow changing the installed app to a managed app.\n- `downloading`: The system is downloading the app.\n- `installing`: The system is installing the app.\n- `managed`: The app is installed and managed.\n- `managed-but-uninstalled`: The app is required, but the system hasn't installed it. The app becomes managed if the system installs it again. If the user removes an optional app, its state is `optional`, not `managed-but-uninstalled`.\n- `failed`: The app install failed."
+            },
+            {
+              "key": "update-state",
+              "title": "Managed application update status",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "available",
+                "prompting-for-update",
+                "prompting-for-update-login",
+                "updating",
+                "failed"
+              ],
+              "content": "The update status of the app, which has the following possible values:\n\n- `available`: An update is available for the app.\n- `prompting-for-update`: The system is displaying a prompt to the user to proceed with app installation.\n- `prompting-for-update-login`: The system is displaying an App Store sign-in prompt to the user to allow app installation.\n- `updating`: The app is updating.\n- `failed`: The app update failed.\n\n\u003e Note:\n\u003e This key is only present if `state` is `managed` and an update is available."
+            },
+            {
+              "key": "config-state",
+              "title": "Managed application configuration status",
+              "type": "\u003cdictionary\u003e",
+              "presence": "optional",
+              "content": "The status of app or extension managed configurations. This key is only present when managed configurations are available for the managed app or any of its extensions.",
+              "subkeytype": "ManagedConfiguration",
+              "subkeys": [
+                {
+                  "key": "app-config-state",
+                  "title": "Application managed configuration status",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "optional",
+                  "content": "The status of any app managed configuration. This key is only present when the managed app has a managed configuration.",
+                  "subkeytype": "ManagedConfigurationState",
+                  "subkeys": [
+                    {
+                      "key": "state",
+                      "title": "Managed configuration status",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "rangelist": [
+                        "unknown",
+                        "invalid",
+                        "valid"
+                      ],
+                      "content": "The managed configuration status.\n- `unknown`: The managed configuration has not been read\n- `invalid`: The managed configuration was read and deemed to be invalid\n- `valid`: The managed configuration was read and deemed to be valid"
+                    }
+                  ]
+                },
+                {
+                  "key": "extension-config-state",
+                  "title": "Extensions managed configuration status",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "optional",
+                  "content": "The status of any app extension managed configuration. This key's value is a dictionary whose keys are the bundle identifiers of app extensions that have a managed configuration. The values of each key represent the status of the corresponding app extension's managed configuration.",
+                  "subkeys": [
+                    {
+                      "key": "ANY",
+                      "type": "\u003cdictionary\u003e",
+                      "presence": "optional",
+                      "content": "The bundle identifier of the managed app extension.",
+                      "subkeytype": "ManagedConfigurationState",
+                      "subkeys": [
+                        {
+                          "key": "state",
+                          "title": "Managed configuration status",
+                          "type": "\u003cstring\u003e",
+                          "presence": "required",
+                          "rangelist": [
+                            "unknown",
+                            "invalid",
+                            "valid"
+                          ],
+                          "content": "The managed configuration status.\n- `unknown`: The managed configuration has not been read\n- `invalid`: The managed configuration was read and deemed to be invalid\n- `valid`: The managed configuration was read and deemed to be valid"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "18.4"
+                },
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "reasons",
+              "title": "Status Reasons",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "An array that contains additional details about the app state, including errors.",
+              "subkeytype": "StatusReason",
+              "subkeys": [
+                {
+                  "key": "_reasons",
+                  "title": "Status Reason",
+                  "type": "\u003cdictionary\u003e",
+                  "content": "Information about a status error.",
+                  "subkeytype": "StatusReason",
+                  "subkeys": [
+                    {
+                      "key": "code",
+                      "title": "Error Code",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "A code for the state."
+                    },
+                    {
+                      "key": "description",
+                      "title": "Error Description",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "content": "A description of the state."
+                    },
+                    {
+                      "key": "details",
+                      "title": "Error Details",
+                      "type": "\u003cdictionary\u003e",
+                      "presence": "optional",
+                      "content": "A dictionary that contains additional details about the state.",
+                      "subkeys": [
+                        {
+                          "key": "ANY",
+                          "type": "\u003cany\u003e",
+                          "presence": "optional",
+                          "content": "Additional keys may be present."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

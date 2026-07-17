@@ -1,0 +1,193 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.SystemConfiguration",
+  "title": "Network Proxy Configuration",
+  "description": "The payload that configures network proxies for a device.",
+  "payload": {
+    "payloadtype": "com.apple.SystemConfiguration",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Proxies",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "The dictionary containing all the proxies for this device.",
+      "subkeys": [
+        {
+          "key": "FTPEnable",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "If `true`, enables FTP proxy."
+        },
+        {
+          "key": "FTPPassive",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "If `true`, enables passive FTP mode."
+        },
+        {
+          "key": "FTPPort",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "The FTP proxy port."
+        },
+        {
+          "key": "FTPProxy",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The host name or IP address for the FTP proxy."
+        },
+        {
+          "key": "GopherEnable",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "If `true`, enables gopher proxy."
+        },
+        {
+          "key": "GopherPort",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "The gopher proxy port."
+        },
+        {
+          "key": "GopherProxy",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The host name or IP address for the gopher proxy."
+        },
+        {
+          "key": "HTTPEnable",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "If `true`, enables web proxy."
+        },
+        {
+          "key": "HTTPPort",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "The web proxy port."
+        },
+        {
+          "key": "HTTPProxy",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The host name or IP address for the web proxy."
+        },
+        {
+          "key": "HTTPSEnable",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "If `true`, enables secure web proxy."
+        },
+        {
+          "key": "HTTPSPort",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "The secure web proxy port."
+        },
+        {
+          "key": "HTTPSProxy",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The host name or IP address for the secure web proxy."
+        },
+        {
+          "key": "ProxyAutoConfigEnable",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "If `true`, enables automatic proxy configuration."
+        },
+        {
+          "key": "ProxyAutoConfigURLString",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The automatic proxy configuration URL."
+        },
+        {
+          "key": "ProxyCaptiveLoginAllowed",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "If 1, allows client to log into captive portal network.",
+          "supportedOS": {
+            "macOS": {
+              "introduced": "10.9"
+            }
+          }
+        },
+        {
+          "key": "RTSPEnable",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "If `true`, enable streaming proxy."
+        },
+        {
+          "key": "RTSPPort",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "The streaming proxy port."
+        },
+        {
+          "key": "RTSPProxy",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The host name or IP address for the streaming proxy."
+        },
+        {
+          "key": "SOCKSEnable",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "If `true`, enable the SOCKS proxy."
+        },
+        {
+          "key": "SOCKSPortinteger",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "The SOCKS proxy port."
+        },
+        {
+          "key": "SOCKSProxy",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The host name or IP address for the SOCKS proxy."
+        },
+        {
+          "key": "FallBackAllowed",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "If `1`, enables fallback. Default is `1`.\n\nFor managed devices, if not supplied, the default is `0`."
+        },
+        {
+          "key": "ExceptionsList",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "The list of hosts and domains that should bypass proxy settings.",
+          "subkeys": [
+            {
+              "key": "Exception",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "Bypass proxy settings for these Hosts \u0026 Domains"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

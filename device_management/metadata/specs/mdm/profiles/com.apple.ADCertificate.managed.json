@@ -1,0 +1,146 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.ADCertificate.managed",
+  "title": "Active Directory Certificate",
+  "description": "The payload that configures Active Directory Certificate settings.",
+  "payload": {
+    "payloadtype": "com.apple.ADCertificate.managed",
+    "content": "A certificate can be requested from a Microsoft Certificate Authority (CA) using DCE/RPC and the Active Directory Certificate profile payload instructions detailed at support.apple.com/kb/HT5357.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "CertServer",
+      "title": "Certificate Server",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The fully qualified host name of the CA."
+    },
+    {
+      "key": "CertTemplate",
+      "title": "Certificate Template",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The certificate template for your environment. The default user certificate value is \\`User\\`. The default computer certificate value is \\`Machine\\`."
+    },
+    {
+      "key": "Description",
+      "title": "Description",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A user-friendly description of the certification identity."
+    },
+    {
+      "key": "CertificateRenewalTimeInterval",
+      "title": "Certificate Renewal Time Interval",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The number of days in advance of certificate expiration that the notification center notifies the user."
+    },
+    {
+      "key": "CertificateAuthority",
+      "title": "Certificate Authority",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The name of the certificate authority (CA), which is determined from the common name (CN) of the Active Directory entry. Available in macOS 10.8 and later. Valid values:\n\n- CN=\u003cyour CA Name\u003e\n- CN=`Certification Authorities`\n- CN=`Public Key Services`\n- CN=`Services`\n- CN=`Configuration`\n- CN=\u003cyour base Domain Name\u003e",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.8"
+        }
+      }
+    },
+    {
+      "key": "CertificateAcquisitionMechanism",
+      "title": "Certificate Acquisition Mechanism",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "This value is most commonly `RPC`; if using web enrollment, use `HTTP`. Available in macOS 10.8 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.8"
+        }
+      }
+    },
+    {
+      "key": "AllowAllAppsAccess",
+      "title": "Allow All Apps Access",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, gives apps access to the private key. Available in macOS 10.10 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.10"
+        }
+      }
+    },
+    {
+      "key": "PromptForCredentials",
+      "title": "Prompt for Credentials",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system prompts the user for credentials when is installs the profile. This key applies only to user certificates with the Manual Download profile delivery method. Omit this key for computer certificates. Available in macOS 10.8 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.8"
+        }
+      }
+    },
+    {
+      "key": "KeyIsExtractable",
+      "title": "Key Is Extractable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system allows exporting the private key. Available in macOS 10.10 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.10"
+        }
+      }
+    },
+    {
+      "key": "Keysize",
+      "title": "Key Size",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "default": 2048,
+      "content": "The RSA key size for the certificate signing request (CSR). Available in macOS 10.11 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.11"
+        }
+      }
+    },
+    {
+      "key": "EnableAutoRenewal",
+      "title": "Enable Auto Renewal",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the certificate obtained with this payload attempts auto-renewal. Auto-renewal can only be used with device Active Directory certificate payloads. Available in macOS 10.13.4 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13.4"
+        }
+      }
+    }
+  ]
+}

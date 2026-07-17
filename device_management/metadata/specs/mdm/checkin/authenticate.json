@@ -1,0 +1,265 @@
+{
+  "category": "mdm/checkin",
+  "name": "authenticate",
+  "title": "Authenticate",
+  "description": "Authenticates a user during MDM payload installation.",
+  "payload": {
+    "requesttype": "Authenticate",
+    "content": "Check-in protocol authenticate request and response.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "10.2"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "DeviceName",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The device's name.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ModelName",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The device's model name.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Model",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The device's model.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "MessageType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "Authenticate"
+      ],
+      "content": "The message type, which requires a value of `Authenticate`."
+    },
+    {
+      "key": "Topic",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The topic that the device subscribes to."
+    },
+    {
+      "key": "UDID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The device's UDID (unique device identifier). The system requires this value if the enrollment type is a device enrollment.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "EnrollmentID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The per-enrollment identifier for the device. The system requires this value if the enrollment type is a user enrollment.\n\nAvailable in iOS 13 and later, macOS 10.15 and later, and visionOS 2 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        },
+        "macOS": {
+          "introduced": "10.15"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {},
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "OSVersion",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The device's OS version.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "visionOS": {
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "watchOS": {
+          "introduced": "10.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        }
+      }
+    },
+    {
+      "key": "BuildVersion",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The device's build version.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "visionOS": {
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "watchOS": {
+          "introduced": "10.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        }
+      }
+    },
+    {
+      "key": "ProductName",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The device's product name (such as `iPhone17,2`).",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "visionOS": {
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "watchOS": {
+          "introduced": "10.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        }
+      }
+    },
+    {
+      "key": "SerialNumber",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The device's serial number.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "macOS": {
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "visionOS": {
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "watchOS": {
+          "introduced": "10.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        }
+      }
+    },
+    {
+      "key": "IMEI",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The device's IMEI (International Mobile Equipment Identity).",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "watchOS": {
+          "introduced": "10.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        }
+      }
+    },
+    {
+      "key": "MEID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The device's MEID (Mobile Equipment Identifier).",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "accessrights": "AllowQueryDeviceInformation"
+        },
+        "watchOS": {
+          "introduced": "10.0",
+          "accessrights": "AllowQueryDeviceInformation"
+        }
+      }
+    }
+  ]
+}

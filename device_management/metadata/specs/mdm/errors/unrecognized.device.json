@@ -1,0 +1,48 @@
+{
+  "category": "mdm/errors",
+  "name": "unrecognized.device",
+  "title": "Error Unrecognized Device",
+  "description": "An error response that indicates a device needs to unenroll.",
+  "payload": {
+    "supportedOS": {
+      "iOS": {
+        "introduced": "17.0"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "17.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "code",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "com.apple.unrecognized.device"
+      ],
+      "content": "Indicates that the device is not recognized by the server. This causes the device to unenroll from MDM."
+    },
+    {
+      "key": "description",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A description of the error. Only use this for logging purposes and don't display it to the user."
+    },
+    {
+      "key": "message",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A description of the error to display to the user."
+    }
+  ]
+}

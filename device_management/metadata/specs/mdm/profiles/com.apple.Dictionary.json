@@ -1,0 +1,35 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.Dictionary",
+  "title": "Parental Controls: Dictionary",
+  "description": "The payload that configures parental control dictionary restrictions.",
+  "payload": {
+    "payloadtype": "com.apple.Dictionary",
+    "content": "Parental controls dictionary restrictions.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "parentalControl",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "content": "If `true`, enables parental controls dictionary restrictions."
+    }
+  ]
+}

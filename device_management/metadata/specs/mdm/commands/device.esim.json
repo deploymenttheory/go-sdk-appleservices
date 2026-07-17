@@ -1,0 +1,36 @@
+{
+  "category": "mdm/commands",
+  "name": "device.esim",
+  "title": "Refresh Cellular Plans Command",
+  "description": "Query a carrier URL for active eSIM cellular-plan profiles on a device.",
+  "payload": {
+    "requesttype": "RefreshCellularPlans",
+    "content": "Instructs the device to query for active cellular plan eSIM \"profiles\" (not a profile in the MDM sense)\nat the designated carrier eSIM server URL. This command is only supported on cellular devices, and only\na subset of those devices support eSIM configuration management. (Need details from CoreTelephony.)",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "13.0",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "eSIMServerURL",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The carrier's eSIM server URL to query. Obtain this URL from each carrier separately."
+    }
+  ]
+}

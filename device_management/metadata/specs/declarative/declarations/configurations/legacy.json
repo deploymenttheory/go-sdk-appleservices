@@ -1,0 +1,36 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "legacy",
+  "title": "Legacy Profile",
+  "description": "The declaration to configure a legacy profile.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.legacy",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ProfileURL",
+      "title": "Profile's URL.",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The URL of the profile to download and install, which needs to start with `https://`, and must be hosted by the MDM server.\n\nIf a user enrollment triggers this configuration, the system silently ignores any MDMv1 payloads in macOS where the User Enrollment Mode setting is `forbidden`. In iOS, the system rejects the entire profile."
+    }
+  ]
+}

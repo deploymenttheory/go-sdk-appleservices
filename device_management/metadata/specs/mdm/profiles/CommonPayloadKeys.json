@@ -1,0 +1,73 @@
+{
+  "category": "mdm/profiles",
+  "name": "CommonPayloadKeys",
+  "title": "Common Payload Keys",
+  "description": "The properties common to all payloads.",
+  "payload": {
+    "payloadtype": "CommonPayloadKeys",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "9.0"
+      },
+      "visionOS": {
+        "introduced": "1.0"
+      },
+      "watchOS": {
+        "introduced": "1.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "PayloadIdentifier",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The reverse-DNS-style identifier for the payload. This identifier is usually the same as the `TopLevel` value, with an additional appended component. This string must be unique within the profile.\n\nDuring a profile replacement, the system updates payloads with the same `PayloadIdentifier` and `PayloadUUID` in the old and new profiles."
+    },
+    {
+      "key": "PayloadUUID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The globally unique identifier for the payload. The actual content is unimportant, but must be globally unique. In macOS, use `uuidgen` to generate UUIDs.\n\nDuring a profile replacement, the system updates payloads with the same `PayloadIdentifier` and `PayloadUUID` in the old and new profiles."
+    },
+    {
+      "key": "PayloadType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The payload type, which each payload domain's reference page specifies."
+    },
+    {
+      "key": "PayloadVersion",
+      "type": "\u003cinteger\u003e",
+      "presence": "required",
+      "rangelist": [
+        1
+      ],
+      "content": "The version of this specific payload."
+    },
+    {
+      "key": "PayloadDescription",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The human-readable description of this payload. This description appears on the Detail screen."
+    },
+    {
+      "key": "PayloadDisplayName",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The human-readable name for the profile payload. The name appears on the Detail screen and doesn't need to be unique."
+    },
+    {
+      "key": "PayloadOrganization",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The human-readable string containing the name of the organization that provides the profile. This value doesn't need to match the organization payload value in the enclosing dictionary."
+    }
+  ]
+}

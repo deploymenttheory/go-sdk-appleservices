@@ -1,0 +1,180 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "safari.settings",
+  "title": "Safari:Settings",
+  "description": "The declaration to configure Safari settings.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.safari.settings",
+    "apply": "combined",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "26.0"
+      },
+      "macOS": {
+        "introduced": "26.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "26.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AcceptCookies",
+      "title": "Accept Cookies",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "Never",
+        "CurrentWebsite",
+        "VisitedWebsites",
+        "Always"
+      ],
+      "default": "Always",
+      "combinetype": "enum-first",
+      "content": "The policy Safari uses for managing cookies:\n\n- `Never`: Safari always blocks cookies.\n- `CurrentWebsite`: Safari allows cookies only from the current website.\n- `VisitedWebsites`: Safari allows cookies only from visited websites.\n- `Always`: Safari always allows cookies.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowDisablingFraudWarning",
+      "title": "Allow Disabling Fraud Warning",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, the system forces fraud warnings on in Safari.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowHistoryClearing",
+      "title": "Allow History Clearing",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, the system disables clearing history in Safari.",
+      "supportedOS": {
+        "iOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "AllowJavaScript",
+      "title": "Allow JavaScript",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, the system disables JavaScript in Safari.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowPrivateBrowsing",
+      "title": "Allow Private Browsing",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, the system disables private browsing in Safari.",
+      "supportedOS": {
+        "iOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "AllowPopups",
+      "title": "Allow Popups",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, the system disables popups in Safari.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowSummary",
+      "title": "Allow Summary",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, the system disables summarization of content in Safari.",
+      "supportedOS": {
+        "iOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "NewTabStartPage",
+      "title": "New Tab Start Page",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "Sets the start page for new tabs in Safari.",
+      "subkeys": [
+        {
+          "key": "PageType",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "rangelist": [
+            "Start",
+            "Home",
+            "Extension"
+          ],
+          "content": "Sets the start page type in Safari:\n\n- `Start` - Safari uses the default start page. Safari disables the Homepage.\n- `Home` - Safari uses the page specified by `HomepageURL`, and Safari also sets that as the Homepage.\n- `Extension` - Safari uses the page specified by the Safari extension whose identifier is `ExtensionIdentifier`. Safari disables the Homepage."
+        },
+        {
+          "key": "HomepageURL",
+          "title": "The homepage URL.",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The URL of the homepage which needs to start with `https://` or `http://`. Required when setting `PageType` to `Home`."
+        },
+        {
+          "key": "ExtensionIdentifier",
+          "title": "The extension identifier.",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The composed identifier of the extension that provides the start page. The required format is \"Identifier (TeamIdentifier)\", for example \"com.example.app (ABCD1234)\". Required when setting `PageType` to `Extension`."
+        }
+      ]
+    }
+  ]
+}

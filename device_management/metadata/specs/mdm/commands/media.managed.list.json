@@ -1,0 +1,87 @@
+{
+  "category": "mdm/commands",
+  "name": "media.managed.list",
+  "title": "Managed Media List Command",
+  "description": "Get a list of the managed books on a device.",
+  "payload": {
+    "requesttype": "ManagedMediaList",
+    "content": "This command allows the server to query for installed 3rd party applications.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "8.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "responsekeys": [
+    {
+      "key": "Books",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries that describes managed books.",
+      "subkeys": [
+        {
+          "key": "BooksItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that describes a managed book.",
+          "subkeys": [
+            {
+              "key": "iTunesStoreID",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "content": "The book's iTunes Store identifier."
+            },
+            {
+              "key": "State",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The installation state of this book, which is one of the following values:\n\n- `Queued`\n- `PromptingForLogin`\n- `Updating`\n- `Installing`\n- `Managed`\n- `ManagedButUninstalled`\n- `Installed`\n- `Uninstalled`\n- `Failed`\n- `Unknown`\n\nThe `Failed` and `Unknown` states are transient and the device only reports them once. Books from the Book Store report their state as `Installed` instead of `Managed`."
+            },
+            {
+              "key": "PersistentID",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The book's persistent identifier in reverse-DNS form; for example, `com.acme.manuals.training`."
+            },
+            {
+              "key": "Kind",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The kind of the media, which is one of the following values:\n\n- `pdf`: A PDF file\n- `epub`: An EPUB file in `gzip` format\n- `ibooks`: An iBooks Author file in `gzip` format\n- The file extension in the URL\n\nThis value is available in iOS 8 and later."
+            },
+            {
+              "key": "Version",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The book's version number."
+            },
+            {
+              "key": "Author",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The name of the book's author."
+            },
+            {
+              "key": "Title",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The book's title."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

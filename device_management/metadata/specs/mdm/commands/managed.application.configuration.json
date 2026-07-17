@@ -1,0 +1,82 @@
+{
+  "category": "mdm/commands",
+  "name": "managed.application.configuration",
+  "title": "Managed Application Configuration Command",
+  "description": "Get app configurations from managed apps on a device.",
+  "payload": {
+    "requesttype": "ManagedApplicationConfiguration",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "7.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "10.15",
+        "accessrights": "AllowAppInstallation"
+      },
+      "tvOS": {
+        "introduced": "10.2",
+        "accessrights": "AllowAppInstallation"
+      },
+      "visionOS": {
+        "introduced": "1.1",
+        "accessrights": "AllowAppInstallation"
+      },
+      "watchOS": {
+        "introduced": "10.0",
+        "accessrights": "AllowAppInstallation"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Identifiers",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "The bundle identifiers of the managed apps.\n\n\u003e Important:\n\u003e For a watchOS app, the identifier needs to be the watch's bundle identifier, which differs from the main bundle identifier for the iPhone to which the watch is paired. Obtain the watch's bundle identifier for an app with a watch bundle, in the `watchBundleId` key that's part of the Content Metadata query. For more information on this query, see `Getting App and Book Information`.",
+      "subkeys": [
+        {
+          "key": "IdentifiersItem",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "ApplicationConfigurations",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of app configuration items.",
+      "subkeys": [
+        {
+          "key": "ApplicationConfigurationsItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that contains a managed app's configurations item.",
+          "subkeys": [
+            {
+              "key": "Identifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The app's bundle identifier.\n\n\u003e Note:\n\u003e For a watchOS app, the identifier is the watch's bundle identifier, which differs from the main bundle identifier for the iPhone to which the watch is paired."
+            },
+            {
+              "key": "Configuration",
+              "type": "\u003cdictionary\u003e",
+              "presence": "optional",
+              "content": "The app's configurations.",
+              "subkeys": [
+                {
+                  "key": "ANY",
+                  "type": "\u003cany\u003e",
+                  "presence": "optional",
+                  "content": "The app's configuration items."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

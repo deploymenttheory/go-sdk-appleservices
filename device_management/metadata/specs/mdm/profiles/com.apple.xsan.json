@@ -1,0 +1,78 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.xsan",
+  "title": "Xsan",
+  "description": "The payload that configures an Xsan client system.",
+  "payload": {
+    "payloadtype": "com.apple.xsan",
+    "content": "Sets up Xsan clients and controls certain Xsan volume mount behaviors. The payload should include either sanConfigURLs or fsnameservers, but not both.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.10"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "sanName",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The name of the SAN. This key is required for all Xsan SANs. The name must exactly match the name of the SAN defined in the metadata server."
+    },
+    {
+      "key": "sanConfigURLs",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of LDAP URLs where Xsan systems can obtain SAN configuration updates. There should be one entry for each Xsan MDC.\n\nThis key is required for all Xsan SANs.\n\nExample URL: `ldaps://mdc1.example.com:389`.",
+      "subkeys": [
+        {
+          "key": "sanConfigURLsItem",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "A URL."
+        }
+      ]
+    },
+    {
+      "key": "fsnameservers",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of storage area network (SAN) File System Name Server coordinators. The list should contain the same addresses in the same order as the metadata controller (MDC) `/Library/Preferences/Xsan/fsnameservers` file.\n\nThis key is required for StorNext SANs.",
+      "subkeys": [
+        {
+          "key": "fsnameserversItem",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "A name server."
+        }
+      ]
+    },
+    {
+      "key": "sanAuthMethod",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "auth_secret"
+      ],
+      "content": "The authentication method for the SAN. This key is required for all Xsan SANs. It's optional for StorNext SANs but should be set if the StorNext SAN uses an `auth_secret` file.\n\n\n\nOnly one value is accepted: `auth_secret`"
+    },
+    {
+      "key": "sharedSecret",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The shared secret used for Xsan network authentication. This key is required when the `sanAuthMethod` key is present. The value should equal the content of the MDC's `/Library/Preferences/Xsan/.auth_secret` file."
+    }
+  ]
+}

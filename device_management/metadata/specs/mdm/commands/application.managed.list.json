@@ -1,0 +1,177 @@
+{
+  "category": "mdm/commands",
+  "name": "application.managed.list",
+  "title": "Managed Application List Command",
+  "description": "Get the status of all managed apps on a device.",
+  "payload": {
+    "requesttype": "ManagedApplicationList",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "5.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "11.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "tvOS": {
+        "introduced": "10.2",
+        "accessrights": "AllowAppInstallation"
+      },
+      "visionOS": {
+        "introduced": "1.1",
+        "accessrights": "AllowAppInstallation"
+      },
+      "watchOS": {
+        "introduced": "10.0",
+        "accessrights": "AllowAppInstallation"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Identifiers",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "The bundle identifiers of the managed apps to include in the response.\n\n\u003e Important:\n\u003e For a watchOS app, the identifier needs to be the watch's bundle identifier, which differs from the main bundle identifier for the iPhone to which the watch is paired. Obtain the watch's bundle identifier for an app with a watch bundle, in the `watchBundleId` key that's part of the Content Metadata query. For more information on this query, see `Getting App and Book Information`.",
+      "subkeys": [
+        {
+          "key": "IdentifiersItem",
+          "type": "\u003cstring\u003e"
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        }
+      }
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "ManagedApplicationList",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "A dictionary that contains status information about each managed app. The response doesn't include apps that Declarative Device Management manages.",
+      "subkeytype": "ManagedApplicationListItem",
+      "subkeys": [
+        {
+          "key": "ANY app identifier",
+          "type": "\u003cdictionary\u003e",
+          "presence": "required",
+          "content": "The bundle identifier of the managed app.",
+          "subkeytype": "ManagedApplicationItem",
+          "subkeys": [
+            {
+              "key": "Status",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "Queued",
+                "NeedsRedemption",
+                "Redeeming",
+                "Prompting",
+                "PromptingForLogin",
+                "ValidatingPurchase",
+                "PromptingForUpdate",
+                "PromptingForUpdateLogin",
+                "PromptingForManagement",
+                "ValidatingUpdate",
+                "Updating",
+                "Installing",
+                "Managed",
+                "ManagedButUninstalled",
+                "Unknown",
+                "UserInstalledApp",
+                "UserRejected",
+                "UpdateRejected",
+                "ManagementRejected",
+                "Failed"
+              ],
+              "content": "The status of the managed app, which is one of the following values:\n\n- `Queued`: The app is scheduled for installation.\n- `NeedsRedemption`: The app needs a redemption code to complete installation.\n- `Redeeming`: The device is redeeming the redemption code for the app.\n- `Prompting`: The app installation is prompting the user.\n- `PromptingForLogin' - The app installation is prompting the user for App Store credentials.\n- `ValidatingPurchase`: Validation of the app purchase is occurring.\n- `PromptingForUpdate`: An app update is prompting the user.\n- `PromptingForUpdateLogin`: An app update is prompting the user for App Store credentials.\n- `PromptingForManagement`: Changing the app to a managed app is prompting the user.\n- `ValidatingUpdate`: Validation of an app update is occurring.\n- `Updating`: The app is updating.\n- `Installing`: The app is installing.\n- `Managed`: The installed app is a managed app.\n- `ManagedButUninstalled`: The app is a managed app and the user removed it. Reinstalling the app reinstates it as a managed app.\n- `Unknown`: The app state is unknown.\n\nThe following statuses are transient and report only once:\n\n- `UserInstalledApp`: The user installed the app before managed app installation could occur.\n- `UserRejected`: The user rejected the offer to install the app.\n- `UpdateRejected`: The user rejected the offer to update the app.\n- `ManagementRejected`:The user rejected management of an installed app.\n- `Failed`: The app installation failed."
+            },
+            {
+              "key": "ManagementFlags",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "content": "The bitwise OR of the following management flags:\n* '1': Remove app upon removal of MDM profile.\n* '4': Prevent backup of app data."
+            },
+            {
+              "key": "UnusedRedemptionCode",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "If the user already purchased a paid app, this code is available for use by another user. This code reports only once. This value is available in iOS 5 and later.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "n/a"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "HasConfiguration",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If 'true', the app has an update available. This key is present only for App Store apps. In macOS, this key is present only for Volume Purchase Program (VPP) apps. This status updates daily and isn't always up-to-date when installing an app.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "7.0"
+                },
+                "macOS": {
+                  "introduced": "11.0"
+                }
+              }
+            },
+            {
+              "key": "HasFeedback",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If 'true', the app has feedback for the server. This value is available in iOS 7 and later, and tvOS 10.2 and later. On macOS 11.3 and later, this value is available if the request was sent on the user channel.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "7.0"
+                },
+                "macOS": {
+                  "introduced": "11.3"
+                }
+              }
+            },
+            {
+              "key": "IsValidated",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If 'true', the app is valid and can run on the device. If the app is enterprise-distributed and unvalidated, it won't be able to run until validation has occurred. This value is available in iOS 9.2 and later, and tvOS 10.2 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "9.2"
+                },
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "ExternalVersionIdentifier",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "content": "The app's external version identifier. You can also retrieve this value from the App Store. For more information, see `Apps and Books for Organizations`.\n\nIf the current external version identifier of an app on the App Store doesn't match the external version identifier reported by the device, there may be an app update available for the device.\n\nAvailable in iOS 10.3 and later, macOS 11.3 and later, and tvOS 10.2 and later.\n\n\u003e Note:\n\u003e A newer version of an app might not be available for installation on the device for a variety of reasons. A common reason is that the device's operating system version or hardware is incompatible with the available version of the app.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "10.3"
+                },
+                "macOS": {
+                  "introduced": "11.3"
+                },
+                "tvOS": {
+                  "introduced": "10.2"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

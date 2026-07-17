@@ -1,0 +1,88 @@
+{
+  "category": "mdm/commands",
+  "name": "managed.application.feedback",
+  "title": "Managed Application Feedback Command",
+  "description": "Get app feedback from a managed app on the device.",
+  "payload": {
+    "requesttype": "ManagedApplicationFeedback",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "7.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "11.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "tvOS": {
+        "introduced": "10.2",
+        "accessrights": "AllowAppInstallation"
+      },
+      "visionOS": {
+        "introduced": "1.1",
+        "accessrights": "AllowAppInstallation"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Identifiers",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "The bundle identifiers of the managed apps.",
+      "subkeys": [
+        {
+          "key": "IdentifiersItem",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    },
+    {
+      "key": "DeleteFeedback",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, delete the app's feedback dictionary after the server reads it. Apps that are managed by Declarative Device Management are ignored."
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "ManagedApplicationFeedback",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of managed app feedback items.",
+      "subkeys": [
+        {
+          "key": "ManagedApplicationFeedbackItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that contains a managed app's feedback item.",
+          "subkeys": [
+            {
+              "key": "Identifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The app's bundle identifier."
+            },
+            {
+              "key": "Feedback",
+              "type": "\u003cdictionary\u003e",
+              "presence": "optional",
+              "content": "The app's feedback.",
+              "subkeys": [
+                {
+                  "key": "ANY",
+                  "type": "\u003cany\u003e",
+                  "presence": "optional",
+                  "content": "The app's feedback items."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

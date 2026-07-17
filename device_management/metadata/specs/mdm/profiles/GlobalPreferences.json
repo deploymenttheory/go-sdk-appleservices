@@ -1,0 +1,42 @@
+{
+  "category": "mdm/profiles",
+  "name": "GlobalPreferences",
+  "title": "Global Preferences",
+  "description": "The payload to configure global preferences.",
+  "payload": {
+    "payloadtype": ".GlobalPreferences",
+    "content": "Global preferences on macOS",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "MultipleSessionEnabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, disables fast user switching."
+    },
+    {
+      "key": "com.apple.autologout.AutoLogOutDelay",
+      "type": "\u003creal\u003e",
+      "presence": "optional",
+      "content": "The `autologout` delay, in seconds. A value of `0` means `autologout` is off. In some cases, this delay may be restricted to values between 5 minutes and 24 hours."
+    }
+  ]
+}

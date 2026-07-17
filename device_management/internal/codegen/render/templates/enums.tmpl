@@ -1,0 +1,26 @@
+{{define "enumblock"}}// {{.TypeName}} — {{.Comment}}
+type {{.TypeName}} {{.BaseType}}
+
+// {{.TypeName}} allowed values.
+const (
+{{- range .Members}}
+	{{.Name}} {{$.TypeName}} = {{.Literal}}
+{{- end}}
+)
+
+{{if eq .BaseType "string"}}// String returns the {{.TypeName}} value as a plain string.
+func (e {{.TypeName}}) String() string { return string(e) }
+{{else}}// String returns the {{.TypeName}} constant's name, or its numeric form
+// when the value is not a known constant.
+func (e {{.TypeName}}) String() string {
+	switch e {
+{{- range .Members}}{{if not .Dup}}
+	case {{.Name}}:
+		return "{{.Name}}"
+{{- end}}{{end}}
+	default:
+		return fmt.Sprintf("{{.TypeName}}(%d)", int64(e))
+	}
+}
+{{end}}
+{{end}}

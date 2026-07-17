@@ -1,0 +1,36 @@
+{
+  "category": "mdm/commands",
+  "name": "user.unlock",
+  "title": "Unlock User Account Command",
+  "description": "Unlock a user account that the system locked because of too many failed password attempts.",
+  "payload": {
+    "requesttype": "UnlockUserAccount",
+    "content": "This command allows the server to unlock a local user account that has been locked due to too many failed password attempts. Requires \"Device lock and passcode removal right\".",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.13",
+        "accessrights": "DeviceLockAndRemovePasscode"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "UserName",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The user name of the local account, which can be any local account on the system, not just a managed user account."
+    }
+  ]
+}

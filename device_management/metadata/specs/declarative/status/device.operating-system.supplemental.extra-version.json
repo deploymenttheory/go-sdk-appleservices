@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "device.operating-system.supplemental.extra-version",
+  "title": "Status Device Operating System Supplemental Extra Version",
+  "description": "A status report of the device's operating system's Background Security Improvement identifier.",
+  "payload": {
+    "statusitemtype": "device.operating-system.supplemental.extra-version",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "16.1"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.1"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "device.operating-system.supplemental.extra-version",
+      "title": "Status item value.",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The operating system's Background Security Improvement version in use on the device, for example, `a`."
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.ldap.account",
+  "title": "LDAP",
+  "description": "The payload that configures a Lightweight Directory Access Protocol (LDAP) account.",
+  "payload": {
+    "payloadtype": "com.apple.ldap.account",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "LDAPAccountDescription",
+      "title": "Account Description",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The description of the account."
+    },
+    {
+      "key": "LDAPAccountHostName",
+      "title": "Account Hostname",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The server's address."
+    },
+    {
+      "key": "LDAPAccountUserName",
+      "title": "Account Username",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user's user name."
+    },
+    {
+      "key": "LDAPAccountPassword",
+      "title": "Account Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user's password. Only use this in encrypted profiles."
+    },
+    {
+      "key": "LDAPAccountUseSSL",
+      "title": "Use SSL",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the system enables SSL."
+    },
+    {
+      "key": "LDAPSearchSettings",
+      "title": "Search Settings",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of search settings dictionaries.",
+      "subkeys": [
+        {
+          "key": "LDAPSearchSettingsItem",
+          "title": "An LDAP Search Setting",
+          "type": "\u003cdictionary\u003e",
+          "subkeys": [
+            {
+              "key": "LDAPSearchSettingDescription",
+              "title": "Description",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The description of this search setting."
+            },
+            {
+              "key": "LDAPSearchSettingSearchBase",
+              "title": "Search Setting Search Base",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The path to the node where a search should start."
+            },
+            {
+              "key": "LDAPSearchSettingScope",
+              "title": "Search Setting Scope",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "LDAPSearchSettingScopeBase",
+                "LDAPSearchSettingScopeOneLevel",
+                "LDAPSearchSettingScopeSubtree"
+              ],
+              "default": "LDAPSearchSettingScopeSubtree",
+              "content": "The type of recursion to use in the search:\n\n- `LDAPSearchSettingScopeBase`: The search uses only the immediate node that the search base points to.\n- `LDAPSearchSettingScopeOneLevel`: The search uses the node plus its immediate children.\n- `LDAPSearchSettingScopeSubtree`: The search uses the node plus all children, regardless of depth."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "VPNUUID",
+      "title": "VPNUUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

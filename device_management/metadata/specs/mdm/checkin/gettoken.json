@@ -1,0 +1,190 @@
+{
+  "category": "mdm/checkin",
+  "name": "gettoken",
+  "title": "Get Token",
+  "description": "Gets a token from the server.",
+  "payload": {
+    "requesttype": "GetToken",
+    "content": "Check-in protocol get token data request and response.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "17.0"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "MessageType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "GetToken"
+      ],
+      "content": "The message type, which requires a value of `GetToken`."
+    },
+    {
+      "key": "TokenServiceType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "com.apple.maid",
+        "com.apple.watch.pairing"
+      ],
+      "content": "A string that specifies the service for the requested token."
+    },
+    {
+      "key": "TokenParameters",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "Parameters that the system uses to generate the token.",
+      "subkeys": [
+        {
+          "key": "SecurityToken",
+          "title": "Security Token",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "A security token to generate the server token. Required by the `com.apple.watch.pairing` service type.",
+          "supportedOS": {
+            "iOS": {},
+            "macOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "PhoneUDID",
+          "title": "Phone Identifier",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The identifier of the phone paired to the watch. Required by the `com.apple.watch.pairing` service type.",
+          "supportedOS": {
+            "iOS": {},
+            "macOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "WatchUDID",
+          "title": "Watch Identifier",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The identifier of the watch paired to the phone. Required by the `com.apple.watch.pairing` service type.",
+          "supportedOS": {
+            "iOS": {},
+            "macOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "UDID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The device's UDID (unique device identifier). The system requires this value if the enrollment type is a device enrollment.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "EnrollmentID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The per-enrollment identifier for the device. The system requires this value if the enrollment type is a user enrollment.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "EnrollmentUserID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The per-enrollment identifier for the user. The system requires this value if the enrollment type is a user enrollment on the user channel.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {},
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "UserShortName",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "For macOS, this value is the short name of the user.\n\nFor Shared iPad, this value is the Managed Apple Account identifier of the user. When present, it indicates that the token is for the user channel.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "UserID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "For macOS, this value is the ID of the user.\n\nFor Shared iPad, this value is `FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF` to indicate that authentication doesn't occur.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "UserLongName",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The full name of the user.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {},
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "TokenData",
+      "type": "\u003cdata\u003e",
+      "presence": "required",
+      "content": "The token data. If the token is a string value, it needs to be a UTF-8-encoded string."
+    }
+  ]
+}

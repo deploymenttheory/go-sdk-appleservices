@@ -1,0 +1,197 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.universalaccess",
+  "title": "Accessibility",
+  "description": "The payload that configures the accessibility features of the device.",
+  "payload": {
+    "payloadtype": "com.apple.universalaccess",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.9"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "closeViewFarPoint",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The minimum zoom level in the Zoom options."
+    },
+    {
+      "key": "closeViewHotkeysEnabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables \"Use keyboard shortcuts\" in the Zoom options."
+    },
+    {
+      "key": "closeViewNearPoint",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The maximum zoom level in the Zoom options."
+    },
+    {
+      "key": "closeViewScrollWheelToggle",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables \"Use scroll gesture\" in the Zoom options."
+    },
+    {
+      "key": "closeViewShowPreview",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables \"Show preview rectangle\" in the Zoom options. Only available in macOS 10.15 and earlier.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.9",
+          "deprecated": "10.15"
+        }
+      }
+    },
+    {
+      "key": "closeViewSmoothImages",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables \"Smooth images\" in the Zoom options."
+    },
+    {
+      "key": "contrast",
+      "type": "\u003creal\u003e",
+      "presence": "optional",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "content": "The contrast value in the Display options."
+    },
+    {
+      "key": "flashScreen",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables \"Flash the screen\" in the Audio options."
+    },
+    {
+      "key": "grayscale",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables \"Use grayscale\" in the Display options.\n\nThis option is deprecated in macOS 11.",
+      "supportedOS": {
+        "macOS": {
+          "deprecated": "11.0"
+        }
+      }
+    },
+    {
+      "key": "mouseDriver",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables Mouse Keys in the Mouse \u0026 Trackpad options."
+    },
+    {
+      "key": "mouseDriverCursorSize",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The size of the cursor."
+    },
+    {
+      "key": "mouseDriverIgnoreTrackpad",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, ignores the built-in trackpad."
+    },
+    {
+      "key": "mouseDriverInitialDelay",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The initial delay before moving the mouse with Mouse Keys."
+    },
+    {
+      "key": "mouseDriverMaxSpeed",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The maximum speed for the cursor when using Mouse Keys."
+    },
+    {
+      "key": "slowKey",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables \"Slow Keys\" in the Keyboard options."
+    },
+    {
+      "key": "slowKeyBeepOn",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables \"click key sounds\" for Slow Keys."
+    },
+    {
+      "key": "slowKeyDelay",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The acceptance delay, in milliseconds, for Slow Keys."
+    },
+    {
+      "key": "stereoAsMono",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, plays stereo audio as mono."
+    },
+    {
+      "key": "stickyKey",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables Sticky Keys in the Keyboard options."
+    },
+    {
+      "key": "stickyKeyBeepOnModifier",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables the beep when a modifier key is set for Sticky Keys."
+    },
+    {
+      "key": "stickyKeyShowWindow",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables \"Display pressed keys on screen\" for Sticky Keys."
+    },
+    {
+      "key": "voiceOverOnOffKey",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables Voice Over."
+    },
+    {
+      "key": "whiteOnBlack",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, enables Invert Colors in Display Accommodations."
+    }
+  ]
+}

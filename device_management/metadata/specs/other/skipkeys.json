@@ -1,0 +1,998 @@
+{
+  "category": "other",
+  "name": "skipkeys",
+  "title": "SkipKeys",
+  "description": "The list of skip keys for setup panes.",
+  "payload": {
+    "payloadtype": "SkipKeys",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "7.0"
+      },
+      "macOS": {
+        "introduced": "10.9"
+      },
+      "tvOS": {
+        "introduced": "10.2"
+      },
+      "visionOS": {
+        "introduced": "26.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Accessibility",
+      "title": "Skip Accessibility pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Accessibility pane, when creating additional users.\n\n\u003e Note:\n\u003e This key doesn't skip the Accessibility pane in Setup Assistant during initial device set up. It does skip the Accessibility pane when Setup Assistant runs due to a new user log in.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "11.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ActionButton",
+      "title": "Skip Action Button setup pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Action Button configuration pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "17.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Android",
+      "title": "Prevents migration from Android device",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "If the Restore pane isn't skipped, this is the key to remove the Move from Android option in the Restore pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Appearance",
+      "title": "Skip Choose your Look setup pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Choose Your Look screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        },
+        "macOS": {
+          "introduced": "10.14"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AppleID",
+      "title": "Disables signing in to an Apple Account and iCloud",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip Apple Account setup."
+    },
+    {
+      "key": "AppStore",
+      "title": "Skips AppStore information pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the App Store pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.3"
+        },
+        "macOS": {
+          "introduced": "11.1"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Biometric",
+      "title": "Skips Touch ID/Face ID setup",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip biometric setup.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "8.1"
+        },
+        "macOS": {
+          "introduced": "10.12.4"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "CameraButton",
+      "title": "Skips Camera Control pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Camera Button pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "18.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "DeviceToDeviceMigration",
+      "title": "Skip Device To Device Migration pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip Device to Device Migration pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.4"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Diagnostics",
+      "title": "Disables automatically sending diagnostic information",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the App Analytics pane."
+    },
+    {
+      "key": "DisplayTone",
+      "title": "Disables True Tone",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip DisplayTone setup.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "9.3.2",
+          "deprecated": "15.0"
+        },
+        "macOS": {
+          "introduced": "10.13.6",
+          "deprecated": "12.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "EnableLockdownMode",
+      "title": "Skips Enable Lockdown Mode",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Lockdown Mode pane if an Apple Account is set up.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "17.1"
+        },
+        "macOS": {
+          "introduced": "14.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "FileVault",
+      "title": "Skip configuration of FileVault",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to disable the FileVault Setup Assistant screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "10.10"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "HomeButtonSensitivity",
+      "title": "Skips Home Button sensitivity setup",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus, and iPhone SE.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.0",
+          "deprecated": "15.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "iCloudDiagnostics",
+      "title": "Skip iCloud Analytics pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the iCloud Analytics screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "10.12.4"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "iCloudStorage",
+      "title": "Skip iCloud Documents and Desktop pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the iCloud Documents and Desktop screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "10.13.4"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "iMessageAndFaceTime",
+      "title": "Skip iMessage and FaceTime set up pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the iMessage and FaceTime screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Intelligence",
+      "title": "Skip Intelligence setup pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Intelligence pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "18.0"
+        },
+        "macOS": {
+          "introduced": "15.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Keyboard",
+      "title": "Skip Keyboard pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Keyboard pane. This pane isn't always skippable because it appears before the device retrieves the Cloud Configuration from the server.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Location",
+      "title": "Disables Location Services",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to disable Location Services.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.11"
+        }
+      }
+    },
+    {
+      "key": "MessagingActivationUsingPhoneNumber",
+      "title": "Disables iMessage activation using a phone number in select regions",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the iMessage pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Multitasking",
+      "title": "Skips Multitasking pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Multitasking pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "26.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "OnBoarding",
+      "title": "Skip on-boarding informational panes",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the on-boarding informational screens for user education (Go Home, Cover Sheet, Multitasking \u0026 Control Center, for example).",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "11.0",
+          "deprecated": "14.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "OSShowcase",
+      "title": "Skips OSShowcase pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the OS Showcase pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "26.0"
+        },
+        "macOS": {
+          "introduced": "26.1"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Passcode",
+      "title": "Skips prompting the user to set a passcode",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to hide and disable the passcode pane.",
+      "supportedOS": {
+        "tvOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Payment",
+      "title": "Skips Apple Pay setup",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip Apple Pay setup.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "8.1"
+        },
+        "macOS": {
+          "introduced": "10.12.4"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Privacy",
+      "title": "Skip Privacy pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the privacy pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "11.3"
+        },
+        "macOS": {
+          "introduced": "10.13.4"
+        },
+        "tvOS": {
+          "introduced": "11.3"
+        }
+      }
+    },
+    {
+      "key": "Restore",
+      "title": "Disables restoring from backup",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to disable restoring from backup.",
+      "supportedOS": {
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "RestoreCompleted",
+      "title": "Skips Restore Completed pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Restore Completed pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ScreenSaver",
+      "title": "Skips screen saver setup",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the tvOS screen about using aerial screensavers on an Apple TV.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Safety",
+      "title": "Skips Safety pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Safety pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "16.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "SafetyAndHandling",
+      "title": "Skips Safety and Handling pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Safety and Handling pane. This pane isn't always skippable because it appears before the device retrieves the Cloud Configuration from the server.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "18.4"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ScreenTime",
+      "title": "Skip Screen Time pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Screen Time pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        },
+        "macOS": {
+          "introduced": "10.15"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "SIMSetup",
+      "title": "Skip SIM-related setup",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the add cellular plan pane. Skipping this pane prevents automatic eSIM setup during Setup Assistant.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Siri",
+      "title": "Disables Siri",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to disable Siri.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.12"
+        }
+      }
+    },
+    {
+      "key": "SoftwareUpdate",
+      "title": "Skip automatic software update configuration pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the mandatory software update screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "12.0"
+        },
+        "macOS": {
+          "introduced": "15.4"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "SpokenLanguage",
+      "title": "Skip Dictation pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Dictation pane. This pane isn't always skippable because it appears before the device retrieves the Cloud Configuration from the server.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "TapToSetup",
+      "title": "Skips simplified tap setup",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Tap To Set Up option in Apple TV related to using an iOS device to set up your Apple TV.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {},
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "TermsOfAddress",
+      "title": "Skips Terms of Address",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Terms of Address pane. This key isn't always skippable because this pane appears before the device retrieves the Cloud Configuration from the server.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "16.0"
+        },
+        "macOS": {
+          "introduced": "13.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Tips",
+      "title": "Skips Tips",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Tips pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "TOS",
+      "title": "Skips Terms and Conditions",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip Terms and Conditions."
+    },
+    {
+      "key": "TVHomeScreenSync",
+      "title": "Skip TV Home Screen",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip TV Home Screen layout sync screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "11.0"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "TVProviderSignIn",
+      "title": "Skip TV provider sign in",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the TV provider sign in screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "11.0"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "TVRoom",
+      "title": "Skip Where is this Apple TV pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the \"Where is this Apple TV?\" screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "11.4"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "UnlockWithWatch",
+      "title": "Skips Unlock With Watch pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the \"Unlock with Apple Watch\" screen.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "15.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "UpdateCompleted",
+      "title": "Skips Software Update Complete pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Software Update Complete pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.0"
+        },
+        "macOS": {
+          "introduced": "26.1"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Wallpaper",
+      "title": "Skips Wallpaper selection",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip Wallpaper setup.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "14.1",
+          "removed": "26.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "WatchMigration",
+      "title": "Skip watch migration",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the screen for watch migration.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "11.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "WebContentFiltering",
+      "title": "Skip web content filtering pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Web Content Filtering pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "18.2"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Welcome",
+      "title": "Skip Get Started pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Get Started pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        },
+        "macOS": {
+          "introduced": "15.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Zoom",
+      "title": "Skips setting zoom configuration",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip zoom setup.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "8.3",
+          "deprecated": "17.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

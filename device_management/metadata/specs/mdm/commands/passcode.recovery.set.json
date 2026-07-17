@@ -1,0 +1,42 @@
+{
+  "category": "mdm/commands",
+  "name": "passcode.recovery.set",
+  "title": "Set Recovery Lock Command",
+  "description": "Set or clear the Recovery Lock password.",
+  "payload": {
+    "requesttype": "SetRecoveryLock",
+    "content": "Sets or clears the recovery lock password (Apple Silicon devices only). Requires the \"Device lock and passcode removal right\".",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "11.5",
+        "accessrights": "DeviceLockAndRemovePasscode"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "CurrentPassword",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "If the device has a Recovery Lock password set, the system requires the current password."
+    },
+    {
+      "key": "NewPassword",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The new password for Recovery Lock. Set as an empty string to clear the Recovery Lock password."
+    }
+  ]
+}

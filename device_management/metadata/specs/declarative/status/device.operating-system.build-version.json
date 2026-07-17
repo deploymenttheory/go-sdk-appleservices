@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "device.operating-system.build-version",
+  "title": "Status Device Operating System Build Version",
+  "description": "A status report of the device's software build identifier.",
+  "payload": {
+    "statusitemtype": "device.operating-system.build-version",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "device.operating-system.build-version",
+      "title": "Status item value.",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The operating system's build version on the device, such as `18F132`."
+    }
+  ]
+}

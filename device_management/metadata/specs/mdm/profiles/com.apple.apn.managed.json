@@ -1,0 +1,92 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.apn.managed",
+  "title": "APN",
+  "description": "The payload that configures access point names.",
+  "payload": {
+    "payloadtype": "com.apple.apn.managed",
+    "content": "Not supported in macOS.\nThis technically does install on watchOS but we are removing the supportedOS dictionary. The cellular payload should be used instead.\nOnly applies to the preferred data SIM.\nDeprecated. Use Cellular instead.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0",
+        "deprecated": "7.0"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "DefaultsData",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "The list of access point names (APNs).",
+      "subkeys": [
+        {
+          "key": "apns",
+          "type": "\u003carray\u003e",
+          "presence": "required",
+          "content": "An array of APN dictionaries (\\`APN.DefaultsData.Apns\\`).",
+          "subkeys": [
+            {
+              "key": "apnsItem",
+              "type": "\u003cdictionary\u003e",
+              "content": "A dictionary that describes an APN configuration.",
+              "subkeys": [
+                {
+                  "key": "apn",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "The access point name."
+                },
+                {
+                  "key": "username",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The user name. If missing, the device prompts for it during profile installation."
+                },
+                {
+                  "key": "password",
+                  "type": "\u003cdata\u003e",
+                  "presence": "optional",
+                  "content": "The password for the user. For obfuscation purposes, the system encodes the password. If missing, the device prompts for the password during profile installation."
+                },
+                {
+                  "key": "proxy",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The IP address or URL of the APN proxy."
+                },
+                {
+                  "key": "proxyPort",
+                  "type": "\u003cinteger\u003e",
+                  "presence": "optional",
+                  "content": "The port number of the APN proxy."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "DefaultsDomainName",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "com.apple.managedCarrier"
+      ],
+      "content": "The domain name."
+    }
+  ]
+}

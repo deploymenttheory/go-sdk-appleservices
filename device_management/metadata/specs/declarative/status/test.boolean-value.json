@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "test.boolean-value",
+  "title": "Status Test Boolean Value",
+  "description": "A test status item for a Boolean value.",
+  "payload": {
+    "statusitemtype": "test.boolean-value",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "16.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "test.boolean-value",
+      "title": "Status item value.",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "content": "The test status Boolean value."
+    }
+  ]
+}

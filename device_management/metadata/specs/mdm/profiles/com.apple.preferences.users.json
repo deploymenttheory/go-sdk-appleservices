@@ -1,0 +1,35 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.preferences.users",
+  "title": "User Preferences",
+  "description": "The payload that configures iCloud password preferences.",
+  "payload": {
+    "payloadtype": "com.apple.preference.users",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.12"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "DisableUsingiCloudPassword",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, disables the iCloud password for local accounts."
+    }
+  ]
+}

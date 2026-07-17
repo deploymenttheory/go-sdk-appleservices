@@ -1,0 +1,95 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "siri.settings",
+  "title": "Siri Settings",
+  "description": "The declaration to configure Siri settings.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.siri.settings",
+    "apply": "combined",
+    "content": "Configures Siri settings.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "26.4"
+      },
+      "macOS": {
+        "introduced": "26.4"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "26.4"
+      },
+      "watchOS": {
+        "introduced": "26.4"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Enabled",
+      "title": "Enabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables Siri.",
+      "supportedOS": {
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowUserGeneratedContent",
+      "title": "Allow User Generated Content",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables Siri user-generated content.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AllowWhileLocked",
+      "title": "Allow While Locked",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables Siri while locked.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ForceProfanityFilter",
+      "title": "Force Profanity Filter",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "combinetype": "boolean-or",
+      "content": "If `true`, forces Siri profanity filter.",
+      "supportedOS": {
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

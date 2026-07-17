@@ -1,0 +1,137 @@
+{
+  "category": "mdm/commands",
+  "name": "lom.devicerequest",
+  "title": "LOM Device Request Command",
+  "description": "Send requests to a device using lights-out management (LOM).",
+  "payload": {
+    "requesttype": "LOMDeviceRequest",
+    "content": "Used to send LOM requests (\"PowerON\", \"PowerOFF\", \"Reset\") to LOM Controller which then forwards the request to LOM Devices.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "11.0",
+        "accessrights": "DeviceLockAndRemovePasscode"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "RequestList",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of requests to perform.",
+      "subkeys": [
+        {
+          "key": "RequestListItem",
+          "type": "\u003cdictionary\u003e",
+          "presence": "required",
+          "content": "A dictionary that contains a requested action to perform on a device using lights-out management (LOM).",
+          "subkeys": [
+            {
+              "key": "DeviceRequestType",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "PowerON",
+                "PowerOFF",
+                "Reset"
+              ],
+              "content": "The requested action to perform on the device."
+            },
+            {
+              "key": "DeviceRequestUUID",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The unique identifier of the request."
+            },
+            {
+              "key": "DeviceDNSName",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The DNS name of the device. This should match the `dNSName` in `SubjectAltName` or an equivalent in a PKCS12 identity."
+            },
+            {
+              "key": "PrimaryIPv6AddressList",
+              "type": "\u003carray\u003e",
+              "presence": "required",
+              "content": "An array that contains the IPv6 addresses for primary LOM-compatible Ethernet interfaces for the device.",
+              "subkeys": [
+                {
+                  "key": "PrimaryIPv6AddressListItem",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required"
+                }
+              ]
+            },
+            {
+              "key": "SecondaryIPv6AddressList",
+              "type": "\u003carray\u003e",
+              "presence": "required",
+              "content": "An array that contains the IPv6 addresses for secondary LOM-compatible Ethernet interfaces for the device.",
+              "subkeys": [
+                {
+                  "key": "SecondaryIPv6AddressListItem",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required"
+                }
+              ]
+            },
+            {
+              "key": "LOMProtocolVersion",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "content": "The LOM protocol version that the device supports. Provide the same value that `LOMProtocolVersion` receives in the `LOMSetupRequestResponse`."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "ResponseList",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries that describes the status of each request.",
+      "subkeys": [
+        {
+          "key": "ResponseListItem",
+          "type": "\u003cdictionary\u003e",
+          "presence": "required",
+          "content": "A dictionary that describes a response list item.",
+          "subkeys": [
+            {
+              "key": "DeviceRequestSuccess",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, the request was successful."
+            },
+            {
+              "key": "DeviceRequestUUID",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The unique identifier of the request for this response list item."
+            },
+            {
+              "key": "DeviceRequestReturnError",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "If present, a description of the error for a failed request."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

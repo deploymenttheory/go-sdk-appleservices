@@ -1,0 +1,410 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "account.exchange",
+  "title": "Account:Exchange",
+  "description": "The declaration to configure an Exchange account.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.account.exchange",
+    "apply": "multiple",
+    "content": "This payload configures an Exchange ActiveSync account on an iOS device.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "VisibleName",
+      "title": "Account Name",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The name that apps show to the user for this Exchange account. If not present, the system generates a suitable default."
+    },
+    {
+      "key": "EnabledProtocolTypes",
+      "title": "Enabled Protocol Types",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "The set of protocol types to enable on the Exchange server, in order of preference. This is an array of unique strings with possible values:\n\n- `EAS:` Exchange ActiveSync\n- `EWS:` Exchange Web Services\n\nIf the device supports one or more of the listed protocol types, it sets up an account for the first supported type.\n\nIf the device doesn't support any of the listed protocol types, it doesn't set up an account and the system reports an error.",
+      "subkeys": [
+        {
+          "key": "EnabledProtocolTypesItem",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "rangelist": [
+            "EAS",
+            "EWS"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "UserIdentityAssetReference",
+      "title": "User Identity Asset Reference",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The identifier of an asset declaration that contains the user identity for this account. The corresponding asset must be of type `UserIdentity`.",
+      "assettypes": [
+        "com.apple.asset.useridentity"
+      ]
+    },
+    {
+      "key": "HostName",
+      "title": "Server Host Name",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The IP address or fully qualified domain name (FQDN) of the Exchange host."
+    },
+    {
+      "key": "Port",
+      "title": "Server Port",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The port number of the EWS server. The system uses this only when this declaration has a `HostName` value.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Path",
+      "title": "Server Path",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The path of the EWS server. The system uses this only when this declaration has a `HostName` value.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ExternalHostName",
+      "title": "Server External Host Name",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The external hostname of the EWS server (or IP address).",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ExternalPort",
+      "title": "Server External Port",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The external port number of the EWS server. The system uses this only when this declaration has a `ExternalHostName` value.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "External Path",
+      "title": "Server External Path",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The external path of the EWS server. The system uses this only when this declaration has a `ExternalHostName` value.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "OAuth",
+      "title": "Controls use of OAuth",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The configuration settings for OAuth for this account.",
+      "subkeys": [
+        {
+          "key": "Enabled",
+          "title": "Use OAuth",
+          "type": "\u003cboolean\u003e",
+          "presence": "required",
+          "content": "If `true`, enables OAuth for this account."
+        },
+        {
+          "key": "SignInURL",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The URL that this account uses for signing in with OAuth. The system ignores this value unless `Enabled` is `true`. The system doesn't use autodiscovery when a declaration contains this URL, so the declaration must also contain a `HostName`."
+        },
+        {
+          "key": "TokenRequestURL",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The URL that this account uses for token requests with OAuth. The system ignores this value unless `Enabled` is `true`.",
+          "supportedOS": {
+            "macOS": {
+              "introduced": "n/a"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "AuthenticationCredentialsAssetReference",
+      "title": "Authentication Credentials Asset Reference",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The identifier of an asset declaration that contains the credentials for this account to authenticate with an Exchange server. Set the corresponding asset type to `CredentialUserNameAndPassword`.",
+      "assettypes": [
+        "com.apple.asset.credential.userpassword"
+      ]
+    },
+    {
+      "key": "AuthenticationIdentityAssetReference",
+      "title": "Authentication Identity Asset Reference",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The identifier of a credential asset declaration that contains the identity that this account requires to authenticate with the Exchange server.",
+      "assettypes": [
+        "com.apple.asset.credential.acme",
+        "com.apple.asset.credential.identity",
+        "com.apple.asset.credential.scep"
+      ]
+    },
+    {
+      "key": "SMIME",
+      "title": "S/MIME Settings",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "Settings for S/MIME.",
+      "subkeys": [
+        {
+          "key": "Signing",
+          "title": "S/MIME Signing Settings",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "Settings for S/MIME signing.",
+          "subkeys": [
+            {
+              "key": "Enabled",
+              "title": "Signing Enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, the system enables S/MIME signing."
+            },
+            {
+              "key": "IdentityAssetReference",
+              "title": "S/MIME Signing Identity Asset Reference",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "Specifies the identifier of an asset declaration containing the identity required for S/MIME signing of messages sent from this account.",
+              "assettypes": [
+                "com.apple.asset.credential.acme",
+                "com.apple.asset.credential.identity",
+                "com.apple.asset.credential.scep"
+              ]
+            },
+            {
+              "key": "UserOverrideable",
+              "title": "Signing User Overrideable",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the user can turn S/MIME signing on or off in Settings."
+            },
+            {
+              "key": "IdentityUserOverrideable",
+              "title": "Signing Identity User Overrideable",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the user can select an S/MIME signing identity in Settings."
+            }
+          ]
+        },
+        {
+          "key": "Encryption",
+          "title": "S/MIME Encryption Settings",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "Settings for S/MIME encryption.",
+          "subkeys": [
+            {
+              "key": "Enabled",
+              "title": "Encryption By Default Enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, the system enables S/MIME encryption by default, which the user can't override if `PerMessageSwitchEnabled` is `false`."
+            },
+            {
+              "key": "IdentityAssetReference",
+              "title": "S/MIME Encryption Identity Asset Reference",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "Specifies the identifier of an asset declaration containing the identity required for S/MIME encryption. The system attaches the public certificate to outgoing mail to allow the user to receive encrypted mail. When the user sends encrypted mail, the system uses the public certificate to encrypt the copy of the mail in their Sent mailbox.",
+              "assettypes": [
+                "com.apple.asset.credential.acme",
+                "com.apple.asset.credential.identity",
+                "com.apple.asset.credential.scep"
+              ]
+            },
+            {
+              "key": "UserOverrideable",
+              "title": "Encryption By Default User Overrideable",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the user can turn S/MIME encryption by default on or off in Settings."
+            },
+            {
+              "key": "IdentityUserOverrideable",
+              "title": "Encryption Identity User Overrideable",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the user can select an S/MIME signing identity in Settings."
+            },
+            {
+              "key": "PerMessageSwitchEnabled",
+              "title": "Per Message Switch Enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system enables the per-message encryption switch in the compose view."
+            }
+          ]
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "17.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "MailServiceActive",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the system activates the mail service for this account."
+    },
+    {
+      "key": "LockMailService",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system prevents the user from changing the status of the mail service for this account.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ContactsServiceActive",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, activates the address book service for this account."
+    },
+    {
+      "key": "LockContactsService",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system prevents the user from changing the status of the address book service for this account.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "CalendarServiceActive",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, activates the calendar service for this account."
+    },
+    {
+      "key": "LockCalendarService",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system prevents the user from changing the status of the calendar service for this account.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "RemindersServiceActive",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the system activates the reminders service for this account."
+    },
+    {
+      "key": "LockRemindersService",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system prevents the user from changing the status of the reminders service for this account.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "NotesServiceActive",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the system activates the notes service for this account."
+    },
+    {
+      "key": "LockNotesService",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system prevents the user from changing the status of the notes service for this account.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

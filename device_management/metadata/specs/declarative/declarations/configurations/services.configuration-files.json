@@ -1,0 +1,46 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "services.configuration-files",
+  "title": "Services Configuration Files",
+  "description": "The managed configuration files for services.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.services.configuration-files",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ServiceType",
+      "title": "Service Type",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The identifier of the system service with managed configuration files. Use a reverse DNS style for this identifier."
+    },
+    {
+      "key": "DataAssetReference",
+      "title": "Data Asset Reference",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The identifier of an asset declaration that contains a reference to the files to use for system service configuration. Ensure that the corresponding asset:\n\n- Is of type `com.apple.asset.data`\n- Is a zip archive of an entire directory\n- Has a `Reference` key that includes the `ContentType` and `Hash-SHA-256` keys, which the system requires\n\nThe system expands the zip archive and stores the data in a well-known location for the service.",
+      "assettypes": [
+        "com.apple.asset.data"
+      ]
+    }
+  ]
+}

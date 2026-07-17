@@ -1,0 +1,40 @@
+{
+  "category": "mdm/commands",
+  "name": "profile.remove",
+  "title": "Remove Profile Command",
+  "description": "Remove a previously installed profile from the device.",
+  "payload": {
+    "requesttype": "RemoveProfile",
+    "content": "This command allows the server to remove a profile. This command requires the Profile Installation and Removal Right. It's supported in the user channel.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0",
+        "accessrights": "AllowInstallationRemoval"
+      },
+      "macOS": {
+        "introduced": "10.7",
+        "accessrights": "AllowInstallationRemoval"
+      },
+      "tvOS": {
+        "introduced": "9.0",
+        "accessrights": "AllowInstallationRemoval"
+      },
+      "visionOS": {
+        "introduced": "1.1",
+        "accessrights": "AllowInstallationRemoval"
+      },
+      "watchOS": {
+        "introduced": "10.0",
+        "accessrights": "AllowInstallationRemoval"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Identifier",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The identifier of the profile to remove."
+    }
+  ]
+}

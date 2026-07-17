@@ -1,0 +1,54 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "account.subscribed-calendar",
+  "title": "Account:Subscribed Calendar",
+  "description": "The declaration to configure a subscribed calendar.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.account.subscribed-calendar",
+    "apply": "multiple",
+    "content": "A subscribed calendar configuration defines a subscribed calendar for a user.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "VisibleName",
+      "title": "Account Name",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The name that apps show to the user for this calendar account. If not present, the system generates a suitable default."
+    },
+    {
+      "key": "CalendarURL",
+      "title": "Calendar URL",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The URL of the subscribed calendar, which needs to start with `https://`."
+    },
+    {
+      "key": "AuthenticationCredentialsAssetReference",
+      "title": "Authentication Credentials Asset Reference",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The identifier of an asset declaration that contains the credentials for this account to authenticate with a calendar server. Set the corresponding asset type to `CredentialUserNameAndPassword`.",
+      "assettypes": [
+        "com.apple.asset.credential.userpassword"
+      ]
+    }
+  ]
+}

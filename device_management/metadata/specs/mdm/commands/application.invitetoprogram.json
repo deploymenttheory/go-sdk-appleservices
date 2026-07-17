@@ -1,0 +1,58 @@
+{
+  "category": "mdm/commands",
+  "name": "application.invitetoprogram",
+  "title": "Invite To Program Command",
+  "description": "Invite a user to join the Volume Purchase Program (VPP).",
+  "payload": {
+    "requesttype": "InviteToProgram",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "7.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "10.9",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ProgramID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "com.apple.cloudvpp"
+      ],
+      "content": "The program's identifier, which can only be `com.apple.cloudvpp`."
+    },
+    {
+      "key": "InvitationURL",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The Volume Purchase Program (VPP) invitation URL."
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "InvitationResult",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "Acknowledged",
+        "InvalidProgramID",
+        "InvalidInvitationURL"
+      ],
+      "content": "The result of the command."
+    }
+  ]
+}

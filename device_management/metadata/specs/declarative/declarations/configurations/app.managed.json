@@ -1,0 +1,662 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "app.managed",
+  "title": "App:Managed",
+  "description": "The declaration to configure a managed app.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.app.managed",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "17.2"
+      },
+      "macOS": {
+        "introduced": "26.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "2.4"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AppStoreID",
+      "title": "App Store ID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The App Store ID of the managed app that is downloaded from the App Store.\n\nOnly one of `AppStoreID`, `BundleID`, `ManifestURL`, or `AppComposedIdentifier` needs to be present."
+    },
+    {
+      "key": "BundleID",
+      "title": "Bundle ID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The bundle ID of the managed app that is downloaded from the App Store.\n\nOnly one of `AppStoreID`, `BundleID`, `ManifestURL`, or `AppComposedIdentifier` needs to be present."
+    },
+    {
+      "key": "ManifestURL",
+      "title": "Manifest URL",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The URL of the manifest for the managed app that the device downloads from a web site. The manifest is returned as a `ManifestURL` property list.\n\nOnly one of `AppStoreID`, `BundleID`, `ManifestURL`, or `AppComposedIdentifier` needs to be present.\n\nAvailable only in iOS and visionOS.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AppComposedIdentifier",
+      "title": "App Composed Identifier",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A string that specifies the composed identifier of an existing app that needs to be managed. The device uses this to take over management of an app installed by some other process, for example installed manually by the user, or via a package configuration. If the app isn't present when the device applies the configuration, the device takes over management of it when it does install.\n\nThe following rules apply when the device takes over management:\n\n- If the `InstallBehavior.Install` key is set to `Required`, the device takes over management of the app.\n- If the `InstallBehavior.Install` key is set to `Optional`, the device takes over management of the app when the user \"installs\" it using an MDM management app.\n\nThe format of the composed identifier is either \"Bundle-ID (Team-ID)\" or \"Bundle-ID {Designated-Requirement}\". For example, `com.example.app (ABCD1234)` for the team ID format, or `com.example.app {anchor apple generic}` for the designated requirement format. Management of the app occurs only if its code signature matches the composed identifier.\n\nIn macOS, only one of `AppStoreID`, `BundleID`, or `AppComposedIdentifier` needs to be present.\n\nAvailable only in macOS.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "26.0"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "iOSApp",
+      "title": "iOS App",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the device installs an iOS or iPadOS app that runs on a Mac with Apple Silicon. This is only used when the app is an App Store app.\n\nAvailable only in macOS.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "26.0"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "InstallBehavior",
+      "title": "Install Behavior",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary that describes how and when to install the app.",
+      "subkeys": [
+        {
+          "key": "Install",
+          "title": "Install",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "rangelist": [
+            "Optional",
+            "Required"
+          ],
+          "default": "Optional",
+          "content": "A string that specifies if the app needs to remain on the device at all times or if the user can freely install and remove it, which is one of the following values:\n\n- `Optional`: The user can install and remove the app after the system activates the configuration.\n- `Required`: The system installs the app after it activates the configuration. The user can't remove the app.\n\nThe system automatically installs apps on supervised devices. Otherwise, the device prompts the user to approve installation of the app."
+        },
+        {
+          "key": "License",
+          "title": "License",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "A dictionary that describes the app's license.",
+          "subkeys": [
+            {
+              "key": "Assignment",
+              "title": "Assignment",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "Device",
+                "User"
+              ],
+              "content": "The type of license that the app uses for installation through the App Store, which is one of the following values:\n\n- `Device`: The app has a device license.\n- `User`: The app has a user license.\n\nThis key needs to be present for App Store apps, when either `AppStoreID` or `BundleID` are present in the configuration."
+            },
+            {
+              "key": "VPPType",
+              "title": "VPP Type",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "Device",
+                "User"
+              ],
+              "content": "The type of VPP license that the app uses for installation through the App Store, which is one of the following values:\n\n- `Device`: The app has a VPP device license.\n- `User`: The app has a VPP user license.\n\nThis key needs to be present to install an app through the App Store.",
+              "supportedOS": {
+                "iOS": {
+                  "removed": "18.0"
+                },
+                "macOS": {
+                  "introduced": "n/a"
+                },
+                "visionOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "key": "Version",
+          "title": "Version",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "The App Store external version identifier (EVID) of the version of the app the device installs. You can retrieve this value from the App Store. For more information, see `Apps and Books for Organizations`. This key is ignored if the app isn't an App Store app.\n\nThe following rules apply when the device applies or updates the configuration:\n\n- If this key isn't present:\n  - If the app isn't present, the device installs the latest version.\n  - If the app is present, if allowed the device takes over management of the current version of the app.\n\n- If this key is present:\n  - If the app isn't present, the device installs the app with the specified version.\n  - If an app with the same version is present, if allowed the device takes over management of that app.\n  - If an app with an older version is present, if allowed the device updates the app to the specified version and takes over management of it.\n  - If an app with a newer version is present, the device doesn't take over management of the app. The device reports an app status failure.\n\n\u003e Note:\n\u003e The device never installs an older version of the app over a newer version.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "26.0"
+            },
+            "macOS": {
+              "introduced": "26.0"
+            },
+            "visionOS": {
+              "introduced": "26.0"
+            }
+          }
+        },
+        {
+          "key": "AllowDownloadsOverCellular",
+          "title": "Allow Downloads Over Cellular",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "rangelist": [
+            "AlwaysOn",
+            "AlwaysOff",
+            "StoreSettings"
+          ],
+          "default": "StoreSettings",
+          "content": "Indicates how the device uses a cellular network when it downloads the app for automatic install or update operations:\n\n- `AlwaysOn`: The device downloads apps of any size using a cellular network.\n- `AlwaysOff`: The device doesn't download apps using a cellular network. The device pauses the automatic install or update operation until a different network is active.\n- `StoreSettings`: The device uses the settings for the corresponding store when downloading apps.\n\nThe device always uses the store settings to download apps when the install or update operation is user initiated.\n\nAvailable only in iOS.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "26.0"
+            },
+            "macOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "UpdateBehavior",
+      "title": "Update Behavior",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary that specifies how the device updates apps.",
+      "subkeys": [
+        {
+          "key": "AutomaticAppUpdates",
+          "title": "Automatic App Updates",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "rangelist": [
+            "AlwaysOn",
+            "AlwaysOff",
+            "StoreSettings"
+          ],
+          "content": "Specifies whether the device automatically updates the app:\n\n- `AlwaysOn`: The device automatically updates the app to the latest version. For App Store apps, the device periodically checks the store for updates. For Enterprise apps, the device periodically downloads the manifest file and compares it to the previous manifest file. If the device detects a change to the bundle version in the manifest, it downloads and updates the app.\n- `AlwaysOff`: The device never automatically updates the app.\n- `StoreSettings`: The device uses the settings for the corresponding store to determine when to automatically update the app. For Enterprise apps, this setting behaves the same as `AlwaysOff`.\n\nWhen the `InstallBehavior.Version` key is specified, the device ignores this key and Automatic App Updates are disabled.\n\nIn macOS, the device ignores this setting if the `AppComposedIdentifier` key is set in the configuration."
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "26.0"
+        },
+        "macOS": {
+          "introduced": "26.0"
+        },
+        "visionOS": {
+          "introduced": "26.0"
+        }
+      }
+    },
+    {
+      "key": "IncludeInBackup",
+      "title": "Include in Backup",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, backups contain the app and its data.\n\nAvailable only in iOS and visionOS.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "Attributes",
+      "title": "App Attributes",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary of values to associate with the app.\n\nAvailable only in iOS and visionOS.",
+      "subkeys": [
+        {
+          "key": "AssociatedDomains",
+          "title": "Associated Domains",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "An array of domain names to associate with the app.",
+          "subkeys": [
+            {
+              "key": "Domain",
+              "title": "Domain",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "A domain to be associated with the app."
+            }
+          ]
+        },
+        {
+          "key": "AssociatedDomainsEnableDirectDownloads",
+          "title": "Associated Domains Enable Direct Downloads",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, the system enables direct downloads for the `AssociatedDomains`."
+        },
+        {
+          "key": "CellularSliceUUID",
+          "title": "Cellular Slice UUID",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The cellular slice identifier, which can be the data network name (DNN) or app category. For DNN, encode the value as \"DNN:name\", where \"name\" is the carrier-provided DNN name. For app category, encode the value as \"AppCategory:category\", where \"category\" is a carrier-provided string such as \"Enterprise1\".",
+          "supportedOS": {
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "ContentFilterUUID",
+          "title": "Content Filter UUID",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The UUID of the content filter to associate with the app."
+        },
+        {
+          "key": "DNSProxyUUID",
+          "title": "DNS Proxy UUID",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The UUID of the DNS proxy to associate with the app."
+        },
+        {
+          "key": "Hideable",
+          "title": "Hideable",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": true,
+          "content": "If `false`, the system prevents the user from hiding the app. It doesn't affect the user's ability to leave it in the App Library, while removing it from the Home Screen.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "18.1"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "Lockable",
+          "title": "Lockable",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": true,
+          "content": "If `false`, the system prevents the user from locking the app. This also prevents the user from hiding the app.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "18.1"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "RelayUUID",
+          "title": "Relay UUID",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The UUID of the relay to associate with the app."
+        },
+        {
+          "key": "TapToPayScreenLock",
+          "title": "Tap to Pay Screen Lock",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, the device automatically locks after every transaction that requires a customer's card PIN. If `false`, the user can choose the behavior.",
+          "supportedOS": {
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "VPNUUID",
+          "title": "VPN UUID",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The UUID of the VPN to associate with the app."
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "AppConfig",
+      "title": "App Config",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary of app config data and credentials.\n\nAvailable only in iOS and visionOS.",
+      "subkeytype": "AppConfigDictionary",
+      "subkeys": [
+        {
+          "key": "DataAssetReference",
+          "title": "App/Extension Config Data Asset Reference",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "Specifies the identifier of an asset declaration containing a reference to the app or extension config data. The corresponding asset needs to be of type `com.apple.asset.data`. The referenced data needs to be a property list file, and the asset's \"ContentType\" value set to match the data type.",
+          "assettypes": [
+            "com.apple.asset.data"
+          ]
+        },
+        {
+          "key": "Passwords",
+          "title": "Password App/Extension Configs.",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "Provides passwords to the managed app or extension. Each element in the array contains a password asset reference and an associated identifier which the app or extension uses to look up the password.",
+          "subkeytype": "CredentialConfig",
+          "subkeys": [
+            {
+              "key": "PasswordAppConfigItem",
+              "type": "\u003cdictionary\u003e",
+              "presence": "required",
+              "content": "A dictionary of values associated with a credential config.",
+              "subkeys": [
+                {
+                  "key": "Identifier",
+                  "title": "Password Identifier",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "The app or extension uses this identifier to fetch the corresponding password using the `ManagedApp` framework. App developers define the values for these identifiers."
+                },
+                {
+                  "key": "AssetReference",
+                  "title": "Asset Reference",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "Specifies the identifier of an asset declaration containing a username and password. The `ManagedApp` framework makes the password available to the app or extension. The `ManagedApp` framework ignores the username.",
+                  "assettypes": [
+                    "com.apple.asset.credential.userpassword"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "Identities",
+          "title": "Identity App/Extension Configs.",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "Provides identities to the managed app or extension. Each element in the array contains an identity asset reference and an associated identifier which the app or extension uses to look up the identity.",
+          "subkeytype": "CredentialConfig",
+          "subkeys": [
+            {
+              "key": "IdentityAppConfigItem",
+              "type": "\u003cdictionary\u003e",
+              "presence": "required",
+              "content": "A dictionary of values associated with a credential config.",
+              "subkeys": [
+                {
+                  "key": "Identifier",
+                  "title": "Identity Identifier",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "The app or extension uses this identifier to fetch the corresponding identity using the `ManagedApp` framework. App developers define the values for these identifiers."
+                },
+                {
+                  "key": "AssetReference",
+                  "title": "Asset Reference",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "Specifies the identifier of an asset declaration containing an identity.",
+                  "assettypes": [
+                    "com.apple.asset.credential.identity",
+                    "com.apple.asset.credential.scep",
+                    "com.apple.asset.credential.acme"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "Certificates",
+          "title": "Certificate App/Extension Configs.",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "Provides certificates to the managed app or extension. Each element in the array contains a certificate asset reference and an associated identifier which the app or extension uses to look up the certificate.",
+          "subkeytype": "CredentialConfig",
+          "subkeys": [
+            {
+              "key": "CertificateAppConfigItem",
+              "type": "\u003cdictionary\u003e",
+              "presence": "required",
+              "content": "A dictionary of values associated with a credential config.",
+              "subkeys": [
+                {
+                  "key": "Identifier",
+                  "title": "Certificate Identifier",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "The app or extension uses this identifier to fetch the corresponding certificate using the `ManagedApp` framework. App developers define the values for these identifiers."
+                },
+                {
+                  "key": "AssetReference",
+                  "title": "Asset Reference",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "Specifies the identifier of an asset declaration containing a certificate.",
+                  "assettypes": [
+                    "com.apple.asset.credential.certificate"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "18.4"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ExtensionConfigs",
+      "title": "Extension Configs",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary of extension config data and credentials.\n\nAvailable only in iOS and visionOS.",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "title": "Extension Composed Identifier",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "A dictionary mapping extension composed identifiers to the extension config data and credentials. The expected format is \"Identifier (TeamIdentifier)\".",
+          "subkeytype": "AppConfigDictionary",
+          "subkeys": [
+            {
+              "key": "DataAssetReference",
+              "title": "App/Extension Config Data Asset Reference",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "Specifies the identifier of an asset declaration containing a reference to the app or extension config data. The corresponding asset needs to be of type `com.apple.asset.data`. The referenced data needs to be a property list file, and the asset's \"ContentType\" value set to match the data type.",
+              "assettypes": [
+                "com.apple.asset.data"
+              ]
+            },
+            {
+              "key": "Passwords",
+              "title": "Password App/Extension Configs.",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "Provides passwords to the managed app or extension. Each element in the array contains a password asset reference and an associated identifier which the app or extension uses to look up the password.",
+              "subkeytype": "CredentialConfig",
+              "subkeys": [
+                {
+                  "key": "PasswordAppConfigItem",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "required",
+                  "content": "A dictionary of values associated with a credential config.",
+                  "subkeys": [
+                    {
+                      "key": "Identifier",
+                      "title": "Password Identifier",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "The app or extension uses this identifier to fetch the corresponding password using the `ManagedApp` framework. App developers define the values for these identifiers."
+                    },
+                    {
+                      "key": "AssetReference",
+                      "title": "Asset Reference",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "Specifies the identifier of an asset declaration containing a username and password. The `ManagedApp` framework makes the password available to the app or extension. The `ManagedApp` framework ignores the username.",
+                      "assettypes": [
+                        "com.apple.asset.credential.userpassword"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "Identities",
+              "title": "Identity App/Extension Configs.",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "Provides identities to the managed app or extension. Each element in the array contains an identity asset reference and an associated identifier which the app or extension uses to look up the identity.",
+              "subkeytype": "CredentialConfig",
+              "subkeys": [
+                {
+                  "key": "IdentityAppConfigItem",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "required",
+                  "content": "A dictionary of values associated with a credential config.",
+                  "subkeys": [
+                    {
+                      "key": "Identifier",
+                      "title": "Identity Identifier",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "The app or extension uses this identifier to fetch the corresponding identity using the `ManagedApp` framework. App developers define the values for these identifiers."
+                    },
+                    {
+                      "key": "AssetReference",
+                      "title": "Asset Reference",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "Specifies the identifier of an asset declaration containing an identity.",
+                      "assettypes": [
+                        "com.apple.asset.credential.identity",
+                        "com.apple.asset.credential.scep",
+                        "com.apple.asset.credential.acme"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "Certificates",
+              "title": "Certificate App/Extension Configs.",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "Provides certificates to the managed app or extension. Each element in the array contains a certificate asset reference and an associated identifier which the app or extension uses to look up the certificate.",
+              "subkeytype": "CredentialConfig",
+              "subkeys": [
+                {
+                  "key": "CertificateAppConfigItem",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "required",
+                  "content": "A dictionary of values associated with a credential config.",
+                  "subkeys": [
+                    {
+                      "key": "Identifier",
+                      "title": "Certificate Identifier",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "The app or extension uses this identifier to fetch the corresponding certificate using the `ManagedApp` framework. App developers define the values for these identifiers."
+                    },
+                    {
+                      "key": "AssetReference",
+                      "title": "Asset Reference",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "Specifies the identifier of an asset declaration containing a certificate.",
+                      "assettypes": [
+                        "com.apple.asset.credential.certificate"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "18.4"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "LegacyAppConfigAssetReference",
+      "title": "App Config MDMv1 Asset Reference",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The identifier of an asset declaration containing a reference to the app config data. The device provides the app config data to the app using the MDMv1 behavior. The corresponding asset needs to be of type `com.apple.asset.data`. The referenced data needs to be a property list file, and the asset's \"ContentType\"\nvalue set to match the data type.\n\nAvailable only in iOS and visionOS.",
+      "assettypes": [
+        "com.apple.asset.data"
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "18.4"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

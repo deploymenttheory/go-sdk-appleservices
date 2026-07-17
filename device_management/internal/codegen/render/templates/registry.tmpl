@@ -1,0 +1,9 @@
+{{define "registry"}}
+{{- range .CommentLines}}// {{.}}
+{{end -}}
+var {{.MapName}} = map[string]func() {{.IfaceType}}{
+{{- range .Entries}}
+	"{{.Identifier}}": func() {{$.IfaceType}} { return new({{.StructName}}) },
+{{- end}}
+}
+{{end}}

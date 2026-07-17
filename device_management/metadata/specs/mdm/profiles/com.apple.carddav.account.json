@@ -1,0 +1,177 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.carddav.account",
+  "title": "CardDAV",
+  "description": "The payload that configures a Contacts account.",
+  "payload": {
+    "payloadtype": "com.apple.carddav.account",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "CardDAVAccountDescription",
+      "title": "Account Description",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The description of the account.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.7"
+        }
+      }
+    },
+    {
+      "key": "CardDAVHostName",
+      "title": "Account Hostname",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The server's address.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.7"
+        }
+      }
+    },
+    {
+      "key": "CardDAVUsername",
+      "title": "Account Username",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user name for logins.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.7"
+        }
+      }
+    },
+    {
+      "key": "CardDAVPassword",
+      "title": "Account Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user's password. Only use this in encrypted profiles.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.7"
+        }
+      }
+    },
+    {
+      "key": "CardDAVPrincipalURL",
+      "title": "Principal URL",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The base URL to the user's address book.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "CardDAVUseSSL",
+      "title": "Use SSL",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the system enables SSL.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.7"
+        }
+      }
+    },
+    {
+      "key": "CardDAVPort",
+      "title": "Port Number",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The server's port.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.7"
+        }
+      }
+    },
+    {
+      "key": "CommunicationServiceRules",
+      "title": "Communication Service Rules",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "An array of communication service rules for this account.",
+      "subkeys": [
+        {
+          "key": "DefaultServiceHandlers",
+          "title": "Default Service Handlers",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "A dictionary of service handlers for contacts from this account.",
+          "subkeys": [
+            {
+              "key": "AudioCall",
+              "title": "App for audio calls",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The bundle identifier for the default application that handles audio calls to contacts from this account.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "10.0"
+                },
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "10.0"
+            },
+            "macOS": {
+              "introduced": "n/a"
+            }
+          }
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "VPNUUID",
+      "title": "VPNUUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

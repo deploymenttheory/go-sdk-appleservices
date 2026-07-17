@@ -1,0 +1,240 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.cellular",
+  "title": "Cellular",
+  "description": "The payload that configures cellular settings.",
+  "payload": {
+    "payloadtype": "com.apple.cellular",
+    "content": "This payload cannot be installed if an APN payload is already installed.\nThis payload only applies to the preferred data SIM. There is no way to have a cellular payload affect a different SIM.\nThis payload replaces the com.apple.managedCarrier payload. The latter payload is supported, but deprecated.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "7.0"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "3.2"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AttachAPN",
+      "title": "AttachAPN",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A configuration dictionary.",
+      "subkeys": [
+        {
+          "key": "Name",
+          "title": "Name",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "The name for this configuration."
+        },
+        {
+          "key": "AuthenticationType",
+          "title": "Authentication type",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "rangelist": [
+            "CHAP",
+            "PAP"
+          ],
+          "default": "PAP",
+          "content": "The authentication type."
+        },
+        {
+          "key": "Username",
+          "title": "User name",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The user name."
+        },
+        {
+          "key": "Password",
+          "title": "Password",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The password for the user."
+        },
+        {
+          "key": "AllowedProtocolMask",
+          "title": "Supported IP Versions",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            1,
+            2,
+            3
+          ],
+          "content": "The Internet Protocol versions that the system supports. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "10.3"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "APNs",
+      "title": "APNs",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of access point name (APN) dictionaries.",
+      "subkeys": [
+        {
+          "key": "APNsItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that contains details about an access point name (APN) configuration.",
+          "subkeys": [
+            {
+              "key": "Name",
+              "title": "Name",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The name for this configuration."
+            },
+            {
+              "key": "AuthenticationType",
+              "title": "Authentication type",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "CHAP",
+                "PAP"
+              ],
+              "default": "PAP",
+              "content": "The authentication type for logging in."
+            },
+            {
+              "key": "Username",
+              "title": "User name",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The user name for the APN."
+            },
+            {
+              "key": "Password",
+              "title": "Password",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The user's password for the APN."
+            },
+            {
+              "key": "ProxyServer",
+              "title": "Proxy server",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The proxy server's address.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "ProxyPort",
+              "title": "Proxy port",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The proxy server's port number."
+            },
+            {
+              "key": "DefaultProtocolMask",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "rangelist": [
+                1,
+                2,
+                3
+              ],
+              "content": "The default Internet Protocol versions. Available in iOS 10.3 but no longer used in iOS 11 and later. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "10.3",
+                  "deprecated": "11.0"
+                }
+              }
+            },
+            {
+              "key": "AllowedProtocolMask",
+              "title": "Supported IP Versions",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "rangelist": [
+                1,
+                2,
+                3
+              ],
+              "content": "The Internet Protocol versions that the system supports. Available in iOS 10.3 and later. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "10.3"
+                }
+              }
+            },
+            {
+              "key": "AllowedProtocolMaskInRoaming",
+              "title": "Supported Roaming IP Versions",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "rangelist": [
+                1,
+                2,
+                3
+              ],
+              "content": "The Internet Protocol versions that the system supports while roaming. Available in iOS 10.3 and later. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "10.3"
+                }
+              }
+            },
+            {
+              "key": "AllowedProtocolMaskInDomesticRoaming",
+              "title": "Supported Roaming IP Versions",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "rangelist": [
+                1,
+                2,
+                3
+              ],
+              "content": "The Internet Protocol versions that the system supports while roaming. Available in iOS 10.3 and later. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "10.3"
+                }
+              }
+            },
+            {
+              "key": "EnableXLAT464",
+              "title": "Enable XLAT464",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system enables XLAT464. Available in iOS 16 and later and watchOS 9 and later.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "16.0"
+                },
+                "watchOS": {
+                  "introduced": "9.0"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

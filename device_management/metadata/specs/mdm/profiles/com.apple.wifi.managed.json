@@ -1,0 +1,778 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.wifi.managed",
+  "title": "Wi-Fi",
+  "description": "The payload that configures Wi-Fi settings.",
+  "payload": {
+    "payloadtype": "com.apple.wifi.managed",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "9.0"
+      },
+      "visionOS": {
+        "introduced": "1.0"
+      },
+      "watchOS": {
+        "introduced": "3.2"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AutoJoin",
+      "title": "Auto Join",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the device joins the network automatically.\n\nIf `false`, the user must tap the network name to join it.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "5.0"
+        }
+      }
+    },
+    {
+      "key": "SSID_STR",
+      "title": "SSID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The SSID of the Wi-Fi network to use. In iOS 7.0 and later, the SSID is optional if a value exists for `DomainName` value.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        }
+      }
+    },
+    {
+      "key": "HIDDEN_NETWORK",
+      "title": "Hidden",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, defines this network as hidden."
+    },
+    {
+      "key": "ProxyType",
+      "title": "Proxy Type",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "None",
+        "Manual",
+        "Auto"
+      ],
+      "default": "None",
+      "content": "The proxy type, if any, to use. If you choose the manual proxy type, you need the proxy server address, including its port and optionally a user name and password into the proxy server. If you choose the auto proxy type, you can enter a proxy autoconfiguration (PAC) URL.",
+      "supportedOS": {
+        "iOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "EncryptionType",
+      "title": "Encryption Type",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "WEP",
+        "WPA",
+        "WPA2",
+        "WPA3",
+        "Any",
+        "None"
+      ],
+      "default": "Any",
+      "content": "The encryption type for the network.\n\nIf set to anything except `None`, the payload may contain the following three keys: `Password`, `PayloadCertificateUUID`, or `EAPClientConfiguration`.\n\nAs of iOS 16, tvOS 16, watchOS 9, and macOS 13:\n\n- `WPA` allows joining WPA or WPA2 networks\n- `WPA2` allows joining WPA2 or WPA3 networks\n- `WPA3` allows joining WPA3 networks only\n- `Any` allows joining WPA, WPA2, WPA3, and WEP networks\n\nPrior to iOS 16, tvOS 16, and watchOS 9, specifying `WPA`, `WPA2`, and `WPA3` were equivalent and would allow joining any WPA network.\n\nPrior to macOS 13, the encryption type, if specified explicitly, needed to match the encryption type of the network exactly."
+    },
+    {
+      "key": "Password",
+      "title": "Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The password for the access point."
+    },
+    {
+      "key": "PayloadCertificateUUID",
+      "title": "Certificate UUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$",
+      "content": "The UUID of the certificate payload within the same profile to use for the client credential."
+    },
+    {
+      "key": "EAPClientConfiguration",
+      "title": "EAP Client Configuration",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The enterprise network configuration.",
+      "subkeys": [
+        {
+          "key": "AcceptEAPTypes",
+          "title": "Accept EAP Types",
+          "type": "\u003carray\u003e",
+          "presence": "required",
+          "content": "The EAP types that the system accepts. Allowed values:\n\n- `13`: EAP-TLS\n- `17`: LEAP\n- `18`: EAP-SIM\n- `21`: EAP-TTLS\n- `23`: EAP-AKA\n- `25`: PEAPv0/v1\n- `43`: EAP-FAST\n\nFor EAP-TLS authentication without a network payload, install the necessary identity certificates and have your users select EAP-TLS mode in the 802.1X credentials dialog that appears when they connect to the network. For other EAP types, a network payload is necessary and must specify the correct settings for the network.",
+          "subkeys": [
+            {
+              "key": "EAPType",
+              "title": "EAP Type",
+              "type": "\u003cinteger\u003e",
+              "rangelist": [
+                13,
+                17,
+                18,
+                21,
+                23,
+                25,
+                43
+              ]
+            }
+          ]
+        },
+        {
+          "key": "UserName",
+          "title": "Username",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The user name for the account. If you don't specify a value, the system prompts the user during login."
+        },
+        {
+          "key": "UserPassword",
+          "title": "Password",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The user's password. If you don't specify a value, the system prompts the user during login."
+        },
+        {
+          "key": "PayloadCertificateAnchorUUID",
+          "title": "Certificate Anchor UUID",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "An array of the UUID of each certificate payload in the same profile to trust for authentication. Use this key to prevent the device from asking the user whether to trust the listed certificates. Dynamic trust (the certificate dialogue) is in a disabled state if you specify this property without also enabling 'TLSAllowTrustExceptions'.",
+          "subkeys": [
+            {
+              "key": "CertificateAnchorUUID",
+              "title": "Individual Certificate Anchor UUID",
+              "type": "\u003cstring\u003e",
+              "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$"
+            }
+          ]
+        },
+        {
+          "key": "TLSTrustedCertificates",
+          "title": "TLS Trusted Certificates",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "An array of trusted certificates. Each entry in the array must contain certificate data that represents an anchor certificate used for verifying the server certificate.",
+          "subkeys": [
+            {
+              "key": "TLSTrustedCertificatesItem",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "A certificate identifier."
+            }
+          ]
+        },
+        {
+          "key": "TLSTrustedServerNames",
+          "title": "TLS Trusted Server Names",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "The list of accepted server certificate common names. If a server presents a certificate that isn't in this list, the system doesn't trust it.\nIf you specify this property, the system disables dynamic trust (the certificate dialog) unless you also specify 'TLSAllowTrustExceptions' with the value 'true'.\nIf necessary, use wildcards to specify the name, such as 'wpa.*.example.com'.",
+          "subkeys": [
+            {
+              "key": "TLSTrustedServerName",
+              "title": "Individual Trusted TLS Server Name",
+              "type": "\u003cstring\u003e"
+            }
+          ]
+        },
+        {
+          "key": "TLSAllowTrustExceptions",
+          "title": "Allow Trust Exceptions",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": true,
+          "content": "If 'true', allows a dynamic trust decision by the user. The dynamic trust is the certificate dialogue that appears when the system doesn't trust a certificate.\nIf 'false', the authentication fails if the system doesn't already trust the certificate.\nAs of iOS 8, Apple no longer supports this key.",
+          "supportedOS": {
+            "iOS": {
+              "removed": "8.0"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "TLSCertificateIsRequired",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If 'true', allows for two-factor authentication for EAP-TTLS, PEAP, or EAP-FAST. If 'false', allows for zero-factor authentication for EAP-TLS.\nIf you don't specify a value, the default is 'true' for EAP-TLS, and 'false' for other EAP types.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "7.0"
+            }
+          }
+        },
+        {
+          "key": "TTLSInnerAuthentication",
+          "title": "TTLS Inner Authentication",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "rangelist": [
+            "PAP",
+            "EAP",
+            "CHAP",
+            "MSCHAP",
+            "MSCHAPv2"
+          ],
+          "default": "MSCHAPv2",
+          "content": "The inner authentication that the TTLS module uses."
+        },
+        {
+          "key": "TLSMinimumVersion",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "rangelist": [
+            "1.0",
+            "1.1",
+            "1.2",
+            "1.3"
+          ],
+          "default": "1.0",
+          "content": "The minimum TLS version for EAP authentication.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "11.0"
+            },
+            "macOS": {
+              "introduced": "10.13"
+            },
+            "tvOS": {
+              "introduced": "11.0"
+            }
+          }
+        },
+        {
+          "key": "TLSMaximumVersion",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "rangelist": [
+            "1.0",
+            "1.1",
+            "1.2",
+            "1.3"
+          ],
+          "default": "1.2",
+          "content": "The maximum TLS version for EAP authentication.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "11.0"
+            },
+            "macOS": {
+              "introduced": "10.13"
+            },
+            "tvOS": {
+              "introduced": "11.0"
+            }
+          }
+        },
+        {
+          "key": "OuterIdentity",
+          "title": "Outer Identity",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "A name that hides the user's true name. The user's actual name appears only inside the encrypted tunnel. For example, you might set this to anonymous or anon, or anon@mycompany.net. It can increase security because an attacker can't see the authenticating user's name in the clear.\nThis key is only relevant to TTLS, PEAP, and EAP-FAST.\nThis field is required if 'TLSMinimumVersion' is '1.3'."
+        },
+        {
+          "key": "EAPFASTUsePAC",
+          "title": "Use PAC",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If 'true', the device uses an existing PAC if it's present. Otherwise, the server must present its identity using a certificate."
+        },
+        {
+          "key": "EAPFASTProvisionPAC",
+          "title": "Provision PAC",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If 'true', allows PAC provisioning.\n\nThis value is only applicable if 'EAPFASTUsePAC' is 'true'. This value must be 'true' for EAP-FAST PAC usage to succeed because there's no other way to provision a PAC."
+        },
+        {
+          "key": "EAPFASTProvisionPACAnonymously",
+          "title": "Provision PAC Anonymously",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If 'true', provisions the device anonymously. Note that there are known machine-in-the-middle attacks for anonymous provisioning."
+        },
+        {
+          "key": "EAPSIMNumberOfRANDs",
+          "title": "Allow Two RANDs",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "rangelist": [
+            2,
+            3
+          ],
+          "default": 3,
+          "content": "The minimum number of RAND values to accept from the server.\nFor use with EAP-SIM only.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "8.0"
+            }
+          }
+        },
+        {
+          "key": "SystemModeCredentialsSource",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "Set this string to 'ActiveDirectory' to use the AD computer name and password credentials.\nIf using this property, you can't use 'SystemModeUseOpenDirectoryCredentials'."
+        },
+        {
+          "key": "SystemModeUseOpenDirectoryCredentials",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If 'true', the system mode connection tries to use the Open Directory credentials.\nIf using this property, you can't use 'SystemModeCredentialsSource'."
+        },
+        {
+          "key": "OneTimeUserPassword",
+          "title": "Per-Connection Password",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If 'true', the user receives a prompt for a password each time they connect to the network.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "8.0"
+            },
+            "macOS": {
+              "introduced": "10.8"
+            },
+            "tvOS": {
+              "introduced": "9.0"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "DisplayedOperatorName",
+      "title": "Displayed Operator Name",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The operator name to display when connected to this network. Used only with Wi-Fi Hotspot 2.0 access points.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        },
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "DomainName",
+      "title": "Domain Name",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The primary domain of the tunnel.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        },
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "RoamingConsortiumOIs",
+      "title": "Roaming OIs",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of Roaming Consortium Organization Identifiers used for Wi-Fi Hotspot 2.0 negotiation.",
+      "subkeys": [
+        {
+          "key": "RoamingConsortiumOI",
+          "type": "\u003cstring\u003e",
+          "format": "^([0-9A-Za-z]{6})|([0-9A-Za-z]{9})$"
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        },
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "ServiceProviderRoamingEnabled",
+      "title": "Roaming Enable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, allows connection to roaming service providers.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        },
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "IsHotspot",
+      "title": "Is Hotspot",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the device treats the network as a hotspot.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        },
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "HESSID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The HESSID used for Wi-Fi Hotspot 2.0 negotiation.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        }
+      }
+    },
+    {
+      "key": "NAIRealmNames",
+      "title": "Realm Names",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of Network Access Identifier Realm names used for Wi-Fi Hotspot 2.0 negotiation.",
+      "subkeys": [
+        {
+          "key": "NAIRealmName",
+          "type": "\u003cstring\u003e"
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        },
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "MCCAndMNCs",
+      "title": "MCC/MNCs",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of Mobile Country Code/Mobile Network Code (MCC/MNC) pairs used for Wi-Fi Hotspot 2.0 negotiation. Each string must contain exactly six digits.",
+      "subkeys": [
+        {
+          "key": "MCCAndMNC",
+          "type": "\u003cstring\u003e",
+          "format": "^[0-9]{6}$"
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "7.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "CaptiveBypass",
+      "title": "Disable Captive Network Detection",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system bypasses Captive Network detection when the device connects to the network.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "QoSMarkingPolicy",
+      "title": "QoS Marking Policy",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary that contains the list of apps that the system allows to benefit from L2 and L3 marking. When this dictionary isn't present, the system allows all apps to use L2 and L3 marking when the Wi-Fi network supports Cisco QoS fast lane.",
+      "subkeys": [
+        {
+          "key": "QoSMarkingAllowListAppIdentifiers",
+          "title": "Allowlisted App Identifiers",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "An array of app bundle identifiers that defines the allow list for L2 and L3 marking for traffic that goes to the Wi-Fi network. If the array isn't present, but the `QoSMarkingPolicy` key is present — even empty — no apps can use L2 and L3 marking.",
+          "subkeys": [
+            {
+              "key": "appBundleID",
+              "title": "Allowlisted App",
+              "type": "\u003cstring\u003e"
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "14.5"
+            },
+            "macOS": {
+              "introduced": "14.0"
+            }
+          }
+        },
+        {
+          "key": "QoSMarkingWhitelistedAppIdentifiers",
+          "title": "Whitelisted App Identifiers",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "Use `QoSMarkingAllowListAppIdentifiers` instead.",
+          "subkeys": [
+            {
+              "key": "appBundleID",
+              "title": "Allowlisted App",
+              "type": "\u003cstring\u003e"
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "deprecated": "14.5"
+            },
+            "macOS": {
+              "deprecated": "14.0"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "QoSMarkingAppleAudioVideoCalls",
+          "title": "QoS marking for audio or video calls",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": true,
+          "content": "If `true`, adds audio and video traffic of built-in audio or video services, such as FaceTime and Wi-Fi Calling, to the allow list for L2 and L3 marking for traffic that goes to the Wi-Fi network."
+        },
+        {
+          "key": "QoSMarkingEnabled",
+          "title": "Allow QoS marking",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": true,
+          "content": "If `true`, disables L3 marking and only uses L2 marking for traffic that goes to the Wi-Fi network.\n\n\n\nIf `false`, the system behaves as if Wi-Fi doesn't have an association with a Cisco QoS fast lane network."
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "10.0"
+        },
+        "macOS": {
+          "introduced": "10.13"
+        }
+      }
+    },
+    {
+      "key": "SetupModes",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of strings that contain the type of connection mode to attach.",
+      "subkeys": [
+        {
+          "key": "SetupModesItem",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "rangelist": [
+            "System",
+            "Loginwindow"
+          ],
+          "content": "A type of connection mode."
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "10.7"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "EnableIPv6",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, enables IPv6 on this interface."
+    },
+    {
+      "key": "TLSCertificateRequired",
+      "title": "Certificate Required",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, allows for two-factor authentication for EAP-TTLS, PEAP, or EAP-FAST. If `false`, allows for zero-factor authentication for EAP-TLS."
+    },
+    {
+      "key": "ProxyServer",
+      "title": "Proxy Server",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The proxy server's network address.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "ProxyServerPort",
+      "title": "Proxy Server Port",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "range": {
+        "min": 0,
+        "max": 65535
+      },
+      "content": "The proxy server's port number.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "ProxyUsername",
+      "title": "Proxy Username",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user name used to authenticate to the proxy server.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "ProxyPassword",
+      "title": "Proxy Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The password used to authenticate to the proxy server.",
+      "supportedOS": {
+        "iOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "ProxyPACURL",
+      "title": "Proxy PAC URL",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The URL of the PAC file that defines the proxy configuration.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "ProxyPACFallbackAllowed",
+      "title": "Proxy PAC Fallback Allowed",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, allows connecting directly to the destination if the PAC file is unreachable.",
+      "supportedOS": {
+        "iOS": {},
+        "macOS": {},
+        "visionOS": {}
+      }
+    },
+    {
+      "key": "DisableAssociationMACRandomization",
+      "title": "Disable MAC address randomization during association",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true,` disables MAC address randomization for a Wi-Fi network while associated with that network. This feature also shows a privacy warning in Settings indicating that the network has reduced privacy protections.\n\nIf `false`, then the system enables MAC address randomization on iOS, watchOS, and visionOS.\n\nThis value is only locked when MDM installs the profile. If the profile is manually installed, the system sets the value but the user can change it.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.0"
+        },
+        "macOS": {
+          "introduced": "15.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {},
+        "watchOS": {
+          "introduced": "7.0"
+        }
+      }
+    },
+    {
+      "key": "AllowJoinBeforeFirstUnlock",
+      "title": "Allow Join Before First Unlock",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the device makes this network available for joining before the device is unlocked for the first time following a reboot, on a device configured for return to service. Any network credentials are placed into Class D storage within the keychain, and information about the network is stored on disk in Class D.\n\nThere are several restrictions on the use of this flag:\n\n- This property is only available in the return to service mode.\n- Only one network can be designated as available before first unlock.\n- `EAPClientConfiguration` must not be present.\n- If `IsHotspot` is present, it must be set to `false`.\n- `QoSMarkingPolicy` must not be present.\n- If `ProxyType` is present, it must be set to `None`.\n\nThe device fails to install the profile payload if any of these conditions are not met.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "26.0"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

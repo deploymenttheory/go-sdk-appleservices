@@ -1,0 +1,63 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "external-intelligence.settings",
+  "title": "External Intelligence Settings",
+  "description": "The declaration to configure External Intelligence Integrations settings.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.external-intelligence.settings",
+    "apply": "combined",
+    "content": "Configures External Intelligence Integrations settings.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "26.4"
+      },
+      "macOS": {
+        "introduced": "26.4"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "26.4"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Enabled",
+      "title": "Allow External Intelligence Integrations",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables external intelligence integrations."
+    },
+    {
+      "key": "AllowSignIn",
+      "title": "Allow External Intelligence Integrations Sign In",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables sign-in for external intelligence integrations."
+    },
+    {
+      "key": "AllowedWorkspaceIDs",
+      "title": "Allowed External Intelligence Workspace IDs",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "combinetype": "set-intersection",
+      "content": "An array of strings, but currently restricted to a single element. If present, Apple Intelligence allows use of only the given external integration workspace ID, and requires a sign-in to make requests. The user is required to sign in to integrations that support signing in. Multiple values combine using an intersect operation.",
+      "subkeys": [
+        {
+          "key": "workspaceID",
+          "title": "Allowed Workspace ID",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    }
+  ]
+}

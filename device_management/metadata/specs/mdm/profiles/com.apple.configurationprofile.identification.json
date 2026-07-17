@@ -1,0 +1,84 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.configurationprofile.identification",
+  "title": "Identification",
+  "description": "The payload that configures the names of the account user.",
+  "payload": {
+    "payloadtype": "com.apple.configurationprofile.identification",
+    "content": "This payload can be used on the device or user channel depending on what payload it is paired with.\n\nDevice channel:\n*com.apple.MCX.FileVault2\n*com.apple.ADCertificate.managed\n*com.apple.DirectoryService.managed\n\nUser channel:\n*com.apple.caldav.account\n*com.apple.carddav.account\n*com.apple.ews.account\n*com.apple.ldap.account\n*com.apple.mail.managed",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7",
+        "deprecated": "15.4"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "PayloadIdentification",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "The dictionary that contains details about the user.",
+      "subkeys": [
+        {
+          "key": "UserName",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "The UNIX user name for the accounts."
+        },
+        {
+          "key": "FullName",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "The full name of the account."
+        },
+        {
+          "key": "EmailAddress",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "The address for the account."
+        },
+        {
+          "key": "AuthMethod",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "rangelist": [
+            "Password",
+            "UserEnteredPassword"
+          ],
+          "content": "The authorization method. Either the profile contains the password or the user provides it."
+        },
+        {
+          "key": "Password",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "The password for the account. Required when the `AuthMethod` is `Password`."
+        },
+        {
+          "key": "Prompt",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The custom instructions for the user, if needed."
+        },
+        {
+          "key": "PromptMessage",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The additional descriptive text for the user prompt."
+        }
+      ]
+    }
+  ]
+}

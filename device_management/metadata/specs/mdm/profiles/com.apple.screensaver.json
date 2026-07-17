@@ -1,0 +1,70 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.screensaver",
+  "title": "Screensaver",
+  "description": "The payload that configures the screen saver.",
+  "payload": {
+    "payloadtype": "com.apple.screensaver",
+    "content": "Specifies grace period for screensaver locking",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.11"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "askForPassword",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the user is prompted for a password when the screen saver is unlocked or stopped. When you use this prompt, you must also provide `askForPasswordDelay`. Available in macOS 10.13 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13"
+        }
+      }
+    },
+    {
+      "key": "askForPasswordDelay",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The number of seconds to delay before the password will be required to unlock or stop the screen saver (the grace period). A value of `2147483647` (for example, `0x7FFFFFFF`) disables this requirement. To use this option, you must set `askForPassword` to `true`. Available in macOS 10.13 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.13"
+        }
+      }
+    },
+    {
+      "key": "idleTime",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "content": "The number of seconds of inactivity before the screen saver activates (0 = Never activate)."
+    },
+    {
+      "key": "loginWindowModulePath",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The full path to the screen-saver module to use."
+    },
+    {
+      "key": "moduleName",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The name of the screen saver module."
+    }
+  ]
+}

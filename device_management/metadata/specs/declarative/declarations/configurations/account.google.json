@@ -1,0 +1,47 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "account.google",
+  "title": "Account:Google",
+  "description": "The declaration to configure a Google account.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.account.google",
+    "apply": "multiple",
+    "content": "A Google configuration defines a Google account for a user. The user will be prompted to enter their credentials shortly after the configuration successfully installs.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "VisibleName",
+      "title": "Account Name",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The name that apps show to the user for this Google account. If not present, the system generates a suitable default."
+    },
+    {
+      "key": "UserIdentityAssetReference",
+      "title": "User Identity Asset Reference",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The identifier of an asset declaration that contains the user identity for this Google account. Set the corresponding asset type to `UserIdentity` and ensure that it contains an `EmailAddress` key that specifies the full Google email address for the account.",
+      "assettypes": [
+        "com.apple.asset.useridentity"
+      ]
+    }
+  ]
+}

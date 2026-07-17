@@ -1,0 +1,62 @@
+{
+  "category": "mdm/commands",
+  "name": "lom.setuprequest",
+  "title": "LOM Setup Request Command",
+  "description": "Get information from a device to set up lights-out management (LOM).",
+  "payload": {
+    "requesttype": "LOMSetupRequest",
+    "content": "Queries the device for LOM setup information such as IP addresses, protocol version, etc. The MDM server must send this command prior to sending the LOMDeviceRequest command.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "11.0",
+        "accessrights": "DeviceLockAndRemovePasscode"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "responsekeys": [
+    {
+      "key": "PrimaryIPv6AddressList",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array that contains the IPv6 addresses for primary LOM-compatible Ethernet interfaces for the device.",
+      "subkeys": [
+        {
+          "key": "PrimaryIPv6AddressListItem",
+          "type": "\u003cstring\u003e",
+          "presence": "required"
+        }
+      ]
+    },
+    {
+      "key": "SecondaryIPv6AddressList",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array that contains the IPv6 addresses for secondary LOM-compatible Ethernet interfaces for the device.",
+      "subkeys": [
+        {
+          "key": "SecondaryIPv6AddressListItem",
+          "type": "\u003cstring\u003e",
+          "presence": "required"
+        }
+      ]
+    },
+    {
+      "key": "LOMProtocolVersion",
+      "type": "\u003cinteger\u003e",
+      "presence": "required",
+      "content": "The LOM protocol version that the device supports."
+    }
+  ]
+}

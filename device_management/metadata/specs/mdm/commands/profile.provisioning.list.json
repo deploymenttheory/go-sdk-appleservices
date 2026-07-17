@@ -1,0 +1,84 @@
+{
+  "category": "mdm/commands",
+  "name": "profile.provisioning.list",
+  "title": "Provisioning Profile List Command",
+  "description": "Get a list of installed provisioning profiles on a device.",
+  "payload": {
+    "requesttype": "ProvisioningProfileList",
+    "content": "This command allows the server to retrieve the list of installed provisioning profiles on the device. This command requires the Inspect Provisioning Profiles right. On macOS, this command is for iOS and iPadOS style provisioning profiles only.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0",
+        "accessrights": "AllowProvisioningInspection"
+      },
+      "macOS": {
+        "introduced": "11.0",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "10.2",
+        "accessrights": "AllowProvisioningInspection"
+      },
+      "visionOS": {
+        "introduced": "1.1",
+        "accessrights": "AllowProvisioningInspection"
+      },
+      "watchOS": {
+        "introduced": "10.0",
+        "accessrights": "AllowProvisioningInspection"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ManagedOnly",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, only include profiles that MDM has installed. For user enrollments, the device ignores this key and always limits the results to managed profiles. This value is available in iOS 13 and later, and tvOS 13 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "13.0"
+        },
+        "tvOS": {
+          "introduced": "13.0"
+        }
+      }
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "ProvisioningProfileList",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries that describes each installed profile.",
+      "subkeys": [
+        {
+          "key": "ProvisioningProfileListItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that describes a provisioning profile list item.",
+          "subkeys": [
+            {
+              "key": "Name",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The display name of the provisioning profile."
+            },
+            {
+              "key": "UUID",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The unique identifier for the provisioning profile."
+            },
+            {
+              "key": "ExpiryDate",
+              "type": "\u003cdate\u003e",
+              "presence": "optional",
+              "content": "The expiry date of the provisioning profile."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

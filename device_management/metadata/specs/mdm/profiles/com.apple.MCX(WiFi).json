@@ -1,0 +1,64 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.MCX(WiFi)",
+  "title": "Wi-Fi Managed Settings",
+  "description": "The payload that configures managed Wi-Fi settings.",
+  "payload": {
+    "payloadtype": "com.apple.MCX",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.9"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "RequireAdminForIBSS",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, requires administrator authorization to enable IBSS.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "RequireAdminForAirPortNetworkChange",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, requires administrator authorization for network changes.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    },
+    {
+      "key": "RequireAdminToTurnAirPortOnOff",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, requires administrator authorization to turn Wi-Fi on or off.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "10.9"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "migration-assistant.settings",
+  "title": "Migration Assistant Settings",
+  "description": "The declaration to configure Migration Assistant settings.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.migration-assistant.settings",
+    "apply": "combined",
+    "content": "Configures the managed migration functions of Migration Assistant.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "26.4"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ShouldDoManagedMigration",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "combinetype": "boolean-or",
+      "content": "If `true`, the device manages Migration Assistant."
+    },
+    {
+      "key": "ExcludedAccounts",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "combinetype": "set-union",
+      "content": "An array of strings that represent the user account short names the system excludes from migration.",
+      "subkeys": [
+        {
+          "key": "_Accounts",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    },
+    {
+      "key": "ExcludedPaths",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "combinetype": "set-union",
+      "content": "An array of strings that represent files and directories relative to the user's home directory that the system excludes from migration. Directory paths need to include a trailing \"/\". For example, to exclude the \"Excluded\" directory in the \"Documents\" folder of a user's home directory, use \"Documents/Excluded/\".",
+      "subkeys": [
+        {
+          "key": "_ExcludedPaths",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    },
+    {
+      "key": "RequiredPaths",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "combinetype": "set-union",
+      "content": "An array of strings that represent files and directories relative to the user's home directory that the system needs to migrate. Directory paths need to include a trailing \"/\". For example, to require the \"Required\" directory in the \"Documents\" folder of a user's home directory, use \"Documents/Required/\".",
+      "subkeys": [
+        {
+          "key": "_RequiredPaths",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    },
+    {
+      "key": "ShouldMigrateSecurityPrivacySettings",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "combinetype": "boolean-or",
+      "content": "If `true`, the system migrates Security \u0026 Privacy settings."
+    }
+  ]
+}

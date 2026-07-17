@@ -1,0 +1,145 @@
+{
+  "category": "declarative/status",
+  "name": "package.list",
+  "title": "Status Package List",
+  "description": "The client's declarative packages.",
+  "payload": {
+    "statusitemtype": "package.list",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "26.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "package.list",
+      "title": "Status item value.",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries that describe the device's declarative packages.",
+      "subkeytype": "Package",
+      "subkeys": [
+        {
+          "key": "status_value",
+          "type": "\u003cdictionary\u003e",
+          "content": "A dictionary that describes a declarative package.",
+          "subkeys": [
+            {
+              "key": "identifier",
+              "title": "Unique identifier of the package.",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The package's unique identifier. This is the package identifier value of the package file."
+            },
+            {
+              "key": "_removed",
+              "title": "Indicates removal of the package.",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system removed the package and only this key and the `identifier` key are present in the status item object."
+            },
+            {
+              "key": "declaration-identifier",
+              "title": "Identifier of the declaration that controls the package.",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The identifier of the declaration that controls the package."
+            },
+            {
+              "key": "name",
+              "title": "Package name",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The name of the package."
+            },
+            {
+              "key": "version",
+              "title": "Version",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The version of the package. This will be the package version value of the package file."
+            },
+            {
+              "key": "state",
+              "title": "Package status",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "optional",
+                "queued",
+                "prompting-for-consent",
+                "downloading",
+                "installing",
+                "installed",
+                "failed"
+              ],
+              "content": "The status of the package, which has the following possible values:\n\n- `optional`: The package is optional and the user has to trigger its installation.\n- `queued`: Installation of the package has started.\n- `prompting-for-consent`: The system is displaying a prompt to the user to proceed with package installation.\n- `downloading`: The system is downloading the package.\n- `installing`: The system is installing the package.\n- `installed`: The package is installed.\n- `failed`: The package install failed."
+            },
+            {
+              "key": "reasons",
+              "title": "Status Reasons",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "An array that contains additional details about the package state, including errors.",
+              "subkeytype": "StatusReason",
+              "subkeys": [
+                {
+                  "key": "_reasons",
+                  "title": "Status Reason",
+                  "type": "\u003cdictionary\u003e",
+                  "content": "Information about a status error.",
+                  "subkeytype": "StatusReason",
+                  "subkeys": [
+                    {
+                      "key": "code",
+                      "title": "Error Code",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "A code for the state."
+                    },
+                    {
+                      "key": "description",
+                      "title": "Error Description",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "content": "A description of the state."
+                    },
+                    {
+                      "key": "details",
+                      "title": "Error Details",
+                      "type": "\u003cdictionary\u003e",
+                      "presence": "optional",
+                      "content": "A dictionary that contains additional details about the state.",
+                      "subkeys": [
+                        {
+                          "key": "ANY",
+                          "type": "\u003cany\u003e",
+                          "presence": "optional",
+                          "content": "Additional keys may be present."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

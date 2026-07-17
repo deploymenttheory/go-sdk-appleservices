@@ -1,0 +1,128 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.cellularprivatenetwork.managed",
+  "title": "Cellular Private Network",
+  "description": "The payload that provides device info on private network deployments, including geographical location, preference over Wi-Fi, and network deployment type.",
+  "payload": {
+    "payloadtype": "com.apple.cellularprivatenetwork.managed",
+    "content": "Payload can be used to provide device info on private network deployments including geographical location, preference over Wi-Fi, and network deployment type. Only five Cellular Private Networks can be configured simultaneously.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "17.0"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Geofences",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "A list of up to 1000 geofences for private networks. Geofencing is only used on iPhone.",
+      "subkeys": [
+        {
+          "key": "GeofenceItem",
+          "type": "\u003cdictionary\u003e",
+          "content": "A geofence for a private network.",
+          "subkeys": [
+            {
+              "key": "Longitude",
+              "type": "\u003creal\u003e",
+              "presence": "required",
+              "range": {
+                "min": -180,
+                "max": 180
+              },
+              "content": "The longitude of the geofence."
+            },
+            {
+              "key": "Latitude",
+              "type": "\u003creal\u003e",
+              "presence": "required",
+              "range": {
+                "min": -90,
+                "max": 90
+              },
+              "content": "The latitude of the geofence."
+            },
+            {
+              "key": "Radius",
+              "type": "\u003creal\u003e",
+              "presence": "required",
+              "range": {
+                "min": 100,
+                "max": 6500
+              },
+              "content": "Specifies the radius of the geofence in meters. Set this value slightly greater than the private cellular network coverage area."
+            },
+            {
+              "key": "GeofenceId",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "A geofence identifier that's unique within a list of geofences."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "DataSetName",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The name of the private network configuration data set."
+    },
+    {
+      "key": "VersionNumber",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The version number of this dataset that the system uses to track updates."
+    },
+    {
+      "key": "CellularDataPreferred",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "Set to `true` to prefer this private network over Wi-Fi."
+    },
+    {
+      "key": "EnableNRStandalone",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "Set to `true` if this private network is NR Standalone."
+    },
+    {
+      "key": "NetworkIdentifier",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A string using the 3GPP \"Coordinated NID\" (option 1 or option 2) format (defined in 3GPP 31.102, Section 12.7.1). The device uses this value to match a SIM present on the device.\n\nAll combinations of `NetworkIdentifier` and `CsgNetworkIdentifier` must be unique across all profiles installed on the device.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "18.0"
+        }
+      }
+    },
+    {
+      "key": "CsgNetworkIdentifier",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A string using the 3GPP \"CSG_ID\" format (defined in 3GPP 23.003, Section 4.7). The device uses this value to match a SIM present on the device.\n\nAll combinations of `NetworkIdentifier` and `CsgNetworkIdentifier` must be unique across all profiles installed on the device.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "18.0"
+        }
+      }
+    }
+  ]
+}

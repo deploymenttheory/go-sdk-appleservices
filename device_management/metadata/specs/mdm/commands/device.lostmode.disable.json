@@ -1,0 +1,28 @@
+{
+  "category": "mdm/commands",
+  "name": "device.lostmode.disable",
+  "title": "Disable Lost Mode Command",
+  "description": "Take the device out of Lost Mode.",
+  "payload": {
+    "requesttype": "DisableLostMode",
+    "content": "This command allows the server to take the device out of MDM lost mode.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.3",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  }
+}

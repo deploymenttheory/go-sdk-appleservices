@@ -1,0 +1,85 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "security.identity",
+  "title": "Security:Identity",
+  "description": "The declaration to install an identity on the device.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.security.identity",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "17.0"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "17.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "CredentialAssetReference",
+      "title": "Credential asset reference",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The identifier of an asset declaration that contains the identity to install.",
+      "assettypes": [
+        "com.apple.asset.credential.identity",
+        "com.apple.asset.credential.scep",
+        "com.apple.asset.credential.acme"
+      ]
+    },
+    {
+      "key": "AllowAllAppsAccess",
+      "title": "Allow all apps access",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, apps can access the private key.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "KeyIsExtractable",
+      "title": "Key is extractable",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `true`, the private key is extractable in the keychain.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

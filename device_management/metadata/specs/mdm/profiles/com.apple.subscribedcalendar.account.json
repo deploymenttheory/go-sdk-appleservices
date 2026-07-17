@@ -1,0 +1,76 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.subscribedcalendar.account",
+  "title": "Subscribed Calendars",
+  "description": "The payload that configures subscribed calendars.",
+  "payload": {
+    "payloadtype": "com.apple.subscribedcalendar.account",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "SubCalAccountDescription",
+      "title": "Description",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The description of the account."
+    },
+    {
+      "key": "SubCalAccountHostName",
+      "title": "URL",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The server's address."
+    },
+    {
+      "key": "SubCalAccountUsername",
+      "title": "Username",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user's user name."
+    },
+    {
+      "key": "SubCalAccountPassword",
+      "title": "Password",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user's password."
+    },
+    {
+      "key": "SubCalAccountUseSSL",
+      "title": "Use SSL",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system enables SSL."
+    },
+    {
+      "key": "VPNUUID",
+      "title": "VPNUUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.0"
+        }
+      }
+    }
+  ]
+}

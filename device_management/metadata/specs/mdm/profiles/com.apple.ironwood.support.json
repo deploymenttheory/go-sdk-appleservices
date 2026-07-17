@@ -1,0 +1,43 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.ironwood.support",
+  "title": "Parental Control: Dictation and Profanity",
+  "description": "The payload that configures parental control for dictation and profanity.",
+  "payload": {
+    "payloadtype": "com.apple.ironwood.support",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.9",
+        "deprecated": "10.13"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Profanity Allowed",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, suppresses profanity. Use `forceAssistantProfanityFilter` in Restrictions instead."
+    },
+    {
+      "key": "Ironwood Allowed",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, disables dictation. Use `allowDictation` in Restrictions instead."
+    }
+  ]
+}

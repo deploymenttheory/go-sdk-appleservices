@@ -1,0 +1,40 @@
+{
+  "category": "mdm/commands",
+  "name": "profile.install",
+  "title": "Install Profile Command",
+  "description": "Install a configuration profile on a device.",
+  "payload": {
+    "requesttype": "InstallProfile",
+    "content": "This command allows the host to install a configuration profile. The profile may be encrypted using any installed identity certificate. The profile may also be signed. This command requires the Profile Installation and Removal right. It's supported in the user channel.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0",
+        "accessrights": "AllowInstallationRemoval"
+      },
+      "macOS": {
+        "introduced": "10.7",
+        "accessrights": "AllowInstallationRemoval"
+      },
+      "tvOS": {
+        "introduced": "9.0",
+        "accessrights": "AllowInstallationRemoval"
+      },
+      "visionOS": {
+        "introduced": "1.1",
+        "accessrights": "AllowInstallationRemoval"
+      },
+      "watchOS": {
+        "introduced": "10.0",
+        "accessrights": "AllowInstallationRemoval"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Payload",
+      "type": "\u003cdata\u003e",
+      "presence": "required",
+      "content": "The profile to install, which you can encrypt using any identity certificate installed on the device. You can also sign the profile."
+    }
+  ]
+}

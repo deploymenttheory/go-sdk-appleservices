@@ -1,0 +1,46 @@
+{
+  "category": "mdm/commands",
+  "name": "system.update.scan",
+  "title": "Schedule OS Update Scan Command",
+  "description": "Schedule a background scan for operating-system updates on a device.",
+  "payload": {
+    "requesttype": "ScheduleOSUpdateScan",
+    "content": "Requests that the device perform a background scan for OS updates.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.11",
+        "deprecated": "26.0",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Force",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, force a scan to start immediately. Otherwise, the scan starts at a system-determined time."
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "ScanInitiated",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "content": "If `true`, the scan started successfully."
+    }
+  ]
+}

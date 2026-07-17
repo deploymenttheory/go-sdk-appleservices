@@ -1,0 +1,206 @@
+{
+  "category": "mdm/commands",
+  "name": "system.update.schedule",
+  "title": "Schedule OS Update Command",
+  "description": "Schedule an update of the operating system on a device.",
+  "payload": {
+    "requesttype": "ScheduleOSUpdate",
+    "content": "This command allows the server to schedule an OS update.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.0",
+        "deprecated": "26.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "10.11",
+        "deprecated": "26.0",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "12.0",
+        "deprecated": "26.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Updates",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries specifying the updates to download or install. If this value is missing, the device applies the default behavior for handling updates.\nThe device ignores this command and an informational error is returned, if a software update is managed by a Declarative Device Management `SoftwareUpdateEnforcementSpecific` configuration, as the configuration takes precedence.",
+      "subkeys": [
+        {
+          "key": "UpdatesItem",
+          "type": "\u003cdictionary\u003e",
+          "presence": "required",
+          "content": "A dictionary that describes the available operating-system updates item.",
+          "subkeys": [
+            {
+              "key": "ProductKey",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The product key that represents the update."
+            },
+            {
+              "key": "ProductVersion",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The version of the update, which the system requires if `ProductKey` isn't present. This value is available in iOS 11.3 and later, macOS 12 and later, and tvOS 12.2 and later.\n\n\u003e Note:\n\u003e This value isn't available for use with Background Security Improvement updates.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "11.3"
+                },
+                "macOS": {
+                  "introduced": "12.0"
+                },
+                "tvOS": {
+                  "introduced": "12.2"
+                }
+              }
+            },
+            {
+              "key": "InstallAction",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "Default",
+                "DownloadOnly",
+                "InstallASAP",
+                "NotifyOnly",
+                "InstallLater",
+                "InstallForceRestart"
+              ],
+              "content": "The install action, which is one of the following values:\n\n- `Default`: Download or install the update, depending on the current state. You can check the `UpdateResults` dictionary to review scheduled updates. This value is available in iOS 9 and later, macOS 10.11 and later, and tvOS 12 and later.\n- `DownloadOnly`: Download the software update without installing it. This value is available in iOS 9 and later, macOS 11 and later, and tvOS 12 and later.\n- `InstallASAP`: In iOS and tvOS, install a previously downloaded software update. In macOS, download the software update and trigger the restart countdown notification. This value is available in iOS 9 and later, macOS 10.11 and later, and tvOS 12 and later.\n- `NotifyOnly`: Download the software update and notify the user through the App Store. This value is available in macOS 10.11 and later.\n- `InstallLater`: Download the software update and install it at a later time. This value is available in macOS 10.11 and later.\n- `InstallForceRestart`: Perform the `Default` action, and then force a restart if the update requires it. This value is available in macOS 11 and later.\n\n\n\u003e Warning:\n\u003e `InstallForceRestart` may result in data loss."
+            },
+            {
+              "key": "MaxUserDeferrals",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The maximum number of times the system allows the user to postpone an update before it's installed. The system prompts the user once a day.\n\nThis key is only supported when `InstallAction` is `InstallLater` and only supported for minor OS updates (for example, macOS 12.x to 12.y).",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                },
+                "macOS": {
+                  "introduced": "12.0"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "Priority",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "Low",
+                "High"
+              ],
+              "default": "Low",
+              "content": "The scheduling priority for downloading and preparing the requested update. This is only supported for minor OS updates (macOS 12.x to 12.y).\n\nAvailable in macOS 12.3 and later. Prior versions of macOS used a priority of `Low`.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "n/a"
+                },
+                "macOS": {
+                  "introduced": "12.3"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "responsekeys": [
+    {
+      "key": "UpdateResults",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries that describes the results of processing operating-system updates.",
+      "subkeys": [
+        {
+          "key": "UpdateResultsItem",
+          "type": "\u003cdictionary\u003e",
+          "presence": "required",
+          "content": "The response dictionary that describes the result of processing an operating-system update.",
+          "subkeys": [
+            {
+              "key": "ProductKey",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The product key that represents the update."
+            },
+            {
+              "key": "InstallAction",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "Error",
+                "DownloadOnly",
+                "InstallASAP",
+                "NotifyOnly",
+                "InstallLater",
+                "InstallForceRestart"
+              ],
+              "content": "The install action that the device scheduled, which is one of the following values:\n\n- `Error`: An error occurred during scheduling.\n- `DownloadOnly`: Download the software update without installing it.\n- `InstallASAP`: Install a previously downloaded software update.\n- `NotifyOnly`: Download the software update and notify the user through the App Store. This value is available in macOS 10.11 and later.\n- `InstallLater`: Download the software update and install it at a later time. This value is available in macOS 10.11 and later.\n- `InstallForceRestart`: Perform the `Default` action, and then force a restart if the update requires it. This value is available in macOS 11 and later."
+            },
+            {
+              "key": "Status",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "Idle",
+                "Downloading",
+                "DownloadFailed",
+                "DownloadRequiresComputer",
+                "DownloadInsufficientSpace",
+                "DownloadInsufficientPower",
+                "DownloadInsufficientNetwork",
+                "Installing",
+                "InstallInsufficientSpace",
+                "InstallInsufficientPower",
+                "InstallPhoneCallInProgress",
+                "InstallFailed"
+              ],
+              "content": "The status of the update, which is one of the following values:\n\n- `Idle`: The update is idle.\n- `Downloading`: The software update is downloading.\n- `DownloadFailed`: The download failed.\n- `DownloadRequiresComputer`: Tether the device to download this update. This value is only available in iOS.\n- `DownloadInsufficientSpace`: There isn't enough space to download the update.\n- `DownloadInsufficientPower`: There isn't enough power to download the update.\n- `DownloadInsufficientNetwork`: The network capacity is insufficient to download the update.\n- `Installing`: The software update is installing.\n- `InstallInsufficientSpace`: There isn't enough space to install the update.\n- `InstallInsufficientPower`: There isn't enough power to install the update.\n- `InstallPhoneCallInProgress`: Installation couldn't occur because a phone call is in progress.\n- `InstallFailed`: Installation failed due to an unspecified reason."
+            },
+            {
+              "key": "ErrorChain",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "A dictionary that describes an error chain.",
+              "subkeys": [
+                {
+                  "key": "ErrorChainItem",
+                  "type": "\u003cdictionary\u003e",
+                  "content": "A dictionary that describes an error chain item.",
+                  "subkeys": [
+                    {
+                      "key": "ANY",
+                      "type": "\u003cany\u003e",
+                      "presence": "required",
+                      "content": "The error details."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

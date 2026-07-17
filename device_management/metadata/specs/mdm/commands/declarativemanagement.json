@@ -1,0 +1,35 @@
+{
+  "category": "mdm/commands",
+  "name": "declarativemanagement",
+  "title": "Declarative Management Command",
+  "description": "Enable your server to support declarative management or trigger a declarative management synchronization operation on the device.",
+  "payload": {
+    "requesttype": "DeclarativeManagement",
+    "content": "This command allows the server to turn on the declarative management engine on the device (the first time it is used), or to trigger a declarative management synchronization operation.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Data",
+      "type": "\u003cdata\u003e",
+      "presence": "optional",
+      "content": "The base64-encoded declarative management JSON request using a `TokensResponse`."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.security.pkcs1",
+  "title": "Certificate (PKCS #1)",
+  "description": "The payload that configures a PKCS #1-formatted certificate.",
+  "payload": {
+    "payloadtype": "com.apple.security.pkcs1",
+    "content": "DER-encoded certificate without private key. May contain root certificates.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "4.0"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "9.0"
+      },
+      "visionOS": {
+        "introduced": "1.0"
+      },
+      "watchOS": {
+        "introduced": "3.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "PayloadCertificateFileName",
+      "title": "Payload Certificate Filename",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The file name of the enclosed certificate."
+    },
+    {
+      "key": "PayloadContent",
+      "title": "Payload Certificate Data",
+      "type": "\u003cdata\u003e",
+      "presence": "required",
+      "content": "The binary representation of the payload, encoded in Base64."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "category": "mdm/commands",
+  "name": "application.redemptioncode",
+  "title": "Apply Redemption Code Command",
+  "description": "Complete the installation of an app using a redemption code.",
+  "payload": {
+    "requesttype": "ApplyRedemptionCode",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "5.0",
+        "accessrights": "AllowAppInstallation"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Identifier",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The bundle identifier of the app."
+    },
+    {
+      "key": "RedemptionCode",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The redemption code that applies to the app pending installation."
+    }
+  ]
+}

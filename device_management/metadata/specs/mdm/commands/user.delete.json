@@ -1,0 +1,64 @@
+{
+  "category": "mdm/commands",
+  "name": "user.delete",
+  "title": "Delete User Command",
+  "description": "Delete a user's account from a device.",
+  "payload": {
+    "requesttype": "DeleteUser",
+    "content": "This command allows the server to delete a user that has an active account on the device.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.3",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "10.13",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "UserName",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The user name of the account to delete. This key is required when the value for `DeleteAllUsers` is absent or `false`."
+    },
+    {
+      "key": "ForceDeletion",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system deletes the account even if the user has data that's pending sync to the cloud. This value is available on iOS 9.3 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "DeleteAllUsers",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system attempts to delete all users from the device. If `ForceDeletion` is `false`, the system generates an error instead and doesn't delete users who have data that's pending sync. This value is available in iOS 14 and later.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "14.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

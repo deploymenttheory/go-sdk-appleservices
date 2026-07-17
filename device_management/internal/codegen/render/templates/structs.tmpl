@@ -1,0 +1,32 @@
+{{define "structdecl"}}
+{{- range .CommentLines}}{{if .}}// {{.}}{{else}}//{{end}}
+{{end -}}
+type {{.Name}} struct {
+{{- range .Fields}}
+{{- range .CommentLines}}
+	{{if .}}// {{.}}{{else}}//{{end}}
+{{- end}}
+	{{.Name}} {{.Type}} `{{.Tag}}`
+{{- end}}
+}
+
+{{end}}
+
+{{define "structfuncs"}}{{if .TypeMethod}}// {{.TypeMethod}} returns the wire type identifier for {{.Name}}.
+func ({{.Name}}) {{.TypeMethod}}() string { return "{{.TypeValue}}" }
+
+{{end}}{{if .ValidateLines}}// Validate checks the payload against Apple's spec: required keys,
+// allowed values, ranges, formats and nested payload keys.
+func (p *{{.Name}}) Validate() error {
+	var errs []error
+{{- range .ValidateLines}}
+	{{.}}
+{{- end}}
+	return errors.Join(errs...)
+}
+
+{{else}}// Validate checks the payload against Apple's spec. {{.Name}} has no
+// constraints beyond its field types.
+func (p *{{.Name}}) Validate() error { return nil }
+
+{{end}}{{end}}

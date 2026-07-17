@@ -1,0 +1,62 @@
+{
+  "category": "mdm/errors",
+  "name": "watch.pairing.token.missing",
+  "title": "Error Code Pairing Token Missing",
+  "description": "An error response that indicates a missing pairing token.",
+  "payload": {
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "code",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "com.apple.watch.pairing.token.missing"
+      ],
+      "content": "Indicates that the pairing token, which the system requires to enroll the watch, is missing."
+    },
+    {
+      "key": "description",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A description of the error. Only use this for logging purposes and don't display it to the user."
+    },
+    {
+      "key": "message",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A description of the error to display to the user."
+    },
+    {
+      "key": "details",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "A dictionary that contains additional data about the error code.",
+      "subkeys": [
+        {
+          "key": "security-token",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "The security token to pass to the phone's MDM server to create the pairing token. This token needs to be a random UUID string."
+        }
+      ]
+    }
+  ]
+}

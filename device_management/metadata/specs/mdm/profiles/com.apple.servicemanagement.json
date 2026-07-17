@@ -1,0 +1,82 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.servicemanagement",
+  "title": "Service Management - Managed Login Items",
+  "description": "This payload that configures managed login items, which auto-enables and auto-allows matched items.",
+  "payload": {
+    "payloadtype": "com.apple.servicemanagement",
+    "content": "This payload defines rules for tagging login items as managed, which will auto-enable and auto-allow matched items.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Rules",
+      "title": "Rules",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of service management rules.",
+      "subkeys": [
+        {
+          "key": "Rule",
+          "title": "Rule",
+          "type": "\u003cdictionary\u003e",
+          "presence": "required",
+          "content": "A specification for matching one or more login items.",
+          "subkeys": [
+            {
+              "key": "RuleType",
+              "title": "Rule Type",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "BundleIdentifier",
+                "BundleIdentifierPrefix",
+                "Label",
+                "LabelPrefix",
+                "TeamIdentifier"
+              ],
+              "content": "The type of comparison to make."
+            },
+            {
+              "key": "RuleValue",
+              "title": "Rule Value",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The value to compare with each login item's value, to determine if this rule is a match."
+            },
+            {
+              "key": "Comment",
+              "title": "Comment",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "An optional description of the rule."
+            },
+            {
+              "key": "TeamIdentifier",
+              "title": "Team Identifier",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "An additional constraint to limit the scope of the rule that the system tests after matching the `RuleType` and `RuleValue`."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

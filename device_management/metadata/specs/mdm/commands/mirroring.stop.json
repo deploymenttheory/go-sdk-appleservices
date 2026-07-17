@@ -1,0 +1,29 @@
+{
+  "category": "mdm/commands",
+  "name": "mirroring.stop",
+  "title": "Stop Mirroring Command",
+  "description": "Stop mirroring the display to another device.",
+  "payload": {
+    "requesttype": "StopMirroring",
+    "content": "This command stops AirPlay mirroring.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "7.0",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "10.10",
+        "accessrights": "None"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "category": "declarative/status",
+  "name": "softwareupdate.failure-reason",
+  "title": "Status Software Update Failure Reason",
+  "description": "A status report of a software update failure reason.",
+  "payload": {
+    "statusitemtype": "softwareupdate.failure-reason",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "17.0"
+      },
+      "macOS": {
+        "introduced": "14.0"
+      },
+      "tvOS": {
+        "introduced": "18.4"
+      },
+      "visionOS": {
+        "introduced": "26.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "softwareupdate.failure-reason",
+      "title": "The software update failure reason state.",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "Details about a software update failure.",
+      "subkeytype": "Dictionary",
+      "subkeys": [
+        {
+          "key": "count",
+          "title": "The software update failure count.",
+          "type": "\u003cinteger\u003e",
+          "presence": "required",
+          "content": "The number of times the current software update failed. If there are no failures, or no pending software update, this is `0`."
+        },
+        {
+          "key": "reason",
+          "title": "The reason for the software update failure.",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "If present, this describes the reason for last software update failure. This key isn't present if there are no failures or no pending software update."
+        },
+        {
+          "key": "timestamp",
+          "title": "The timestamp of the software update failure.",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "If present, this is the RFC 3339 timestamp of the last software update failure. This key isn't present if there are no failures or no pending software update."
+        }
+      ]
+    }
+  ]
+}

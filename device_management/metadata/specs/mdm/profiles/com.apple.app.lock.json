@@ -1,0 +1,272 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.app.lock",
+  "title": "App Lock",
+  "description": "The payload that configures a device to run a single app.",
+  "payload": {
+    "payloadtype": "com.apple.app.lock",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "6.0"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "10.2"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "App",
+      "title": "App",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "A dictionary that contains information about the app.",
+      "subkeys": [
+        {
+          "key": "Identifier",
+          "title": "Identifier",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "The app's bundle identifier."
+        },
+        {
+          "key": "Options",
+          "title": "Options",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "A dictionary of options that the user can't change.",
+          "subkeys": [
+            {
+              "key": "DisableTouch",
+              "title": "Disable Touch",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system disables the touch screen. In tvOS, it disables the touch surface on the Apple TV Remote."
+            },
+            {
+              "key": "DisableDeviceRotation",
+              "title": "Disable Device Rotation",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system disables device rotation sensing.",
+              "supportedOS": {
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "DisableVolumeButtons",
+              "title": "Disable Volume Buttons",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system disables the volume buttons.",
+              "supportedOS": {
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "DisableRingerSwitch",
+              "title": "Disable Ringer Switch",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system disables the ringer switch. When disabled, the ringer behavior depends on what position the switch was in when it was first disabled.",
+              "supportedOS": {
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "DisableSleepWakeButton",
+              "title": "Disable Sleep Wake Button",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system disables the sleep/wake button.",
+              "supportedOS": {
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "DisableAutoLock",
+              "title": "Disable Auto Lock",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the device doesn't automatically go to sleep after an idle period."
+            },
+            {
+              "key": "EnableVoiceOver",
+              "title": "Enable Voice Over",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system enables VoiceOver."
+            },
+            {
+              "key": "EnableZoom",
+              "title": "Enable Zoom",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system enables Zoom."
+            },
+            {
+              "key": "EnableInvertColors",
+              "title": "Enable Invert Colors",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system enables Invert Colors."
+            },
+            {
+              "key": "EnableAssistiveTouch",
+              "title": "Enable Assistive Touch",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system enables AssistiveTouch.",
+              "supportedOS": {
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "EnableSpeakSelection",
+              "title": "Enable Speak Selection",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system enables Speak Selection.",
+              "supportedOS": {
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "EnableMonoAudio",
+              "title": "Enable Mono Audio",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system enables Mono Audio.",
+              "supportedOS": {
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "EnableVoiceControl",
+              "title": "Enable Voice Control",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system enables Voice Control.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "13.0"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "7.0"
+            }
+          }
+        },
+        {
+          "key": "UserEnabledOptions",
+          "title": "User Enabled Options",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "A dictionary of user-editable options.",
+          "subkeys": [
+            {
+              "key": "VoiceControl",
+              "title": "Voice Control",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system allows the user to toggle Voice Control.",
+              "supportedOS": {
+                "iOS": {
+                  "introduced": "13.0"
+                },
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            },
+            {
+              "key": "VoiceOver",
+              "title": "Voice Over",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system allows the user to toggle VoiceOver."
+            },
+            {
+              "key": "Zoom",
+              "title": "Zoom",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system allows the user to toggle Zoom."
+            },
+            {
+              "key": "InvertColors",
+              "title": "Invert Colors",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system allows the user to toggle Invert Colors."
+            },
+            {
+              "key": "AssistiveTouch",
+              "title": "Assistive Touch",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system allows the user to toggle AssistiveTouch.",
+              "supportedOS": {
+                "tvOS": {
+                  "introduced": "n/a"
+                }
+              }
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "7.0"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

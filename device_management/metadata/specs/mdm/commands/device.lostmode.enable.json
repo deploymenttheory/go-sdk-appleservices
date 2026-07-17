@@ -1,0 +1,48 @@
+{
+  "category": "mdm/commands",
+  "name": "device.lostmode.enable",
+  "title": "Enable Lost Mode Command",
+  "description": "Enable Lost Mode on a device, which provides a message and phone number on the Lock Screen.",
+  "payload": {
+    "requesttype": "EnableLostMode",
+    "content": "This command allows the server to put the device in MDM lost mode, with a message, phone number, and footnote text. A message or phone number must be provided.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "9.3",
+        "accessrights": "None"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Message",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "If present, the device displays this text on the Lock Screen. You must provide this value if you don't provide a value for `PhoneNumber`."
+    },
+    {
+      "key": "PhoneNumber",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "If present, the device displays this phone number on the Lock Screen. You must provide this value if you don't provide a value for `Message`."
+    },
+    {
+      "key": "Footnote",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "If present, the device displays this text at the bottom of the Lock Screen."
+    }
+  ]
+}

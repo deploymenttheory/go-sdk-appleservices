@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "device.identifier.udid",
+  "title": "Status Device UDID",
+  "description": "A status report of the device's UDID.",
+  "payload": {
+    "statusitemtype": "device.identifier.udid",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "16.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "device.identifier.udid",
+      "title": "Status item value.",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The device's UDID. This value is always available on the device channel. This value is only available on user channels whose organization matches that of the device channel."
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "category": "mdm/profiles",
+  "name": "com.apple.syspolicy.kernel-extension-policy",
+  "title": "System Policy - Kernel Extensions",
+  "description": "The payload that configures the kernel extension policies.",
+  "payload": {
+    "payloadtype": "com.apple.syspolicy.kernel-extension-policy",
+    "content": "Provides a way of enabling a set of team identifiers or specific kernel extensions for loading without user approval. Also provides a way to block users from approving additional kernel extensions. Payload must be user-approved only.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.13.2"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AllowNonAdminUserApprovals",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, nonadministrative users can approve additional kernel extensions in the Security \u0026 Privacy preferences.\n\nAvailable in macOS 11 and later.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "11.0"
+        }
+      }
+    },
+    {
+      "key": "AllowUserOverrides",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, users can approve additional kernel extensions that configuration profiles don't explicitly allow."
+    },
+    {
+      "key": "AllowedTeamIdentifiers",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "The array of team identifiers that define which validly signed kernel extensions can load.",
+      "subkeys": [
+        {
+          "key": "AllowedTeamIdentifiersItem",
+          "title": "Identifier",
+          "type": "\u003cstring\u003e"
+        }
+      ]
+    },
+    {
+      "key": "AllowedKernelExtensions",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The dictionary that represents a set of kernel extensions that the system always allows to load on the computer. The dictionary maps team identifiers (keys) to arrays of bundle identifiers.",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "The kernel extension data.",
+          "subkeys": [
+            {
+              "key": "AllowedKernelExtensionsItems",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "Kernel extension data."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

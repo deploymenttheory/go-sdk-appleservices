@@ -1,0 +1,56 @@
+{
+  "category": "mdm/checkin",
+  "name": "userauthenticate",
+  "title": "User Authenticate",
+  "description": "Authenticates a user with a two-step authentication protocol.",
+  "payload": {
+    "requesttype": "UserAuthenticate",
+    "content": "Authenticate network or mobile users with MDM.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "10.7"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "MessageType",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "UserAuthenticate"
+      ],
+      "content": "The message type, which requires a value of `UserAuthenticate`."
+    },
+    {
+      "key": "UDID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The device's UDID (unique device identifier). The system requires this value if the enrollment type is a device enrollment."
+    },
+    {
+      "key": "UserID",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The local mobile user's GUID or the network user's GUID from an Open Directory record."
+    },
+    {
+      "key": "DigestResponse",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "A string that the client provides in the second `User-Authenticate` request after receiving `DigestChallenge` from the server on the first `User-Authenticate` request."
+    }
+  ]
+}

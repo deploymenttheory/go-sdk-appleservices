@@ -1,0 +1,118 @@
+{
+  "category": "declarative/protocol",
+  "name": "statusreport",
+  "title": "Status Report",
+  "description": "Status sent by the client.",
+  "payload": {
+    "requesttype": "StatusReport",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "15.0"
+      },
+      "macOS": {
+        "introduced": "13.0"
+      },
+      "tvOS": {
+        "introduced": "16.0"
+      },
+      "visionOS": {
+        "introduced": "1.1"
+      },
+      "watchOS": {
+        "introduced": "10.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "StatusItems",
+      "title": "Status Items",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "The status items for this report."
+    },
+    {
+      "key": "Errors",
+      "title": "Errors",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of errors for this status report.",
+      "subkeys": [
+        {
+          "key": "_Errors",
+          "title": "Error",
+          "type": "\u003cdictionary\u003e",
+          "content": "Error information for a status item that cannot be returned.",
+          "subkeys": [
+            {
+              "key": "StatusItem",
+              "title": "Status Item",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The status item that this error pertains to."
+            },
+            {
+              "key": "Reasons",
+              "title": "Status Reasons",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "An array of reasons for the error.",
+              "subkeytype": "StatusReason",
+              "subkeys": [
+                {
+                  "key": "_Reasons",
+                  "title": "Status Reason",
+                  "type": "\u003cdictionary\u003e",
+                  "content": "Information about a status error.",
+                  "subkeytype": "StatusReason",
+                  "subkeys": [
+                    {
+                      "key": "Code",
+                      "title": "Error Code",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "content": "The error code for this error."
+                    },
+                    {
+                      "key": "Description",
+                      "title": "Error Description",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "content": "The description for this error."
+                    },
+                    {
+                      "key": "Details",
+                      "title": "Error Details",
+                      "type": "\u003cdictionary\u003e",
+                      "presence": "optional",
+                      "content": "A dictionary that contains further details about this error."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "FullReport",
+      "title": "Full Report",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "The system sets this to `true` to indicate that the status report contains the full set of current status, and is not an incremental report. A full status report includes the full set of items in any status array item, not just the changes. Servers use this to replace their entire status for the device, rather than do an incremental update to the existing status. The system sets this to `true` when sending a \"safety sync\" status report, which is typically sent every 24 hours or so.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "17.0"
+        },
+        "macOS": {
+          "introduced": "14.0"
+        },
+        "tvOS": {
+          "introduced": "17.0"
+        }
+      }
+    }
+  ]
+}
