@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.6.0...v0.7.0) (2026-07-17)
+
+
+### Features
+
+* **device_management:** add generated Apple MDM/DDM SDK built from apple/device-management specs ([c6cda7b](https://github.com/deploymenttheory/go-sdk-appleservices/commit/c6cda7b261c7d785ca7746732da1af8741984dd4))
+* **device_management:** add generated Apple MDM/DDM SDK built from apple/device-management specs ([8772aa7](https://github.com/deploymenttheory/go-sdk-appleservices/commit/8772aa70e33b233591ffdc1f524576e065d11f28))
+
 ## [0.6.0](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.5.0...v0.6.0) (2026-06-07)
 
 
