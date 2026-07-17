@@ -18,6 +18,7 @@ const (
 	EndpointAuditEvents         = APIVersionV1 + "/auditEvents"
 	EndpointUsers               = APIVersionV1 + "/users"
 	EndpointUserGroups          = APIVersionV1 + "/userGroups"
+	EndpointOrganizationalUnits = APIVersionV1 + "/organizationalUnits"
 	EndpointApps                = APIVersionV1 + "/apps"
 	EndpointPackages            = APIVersionV1 + "/packages"
 	EndpointConfigurations      = APIVersionV1 + "/configurations"
