@@ -7,6 +7,7 @@ import (
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/configurations"
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devicemanagement"
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/devices"
+	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/organizationalunits"
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/packages"
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/usergroups"
 	"github.com/deploymenttheory/go-api-sdk-apple/axm/axm_api/users"
@@ -21,15 +22,16 @@ type Client struct {
 
 // AXMAPIClient groups all Apple Business Manager API services.
 type AXMAPIClient struct {
-	Devices          *devices.Devices
-	DeviceManagement *devicemanagement.DeviceManagement
-	AuditEvents      *auditevents.AuditEvents
-	Users            *users.Users
-	UserGroups       *usergroups.UserGroups
-	Apps             *apps.Apps
-	Packages         *packages.Packages
-	Configurations   *configurations.Configurations
-	Blueprints       *blueprints.Blueprints
+	Devices             *devices.Devices
+	DeviceManagement    *devicemanagement.DeviceManagement
+	AuditEvents         *auditevents.AuditEvents
+	Users               *users.Users
+	UserGroups          *usergroups.UserGroups
+	OrganizationalUnits *organizationalunits.OrganizationalUnits
+	Apps                *apps.Apps
+	Packages            *packages.Packages
+	Configurations      *configurations.Configurations
+	Blueprints          *blueprints.Blueprints
 }
 
 // NewClient creates a new Apple Business Manager client.
@@ -47,15 +49,16 @@ func NewClient(keyID, issuerID string, privateKey any, options ...client.ClientO
 	return &Client{
 		transport: transport,
 		AXMAPI: &AXMAPIClient{
-			Devices:          devices.NewService(transport),
-			DeviceManagement: devicemanagement.NewService(transport),
-			AuditEvents:      auditevents.NewService(transport),
-			Users:            users.NewService(transport),
-			UserGroups:       usergroups.NewService(transport),
-			Apps:             apps.NewService(transport),
-			Packages:         packages.NewService(transport),
-			Configurations:   configurations.NewService(transport),
-			Blueprints:       blueprints.NewService(transport),
+			Devices:             devices.NewService(transport),
+			DeviceManagement:    devicemanagement.NewService(transport),
+			AuditEvents:         auditevents.NewService(transport),
+			Users:               users.NewService(transport),
+			UserGroups:          usergroups.NewService(transport),
+			OrganizationalUnits: organizationalunits.NewService(transport),
+			Apps:                apps.NewService(transport),
+			Packages:            packages.NewService(transport),
+			Configurations:      configurations.NewService(transport),
+			Blueprints:          blueprints.NewService(transport),
 		},
 	}, nil
 }
@@ -87,15 +90,16 @@ func NewClientFromEnv(options ...client.ClientOption) (*Client, error) {
 	return &Client{
 		transport: transport,
 		AXMAPI: &AXMAPIClient{
-			Devices:          devices.NewService(transport),
-			DeviceManagement: devicemanagement.NewService(transport),
-			AuditEvents:      auditevents.NewService(transport),
-			Users:            users.NewService(transport),
-			UserGroups:       usergroups.NewService(transport),
-			Apps:             apps.NewService(transport),
-			Packages:         packages.NewService(transport),
-			Configurations:   configurations.NewService(transport),
-			Blueprints:       blueprints.NewService(transport),
+			Devices:             devices.NewService(transport),
+			DeviceManagement:    devicemanagement.NewService(transport),
+			AuditEvents:         auditevents.NewService(transport),
+			Users:               users.NewService(transport),
+			UserGroups:          usergroups.NewService(transport),
+			OrganizationalUnits: organizationalunits.NewService(transport),
+			Apps:                apps.NewService(transport),
+			Packages:            packages.NewService(transport),
+			Configurations:      configurations.NewService(transport),
+			Blueprints:          blueprints.NewService(transport),
 		},
 	}, nil
 }

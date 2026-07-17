@@ -116,7 +116,7 @@ func (t *Transport) execute(req *resty.Request, path string, result any) (*resty
 		return nil, fmt.Errorf("request failed: %w", err)
 	}
 
-	if resp.IsError() {
+	if resp.IsStatusFailure() {
 		return resp, t.errorHandler.HandleError(resp)
 	}
 

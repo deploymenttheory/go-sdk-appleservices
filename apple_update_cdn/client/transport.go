@@ -112,7 +112,7 @@ func (t *Transport) execute(req *resty.Request, path string, result any) (*resty
 		return nil, fmt.Errorf("request failed: %w", err)
 	}
 
-	if resp.IsError() {
+	if resp.IsStatusFailure() {
 		return resp, t.errorHandler.HandleError(resp)
 	}
 
@@ -142,7 +142,7 @@ func (t *Transport) executeHead(req *resty.Request, path string) (*resty.Respons
 		return nil, fmt.Errorf("request failed: %w", err)
 	}
 
-	if resp.IsError() {
+	if resp.IsStatusFailure() {
 		return resp, t.errorHandler.HandleError(resp)
 	}
 
@@ -153,12 +153,12 @@ func (t *Transport) executeHead(req *resty.Request, path string) (*resty.Respons
 // into w without buffering it in memory. Suitable for large file downloads
 // (e.g. IPSW files). Returns the response, bytes written, and any error.
 func (t *Transport) executeDownload(req *resty.Request, path string, w io.Writer) (*resty.Response, int64, error) {
-	resp, err := req.SetDoNotParseResponse(true).Get(path)
+	resp, err := req.SetResponseDoNotParse(true).Get(path)
 	if err != nil {
 		return nil, 0, fmt.Errorf("request failed: %w", err)
 	}
 
-	if resp.IsError() {
+	if resp.IsStatusFailure() {
 		resp.Body.Close()
 		return resp, 0, t.errorHandler.HandleError(resp)
 	}

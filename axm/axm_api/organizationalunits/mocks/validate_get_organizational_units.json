@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "type": "organizationalUnits",
+      "id": "OU789012",
+      "attributes": {
+        "name": "Engineering",
+        "description": "Engineering organizational unit",
+        "createdDateTime": "2023-03-15T10:00:00Z",
+        "updatedDateTime": "2024-06-01T14:30:00Z"
+      },
+      "relationships": {
+        "users": {
+          "links": {
+            "self": "https://api-business.apple.com/v1/organizationalUnits/OU789012/relationships/users"
+          }
+        }
+      },
+      "links": {
+        "self": "https://api-business.apple.com/v1/organizationalUnits/OU789012"
+      }
+    }
+  ],
+  "links": {
+    "self": "https://api-business.apple.com/v1/organizationalUnits"
+  },
+  "meta": {
+    "paging": {
+      "limit": 100
+    }
+  }
+}
