@@ -10,7 +10,7 @@ require (
 	go.uber.org/zap v1.28.0
 	golang.org/x/net v0.58.0
 	gopkg.in/yaml.v3 v3.0.1
-	resty.dev/v3 v3.0.0-rc.3
+	resty.dev/v3 v3.0.0-rc.4
 )
 
 require (
