@@ -1,6 +1,6 @@
 module github.com/deploymenttheory/go-sdk-appleservices
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/golang-jwt/jwt/v5 v5.3.1
@@ -8,7 +8,7 @@ require (
 	github.com/jarcoal/httpmock v1.4.2
 	github.com/stretchr/testify v1.12.1
 	go.uber.org/zap v1.28.0
-	golang.org/x/net v0.58.0
+	golang.org/x/net v0.59.0
 	gopkg.in/yaml.v3 v3.0.1
 	resty.dev/v3 v3.0.0-rc.3
 )
