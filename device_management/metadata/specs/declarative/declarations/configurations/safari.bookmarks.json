@@ -27,13 +27,14 @@
   "payloadkeys": [
     {
       "key": "ManagedBookmarks",
-      "title": "Managed Bookmarks",
+      "title": "Managed bookmarks",
       "type": "\u003carray\u003e",
       "presence": "optional",
       "content": "A dictionary that specifies a set of managed bookmarks.",
       "subkeys": [
         {
           "key": "BookmarkGroup",
+          "title": "Bookmark group",
           "type": "\u003cdictionary\u003e",
           "presence": "required",
           "content": "A group of managed bookmarks.",
@@ -62,6 +63,7 @@
               "subkeys": [
                 {
                   "key": "bookmarks-item",
+                  "title": "Bookmarks item",
                   "type": "\u003cdictionary\u003e",
                   "presence": "required",
                   "content": "A bookmark that specifies a title, and either a URL for the bookmark, or a nested folder of bookmarks.",
@@ -90,6 +92,7 @@
                       "subkeys": [
                         {
                           "key": "folder-item",
+                          "title": "Folder item",
                           "type": "\u003cdictionary\u003e",
                           "presence": "required",
                           "content": "A bookmark that specifies a title, and either a URL for the bookmark, or a nested folder of bookmarks."

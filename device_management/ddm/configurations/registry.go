@@ -9,6 +9,7 @@ import (
 // ByDeclarationType maps declaration type identifiers to payload factories.
 // Factories return zero payloads ready to populate or decode into.
 var ByDeclarationType = map[string]func() ddm.DeclarationPayload{
+	"com.apple.configuration.accessibility.settings":              func() ddm.DeclarationPayload { return new(AccessibilitySettings) },
 	"com.apple.configuration.account.caldav":                      func() ddm.DeclarationPayload { return new(AccountCaldav) },
 	"com.apple.configuration.account.carddav":                     func() ddm.DeclarationPayload { return new(AccountCarddav) },
 	"com.apple.configuration.account.exchange":                    func() ddm.DeclarationPayload { return new(AccountExchange) },
@@ -17,8 +18,11 @@ var ByDeclarationType = map[string]func() ddm.DeclarationPayload{
 	"com.apple.configuration.account.mail":                        func() ddm.DeclarationPayload { return new(AccountMail) },
 	"com.apple.configuration.account.subscribed-calendar":         func() ddm.DeclarationPayload { return new(AccountSubscribedCalendar) },
 	"com.apple.configuration.app.managed":                         func() ddm.DeclarationPayload { return new(AppManaged) },
+	"com.apple.configuration.app.settings":                        func() ddm.DeclarationPayload { return new(AppSettings) },
 	"com.apple.configuration.audio-accessory.settings":            func() ddm.DeclarationPayload { return new(AudioAccessorySettings) },
+	"com.apple.configuration.content-cache.settings":              func() ddm.DeclarationPayload { return new(ContentCacheSettings) },
 	"com.apple.configuration.diskmanagement.settings":             func() ddm.DeclarationPayload { return new(DiskmanagementSettings) },
+	"com.apple.configuration.extensible-sso":                      func() ddm.DeclarationPayload { return new(ExtensibleSso) },
 	"com.apple.configuration.external-intelligence.settings":      func() ddm.DeclarationPayload { return new(ExternalIntelligenceSettings) },
 	"com.apple.configuration.intelligence.settings":               func() ddm.DeclarationPayload { return new(IntelligenceSettings) },
 	"com.apple.configuration.keyboard.settings":                   func() ddm.DeclarationPayload { return new(KeyboardSettings) },
@@ -28,6 +32,13 @@ var ByDeclarationType = map[string]func() ddm.DeclarationPayload{
 	"com.apple.configuration.management.test":                     func() ddm.DeclarationPayload { return new(ManagementTest) },
 	"com.apple.configuration.math.settings":                       func() ddm.DeclarationPayload { return new(MathSettings) },
 	"com.apple.configuration.migration-assistant.settings":        func() ddm.DeclarationPayload { return new(MigrationAssistantSettings) },
+	"com.apple.configuration.network.dns-proxy":                   func() ddm.DeclarationPayload { return new(NetworkDnsProxy) },
+	"com.apple.configuration.network.dns-settings":                func() ddm.DeclarationPayload { return new(NetworkDnsSettings) },
+	"com.apple.configuration.network.relay":                       func() ddm.DeclarationPayload { return new(NetworkRelay) },
+	"com.apple.configuration.network.vpn.always-on":               func() ddm.DeclarationPayload { return new(NetworkVpnAlwaysOn) },
+	"com.apple.configuration.network.vpn.ikev2":                   func() ddm.DeclarationPayload { return new(NetworkVpnIkev2) },
+	"com.apple.configuration.network.vpn.ipsec":                   func() ddm.DeclarationPayload { return new(NetworkVpnIpsec) },
+	"com.apple.configuration.network.vpn.vpn-plugin":              func() ddm.DeclarationPayload { return new(NetworkVpnVpnPlugin) },
 	"com.apple.configuration.package":                             func() ddm.DeclarationPayload { return new(Package) },
 	"com.apple.configuration.passcode.settings":                   func() ddm.DeclarationPayload { return new(PasscodeSettings) },
 	"com.apple.configuration.safari.bookmarks":                    func() ddm.DeclarationPayload { return new(SafariBookmarks) },
@@ -45,4 +56,5 @@ var ByDeclarationType = map[string]func() ddm.DeclarationPayload{
 	"com.apple.configuration.softwareupdate.enforcement.specific": func() ddm.DeclarationPayload { return new(SoftwareupdateEnforcementSpecific) },
 	"com.apple.configuration.softwareupdate.settings":             func() ddm.DeclarationPayload { return new(SoftwareupdateSettings) },
 	"com.apple.configuration.watch.enrollment":                    func() ddm.DeclarationPayload { return new(WatchEnrollment) },
+	"com.apple.configuration.webcontent-filter.plugin":            func() ddm.DeclarationPayload { return new(WebcontentFilterPlugin) },
 }

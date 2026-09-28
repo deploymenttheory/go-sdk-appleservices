@@ -26,7 +26,7 @@
   "payloadkeys": [
     {
       "key": "Precomposed",
-      "title": "Precomposed Icon",
+      "title": "Precomposed icon",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -39,7 +39,7 @@
     },
     {
       "key": "FullScreen",
-      "title": "Full Screen",
+      "title": "Full screen",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -87,11 +87,11 @@
     },
     {
       "key": "IgnoreManifestScope",
-      "title": "Ignore Web Clip manifest scope",
+      "title": "Ignore web clip manifest scope",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, a full screen web clip can navigate to an external web site without showing Safari UI. Otherwise, Safari UI appears when navigating away from the web clip's URL. This key has no effect when `FullScreen` is `false`. Available in iOS 14 and later.",
+      "content": "If `true`, a full screen web clip can navigate to an external web site without showing Safari UI. Otherwise, Safari UI appears when navigating away from the web clip's URL. This key has no effect when `FullScreen` is `false`.",
       "supportedOS": {
         "iOS": {
           "introduced": "14.0"
@@ -103,10 +103,10 @@
     },
     {
       "key": "TargetApplicationBundleIdentifier",
-      "title": "Target Application Bundle Identifier",
+      "title": "Target application bundle identifier",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The application bundle identifier of the application that opens the URL. To use this property, install the profile through MDM. Available in iOS 14 and later.",
+      "content": "The application bundle identifier of the application that opens the URL. To use this property, install the profile through MDM.",
       "supportedOS": {
         "iOS": {
           "introduced": "14.0"

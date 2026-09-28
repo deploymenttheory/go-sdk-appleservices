@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "screensharing.connection.group.unresolved-connection",
   "title": "Status Screen Sharing Connection Group Unresolved Connections",
-  "description": "Information about connection groups with member connection references that the system couldn't resolve.",
+  "description": "The status item that lists connection groups with member connection references that the device couldn't resolve.",
   "payload": {
     "statusitemtype": "screensharing.connection.group.unresolved-connection",
     "supportedOS": {
@@ -26,16 +26,17 @@
   "payloadkeys": [
     {
       "key": "screensharing.connection.group.unresolved-connection",
-      "title": "Connection Groups status",
+      "title": "Connection groups status",
       "type": "\u003carray\u003e",
       "presence": "required",
-      "content": "A status item that contains an array of unresolved connection groups.",
+      "content": "The status item that contains an array of unresolved connection groups.",
       "subkeytype": "UnresolvedGroup",
       "subkeys": [
         {
           "key": "unresolved_group",
+          "title": "Unresolved group",
           "type": "\u003cdictionary\u003e",
-          "content": "A status item that contains an unresolved connection group.",
+          "content": "The status item that contains an unresolved connection group.",
           "subkeys": [
             {
               "key": "identifier",
@@ -61,7 +62,7 @@
               "subkeys": [
                 {
                   "key": "ConnectionUUID",
-                  "title": "Connection Unique Identifier",
+                  "title": "Connection unique identifier",
                   "type": "\u003cstring\u003e",
                   "content": "The unique identifier (i.e., ConnectionUUID) of a connection which could not be resolved."
                 }

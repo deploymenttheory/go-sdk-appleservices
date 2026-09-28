@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.operating-system.supplemental.extra-version",
   "title": "Status Device Operating System Supplemental Extra Version",
-  "description": "A status report of the device's operating system's Background Security Improvement identifier.",
+  "description": "The status item that reports the device's operating system Background Security Improvement version.",
   "payload": {
     "statusitemtype": "device.operating-system.supplemental.extra-version",
     "supportedOS": {

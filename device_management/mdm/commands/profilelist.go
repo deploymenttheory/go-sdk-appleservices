@@ -8,8 +8,7 @@ package commands
 // Supported: iOS 4.0+, macOS 10.7+, tvOS 9.0+, visionOS 1.1+, watchOS 10.0+.
 type ProfileList struct {
 	// If `true`, only include profiles that MDM has installed. For user enrollments, the device
-	// ignores this key and always limits the results to managed profiles. This value is available in
-	// iOS 13 and later, macOS 10.5 and later, and tvOS 13 and later.
+	// ignores this key and always limits the results to managed profiles.
 	//
 	// Default: false.
 	ManagedOnly *bool `plist:"ManagedOnly,omitempty" json:"ManagedOnly,omitempty"`
@@ -72,8 +71,8 @@ type ProfileListResponseProfileListItem struct {
 	// An array that contains the certificate for signing the profile, followed by any intermediate
 	// certificates, in DER-encoded X.509 format.
 	SignerCertificates [][]byte `plist:"SignerCertificates,omitempty" json:"SignerCertificates,omitempty"`
-	// If `true`, the current MDM service installed the profile. MDM doesn't return this value for
-	// supervised devices, and can remove or replace all profiles on supervised devices.
+	// If `true`, the current MDM service installed the profile. MDM can remove or replace all profiles
+	// on supervised devices.
 	//
 	// Default: false.
 	IsManaged *bool `plist:"IsManaged,omitempty" json:"IsManaged,omitempty"`

@@ -30,7 +30,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, nonadministrative users can approve additional kernel extensions in the Security \u0026 Privacy preferences.\n\nAvailable in macOS 11 and later.",
+      "content": "If `true`, nonadministrative users can approve additional kernel extensions in the Security \u0026 Privacy preferences.",
       "supportedOS": {
         "macOS": {
           "introduced": "11.0"

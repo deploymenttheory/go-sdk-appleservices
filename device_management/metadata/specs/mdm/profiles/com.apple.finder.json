@@ -32,21 +32,6 @@
       "content": "If `true`, the system disables the Finder's burn support."
     },
     {
-      "key": "InterfaceLevel",
-      "type": "\u003cstring\u003e",
-      "presence": "optional",
-      "rangelist": [
-        "Simple",
-        "Full"
-      ],
-      "content": "Specifies whether Finder should operate in Simple or Full mode.",
-      "supportedOS": {
-        "macOS": {
-          "removed": "10.15"
-        }
-      }
-    },
-    {
       "key": "ProhibitConnectTo",
       "type": "\u003cboolean\u003e",
       "presence": "optional",

@@ -52,11 +52,6 @@ func (p *AppManagedInstallBehaviorLicense) Validate() error {
 			errs = append(errs, err)
 		}
 	}
-	if p.VPPType != nil {
-		if err := validate.InList("VPPType", *p.VPPType, []AppManagedInstallBehaviorLicenseVPPType{AppManagedInstallBehaviorLicenseVPPTypeDevice, AppManagedInstallBehaviorLicenseVPPTypeUser}); err != nil {
-			errs = append(errs, err)
-		}
-	}
 	return errors.Join(errs...)
 }
 

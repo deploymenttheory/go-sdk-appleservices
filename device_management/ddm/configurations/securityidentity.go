@@ -3,7 +3,7 @@
 package configurations
 
 // SecurityIdentity — Security:Identity.
-// The declaration to install an identity on the device.
+// The declaration to configure an identity.
 //
 // Supported: iOS 17.0+, macOS 14.0+, tvOS 17.0+, visionOS 1.1+, watchOS 10.0+.
 type SecurityIdentity struct {

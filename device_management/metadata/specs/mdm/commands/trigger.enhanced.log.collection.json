@@ -1,0 +1,35 @@
+{
+  "category": "mdm/commands",
+  "name": "trigger.enhanced.log.collection",
+  "title": "Trigger Enhanced Log Collection Command",
+  "description": "Trigger enhanced log collection on the device.",
+  "payload": {
+    "requesttype": "TriggerEnhancedLogCollection",
+    "content": "This command allows supervised devices to collect enhanced log and upload it to a remote server.",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "27.0"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "AppleCareToken",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The AppleCare token the device uses for authorizing the enhanced log collection session."
+    }
+  ]
+}

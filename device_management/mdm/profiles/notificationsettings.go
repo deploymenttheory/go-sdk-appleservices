@@ -19,7 +19,7 @@ type NotificationsettingsNotificationSettingsItem struct {
 	//
 	// Default: true.
 	NotificationsEnabled *bool `plist:"NotificationsEnabled,omitempty" json:"NotificationsEnabled,omitempty"`
-	// If `true`, enables notifications in the notification center for this app.
+	// If `true`, enables notifications in the Notification Center for this app.
 	//
 	// Default: true.
 	ShowInNotificationCenter *bool `plist:"ShowInNotificationCenter,omitempty" json:"ShowInNotificationCenter,omitempty"`

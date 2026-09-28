@@ -97,9 +97,9 @@ type WifiManaged struct {
 	// Default: false.
 	DisableAssociationMACRandomization *bool `plist:"DisableAssociationMACRandomization,omitempty" json:"DisableAssociationMACRandomization,omitempty"`
 	// If `true`, the device makes this network available for joining before the device is unlocked for
-	// the first time following a reboot, on a device configured for return to service. Any network
-	// credentials are placed into Class D storage within the keychain, and information about the
-	// network is stored on disk in Class D.
+	// the first time following a reboot, on a device configured for return to service. The device
+	// places any network credentials into Class D storage within the keychain and stores information
+	// about the network on disk in Class D.
 	//
 	// Default: false.
 	AllowJoinBeforeFirstUnlock *bool `plist:"AllowJoinBeforeFirstUnlock,omitempty" json:"AllowJoinBeforeFirstUnlock,omitempty"`
@@ -117,8 +117,8 @@ type WifiManagedEAPClientConfiguration struct {
 	UserPassword *string `plist:"UserPassword,omitempty" json:"UserPassword,omitempty"`
 	// An array of the UUID of each certificate payload in the same profile to trust for
 	// authentication. Use this key to prevent the device from asking the user whether to trust the
-	// listed certificates. Dynamic trust (the certificate dialogue) is in a disabled state if you
-	// specify this property without also enabling 'TLSAllowTrustExceptions'.
+	// listed certificates. The device disables dynamic trust (the certificate dialogue) if you specify
+	// this property without also enabling 'TLSAllowTrustExceptions'.
 	PayloadCertificateAnchorUUID []string `plist:"PayloadCertificateAnchorUUID,omitempty" json:"PayloadCertificateAnchorUUID,omitempty"`
 	// An array of trusted certificates. Each entry in the array must contain certificate data that
 	// represents an anchor certificate used for verifying the server certificate.

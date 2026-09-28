@@ -15,11 +15,6 @@ func (SystemLogging) PayloadType() string { return "com.apple.system.logging" }
 // allowed values, ranges, formats and nested payload keys.
 func (p *SystemLogging) Validate() error {
 	var errs []error
-	if p.Processes != nil {
-		if err := p.Processes.Validate(); err != nil {
-			errs = append(errs, validate.Nested("Processes", err))
-		}
-	}
 	if p.Subsystems != nil {
 		if err := p.Subsystems.Validate(); err != nil {
 			errs = append(errs, validate.Nested("Subsystems", err))

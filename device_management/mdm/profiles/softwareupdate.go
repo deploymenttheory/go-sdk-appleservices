@@ -3,11 +3,12 @@
 package profiles
 
 // SoftwareUpdate — Software Update.
-// The payload that configures the software update policy.
+// The payload that configures the software update policy. Removed: use the declarative management
+// `com.apple.configuration.softwareupdate.settings` configuration.
 //
-// Supported: macOS 10.7+.
+// Supported: macOS 10.7–27.0.
 type SoftwareUpdate struct {
-	// The URL of the software update catalog. This property is not supported in macOS 11 and later.
+	// The URL of the software update catalog. This property isn't supported in macOS 11 and later.
 	CatalogURL *string `plist:"CatalogURL,omitempty" json:"CatalogURL,omitempty"`
 	// If `true`, prerelease software can be installed on this computer.
 	//

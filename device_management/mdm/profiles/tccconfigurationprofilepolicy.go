@@ -21,7 +21,7 @@ type TCCConfigurationProfilePolicyServicesIdentityDict struct {
 	// binaries must be identified by installation path. Helper tools embedded within an application
 	// bundle automatically inherit the permissions of their enclosing app bundle.
 	IdentifierType TCCConfigurationProfilePolicyServicesIdentityDictIdentifierType `plist:"IdentifierType" json:"IdentifierType"`
-	// Obtained via the command `codesign -display -r -`.
+	// Obtain this value by running `codesign -display -r -`.
 	CodeRequirement string `plist:"CodeRequirement" json:"CodeRequirement"`
 	// If `true`, statically validate the code requirement. Used only if the process invalidates its
 	// dynamic code signature.
@@ -59,13 +59,13 @@ type TCCConfigurationProfilePolicyServices struct {
 	Reminders []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"Reminders,omitempty" json:"Reminders,omitempty"`
 	// The pictures managed by the Photos app in `~/Pictures/.photoslibrary`.
 	Photos []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"Photos,omitempty" json:"Photos,omitempty"`
-	// A system camera. Access to the camera can't be given in a profile; it can only be denied.
+	// A system camera. A profile can't grant access to the camera; it can only deny it.
 	Camera []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"Camera,omitempty" json:"Camera,omitempty"`
-	// A system microphone. Access to the microphone can't be given in a profile; it can only be
-	// denied.
+	// A system microphone. A profile can't grant access to the microphone; it can only deny it.
 	Microphone []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"Microphone,omitempty" json:"Microphone,omitempty"`
-	// Specifies the policies for the app via the Accessibility subsystem. The ability to grant access
-	// by this profile is deprecated as of macOS 26.2, and will be removed in macOS 27.0.
+	// Specifies the policies for the app via the Accessibility subsystem. In macOS 27.0, the device
+	// shows a non-blocking notification for each application when this setting is applied, and it
+	// allows the user to make changes to the setting in the System Settings app.
 	Accessibility []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"Accessibility,omitempty" json:"Accessibility,omitempty"`
 	// Specifies the policies for the application to use CoreGraphics APIs to send CGEvents to the
 	// system event stream.
@@ -82,11 +82,10 @@ type TCCConfigurationProfilePolicyServices struct {
 	// Provider.
 	FileProviderPresence []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"FileProviderPresence,omitempty" json:"FileProviderPresence,omitempty"`
 	// Allows the application to use CoreGraphics and HID APIs to listen to (receive) CGEvents and HID
-	// events from all processes. Access to these events can't be given in a profile; it can only be
-	// denied.
+	// events from all processes. A profile can't grant access to these events; it can only deny it.
 	ListenEvent []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"ListenEvent,omitempty" json:"ListenEvent,omitempty"`
-	// Allows the application to capture (read) the contents of the system display. Access to the
-	// contents can't be given in a profile; it can only be denied.
+	// Allows the application to capture (read) the contents of the system display. A profile can't
+	// grant access to the contents; it can only deny it.
 	ScreenCapture []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"ScreenCapture,omitempty" json:"ScreenCapture,omitempty"`
 	// Allows the application to use the system Speech Recognition facility and to send speech data to
 	// Apple.
@@ -101,7 +100,7 @@ type TCCConfigurationProfilePolicyServices struct {
 	SystemPolicyNetworkVolumes []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"SystemPolicyNetworkVolumes,omitempty" json:"SystemPolicyNetworkVolumes,omitempty"`
 	// Allows the application to access files on removable volumes.
 	SystemPolicyRemovableVolumes []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"SystemPolicyRemovableVolumes,omitempty" json:"SystemPolicyRemovableVolumes,omitempty"`
-	// Allows the application to update or delete other apps. Available in macOS 13 and later.
+	// Allows the application to update or delete other apps.
 	SystemPolicyAppBundles []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"SystemPolicyAppBundles,omitempty" json:"SystemPolicyAppBundles,omitempty"`
 	// Specifies the policies for the app to access the data of other apps.
 	SystemPolicyAppData []TCCConfigurationProfilePolicyServicesIdentityDict `plist:"SystemPolicyAppData,omitempty" json:"SystemPolicyAppData,omitempty"`

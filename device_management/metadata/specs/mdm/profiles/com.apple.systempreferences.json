@@ -144,7 +144,7 @@
       "key": "DisabledSystemSettings",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "The list of disabled System Settings extensions. All other items will be enabled. When `DisabledSystemSettings` is specified, the device ignores `DisabledPreferencePanes` and `EnabledPreferencePanes`.\n\n\u003e Note:\n\u003e A given System Settings extension can supply more than one section in System Settings; disabling such an extension disables all sections it supplies.",
+      "content": "The list of disabled System Settings extensions. The device enables all other items. When you specify `DisabledSystemSettings`, the device ignores `DisabledPreferencePanes` and `EnabledPreferencePanes`.\n\n\u003e Note:\n\u003e A given System Settings extension can supply more than one section in System Settings; disabling such an extension disables all sections it supplies.",
       "subkeys": [
         {
           "key": "SettingsExtensions",

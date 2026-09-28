@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "mdm.is-return-to-service",
+  "title": "Status MDM Is Return to Service",
+  "description": "The status item that reports the device's return to service with app preservation state.",
+  "payload": {
+    "statusitemtype": "mdm.is-return-to-service",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "27.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "mdm.is-return-to-service",
+      "title": "Status item value.",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "content": "If `true`, the device is using the return to service with app preservation mode."
+    }
+  ]
+}

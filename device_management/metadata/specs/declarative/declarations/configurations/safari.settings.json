@@ -27,7 +27,7 @@
   "payloadkeys": [
     {
       "key": "AcceptCookies",
-      "title": "Accept Cookies",
+      "title": "Accept cookies",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "rangelist": [
@@ -51,7 +51,7 @@
     },
     {
       "key": "AllowDisablingFraudWarning",
-      "title": "Allow Disabling Fraud Warning",
+      "title": "Allow disabling fraud warning",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -69,7 +69,7 @@
     },
     {
       "key": "AllowHistoryClearing",
-      "title": "Allow History Clearing",
+      "title": "Allow history clearing",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -100,7 +100,7 @@
     },
     {
       "key": "AllowPrivateBrowsing",
-      "title": "Allow Private Browsing",
+      "title": "Allow private browsing",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -113,7 +113,7 @@
     },
     {
       "key": "AllowPopups",
-      "title": "Allow Popups",
+      "title": "Allow popups",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -131,7 +131,7 @@
     },
     {
       "key": "AllowSummary",
-      "title": "Allow Summary",
+      "title": "Allow summary",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -144,13 +144,14 @@
     },
     {
       "key": "NewTabStartPage",
-      "title": "New Tab Start Page",
+      "title": "New tab start page",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "Sets the start page for new tabs in Safari.",
       "subkeys": [
         {
           "key": "PageType",
+          "title": "Page type",
           "type": "\u003cstring\u003e",
           "presence": "required",
           "rangelist": [
@@ -175,6 +176,75 @@
           "content": "The composed identifier of the extension that provides the start page. The required format is \"Identifier (TeamIdentifier)\", for example \"com.example.app (ABCD1234)\". Required when setting `PageType` to `Extension`."
         }
       ]
+    },
+    {
+      "key": "Privacy",
+      "title": "Website privacy",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The dictionary of website privacy settings.",
+      "subkeys": [
+        {
+          "key": "PermissionDefaults",
+          "title": "Website privacy permission defaults",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The dictionary of website permission defaults. Each key in the dictionary represents a single website, or a website and its sub-domains. The dictionary values represent the permission defaults that Safari applies for each website that matches the key.\n\nSafari supports the following patterns for the website key:\n\n- A specific domain such as \"example.com\" or \"www.example.com\". The permission defaults apply to that website only.\n- A wildcard domain that uses a single \"\\*\" character as a prefix for the domain, such as \"\\*example.com\". The permission defaults apply to both the exact domain \"example.com\", and any sub-domains such as \"www.example.com\". It won't match other domains with a similar string suffix such as \"myexample.com\".\n\nWhen multiple patterns match a website, Safari uses the most precise pattern. For example, for the website \"www.example.com\", if rules \"www.example.com\" and \"\\*example.com\" match, Safari uses the former.",
+          "subkeys": [
+            {
+              "key": "ANY",
+              "type": "\u003cdictionary\u003e",
+              "presence": "optional",
+              "content": "The dictionary that defines the website privacy permission defaults. Each key represents a website.",
+              "subkeytype": "WebsiteDictionary",
+              "subkeys": [
+                {
+                  "key": "OrganizationJustification",
+                  "title": "Organization justification",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "Text that clearly explains to the Safari user the reason why the organization requires these website privacy permission defaults. Safari includes this text in the permission consent prompt it displays when it first displays the website."
+                },
+                {
+                  "key": "Camera",
+                  "title": "Camera permission",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "None",
+                    "Allow"
+                  ],
+                  "combinetype": "enum-last",
+                  "content": "Controls whether a website privacy permission default is set.\n* `None`: Safari sets no website privacy permission default for use of the camera.\n* `Allow`: Safari sets the website privacy permission default to allow use of the camera."
+                },
+                {
+                  "key": "Microphone",
+                  "title": "Microphone permission",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "None",
+                    "Allow"
+                  ],
+                  "combinetype": "enum-last",
+                  "content": "Controls whether a website privacy permission default is set.\n* `None`: Safari sets no website privacy permission default for use of the microphone.\n* `Allow`: Safari sets the website privacy permission default to allow use of the microphone."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "27.0"
+        },
+        "macOS": {
+          "introduced": "27.0"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
     }
   ]
 }

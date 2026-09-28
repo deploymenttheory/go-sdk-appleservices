@@ -306,7 +306,8 @@ type Applicationaccess struct {
 	//
 	// Default: true.
 	AllowEraseContentAndSettings *bool `plist:"allowEraseContentAndSettings,omitempty" json:"allowEraseContentAndSettings,omitempty"`
-	// If `false`, the system disables modifications of eSIMs.
+	// If `false`, the system disables modifications of eSIMs. This also disables the phone number
+	// sharing setup on iPhones, in iOS 27 and later.
 	//
 	// Default: true.
 	AllowESIMModification *bool `plist:"allowESIMModification,omitempty" json:"allowESIMModification,omitempty"`
@@ -613,8 +614,8 @@ type Applicationaccess struct {
 	//
 	// Default: true.
 	AllowRemoteScreenObservation *bool `plist:"allowRemoteScreenObservation,omitempty" json:"allowRemoteScreenObservation,omitempty"`
-	// If `false`, disables Rosetta usage awareness. When Rosetta usage awareness is active, a pop-up
-	// dialog is displayed to the user when an app that is using Rosetta is launched. The pop-up dialog
+	// If `false`, disables Rosetta usage awareness. When Rosetta usage awareness is active, the device
+	// displays a pop-up dialog to the user when launching an app that uses Rosetta. The pop-up dialog
 	// indicates that Rosetta will be removed in a future version of the operating system so that the
 	// user can contact the app vendor regarding a replacement for the current app.
 	//
@@ -656,6 +657,10 @@ type Applicationaccess struct {
 	//
 	// Default: true.
 	AllowSharedStream *bool `plist:"allowSharedStream,omitempty" json:"allowSharedStream,omitempty"`
+	// If `false`, the system disables Apple Intelligence integration in Siri.
+	//
+	// Default: true.
+	AllowSiriAI *bool `plist:"allowSiriAI,omitempty" json:"allowSiriAI,omitempty"`
 	// If `false`, the system disables the keyboard spell checker.
 	//
 	// Default: true.
@@ -674,7 +679,7 @@ type Applicationaccess struct {
 	// Default: true.
 	AllowSystemAppRemoval *bool `plist:"allowSystemAppRemoval,omitempty" json:"allowSystemAppRemoval,omitempty"`
 	// If `false`, the system prevents modification of Time Machine settings in System Settings. This
-	// restriction is not supported on the user channel.
+	// restriction isn't supported on the user channel.
 	//
 	// Default: true.
 	AllowTimeMachineBackup *bool `plist:"allowTimeMachineBackup,omitempty" json:"allowTimeMachineBackup,omitempty"`
@@ -710,7 +715,7 @@ type Applicationaccess struct {
 	// If `false`, the system allows iOS devices to always connect to USB accessories while locked. In
 	// macOS, allows new USB and Thunderbolt accessories, and SD cards to connect without
 	// authorization. If the system has Lockdown mode enabled, it ignores this value. This restriction
-	// is not supported on the user channel.
+	// isn't supported on the user channel.
 	//
 	// Default: true.
 	AllowUSBRestrictedMode *bool `plist:"allowUSBRestrictedMode,omitempty" json:"allowUSBRestrictedMode,omitempty"`
@@ -750,7 +755,7 @@ type Applicationaccess struct {
 	// If present, the system allows apps identified by the bundle IDs listed in the array to
 	// autonomously enter Single App Mode.
 	AutonomousSingleAppModePermittedAppIDs []string `plist:"autonomousSingleAppModePermittedAppIDs,omitempty" json:"autonomousSingleAppModePermittedAppIDs,omitempty"`
-	// Use `blockedAppBundleIDs` instead.
+	// Deprecated: use the declarative management `com.apple.configuration.app.settings` configuration.
 	BlacklistedAppBundleIDs []string `plist:"blacklistedAppBundleIDs,omitempty" json:"blacklistedAppBundleIDs,omitempty"`
 	// If present, the system prevents showing or launching apps with bundle IDs in the array. Include
 	// the value `com.apple.webapp` to restrict all webclips. This applies to App Store apps,
@@ -941,8 +946,8 @@ type Applicationaccess struct {
 	//
 	// Default: 1000.
 	RatingTVShows *int64 `plist:"ratingTVShows,omitempty" json:"ratingTVShows,omitempty"`
-	// If `true`, copy-and-paste functionality is limited by the `allowOpenFromManagedToUnmanaged` and
-	// `allowOpenFromUnmanagedToManaged` restrictions.
+	// If `true`, the `allowOpenFromManagedToUnmanaged` and `allowOpenFromUnmanagedToManaged`
+	// restrictions also limit copy-and-paste functionality.
 	//
 	// Default: false.
 	RequireManagedPasteboard *bool `plist:"requireManagedPasteboard,omitempty" json:"requireManagedPasteboard,omitempty"`
@@ -972,6 +977,6 @@ type Applicationaccess struct {
 	//
 	// Default: false.
 	SafariForceFraudWarning *bool `plist:"safariForceFraudWarning,omitempty" json:"safariForceFraudWarning,omitempty"`
-	// Use `allowListedAppBundleIDs` instead.
+	// Deprecated: use the declarative management `com.apple.configuration.app.settings` configuration.
 	WhitelistedAppBundleIDs []string `plist:"whitelistedAppBundleIDs,omitempty" json:"whitelistedAppBundleIDs,omitempty"`
 }

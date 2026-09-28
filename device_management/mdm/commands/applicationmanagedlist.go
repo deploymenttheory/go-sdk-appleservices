@@ -26,22 +26,18 @@ type ManagedApplicationItem struct {
 	// The bitwise OR of the following management flags:
 	ManagementFlags int64 `plist:"ManagementFlags" json:"ManagementFlags"`
 	// If the user already purchased a paid app, this code is available for use by another user. This
-	// code reports only once. This value is available in iOS 5 and later.
+	// code reports only once.
 	UnusedRedemptionCode string `plist:"UnusedRedemptionCode" json:"UnusedRedemptionCode"`
-	// If 'true', the app has an update available. This key is present only for App Store apps. In
-	// macOS, this key is present only for Volume Purchase Program (VPP) apps. This status updates
-	// daily and isn't always up-to-date when installing an app.
+	// If 'true', the app has a server-provided managed configuration.
 	HasConfiguration bool `plist:"HasConfiguration" json:"HasConfiguration"`
-	// If 'true', the app has feedback for the server. This value is available in iOS 7 and later, and
-	// tvOS 10.2 and later. On macOS 11.3 and later, this value is available if the request was sent on
-	// the user channel.
+	// If 'true', the app has feedback for the server. On macOS 11.3 and later, this value is available
+	// if the device management server sent the request on the user channel.
 	HasFeedback bool `plist:"HasFeedback" json:"HasFeedback"`
 	// If 'true', the app is valid and can run on the device. If the app is enterprise-distributed and
-	// unvalidated, it won't be able to run until validation has occurred. This value is available in
-	// iOS 9.2 and later, and tvOS 10.2 and later.
+	// unvalidated, it won't be able to run until validation has occurred.
 	IsValidated bool `plist:"IsValidated" json:"IsValidated"`
 	// The app's external version identifier. You can also retrieve this value from the App Store. For
-	// more information, see `Apps and Books for Organizations`.
+	// more information, see `Apps and books metadata for organizations`.
 	ExternalVersionIdentifier int64 `plist:"ExternalVersionIdentifier" json:"ExternalVersionIdentifier"`
 }
 

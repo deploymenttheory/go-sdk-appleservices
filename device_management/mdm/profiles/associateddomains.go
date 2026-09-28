@@ -22,7 +22,7 @@ type AssociatedDomainsConfigurationItem struct {
 	AssociatedDomains []string `plist:"AssociatedDomains" json:"AssociatedDomains"`
 	// If `true`, the system enables direct download of data for this domain instead of through a CDN.
 	// Set the entitlement value for this domain to `service:domain?mode=managed`; otherwise, the
-	// system ignores this value. Available in macOS 11 and later.
+	// system ignores this value.
 	//
 	// Default: false.
 	EnableDirectDownloads *bool `plist:"EnableDirectDownloads,omitempty" json:"EnableDirectDownloads,omitempty"`

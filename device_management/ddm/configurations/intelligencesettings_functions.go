@@ -25,6 +25,10 @@ func (p *IntelligenceSettings) Validate() error {
 	return errors.Join(errs...)
 }
 
+// Validate checks the payload against Apple's spec. IntelligenceSettingsAppsCalendar has no
+// constraints beyond its field types.
+func (p *IntelligenceSettingsAppsCalendar) Validate() error { return nil }
+
 // Validate checks the payload against Apple's spec. IntelligenceSettingsAppsMail has no
 // constraints beyond its field types.
 func (p *IntelligenceSettingsAppsMail) Validate() error { return nil }
@@ -41,6 +45,11 @@ func (p *IntelligenceSettingsAppsSafari) Validate() error { return nil }
 // allowed values, ranges, formats and nested payload keys.
 func (p *IntelligenceSettingsApps) Validate() error {
 	var errs []error
+	if p.Calendar != nil {
+		if err := p.Calendar.Validate(); err != nil {
+			errs = append(errs, validate.Nested("Calendar", err))
+		}
+	}
 	if p.Mail != nil {
 		if err := p.Mail.Validate(); err != nil {
 			errs = append(errs, validate.Nested("Mail", err))

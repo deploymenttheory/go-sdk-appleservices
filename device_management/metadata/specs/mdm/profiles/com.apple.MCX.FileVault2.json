@@ -127,7 +127,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, and installation of this payload occurs after enrolling with MDM in Setup Assistant, the system requests Setup Assistant to enable FileVault at setup time.\n\nTo use this, enable the Await Device Configured DEP configuration option and send this profile with this key set, before sending the `DeviceConfiguredCommand`.\n\nAn admin SecureToken user is required, otherwise the FileVault pane does not appear.",
+      "content": "If `true`, and installation of this payload occurs after enrolling with MDM in Setup Assistant, the system requests Setup Assistant to enable FileVault at setup time.\n\nTo use this, enable the Await Device Configured ADE configuration option and send this profile with this key set, before sending the `DeviceConfiguredCommand`.\n\nAn admin SecureToken user is required, otherwise the FileVault pane doesn't appear.",
       "supportedOS": {
         "macOS": {
           "introduced": "14.0"

@@ -7,9 +7,10 @@ import (
 )
 
 // AvailableOSUpdates — Available OS Updates Command.
-// Get a list of available operating-system updates for a device.
+// Get a list of available operating-system updates for a device. Removed: use the declarative
+// management `com.apple.configuration.softwareupdate.enforcement.specific` configuration.
 //
-// Supported: iOS 9.0+, macOS 10.11+, tvOS 12.0+.
+// Supported: iOS 9.0–27.0, macOS 10.11–27.0, tvOS 12.0–27.0.
 type AvailableOSUpdates struct {
 }
 
@@ -29,15 +30,12 @@ type AvailableOSUpdatesResponseAvailableOSUpdatesItem struct {
 	ProductKey string `plist:"ProductKey" json:"ProductKey"`
 	// The human-readable name of the update in the current user's current locale.
 	HumanReadableName string `plist:"HumanReadableName" json:"HumanReadableName"`
-	// The locale, in IOS639-1 Alpha-2 code format, of the `HumanReadableName` value. This value is
-	// available in macOS 10.11 and later.
+	// The locale, in IOS639-1 Alpha-2 code format, of the `HumanReadableName` value.
 	HumanReadableNameLocale string `plist:"HumanReadableNameLocale" json:"HumanReadableNameLocale"`
 	// A URL where the MDM server can request additional localized names for this update. This key
 	// isn't present for certain updates, such as mobile software updates (MSUs) or major OS updates.
-	// This value is available in macOS 10.11 and later.
 	MetadataURL string `plist:"MetadataURL" json:"MetadataURL"`
-	// The product name; for example, _iOS_. This value is available in iOS 9.0 and later, and tvOS
-	// 12.0 and later.
+	// The product name; for example, _iOS_.
 	ProductName string `plist:"ProductName" json:"ProductName"`
 	// The version of the update.
 	Version string `plist:"Version" json:"Version"`
@@ -47,27 +45,23 @@ type AvailableOSUpdatesResponseAvailableOSUpdatesItem struct {
 	// includes major operating-system updates. In macOS 10.14 and later, this also includes minor
 	// updates.
 	DownloadSize int64 `plist:"DownloadSize" json:"DownloadSize"`
-	// The storage size necessary to install the update. This value is available in iOS 9.0 and later,
-	// and tvOS 12.0 and later.
+	// The storage size necessary to install the update.
 	InstallSize int64 `plist:"InstallSize" json:"InstallSize"`
-	// An array that contains app identifiers of apps to close so you can install the update. This
-	// value is available in macOS 10.11 and later.
+	// An array that contains app identifiers of apps to close so you can install the update.
 	AppIdentifiersToClose []string `plist:"AppIdentifiersToClose" json:"AppIdentifiersToClose"`
 	// If `true`, this is a critical update.
 	//
 	// Default: false.
 	IsCritical *bool `plist:"IsCritical,omitempty" json:"IsCritical,omitempty"`
-	// If `true`, this is an update to a configuration file. This value is available in macOS 10.11 and
-	// later.
+	// If `true`, this is an update to a configuration file.
 	//
 	// Default: false.
 	IsConfigDataUpdate *bool `plist:"IsConfigDataUpdate,omitempty" json:"IsConfigDataUpdate,omitempty"`
-	// If `true`, this is an update to firmware. This value is available in macOS 10.11 and later.
+	// If `true`, this is an update to firmware.
 	//
 	// Default: false.
 	IsFirmwareUpdate *bool `plist:"IsFirmwareUpdate,omitempty" json:"IsFirmwareUpdate,omitempty"`
-	// If `true`, this is a major update; for example, 10.15.x to 11. This value is available in macOS
-	// 10.11 and later.
+	// If `true`, this is a major update; for example, 10.15.x to 11.
 	//
 	// Default: false.
 	IsMajorOSUpdate *bool `plist:"IsMajorOSUpdate,omitempty" json:"IsMajorOSUpdate,omitempty"`
@@ -79,8 +73,7 @@ type AvailableOSUpdatesResponseAvailableOSUpdatesItem struct {
 	//
 	// Default: false.
 	AllowsInstallLater *bool `plist:"AllowsInstallLater,omitempty" json:"AllowsInstallLater,omitempty"`
-	// If present, the date when you want the update to install. This value is available in macOS
-	// 10.12.4 and later.
+	// If present, the date when you want the update to install.
 	DeferredUntil *time.Time `plist:"DeferredUntil,omitempty" json:"DeferredUntil,omitempty"`
 	// If `true`, the device can accept a Bootstrap Token from the MDM server instead of prompting for
 	// user authentication prior to installation. This only applies when

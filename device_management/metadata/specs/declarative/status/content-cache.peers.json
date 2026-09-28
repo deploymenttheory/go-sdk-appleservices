@@ -1,0 +1,96 @@
+{
+  "category": "declarative/status",
+  "name": "content-cache.peers",
+  "title": "Status Content Cache Peers",
+  "description": "The status item that reports information about the Content Cache service peer caches.",
+  "payload": {
+    "statusitemtype": "content-cache.peers",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "content-cache.peers",
+      "title": "Content cache peers",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array of dictionaries that describes peer Content Caches.",
+      "subkeys": [
+        {
+          "key": "peer-item",
+          "title": "Peer item",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "A peer Content Cache.",
+          "subkeys": [
+            {
+              "key": "identifier",
+              "title": "Peer GUID",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The unique identifier of the peer Content Cache."
+            },
+            {
+              "key": "_removed",
+              "title": "Indicates removal of the entry.",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system removed the peer entry and only this key and the `identifier` key are present in the status item object."
+            },
+            {
+              "key": "address",
+              "title": "IP address",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The local IPv4 address of the peer Content Cache."
+            },
+            {
+              "key": "port",
+              "title": "Port",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "content": "The IP port number the peer Content Cache listens to for requests."
+            },
+            {
+              "key": "friendly",
+              "title": "Friendly",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, the peer Content Cache is willing to respond to requests from this Content Cache."
+            },
+            {
+              "key": "healthy",
+              "title": "Cache health",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, the peer Content Cache is able to respond to requests from this Content Cache."
+            },
+            {
+              "key": "version",
+              "title": "Version",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The version number of the peer Content Cache software."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

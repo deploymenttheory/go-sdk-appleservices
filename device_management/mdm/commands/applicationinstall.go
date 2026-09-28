@@ -13,20 +13,17 @@ type InstallApplication struct {
 	Identifier *string `plist:"Identifier,omitempty" json:"Identifier,omitempty"`
 	// A dictionary that contains the app installation options.
 	Options *InstallApplicationOptions `plist:"Options,omitempty" json:"Options,omitempty"`
-	// The URL of the app manifest, which needs to begin with `https:`. The manifest is returned as a
-	// property list that uses the `ManifestURL` format.
+	// The URL of the app manifest, which needs to begin with `https:`. The server returns the manifest
+	// as a property list that uses the `ManifestURL` format.
 	ManifestURL *string `plist:"ManifestURL,omitempty" json:"ManifestURL,omitempty"`
 	// A bitwise OR of the management flags. The possible values are:
 	ManagementFlags *InstallApplicationManagementFlags `plist:"ManagementFlags,omitempty" json:"ManagementFlags,omitempty"`
 	// A dictionary that contains the initial configuration of the app, if you choose to provide it.
-	// Available in iOS 7 and later, macOS 11 and later, and tvOS 10.2 and later.
 	Configuration *InstallApplicationConfiguration `plist:"Configuration,omitempty" json:"Configuration,omitempty"`
 	// A dictionary that contains the initial attributes of the app, if you choose to provide it.
-	// Available in iOS 7 and later, and tvOS 10.2 and later.
 	Attributes *InstallApplicationAttributes `plist:"Attributes,omitempty" json:"Attributes,omitempty"`
 	// The change management state. This value doesn't work with the user enrollment feature introduced
-	// in iOS 13, or any type of account driven enrollment. Available in iOS 9 and later, macOS 11 and
-	// later, and tvOS 10.2 and later. The only possible value is:
+	// in iOS 13, or any type of account driven enrollment. The only possible value is:
 	ChangeManagementState *string `plist:"ChangeManagementState,omitempty" json:"ChangeManagementState,omitempty"`
 	// If `true`, install the app as a managed app. Otherwise, the system installs the app as
 	// unmanaged. If you reinstall a manged app and omit this value or set it to `false`, the app
@@ -62,7 +59,6 @@ type InstallApplicationOptions struct {
 
 // InstallApplicationConfiguration is the Configuration dictionary.
 // A dictionary that contains the initial configuration of the app, if you choose to provide it.
-// Available in iOS 7 and later, macOS 11 and later, and tvOS 10.2 and later.
 type InstallApplicationConfiguration struct {
 	// An app configuration key.
 	ANY any `plist:"ANY,omitempty" json:"ANY,omitempty"`
@@ -70,26 +66,23 @@ type InstallApplicationConfiguration struct {
 
 // InstallApplicationAttributes is the Attributes dictionary.
 // A dictionary that contains the initial attributes of the app, if you choose to provide it.
-// Available in iOS 7 and later, and tvOS 10.2 and later.
 type InstallApplicationAttributes struct {
-	// A per-app VPN unique identifier for this app. Available in iOS 7 and later.
+	// A per-app VPN unique identifier for this app.
 	VPNUUID *string `plist:"VPNUUID,omitempty" json:"VPNUUID,omitempty"`
-	// The content filter UUID for this app. Available in iOS 16 and later.
+	// The content filter UUID for this app.
 	ContentFilterUUID *string `plist:"ContentFilterUUID,omitempty" json:"ContentFilterUUID,omitempty"`
-	// The DNS proxy UUID for this app. Available in iOS 16 and later.
+	// The DNS proxy UUID for this app.
 	DNSProxyUUID *string `plist:"DNSProxyUUID,omitempty" json:"DNSProxyUUID,omitempty"`
-	// The relay UUID for this app. Available in iOS 17 and later.
+	// The relay UUID for this app.
 	RelayUUID *string `plist:"RelayUUID,omitempty" json:"RelayUUID,omitempty"`
-	// An array that contains the associated domains to add to this app. Available in iOS 13 and later.
+	// An array that contains the associated domains to add to this app.
 	AssociatedDomains []string `plist:"AssociatedDomains,omitempty" json:"AssociatedDomains,omitempty"`
 	// If `true`, perform claimed site association verification directly at the domain instead of on
-	// Apple's servers. Only set this to `true` for domains that can't access the internet. Available
-	// in iOS 14 and later.
+	// Apple's servers. Only set this to `true` for domains that can't access the internet.
 	//
 	// Default: false.
 	AssociatedDomainsEnableDirectDownloads *bool `plist:"AssociatedDomainsEnableDirectDownloads,omitempty" json:"AssociatedDomainsEnableDirectDownloads,omitempty"`
-	// If `false`, this app isn't removable while it's a managed app. Available in iOS 14 and later,
-	// and tvOS 14 and later.
+	// If `false`, this app isn't removable while it's a managed app.
 	//
 	// Default: true.
 	Removable *bool `plist:"Removable,omitempty" json:"Removable,omitempty"`

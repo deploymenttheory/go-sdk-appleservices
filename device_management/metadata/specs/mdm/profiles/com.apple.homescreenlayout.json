@@ -58,7 +58,7 @@
               "key": "BundleID",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The bundle identifier of the app. This setting is required if the type is `Application`."
+              "content": "The bundle identifier of the app. The device requires this setting if the type is `Application`."
             },
             {
               "key": "Pages",
@@ -78,7 +78,7 @@
               "key": "URL",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The URL of the existing web clip for this item. This setting is required if `type` is `WebClip`. If more than one web clip exists with the same URL, the behavior is undefined.\n\nSpecifying a web clip in this payload doesn't create the web clip. Use the `WebClip` payload to create a web clip.",
+              "content": "The URL of the existing web clip for this item. The device requires this setting if `type` is `WebClip`. If more than one web clip exists with the same URL, the behavior is undefined.\n\nSpecifying a web clip in this payload doesn't create the web clip. Use the `WebClip` payload to create a web clip.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "11.3"
@@ -127,7 +127,7 @@
                   "key": "BundleID",
                   "type": "\u003cstring\u003e",
                   "presence": "optional",
-                  "content": "The bundle identifier of the app. This setting is required if the type is `Application`."
+                  "content": "The bundle identifier of the app. The device requires this setting if the type is `Application`."
                 },
                 {
                   "key": "Pages",
@@ -140,7 +140,7 @@
                   "key": "URL",
                   "type": "\u003cstring\u003e",
                   "presence": "optional",
-                  "content": "The URL of the existing web clip for this item. This setting is required if `type` is `WebClip`. If more than one web clip exists with the same URL, the behavior is undefined.\n\nSpecifying a web clip in this payload doesn't create the web clip. Use the `WebClip` payload to create a web clip.",
+                  "content": "The URL of the existing web clip for this item. The device requires this setting if `type` is `WebClip`. If more than one web clip exists with the same URL, the behavior is undefined.\n\nSpecifying a web clip in this payload doesn't create the web clip. Use the `WebClip` payload to create a web clip.",
                   "supportedOS": {
                     "iOS": {
                       "introduced": "11.3"

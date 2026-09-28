@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.model.identifier",
   "title": "Status Device Model Identifier",
-  "description": "A status report of the device's hardware identifier.",
+  "description": "The status item that reports the device's hardware model identifier.",
   "payload": {
     "statusitemtype": "device.model.identifier",
     "supportedOS": {

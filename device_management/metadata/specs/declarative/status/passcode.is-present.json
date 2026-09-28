@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "passcode.is-present",
   "title": "Status Passcode Is Present",
-  "description": "A status report of the passcode on the device.",
+  "description": "The status item that reports whether the device has a passcode.",
   "payload": {
     "statusitemtype": "passcode.is-present",
     "supportedOS": {

@@ -47,19 +47,15 @@ type CellularAPNsItem struct {
 	ProxyServer *string `plist:"ProxyServer,omitempty" json:"ProxyServer,omitempty"`
 	// The proxy server's port number.
 	ProxyPort *int64 `plist:"ProxyPort,omitempty" json:"ProxyPort,omitempty"`
-	// The default Internet Protocol versions. Available in iOS 10.3 but no longer used in iOS 11 and
-	// later. Allowed values:
+	// The default Internet Protocol versions. Allowed values:
 	DefaultProtocolMask *CellularAPNsItemDefaultProtocolMask `plist:"DefaultProtocolMask,omitempty" json:"DefaultProtocolMask,omitempty"`
-	// The Internet Protocol versions that the system supports. Available in iOS 10.3 and later.
-	// Allowed values:
+	// The Internet Protocol versions that the system supports. Allowed values:
 	AllowedProtocolMask *CellularAPNsItemAllowedProtocolMask `plist:"AllowedProtocolMask,omitempty" json:"AllowedProtocolMask,omitempty"`
-	// The Internet Protocol versions that the system supports while roaming. Available in iOS 10.3 and
-	// later. Allowed values:
+	// The Internet Protocol versions that the system supports while roaming. Allowed values:
 	AllowedProtocolMaskInRoaming *CellularAPNsItemAllowedProtocolMaskInRoaming `plist:"AllowedProtocolMaskInRoaming,omitempty" json:"AllowedProtocolMaskInRoaming,omitempty"`
-	// The Internet Protocol versions that the system supports while roaming. Available in iOS 10.3 and
-	// later. Allowed values:
+	// The Internet Protocol versions that the system supports while roaming. Allowed values:
 	AllowedProtocolMaskInDomesticRoaming *CellularAPNsItemAllowedProtocolMaskInDomesticRoaming `plist:"AllowedProtocolMaskInDomesticRoaming,omitempty" json:"AllowedProtocolMaskInDomesticRoaming,omitempty"`
-	// If `true`, the system enables XLAT464. Available in iOS 16 and later and watchOS 9 and later.
+	// If `true`, the system enables XLAT464.
 	//
 	// Default: false.
 	EnableXLAT464 *bool `plist:"EnableXLAT464,omitempty" json:"EnableXLAT464,omitempty"`

@@ -8,7 +8,7 @@ package configurations
 // Supported: iOS 18.0+, macOS 15.0+, visionOS 26.0+.
 type SafariExtensionsSettings struct {
 	// The dictionary of managed extensions settings. Each key in the dictionary represents a composed
-	// identifier for a specific managed extension, or you can specify a single "*" character to match
+	// identifier for a specific managed extension, or you can specify a single "\*" character to match
 	// any extension. The dictionary values represent the settings that Safari applies to each
 	// extension that matches the key. In order for the extension to be managed, its host app needs to
 	// be present on the device.
@@ -19,19 +19,23 @@ type SafariExtensionsSettings struct {
 // The dictionary that defines the settings for a managed extension. Each key represents a specific
 // managed extension, or you can specify a single "*" character to match any extension.
 type ExtensionDictionary struct {
-	// Controls whether an extension is allowed.
+	// Controls whether an extension is allowed. The device uses this key when the extension identifier
+	// is a composed identifier or a single "\*" character.
 	State *ExtensionDictionaryState `plist:"State,omitempty" json:"State,omitempty"`
-	// Controls whether an extension is allowed in Private Browsing.
+	// Controls whether an extension is allowed in Private Browsing. The device uses this key when the
+	// extension identifier is a composed identifier or a single "\*" character.
 	PrivateBrowsing *ExtensionDictionaryPrivateBrowsing `plist:"PrivateBrowsing,omitempty" json:"PrivateBrowsing,omitempty"`
-	// Controls the domains and sub-domains the extension is granted access to.
+	// Controls the domains and sub-domains the extension can access. The device ignores this key when
+	// the extension identifier is a single "*" character.
 	AllowedDomains []string `plist:"AllowedDomains,omitempty" json:"AllowedDomains,omitempty"`
-	// Controls the domains and sub-domains the extension isn't allowed to access.
+	// Controls the domains and sub-domains the extension isn't allowed to access. The device uses this
+	// key when the extension identifier is a composed identifier or a single "*" character.
 	DeniedDomains []string `plist:"DeniedDomains,omitempty" json:"DeniedDomains,omitempty"`
 }
 
 // SafariExtensionsSettingsManagedExtensions is the ManagedExtensions dictionary.
 // The dictionary of managed extensions settings. Each key in the dictionary represents a composed
-// identifier for a specific managed extension, or you can specify a single "*" character to match
+// identifier for a specific managed extension, or you can specify a single "\*" character to match
 // any extension. The dictionary values represent the settings that Safari applies to each
 // extension that matches the key. In order for the extension to be managed, its host app needs to
 // be present on the device.

@@ -37,25 +37,25 @@
         "AlwaysOn",
         "TransparentProxy"
       ],
-      "content": "The type of the VPN, which defines which settings are appropriate for this VPN payload.\n\nIf the type is `VPN` or `TransparentProxy`, then the system requires a value for `VPNSubType`.\n\n`TransparentProxy` is only available in macOS. `L2TP` and `IPSec` aren't available in tvOS. `AlwaysOn` is only available on iOS and Apple Watch pairing isn't supported with `AlwaysOn`. For a previously paired Apple Watch, all phone-watch communications cease when `AlwaysOn` is enabled. Not available in watchOS."
+      "content": "The type of the VPN, which defines which settings are appropriate for this VPN payload.\n\nIf the type is `VPN` or `TransparentProxy`, then the system requires a value for `VPNSubType`.\n\n`TransparentProxy` is only available in macOS. `L2TP` and `IPSec` aren't available in tvOS. `AlwaysOn` is only available on iOS and `AlwaysOn` doesn't support Apple Watch pairing. For a previously paired Apple Watch, all phone-watch communications cease when `AlwaysOn` is enabled. Not available in watchOS."
     },
     {
       "key": "VPNSubType",
-      "title": "VPN Subtype",
+      "title": "VPN subtype",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "An identifier for a vendor-specified configuration dictionary when the value for `VPNType` is `VPN`.\n\nIf `VPNType` is `VPN`, the system requires this field. If the configuration targets a VPN solution that uses a VPN plugin, then this field contains the bundle identifier of the plugin. Here are some examples:\n\n- Cisco AnyConnect: `com.cisco.anyconnect.applevpn.plugin`\n- Juniper SSL: `net.juniper.sslvpn`\n- F5 SSL: `com.f5.F5-Edge-Client.vpnplugin`\n- SonicWALL Mobile Connect: `com.sonicwall.SonicWALL-SSLVPN.vpnplugin`\n- ``Aruba VIA: `com.arubanetworks.aruba-via.vpnplugin`\n\nIf the configuration targets a VPN solution that uses a network extension provider, then this field contains the bundle identifier of the app that contains the provider. Contact the VPN solution vendor for the value of the identifier.\n\nIf `VPNType` is `IKEv2`, then the `VPNSubType` field is optional and reserved for future use. If it's specified, it needs to contain an empty string.\n\nNot available in watchOS."
     },
     {
       "key": "UserDefinedName",
-      "title": "User Defined Name",
+      "title": "User defined name",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The description of the VPN connection that the system displays on the device. Not available in watchOS."
     },
     {
       "key": "VendorConfig",
-      "title": "Vendor Configuration Dictionary",
+      "title": "Vendor configuration dictionary",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "The vendor-specific configuration dictionary, which the system reads only when `VPNSubType` has a value. Not available in watchOS.",
@@ -83,7 +83,7 @@
         },
         {
           "key": "LoginGroupOrDomain",
-          "title": "Login Group or Domain",
+          "title": "Login group or domain",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The login group or domain. Valid only for SonicWALL Mobile Connect. Not available in watchOS."
@@ -99,14 +99,14 @@
       "subkeys": [
         {
           "key": "AuthName",
-          "title": "Account Username",
+          "title": "Account username",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The VPN account username."
         },
         {
           "key": "AuthPassword",
-          "title": "Account Password",
+          "title": "Account password",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The VPN account password. Only use this if `AuthenticationMethod` is set to `Password`."
@@ -120,7 +120,7 @@
         },
         {
           "key": "AuthenticationMethod",
-          "title": "Authentication Method",
+          "title": "Authentication method",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
@@ -140,17 +140,17 @@
         },
         {
           "key": "ProviderBundleIdentifier",
-          "title": "Provider Bundle Identifier",
+          "title": "Provider bundle identifier",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The bundle identifier for the VPN provider. Not available in watchOS."
         },
         {
           "key": "ProviderDesignatedRequirement",
-          "title": "Provider Designated Requirement",
+          "title": "Provider designated requirement",
           "type": "\u003cstring\u003e",
           "presence": "optional",
-          "content": "If the VPN provider is implemented as a system extension, this field is required. Not available in watchOS.",
+          "content": "If the VPN provider uses a system extension, this field is required. Not available in watchOS.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -165,7 +165,7 @@
         },
         {
           "key": "DisconnectOnIdle",
-          "title": "Enable Disconnect on Idle",
+          "title": "Enable disconnect on idle",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -177,7 +177,7 @@
         },
         {
           "key": "DisconnectOnIdleTimer",
-          "title": "Disconnect on Idle time",
+          "title": "Disconnect on idle time",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "content": "The length of time to wait, in seconds, before disconnecting an on-demand connection. In watchOS, the maximum allowed value is `15`."
@@ -195,7 +195,7 @@
         },
         {
           "key": "IncludeAllNetworks",
-          "title": "Include All Networks",
+          "title": "Include all networks",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -203,7 +203,7 @@
             1
           ],
           "default": 0,
-          "content": "If `1``, routes all traffic through the VPN, with some exclusions. Several of the exclusions can be controlled with the `ExcludeLocalNetworks`, `ExcludeCellularServices`, `ExcludeAPNs` and `ExcludeDeviceCommunication` properties. The following traffic is always excluded from the tunnel:\n\n- Traffic necessary for connecting and maintaining the device's network connection, such as DHCP.\n- Traffic necessary for connecting to captive networks.\n- Certain cellular services traffic that is not routable over the internet and is instead directly routed to the cellular network. See the ExcludeCellularServices property for more details.\n- Network communication with a companion device such as a watchOS device.\n\nNot available in watchOS.",
+          "content": "If `1``, routes all traffic through the VPN, with some exclusions. Several of the exclusions can be controlled with the `ExcludeLocalNetworks`, `ExcludeCellularServices`, `ExcludeAPNs` and `ExcludeDeviceCommunication` properties. The system always excludes the following traffic from the tunnel:\n\n- Traffic necessary for connecting and maintaining the device's network connection, such as DHCP.\n- Traffic necessary for connecting to captive networks.\n- Certain cellular services traffic that's not routable over the internet and is instead directly routed to the cellular network. See the ExcludeCellularServices property for more details.\n- Network communication with a companion device such as a watchOS device.\n\nNot available in watchOS.",
           "supportedOS": {
             "iOS": {
               "introduced": "14.0"
@@ -218,7 +218,7 @@
         },
         {
           "key": "EnforceRoutes",
-          "title": "Enforce Routes",
+          "title": "Enforce routes",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -226,7 +226,7 @@
             1
           ],
           "default": 0,
-          "content": "If `1`, all the VPN's non-default routes take precedence over any locally defined routes.\n\nIf `IncludeAllNetworks` is `1`, the system ignores the value of `EnforceRoutes`.\n\nAvailable in iOS 14.2 and later, and macOS 11 and later. Not available in watchOS.",
+          "content": "If `1`, all the VPN's non-default routes take precedence over any locally defined routes.\n\nIf `IncludeAllNetworks` is `1`, the system ignores the value of `EnforceRoutes`.\n\n Not available in watchOS.",
           "supportedOS": {
             "iOS": {
               "introduced": "14.2"
@@ -238,7 +238,7 @@
         },
         {
           "key": "ExcludeLocalNetworks",
-          "title": "Exclude Local Networks",
+          "title": "Exclude local networks",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -260,7 +260,7 @@
         },
         {
           "key": "ExcludeCellularServices",
-          "title": "Exclude Cellular Services",
+          "title": "Exclude cellular services",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -306,7 +306,7 @@
         },
         {
           "key": "ExcludeDeviceCommunication",
-          "title": "Exclude Device Communication",
+          "title": "Exclude device communication",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -332,7 +332,7 @@
         },
         {
           "key": "OnDemandEnabled",
-          "title": "Enable VPN On Demand",
+          "title": "Enable VPN on demand",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -344,7 +344,7 @@
         },
         {
           "key": "OnDemandUserOverrideDisabled",
-          "title": "Prevent users from toggling VPN On Demand",
+          "title": "Prevent users from toggling VPN on demand",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -352,7 +352,7 @@
             1
           ],
           "default": 0,
-          "content": "If `1`, the Connect On Demand toggle in Settings is disabled for this configuration. Available in iOS 14 and later. Not available in watchOS.",
+          "content": "If `1`, the device disables the Connect On Demand toggle in Settings for this configuration. Not available in watchOS.",
           "supportedOS": {
             "iOS": {
               "introduced": "14.0"
@@ -364,7 +364,7 @@
         },
         {
           "key": "OnDemandMatchDomainsAlways",
-          "title": "On Demand Match Domains Always",
+          "title": "On demand match domains always",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "A list of domain names. The system treats associated domain names as though they're associated with the `OnDemandMatchDomainsOnRetry` key. This behavior can be overridden by `OnDemandRules`.\n\nIn iOS 7 and later, this key is deprecated (but still supported) in favor of `EvaluateConnection` actions in the `OnDemandRules` dictionaries.\n\nNot available in watchOS.",
@@ -372,7 +372,7 @@
           "subkeys": [
             {
               "key": "MatchDomainAlwaysElement",
-              "title": "Match Domain Always Element",
+              "title": "Match domain always element",
               "type": "\u003cstring\u003e"
             }
           ],
@@ -384,7 +384,7 @@
         },
         {
           "key": "OnDemandMatchDomainsNever",
-          "title": "On Demand Match Domains Never",
+          "title": "On demand match domains never",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "A list of domain names. If the host name ends with one of these domain names, the system doesn't start the VPN automatically. The system uses this value to exclude a subdomain within an included domain.\n\nIn iOS 7 and later, this key is deprecated (but still supported) in favor of `EvaluateConnection` actions in the `OnDemandRules` dictionaries.\n\nNot available in watchOS.",
@@ -392,7 +392,7 @@
           "subkeys": [
             {
               "key": "MatchDomainNeverElement",
-              "title": "Match Domain Never Element",
+              "title": "Match domain never element",
               "type": "\u003cstring\u003e"
             }
           ],
@@ -404,7 +404,7 @@
         },
         {
           "key": "OnDemandMatchDomainsOnRetry",
-          "title": "On Demand Match Domains On Retry",
+          "title": "On demand match domains on retry",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "A list of domain names. If the host name ends with one of these domain names and a DNS query for that domain name fails, the system starts the VPN automatically.\n\nIn iOS 7 and later, this key is deprecated (but still supported) in favor of `EvaluateConnection` actions in the `OnDemandRules` dictionaries.\n\nNot available in watchOS.",
@@ -412,7 +412,7 @@
           "subkeys": [
             {
               "key": "MatchDomainOnRetryElement",
-              "title": "Match Domain On Retry Element",
+              "title": "Match domain on retry element",
               "type": "\u003cstring\u003e"
             }
           ],
@@ -424,7 +424,7 @@
         },
         {
           "key": "OnDemandRules",
-          "title": "On Demand Rules",
+          "title": "On demand rules",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "An array of dictionaries defining On Demand Rules.",
@@ -432,12 +432,12 @@
           "subkeys": [
             {
               "key": "OnDemandRulesElement",
-              "title": "On Demand Rules Element",
+              "title": "On demand rules element",
               "type": "\u003cdictionary\u003e",
               "subkeys": [
                 {
                   "key": "Action",
-                  "title": "On Demand Action",
+                  "title": "On demand action",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -451,14 +451,14 @@
                 },
                 {
                   "key": "ActionParameters",
-                  "title": "Action Parameters",
+                  "title": "Action parameters",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "An array of dictionaries that provides rules similar to the `OnDemandRules` dictionary, but evaluated on each connection instead of when the network changes. This value is only for use with dictionaries in which the `Action` value is `EvaluateConnection`. The system evaluates these dictionaries in order and the first dictionary that matches determines the behavior. Not available in watchOS.",
                   "subkeys": [
                     {
                       "key": "ActionParameter",
-                      "title": "Action Parameter",
+                      "title": "Action parameter",
                       "type": "\u003cdictionary\u003e",
                       "presence": "optional",
                       "content": "A dictionary that provides rules similar to the OnDemandRules dictionary, but evaluated on each connection instead of when the network changes. These dictionaries are evaluated in order, and the behavior is determined by the first dictionary that matches.\nThe keys allowed in each dictionary are described below. Note: This array is used only for dictionaries in which EvaluateConnection is the Action value.",
@@ -472,14 +472,14 @@
                           "subkeys": [
                             {
                               "key": "DomainsElement",
-                              "title": "Domains Element",
+                              "title": "Domains element",
                               "type": "\u003cstring\u003e"
                             }
                           ]
                         },
                         {
                           "key": "DomainAction",
-                          "title": "Domain Action",
+                          "title": "Domain action",
                           "type": "\u003cstring\u003e",
                           "presence": "required",
                           "rangelist": [
@@ -490,24 +490,24 @@
                         },
                         {
                           "key": "RequiredDNSServers",
-                          "title": "Required DNS Servers",
+                          "title": "Required DNS servers",
                           "type": "\u003carray\u003e",
                           "presence": "optional",
                           "content": "An array of IP addresses of DNS servers to use for resolving the specified domains. These servers don't need to be part of the device's current network configuration. If these DNS servers aren't reachable, the system establishes a VPN connection. These DNS servers need to be either internal DNS servers or trusted external DNS servers.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'.",
                           "subkeys": [
                             {
                               "key": "RequiredDNSServersElement",
-                              "title": "Required DNS Servers Element",
+                              "title": "Required DNS servers element",
                               "type": "\u003cstring\u003e"
                             }
                           ]
                         },
                         {
                           "key": "RequiredURLStringProbe",
-                          "title": "Required URL String Probe",
+                          "title": "Required URL string probe",
                           "type": "\u003cstring\u003e",
                           "presence": "optional",
-                          "content": "An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status code, a VPN connection is established in response.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'."
+                          "content": "An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status code, the device establishes a VPN connection in response.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'."
                         }
                       ]
                     }
@@ -515,35 +515,35 @@
                 },
                 {
                   "key": "DNSDomainMatch",
-                  "title": "DNS Domain Match",
+                  "title": "DNS domain match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
-                  "content": "An array of domain names. This rule matches if any of the domain names in the specified list matches any domain in the device's search domains list.\nThe system supports a wildcard (`*`) prefix. For example, `*.example.com` matches against either `mydomain.example.com` or `yourdomain.example.com`.",
+                  "content": "An array of domain names. This rule matches if any of the domain names in the specified list matches any domain in the device's search domains list.\nThe system supports a wildcard (`\\*`) prefix. For example, `\\*.example.com` matches against either `mydomain.example.com` or `yourdomain.example.com`.",
                   "subkeys": [
                     {
                       "key": "DNSDomainMatchElement",
-                      "title": "DNS Domain Match Element",
+                      "title": "DNS domain match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "DNSServerAddressMatch",
-                  "title": "DNS Server Address Match",
+                  "title": "DNS server address match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
-                  "content": "An array of IP addresses. This rule matches if any of the network's specified DNS servers match any entry in the array.\nThe system supports matching with a single wildcard. For example, `17.*` matches any DNS server in the `17.0.0.0/8` subnet.",
+                  "content": "An array of IP addresses. This rule matches if any of the network's specified DNS servers match any entry in the array.\nThe system supports matching with a single wildcard. For example, `17.\\*` matches any DNS server in the `17.0.0.0/8` subnet.",
                   "subkeys": [
                     {
                       "key": "DNSServerAddressMatchElement",
-                      "title": "DNS Server Address Match Element",
+                      "title": "DNS server address match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "InterfaceTypeMatch",
-                  "title": "Interface Type Match",
+                  "title": "Interface type match",
                   "type": "\u003cstring\u003e",
                   "presence": "optional",
                   "rangelist": [
@@ -555,21 +555,21 @@
                 },
                 {
                   "key": "SSIDMatch",
-                  "title": "SSID Match",
+                  "title": "SSID match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "An array of SSIDs to match against the current network. If the network isn't a Wi-Fi network or if the SSID doesn't appear in this array, the match fails.\nOmit this key and the corresponding array to match against any SSID.",
                   "subkeys": [
                     {
                       "key": "SSIDMatchElement",
-                      "title": "SSID Match Element",
+                      "title": "SSID match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "URLStringProbe",
-                  "title": "URL String Probe",
+                  "title": "URL string probe",
                   "type": "\u003cstring\u003e",
                   "presence": "optional",
                   "content": "A URL to probe. This rule matches when this URL is successfully fetched (returns a `200` HTTP status code) without redirection. Not available in watchOS."
@@ -582,14 +582,14 @@
     },
     {
       "key": "IPv4",
-      "title": "IPv4 Settings",
+      "title": "IPv4 settings",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "The dictionary that contains IPv4 settings. Not available in watchOS.",
       "subkeys": [
         {
           "key": "OverridePrimary",
-          "title": "Override Primary Connection",
+          "title": "Override primary connection",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -615,21 +615,21 @@
       "subkeys": [
         {
           "key": "AuthName",
-          "title": "Account Username",
+          "title": "Account username",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The VPN account user name. This key is for use with L2TP and PPTP networks."
         },
         {
           "key": "AuthPassword",
-          "title": "Account Password",
+          "title": "Account password",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "If `TokenCard` is `1`, use this password for authentication. This key is for use with L2TP and PPTP networks."
         },
         {
           "key": "TokenCard",
-          "title": "Use Token Card",
+          "title": "Use token card",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -641,21 +641,21 @@
         },
         {
           "key": "CommRemoteAddress",
-          "title": "Remote Address",
+          "title": "Remote address",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The IP address or host name of VPN server. This key is for use with L2TP and PPTP networks."
         },
         {
           "key": "AuthEAPPlugins",
-          "title": "EAP Plugins",
+          "title": "EAP plugins",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "An array of authentication plugins. For use of RSA SecurID, this array should only have one value: `EAP-RSA`. This key is for use with L2TP and PPTP networks.",
           "subkeys": [
             {
               "key": "EAPPluginElement",
-              "title": "EAP Plugin",
+              "title": "EAP plugin",
               "type": "\u003cstring\u003e",
               "rangelist": [
                 "EAP-RSA",
@@ -678,7 +678,7 @@
           "subkeys": [
             {
               "key": "AuthProtocolElement",
-              "title": "Auth Protocol",
+              "title": "Auth protocol",
               "type": "\u003cstring\u003e",
               "rangelist": [
                 "EAP"
@@ -725,7 +725,7 @@
         },
         {
           "key": "DisconnectOnIdle",
-          "title": "Enable Disconnect on Idle",
+          "title": "Enable disconnect on idle",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -737,7 +737,7 @@
         },
         {
           "key": "DisconnectOnIdleTimer",
-          "title": "Disconnect on Idle time",
+          "title": "Disconnect on idle time",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "content": "The length of time to wait before disconnecting an on demand connection"
@@ -751,21 +751,21 @@
     },
     {
       "key": "IPSec",
-      "title": "IPSec Settings",
+      "title": "IPSec settings",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "The dictionary that contains IPSec settings. Not available in watchOS.",
       "subkeys": [
         {
           "key": "RemoteAddress",
-          "title": "Remote Address",
+          "title": "Remote address",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The IP address or host name of the VPN server."
         },
         {
           "key": "AuthenticationMethod",
-          "title": "Authentication Method",
+          "title": "Authentication method",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
@@ -791,7 +791,7 @@
         },
         {
           "key": "XAuthEnabled",
-          "title": "XAUTH Enabled",
+          "title": "XAUTH enabled",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -802,7 +802,7 @@
         },
         {
           "key": "XAuthPasswordEncryption",
-          "title": "XAUTH Password Encryption",
+          "title": "XAUTH password encryption",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
@@ -812,14 +812,14 @@
         },
         {
           "key": "LocalIdentifier",
-          "title": "Local Identifier",
+          "title": "Local identifier",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The name of the group. For hybrid authentication, the string needs to end with \"hybrid\".\n\nPresent only for Cisco IPSec if `AuthenticationMethod` is `SharedSecret`."
         },
         {
           "key": "LocalIdentifierType",
-          "title": "Local Identifier Type",
+          "title": "Local identifier type",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
@@ -830,7 +830,7 @@
         },
         {
           "key": "SharedSecret",
-          "title": "Shared Secret",
+          "title": "Shared secret",
           "type": "\u003cdata\u003e",
           "presence": "optional",
           "content": "The shared secret for this VPN account.\n\nOnly use this with L2TP and Cisco IPSec VPNs and if the `AuthenticationMethod` key is to `SharedSecret`."
@@ -852,7 +852,7 @@
         },
         {
           "key": "DisconnectOnIdle",
-          "title": "Enable Disconnect on Idle",
+          "title": "Enable disconnect on idle",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -864,14 +864,14 @@
         },
         {
           "key": "DisconnectOnIdleTimer",
-          "title": "Disconnect on Idle time",
+          "title": "Disconnect on idle time",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "content": "The length of time to wait before disconnecting an on-demand connection."
         },
         {
           "key": "OnDemandEnabled",
-          "title": "Enable VPN On Demand",
+          "title": "Enable VPN on demand",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -883,7 +883,7 @@
         },
         {
           "key": "OnDemandMatchDomainsAlways",
-          "title": "On Demand Match Domains Always",
+          "title": "On demand match domains always",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "Deprecated. A list of domain names. In iOS 7 and later, if this key is present, the system treats associated domain names as though they're associated with the `OnDemandMatchDomainsOnRetry` key. This behavior can be overridden by `OnDemandRules`.",
@@ -891,7 +891,7 @@
           "subkeys": [
             {
               "key": "MatchDomainAlwaysElement",
-              "title": "Match Domain Always Element",
+              "title": "Match domain always element",
               "type": "\u003cstring\u003e"
             }
           ],
@@ -903,7 +903,7 @@
         },
         {
           "key": "OnDemandMatchDomainsNever",
-          "title": "On Demand Match Domains Never",
+          "title": "On demand match domains never",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "Deprecated. A list of domain names. In iOS 7 and later, this key is deprecated (but still supported) in favor of `EvaluateConnection` actions in the `OnDemandRules` dictionaries.",
@@ -911,7 +911,7 @@
           "subkeys": [
             {
               "key": "MatchDomainNeverElement",
-              "title": "Match Domain Never Element",
+              "title": "Match domain never element",
               "type": "\u003cstring\u003e"
             }
           ],
@@ -923,7 +923,7 @@
         },
         {
           "key": "OnDemandMatchDomainsOnRetry",
-          "title": "On Demand Match Domains On Retry",
+          "title": "On demand match domains on retry",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "Deprecated. A list of domain names. In iOS 7 and later, this field is deprecated (but still supported) in favor of `EvaluateConnection` actions in the `OnDemandRules` dictionaries.",
@@ -931,7 +931,7 @@
           "subkeys": [
             {
               "key": "MatchDomainOnRetryElement",
-              "title": "Match Domain On Retry Element",
+              "title": "Match domain on retry element",
               "type": "\u003cstring\u003e"
             }
           ],
@@ -943,7 +943,7 @@
         },
         {
           "key": "OnDemandRules",
-          "title": "On Demand Rules",
+          "title": "On demand rules",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "The on-demand rules dictionary.",
@@ -951,12 +951,12 @@
           "subkeys": [
             {
               "key": "OnDemandRulesElement",
-              "title": "On Demand Rules Element",
+              "title": "On demand rules element",
               "type": "\u003cdictionary\u003e",
               "subkeys": [
                 {
                   "key": "Action",
-                  "title": "On Demand Action",
+                  "title": "On demand action",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -970,14 +970,14 @@
                 },
                 {
                   "key": "ActionParameters",
-                  "title": "Action Parameters",
+                  "title": "Action parameters",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "An array of dictionaries that provides rules similar to the `OnDemandRules` dictionary, but evaluated on each connection instead of when the network changes. This value is only for use with dictionaries in which the `Action` value is `EvaluateConnection`. The system evaluates these dictionaries in order and the first dictionary that matches determines the behavior. Not available in watchOS.",
                   "subkeys": [
                     {
                       "key": "ActionParameter",
-                      "title": "Action Parameter",
+                      "title": "Action parameter",
                       "type": "\u003cdictionary\u003e",
                       "presence": "optional",
                       "content": "A dictionary that provides rules similar to the OnDemandRules dictionary, but evaluated on each connection instead of when the network changes. These dictionaries are evaluated in order, and the behavior is determined by the first dictionary that matches.\nThe keys allowed in each dictionary are described below. Note: This array is used only for dictionaries in which EvaluateConnection is the Action value.",
@@ -991,14 +991,14 @@
                           "subkeys": [
                             {
                               "key": "DomainsElement",
-                              "title": "Domains Element",
+                              "title": "Domains element",
                               "type": "\u003cstring\u003e"
                             }
                           ]
                         },
                         {
                           "key": "DomainAction",
-                          "title": "Domain Action",
+                          "title": "Domain action",
                           "type": "\u003cstring\u003e",
                           "presence": "required",
                           "rangelist": [
@@ -1009,24 +1009,24 @@
                         },
                         {
                           "key": "RequiredDNSServers",
-                          "title": "Required DNS Servers",
+                          "title": "Required DNS servers",
                           "type": "\u003carray\u003e",
                           "presence": "optional",
                           "content": "An array of IP addresses of DNS servers to use for resolving the specified domains. These servers don't need to be part of the device's current network configuration. If these DNS servers aren't reachable, the system establishes a VPN connection. These DNS servers need to be either internal DNS servers or trusted external DNS servers.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'.",
                           "subkeys": [
                             {
                               "key": "RequiredDNSServersElement",
-                              "title": "Required DNS Servers Element",
+                              "title": "Required DNS servers element",
                               "type": "\u003cstring\u003e"
                             }
                           ]
                         },
                         {
                           "key": "RequiredURLStringProbe",
-                          "title": "Required URL String Probe",
+                          "title": "Required URL string probe",
                           "type": "\u003cstring\u003e",
                           "presence": "optional",
-                          "content": "An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status code, a VPN connection is established in response.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'."
+                          "content": "An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status code, the device establishes a VPN connection in response.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'."
                         }
                       ]
                     }
@@ -1034,35 +1034,35 @@
                 },
                 {
                   "key": "DNSDomainMatch",
-                  "title": "DNS Domain Match",
+                  "title": "DNS domain match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
-                  "content": "An array of domain names. This rule matches if any of the domain names in the specified list matches any domain in the device's search domains list.\nThe system supports a wildcard (`*`) prefix. For example, `*.example.com` matches against either `mydomain.example.com` or `yourdomain.example.com`.",
+                  "content": "An array of domain names. This rule matches if any of the domain names in the specified list matches any domain in the device's search domains list.\nThe system supports a wildcard (`\\*`) prefix. For example, `\\*.example.com` matches against either `mydomain.example.com` or `yourdomain.example.com`.",
                   "subkeys": [
                     {
                       "key": "DNSDomainMatchElement",
-                      "title": "DNS Domain Match Element",
+                      "title": "DNS domain match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "DNSServerAddressMatch",
-                  "title": "DNS Server Address Match",
+                  "title": "DNS server address match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
-                  "content": "An array of IP addresses. This rule matches if any of the network's specified DNS servers match any entry in the array.\nThe system supports matching with a single wildcard. For example, `17.*` matches any DNS server in the `17.0.0.0/8` subnet.",
+                  "content": "An array of IP addresses. This rule matches if any of the network's specified DNS servers match any entry in the array.\nThe system supports matching with a single wildcard. For example, `17.\\*` matches any DNS server in the `17.0.0.0/8` subnet.",
                   "subkeys": [
                     {
                       "key": "DNSServerAddressMatchElement",
-                      "title": "DNS Server Address Match Element",
+                      "title": "DNS server address match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "InterfaceTypeMatch",
-                  "title": "Interface Type Match",
+                  "title": "Interface type match",
                   "type": "\u003cstring\u003e",
                   "presence": "optional",
                   "rangelist": [
@@ -1074,21 +1074,21 @@
                 },
                 {
                   "key": "SSIDMatch",
-                  "title": "SSID Match",
+                  "title": "SSID match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "An array of SSIDs to match against the current network. If the network isn't a Wi-Fi network or if the SSID doesn't appear in this array, the match fails.\nOmit this key and the corresponding array to match against any SSID.",
                   "subkeys": [
                     {
                       "key": "SSIDMatchElement",
-                      "title": "SSID Match Element",
+                      "title": "SSID match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "URLStringProbe",
-                  "title": "URL String Probe",
+                  "title": "URL string probe",
                   "type": "\u003cstring\u003e",
                   "presence": "optional",
                   "content": "A URL to probe. This rule matches when this URL is successfully fetched (returns a `200` HTTP status code) without redirection. Not available in watchOS."
@@ -1146,7 +1146,7 @@
         },
         {
           "key": "CertificateType",
-          "title": "Certificate Type",
+          "title": "Certificate type",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1168,24 +1168,24 @@
         },
         {
           "key": "Password",
-          "title": "Account Password",
+          "title": "Account password",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The password to use for the account credentials. Only used if `AuthenticationMethod` is `Password`."
         },
         {
           "key": "ProviderBundleIdentifier",
-          "title": "Provider Bundle Identifier",
+          "title": "Provider bundle identifier",
           "type": "\u003cstring\u003e",
           "presence": "optional",
-          "content": "If the VPNSubType field contains the bundle identifier of an app that contains multiple VPN providers of the same type (app-proxy or packet-tunnel), then the system uses this field to choose which provider to use for this configuration. If the VPN provider is implemented as a System Extension, then this field is required."
+          "content": "If the VPNSubType field contains the bundle identifier of an app that contains multiple VPN providers of the same type (app-proxy or packet-tunnel), then the system uses this field to choose which provider to use for this configuration. If the VPN provider uses a system extension, then this field is required."
         },
         {
           "key": "ProviderDesignatedRequirement",
-          "title": "Provider Designated Requirement",
+          "title": "Provider designated requirement",
           "type": "\u003cstring\u003e",
           "presence": "optional",
-          "content": "If the VPN provider is implemented as a System Extension, then this field is required. Available in macOS 10.15 and later, tvOS 17 and later, and watchOS 10 and later.",
+          "content": "If the VPN provider uses a system extension, then this field is required.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -1203,7 +1203,7 @@
           "title": "SharedSecret",
           "type": "\u003cstring\u003e",
           "presence": "optional",
-          "content": "If `AuthenticationMethod` is `SharedSecret`, this value is used for IKE authentication."
+          "content": "If `AuthenticationMethod` is `SharedSecret`, the device uses this value for IKE authentication."
         },
         {
           "key": "ExtendedAuthEnabled",
@@ -1233,7 +1233,7 @@
         },
         {
           "key": "OnDemandEnabled",
-          "title": "Enable VPN On Demand",
+          "title": "Enable VPN on demand",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1245,7 +1245,7 @@
         },
         {
           "key": "OnDemandUserOverrideDisabled",
-          "title": "Prevent users from toggling VPN On Demand",
+          "title": "Prevent users from toggling VPN on demand",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1265,7 +1265,7 @@
         },
         {
           "key": "OnDemandRules",
-          "title": "On Demand Rules",
+          "title": "On demand rules",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "A list of rules that determine when and how to use an OnDemand VPN.",
@@ -1273,12 +1273,12 @@
           "subkeys": [
             {
               "key": "OnDemandRulesElement",
-              "title": "On Demand Rules Element",
+              "title": "On demand rules element",
               "type": "\u003cdictionary\u003e",
               "subkeys": [
                 {
                   "key": "Action",
-                  "title": "On Demand Action",
+                  "title": "On demand action",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -1292,14 +1292,14 @@
                 },
                 {
                   "key": "ActionParameters",
-                  "title": "Action Parameters",
+                  "title": "Action parameters",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "An array of dictionaries that provides rules similar to the `OnDemandRules` dictionary, but evaluated on each connection instead of when the network changes. This value is only for use with dictionaries in which the `Action` value is `EvaluateConnection`. The system evaluates these dictionaries in order and the first dictionary that matches determines the behavior. Not available in watchOS.",
                   "subkeys": [
                     {
                       "key": "ActionParameter",
-                      "title": "Action Parameter",
+                      "title": "Action parameter",
                       "type": "\u003cdictionary\u003e",
                       "presence": "optional",
                       "content": "A dictionary that provides rules similar to the OnDemandRules dictionary, but evaluated on each connection instead of when the network changes. These dictionaries are evaluated in order, and the behavior is determined by the first dictionary that matches.\nThe keys allowed in each dictionary are described below. Note: This array is used only for dictionaries in which EvaluateConnection is the Action value.",
@@ -1313,14 +1313,14 @@
                           "subkeys": [
                             {
                               "key": "DomainsElement",
-                              "title": "Domains Element",
+                              "title": "Domains element",
                               "type": "\u003cstring\u003e"
                             }
                           ]
                         },
                         {
                           "key": "DomainAction",
-                          "title": "Domain Action",
+                          "title": "Domain action",
                           "type": "\u003cstring\u003e",
                           "presence": "required",
                           "rangelist": [
@@ -1331,24 +1331,24 @@
                         },
                         {
                           "key": "RequiredDNSServers",
-                          "title": "Required DNS Servers",
+                          "title": "Required DNS servers",
                           "type": "\u003carray\u003e",
                           "presence": "optional",
                           "content": "An array of IP addresses of DNS servers to use for resolving the specified domains. These servers don't need to be part of the device's current network configuration. If these DNS servers aren't reachable, the system establishes a VPN connection. These DNS servers need to be either internal DNS servers or trusted external DNS servers.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'.",
                           "subkeys": [
                             {
                               "key": "RequiredDNSServersElement",
-                              "title": "Required DNS Servers Element",
+                              "title": "Required DNS servers element",
                               "type": "\u003cstring\u003e"
                             }
                           ]
                         },
                         {
                           "key": "RequiredURLStringProbe",
-                          "title": "Required URL String Probe",
+                          "title": "Required URL string probe",
                           "type": "\u003cstring\u003e",
                           "presence": "optional",
-                          "content": "An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status code, a VPN connection is established in response.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'."
+                          "content": "An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status code, the device establishes a VPN connection in response.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'."
                         }
                       ]
                     }
@@ -1356,35 +1356,35 @@
                 },
                 {
                   "key": "DNSDomainMatch",
-                  "title": "DNS Domain Match",
+                  "title": "DNS domain match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
-                  "content": "An array of domain names. This rule matches if any of the domain names in the specified list matches any domain in the device's search domains list.\nThe system supports a wildcard (`*`) prefix. For example, `*.example.com` matches against either `mydomain.example.com` or `yourdomain.example.com`.",
+                  "content": "An array of domain names. This rule matches if any of the domain names in the specified list matches any domain in the device's search domains list.\nThe system supports a wildcard (`\\*`) prefix. For example, `\\*.example.com` matches against either `mydomain.example.com` or `yourdomain.example.com`.",
                   "subkeys": [
                     {
                       "key": "DNSDomainMatchElement",
-                      "title": "DNS Domain Match Element",
+                      "title": "DNS domain match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "DNSServerAddressMatch",
-                  "title": "DNS Server Address Match",
+                  "title": "DNS server address match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
-                  "content": "An array of IP addresses. This rule matches if any of the network's specified DNS servers match any entry in the array.\nThe system supports matching with a single wildcard. For example, `17.*` matches any DNS server in the `17.0.0.0/8` subnet.",
+                  "content": "An array of IP addresses. This rule matches if any of the network's specified DNS servers match any entry in the array.\nThe system supports matching with a single wildcard. For example, `17.\\*` matches any DNS server in the `17.0.0.0/8` subnet.",
                   "subkeys": [
                     {
                       "key": "DNSServerAddressMatchElement",
-                      "title": "DNS Server Address Match Element",
+                      "title": "DNS server address match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "InterfaceTypeMatch",
-                  "title": "Interface Type Match",
+                  "title": "Interface type match",
                   "type": "\u003cstring\u003e",
                   "presence": "optional",
                   "rangelist": [
@@ -1396,21 +1396,21 @@
                 },
                 {
                   "key": "SSIDMatch",
-                  "title": "SSID Match",
+                  "title": "SSID match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "An array of SSIDs to match against the current network. If the network isn't a Wi-Fi network or if the SSID doesn't appear in this array, the match fails.\nOmit this key and the corresponding array to match against any SSID.",
                   "subkeys": [
                     {
                       "key": "SSIDMatchElement",
-                      "title": "SSID Match Element",
+                      "title": "SSID match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "URLStringProbe",
-                  "title": "URL String Probe",
+                  "title": "URL string probe",
                   "type": "\u003cstring\u003e",
                   "presence": "optional",
                   "content": "A URL to probe. This rule matches when this URL is successfully fetched (returns a `200` HTTP status code) without redirection. Not available in watchOS."
@@ -1421,7 +1421,7 @@
         },
         {
           "key": "DeadPeerDetectionRate",
-          "title": "Dead Peer Detection Rate",
+          "title": "Dead peer detection rate",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1454,13 +1454,14 @@
         },
         {
           "key": "TLSMinimumVersion",
-          "title": "TLS Minimum Version",
+          "title": "TLS minimum version",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
             "1.0",
             "1.1",
-            "1.2"
+            "1.2",
+            "1.3"
           ],
           "default": "1.0",
           "content": "The minimum TLS version to use with EAP-TLS authentication.",
@@ -1475,13 +1476,14 @@
         },
         {
           "key": "TLSMaximumVersion",
-          "title": "TLS Maximum Version",
+          "title": "TLS maximum version",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
             "1.0",
             "1.1",
-            "1.2"
+            "1.2",
+            "1.3"
           ],
           "default": "1.2",
           "content": "The maximum TLS version to use with EAP-TLS authentication.",
@@ -1496,7 +1498,7 @@
         },
         {
           "key": "UseConfigurationAttributeInternalIPSubnet",
-          "title": "Use IPv4 / IPv6 Internal Subnet Attributes",
+          "title": "Use IPv4 / IPv6 internal subnet attributes",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1513,7 +1515,7 @@
         },
         {
           "key": "DisableMOBIKE",
-          "title": "Disable Mobility and Multihoming",
+          "title": "Disable mobility and multihoming",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1530,7 +1532,7 @@
         },
         {
           "key": "DisableRedirect",
-          "title": "Disable Redirect",
+          "title": "Disable redirect",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1547,7 +1549,7 @@
         },
         {
           "key": "DisconnectOnIdle",
-          "title": "Enable Disconnect on Idle",
+          "title": "Enable disconnect on idle",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1559,14 +1561,14 @@
         },
         {
           "key": "DisconnectOnIdleTimer",
-          "title": "Disconnect on Idle time",
+          "title": "Disconnect on idle time",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "content": "Only used if `DisconnectOnIdle` is `1`. The number of seconds before the VPN disconnects. On watchOS, maximum allowed value is 15 seconds"
         },
         {
           "key": "NATKeepAliveOffloadEnable",
-          "title": "NAT Keep Alive Offload Enable",
+          "title": "NAT keep alive offload enable",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1583,7 +1585,7 @@
         },
         {
           "key": "NATKeepAliveInterval",
-          "title": "NAT Keepalive Interval",
+          "title": "NAT keepalive interval",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "default": 20,
@@ -1638,7 +1640,7 @@
             1
           ],
           "default": 0,
-          "content": "If `1`, the system enables a tunnel over cellular data to carry traffic that's eligible for Wi-Fi Assist and also requires VPN.\n\nEnabling fallback requires that the server support multiple tunnels for a single user.\n\nThis field is available in iOS 13 and later, and tvOS 17 and later. Not available in watchOS.",
+          "content": "If `1`, the system enables a tunnel over cellular data to carry traffic that's eligible for Wi-Fi Assist and also requires VPN.\n\nEnabling fallback requires that the server support multiple tunnels for a single user.\n\n Not available in watchOS.",
           "supportedOS": {
             "iOS": {
               "introduced": "13.0"
@@ -1653,7 +1655,7 @@
         },
         {
           "key": "MTU",
-          "title": "Maximum Transmission Unit",
+          "title": "Maximum transmission unit",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "range": {
@@ -1661,7 +1663,7 @@
             "max": 1400
           },
           "default": 1280,
-          "content": "The Maximum Transmission Unit (MTU) specifies the maximum size in bytes of each packet that the system sends over the IKEv2 VPN interface. Available in iOS 14 and later, and macOS 11 and later.",
+          "content": "The Maximum Transmission Unit (MTU) specifies the maximum size in bytes of each packet that the system sends over the IKEv2 VPN interface.",
           "supportedOS": {
             "iOS": {
               "introduced": "14.0"
@@ -1684,7 +1686,7 @@
         },
         {
           "key": "IncludeAllNetworks",
-          "title": "Include All Networks",
+          "title": "Include all networks",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1710,7 +1712,7 @@
         },
         {
           "key": "EnforceRoutes",
-          "title": "Enforce Routes",
+          "title": "Enforce routes",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1733,7 +1735,7 @@
         },
         {
           "key": "ExcludeLocalNetworks",
-          "title": "Exclude Local Networks",
+          "title": "Exclude local networks",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1758,7 +1760,7 @@
         },
         {
           "key": "ExcludeCellularServices",
-          "title": "Exclude Cellular Services",
+          "title": "Exclude cellular services",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1810,7 +1812,7 @@
         },
         {
           "key": "ExcludeDeviceCommunication",
-          "title": "Exclude Device Communication",
+          "title": "Exclude device communication",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1839,7 +1841,7 @@
         },
         {
           "key": "PPK",
-          "title": "Post-quantum Pre-shared Key",
+          "title": "Post-quantum pre-shared key",
           "type": "\u003cdata\u003e",
           "presence": "optional",
           "content": "The Post-quantum Pre-shared key (PPK) the device uses for this VPN. This key is is used with VPN servers that support RFC 8784. If this key is present `PPKIdentifier` must also be present.",
@@ -1863,7 +1865,7 @@
         },
         {
           "key": "PPKIdentifier",
-          "title": "Post-quantum Pre-shared Key Identifier",
+          "title": "Post-quantum pre-shared key identifier",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The identifier for the Post-quantum Pre-shared key (PPK) the device uses for this VPN. This key is is used with VPN servers that support RFC 8784. If this key is present `PPK` must also be present.",
@@ -1887,7 +1889,7 @@
         },
         {
           "key": "PPKMandatory",
-          "title": "Post-quantum Pre-shared Key Mandatory",
+          "title": "Post-quantum pre-shared key mandatory",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1895,7 +1897,7 @@
             1
           ],
           "default": 1,
-          "content": "If set to `1`, the VPN doesn't establish a connection if the server doesn't support RFC 8784 or doesn't accept the PPK identifier specified in `PPKIdentifier`. The device ignores this key if `PPK` and `PPKIdentifier` are not present.",
+          "content": "If set to `1`, the VPN doesn't establish a connection if the server doesn't support RFC 8784 or doesn't accept the PPK identifier specified in `PPKIdentifier`. The device ignores this key if `PPK` and `PPKIdentifier` aren't present.",
           "supportedOS": {
             "iOS": {
               "introduced": "18.0"
@@ -1916,7 +1918,7 @@
         },
         {
           "key": "AllowPostQuantumKeyExchangeFallback",
-          "title": "Allow Post-quantum Key Exchange Fallback",
+          "title": "Allow post-quantum key exchange fallback",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1924,7 +1926,7 @@
             1
           ],
           "default": 0,
-          "content": "If set to `0`, the VPN doesn't establish a connection if the server does not support or doesn't allow post-quantum key exchanges. Thd device ignores this key if `PostQuantumKeyExchangeMethods` is not present in `IKESecurityAssociationParameters` or `ChildSecurityAssociationParameters`.",
+          "content": "If set to `0`, the VPN doesn't establish a connection if the server does not support or doesn't allow post-quantum key exchanges. Thd device ignores this key if `PostQuantumKeyExchangeMethods` isn't present in `IKESecurityAssociationParameters` or `ChildSecurityAssociationParameters`.",
           "supportedOS": {
             "iOS": {
               "introduced": "26.0"
@@ -1945,7 +1947,7 @@
         },
         {
           "key": "EnforceStrictAlgorithmSelection",
-          "title": "Enforce Strict Algorithm Selection",
+          "title": "Enforce strict algorithm selection",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -1953,7 +1955,7 @@
             1
           ],
           "default": 0,
-          "content": "If set to `1`, the device doesn't allow DES, 3DES, and Diffie-Hellman groups less than 14. Also the device requires the encryption algorithm specified for the IKE SA to be at least as cryptographically strong as the algorithm specified for the child SA. The device rejects this profile payload if these requirements are not met.",
+          "content": "If set to `1`, the device doesn't allow DES, 3DES, and Diffie-Hellman groups less than 14. Also the device requires the encryption algorithm specified for the IKE SA to be at least as cryptographically strong as the algorithm specified for the child SA. The device rejects this profile payload if these requirements aren't met.",
           "supportedOS": {
             "iOS": {
               "introduced": "18.5"
@@ -2037,14 +2039,14 @@
             },
             {
               "key": "PostQuantumKeyExchangeMethods",
-              "title": "Post-quantum Key Exchange Methods",
+              "title": "Post-quantum key exchange methods",
               "type": "\u003carray\u003e",
               "presence": "optional",
-              "content": "An array of strings representing postquantum key exchange methods the device uses during SA establishment and rekey. You can specify up to seven items, which correspond to ADDKE1 - ADDKE7 from RFC 9370.",
+              "content": "An array of integers representing postquantum key exchange methods the device uses during SA establishment and rekey. You can specify up to seven items, which correspond to ADDKE1 - ADDKE7 from RFC 9370.",
               "subkeys": [
                 {
                   "key": "PostQuantumKeyExchangeMethod",
-                  "title": "Post-quantum Key Exchange Method",
+                  "title": "Post-quantum key exchange method",
                   "type": "\u003cinteger\u003e",
                   "rangelist": [
                     0,
@@ -2150,14 +2152,14 @@
             },
             {
               "key": "PostQuantumKeyExchangeMethods",
-              "title": "Post-quantum Key Exchange Methods",
+              "title": "Post-quantum key exchange methods",
               "type": "\u003carray\u003e",
               "presence": "optional",
-              "content": "An array of strings representing postquantum key exchange methods the device uses during SA establishment and rekey. You can specify up to seven items, which correspond to ADDKE1 - ADDKE7 from RFC 9370.",
+              "content": "An array of integers representing postquantum key exchange methods the device uses during SA establishment and rekey. You can specify up to seven items, which correspond to ADDKE1 - ADDKE7 from RFC 9370.",
               "subkeys": [
                 {
                   "key": "PostQuantumKeyExchangeMethod",
-                  "title": "Post-quantum Key Exchange Method",
+                  "title": "Post-quantum key exchange method",
                   "type": "\u003cinteger\u003e",
                   "rangelist": [
                     0,
@@ -2214,7 +2216,7 @@
       "subkeys": [
         {
           "key": "DNSProtocol",
-          "title": "DNS Protocol",
+          "title": "DNS protocol",
           "type": "\u003cstring\u003e",
           "presence": "required",
           "rangelist": [
@@ -2249,7 +2251,7 @@
         },
         {
           "key": "ServerName",
-          "title": "Server Name",
+          "title": "Server name",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The hostname of a DNS-over-TLS server to validate the server certificate, as defined in RFC 7858. If `ServerAddresses` isn't specified, the system uses the hostname to determine the server addresses. This key is required if the `DNSProtocol` is `TLS`.",
@@ -2264,14 +2266,14 @@
         },
         {
           "key": "ServerAddresses",
-          "title": "DNS Server Addresses",
+          "title": "DNS server addresses",
           "type": "\u003carray\u003e",
           "presence": "required",
           "content": "The array of DNS server IP address strings. These IP addresses can be a mixture of IPv4 and IPv6 addresses.",
           "subkeys": [
             {
               "key": "ServerAddressesElement",
-              "title": "Server Address Element",
+              "title": "Server address element",
               "type": "\u003cstring\u003e"
             }
           ],
@@ -2286,14 +2288,14 @@
         },
         {
           "key": "SearchDomains",
-          "title": "DNS Search Domains",
+          "title": "DNS search domains",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "The list of domain strings used to fully qualify single-label host names.",
           "subkeys": [
             {
               "key": "SearchDomainsElement",
-              "title": "Search Domains Element",
+              "title": "Search domains element",
               "type": "\u003cstring\u003e"
             }
           ],
@@ -2308,7 +2310,7 @@
         },
         {
           "key": "DomainName",
-          "title": "Domain Name",
+          "title": "Domain name",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The primary domain of the tunnel.",
@@ -2323,14 +2325,14 @@
         },
         {
           "key": "SupplementalMatchDomains",
-          "title": "Supplemental Match Domains",
+          "title": "Supplemental match domains",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "The list of domain strings used to determine which DNS queries use the DNS resolver settings in `ServerAddresses`. The system uses this key to create a split DNS configuration where it resolves only hosts in certain domains using the tunnel's DNS resolver. The system uses the default resolver for hosts that aren't in one of the domains in this list.\n\nIf `SupplementalMatchDomains` contains the empty string it becomes the default domain.\n\nSplit-tunnel configurations can direct all DNS queries to the VPN DNS servers before the primary DNS servers. If the VPN tunnel becomes the network's default route, the servers listed in `ServerAddresses` become the default resolver and the system ignores the `SupplementalMatchDomains` list.",
           "subkeys": [
             {
               "key": "SupplementalMatchDomainsElement",
-              "title": "Supplemental Match Domains Element",
+              "title": "Supplemental match domains element",
               "type": "\u003cstring\u003e"
             }
           ],
@@ -2345,7 +2347,7 @@
         },
         {
           "key": "SupplementalMatchDomainsNoSearch",
-          "title": "Supplemental Match Domains No Search",
+          "title": "Supplemental match domains no search",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -2365,7 +2367,7 @@
         },
         {
           "key": "PayloadCertificateUUID",
-          "title": "DNS Certificate UUID",
+          "title": "DNS certificate UUID",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$",
@@ -2395,7 +2397,7 @@
       "subkeys": [
         {
           "key": "ProxyAutoConfigEnable",
-          "title": "Proxy AutoConfig Enable",
+          "title": "Proxy AutoConfig enable",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -2406,7 +2408,7 @@
         },
         {
           "key": "ProxyAutoDiscoveryEnable",
-          "title": "Proxy Auto Discovery Enable",
+          "title": "Proxy auto discovery enable",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -2418,21 +2420,21 @@
         },
         {
           "key": "ProxyAutoConfigURLString",
-          "title": "Proxy Server URL",
+          "title": "Proxy server URL",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The URL to the location of the proxy auto-configuration file. Used only when `ProxyAutoConfigEnable` is `true`."
         },
         {
           "key": "SupplementalMatchDomains",
-          "title": "Supplemental Match Domains",
+          "title": "Supplemental match domains",
           "type": "\u003carray\u003e",
           "presence": "optional",
           "content": "An array of domains that defines which hosts use proxy settings for hosts.",
           "subkeys": [
             {
               "key": "SupplementalMatchDomainsElement",
-              "title": "Supplemental Match Domains Element",
+              "title": "Supplemental match domains element",
               "type": "\u003cstring\u003e"
             }
           ]
@@ -2451,14 +2453,14 @@
         },
         {
           "key": "HTTPProxy",
-          "title": "HTTP Proxy",
+          "title": "HTTP proxy",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The host name of the HTTP proxy."
         },
         {
           "key": "HTTPPort",
-          "title": "HTTP Port",
+          "title": "HTTP port",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "range": {
@@ -2495,14 +2497,14 @@
         },
         {
           "key": "HTTPSProxy",
-          "title": "HTTPS Proxy",
+          "title": "HTTPS proxy",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The host name of the HTTPS proxy."
         },
         {
           "key": "HTTPSPort",
-          "title": "HTTPS Port",
+          "title": "HTTPS port",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "range": {
@@ -2527,7 +2529,7 @@
       "subkeys": [
         {
           "key": "UIToggleEnabled",
-          "title": "UI Toggle Enabled",
+          "title": "UI toggle enabled",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -2546,12 +2548,12 @@
           "subkeys": [
             {
               "key": "TunnelConfigurationElement",
-              "title": "A TunnelConfiguration Element",
+              "title": "A TunnelConfiguration element",
               "type": "\u003cdictionary\u003e",
               "subkeys": [
                 {
                   "key": "ProtocolType",
-                  "title": "Protocol Type",
+                  "title": "Protocol type",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -2568,7 +2570,7 @@
                   "subkeys": [
                     {
                       "key": "InterfacesElement",
-                      "title": "Interfaces Element",
+                      "title": "Interfaces element",
                       "type": "\u003cstring\u003e",
                       "rangelist": [
                         "Cellular",
@@ -2590,12 +2592,12 @@
           "subkeys": [
             {
               "key": "ServiceExceptionElement",
-              "title": "A ServiceException Element",
+              "title": "A ServiceException element",
               "type": "\u003cdictionary\u003e",
               "subkeys": [
                 {
                   "key": "ServiceName",
-                  "title": "Service Name",
+                  "title": "Service name",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -2604,7 +2606,7 @@
                     "CellularServices",
                     "DeviceCommunication"
                   ],
-                  "content": "The name of a service that's exempt from Always On VPN.\n\n`CellularServices` is available in iOS 11.3 and later; it exempts `VoLTE`, `IMS` and `MMS`. WiFiCalling is exempted in iOS 13.4 and later.\n\n`DeviceCommunication` is available in iOS 17.4 and later; it exempts network traffic used for communicating with devices connected via USB or Wi-Fi."
+                  "content": "The name of a service that's exempt from Always On VPN.\n\n`CellularServices` is available in iOS 11.3 and later; it exempts `VoLTE`, `IMS` and `MMS`. Always On VPN exempts WiFiCalling in iOS 13.4 and later.\n\n`DeviceCommunication` is available in iOS 17.4 and later; it exempts network traffic used for communicating with devices connected via USB or Wi-Fi."
                 },
                 {
                   "key": "Action",
@@ -2630,12 +2632,12 @@
           "subkeys": [
             {
               "key": "ApplicationExceptionElement",
-              "title": "A ApplicationException Element",
+              "title": "A ApplicationException element",
               "type": "\u003cdictionary\u003e",
               "subkeys": [
                 {
                   "key": "BundleIdentifier",
-                  "title": "Bundle Identifier",
+                  "title": "Bundle identifier",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The app's bundle identifier."
@@ -2649,7 +2651,7 @@
                   "subkeys": [
                     {
                       "key": "LimitToProtocolElement",
-                      "title": "LimitToProtocol Element",
+                      "title": "LimitToProtocol element",
                       "type": "\u003cstring\u003e",
                       "rangelist": [
                         "UDP"
@@ -2668,7 +2670,7 @@
         },
         {
           "key": "AllowCaptiveWebSheet",
-          "title": "Allow Captive Web Sheet",
+          "title": "Allow captive web sheet",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -2680,7 +2682,7 @@
         },
         {
           "key": "AllowAllCaptiveNetworkPlugins",
-          "title": "Allow All Captive Network Plugins",
+          "title": "Allow all captive network plugins",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -2699,12 +2701,12 @@
           "subkeys": [
             {
               "key": "AllowedCaptiveNetworkPluginElement",
-              "title": "An AllowedCaptiveNetworkPlugin Element",
+              "title": "An AllowedCaptiveNetworkPlugin element",
               "type": "\u003cdictionary\u003e",
               "subkeys": [
                 {
                   "key": "BundleIdentifier",
-                  "title": "Bundle Identifier",
+                  "title": "Bundle identifier",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The bundle identifier for the app that's allowed on the captive network."
@@ -2731,11 +2733,11 @@
       "title": "TransparentProxy",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
-      "content": "The dictionary to use when `VPNType` is `TransparentProxy`. Available in macOS 14 and later.",
+      "content": "The dictionary to use when `VPNType` is `TransparentProxy`.",
       "subkeys": [
         {
           "key": "AuthenticationMethod",
-          "title": "Authentication Method",
+          "title": "Authentication method",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
@@ -2744,11 +2746,11 @@
             "Password+Certificate"
           ],
           "default": "Password",
-          "content": "The type of authentication method to use: `Password`, `Certificate`, or `Password+Certificate`.\n\nAvailable in macOS 14 and later."
+          "content": "The type of authentication method to use: `Password`, `Certificate`, or `Password+Certificate`."
         },
         {
           "key": "DisconnectOnIdle",
-          "title": "Enable Disconnect on Idle",
+          "title": "Enable disconnect on idle",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -2756,18 +2758,18 @@
             1
           ],
           "default": 0,
-          "content": "If `1`, the VPN disconnects automatically disconnect after a period defined by `DisconnectOnIdleTimer`.\n\nAvailable in macOS 14 and later."
+          "content": "If `1`, the VPN disconnects automatically disconnect after a period defined by `DisconnectOnIdleTimer`."
         },
         {
           "key": "DisconnectOnIdleTimer",
-          "title": "Disconnect on Idle time",
+          "title": "Disconnect on idle time",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
-          "content": "The number of seconds before the VPN disconnects. This value is only used if `DisconnectOnIdle` is `1`.\n\nAvailable in macOS 14 and later."
+          "content": "The number of seconds before the VPN disconnects. This value is only used if `DisconnectOnIdle` is `1`."
         },
         {
           "key": "EnforceRoutes",
-          "title": "Enforce Routes",
+          "title": "Enforce routes",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -2775,11 +2777,11 @@
             1
           ],
           "default": 0,
-          "content": "If `1`, then all the VPN's non-default routes take precedence over any locally-defined routes. If `IncludeAllNetworks` is `1`, the system ignores the value of `EnforceRoutes`.\n\nAvailable in macOS 14 and later."
+          "content": "If `1`, then all the VPN's non-default routes take precedence over any locally-defined routes. If `IncludeAllNetworks` is `1`, the system ignores the value of `EnforceRoutes`."
         },
         {
           "key": "OnDemandEnabled",
-          "title": "Enable VPN On Demand",
+          "title": "Enable VPN on demand",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -2787,24 +2789,24 @@
             1
           ],
           "default": 0,
-          "content": "If `1`, the system brings up the VPN on demand.\n\nAvailable in macOS 14 and later."
+          "content": "If `1`, the system brings up the VPN on demand."
         },
         {
           "key": "OnDemandRules",
-          "title": "On Demand Rules",
+          "title": "On demand rules",
           "type": "\u003carray\u003e",
           "presence": "optional",
-          "content": "Determines when and how the system uses an OnDemand VPN.\n\nAvailable in macOS 14 and later.",
+          "content": "Determines when and how the system uses an OnDemand VPN.",
           "subkeytype": "OnDemandRulesElement",
           "subkeys": [
             {
               "key": "OnDemandRulesElement",
-              "title": "On Demand Rules Element",
+              "title": "On demand rules element",
               "type": "\u003cdictionary\u003e",
               "subkeys": [
                 {
                   "key": "Action",
-                  "title": "On Demand Action",
+                  "title": "On demand action",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -2818,14 +2820,14 @@
                 },
                 {
                   "key": "ActionParameters",
-                  "title": "Action Parameters",
+                  "title": "Action parameters",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "An array of dictionaries that provides rules similar to the `OnDemandRules` dictionary, but evaluated on each connection instead of when the network changes. This value is only for use with dictionaries in which the `Action` value is `EvaluateConnection`. The system evaluates these dictionaries in order and the first dictionary that matches determines the behavior. Not available in watchOS.",
                   "subkeys": [
                     {
                       "key": "ActionParameter",
-                      "title": "Action Parameter",
+                      "title": "Action parameter",
                       "type": "\u003cdictionary\u003e",
                       "presence": "optional",
                       "content": "A dictionary that provides rules similar to the OnDemandRules dictionary, but evaluated on each connection instead of when the network changes. These dictionaries are evaluated in order, and the behavior is determined by the first dictionary that matches.\nThe keys allowed in each dictionary are described below. Note: This array is used only for dictionaries in which EvaluateConnection is the Action value.",
@@ -2839,14 +2841,14 @@
                           "subkeys": [
                             {
                               "key": "DomainsElement",
-                              "title": "Domains Element",
+                              "title": "Domains element",
                               "type": "\u003cstring\u003e"
                             }
                           ]
                         },
                         {
                           "key": "DomainAction",
-                          "title": "Domain Action",
+                          "title": "Domain action",
                           "type": "\u003cstring\u003e",
                           "presence": "required",
                           "rangelist": [
@@ -2857,24 +2859,24 @@
                         },
                         {
                           "key": "RequiredDNSServers",
-                          "title": "Required DNS Servers",
+                          "title": "Required DNS servers",
                           "type": "\u003carray\u003e",
                           "presence": "optional",
                           "content": "An array of IP addresses of DNS servers to use for resolving the specified domains. These servers don't need to be part of the device's current network configuration. If these DNS servers aren't reachable, the system establishes a VPN connection. These DNS servers need to be either internal DNS servers or trusted external DNS servers.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'.",
                           "subkeys": [
                             {
                               "key": "RequiredDNSServersElement",
-                              "title": "Required DNS Servers Element",
+                              "title": "Required DNS servers element",
                               "type": "\u003cstring\u003e"
                             }
                           ]
                         },
                         {
                           "key": "RequiredURLStringProbe",
-                          "title": "Required URL String Probe",
+                          "title": "Required URL string probe",
                           "type": "\u003cstring\u003e",
                           "presence": "optional",
-                          "content": "An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status code, a VPN connection is established in response.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'."
+                          "content": "An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status code, the device establishes a VPN connection in response.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'."
                         }
                       ]
                     }
@@ -2882,35 +2884,35 @@
                 },
                 {
                   "key": "DNSDomainMatch",
-                  "title": "DNS Domain Match",
+                  "title": "DNS domain match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
-                  "content": "An array of domain names. This rule matches if any of the domain names in the specified list matches any domain in the device's search domains list.\nThe system supports a wildcard (`*`) prefix. For example, `*.example.com` matches against either `mydomain.example.com` or `yourdomain.example.com`.",
+                  "content": "An array of domain names. This rule matches if any of the domain names in the specified list matches any domain in the device's search domains list.\nThe system supports a wildcard (`\\*`) prefix. For example, `\\*.example.com` matches against either `mydomain.example.com` or `yourdomain.example.com`.",
                   "subkeys": [
                     {
                       "key": "DNSDomainMatchElement",
-                      "title": "DNS Domain Match Element",
+                      "title": "DNS domain match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "DNSServerAddressMatch",
-                  "title": "DNS Server Address Match",
+                  "title": "DNS server address match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
-                  "content": "An array of IP addresses. This rule matches if any of the network's specified DNS servers match any entry in the array.\nThe system supports matching with a single wildcard. For example, `17.*` matches any DNS server in the `17.0.0.0/8` subnet.",
+                  "content": "An array of IP addresses. This rule matches if any of the network's specified DNS servers match any entry in the array.\nThe system supports matching with a single wildcard. For example, `17.\\*` matches any DNS server in the `17.0.0.0/8` subnet.",
                   "subkeys": [
                     {
                       "key": "DNSServerAddressMatchElement",
-                      "title": "DNS Server Address Match Element",
+                      "title": "DNS server address match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "InterfaceTypeMatch",
-                  "title": "Interface Type Match",
+                  "title": "Interface type match",
                   "type": "\u003cstring\u003e",
                   "presence": "optional",
                   "rangelist": [
@@ -2922,21 +2924,21 @@
                 },
                 {
                   "key": "SSIDMatch",
-                  "title": "SSID Match",
+                  "title": "SSID match",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "An array of SSIDs to match against the current network. If the network isn't a Wi-Fi network or if the SSID doesn't appear in this array, the match fails.\nOmit this key and the corresponding array to match against any SSID.",
                   "subkeys": [
                     {
                       "key": "SSIDMatchElement",
-                      "title": "SSID Match Element",
+                      "title": "SSID match element",
                       "type": "\u003cstring\u003e"
                     }
                   ]
                 },
                 {
                   "key": "URLStringProbe",
-                  "title": "URL String Probe",
+                  "title": "URL string probe",
                   "type": "\u003cstring\u003e",
                   "presence": "optional",
                   "content": "A URL to probe. This rule matches when this URL is successfully fetched (returns a `200` HTTP status code) without redirection. Not available in watchOS."
@@ -2950,28 +2952,28 @@
           "title": "PayloadCertificateUUID",
           "type": "\u003cstring\u003e",
           "presence": "optional",
-          "content": "The UUID of the identity certificate as the account credential. If `AuthenticationMethod` is `Certificate`, and extended authentication (EAP) isn't used, this certificate is sent out for IKE client authentication. If extended authentication is used, this certificate can be used for EAP-TLS.\n\nAvailable in macOS 14 and later."
+          "content": "The UUID of the identity certificate as the account credential. If `AuthenticationMethod` is `Certificate`, and extended authentication (EAP) isn't used, the device sends this certificate for IKE client authentication. If extended authentication is used, this certificate can be used for EAP-TLS."
         },
         {
           "key": "Password",
-          "title": "Account Password",
+          "title": "Account password",
           "type": "\u003cstring\u003e",
           "presence": "optional",
-          "content": "The password to use for the account credentials. Only used if `AuthenticationMethod` is `Password`.\n\nAvailable in macOS 14 and later."
+          "content": "The password to use for the account credentials. Only used if `AuthenticationMethod` is `Password`."
         },
         {
           "key": "ProviderBundleIdentifier",
-          "title": "Provider Bundle Identifier",
+          "title": "Provider bundle identifier",
           "type": "\u003cstring\u003e",
           "presence": "optional",
-          "content": "If the VPNSubType field contains the bundle identifier of an app that contains multiple VPN providers of the same type (app-proxy or packet-tunnel), then the system uses this field to choose which provider to use for this configuration. If the VPN provider is implemented as a System Extension, then this field is required.\n\nAvailable in macOS 14 and later."
+          "content": "If the VPNSubType field contains the bundle identifier of an app that contains multiple VPN providers of the same type (app-proxy or packet-tunnel), then the system uses this field to choose which provider to use for this configuration. If the VPN provider uses a system extension, then this field is required."
         },
         {
           "key": "ProviderDesignatedRequirement",
-          "title": "Provider Designated Requirement",
+          "title": "Provider designated requirement",
           "type": "\u003cstring\u003e",
           "presence": "optional",
-          "content": "If the VPN provider is implemented as a System Extension, then this field is required.\n\nAvailable in macOS 14 and later."
+          "content": "If the VPN provider uses a system extension, then this field is required."
         },
         {
           "key": "ProviderType",
@@ -2982,14 +2984,14 @@
             "app-proxy"
           ],
           "default": "packet-tunnel",
-          "content": "If the value of this key is `app-proxy`, the VPN service tunnels traffic at the application layer. If the value of this key is `packet-tunnel`, the VPN service tunnels traffic at the IP layer.\n\nAvailable in macOS 14 and later."
+          "content": "If the value of this key is `app-proxy`, the VPN service tunnels traffic at the application layer. If the value of this key is `packet-tunnel`, the VPN service tunnels traffic at the IP layer."
         },
         {
           "key": "Order",
           "title": "Order",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
-          "content": "A positive integer.\n\nAvailable in macOS 14 and later."
+          "content": "A positive integer."
         }
       ],
       "supportedOS": {

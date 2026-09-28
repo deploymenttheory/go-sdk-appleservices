@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "mdm.push-magic",
+  "title": "Status MDM Push Magic",
+  "description": "The status item that reports the device's push magic value.",
+  "payload": {
+    "statusitemtype": "mdm.push-magic",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "27.0"
+      },
+      "visionOS": {
+        "introduced": "27.0"
+      },
+      "watchOS": {
+        "introduced": "27.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "mdm.push-magic",
+      "title": "Status item value.",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The push magic value that the device expects the MDM server to include in Apple Push Notification service messages."
+    }
+  ]
+}

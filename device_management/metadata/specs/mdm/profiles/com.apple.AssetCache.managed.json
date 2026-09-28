@@ -1,7 +1,7 @@
 {
   "category": "mdm/profiles",
   "name": "com.apple.AssetCache.managed",
-  "title": "Content Caching",
+  "title": "Content Caching Service",
   "description": "The payload that configures the Content Caching service.",
   "payload": {
     "payloadtype": "com.apple.AssetCache.managed",
@@ -11,7 +11,8 @@
         "introduced": "n/a"
       },
       "macOS": {
-        "introduced": "10.13.4"
+        "introduced": "10.13.4",
+        "deprecated": "27.0"
       },
       "tvOS": {
         "introduced": "n/a"
@@ -30,7 +31,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If true, the system purges content from the cache automatically when it needs disk space for other apps when free disk space runs low on the computer. Set to `false` to maximize effectiveness of Content Caching. Available in macOS 10.15 and later.",
+      "content": "If true, the system purges content from the cache automatically when it needs disk space for other apps when free disk space runs low on the computer. Set to `false` to maximize effectiveness of Content Caching.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.15"
@@ -78,7 +79,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system automatically enables Internet connection sharing when possible and prevent disabling Internet connection sharing. `DenyTetheredCaching` overrides `AutoEnableTetheredCaching`. Tethered caching requires Content Caching.\n\nAvailable in macOS 10.15.4 and later.",
+      "content": "If `true`, the system automatically enables Internet connection sharing when possible and prevent disabling Internet connection sharing. `DenyTetheredCaching` overrides `AutoEnableTetheredCaching`. Tethered caching requires Content Caching.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.15.4"
@@ -126,7 +127,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, Content Caching displays exceptional conditions (alerts) as system notifications in the upper corner of the screen. Alerts were automatically displayed starting in macOS 10.13. In macOS 10.15 the alerts are off by default, but still available through this setting. Available in macOS 10.15 and later.",
+      "content": "If `true`, Content Caching displays exceptional conditions (alerts) as system notifications in the upper corner of the screen. The device automatically displayed alerts starting in macOS 10.13. In macOS 10.15 the alerts are off by default, but still available through this setting.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.15"
@@ -138,7 +139,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system prevents the computer from sleeping as long as Content Caching is on (System Preferences \u003e Sharing \u003e Content Caching is on). Customers who want Content Caching to be as available as much as possible should turn this setting on. Available in macOS 10.15 and later.",
+      "content": "If `true`, the system prevents the computer from sleeping as long as Content Caching is on (System Preferences \u003e Sharing \u003e Content Caching is on). Customers who want Content Caching to be as available as much as possible should turn this setting on.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.15"
@@ -283,7 +284,7 @@
         "sticky-available"
       ],
       "default": "round-robin",
-      "content": "The policy to implement when choosing among more than one configured parent content cache. With every policy, the system skips parent caches that are temporarily unavailable. Allowed values:\n\n- `first-available`: Always use the first available parent in the Parents list. Use this policy to designate permanent primary, secondary, and subsequent parents.\n- `url-path-hash`: Hash the path part of the requested URL so that the same parent is always used for the same URL. This is useful for maximizing the size of the combined caches of     the parents.\n- `random`: Choose a parent at random. Use this policy for load balancing.\n- `round-robin`: Rotate through the parents in order. Use this policy for load balancing.\n- `sticky-available`: Use the first available parent in the Parents list until it becomes unavailable, then advance to the next one. Use this policy for designating floating primary, secondary, and subsequent parents.",
+      "content": "The policy to implement when choosing among more than one configured parent content cache. With every policy, the system skips parent caches that are temporarily unavailable. Allowed values:\n\n* `first-available`: Always use the first available parent in the Parents list. Use this policy to designate permanent primary, secondary, and subsequent parents.\n* `url-path-hash`: Hash the path part of the requested URL so that the same parent is always used for the same URL. This is useful for maximizing the size of the combined caches of     the parents.\n* `random`: Choose a parent at random. Use this policy for load balancing.\n* `round-robin`: Rotate through the parents in order. Use this policy for load balancing.\n* `sticky-available`: Use the first available parent in the Parents list until it becomes unavailable, then advance to the next one. Use this policy for designating floating primary, secondary, and subsequent parents.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.13.4"

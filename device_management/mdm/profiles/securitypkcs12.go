@@ -13,7 +13,7 @@ type SecurityPkcs12 struct {
 	PayloadContent []byte `plist:"PayloadContent" json:"PayloadContent"`
 	// The password to the identity.
 	Password *string `plist:"Password,omitempty" json:"Password,omitempty"`
-	// If `true`, the system allows apps access to the private key. Available in macOS 10.10 and later.
+	// If `true`, the system allows apps access to the private key.
 	//
 	// Default: false.
 	AllowAllAppsAccess *bool `plist:"AllowAllAppsAccess,omitempty" json:"AllowAllAppsAccess,omitempty"`

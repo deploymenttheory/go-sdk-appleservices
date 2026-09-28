@@ -44,7 +44,7 @@ type SetupAssistantManaged struct {
 	// Default: false.
 	SkipAccessibility *bool `plist:"SkipAccessibility,omitempty" json:"SkipAccessibility,omitempty"`
 	// An array of strings that describe the setup items to skip. `SkipKeys` provides a list of valid
-	// strings and their meanings. Available in iOS 14 and later, and macOS 15 and later.
+	// strings and their meanings.
 	SkipSetupItems []string `plist:"SkipSetupItems,omitempty" json:"SkipSetupItems,omitempty"`
 	// If `true`, the system skips the Unlock With Apple Watch pane.
 	//

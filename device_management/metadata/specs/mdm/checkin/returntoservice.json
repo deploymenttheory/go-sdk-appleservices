@@ -47,7 +47,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the device preserves the data plan on an iPhone or iPad with eSIM functionality, if one exists. This value is available in iOS 26.4 and later.",
+      "content": "If `true`, the device preserves the data plan on an iPhone or iPad with eSIM functionality, if one exists.",
       "supportedOS": {
         "iOS": {
           "introduced": "26.4"
@@ -74,19 +74,34 @@
           "key": "WiFiProfileData",
           "type": "\u003cdata\u003e",
           "presence": "optional",
-          "content": "The Wi-Fi profile that installs after erasure when using return to service. This is required when the device doesn't have Ethernet access."
+          "content": "The Wi-Fi profile that installs after erasure when using return to service. The device requires this when it doesn't have Ethernet access."
         },
         {
           "key": "MDMProfileData",
           "type": "\u003cdata\u003e",
           "presence": "optional",
-          "content": "The MDM profile that installs after erasure when using return to service. If provided, the device uses this profile directly instead of fetching it from the server. This key is required if the device's Automated Device Enrollment profile contains the `configuration-web-url` key.\n\nThe device always downloads the Automated Device Enrollment profile even when this key is present, so the supervision identity, MDM removability, and other settings still apply. However, the device doesn't use the specified URL in the Automated Device Enrollment profile to fetch the MDM profile."
+          "content": "The MDM profile that installs after erasure when using return to service. If provided, the device uses this profile directly instead of fetching it from the server. The device requires this key if its Automated Device Enrollment profile contains the `configuration-web-url` key.\n\nThe device always downloads the Automated Device Enrollment profile even when this key is present, so the supervision identity, MDM removability, and other settings still apply. However, the device doesn't use the specified URL in the Automated Device Enrollment profile to fetch the MDM profile."
         },
         {
           "key": "BootstrapToken",
           "type": "\u003cdata\u003e",
           "presence": "optional",
-          "content": "The system uses the bootstrap token for return to service with app preservation. Required when Automated Device Enrollment enables return to service for the device.\n\nIf the bootstrap token isn't present, the device performs a full erasure and a regular return to service, and can't preserve any data for app preservation."
+          "content": "The system uses the bootstrap token for return to service with app preservation. The device requires this key when Automated Device Enrollment enables return to service for the device.\n\nIf the bootstrap token isn't present, the device performs a full erasure and a regular return to service, and can't preserve any data for app preservation."
+        },
+        {
+          "key": "ShouldRetryEnrollment",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, the device retries service enrollment when the initial enrollment fails after erasure.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "27.0"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
         }
       ]
     }

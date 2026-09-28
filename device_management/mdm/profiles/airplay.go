@@ -29,7 +29,7 @@ type AirplayAllowListItem struct {
 
 // AirplayPasswordsItem is the PasswordsItem dictionary.
 type AirplayPasswordsItem struct {
-	// The name of the AirPlay destination; used in iOS, and available in macOS 15 and later.
+	// The name of the AirPlay destination.
 	DeviceName *string `plist:"DeviceName,omitempty" json:"DeviceName,omitempty"`
 	// The password for the AirPlay destination.
 	Password string `plist:"Password" json:"Password"`

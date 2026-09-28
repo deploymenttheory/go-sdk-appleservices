@@ -19,8 +19,8 @@ type SettingsResponse struct {
 
 // SettingsSettingsItemWallpaper is the Wallpaper dictionary.
 // A dictionary that contains wallpaper settings. This setting doesn't support user enrollment.
-// Available in iOS 8 and later. Starting in iOS 16 and iPadOS 17, when setting the wallpaper for
-// the first time, both locations update. After that, you can set either location separately.
+// Starting in iOS 16 and iPadOS 17, when setting the wallpaper for the first time, both locations
+// update. After that, you can set either location separately.
 type SettingsSettingsItemWallpaper struct {
 	// A string that identifies this setting.
 	Item string `plist:"Item" json:"Item"`
@@ -32,18 +32,18 @@ type SettingsSettingsItemWallpaper struct {
 
 // SettingsSettingsItemDataRoaming is the DataRoaming dictionary.
 // A dictionary that contains data roaming settings. This setting requires the Network Information
-// access right, and doesn't support user enrollment. Available in iOS 5 and later.
+// access right, and doesn't support user enrollment.
 type SettingsSettingsItemDataRoaming struct {
 	// A string that identifies this setting.
 	Item string `plist:"Item" json:"Item"`
 	// If `true`, enable data roaming, which also enables voice roaming. If `false`, disable data
-	// roaming.
+	// roaming. The device only applies this setting to the primary SIM.
 	Enabled bool `plist:"Enabled" json:"Enabled"`
 }
 
 // SettingsSettingsItemVoiceRoaming is the VoiceRoaming dictionary.
 // A dictionary that contains voice roaming settings. This setting requires the Network Information
-// access right, and doesn't support user enrollment. Available in iOS 5 and later.
+// access right, and doesn't support user enrollment.
 type SettingsSettingsItemVoiceRoaming struct {
 	// A string that identifies this setting.
 	Item string `plist:"Item" json:"Item"`
@@ -54,7 +54,7 @@ type SettingsSettingsItemVoiceRoaming struct {
 
 // SettingsSettingsItemPersonalHotspot is the PersonalHotspot dictionary.
 // A dictionary that contains Personal Hotspot settings. This setting requires the Network
-// Information access right, and doesn't support user enrollment. Available in iOS 5 and later.
+// Information access right, and doesn't support user enrollment.
 type SettingsSettingsItemPersonalHotspot struct {
 	// A string that identifies this setting.
 	Item string `plist:"Item" json:"Item"`
@@ -65,7 +65,6 @@ type SettingsSettingsItemPersonalHotspot struct {
 // SettingsSettingsItemBluetooth is the Bluetooth dictionary.
 // A dictionary that contains Bluetooth settings. This setting requires the Network Information
 // access right, doesn't support user enrollment, and is available only on supervised devices.
-// Available in iOS 11.3 and later, and macOS 10.13.4 and later.
 type SettingsSettingsItemBluetooth struct {
 	// A string that identifies this setting.
 	Item string `plist:"Item" json:"Item"`
@@ -84,8 +83,7 @@ type SettingsSettingsItemApplicationConfigurationConfiguration struct {
 // SettingsSettingsItemApplicationConfiguration is the ApplicationConfiguration dictionary.
 // A dictionary that contains the configurations to apply to the app. Omit this setting to remove
 // existing configurations. This setting requires the App Management access right, supports user
-// enrollment, and is available in iOS 7 and later, macOS 10.15 and later, and tvOS 10.2 and later.
-// This setting fails for apps that Declarative Device Management manages.
+// enrollment. This setting fails for apps that Declarative Device Management manages.
 type SettingsSettingsItemApplicationConfiguration struct {
 	// A string that identifies this setting.
 	Item string `plist:"Item" json:"Item"`
@@ -98,26 +96,24 @@ type SettingsSettingsItemApplicationConfiguration struct {
 
 // SettingsSettingsItemApplicationAttributesAttributes is the Attributes dictionary.
 // A dictionary that contains the attributes to apply to the app. Omit this setting to remove
-// existing attributes. This setting is available in iOS 7 and later, and tvOS 10.2 and later.
+// existing attributes.
 type SettingsSettingsItemApplicationAttributesAttributes struct {
-	// A per-app VPN unique identifier for this app. Available in iOS 7 and later.
+	// A per-app VPN unique identifier for this app.
 	VPNUUID *string `plist:"VPNUUID,omitempty" json:"VPNUUID,omitempty"`
-	// The content filter UUID for this app. Available in iOS 16 and later.
+	// The content filter UUID for this app.
 	ContentFilterUUID *string `plist:"ContentFilterUUID,omitempty" json:"ContentFilterUUID,omitempty"`
-	// The DNS proxy UUID for this app. Available in iOS 16 and later.
+	// The DNS proxy UUID for this app.
 	DNSProxyUUID *string `plist:"DNSProxyUUID,omitempty" json:"DNSProxyUUID,omitempty"`
-	// The relay UUID for this app. Available in iOS 17 and later.
+	// The relay UUID for this app.
 	RelayUUID *string `plist:"RelayUUID,omitempty" json:"RelayUUID,omitempty"`
-	// An array that contains the associated domains to add to this app. Available in iOS 13 and later.
+	// An array that contains the associated domains to add to this app.
 	AssociatedDomains []string `plist:"AssociatedDomains,omitempty" json:"AssociatedDomains,omitempty"`
 	// If `true`, perform claimed site association verification directly at the domain, instead of on
-	// Apple's servers. Only set this to `true` for domains that can't access the internet. Available
-	// in iOS 14 and later.
+	// Apple's servers. Only set this to `true` for domains that can't access the internet.
 	//
 	// Default: false.
 	AssociatedDomainsEnableDirectDownloads *bool `plist:"AssociatedDomainsEnableDirectDownloads,omitempty" json:"AssociatedDomainsEnableDirectDownloads,omitempty"`
-	// If `false`, this app isn't removable while it's managed. Available in iOS 14 and later, and tvOS
-	// 14 and later.
+	// If `false`, this app isn't removable while it's managed.
 	//
 	// Default: true.
 	Removable *bool `plist:"Removable,omitempty" json:"Removable,omitempty"`
@@ -145,22 +141,21 @@ type SettingsSettingsItemApplicationAttributesAttributes struct {
 
 // SettingsSettingsItemApplicationAttributes is the ApplicationAttributes dictionary.
 // A dictionary that contains the attributes to apply to the app. Omit this setting to remove
-// existing attributes. This setting supports user enrollment, is available in iOS 7 and later, and
-// tvOS 10.2 and later. This setting fails for apps that Declarative Device Management manages.
+// existing attributes. This setting supports user enrollment. This setting fails for apps that
+// Declarative Device Management manages.
 type SettingsSettingsItemApplicationAttributes struct {
 	// A string that identifies this setting.
 	Item string `plist:"Item" json:"Item"`
 	// The bundle identifier of the app.
 	Identifier string `plist:"Identifier" json:"Identifier"`
 	// A dictionary that contains the attributes to apply to the app. Omit this setting to remove
-	// existing attributes. This setting is available in iOS 7 and later, and tvOS 10.2 and later.
+	// existing attributes.
 	Attributes *SettingsSettingsItemApplicationAttributesAttributes `plist:"Attributes,omitempty" json:"Attributes,omitempty"`
 }
 
 // SettingsSettingsItemDeviceName is the DeviceName dictionary.
 // A dictionary that contains device name settings. This setting doesn't support user enrollment,
-// and is available only on supervised devices. Available in iOS 5 and later, macOS 10.10 and
-// later, and visionOS 2 and later.
+// and is available only on supervised devices.
 type SettingsSettingsItemDeviceName struct {
 	// A string that identifies this setting.
 	Item string `plist:"Item" json:"Item"`
@@ -169,8 +164,7 @@ type SettingsSettingsItemDeviceName struct {
 }
 
 // SettingsSettingsItemHostName is the HostName dictionary.
-// A dictionary that contains hostname settings. This setting doesn't support user enrollment, and
-// is available in macOS 10.11 and later.
+// A dictionary that contains hostname settings. This setting doesn't support user enrollment.
 type SettingsSettingsItemHostName struct {
 	// The string that defines this setting type.
 	Item string `plist:"Item" json:"Item"`
@@ -200,7 +194,7 @@ type SettingsSettingsItemOrganizationInfoOrganizationInfo struct {
 
 // SettingsSettingsItemOrganizationInfo is the OrganizationInfo dictionary.
 // A dictionary that contains settings about the organization operating the MDM server. This
-// setting supports user enrollment. Available in iOS 5 and later.
+// setting supports user enrollment.
 type SettingsSettingsItemOrganizationInfo struct {
 	// The string that defines this setting type.
 	Item string `plist:"Item" json:"Item"`
@@ -247,8 +241,10 @@ type SettingsSettingsItemMDMOptionsMDMOptions struct {
 	//
 	// Default: false.
 	PromptUserToAllowBootstrapTokenForAuthentication *bool `plist:"PromptUserToAllowBootstrapTokenForAuthentication,omitempty" json:"PromptUserToAllowBootstrapTokenForAuthentication,omitempty"`
-	// If `true`, the device automatically reboots while locked after several days of inactivity. This
-	// is set to `false` by default when a supervised device enrolls.
+	// If `true`, the device automatically reboots while locked after several days of inactivity. The
+	// device sets this to `false` by default for a supervised enrollment. Starting in iOS 26.6 and
+	// iPadOS 26.6, changing the effective value from reboot allowed to reboot disallowed requires a
+	// reboot or a device unlock before the change takes effect.
 	//
 	// Default: false.
 	IdleRebootAllowed *bool `plist:"IdleRebootAllowed,omitempty" json:"IdleRebootAllowed,omitempty"`
@@ -256,7 +252,7 @@ type SettingsSettingsItemMDMOptionsMDMOptions struct {
 
 // SettingsSettingsItemMDMOptions is the MDMOptions dictionary.
 // A dictionary that contains settings related to the MDM protocol. This setting doesn't support
-// user enrollment. Available in iOS 7 and later, macOS 10.15 and later, and visionOS 2 and later.
+// user enrollment.
 type SettingsSettingsItemMDMOptions struct {
 	// The string that defines this setting type.
 	Item string `plist:"Item" json:"Item"`
@@ -379,8 +375,7 @@ type SettingsSettingsItemPasscodeLockGracePeriod struct {
 
 // SettingsSettingsItemTimeZone is the TimeZone dictionary.
 // A dictionary that contains time zone settings. This setting is available only on supervised
-// devices and doesn't support user enrollment. Available in iOS 14 and later, tvOS 14 and later,
-// and visionOS 2 and later.
+// devices and doesn't support user enrollment.
 type SettingsSettingsItemTimeZone struct {
 	// A string that identifies this setting.
 	Item string `plist:"Item" json:"Item"`
@@ -390,7 +385,7 @@ type SettingsSettingsItemTimeZone struct {
 
 // SettingsSettingsItemSoftwareUpdateSettings is the SoftwareUpdateSettings dictionary.
 // A dictionary that contains software update settings. This setting doesn't support user
-// enrollment. Available in iOS 14.5 and later.
+// enrollment.
 type SettingsSettingsItemSoftwareUpdateSettings struct {
 	// A string that represents the type of updates that should appear in the Software Update pane in
 	// Settings. Supervised only.
@@ -401,7 +396,7 @@ type SettingsSettingsItemSoftwareUpdateSettings struct {
 }
 
 // SettingsSettingsItemAccessibilitySettings is the AccessibilitySettings dictionary.
-// A dictionary that contains accessibility settings. Available in iOS 16 and later.
+// A dictionary that contains accessibility settings.
 type SettingsSettingsItemAccessibilitySettings struct {
 	// Sets various accessibility settings. The system allows only keys with explicitly provided
 	// values.
@@ -448,46 +443,42 @@ type SettingsSettingsItemAccessibilitySettings struct {
 // SettingsSettingsItem is the Settings dictionary.
 type SettingsSettingsItem struct {
 	// A dictionary that contains wallpaper settings. This setting doesn't support user enrollment.
-	// Available in iOS 8 and later. Starting in iOS 16 and iPadOS 17, when setting the wallpaper for
-	// the first time, both locations update. After that, you can set either location separately.
+	// Starting in iOS 16 and iPadOS 17, when setting the wallpaper for the first time, both locations
+	// update. After that, you can set either location separately.
 	Wallpaper *SettingsSettingsItemWallpaper `plist:"Wallpaper,omitempty" json:"Wallpaper,omitempty"`
 	// A dictionary that contains data roaming settings. This setting requires the Network Information
-	// access right, and doesn't support user enrollment. Available in iOS 5 and later.
+	// access right, and doesn't support user enrollment.
 	DataRoaming *SettingsSettingsItemDataRoaming `plist:"DataRoaming,omitempty" json:"DataRoaming,omitempty"`
 	// A dictionary that contains voice roaming settings. This setting requires the Network Information
-	// access right, and doesn't support user enrollment. Available in iOS 5 and later.
+	// access right, and doesn't support user enrollment.
 	VoiceRoaming *SettingsSettingsItemVoiceRoaming `plist:"VoiceRoaming,omitempty" json:"VoiceRoaming,omitempty"`
 	// A dictionary that contains Personal Hotspot settings. This setting requires the Network
-	// Information access right, and doesn't support user enrollment. Available in iOS 5 and later.
+	// Information access right, and doesn't support user enrollment.
 	PersonalHotspot *SettingsSettingsItemPersonalHotspot `plist:"PersonalHotspot,omitempty" json:"PersonalHotspot,omitempty"`
 	// A dictionary that contains Bluetooth settings. This setting requires the Network Information
 	// access right, doesn't support user enrollment, and is available only on supervised devices.
-	// Available in iOS 11.3 and later, and macOS 10.13.4 and later.
 	Bluetooth *SettingsSettingsItemBluetooth `plist:"Bluetooth,omitempty" json:"Bluetooth,omitempty"`
 	// A dictionary that contains the configurations to apply to the app. Omit this setting to remove
 	// existing configurations. This setting requires the App Management access right, supports user
-	// enrollment, and is available in iOS 7 and later, macOS 10.15 and later, and tvOS 10.2 and later.
-	// This setting fails for apps that Declarative Device Management manages.
+	// enrollment. This setting fails for apps that Declarative Device Management manages.
 	ApplicationConfiguration *SettingsSettingsItemApplicationConfiguration `plist:"ApplicationConfiguration,omitempty" json:"ApplicationConfiguration,omitempty"`
 	// A dictionary that contains the attributes to apply to the app. Omit this setting to remove
-	// existing attributes. This setting supports user enrollment, is available in iOS 7 and later, and
-	// tvOS 10.2 and later. This setting fails for apps that Declarative Device Management manages.
+	// existing attributes. This setting supports user enrollment. This setting fails for apps that
+	// Declarative Device Management manages.
 	ApplicationAttributes *SettingsSettingsItemApplicationAttributes `plist:"ApplicationAttributes,omitempty" json:"ApplicationAttributes,omitempty"`
 	// A dictionary that contains device name settings. This setting doesn't support user enrollment,
-	// and is available only on supervised devices. Available in iOS 5 and later, macOS 10.10 and
-	// later, and visionOS 2 and later.
+	// and is available only on supervised devices.
 	DeviceName *SettingsSettingsItemDeviceName `plist:"DeviceName,omitempty" json:"DeviceName,omitempty"`
-	// A dictionary that contains hostname settings. This setting doesn't support user enrollment, and
-	// is available in macOS 10.11 and later.
+	// A dictionary that contains hostname settings. This setting doesn't support user enrollment.
 	HostName *SettingsSettingsItemHostName `plist:"HostName,omitempty" json:"HostName,omitempty"`
 	// A dictionary that contains settings about the organization operating the MDM server. This
-	// setting supports user enrollment. Available in iOS 5 and later.
+	// setting supports user enrollment.
 	OrganizationInfo *SettingsSettingsItemOrganizationInfo `plist:"OrganizationInfo,omitempty" json:"OrganizationInfo,omitempty"`
 	// A dictionary that contains default application bundle identifiers for each default application
 	// type that can be set.
 	DefaultApplications *SettingsSettingsItemDefaultApplications `plist:"DefaultApplications,omitempty" json:"DefaultApplications,omitempty"`
 	// A dictionary that contains settings related to the MDM protocol. This setting doesn't support
-	// user enrollment. Available in iOS 7 and later, macOS 10.15 and later, and visionOS 2 and later.
+	// user enrollment.
 	MDMOptions *SettingsSettingsItemMDMOptions `plist:"MDMOptions,omitempty" json:"MDMOptions,omitempty"`
 	// A dictionary that contains settings for maximum resident users. Apple deprecated this setting in
 	// iOS 13.4. Use 'SharedDeviceConfiguration` instead. This setting is available only for Shared
@@ -506,13 +497,12 @@ type SettingsSettingsItem struct {
 	// for Shared iPad in iOS 9.3.2 and later.
 	PasscodeLockGracePeriod *SettingsSettingsItemPasscodeLockGracePeriod `plist:"PasscodeLockGracePeriod,omitempty" json:"PasscodeLockGracePeriod,omitempty"`
 	// A dictionary that contains time zone settings. This setting is available only on supervised
-	// devices and doesn't support user enrollment. Available in iOS 14 and later, tvOS 14 and later,
-	// and visionOS 2 and later.
+	// devices and doesn't support user enrollment.
 	TimeZone *SettingsSettingsItemTimeZone `plist:"TimeZone,omitempty" json:"TimeZone,omitempty"`
 	// A dictionary that contains software update settings. This setting doesn't support user
-	// enrollment. Available in iOS 14.5 and later.
+	// enrollment.
 	SoftwareUpdateSettings *SettingsSettingsItemSoftwareUpdateSettings `plist:"SoftwareUpdateSettings,omitempty" json:"SoftwareUpdateSettings,omitempty"`
-	// A dictionary that contains accessibility settings. Available in iOS 16 and later.
+	// A dictionary that contains accessibility settings.
 	AccessibilitySettings *SettingsSettingsItemAccessibilitySettings `plist:"AccessibilitySettings,omitempty" json:"AccessibilitySettings,omitempty"`
 }
 

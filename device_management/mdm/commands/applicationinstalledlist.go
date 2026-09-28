@@ -8,12 +8,10 @@ package commands
 // Supported: iOS 5.0+, macOS 10.7+, tvOS 10.2+, visionOS 1.1+, watchOS 10.0+.
 type InstalledApplicationList struct {
 	// An array of app identifiers. Provide this value to limit the response to only include these
-	// apps. This value is available in iOS 7 and later, macOS 10.15 and later, tvOS 10.2 and later,
-	// visionOS 1.1 and later, and watchOS 10 and later.
+	// apps.
 	Identifiers []string `plist:"Identifiers,omitempty" json:"Identifiers,omitempty"`
 	// If `true`, only get a list of managed apps, excluding ones that Declarative Device Management is
-	// managing. This value is available in iOS 7 and later, macOS 10.15 and later, and tvOS 10.2 and
-	// later.
+	// managing.
 	//
 	// Default: false.
 	ManagedAppsOnly *bool `plist:"ManagedAppsOnly,omitempty" json:"ManagedAppsOnly,omitempty"`
@@ -38,10 +36,9 @@ type InstalledApplicationListResponseInstalledApplicationListItem struct {
 	// macOS.
 	Identifier *string `plist:"Identifier,omitempty" json:"Identifier,omitempty"`
 	// The app's external version identifier. You can also retrieve this value from the App Store. For
-	// more information, see `Apps and Books for Organizations`.
+	// more information, see `Apps and books metadata for organizations`.
 	ExternalVersionIdentifier *int64 `plist:"ExternalVersionIdentifier,omitempty" json:"ExternalVersionIdentifier,omitempty"`
-	// The marketplace hosted application's distributor ID. This value is available in iOS 17.4 and
-	// later.
+	// The marketplace hosted application's distributor ID.
 	DistributorIdentifier *string `plist:"DistributorIdentifier,omitempty" json:"DistributorIdentifier,omitempty"`
 	// The app's version.
 	Version *string `plist:"Version,omitempty" json:"Version,omitempty"`
@@ -49,35 +46,29 @@ type InstalledApplicationListResponseInstalledApplicationListItem struct {
 	ShortVersion *string `plist:"ShortVersion,omitempty" json:"ShortVersion,omitempty"`
 	// The app's name.
 	Name *string `plist:"Name,omitempty" json:"Name,omitempty"`
+	// The app's path.
+	Path *string `plist:"Path,omitempty" json:"Path,omitempty"`
 	// The app's static bundle size, in bytes. This value is expensive to calculate. Starting in iOS
-	// 26, macOS 26, tvOS 26, watchOS 26, and visionOS 26 it isn't present in the response unless it is
-	// included in the `Items` request key. This value is available in iOS 5 and later, and macOS 10.7
-	// and later, tvOS 10.2 and later, watchOS 10 and later, and visionOS 1.1 and later.
+	// 26, macOS 26, tvOS 26, watchOS 26, and visionOS 26 it isn't present in the response unless it's
+	// included in the `Items` request key.
 	BundleSize *int64 `plist:"BundleSize,omitempty" json:"BundleSize,omitempty"`
 	// The size of the app's file system in bytes, including the Documents, Library, and other
 	// directories. This value is expensive to calculate. Starting in iOS 26, tvOS 26, watchOS 26, and
-	// visionOS 26 it isn't present in the response unless it is included in the `Items` request key.
-	// This value is available in iOS 5 and later, tvOS 10.2 and later, watchOS 10 and later, and
-	// visionOS 1.1 and later.
+	// visionOS 26 it isn't present in the response unless it's included in the `Items` request key.
 	DynamicSize *int64 `plist:"DynamicSize,omitempty" json:"DynamicSize,omitempty"`
 	// If `true`, the app is valid and can run on the device. If the app is enterprise-distributed and
-	// unvalidated, it won't be able to run until validation has occurred. This value is available in
-	// iOS 9.2 and later, and tvOS 10.2 and later.
+	// unvalidated, it won't be able to run until validation has occurred.
 	IsValidated *bool `plist:"IsValidated,omitempty" json:"IsValidated,omitempty"`
 	// If `true`, the app is downloading. If `false`, it's already installed.
 	Installing *bool `plist:"Installing,omitempty" json:"Installing,omitempty"`
 	// If `true`, the app came from the App Store and can participate in store features. For
-	// device-based Volume Purchase Program (VPP) apps, this value is `false`. This value is available
-	// in iOS 11.3 and later, and tvOS 11.3 and later.
+	// device-based Volume Purchase Program (VPP) apps, this value is `false`.
 	AppStoreVendable *bool `plist:"AppStoreVendable,omitempty" json:"AppStoreVendable,omitempty"`
-	// If `true`, installing the app didn't require an Apple Account. This value is available in iOS
-	// 11.3 and later, and tvOS 11.3 and later.
+	// If `true`, installing the app didn't require an Apple Account.
 	DeviceBasedVPP *bool `plist:"DeviceBasedVPP,omitempty" json:"DeviceBasedVPP,omitempty"`
-	// If `true`, the app is part of the Apple Beta Software Program. This value is available in iOS
-	// 11.3 and later, and tvOS 11.3 and later.
+	// If `true`, the app is part of the Apple Beta Software Program.
 	BetaApp *bool `plist:"BetaApp,omitempty" json:"BetaApp,omitempty"`
-	// If `true`, the app is ad-hoc code signed. This query is available in iOS 11.3 and later, and
-	// tvOS 11.3 and later.
+	// If `true`, the app is ad-hoc code signed.
 	AdHocCodeSigned *bool `plist:"AdHocCodeSigned,omitempty" json:"AdHocCodeSigned,omitempty"`
 	// If `true`, the app has an update available. This key is present only for App Store apps. In
 	// macOS, this key is present only for Volume Purchase Program (VPP) apps. This status updates
@@ -99,11 +90,11 @@ type InstalledApplicationListResponseInstalledApplicationListItem struct {
 	//
 	// Default: false.
 	DownloadCancelled *bool `plist:"DownloadCancelled,omitempty" json:"DownloadCancelled,omitempty"`
-	// If `true`, the app is an App Clip. Available in iOS 16 and later.
+	// If `true`, the app is an App Clip.
 	//
 	// Default: false.
 	IsAppClip *bool `plist:"IsAppClip,omitempty" json:"IsAppClip,omitempty"`
-	// The source of the application. When the app is managed by Declarative Device Management this
-	// value is `Declarative Device Management`.
+	// The source of the application. When Declarative Device Management manages the app, this value is
+	// `Declarative Device Management`.
 	Source *string `plist:"Source,omitempty" json:"Source,omitempty"`
 }

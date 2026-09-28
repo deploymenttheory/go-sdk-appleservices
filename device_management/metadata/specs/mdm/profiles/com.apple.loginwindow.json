@@ -72,6 +72,13 @@
       "content": "The admin host info. If present in the payload, the system displays its value in the Login Window as additional computer information. Before macOS 10.10, this string could only contain host name, system version, or IP address. After macOS 10.10, setting this key to any value allows the user to click the time area of the menu bar to toggle through various computer information values."
     },
     {
+      "key": "AdminMayDisableMCX",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, a local administrator user can bypass or disable managed preferences (MCX settings) for their login session. The device presents the user with this option at login only when the user is a local administrator, and other users are not logged in."
+    },
+    {
       "key": "AllowList",
       "type": "\u003carray\u003e",
       "presence": "optional",
@@ -121,6 +128,13 @@
       "content": "If `true`, the system disables the Restart item."
     },
     {
+      "key": "RetriesUntilHint",
+      "type": "\u003cinteger\u003e",
+      "presence": "optional",
+      "default": 0,
+      "content": "If specified, allows a certain number of retries until the device shows a password hint. The device shows no hints if set to a value of 0."
+    },
+    {
       "key": "SleepDisabled",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
@@ -166,7 +180,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system disables the Log Out menu item when the user is logged in. Available in macOS 10.13 and later.",
+      "content": "If `true`, the system disables the Log Out menu item when the user is logged in.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.13"
@@ -178,7 +192,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system disables the immediate Screen Lock functions. Available in macOS 10.13 and later.",
+      "content": "If `true`, the system disables the immediate Screen Lock functions.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.13"
@@ -228,6 +242,32 @@
       "supportedOS": {
         "macOS": {
           "introduced": "14.0"
+        }
+      }
+    },
+    {
+      "key": "ForceWifiConfigurationOnLockScreen",
+      "title": "Enable WiFi network selection for login and unlock",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system allows the user to select WiFi networks at login or unlock.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "27.0"
+        }
+      }
+    },
+    {
+      "key": "ForceCaptivePortalConnectionFromLockScreen",
+      "title": "Enable captive WiFi portal for login and unlock",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, the system allows use of the captive WiFi portal at login or unlock.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "27.0"
         }
       }
     }

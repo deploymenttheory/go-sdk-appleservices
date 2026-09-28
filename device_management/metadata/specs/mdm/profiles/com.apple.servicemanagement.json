@@ -41,7 +41,7 @@
           "subkeys": [
             {
               "key": "RuleType",
-              "title": "Rule Type",
+              "title": "Rule type",
               "type": "\u003cstring\u003e",
               "presence": "required",
               "rangelist": [
@@ -55,7 +55,7 @@
             },
             {
               "key": "RuleValue",
-              "title": "Rule Value",
+              "title": "Rule value",
               "type": "\u003cstring\u003e",
               "presence": "required",
               "content": "The value to compare with each login item's value, to determine if this rule is a match."
@@ -69,7 +69,7 @@
             },
             {
               "key": "TeamIdentifier",
-              "title": "Team Identifier",
+              "title": "Team identifier",
               "type": "\u003cstring\u003e",
               "presence": "optional",
               "content": "An additional constraint to limit the scope of the rule that the system tests after matching the `RuleType` and `RuleValue`."

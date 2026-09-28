@@ -14,9 +14,9 @@ type SystempolicyRule struct {
 	// The policy requirement. This key must follow the syntax described in [Code Signing Requirement
 	// Language](https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/RequirementLang/RequirementLang.html#//apple_ref/doc/uid/TP40005929-CH5).
 	Requirement *string `plist:"Requirement,omitempty" json:"Requirement,omitempty"`
-	// This string appears in the System Policy UI. If it's missing, `PayloadDisplayName` or
-	// `PayloadDescription` is entered into this field before the rule is added to the System Policy
-	// database.
+	// This string appears in the System Policy UI. If it's missing, the device enters
+	// `PayloadDisplayName` or `PayloadDescription` into this field before adding the rule to the
+	// System Policy database.
 	Comment *string `plist:"Comment,omitempty" json:"Comment,omitempty"`
 	// The rule's priority.
 	Priority *float64 `plist:"Priority,omitempty" json:"Priority,omitempty"`
@@ -26,6 +26,6 @@ type SystempolicyRule struct {
 	//
 	// Default: operation:execute.
 	OperationType *SystempolicyRuleOperationType `plist:"OperationType,omitempty" json:"OperationType,omitempty"`
-	// The single leaf certificate for the app that is in the allow list.
+	// The single leaf certificate for the app that's in the allow list.
 	LeafCertificate []byte `plist:"LeafCertificate,omitempty" json:"LeafCertificate,omitempty"`
 }

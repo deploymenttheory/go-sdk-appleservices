@@ -27,6 +27,10 @@ type IntelligenceSettings struct {
 	//
 	// Default: true.
 	AllowPersonalizedHandwritingResults *bool `plist:"AllowPersonalizedHandwritingResults,omitempty" json:"AllowPersonalizedHandwritingResults,omitempty"`
+	// If `false`, disables Visual Intelligence.
+	//
+	// Default: true.
+	AllowVisualIntelligence *bool `plist:"AllowVisualIntelligence,omitempty" json:"AllowVisualIntelligence,omitempty"`
 	// If `false`, disables Visual Intelligence Summary.
 	//
 	// Default: true.
@@ -45,6 +49,15 @@ type IntelligenceSettings struct {
 	//
 	// Default: false.
 	ForceOnDeviceOnlyTranslation *bool `plist:"ForceOnDeviceOnlyTranslation,omitempty" json:"ForceOnDeviceOnlyTranslation,omitempty"`
+}
+
+// IntelligenceSettingsAppsCalendar is the Calendar dictionary.
+// If present, configures Calendar and Reminders Intelligence features.
+type IntelligenceSettingsAppsCalendar struct {
+	// If `false`, disables Natural Language Editing in Calendar and Reminders.
+	//
+	// Default: true.
+	AllowNaturalLanguageEditing *bool `plist:"AllowNaturalLanguageEditing,omitempty" json:"AllowNaturalLanguageEditing,omitempty"`
 }
 
 // IntelligenceSettingsAppsMail is the Mail dictionary.
@@ -85,6 +98,8 @@ type IntelligenceSettingsAppsSafari struct {
 // IntelligenceSettingsApps is the Apps dictionary.
 // If present, configures app-specific Intelligence features.
 type IntelligenceSettingsApps struct {
+	// If present, configures Calendar and Reminders Intelligence features.
+	Calendar *IntelligenceSettingsAppsCalendar `plist:"Calendar,omitempty" json:"Calendar,omitempty"`
 	// If present, configures Mail Intelligence features.
 	Mail *IntelligenceSettingsAppsMail `plist:"Mail,omitempty" json:"Mail,omitempty"`
 	// If present, configures Notes Intelligence features.

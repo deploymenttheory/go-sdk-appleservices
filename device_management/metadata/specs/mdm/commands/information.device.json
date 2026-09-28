@@ -68,7 +68,7 @@
               "key": "ProvisioningUDID",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the device identifier for provisioning profiles. This value differs from the UDID for a Mac with Apple silicon. Available in macOS 11.3 and later.",
+              "content": "The key to get the device identifier for provisioning profiles. This value differs from the UDID for a Mac with Apple silicon.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -142,7 +142,7 @@
               "key": "LastCloudBackupDate",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the date of the most-recent iCloud backup. Available in iOS 8 and later.",
+              "content": "The key to get the date of the most-recent iCloud backup.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "8.0"
@@ -434,7 +434,7 @@
               "key": "IsAppleSilicon",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the device is a Mac with Apple silicon (for example, an Apple M1 chip). Available in macOS 12 and later.",
+              "content": "The key to determine whether the device is a Mac with Apple silicon (for example, an Apple M1 chip).",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -504,7 +504,7 @@
               "key": "DeviceCapacity",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the device's total capacity. Requires the Device Information access right. Available in iOS 4 and later, and macOS 10.7 and later.",
+              "content": "The key to get the device's total capacity. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "accessrights": "AllowQueryDeviceInformation"
@@ -527,7 +527,7 @@
               "key": "AvailableDeviceCapacity",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the available capacity. Requires the Device Information access right. Available in iOS 4 and later, and macOS 10.7 and later.",
+              "content": "The key to get the available capacity. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "accessrights": "AllowQueryDeviceInformation"
@@ -600,7 +600,7 @@
               "key": "ModemFirmwareVersion",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the modem firmware version. Requires the Device Information access right. Available in iOS 4 and later.",
+              "content": "The key to get the modem firmware version. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "accessrights": "AllowQueryDeviceInformation"
@@ -623,7 +623,7 @@
               "key": "CellularTechnology",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the cellular technology type. Requires the Device Information access right. Available in iOS 4.2.6 and later.",
+              "content": "The key to get the cellular technology type. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "4.2.6",
@@ -647,7 +647,7 @@
               "key": "BatteryLevel",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the battery level. Requires the Device Information access right. Available in iOS 5 and later.",
+              "content": "The key to get the battery level. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "5.0",
@@ -696,7 +696,7 @@
               "key": "IsSupervised",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the device is supervised. Requires the Device Information access right. Available in iOS 6 and later, macOS 10.15 and later, and tvOS 9 and later.",
+              "content": "The key to determine whether the device is supervised. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "6.0",
@@ -721,7 +721,7 @@
               "key": "IsMultiUser",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the device is a Shared iPad. Requires the Device Information access right. Available in iOS 9.3 and later.",
+              "content": "The key to determine whether the device is a Shared iPad. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "9.3",
@@ -745,7 +745,7 @@
               "key": "IsDeviceLocatorServiceEnabled",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the system enabled a device locator service such as Find My on the device. Requires the Device Information access right. Available in iOS 7 and later.",
+              "content": "The key to determine whether the system enabled a device locator service such as Find My on the device. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "7.0",
@@ -797,7 +797,7 @@
               "key": "IsActivationLockSupported",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the device supports Activation Lock. Also see `IsActivationLockManageable` in `ManagementStatus`. Available in macOS 10.9 and later.",
+              "content": "The key to determine whether the device supports Activation Lock. Also see `IsActivationLockManageable` in `ManagementStatus`.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -821,7 +821,7 @@
               "key": "IsDoNotDisturbInEffect",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the device is in Do Not Disturb (DND) mode. Requires the Device Information access right. Available in iOS 7 and later.",
+              "content": "The key to determine whether the device is in Do Not Disturb (DND) mode. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "7.0",
@@ -845,7 +845,7 @@
               "key": "DeviceID",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the device ID. Requires the Device Information access right. Available in tvOS 6 and later.",
+              "content": "The key to get the device ID. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -869,7 +869,7 @@
               "key": "EASDeviceIdentifier",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the device identifier for Exchange ActiveSync (EAS). Requires the Device Information access right. Available in iOS 7 and later.",
+              "content": "The key to get the device identifier for Exchange ActiveSync (EAS). Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "7.0",
@@ -893,7 +893,7 @@
               "key": "IsCloudBackupEnabled",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the system enabled iCloud Backup on the device. Requires the Device Information access right. Available in iOS 7.1 and later.",
+              "content": "The key to determine whether the system enabled iCloud Backup on the device. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "7.1",
@@ -917,7 +917,7 @@
               "key": "ActiveManagedUsers",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get an array of directory GUIDs for logged-in managed users. Requires the Device Information access right. Available in macOS 10.11 and later.",
+              "content": "The key to get an array of directory GUIDs for logged-in managed users. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -941,7 +941,7 @@
               "key": "OSUpdateSettings",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the contents of `OSUpdateSettings`. Requires the Device Information access right. Available in macOS 10.11 and later.",
+              "content": "The key to get the contents of `OSUpdateSettings`. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -949,6 +949,7 @@
                 "macOS": {
                   "introduced": "10.11",
                   "deprecated": "26.0",
+                  "removed": "27.0",
                   "accessrights": "AllowQueryDeviceInformation"
                 },
                 "tvOS": {
@@ -966,7 +967,7 @@
               "key": "LocalHostName",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the local hostname from Bonjour. Available in macOS 10.11 and later.",
+              "content": "The key to get the local hostname from Bonjour.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -990,7 +991,7 @@
               "key": "HostName",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the hostname. Available in macOS 10.11 and later.",
+              "content": "The key to get the hostname.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -1014,7 +1015,7 @@
               "key": "AutoSetupAdminAccounts",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the contents of `AutoSetupAdminAccountsItem`, which Setup Assistant automatically creates during enrollment. Requires the Device Information access right. Available in macOS 10.11 and later.",
+              "content": "The key to get the contents of `AutoSetupAdminAccountsItem`, which Setup Assistant automatically creates during enrollment. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -1062,7 +1063,7 @@
               "key": "SupportsLOMDevice",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the device can receive `PowerON`, `PowerOFF`, and `Reset` commands from a lights-out management (LOM) controller. Available in macOS 11 and later.",
+              "content": "The key to determine whether the device can receive `PowerON`, `PowerOFF`, and `Reset` commands from a lights-out management (LOM) controller.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -1086,7 +1087,7 @@
               "key": "IsMDMLostModeEnabled",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the system enabled Managed Lost Mode on the device. Requires the Device Information access right. Available in iOS 9.3 and later.",
+              "content": "The key to determine whether the system enabled Managed Lost Mode on the device. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "9.3",
@@ -1110,7 +1111,7 @@
               "key": "MaximumResidentUsers",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the maximum number of users that can use this Shared iPad device. In iOS 13.4 and later, this value is always `32`. Requires the Device Information access right. Available in iOS 9.3 and later.",
+              "content": "The key to get the maximum number of users that can use this Shared iPad device. In iOS 13.4 and later, this value is always `32`. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "9.3",
@@ -1134,7 +1135,7 @@
               "key": "EstimatedResidentUsers",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the estimated number of users that can use this Shared iPad device, according to the available space of the device and each user's quota. Requires the Device Information access right. Available in iOS 14 and later.",
+              "content": "The key to get the estimated number of users that can use this Shared iPad device, according to the available space of the device and each user's quota. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "14.0",
@@ -1158,7 +1159,7 @@
               "key": "QuotaSize",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the quota size for each user on this Shared iPad device. Requires the Device Information access right. Available in iOS 13.4 and later.",
+              "content": "The key to get the quota size for each user on this Shared iPad device. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "13.4",
@@ -1182,7 +1183,7 @@
               "key": "ResidentUsers",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the number of users currently on this Shared iPad device. Requires the Device Information access right. Available in iOS 13.4 and later.",
+              "content": "The key to get the number of users currently on this Shared iPad device. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "13.4",
@@ -1278,7 +1279,7 @@
               "key": "ManagedAppleIDDefaultDomains",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the list of domains that the device suggests on the Shared iPad login screen. Available in iOS 16 and later.",
+              "content": "The key to get the list of domains that the device suggests on the Shared iPad login screen.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "16.0",
@@ -1302,7 +1303,7 @@
               "key": "OnlineAuthenticationGracePeriod",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the grace period for Shared iPad online authentication (in days). Available in iOS 16 and later.",
+              "content": "The key to get the grace period for Shared iPad online authentication (in days).",
               "supportedOS": {
                 "iOS": {
                   "introduced": "16.0",
@@ -1350,7 +1351,7 @@
               "key": "PushToken",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the push token for the current user-channel connection. The MDM server ignores this query for the device channel. Requires the Device Information access right. Available in iOS 9.3 and later, and macOS 10.12 and later.",
+              "content": "The key to get the push token for the current user-channel connection. The MDM server ignores this query for the device channel. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "9.3",
@@ -1374,7 +1375,7 @@
               "key": "DiagnosticSubmissionEnabled",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the system enabled the diagnostic submission setting on the device. Requires the Device Information access right. Available in iOS 9.3 and later.",
+              "content": "The key to determine whether the system enabled the diagnostic submission setting on the device. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "9.3",
@@ -1398,7 +1399,7 @@
               "key": "AppAnalyticsEnabled",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the device is sharing app analytics. Requires the Device Information access right. Available in iOS 4 and later, and macOS 10.7 and later.",
+              "content": "The key to determine whether the device is sharing app analytics. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "9.3",
@@ -1422,7 +1423,7 @@
               "key": "TimeZone",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the current Internet Assigned Numbers Authority (IANA) time zone database name. Requires the Device Information access right. Available in macOS 26 and later, iOS 14 and later, tvOS 14 and later, and visionOS 2 and later.",
+              "content": "The key to get the current Internet Assigned Numbers Authority (IANA) time zone database name. Requires the Device Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "14.0",
@@ -1520,7 +1521,7 @@
               "key": "EthernetMAC",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the primary Ethernet MAC address. Requires the Network Information access right. Available in macOS 10.7 and later.",
+              "content": "The key to get the primary Ethernet MAC address. Requires the Network Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -1668,7 +1669,7 @@
               "key": "DataRoamingEnabled",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the system enabled data roaming on the device. Requires the Network Information access right. Available in iOS 5 and later.",
+              "content": "The key to determine whether the system enabled data roaming on the device. Requires the Network Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "5.0",
@@ -1718,7 +1719,7 @@
               "key": "PersonalHotspotEnabled",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the system enabled Personal Hotspot on the device, which isn't available for all carriers. Requires the Network Information access right. Available in iOS 7 and later.",
+              "content": "The key to determine whether the system enabled Personal Hotspot on the device, which isn't available for all carriers. Requires the Network Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "7.0",
@@ -1742,7 +1743,7 @@
               "key": "IsNetworkTethered",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the device is network-tethered. Requires the Network Information access right. Available in iOS 10.3 and later.",
+              "content": "The key to determine whether the device is network-tethered. Requires the Network Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "10.3",
@@ -1766,7 +1767,7 @@
               "key": "IsRoaming",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the device is roaming. Requires the Network Information access right. Available in iOS 4.2 and later.",
+              "content": "The key to determine whether the device is roaming. Requires the Network Information access right.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "4.2",
@@ -1918,7 +1919,7 @@
               "key": "PINRequiredForEraseDevice",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the `EraseDeviceCommand` requires a PIN. Available in macOS 11 and later.",
+              "content": "The key to determine whether the `EraseDeviceCommand` requires a PIN.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -1942,7 +1943,7 @@
               "key": "PINRequiredForDeviceLock",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the `DeviceLockCommand` requires a PIN. Available in macOS 11 and later.",
+              "content": "The key to determine whether the `DeviceLockCommand` requires a PIN.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -1966,7 +1967,7 @@
               "key": "SupportsiOSAppInstalls",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to determine whether the macOS device supports iOS or iPadOS app installs. Available in macOS 11 and later.",
+              "content": "The key to determine whether the macOS device supports iOS or iPadOS app installs.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -1990,21 +1991,24 @@
               "key": "SoftwareUpdateDeviceID",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the device identifier to look up available OS updates through [https://gdmf.apple.com/v2/pmv](https://gdmf.apple.com/v2/pmv). Available in iOS 15 and later, and macOS 12 and later.",
+              "content": "The key to get the device identifier to look up available OS updates through [https://gdmf.apple.com/v2/pmv](https://gdmf.apple.com/v2/pmv).\n\nRemoved: subscribe to the declarative management `softwareupdate.device-id` status item.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "15.0",
-                  "deprecated": "26.0"
+                  "deprecated": "26.0",
+                  "removed": "27.0"
                 },
                 "macOS": {
                   "introduced": "12.0",
-                  "deprecated": "26.0"
+                  "deprecated": "26.0",
+                  "removed": "27.0"
                 },
                 "tvOS": {
                   "introduced": "n/a"
                 },
                 "visionOS": {
-                  "deprecated": "26.0"
+                  "deprecated": "26.0",
+                  "removed": "27.0"
                 },
                 "watchOS": {
                   "introduced": "n/a"
@@ -2015,11 +2019,12 @@
               "key": "SoftwareUpdateSettings",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the device settings that control which updates appear in the Software Update pane in Settings. Available in iOS 14.5 and later.",
+              "content": "The key to get the device settings that control which updates appear in the Software Update pane in Settings.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration to set values.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "14.5",
-                  "deprecated": "26.0"
+                  "deprecated": "26.0",
+                  "removed": "27.0"
                 },
                 "macOS": {
                   "introduced": "n/a"
@@ -2039,7 +2044,7 @@
               "key": "AccessibilitySettings",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get the current state of settable accessibility settings. Available in iOS 16 and later.",
+              "content": "The key to get the current state of settable accessibility settings.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "16.0"
@@ -2060,7 +2065,7 @@
               "key": "DevicePropertiesAttestation",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The key to get an attestation of the device's properties. Available in iOS 16 and later, macOS 14 and later, tvOS 16 and later, and watchOS 10 and later. The hardware requirements for attestation are described below.",
+              "content": "The key to get an attestation of the device's properties. See the hardware requirements for attestation below.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "16.0"
@@ -2106,7 +2111,7 @@
       "key": "DeviceAttestationNonce",
       "type": "\u003cdata\u003e",
       "presence": "optional",
-      "content": "A freshness code that appears in the resulting attestation. This value can contain up to 32 bytes of data. If specified, queries need to contain `DevicePropertiesAttestation`.\n\nThe MDM server uses this value to prove that an attestation was recently generated. The system caches the most recently generated attestation on the device. If omitted or if the value matches the cached attestation, the system returns the cached attestation. To request a new attestation, provide a new freshness code. Requests for new attestations are rate limited. If it is fewer than 7 days since the system generated an attestation, the device returns the cached attestation rather than generating a new one.\n\nAvailable in iOS 16 and later, macOS 14 and later, tvOS 16 and later, and watchOS 10 and later. The hardware requirements for attestation are described below.",
+      "content": "A freshness code that appears in the resulting attestation. This value can contain up to 32 bytes of data. If specified, queries need to contain `DevicePropertiesAttestation`.\n\nThe MDM server uses this value to prove that an attestation was recently generated. The system caches the most recently generated attestation on the device. If omitted or if the value matches the cached attestation, the system returns the cached attestation. To request a new attestation, provide a new freshness code. Requests for new attestations are rate limited. If it's fewer than 7 days since the system generated an attestation, the device returns the cached attestation rather than generating a new one.\n\nSee the hardware requirements for attestation below.",
       "supportedOS": {
         "iOS": {
           "introduced": "16.0"
@@ -2136,7 +2141,7 @@
         {
           "key": "ProvisioningUDID",
           "type": "\u003cstring\u003e",
-          "content": "The device identifier to use in provisioning profiles. This value differs from the UDID on a Mac with Apple silicon. Available in macOS 11.3 and later.",
+          "content": "The device identifier to use in provisioning profiles. This value differs from the UDID on a Mac with Apple silicon.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -2165,31 +2170,31 @@
               "key": "OrganizationName",
               "type": "\u003cstring\u003e",
               "presence": "required",
-              "content": "A string that describes the organization operating the MDM server. This value is available in iOS 7 and later, macOS 10.11 and later, and tvOS 9 and later."
+              "content": "A string that describes the organization operating the MDM server."
             },
             {
               "key": "OrganizationAddress",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The organization's address. Use the LF character (`\u0026#10`) to insert line breaks. This value is available in iOS 7 and later, macOS 10.11 and later, and tvOS 9 and later."
+              "content": "The organization's address. Use the LF character (`\u0026#10`) to insert line breaks."
             },
             {
               "key": "OrganizationPhone",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The organization's phone number. This value is available in iOS 7 and later, macOS 10.11 and later, and tvOS 9 and later."
+              "content": "The organization's phone number."
             },
             {
               "key": "OrganizationEmail",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The organization's support email address. This value is available in iOS 7 and later, macOS 10.11 and later, and tvOS 9 and later."
+              "content": "The organization's support email address."
             },
             {
               "key": "OrganizationMagic",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "A unique identifier for the various services a single organization manages. This value is available in iOS 7 and later, macOS 10.11 and later, and tvOS 9 and later."
+              "content": "A unique identifier for the various services a single organization manages."
             }
           ],
           "supportedOS": {
@@ -2214,7 +2219,7 @@
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
-              "content": "If `true`, a supervised device registers itself with Activation Lock when the user enables Find My. Unsupervised devices ignore this value. This value is available in iOS 7 and later, macOS 11 and later, and tvOS 9 and later.",
+              "content": "If `true`, a supervised device registers itself with Activation Lock when the user enables Find My. Unsupervised devices ignore this value.",
               "supportedOS": {
                 "visionOS": {
                   "introduced": "n/a"
@@ -2229,7 +2234,7 @@
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
-              "content": "If `true`, the server supports Bootstrap Token commands. This value is available in macOS 11 and later.",
+              "content": "If `true`, the server supports Bootstrap Token commands.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -2288,7 +2293,7 @@
         {
           "key": "LastCloudBackupDate",
           "type": "\u003cdate\u003e",
-          "content": "The date of the last iCloud backup. Available in iOS 8 and later.",
+          "content": "The date of the last iCloud backup.",
           "supportedOS": {
             "iOS": {
               "introduced": "8.0"
@@ -2463,7 +2468,7 @@
         {
           "key": "DeviceCapacity",
           "type": "\u003creal\u003e",
-          "content": "The total capacity in floating-point base-10 gigabytes (GB) on iOS and macOS 12 or later. The capacity is in base-2 gibibytes (GiB) on macOS 11 and earlier. Requires the Device Information access right. Available in iOS 4 and later, and macOS 10.7 and later.",
+          "content": "The total capacity in floating-point base-10 gigabytes (GB) on iOS and macOS 12 or later. The capacity is in base-2 gibibytes (GiB) on macOS 11 and earlier. Requires the Device Information access right.",
           "supportedOS": {
             "tvOS": {
               "introduced": "n/a"
@@ -2473,7 +2478,7 @@
         {
           "key": "AvailableDeviceCapacity",
           "type": "\u003creal\u003e",
-          "content": "The available capacity in floating-point base-10 gigabytes (GB) in iOS and macOS 12 or later. The capacity is in base-2 gibibytes (GiB) in macOS 11 and earlier. Requires the Device Information access right. Available in iOS 4 and later, and macOS 10.7 and later.",
+          "content": "The available capacity in floating-point base-10 gigabytes (GB) in iOS and macOS 12 or later. The capacity is in base-2 gibibytes (GiB) in macOS 11 and earlier. Requires the Device Information access right.",
           "supportedOS": {
             "tvOS": {
               "introduced": "n/a"
@@ -2529,7 +2534,7 @@
         {
           "key": "ModemFirmwareVersion",
           "type": "\u003cstring\u003e",
-          "content": "The modem firmware version. Requires the Device Information access right. Available in iOS 4 and later.",
+          "content": "The modem firmware version. Requires the Device Information access right.",
           "supportedOS": {
             "macOS": {
               "introduced": "n/a"
@@ -2554,7 +2559,7 @@
             2,
             3
           ],
-          "content": "The cellular technology type, which is one of the following values:\n- `0`: None\n- `1`: GSM\n- `2`: CDMA\n- `3`: GSM and CDMA\n\nRequires the Device Information access right. Available in iOS 4.2.6 and later.",
+          "content": "The cellular technology type, which is one of the following values:\n- `0`: None\n- `1`: GSM\n- `2`: CDMA\n- `3`: GSM and CDMA\n\nRequires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "4.2.6"
@@ -2576,7 +2581,7 @@
         {
           "key": "BatteryLevel",
           "type": "\u003creal\u003e",
-          "content": "The battery level, between `0.0` and `1.0`, or `-1.0` if MDM can't determine the battery level. Requires the Device Information access right. Available in iOS 5 and later, and macOS 13.3 and later.",
+          "content": "The battery level, between `0.0` and `1.0`, or `-1.0` if MDM can't determine the battery level. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "5.0"
@@ -2614,7 +2619,7 @@
         {
           "key": "IsSupervised",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, it's a supervised device. Requires the Device Information access right. Available in iOS 6 and later, macOS 10.15 and later, and tvOS 9 and later.",
+          "content": "If `true`, it's a supervised device. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "6.0"
@@ -2630,7 +2635,7 @@
         {
           "key": "IsMultiUser",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device is a Shared iPad. Requires the Device Information access right. Available in iOS 9.3 and later.",
+          "content": "If `true`, the device is a Shared iPad. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "9.3"
@@ -2652,7 +2657,7 @@
         {
           "key": "IsDeviceLocatorServiceEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device has enabled a device locator service, such as Find My. Requires the Device Information access right. Available in iOS 7 and later.",
+          "content": "If `true`, the device has enabled a device locator service, such as Find My. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "7.0"
@@ -2692,7 +2697,7 @@
         {
           "key": "IsActivationLockSupported",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device supports Activation Lock. Also see `IsActivationLockManageable` in `ManagementStatus`. Available in macOS 10.9 and later.",
+          "content": "If `true`, the device supports Activation Lock. Also see `IsActivationLockManageable` in `ManagementStatus`.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -2714,7 +2719,7 @@
         {
           "key": "IsDoNotDisturbInEffect",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device is in Do Not Disturb (DND) mode. This value is `true` even if DND is only in effect for a locked device. Requires the Device Information access right. Available in iOS 7 and later.",
+          "content": "If `true`, the device is in Do Not Disturb (DND) mode. This value is `true` even if DND is only in effect for a locked device. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "7.0"
@@ -2730,7 +2735,7 @@
         {
           "key": "SupportsLOMDevice",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device can receive `PowerON`, `PowerOFF`, and `Reset` commands from a lights-out management (LOM) controller. Available in macOS 11 and later.",
+          "content": "If `true`, the device can receive `PowerON`, `PowerOFF`, and `Reset` commands from a lights-out management (LOM) controller.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -2752,7 +2757,7 @@
         {
           "key": "DeviceID",
           "type": "\u003cstring\u003e",
-          "content": "The device identifier. Requires the Device Information access right. Available in tvOS 6 and later.",
+          "content": "The device identifier. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -2774,7 +2779,7 @@
         {
           "key": "EASDeviceIdentifier",
           "type": "\u003cstring\u003e",
-          "content": "The device identifier for Exchange Active Sync (EAS). Requires the Device Information access right. Available in iOS 7 and later.",
+          "content": "The device identifier for Exchange Active Sync (EAS). Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "7.0"
@@ -2793,7 +2798,7 @@
         {
           "key": "IsCloudBackupEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device has enabled iCloud backup. Requires the Device Information access right. Available in iOS 7.1 and later.",
+          "content": "If `true`, the device has enabled iCloud backup. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "7.1"
@@ -2812,7 +2817,7 @@
         {
           "key": "ActiveManagedUsers",
           "type": "\u003carray\u003e",
-          "content": "An array of the directory GUIDs of the logged-in managed users. If one of these users is currently logged in to the console, the `CurrentConsoleManagedUser` key returns the GUID of that user. Requires the Device Information access right. Available in macOS 10.11 and later.",
+          "content": "An array of the directory GUIDs of the logged-in managed users. If one of these users is currently logged in to the console, the `CurrentConsoleManagedUser` key returns the GUID of that user. Requires the Device Information access right.",
           "subkeys": [
             {
               "key": "ActiveManagedUsersItems",
@@ -2840,29 +2845,29 @@
         {
           "key": "OSUpdateSettings",
           "type": "\u003cdictionary\u003e",
-          "content": "The contents of ``OSUpdateSettings-dictionary``. Requires the Device Information access right. Available in macOS 10.11 and later.",
+          "content": "The contents of ``OSUpdateSettings-dictionary``. Requires the Device Information access right.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration to set values.",
           "subkeys": [
             {
               "key": "CatalogURL",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The URL to the software update catalog the client is using. This value is available in macOS 10.11 and later."
+              "content": "The URL to the software update catalog the client is using."
             },
             {
               "key": "IsDefaultCatalog",
               "type": "\u003cboolean\u003e",
-              "content": "If `true`, `CatalogURL` is the default catalog. This value is available in macOS 10.11 and later."
+              "content": "If `true`, `CatalogURL` is the default catalog."
             },
             {
               "key": "PreviousScanDate",
               "type": "\u003cdate\u003e",
-              "content": "The date of the last software update scan. This value is available in macOS 10.11 and later."
+              "content": "The date of the last software update scan."
             },
             {
               "key": "PreviousScanResult",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The result code of last software update scan; `0` = success. This value is available in macOS 10.11 and no longer available in macOS 15 and later.",
+              "content": "The result code of last software update scan; `0` = success.",
               "supportedOS": {
                 "macOS": {
                   "deprecated": "11.0",
@@ -2873,32 +2878,32 @@
             {
               "key": "PerformPeriodicCheck",
               "type": "\u003cboolean\u003e",
-              "content": "If `true`, start a new scan. This value is available in macOS 10.11 and later."
+              "content": "If `true`, start a new scan."
             },
             {
               "key": "AutoCheckEnabled",
               "type": "\u003cboolean\u003e",
-              "content": "The preference to automatically check for app updates. This value is available in macOS 10.11 and later."
+              "content": "The preference to automatically check for app updates."
             },
             {
               "key": "BackgroundDownloadEnabled",
               "type": "\u003cboolean\u003e",
-              "content": "The preference to download app updates in the background. This value is available in macOS 10.11 and later."
+              "content": "The preference to download app updates in the background."
             },
             {
               "key": "AutomaticAppInstallationEnabled",
               "type": "\u003cboolean\u003e",
-              "content": "The preference to automatically install app updates. This value is available in macOS 10.11 and later."
+              "content": "The preference to automatically install app updates."
             },
             {
               "key": "AutomaticOSInstallationEnabled",
               "type": "\u003cboolean\u003e",
-              "content": "The preference to automatically install operating system updates. This value is available in macOS 10.11 and later."
+              "content": "The preference to automatically install operating system updates."
             },
             {
               "key": "AutomaticSecurityUpdatesEnabled",
               "type": "\u003cboolean\u003e",
-              "content": "The preference to automatically install system data files and security updates. This value is available in macOS 10.11 and later."
+              "content": "The preference to automatically install system data files and security updates."
             }
           ],
           "supportedOS": {
@@ -2907,7 +2912,8 @@
             },
             "macOS": {
               "introduced": "10.11",
-              "deprecated": "26.0"
+              "deprecated": "26.0",
+              "removed": "27.0"
             },
             "tvOS": {
               "introduced": "n/a"
@@ -2923,7 +2929,7 @@
         {
           "key": "LocalHostName",
           "type": "\u003cstring\u003e",
-          "content": "The local host name from Bonjour. Available in macOS 10.11 and later.",
+          "content": "The local host name from Bonjour.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -2945,7 +2951,7 @@
         {
           "key": "HostName",
           "type": "\u003cstring\u003e",
-          "content": "The host name. Available in macOS 10.11 and later.",
+          "content": "The host name.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -2967,7 +2973,7 @@
         {
           "key": "AutoSetupAdminAccounts",
           "type": "\u003carray\u003e",
-          "content": "The contents of ``AutoSetupAdminAccountsItem``, which Setup Assistant automatically creates during DEP enrollment. Requires the Device Information access right. Available in macOS 10.11 and later.",
+          "content": "The contents of ``AutoSetupAdminAccountsItem``, which Setup Assistant automatically creates during ADE enrollment. Requires the Device Information access right.",
           "subkeys": [
             {
               "key": "AutoSetupAdminAccountsItem",
@@ -2977,12 +2983,12 @@
                 {
                   "key": "GUID",
                   "type": "\u003cstring\u003e",
-                  "content": "The `GeneratedUID` of the administrator account. This value is available in macOS 10.11 and later."
+                  "content": "The `GeneratedUID` of the administrator account."
                 },
                 {
                   "key": "shortName",
                   "type": "\u003cstring\u003e",
-                  "content": "The short name of the administrator account. This value is available in macOS 10.11 and later."
+                  "content": "The short name of the administrator account."
                 }
               ]
             }
@@ -3008,7 +3014,7 @@
         {
           "key": "SystemIntegrityProtectionEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device has enabled System Integrity Protection. Requires the Device Information access right. Available in macOS 10.12 and later.",
+          "content": "If `true`, the device has enabled System Integrity Protection. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -3030,7 +3036,7 @@
         {
           "key": "IsMDMLostModeEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device has enabled Managed Lost Mode. Requires the Device Information access right. Available in iOS 9.3 and later.",
+          "content": "If `true`, the device has enabled Managed Lost Mode. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "9.3"
@@ -3049,7 +3055,7 @@
         {
           "key": "MaximumResidentUsers",
           "type": "\u003cinteger\u003e",
-          "content": "The maximum number of users that can use this Shared iPad device. Starting with iOS 13.4, the value that returns is always `32`. Requires the Device Information access right. Available in iOS 9.3 and later.",
+          "content": "The maximum number of users that can use this Shared iPad device. Starting with iOS 13.4, the value that returns is always `32`. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "9.3"
@@ -3071,7 +3077,7 @@
         {
           "key": "EstimatedResidentUsers",
           "type": "\u003cinteger\u003e",
-          "content": "The estimated number of users that can use this Shared iPad device, according to the space available on the device and each user's quota. Requires the Device Information access right. Available in iOS 14 and later.",
+          "content": "The estimated number of users that can use this Shared iPad device, according to the space available on the device and each user's quota. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "14.0"
@@ -3093,7 +3099,7 @@
         {
           "key": "QuotaSize",
           "type": "\u003cinteger\u003e",
-          "content": "The quota size in megabytes for each user on this Shared iPad device. Requires the Device Information access right. Available in iOS 13.4 and later.",
+          "content": "The quota size in megabytes for each user on this Shared iPad device. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "13.4"
@@ -3115,7 +3121,7 @@
         {
           "key": "ResidentUsers",
           "type": "\u003cinteger\u003e",
-          "content": "The number of users currently on this Shared iPad device. Requires the Device Information access right. Available in iOS 13.4 and later.",
+          "content": "The number of users currently on this Shared iPad device. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "13.4"
@@ -3203,7 +3209,7 @@
         {
           "key": "ManagedAppleIDDefaultDomains",
           "type": "\u003carray\u003e",
-          "content": "The list of domains that the device suggests on the Shared iPad login screen. Available in iOS 16 and later.",
+          "content": "The list of domains that the device suggests on the Shared iPad login screen.",
           "subkeys": [
             {
               "key": "AppleID domain",
@@ -3231,7 +3237,7 @@
         {
           "key": "OnlineAuthenticationGracePeriod",
           "type": "\u003cinteger\u003e",
-          "content": "The grace period for Shared iPad online authentication (in days). A value of `0` indicates that the device requires online authentication for every login. Available in iOS 16 and later.",
+          "content": "The grace period for Shared iPad online authentication (in days). A value of `0` indicates that the device requires online authentication for every login.",
           "supportedOS": {
             "iOS": {
               "introduced": "16.0"
@@ -3275,7 +3281,7 @@
         {
           "key": "PushToken",
           "type": "\u003cdata\u003e",
-          "content": "The push token for the user-channel connection, in the same format as in `TokenUpdateRequest`. MDM ignores this query for the device channel. Requires the Device Information access right. Available in iOS 9.3 and later, and macOS 10.12 and later.",
+          "content": "The push token for the user-channel connection, in the same format as in `TokenUpdateRequest`. MDM ignores this query for the device channel. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "9.3"
@@ -3297,7 +3303,7 @@
         {
           "key": "DiagnosticSubmissionEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device has enabled diagnostic submission. Requires the Device Information access right. Available in iOS 9.3 and later.",
+          "content": "If `true`, the device has enabled diagnostic submission. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "9.3"
@@ -3313,7 +3319,7 @@
         {
           "key": "AppAnalyticsEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device is sharing app analytics. Requires the Device Information access right. Available in iOS 9.3 and later.",
+          "content": "If `true`, the device is sharing app analytics. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "9.3"
@@ -3329,7 +3335,7 @@
         {
           "key": "TimeZone",
           "type": "\u003cstring\u003e",
-          "content": "The current Internet Assigned Numbers Authority (IANA) time zone database name. Requires the Device Information access right. Available in iOS 14 and later, and tvOS 14 and later.",
+          "content": "The current Internet Assigned Numbers Authority (IANA) time zone database name. Requires the Device Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "14.0"
@@ -3383,7 +3389,7 @@
         {
           "key": "EthernetMAC",
           "type": "\u003cstring\u003e",
-          "content": "The primary Ethernet MAC address. Requires the Network Information access right. Available in macOS 10.7 and later.",
+          "content": "The primary Ethernet MAC address. Requires the Network Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -3517,7 +3523,7 @@
         {
           "key": "DataRoamingEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device has enabled data roaming. Requires the Network Information access right. Available in iOS 5 and later.",
+          "content": "If `true`, the device has enabled data roaming. Requires the Network Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "5.0"
@@ -3563,7 +3569,7 @@
         {
           "key": "PersonalHotspotEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true,` the device has enabled Personal Hotspot, which isn't available for all carriers. Requires the Network Information access right. Available in iOS 7 and later.",
+          "content": "If `true,` the device has enabled Personal Hotspot, which isn't available for all carriers. Requires the Network Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "7.0"
@@ -3585,7 +3591,7 @@
         {
           "key": "IsNetworkTethered",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device is network-tethered. Requires the Network Information access right. Available in iOS 10.3 and later.",
+          "content": "If `true`, the device is network-tethered. Requires the Network Information access right.",
           "supportedOS": {
             "iOS": {
               "introduced": "10.3"
@@ -3779,32 +3785,32 @@
                 {
                   "key": "CarrierSettingsVersion",
                   "type": "\u003cstring\u003e",
-                  "content": "The version of the carrier settings. This value is available in iOS 12 and later."
+                  "content": "The version of the carrier settings."
                 },
                 {
                   "key": "CurrentCarrierNetwork",
                   "type": "\u003cstring\u003e",
-                  "content": "The name of the current carrier network. This value is available in iOS 12 and later."
+                  "content": "The name of the current carrier network."
                 },
                 {
                   "key": "CurrentMCC",
                   "type": "\u003cstring\u003e",
-                  "content": "The current mobile country code (MCC). This value is available in iOS 12 and later."
+                  "content": "The current mobile country code (MCC)."
                 },
                 {
                   "key": "CurrentMNC",
                   "type": "\u003cstring\u003e",
-                  "content": "The current mobile network code (MNC). This value is available in iOS 12 and later."
+                  "content": "The current mobile network code (MNC)."
                 },
                 {
                   "key": "ICCID",
                   "type": "\u003cstring\u003e",
-                  "content": "The integrated circuit card identifier (ICCID) value. This value is available in iOS 12 and later."
+                  "content": "The integrated circuit card identifier (ICCID) value."
                 },
                 {
                   "key": "EID",
                   "type": "\u003cstring\u003e",
-                  "content": "The eSIM identifier. This value is available in iOS 14 and later.",
+                  "content": "The eSIM identifier.",
                   "supportedOS": {
                     "iOS": {
                       "introduced": "14.0"
@@ -3820,52 +3826,52 @@
                 {
                   "key": "IMEI",
                   "type": "\u003cstring\u003e",
-                  "content": "The device International Mobile Equipment Identity (IMEI) number. This value is available in iOS 12 and later."
+                  "content": "The device International Mobile Equipment Identity (IMEI) number."
                 },
                 {
                   "key": "IsDataPreferred",
                   "type": "\u003cboolean\u003e",
-                  "content": "If `true`, this subscription is the preference for data. This value is available in iOS 12 and later."
+                  "content": "If `true`, this subscription is the preference for data."
                 },
                 {
                   "key": "IsRoaming",
                   "type": "\u003cboolean\u003e",
-                  "content": "If `true`, the phone is roaming. This value is available in iOS 12 and later."
+                  "content": "If `true`, the phone is roaming."
                 },
                 {
                   "key": "IsVoicePreferred",
                   "type": "\u003cboolean\u003e",
-                  "content": "If `true`, this subscription is the preference for voice. This value is available in iOS 12 and later."
+                  "content": "If `true`, this subscription is the preference for voice."
                 },
                 {
                   "key": "Label",
                   "type": "\u003cstring\u003e",
-                  "content": "The label of this subscription. This value is available in iOS 12 and later."
+                  "content": "The label of this subscription."
                 },
                 {
                   "key": "LabelID",
                   "type": "\u003cstring\u003e",
-                  "content": "The unique identifier for this subscription. This value is available in iOS 12 and later."
+                  "content": "The unique identifier for this subscription."
                 },
                 {
                   "key": "MEID",
                   "type": "\u003cstring\u003e",
-                  "content": "The device Mobile Equipment Identifier (MEID) number. This query is available in iOS 12 and later."
+                  "content": "The device Mobile Equipment Identifier (MEID) number."
                 },
                 {
                   "key": "PhoneNumber",
                   "type": "\u003cstring\u003e",
-                  "content": "The raw phone number without punctuation and including country code. This value is available in iOS 12 and later."
+                  "content": "The raw phone number without punctuation and including country code."
                 },
                 {
                   "key": "Slot",
                   "type": "\u003cstring\u003e",
-                  "content": "The description of the slot that contains the SIM representing this subscription. This value is available in iOS 12 and later."
+                  "content": "The description of the slot that contains the SIM representing this subscription."
                 },
                 {
                   "key": "SubscriberCarrierNetwork",
                   "type": "\u003cstring\u003e",
-                  "content": "The name of the home carrier network. This value is available in iOS 16 and later.",
+                  "content": "The name of the home carrier network.",
                   "supportedOS": {
                     "iOS": {
                       "introduced": "16.0"
@@ -3902,7 +3908,7 @@
         {
           "key": "PINRequiredForEraseDevice",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the `EraseDeviceCommand` requires a PIN. Available in macOS 11 and later.",
+          "content": "If `true`, the `EraseDeviceCommand` requires a PIN.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -3924,7 +3930,7 @@
         {
           "key": "PINRequiredForDeviceLock",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the `DeviceLockCommand` requires a PIN. Available in macOS 11 and later.",
+          "content": "If `true`, the `DeviceLockCommand` requires a PIN.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -3946,7 +3952,7 @@
         {
           "key": "SupportsiOSAppInstalls",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device supports iOS or iPadOS app installs through MDM. Available in macOS 11 and later.",
+          "content": "If `true`, the device supports iOS or iPadOS app installs through MDM.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -3968,21 +3974,24 @@
         {
           "key": "SoftwareUpdateDeviceID",
           "type": "\u003cstring\u003e",
-          "content": "The device identifier to look up available OS updates through [https://gdmf.apple.com/v2/pmv](https://gdmf.apple.com/v2/pmv). Available in iOS 15 and later, and macOS 12 and later.",
+          "content": "The device identifier to look up available OS updates through [https://gdmf.apple.com/v2/pmv](https://gdmf.apple.com/v2/pmv).\n\nRemoved: subscribe to the declarative management `softwareupdate.device-id` status item.",
           "supportedOS": {
             "iOS": {
               "introduced": "15.0",
-              "deprecated": "26.0"
+              "deprecated": "26.0",
+              "removed": "27.0"
             },
             "macOS": {
               "introduced": "12.0",
-              "deprecated": "26.0"
+              "deprecated": "26.0",
+              "removed": "27.0"
             },
             "tvOS": {
               "introduced": "n/a"
             },
             "visionOS": {
-              "deprecated": "26.0"
+              "deprecated": "26.0",
+              "removed": "27.0"
             },
             "watchOS": {
               "introduced": "n/a"
@@ -3992,10 +4001,10 @@
         {
           "key": "SoftwareUpdateSettings",
           "type": "\u003cdictionary\u003e",
-          "content": "The device settings that control which updates appear in the Software Update pane in Settings. Available in iOS 14.5 and later.",
+          "content": "The device settings that control which updates appear in the Software Update pane in Settings.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration to set values.",
           "subkeys": [
             {
-              "key": "RecommendationsCadence",
+              "key": "RecommendationCadence",
               "type": "\u003cinteger\u003e",
               "content": "Which software updates to present to the user.\n\n- `0`: Allows all updates (the default value).\n- `1`: Allows only older updates.\n- `2`: Allows only newer updates.\n\nNo effect if the device qualifies for only a single update."
             }
@@ -4003,7 +4012,8 @@
           "supportedOS": {
             "iOS": {
               "introduced": "14.5",
-              "deprecated": "26.0"
+              "deprecated": "26.0",
+              "removed": "27.0"
             },
             "macOS": {
               "introduced": "n/a"
@@ -4022,7 +4032,7 @@
         {
           "key": "AccessibilitySettings",
           "type": "\u003cdictionary\u003e",
-          "content": "The current state of settable accessibility settings. Available in iOS 16 and later.",
+          "content": "The current state of settable accessibility settings.",
           "subkeys": [
             {
               "key": "BoldTextEnabled",
@@ -4114,7 +4124,7 @@
         {
           "key": "DevicePropertiesAttestation",
           "type": "\u003carray\u003e",
-          "content": "The key to get an attestation of the device's properties. Available in iOS 16 and later, macOS 14 and later, tvOS 16 and later, and watchOS 10 and later. The hardware requirements for attestation are described below.\n\nThe value is an array of certificates in DER form that forms a certificate chain. The chain is rooted with the Apple CA `Apple Enterprise Attestation Root CA`. The first array item is the leaf certificate. The leaf certificate contains custom OIDs describing a device. The OS version of the device, and the type of enrollment, determine which OIDs are present in the certificate. If Apple's attestation servers are unable to verify a device property they generate a blank value, omit the OID entirely, or refuse to issue an attestation certificate.\n\nThe following OIDs were introduced in iOS 16, iPadOS 16, tvOS 16, watchOS 10, visionOS 1 and macOS 14:\n\n- `1.2.840.113635.100.8.9.1` serial number: This is the serial number of the device. It is omitted if the enrollment is a user enrollment.\n- `1.2.840.113635.100.8.9.2` UDID: For a Mac this has the same value as the `ProvisioningUDID` key, and does not match the UDID used elsewhere in the MDM protocol. It is omitted if the enrollment is a user enrollment.\n- `1.2.840.113635.100.8.10.2` sepOS version: This is the version of the operating system running on the Secure Enclave when the attestation is generated. Typically this matches the version of the main operating system.\n- `1.2.840.113635.100.8.11.1` Freshness code: This is the freshness code. See the `DeviceAttestationNonce`. This may not match the requested freshness code if a cached attestation was returned.\n\nThe following OIDs were introduced in iOS 17.2, iPadOS 17.2, tvOS 17.2, watchOS 10.2, visionOS 1.l0, and macOS 14.2:\n\n- `1.2.840.113635.100.8.9.4` Software Update Device ID: This is an identifier of the device model. It is expected to match the `SoftwareUpdateDeviceID` in the `DeviceInformation`` response. This is the device identifier to use when looking up available OS updates through \u003chttps://gdmf.apple.com/v2/pmv\u003e.\n- `1.2.840.113635.100.8.10.1` OS Version: This is the version of iOS, iPadOS or tvOS running on the device when the attestation is generated.\n- `1.2.840.113635.100.8.10.3` LLB Version: This is the version of the Low Level Bootloader firmware running on the device when the attestation is generated. For more information about the boot process, see the documentation of the boot process in the Apple Platform Security guide.\n\nThe following OIDs were introduced in macOS 14.2:\n\n- `1.2.840.113635.100.8.13.1` System Integrity Protection (SIP) status: This indicates whether SIP is enabled or disabled when the attestation is generated. `0` indicates enabled, `1` indicates disabled.\n- `1.2.840.113635.100.8.13.2` Secure boot status: This describes part of the configuration of the LocalPolicy when the attestation is generated. The values are `Full Security`, `Reduced Security`, or `Permissive Security`. For a description of these values see the Apple Platform Security guide.\n- `1.2.840.113635.100.8.13.3` Third party kernel extensions allowed: This indicates whether third party kernel extensions are allowed. A value of `0` indicates third party kernel extensions are not allowed. Any other value means that some kinds of third party kernel extensions are allowed.",
+          "content": "The key to get an attestation of the device's properties. See the hardware requirements for attestation below.\n\nThe value is an array of certificates in DER form that forms a certificate chain. The chain is rooted with the Apple CA `Apple Enterprise Attestation Root CA`. The first array item is the leaf certificate. The leaf certificate contains custom OIDs describing a device. The OS version of the device, and the type of enrollment, determine which OIDs are present in the certificate. If Apple's attestation servers are unable to verify a device property they generate a blank value, omit the OID entirely, or refuse to issue an attestation certificate.\n\nThe following OIDs were introduced in iOS 16, iPadOS 16, tvOS 16, watchOS 10, visionOS 1 and macOS 14:\n\n- `1.2.840.113635.100.8.9.1` serial number: This is the serial number of the device. It's omitted if the enrollment is a user enrollment.\n- `1.2.840.113635.100.8.9.2` UDID: For a Mac this has the same value as the `ProvisioningUDID` key, and doesn't match the UDID used elsewhere in the MDM protocol. It's omitted if the enrollment is a user enrollment.\n- `1.2.840.113635.100.8.10.2` sepOS version: This is the version of the operating system running on the Secure Enclave when the attestation is generated. Typically this matches the version of the main operating system.\n- `1.2.840.113635.100.8.11.1` Freshness code: This is the freshness code. See the `DeviceAttestationNonce`. This may not match the requested freshness code if the device returned a cached attestation.\n\nThe following OIDs were introduced in iOS 17.2, iPadOS 17.2, tvOS 17.2, watchOS 10.2, visionOS 1.l0, and macOS 14.2:\n\n- `1.2.840.113635.100.8.9.4` Software Update Device ID: This is an identifier of the device model. It's expected to match the `SoftwareUpdateDeviceID` in the `DeviceInformation`` response. This is the device identifier to use when looking up available OS updates through \u003chttps://gdmf.apple.com/v2/pmv\u003e.\n- `1.2.840.113635.100.8.10.1` OS Version: This is the version of iOS, iPadOS or tvOS running on the device when the attestation is generated.\n- `1.2.840.113635.100.8.10.3` LLB Version: This is the version of the Low Level Bootloader firmware running on the device when the attestation is generated. For more information about the boot process, see the documentation of the boot process in the Apple Platform Security guide.\n\nThe following OIDs were introduced in macOS 14.2:\n\n- `1.2.840.113635.100.8.13.1` System Integrity Protection (SIP) status: This indicates whether SIP is enabled or disabled when the attestation is generated. `0` indicates enabled, `1` indicates disabled.\n- `1.2.840.113635.100.8.13.2` Secure boot status: This describes part of the configuration of the LocalPolicy when the attestation is generated. The values are `Full Security`, `Reduced Security`, or `Permissive Security`. For a description of these values see the Apple Platform Security guide.\n- `1.2.840.113635.100.8.13.3` Third party kernel extensions allowed: This indicates whether third party kernel extensions are allowed. A value of `0` indicates third party kernel extensions aren't allowed. Any other value means that some kinds of third party kernel extensions are allowed.",
           "subkeys": [
             {
               "key": "AttestationCertificate",
@@ -4137,7 +4147,7 @@
         {
           "key": "EACSPreflight",
           "type": "\u003cstring\u003e",
-          "content": "Specifies whether the device can perform an `EraseDeviceCommand` using Erase All Content and Settings (EACS), which is one of the following values:\n- `success`: The device supports EACS.\n- `not supported`: The device is too old to support EACS.\n- `unknown failure`: A problem occurred for which there isn't a more specific error message.\n- `(other string)`: A reason why the device can't perform EACS, such as \"System is not sealed\"",
+          "content": "Specifies whether the device can perform an `EraseDeviceCommand` using Erase All Content and Settings (EACS), which is one of the following values:\n* `success`: The device supports EACS.\n* `not supported`: The device is too old to support EACS.\n* `unknown failure`: A problem occurred for which there isn't a more specific error message.\n* `(other string)`: A reason why the device can't perform EACS, such as \"System is not sealed\"",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"

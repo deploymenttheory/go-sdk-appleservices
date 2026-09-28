@@ -66,7 +66,7 @@
       "rangelist": [
         "auth_secret"
       ],
-      "content": "The authentication method for the SAN. This key is required for all Xsan SANs. It's optional for StorNext SANs but should be set if the StorNext SAN uses an `auth_secret` file.\n\n\n\nOnly one value is accepted: `auth_secret`"
+      "content": "The authentication method for the SAN. This key is required for all Xsan SANs. It's optional for StorNext SANs but should be set if the StorNext SAN uses an `auth_secret` file.\n\n\n\nThe SAN accepts only one value: `auth_secret`"
     },
     {
       "key": "sharedSecret",

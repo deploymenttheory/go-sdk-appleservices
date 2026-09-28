@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.identifier.serial-number",
   "title": "Status Device Serial Number",
-  "description": "A status report of the device's serial number.",
+  "description": "The status item that reports the device's serial number.",
   "payload": {
     "statusitemtype": "device.identifier.serial-number",
     "supportedOS": {

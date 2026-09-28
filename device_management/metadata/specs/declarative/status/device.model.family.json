@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.model.family",
   "title": "Status Device Model Family",
-  "description": "A status report of the device's hardware family.",
+  "description": "The status item that reports the device's hardware model family.",
   "payload": {
     "statusitemtype": "device.model.family",
     "supportedOS": {

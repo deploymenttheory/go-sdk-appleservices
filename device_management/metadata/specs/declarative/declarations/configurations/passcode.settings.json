@@ -27,7 +27,7 @@
   "payloadkeys": [
     {
       "key": "RequirePasscode",
-      "title": "Require Passcode on Device",
+      "title": "Require passcode on device",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -36,7 +36,7 @@
     },
     {
       "key": "RequireAlphanumericPasscode",
-      "title": "Require Alphanumeric Passcode",
+      "title": "Require alphanumeric passcode",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -56,7 +56,7 @@
     },
     {
       "key": "RequireComplexPasscode",
-      "title": "Require Complex Passcode",
+      "title": "Require complex passcode",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -65,7 +65,7 @@
     },
     {
       "key": "MinimumLength",
-      "title": "Minimum Passcode Length",
+      "title": "Minimum passcode length",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -78,7 +78,7 @@
     },
     {
       "key": "MinimumComplexCharacters",
-      "title": "Minimum Complex Characters",
+      "title": "Minimum complex characters",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -102,7 +102,7 @@
     },
     {
       "key": "MaximumFailedAttempts",
-      "title": "Maximum Number of Failed Attempts",
+      "title": "Maximum number of failed attempts",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -115,7 +115,7 @@
     },
     {
       "key": "FailedAttemptsResetInMinutes",
-      "title": "Failed Attempts Reset",
+      "title": "Failed attempts reset",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "combinetype": "number-min",
@@ -137,7 +137,7 @@
     },
     {
       "key": "MaximumGracePeriodInMinutes",
-      "title": "Maximum Grace Period",
+      "title": "Maximum grace period",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "combinetype": "number-min",
@@ -145,7 +145,7 @@
     },
     {
       "key": "MaximumInactivityInMinutes",
-      "title": "Automatic Device Lock",
+      "title": "Automatic device lock",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -157,7 +157,7 @@
     },
     {
       "key": "MaximumPasscodeAgeInDays",
-      "title": "Maximum Passcode Age",
+      "title": "Maximum passcode age",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -177,7 +177,7 @@
     },
     {
       "key": "PasscodeReuseLimit",
-      "title": "Passcode Reuse Limit",
+      "title": "Passcode reuse limit",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -189,7 +189,7 @@
     },
     {
       "key": "ChangeAtNextAuth",
-      "title": "Change At Next Auth",
+      "title": "Change at next auth",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -212,6 +212,7 @@
     },
     {
       "key": "CustomRegex",
+      "title": "Custom regex",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "Specifies a regular expression, and its description, to enforce password compliance. Use the simpler passcode settings whenever possible, and rely on regular expression matching only when necessary. Mistakes in regular expressions can lead to frustrating user experiences, such as unsatisfiable passcode policies, or policy descriptions that don't match the enforced policy.",
@@ -224,6 +225,7 @@
         },
         {
           "key": "Description",
+          "title": "Description",
           "type": "\u003cdictionary\u003e",
           "presence": "optional",
           "content": "A dictionary with supported OS language IDs for the keys (such as `en-US`), and values that represent a localized description of the policy that the regular expression enforces. Use the special `default` key for languages that the dictionary doesn't contain.",

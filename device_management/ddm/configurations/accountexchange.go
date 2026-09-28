@@ -21,18 +21,18 @@ type AccountExchange struct {
 	// The IP address or fully qualified domain name (FQDN) of the Exchange host.
 	HostName *string `plist:"HostName,omitempty" json:"HostName,omitempty"`
 	// The port number of the EWS server. The system uses this only when this declaration has a
-	// `HostName` value.
+	// `HostName` value. Applicable for "EWS" only.
 	Port *int64 `plist:"Port,omitempty" json:"Port,omitempty"`
 	// The path of the EWS server. The system uses this only when this declaration has a `HostName`
-	// value.
+	// value. Applicable for "EWS" only.
 	Path *string `plist:"Path,omitempty" json:"Path,omitempty"`
-	// The external hostname of the EWS server (or IP address).
+	// The external hostname of the EWS server (or IP address). Applicable for "EWS" only.
 	ExternalHostName *string `plist:"ExternalHostName,omitempty" json:"ExternalHostName,omitempty"`
 	// The external port number of the EWS server. The system uses this only when this declaration has
-	// a `ExternalHostName` value.
+	// an `ExternalHostName` value. Applicable for "EWS" only.
 	ExternalPort *int64 `plist:"ExternalPort,omitempty" json:"ExternalPort,omitempty"`
-	// The external path of the EWS server. The system uses this only when this declaration has a
-	// `ExternalHostName` value.
+	// The external path of the EWS server. The system uses this only when this declaration has an
+	// `ExternalHostName` value. Applicable for "EWS" only.
 	ExternalPath *string `plist:"External Path,omitempty" json:"External Path,omitempty"`
 	// The configuration settings for OAuth for this account.
 	OAuth *AccountExchangeOAuth `plist:"OAuth,omitempty" json:"OAuth,omitempty"`
@@ -47,14 +47,14 @@ type AccountExchange struct {
 	//
 	// Allowed asset types: com.apple.asset.credential.acme, com.apple.asset.credential.identity, com.apple.asset.credential.scep.
 	AuthenticationIdentityAssetReference *string `plist:"AuthenticationIdentityAssetReference,omitempty" json:"AuthenticationIdentityAssetReference,omitempty"`
-	// Settings for S/MIME.
+	// Settings for S/MIME. Applicable for "EAS" only.
 	SMIME *AccountExchangeSMIME `plist:"SMIME,omitempty" json:"SMIME,omitempty"`
 	// If `true`, the system activates the mail service for this account.
 	//
 	// Default: true.
 	MailServiceActive *bool `plist:"MailServiceActive,omitempty" json:"MailServiceActive,omitempty"`
 	// If `true`, the system prevents the user from changing the status of the mail service for this
-	// account.
+	// account. Applicable for "EAS" only.
 	//
 	// Default: false.
 	LockMailService *bool `plist:"LockMailService,omitempty" json:"LockMailService,omitempty"`
@@ -63,7 +63,7 @@ type AccountExchange struct {
 	// Default: true.
 	ContactsServiceActive *bool `plist:"ContactsServiceActive,omitempty" json:"ContactsServiceActive,omitempty"`
 	// If `true`, the system prevents the user from changing the status of the address book service for
-	// this account.
+	// this account. Applicable for "EAS" only.
 	//
 	// Default: false.
 	LockContactsService *bool `plist:"LockContactsService,omitempty" json:"LockContactsService,omitempty"`
@@ -72,7 +72,7 @@ type AccountExchange struct {
 	// Default: true.
 	CalendarServiceActive *bool `plist:"CalendarServiceActive,omitempty" json:"CalendarServiceActive,omitempty"`
 	// If `true`, the system prevents the user from changing the status of the calendar service for
-	// this account.
+	// this account. Applicable for "EAS" only.
 	//
 	// Default: false.
 	LockCalendarService *bool `plist:"LockCalendarService,omitempty" json:"LockCalendarService,omitempty"`
@@ -81,7 +81,7 @@ type AccountExchange struct {
 	// Default: true.
 	RemindersServiceActive *bool `plist:"RemindersServiceActive,omitempty" json:"RemindersServiceActive,omitempty"`
 	// If `true`, the system prevents the user from changing the status of the reminders service for
-	// this account.
+	// this account. Applicable for "EAS" only.
 	//
 	// Default: false.
 	LockRemindersService *bool `plist:"LockRemindersService,omitempty" json:"LockRemindersService,omitempty"`
@@ -90,7 +90,7 @@ type AccountExchange struct {
 	// Default: true.
 	NotesServiceActive *bool `plist:"NotesServiceActive,omitempty" json:"NotesServiceActive,omitempty"`
 	// If `true`, the system prevents the user from changing the status of the notes service for this
-	// account.
+	// account. Applicable for "EAS" only.
 	//
 	// Default: false.
 	LockNotesService *bool `plist:"LockNotesService,omitempty" json:"LockNotesService,omitempty"`
@@ -106,62 +106,66 @@ type AccountExchangeOAuth struct {
 	// so the declaration must also contain a `HostName`.
 	SignInURL *string `plist:"SignInURL,omitempty" json:"SignInURL,omitempty"`
 	// The URL that this account uses for token requests with OAuth. The system ignores this value
-	// unless `Enabled` is `true`.
+	// unless `Enabled` is `true`. Applicable for "EAS" only.
 	TokenRequestURL *string `plist:"TokenRequestURL,omitempty" json:"TokenRequestURL,omitempty"`
 }
 
 // AccountExchangeSMIMESigning is the Signing dictionary.
-// Settings for S/MIME signing.
+// Settings for S/MIME signing. Applicable for "EAS" only.
 type AccountExchangeSMIMESigning struct {
-	// If `true`, the system enables S/MIME signing.
+	// If `true`, the system enables S/MIME signing. Applicable for "EAS" only.
 	Enabled bool `plist:"Enabled" json:"Enabled"`
-	// Specifies the identifier of an asset declaration containing the identity required for S/MIME
-	// signing of messages sent from this account.
+	// The identifier of an asset declaration containing the identity required for S/MIME signing of
+	// messages sent from this account. Applicable for "EAS" only.
 	//
 	// Allowed asset types: com.apple.asset.credential.acme, com.apple.asset.credential.identity, com.apple.asset.credential.scep.
 	IdentityAssetReference *string `plist:"IdentityAssetReference,omitempty" json:"IdentityAssetReference,omitempty"`
-	// If `true`, the user can turn S/MIME signing on or off in Settings.
+	// If `true`, the user can turn S/MIME signing on or off in Settings. Applicable for "EAS" only.
 	//
 	// Default: false.
 	UserOverrideable *bool `plist:"UserOverrideable,omitempty" json:"UserOverrideable,omitempty"`
-	// If `true`, the user can select an S/MIME signing identity in Settings.
+	// If `true`, the user can select an S/MIME signing identity in Settings. Applicable for "EAS"
+	// only.
 	//
 	// Default: false.
 	IdentityUserOverrideable *bool `plist:"IdentityUserOverrideable,omitempty" json:"IdentityUserOverrideable,omitempty"`
 }
 
 // AccountExchangeSMIMEEncryption is the Encryption dictionary.
-// Settings for S/MIME encryption.
+// Settings for S/MIME encryption. Applicable for "EAS" only.
 type AccountExchangeSMIMEEncryption struct {
 	// If `true`, the system enables S/MIME encryption by default, which the user can't override if
-	// `PerMessageSwitchEnabled` is `false`.
+	// `PerMessageSwitchEnabled` is `false`. Applicable for "EAS" only.
 	Enabled bool `plist:"Enabled" json:"Enabled"`
-	// Specifies the identifier of an asset declaration containing the identity required for S/MIME
-	// encryption. The system attaches the public certificate to outgoing mail to allow the user to
-	// receive encrypted mail. When the user sends encrypted mail, the system uses the public
-	// certificate to encrypt the copy of the mail in their Sent mailbox.
+	// The identifier of an asset declaration containing the identity required for S/MIME encryption.
+	// The system attaches the public certificate to outgoing mail to allow the user to receive
+	// encrypted mail. When the user sends encrypted mail, the system uses the public certificate to
+	// encrypt the copy of the mail in their Sent mailbox. Applicable for "EAS" only.
 	//
 	// Allowed asset types: com.apple.asset.credential.acme, com.apple.asset.credential.identity, com.apple.asset.credential.scep.
 	IdentityAssetReference *string `plist:"IdentityAssetReference,omitempty" json:"IdentityAssetReference,omitempty"`
-	// If `true`, the user can turn S/MIME encryption by default on or off in Settings.
+	// If `true`, the user can turn S/MIME encryption by default on or off in Settings. Applicable for
+	// "EAS" only.
 	//
 	// Default: false.
 	UserOverrideable *bool `plist:"UserOverrideable,omitempty" json:"UserOverrideable,omitempty"`
-	// If `true`, the user can select an S/MIME signing identity in Settings.
+	// If `true`, the user can select an S/MIME signing identity in Settings. Applicable for "EAS"
+	// only.
 	//
 	// Default: false.
 	IdentityUserOverrideable *bool `plist:"IdentityUserOverrideable,omitempty" json:"IdentityUserOverrideable,omitempty"`
-	// If `true`, the system enables the per-message encryption switch in the compose view.
+	// If `true`, the system enables the per-message encryption switch in the compose view. Applicable
+	// for "EAS" only.
 	//
 	// Default: false.
 	PerMessageSwitchEnabled *bool `plist:"PerMessageSwitchEnabled,omitempty" json:"PerMessageSwitchEnabled,omitempty"`
 }
 
 // AccountExchangeSMIME is the SMIME dictionary.
-// Settings for S/MIME.
+// Settings for S/MIME. Applicable for "EAS" only.
 type AccountExchangeSMIME struct {
-	// Settings for S/MIME signing.
+	// Settings for S/MIME signing. Applicable for "EAS" only.
 	Signing *AccountExchangeSMIMESigning `plist:"Signing,omitempty" json:"Signing,omitempty"`
-	// Settings for S/MIME encryption.
+	// Settings for S/MIME encryption. Applicable for "EAS" only.
 	Encryption *AccountExchangeSMIMEEncryption `plist:"Encryption,omitempty" json:"Encryption,omitempty"`
 }

@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.model.marketing-name",
   "title": "Status Device Model Marketing Name",
-  "description": "A status report of the device's marketing name.",
+  "description": "The status item that reports the device's model marketing name.",
   "payload": {
     "statusitemtype": "device.model.marketing-name",
     "supportedOS": {

@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "account.list.google",
   "title": "Status Account List Google",
-  "description": "A status report of the client's Google accounts.",
+  "description": "The status item that lists the client's Google accounts.",
   "payload": {
     "statusitemtype": "account.list.google",
     "supportedOS": {
@@ -34,8 +34,9 @@
       "subkeys": [
         {
           "key": "status_value",
+          "title": "Status value",
           "type": "\u003cdictionary\u003e",
-          "content": "A status report of the client's Google account details.",
+          "content": "A Google account.",
           "subkeys": [
             {
               "key": "identifier",
@@ -50,7 +51,7 @@
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
-              "content": "If `true`, the account is removed and the status item object only contains this key and the `identifier` key."
+              "content": "If `true`, the device removed the account and the status item object only contains this key and the `identifier` key."
             },
             {
               "key": "declaration-identifier",

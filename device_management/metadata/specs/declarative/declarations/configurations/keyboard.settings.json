@@ -6,7 +6,6 @@
   "payload": {
     "declarationtype": "com.apple.configuration.keyboard.settings",
     "apply": "combined",
-    "content": "Configures keyboard settings.",
     "supportedOS": {
       "iOS": {
         "introduced": "26.4"
@@ -28,7 +27,7 @@
   "payloadkeys": [
     {
       "key": "AllowAutoCorrection",
-      "title": "Allow Auto-Correction",
+      "title": "Allow auto-correction",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -42,7 +41,7 @@
     },
     {
       "key": "AllowDefinitionLookup",
-      "title": "Allow Definition Lookup",
+      "title": "Allow definition lookup",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -51,7 +50,7 @@
     },
     {
       "key": "AllowDictation",
-      "title": "Allow Dictation",
+      "title": "Allow dictation",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -60,7 +59,7 @@
     },
     {
       "key": "AllowMathKeyboardSuggestions",
-      "title": "Allow Math Keyboard Suggestions",
+      "title": "Allow math keyboard suggestions",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -69,7 +68,7 @@
     },
     {
       "key": "AllowPredictiveText",
-      "title": "Allow Predictive Text",
+      "title": "Allow predictive text",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -83,7 +82,7 @@
     },
     {
       "key": "AllowSlideToType",
-      "title": "Allow Slide to Type",
+      "title": "Allow slide to type",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -97,7 +96,7 @@
     },
     {
       "key": "AllowSpellCheck",
-      "title": "Allow Spell Check",
+      "title": "Allow spell check",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -111,7 +110,7 @@
     },
     {
       "key": "AllowTextReplacement",
-      "title": "Allow Text Replacement",
+      "title": "Allow text replacement",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,

@@ -9,8 +9,7 @@ package commands
 type CertificateList struct {
 	// If `true`, only include certificates that MDM installed or that are in the same profile as the
 	// MDM payload. User-enrolled devices ignore this value and always only include managed
-	// certificates. This value is available in iOS 13 and later, macOS 10.15 and later, and tvOS 13
-	// and later.
+	// certificates.
 	//
 	// Default: false.
 	ManagedOnly *bool `plist:"ManagedOnly,omitempty" json:"ManagedOnly,omitempty"`

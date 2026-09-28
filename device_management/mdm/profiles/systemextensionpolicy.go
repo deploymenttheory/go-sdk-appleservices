@@ -38,7 +38,7 @@ type SystemExtensionPolicy struct {
 	// A dictionary of system extensions on the computer. The dictionary maps the team identifiers
 	// (keys) to arrays of bundle identifiers, where the bundle identifier defines the system extension
 	// which can't be disabled or uninstalled from System Settings or Finder. The set of system
-	// extensions between `RemovableSystemExtensions` and `NonRemovableFromUISystemExtensions` can to
+	// extensions between `RemovableSystemExtensions` and `NonRemovableFromUISystemExtensions` can't
 	// overlap.
 	NonRemovableFromUISystemExtensions *SystemExtensionPolicyNonRemovableFromUISystemExtensions `plist:"NonRemovableFromUISystemExtensions,omitempty" json:"NonRemovableFromUISystemExtensions,omitempty"`
 }
@@ -49,7 +49,7 @@ type SystemExtensionPolicy struct {
 // `DriverExtension`, `NetworkExtension`, and `EndpointSecurityExtension`.
 type SystemExtensionPolicyAllowedSystemExtensionTypes struct {
 	// The mapping of team identifier to an array of strings, where each string is a type of system
-	// extension that may be installed for that team identifier.
+	// extension that you can install for that team identifier.
 	ANY []string `plist:"ANY,omitempty" json:"ANY,omitempty"`
 }
 
@@ -58,8 +58,8 @@ type SystemExtensionPolicyAllowedSystemExtensionTypes struct {
 // identifiers (keys) to arrays of bundle identifiers, where the bundle identifier defines the
 // system extension to install.
 type SystemExtensionPolicyAllowedSystemExtensions struct {
-	// The mapping of team identifiers to arrays of bundle identifiers, where the bundle identifier is
-	// that of the system extension to be installed.
+	// The mapping of team identifiers to arrays of bundle identifiers, where the bundle identifier
+	// defines the system extension to install.
 	ANY []string `plist:"ANY,omitempty" json:"ANY,omitempty"`
 }
 
@@ -90,7 +90,7 @@ type SystemExtensionPolicyNonRemovableSystemExtensions struct {
 // A dictionary of system extensions on the computer. The dictionary maps the team identifiers
 // (keys) to arrays of bundle identifiers, where the bundle identifier defines the system extension
 // which can't be disabled or uninstalled from System Settings or Finder. The set of system
-// extensions between `RemovableSystemExtensions` and `NonRemovableFromUISystemExtensions` can to
+// extensions between `RemovableSystemExtensions` and `NonRemovableFromUISystemExtensions` can't
 // overlap.
 type SystemExtensionPolicyNonRemovableFromUISystemExtensions struct {
 	// System extension bundle identifiers

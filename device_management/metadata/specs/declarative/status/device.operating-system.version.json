@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.operating-system.version",
   "title": "Status Device Operating System Version",
-  "description": "A status report of the device's operating system version.",
+  "description": "The status item that reports the device's operating system version.",
   "payload": {
     "statusitemtype": "device.operating-system.version",
     "supportedOS": {

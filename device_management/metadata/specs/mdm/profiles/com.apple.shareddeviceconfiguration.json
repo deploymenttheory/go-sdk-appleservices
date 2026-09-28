@@ -27,14 +27,14 @@
   "payloadkeys": [
     {
       "key": "AssetTagInformation",
-      "title": "Asset Tag",
+      "title": "Asset tag",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The asset tag information for the device, displayed in the Login Window and Lock Screen."
     },
     {
       "key": "IfLostReturnToMessage",
-      "title": "If Lost message",
+      "title": "If lost message",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "Deprecated. Use `LockScreenFootnote` instead.",

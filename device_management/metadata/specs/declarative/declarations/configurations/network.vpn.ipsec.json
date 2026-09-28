@@ -1,0 +1,557 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "network.vpn.ipsec",
+  "title": "Network:VPN:IPSec",
+  "description": "The declaration to configure a VPN using the IPSec sub-type.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.network.vpn.ipsec",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "27.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "VisibleName",
+      "title": "Visible name",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The name of the VPN connection that the system displays on the device."
+    },
+    {
+      "key": "HostName",
+      "title": "Host name",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The IP address or hostname of the VPN server."
+    },
+    {
+      "key": "Authentication",
+      "title": "Authentication details",
+      "type": "\u003cdictionary\u003e",
+      "presence": "required",
+      "content": "Settings that control authentication.",
+      "subkeys": [
+        {
+          "key": "Method",
+          "title": "Authentication method",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "rangelist": [
+            "SharedSecret",
+            "Certificate"
+          ],
+          "content": "The authentication method to use."
+        },
+        {
+          "key": "CredentialsAssetReference",
+          "title": "Credentials asset reference",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The identifier of an asset declaration that contains the credentials\n(password) to authenticate with the VPN servers.\n\nOnly use this with Cisco IPSec VPNs and if the `Authentication.Method` key is to `SharedSecret`.",
+          "assettypes": [
+            "com.apple.asset.credential.userpassword"
+          ]
+        },
+        {
+          "key": "IdentityAssetReference",
+          "title": "Identity asset reference",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The identifier of a credential asset declaration that contains the identity\nthat this account requires to authenticate with the VPN servers.\n\nOnly use this with Cisco IPSec VPNs and if the `Authentication.Method` key is to `Certificate`.",
+          "assettypes": [
+            "com.apple.asset.credential.acme",
+            "com.apple.asset.credential.identity",
+            "com.apple.asset.credential.scep"
+          ]
+        },
+        {
+          "key": "LocalIdentifier",
+          "title": "Local identifier",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The name of the group. For hybrid authentication, the string needs to end with \"hybrid\".\n\nPresent only for Cisco IPSec if `Authentication.Method` is `SharedSecret`."
+        },
+        {
+          "key": "LocalIdentifierType",
+          "title": "Local identifier type",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "rangelist": [
+            "KeyID"
+          ],
+          "default": "KeyID",
+          "content": "Present only if `Authentication.Method` is `SharedSecret`. The value is `KeyID`. The system uses this value for Cisco IPSec VPNs."
+        },
+        {
+          "key": "PromptForVPNPIN",
+          "title": "Prompt for PIN",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, prompts for a PIN when connecting to Cisco IPSec VPNs."
+        },
+        {
+          "key": "XAuth",
+          "title": "XAuth details",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "Settings that control XAuth.",
+          "subkeys": [
+            {
+              "key": "Enabled",
+              "title": "XAuth enabled",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true`, enables Xauth for Cisco IPSec VPNs."
+            },
+            {
+              "key": "CredentialsAssetReference",
+              "title": "Credentials asset reference",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The identifier of an asset declaration that contains the credentials (user name and password) required for XAuth. Required when `Enabled` key is set to `true`.",
+              "assettypes": [
+                "com.apple.asset.credential.userpassword"
+              ]
+            },
+            {
+              "key": "PasswordEncryption",
+              "title": "XAuth password encryption",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "Prompt"
+              ],
+              "content": "A string that either has the value `Prompt` or isn't present."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Idle",
+      "title": "Disconnect on idle settings.",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "Specifies details about how the system handles idle VPN connections.",
+      "subkeys": [
+        {
+          "key": "Disconnect",
+          "title": "Enable disconnect on idle",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, disconnects after an on-demand connection idles."
+        },
+        {
+          "key": "Timer",
+          "title": "Disconnect on idle time",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "content": "The length of time to wait, in seconds, before disconnecting an on-demand connection."
+        }
+      ]
+    },
+    {
+      "key": "OnDemand",
+      "title": "On demand details",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "Specifies details about how the system controls on-demand VPN.",
+      "subkeys": [
+        {
+          "key": "Enabled",
+          "title": "Enable VPN on demand",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, enables VPN On Demand."
+        },
+        {
+          "key": "Rules",
+          "title": "On demand rules",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "An array of dictionaries defining On Demand Rules.",
+          "subkeytype": "RulesElement",
+          "subkeys": [
+            {
+              "key": "RulesElement",
+              "title": "Rules element",
+              "type": "\u003cdictionary\u003e",
+              "subkeys": [
+                {
+                  "key": "Action",
+                  "title": "On demand action",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "rangelist": [
+                    "Allow",
+                    "Connect",
+                    "Disconnect",
+                    "EvaluateConnection",
+                    "Ignore"
+                  ],
+                  "content": "The action to take if this dictionary matches the current network. Possible values are:\n- `Allow`: Deprecated. Allow VPN On Demand to connect if triggered.\n- `Connect`: Unconditionally initiate a VPN connection on the next network attempt.\n- `Disconnect`: Tear down the VPN connection and don't reconnect on demand as long as this dictionary matches.\n- `EvaluateConnection`: Evaluate the ActionParameters array for each connection attempt.\n- `Ignore`: Leave any existing VPN connection up, but don't reconnect on demand as long as this dictionary matches."
+                },
+                {
+                  "key": "ActionParameters",
+                  "title": "Action parameters",
+                  "type": "\u003carray\u003e",
+                  "presence": "optional",
+                  "content": "An array of dictionaries that provides rules similar to the `OnDemandRules` dictionary, but evaluated on each connection instead of when the network changes. This value is only for use with dictionaries in which the `Action` value is `EvaluateConnection`. The system evaluates these dictionaries in order and the first dictionary that matches determines the behavior.",
+                  "subkeys": [
+                    {
+                      "key": "ActionParameter",
+                      "title": "Action parameter",
+                      "type": "\u003cdictionary\u003e",
+                      "presence": "optional",
+                      "content": "A dictionary that provides rules similar to the OnDemandRules dictionary, but evaluated on each connection instead of when the network changes. These dictionaries are evaluated in order, and the behavior is determined by the first dictionary that matches.\nThe keys allowed in each dictionary are described below. Note: This array is used only for dictionaries in which EvaluateConnection is the Action value.",
+                      "subkeys": [
+                        {
+                          "key": "Domains",
+                          "title": "Domains",
+                          "type": "\u003carray\u003e",
+                          "presence": "required",
+                          "content": "The domains to apply this evaluation.",
+                          "subkeys": [
+                            {
+                              "key": "DomainsElement",
+                              "title": "Domains element",
+                              "type": "\u003cstring\u003e"
+                            }
+                          ]
+                        },
+                        {
+                          "key": "DomainAction",
+                          "title": "Domain action",
+                          "type": "\u003cstring\u003e",
+                          "presence": "required",
+                          "rangelist": [
+                            "ConnectIfNeeded",
+                            "NeverConnect"
+                          ],
+                          "content": "Defines the VPN behavior for the specified domains. Allowed values are:\n* 'ConnectIfNeeded': The specified domains should trigger a VPN connection attempt if domain name resolution fails, such as when the DNS server indicates that it can't resolve the domain, responds with a redirection to a different server, or fails to respond (timeout).\n* 'NeverConnect': The specified domains should never trigger a VPN connection attempt."
+                        },
+                        {
+                          "key": "RequiredDNSServers",
+                          "title": "Required DNS servers",
+                          "type": "\u003carray\u003e",
+                          "presence": "optional",
+                          "content": "An array of IP addresses of DNS servers to use for resolving the specified domains. These servers don't need to be part of the device's current network configuration. If these DNS servers aren't reachable, the system establishes a VPN connection. These DNS servers need to be either internal DNS servers or trusted external DNS servers.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'.",
+                          "subkeys": [
+                            {
+                              "key": "RequiredDNSServersElement",
+                              "title": "Required DNS servers element",
+                              "type": "\u003cstring\u003e"
+                            }
+                          ]
+                        },
+                        {
+                          "key": "RequiredURLStringProbe",
+                          "title": "Required URL string probe",
+                          "type": "\u003cstring\u003e",
+                          "presence": "optional",
+                          "content": "An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status code, a VPN connection is established in response.\nThis key is valid only if the value of 'DomainAction' is 'ConnectIfNeeded'."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "key": "DNSDomainMatch",
+                  "title": "DNS domain match",
+                  "type": "\u003carray\u003e",
+                  "presence": "optional",
+                  "content": "An array of domain names. This rule matches if any of the domain names in the specified list matches any domain in the device's search domains list.\nThe system supports a wildcard (`\\*`) prefix. For example, `\\*.example.com` matches against either `mydomain.example.com` or `yourdomain.example.com`.",
+                  "subkeys": [
+                    {
+                      "key": "DNSDomainMatchElement",
+                      "title": "DNS domain match element",
+                      "type": "\u003cstring\u003e"
+                    }
+                  ]
+                },
+                {
+                  "key": "DNSServerAddressMatch",
+                  "title": "DNS server address match",
+                  "type": "\u003carray\u003e",
+                  "presence": "optional",
+                  "content": "An array of IP addresses. This rule matches if any of the network's specified DNS servers match any entry in the array.\nThe system supports matching with a single wildcard. For example, `17.\\*` matches any DNS server in the `17.0.0.0/8` subnet.",
+                  "subkeys": [
+                    {
+                      "key": "DNSServerAddressMatchElement",
+                      "title": "DNS server address match element",
+                      "type": "\u003cstring\u003e"
+                    }
+                  ]
+                },
+                {
+                  "key": "InterfaceTypeMatch",
+                  "title": "Interface type match",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "Ethernet",
+                    "WiFi",
+                    "Cellular"
+                  ],
+                  "content": "An interface type. If specified, this rule matches only if the primary network interface hardware matches the specified type."
+                },
+                {
+                  "key": "SSIDMatch",
+                  "title": "SSID match",
+                  "type": "\u003carray\u003e",
+                  "presence": "optional",
+                  "content": "An array of SSIDs to match against the current network. If the network isn't a Wi-Fi network or if the SSID doesn't appear in this array, the match fails.\nOmit this key and the corresponding array to match against any SSID.",
+                  "subkeys": [
+                    {
+                      "key": "SSIDMatchElement",
+                      "title": "SSID match element",
+                      "type": "\u003cstring\u003e"
+                    }
+                  ]
+                },
+                {
+                  "key": "URLStringProbe",
+                  "title": "URL string probe",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "A URL to probe. This rule matches when this URL is successfully fetched (returns a `200` HTTP status code) without redirection."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "DNS",
+      "title": "DNS",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary to use for all VPN types.",
+      "subkeys": [
+        {
+          "key": "ServerAddresses",
+          "title": "DNS server addresses",
+          "type": "\u003carray\u003e",
+          "presence": "required",
+          "content": "The array of DNS server IP address strings. These IP addresses can be a mixture of IPv4 and IPv6 addresses.",
+          "subkeys": [
+            {
+              "key": "ServerAddressesElement",
+              "title": "Server address element",
+              "type": "\u003cstring\u003e"
+            }
+          ]
+        },
+        {
+          "key": "SearchDomains",
+          "title": "DNS search domains",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "The list of domain strings used to fully qualify single-label host names.",
+          "subkeys": [
+            {
+              "key": "SearchDomainsElement",
+              "title": "Search domains element",
+              "type": "\u003cstring\u003e"
+            }
+          ]
+        },
+        {
+          "key": "DomainName",
+          "title": "Domain name",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The primary domain of the tunnel."
+        },
+        {
+          "key": "SupplementalMatchDomains",
+          "title": "Supplemental match domains",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "The list of domain strings used to determine which DNS queries use the DNS resolver settings in `ServerAddresses`. The system uses this key to create a split DNS configuration where it resolves only hosts in certain domains using the tunnel's DNS resolver. The system uses the default resolver for hosts that aren't in one of the domains in this list.\n\nIf `SupplementalMatchDomains` contains the empty string it becomes the default domain.\n\nSplit-tunnel configurations can direct all DNS queries to the VPN DNS servers before the primary DNS servers. If the VPN tunnel becomes the network's default route, the servers listed in `ServerAddresses` become the default resolver and the system ignores the `SupplementalMatchDomains` list.",
+          "subkeys": [
+            {
+              "key": "SupplementalMatchDomainsElement",
+              "title": "Supplemental match domains element",
+              "type": "\u003cstring\u003e"
+            }
+          ]
+        },
+        {
+          "key": "SupplementalMatchDomainsNoSearch",
+          "title": "Supplemental match domains no search",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, don't append the domains in the `SupplementalMatchDomains` list to the resolver's list of search domains."
+        },
+        {
+          "key": "IdentityAssetReference",
+          "title": "Identity asset reference",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The identifier of a credential asset declaration that contains the identity that the system uses to authenticate the user to the DNS resolver.",
+          "assettypes": [
+            "com.apple.asset.credential.acme",
+            "com.apple.asset.credential.identity",
+            "com.apple.asset.credential.scep"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Proxies",
+      "title": "Proxies",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The dictionary to use to configure `Proxies` for use with `VPN`.",
+      "subkeys": [
+        {
+          "key": "AutoConfigEnable",
+          "title": "Proxy auto config enable",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, enables automatic proxy configuration."
+        },
+        {
+          "key": "AutoDiscoveryEnable",
+          "title": "Proxy auto discovery enable",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": true,
+          "content": "If `true`, enables proxy auto discovery."
+        },
+        {
+          "key": "AutoConfigURLString",
+          "title": "Proxy server URL",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The URL to the location of the proxy auto-configuration file. Used only when `ProxyAutoConfigEnable` is `true`."
+        },
+        {
+          "key": "SupplementalMatchDomains",
+          "title": "Supplemental match domains",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "content": "An array of domains that defines which hosts use proxy settings for hosts.",
+          "subkeys": [
+            {
+              "key": "SupplementalMatchDomainsElement",
+              "title": "Supplemental match domains element",
+              "type": "\u003cstring\u003e"
+            }
+          ]
+        },
+        {
+          "key": "Protocol",
+          "title": "Protocol",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The dictionary to use to configure HTTP servers  for `Proxies` for use with `VPN`.",
+          "subkeys": [
+            {
+              "key": "HTTP",
+              "title": "HTTP protocol",
+              "type": "\u003cdictionary\u003e",
+              "presence": "optional",
+              "content": "The dictionary to use to configure the HTTP (non-TLS) server.",
+              "subkeys": [
+                {
+                  "key": "Enable",
+                  "title": "Enable HTTP",
+                  "type": "\u003cboolean\u003e",
+                  "presence": "optional",
+                  "default": false,
+                  "content": "If `true`, enables proxy for HTTP traffic."
+                },
+                {
+                  "key": "HostName",
+                  "title": "HTTP host name",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The host name of the HTTP proxy."
+                },
+                {
+                  "key": "Port",
+                  "title": "HTTP port",
+                  "type": "\u003cinteger\u003e",
+                  "presence": "optional",
+                  "range": {
+                    "min": 0,
+                    "max": 65535
+                  },
+                  "content": "The port number of the HTTP proxy. This field is required if `HostName` is specified."
+                }
+              ]
+            },
+            {
+              "key": "HTTPS",
+              "title": "HTTPS protocol",
+              "type": "\u003cdictionary\u003e",
+              "presence": "optional",
+              "content": "The dictionary to use to configure the HTTPS (TLS) server.",
+              "subkeys": [
+                {
+                  "key": "Enable",
+                  "title": "Enable HTTPS",
+                  "type": "\u003cboolean\u003e",
+                  "presence": "optional",
+                  "default": false,
+                  "content": "If `true`, enables proxy for HTTPS traffic."
+                },
+                {
+                  "key": "HostName",
+                  "title": "HTTPS host name",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The host name of the HTTPS proxy."
+                },
+                {
+                  "key": "Port",
+                  "title": "HTTPS port",
+                  "type": "\u003cinteger\u003e",
+                  "presence": "optional",
+                  "range": {
+                    "min": 0,
+                    "max": 65535
+                  },
+                  "content": "The port number of the HTTPS proxy. This field is required if `HostName` is specified."
+                }
+              ]
+            },
+            {
+              "key": "CredentialsAssetReference",
+              "title": "Credentials asset reference",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The identifier of an asset declaration that contains the credentials (user name and password) to authenticate with the proxy server.",
+              "assettypes": [
+                "com.apple.asset.credential.userpassword"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

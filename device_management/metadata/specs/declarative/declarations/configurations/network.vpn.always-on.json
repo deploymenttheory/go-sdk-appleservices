@@ -1,0 +1,680 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "network.vpn.always-on",
+  "title": "Network:VPN:AlwaysOn",
+  "description": "The declaration to configure a VPN using the Always On sub-type.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.network.vpn.always-on",
+    "apply": "single",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "n/a"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "27.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "VisibleName",
+      "title": "Visible name",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The name of the VPN connection that the system displays on the device."
+    },
+    {
+      "key": "UIToggleEnabled",
+      "title": "UI toggle enabled",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, allows the user to disable the VPN configuration."
+    },
+    {
+      "key": "TunnelConfigurations",
+      "title": "Tunnel configurations",
+      "type": "\u003carray\u003e",
+      "presence": "required",
+      "content": "An array that contains an arbitrary number of tunnel configurations.",
+      "subkeys": [
+        {
+          "key": "TunnelConfigurationElement",
+          "title": "A tunnel configuration element",
+          "type": "\u003cdictionary\u003e",
+          "subkeys": [
+            {
+              "key": "ProtocolType",
+              "title": "Protocol type",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "IKEv2"
+              ],
+              "content": "The type of connection, which needs to be `IKEv2`."
+            },
+            {
+              "key": "Interfaces",
+              "title": "Interfaces",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The interfaces to apply this configuration to.",
+              "subkeys": [
+                {
+                  "key": "InterfacesElement",
+                  "title": "Interfaces element",
+                  "type": "\u003cstring\u003e",
+                  "rangelist": [
+                    "Cellular",
+                    "WiFi"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "IKEV2",
+              "title": "IKEv2 configuration",
+              "type": "\u003cdictionary\u003e",
+              "presence": "optional",
+              "content": "The IKEv2 configuration for this tunnel.",
+              "subkeys": [
+                {
+                  "key": "HostName",
+                  "title": "Host name",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "The IP address or hostname of the VPN server."
+                },
+                {
+                  "key": "LocalIdentifier",
+                  "title": "Local identifier",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "Identifier of the IKEv2 client."
+                },
+                {
+                  "key": "RemoteIdentifier",
+                  "title": "Remote identifier",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "The remote identifier."
+                },
+                {
+                  "key": "Authentication",
+                  "title": "Authentication details",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "required",
+                  "content": "Settings that control authentication.",
+                  "subkeys": [
+                    {
+                      "key": "Method",
+                      "title": "Authentication method",
+                      "type": "\u003cstring\u003e",
+                      "presence": "required",
+                      "rangelist": [
+                        "None",
+                        "SharedSecret",
+                        "Certificate"
+                      ],
+                      "content": "The type of authentication method for the VPN.\n\nTo enable EAP-only authentication, set this to `None` and `ExtendedAuthEnabled` to `true`. If this is `None` and the `ExtendedAuthEnabled` key isn't set, the authentication configuration defaults to `SharedSecret`."
+                    },
+                    {
+                      "key": "CredentialsAssetReference",
+                      "title": "Credentials asset reference",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "content": "The identifier of an asset declaration that contains the credentials (password) to authenticate with the VPN server. Required when `Authentication.Method` is set to `SharedSecret`.",
+                      "assettypes": [
+                        "com.apple.asset.credential.userpassword"
+                      ]
+                    },
+                    {
+                      "key": "IdentityCertificateType",
+                      "title": "Certificate type",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "rangelist": [
+                        "RSA",
+                        "ECDSA256",
+                        "ECDSA384",
+                        "ECDSA521",
+                        "RSA-PSS"
+                      ],
+                      "default": "RSA",
+                      "content": "The type of key used by the identity set in the `IdentityAssetReference` to use for IKEv2 machine authentication. If this key is included, the system requires a value for `ServerCertificateIssuerCommonName`."
+                    },
+                    {
+                      "key": "IdentityAssetReference",
+                      "title": "Identity asset reference",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "content": "The identifier of a credential asset declaration that contains the identity that this account requires to authenticate with the VPN server. If the value of `AuthenticationMethod` is `Certificate`, the system sends this certificate out for IKEv2 machine authentication. If extended authentication (EAP) is used, the system sends this certificate out for EAP-TLS authentication. Required when `Authentication.Method` is set to `Certificate`.",
+                      "assettypes": [
+                        "com.apple.asset.credential.acme",
+                        "com.apple.asset.credential.identity",
+                        "com.apple.asset.credential.scep"
+                      ]
+                    },
+                    {
+                      "key": "ExtendedAuth",
+                      "title": "Extended authentication (EAP)",
+                      "type": "\u003cdictionary\u003e",
+                      "presence": "optional",
+                      "content": "Specifies details about extended authentication (EAP).",
+                      "subkeys": [
+                        {
+                          "key": "Enabled",
+                          "title": "Enabled",
+                          "type": "\u003cboolean\u003e",
+                          "presence": "optional",
+                          "default": false,
+                          "content": "If `true`, enables EAP-only authentication."
+                        },
+                        {
+                          "key": "CredentialsAssetReference",
+                          "title": "Credentials asset reference",
+                          "type": "\u003cstring\u003e",
+                          "presence": "optional",
+                          "content": "The identifier of an asset declaration that contains the credentials (user name and password) to authenticate with the VPN server. Required when `Enabled` is set to `true`. Implies the use of EAP-MSCHAPv2.",
+                          "assettypes": [
+                            "com.apple.asset.credential.userpassword"
+                          ]
+                        },
+                        {
+                          "key": "ServerCertificateIssuerCommonName",
+                          "title": "Server certificate issuer common name",
+                          "type": "\u003cstring\u003e",
+                          "presence": "optional",
+                          "content": "Common Name of the server certificate issuer. If set, this field causes IKE to send a certificate request based on this certificate issuer to the server. This key is required if the `IdentityCertificateType` key is included and the `ExtendedAuth.Enabled` key is `true`."
+                        },
+                        {
+                          "key": "ServerCertificateCommonName",
+                          "title": "Server certificate common name",
+                          "type": "\u003cstring\u003e",
+                          "presence": "optional",
+                          "content": "The common name of the server certificate. The system uses this name to validate the certificate sent by the IKE server. If not set, the system uses the remote identifier to validate the certificate."
+                        },
+                        {
+                          "key": "TLSMinimumVersion",
+                          "title": "TLS minimum version",
+                          "type": "\u003cstring\u003e",
+                          "presence": "optional",
+                          "rangelist": [
+                            "1.0",
+                            "1.1",
+                            "1.2",
+                            "1.3"
+                          ],
+                          "default": "1.0",
+                          "content": "The minimum TLS version to use with EAP-TLS authentication."
+                        },
+                        {
+                          "key": "TLSMaximumVersion",
+                          "title": "TLS maximum version",
+                          "type": "\u003cstring\u003e",
+                          "presence": "optional",
+                          "rangelist": [
+                            "1.0",
+                            "1.1",
+                            "1.2",
+                            "1.3"
+                          ],
+                          "default": "1.2",
+                          "content": "The maximum TLS version to use with EAP-TLS authentication."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "key": "Idle",
+                  "title": "Disconnect on idle settings.",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "optional",
+                  "content": "Specifies details about how the system handles idle VPN connections.",
+                  "subkeys": [
+                    {
+                      "key": "DeadPeerDetectionRate",
+                      "title": "Dead peer detection rate",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "rangelist": [
+                        "None",
+                        "Low",
+                        "Medium",
+                        "High"
+                      ],
+                      "default": "Medium",
+                      "content": "One of the following:\n\n- `None`: No keepalive.\n- `Low`: Send keepalive every 30 minutes.\n- `Medium`: Send keepalive every 10 minutes.\n- `High`: Send keepalive every 1 minute."
+                    }
+                  ]
+                },
+                {
+                  "key": "UseConfigurationAttributeInternalIPSubnet",
+                  "title": "Use IPv4 / IPv6 internal subnet attributes",
+                  "type": "\u003cboolean\u003e",
+                  "presence": "optional",
+                  "default": false,
+                  "content": "If `true`, negotiations should use IKEv2 Configuration Attribute `INTERNAL_IP4_SUBNET` and `INTERNAL_IP6_SUBNET`."
+                },
+                {
+                  "key": "DisableMOBIKE",
+                  "title": "Disable mobility and multihoming",
+                  "type": "\u003cboolean\u003e",
+                  "presence": "optional",
+                  "default": false,
+                  "content": "If `true`, the system disables MOBIKE."
+                },
+                {
+                  "key": "DisableRedirect",
+                  "title": "Disable redirect",
+                  "type": "\u003cboolean\u003e",
+                  "presence": "optional",
+                  "default": false,
+                  "content": "If `true`, the system disables IKEv2 redirect. If not set, the system redirects an IKEv2 connection when it receives a redirect request from the server."
+                },
+                {
+                  "key": "EnableNATKeepAliveOffload",
+                  "title": "Enable NAT keep alive offload",
+                  "type": "\u003cboolean\u003e",
+                  "presence": "optional",
+                  "default": true,
+                  "content": "If `true`, enables NAT keepalive offload for Always On VPN IKEv2 connections. The device sends keepalive packets to maintain NAT mappings for IKEv2 connections that have a NAT on the path. It sends keepalive packets at regular intervals when the device is awake. If `NATKeepAliveOffloadEnable` is `true`, the system offloads keepalive packets to hardware while the device is asleep.\n\nNAT keepalive offload has an impact on the battery life due to the extra workload during sleep. The default interval for the keepalive offload packets is 20 seconds over Wi-Fi and 110 seconds over Cellular interface. The default NAT keepalive works well on networks with small NAT mapping timeouts but imposes a potential battery impact. If a network has larger NAT mapping timeouts, larger keepalive intervals may be safely used to minimize battery impact. Modify the keepalive interval through the `NATKeepAliveInterval` key."
+                },
+                {
+                  "key": "NATKeepAliveInterval",
+                  "title": "NAT keepalive interval",
+                  "type": "\u003cinteger\u003e",
+                  "presence": "optional",
+                  "default": 20,
+                  "content": "The NAT Keepalive interval for Always On VPN IKEv2 connections. This value controls the interval that the device sends keepalive offload packets. The minimum value is 20 seconds. If no key is specified, the default is 20 seconds over Wi-Fi and 110 seconds over a cellular interface."
+                },
+                {
+                  "key": "EnablePFS",
+                  "title": "Enable perfect forward secrecy",
+                  "type": "\u003cboolean\u003e",
+                  "presence": "optional",
+                  "default": false,
+                  "content": "If `true`,  enables Perfect Forward Secrecy (PFS) for IKEv2 Connections."
+                },
+                {
+                  "key": "EnableCertificateRevocationCheck",
+                  "title": "Enable certificate revocation check",
+                  "type": "\u003cboolean\u003e",
+                  "presence": "optional",
+                  "default": false,
+                  "content": "If `true`, the system performs a certificate revocation check for IKEv2 connections. This is a best-effort revocation check and server response timeouts won't cause it to fail."
+                },
+                {
+                  "key": "MTU",
+                  "title": "Maximum transmission unit",
+                  "type": "\u003cinteger\u003e",
+                  "presence": "optional",
+                  "range": {
+                    "min": 1280,
+                    "max": 1400
+                  },
+                  "default": 1280,
+                  "content": "The Maximum Transmission Unit (MTU) specifies the maximum size in bytes of each packet that the system sends over the IKEv2 VPN interface."
+                },
+                {
+                  "key": "EnforceStrictAlgorithmSelection",
+                  "title": "Enforce strict algorithm selection",
+                  "type": "\u003cboolean\u003e",
+                  "presence": "optional",
+                  "default": false,
+                  "content": "If set to `true`, the device doesn't allow DES, 3DES, and Diffie-Hellman groups less than 14. Also the device requires the encryption algorithm specified in `IKESecurityAssociationParameters` to be at least as cryptographically strong as the algorithm specified in `ChildSecurityAssociationParameters`. The device rejects this configuration if these requirements aren't met."
+                },
+                {
+                  "key": "PostQuantumKeyExchange",
+                  "title": "Post quantum key exchange",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "optional",
+                  "content": "Post Quantum Key Exchange settings.",
+                  "subkeys": [
+                    {
+                      "key": "PPK",
+                      "title": "Post-quantum pre-shared key",
+                      "type": "\u003cdata\u003e",
+                      "presence": "optional",
+                      "content": "The Post-quantum Pre-shared key (PPK) the device uses for this VPN. This key is is used with VPN servers that support RFC 8784. If this key is present `PPKIdentifier` must also be present."
+                    },
+                    {
+                      "key": "PPKIdentifier",
+                      "title": "Post-quantum pre-shared key identifier",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "content": "The identifier for the Post-quantum Pre-shared key (PPK) the device uses for this VPN. This key is is used with VPN servers that support RFC 8784. If this key is present `PPK` must also be present."
+                    },
+                    {
+                      "key": "PPKMandatory",
+                      "title": "Post-quantum pre-shared key mandatory",
+                      "type": "\u003cboolean\u003e",
+                      "presence": "optional",
+                      "default": true,
+                      "content": "If set to `true`, the VPN doesn't establish a connection if the server doesn't support RFC 8784 or doesn't accept the PPK identifier specified in `PPKIdentifier`. The device ignores this key if `PPK` and `PPKIdentifier` aren't present."
+                    },
+                    {
+                      "key": "AllowFallback",
+                      "title": "Allow post-quantum key exchange fallback",
+                      "type": "\u003cboolean\u003e",
+                      "presence": "optional",
+                      "default": false,
+                      "content": "If set to `false`, the VPN doesn't establish a connection if the server doesn't support or doesn't allow post-quantum key exchanges. Thd device ignores this key if `PostQuantumKeyExchangeMethods` isn't present in `IKESecurityAssociationParameters` or `ChildSecurityAssociationParameters`."
+                    }
+                  ]
+                },
+                {
+                  "key": "IKESecurityAssociationParameters",
+                  "title": "IKE security association parameters",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "optional",
+                  "content": "These parameters apply to Child Security Association unless `ChildSecurityAssociationParameters` is specified.",
+                  "subkeytype": "SecurityAssociationParameters",
+                  "subkeys": [
+                    {
+                      "key": "EncryptionAlgorithm",
+                      "title": "Encryption algorithm",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "rangelist": [
+                        "AES-128",
+                        "AES-256",
+                        "AES-128-GCM",
+                        "AES-256-GCM",
+                        "ChaCha20Poly1305"
+                      ],
+                      "default": "AES-256",
+                      "content": "The encryption algorithm.\n\nIn tvOS the default value is `AES-256-GCM`."
+                    },
+                    {
+                      "key": "IntegrityAlgorithm",
+                      "title": "Integrity algorithm",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "rangelist": [
+                        "SHA2-256",
+                        "SHA2-384",
+                        "SHA2-512"
+                      ],
+                      "default": "SHA2-256",
+                      "content": "The integrity algorithm."
+                    },
+                    {
+                      "key": "DiffieHellmanGroup",
+                      "title": "Diffie hellman group",
+                      "type": "\u003cinteger\u003e",
+                      "presence": "optional",
+                      "rangelist": [
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        31,
+                        32
+                      ],
+                      "default": 14,
+                      "content": "The Diffie-Hellman group.\n\nFor `AlwaysOn` VPN, the minimum allowed value is `14`."
+                    },
+                    {
+                      "key": "PostQuantumKeyExchangeMethods",
+                      "title": "Post-quantum key exchange methods",
+                      "type": "\u003carray\u003e",
+                      "presence": "optional",
+                      "content": "An array of integers representing postquantum key exchange methods the device uses during SA establishment and rekey. You can specify up to seven items, which correspond to ADDKE1 - ADDKE7 from RFC 9370.",
+                      "subkeys": [
+                        {
+                          "key": "PostQuantumKeyExchangeMethod",
+                          "title": "Post-quantum key exchange method",
+                          "type": "\u003cinteger\u003e",
+                          "rangelist": [
+                            0,
+                            36,
+                            37
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "LifeTimeInMinutes",
+                      "title": "Life time in minutes",
+                      "type": "\u003cinteger\u003e",
+                      "presence": "optional",
+                      "range": {
+                        "min": 10,
+                        "max": 1440
+                      },
+                      "default": 1440,
+                      "content": "The SA lifetime (rekey interval) in minutes."
+                    }
+                  ]
+                },
+                {
+                  "key": "ChildSecurityAssociationParameters",
+                  "title": "Child security association parameters",
+                  "type": "\u003cdictionary\u003e",
+                  "presence": "optional",
+                  "content": "The `ChildSecurityAssociationParameters` dictionaries.",
+                  "subkeytype": "SecurityAssociationParameters",
+                  "subkeys": [
+                    {
+                      "key": "EncryptionAlgorithm",
+                      "title": "Encryption algorithm",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "rangelist": [
+                        "AES-128",
+                        "AES-256",
+                        "AES-128-GCM",
+                        "AES-256-GCM",
+                        "ChaCha20Poly1305"
+                      ],
+                      "default": "AES-256",
+                      "content": "The encryption algorithm.\n\nIn tvOS the default value is `AES-256-GCM`."
+                    },
+                    {
+                      "key": "IntegrityAlgorithm",
+                      "title": "Integrity algorithm",
+                      "type": "\u003cstring\u003e",
+                      "presence": "optional",
+                      "rangelist": [
+                        "SHA2-256",
+                        "SHA2-384",
+                        "SHA2-512"
+                      ],
+                      "default": "SHA2-256",
+                      "content": "The integrity algorithm."
+                    },
+                    {
+                      "key": "DiffieHellmanGroup",
+                      "title": "Diffie hellman group",
+                      "type": "\u003cinteger\u003e",
+                      "presence": "optional",
+                      "rangelist": [
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        31,
+                        32
+                      ],
+                      "default": 14,
+                      "content": "The Diffie-Hellman group.\n\nFor `AlwaysOn` VPN, the minimum allowed value is `14`."
+                    },
+                    {
+                      "key": "PostQuantumKeyExchangeMethods",
+                      "title": "Post-quantum key exchange methods",
+                      "type": "\u003carray\u003e",
+                      "presence": "optional",
+                      "content": "An array of integers representing postquantum key exchange methods the device uses during SA establishment and rekey. You can specify up to seven items, which correspond to ADDKE1 - ADDKE7 from RFC 9370.",
+                      "subkeys": [
+                        {
+                          "key": "PostQuantumKeyExchangeMethod",
+                          "title": "Post-quantum key exchange method",
+                          "type": "\u003cinteger\u003e",
+                          "rangelist": [
+                            0,
+                            36,
+                            37
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "key": "LifeTimeInMinutes",
+                      "title": "Life time in minutes",
+                      "type": "\u003cinteger\u003e",
+                      "presence": "optional",
+                      "range": {
+                        "min": 10,
+                        "max": 1440
+                      },
+                      "default": 1440,
+                      "content": "The SA lifetime (rekey interval) in minutes."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ServiceExceptions",
+      "title": "Service exceptions",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array that contains an arbitrary number of service exceptions.",
+      "subkeys": [
+        {
+          "key": "ServiceExceptionElement",
+          "title": "A service exception element",
+          "type": "\u003cdictionary\u003e",
+          "subkeys": [
+            {
+              "key": "ServiceName",
+              "title": "Service name",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "VoiceMail",
+                "AirPrint",
+                "CellularServices",
+                "DeviceCommunication"
+              ],
+              "content": "The name of a service that's exempt from Always On VPN.\n\n`CellularServices` exempts `VoLTE`, `IMS`, `MMS`, and Wi-Fi calling.\n\n`DeviceCommunication` exempts network traffic used for communicating with devices connected via USB or Wi-Fi."
+            },
+            {
+              "key": "Action",
+              "title": "Action",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "rangelist": [
+                "Allow",
+                "Drop"
+              ],
+              "content": "The action to take with network connections from the named service."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ApplicationExceptions",
+      "title": "Application exceptions",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array that contains an arbitrary number of apps whose connections occur outside the VPN.",
+      "subkeys": [
+        {
+          "key": "ApplicationExceptionElement",
+          "title": "A application exception element",
+          "type": "\u003cdictionary\u003e",
+          "subkeys": [
+            {
+              "key": "BundleIdentifier",
+              "title": "Bundle identifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The app's bundle identifier."
+            },
+            {
+              "key": "LimitToProtocols",
+              "title": "Limit to protocols",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "Limit the exception to only the specified list of protocols, with support for `UDP` only.",
+              "subkeys": [
+                {
+                  "key": "LimitToProtocolElement",
+                  "title": "Limit to protocol element",
+                  "type": "\u003cstring\u003e",
+                  "rangelist": [
+                    "UDP"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "AllowCaptiveWebSheet",
+      "title": "Allow captive web sheet",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, allows traffic from Captive Web Sheet outside the VPN tunnel."
+    },
+    {
+      "key": "AllowAllCaptiveNetworkPlugins",
+      "title": "Allow all captive network plugins",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "content": "If `true`, allows traffic from all captive networking apps outside the VPN tunnel to perform captive network handling."
+    },
+    {
+      "key": "AllowedCaptiveNetworkPlugins",
+      "title": "Allowed captive network plugins",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "The array of captive networking apps whose traffic is allowed outside the VPN tunnel, to perform captive network handling. Used only when `AllowAllCaptiveNetworkPlugins` is `false`.",
+      "subkeys": [
+        {
+          "key": "AllowedCaptiveNetworkPluginElement",
+          "title": "An allowed captive network plugin element",
+          "type": "\u003cdictionary\u003e",
+          "subkeys": [
+            {
+              "key": "BundleIdentifier",
+              "title": "Bundle identifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The bundle identifier for the app that's allowed on the captive network."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

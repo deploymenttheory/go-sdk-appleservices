@@ -7,20 +7,21 @@ package configurations
 //
 // Supported: iOS 17.2+, macOS 26.0+, visionOS 2.4+.
 type AppManaged struct {
-	// The App Store ID of the managed app that is downloaded from the App Store.
+	// The App Store ID of the managed app that's downloaded from the App Store.
 	AppStoreID *string `plist:"AppStoreID,omitempty" json:"AppStoreID,omitempty"`
-	// The bundle ID of the managed app that is downloaded from the App Store.
+	// The bundle ID of the managed app that's downloaded from the App Store.
 	BundleID *string `plist:"BundleID,omitempty" json:"BundleID,omitempty"`
 	// The URL of the manifest for the managed app that the device downloads from a web site. The
-	// manifest is returned as a `ManifestURL` property list.
+	// manifest is a `ManifestURL` property list.
 	ManifestURL *string `plist:"ManifestURL,omitempty" json:"ManifestURL,omitempty"`
 	// A string that specifies the composed identifier of an existing app that needs to be managed. The
 	// device uses this to take over management of an app installed by some other process, for example
 	// installed manually by the user, or via a package configuration. If the app isn't present when
 	// the device applies the configuration, the device takes over management of it when it does
-	// install.
+	// install. Management of the app occurs only if its code signature matches the composed
+	// identifier.
 	AppComposedIdentifier *string `plist:"AppComposedIdentifier,omitempty" json:"AppComposedIdentifier,omitempty"`
-	// If `true`, the device installs an iOS or iPadOS app that runs on a Mac with Apple Silicon. This
+	// If `true`, the device installs an iOS or iPadOS app that runs on a Mac with Apple silicon. This
 	// is only used when the app is an App Store app.
 	//
 	// Default: false.
@@ -54,9 +55,6 @@ type AppManagedInstallBehaviorLicense struct {
 	// The type of license that the app uses for installation through the App Store, which is one of
 	// the following values:
 	Assignment *AppManagedInstallBehaviorLicenseAssignment `plist:"Assignment,omitempty" json:"Assignment,omitempty"`
-	// The type of VPP license that the app uses for installation through the App Store, which is one
-	// of the following values:
-	VPPType *AppManagedInstallBehaviorLicenseVPPType `plist:"VPPType,omitempty" json:"VPPType,omitempty"`
 }
 
 // AppManagedInstallBehavior is the InstallBehavior dictionary.
@@ -70,8 +68,8 @@ type AppManagedInstallBehavior struct {
 	// A dictionary that describes the app's license.
 	License *AppManagedInstallBehaviorLicense `plist:"License,omitempty" json:"License,omitempty"`
 	// The App Store external version identifier (EVID) of the version of the app the device installs.
-	// You can retrieve this value from the App Store. For more information, see `Apps and Books for
-	// Organizations`. This key is ignored if the app isn't an App Store app.
+	// You can retrieve this value from the App Store. For more information, see `Apps and books
+	// metadata for organizations`. This key is ignored if the app isn't an App Store app.
 	Version *int64 `plist:"Version,omitempty" json:"Version,omitempty"`
 	// Indicates how the device uses a cellular network when it downloads the app for automatic install
 	// or update operations:
@@ -192,6 +190,6 @@ type AppConfigDictionary struct {
 // A dictionary of extension config data and credentials.
 type AppManagedExtensionConfigs struct {
 	// A dictionary mapping extension composed identifiers to the extension config data and
-	// credentials. The expected format is "Identifier (TeamIdentifier)".
+	// credentials.
 	ANY *AppConfigDictionary `plist:"ANY,omitempty" json:"ANY,omitempty"`
 }

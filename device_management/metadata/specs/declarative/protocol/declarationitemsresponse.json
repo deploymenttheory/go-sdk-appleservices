@@ -26,7 +26,7 @@
   "payloadkeys": [
     {
       "key": "Declarations",
-      "title": "Manifest Declaration Items",
+      "title": "Manifest declaration items",
       "type": "\u003cdictionary\u003e",
       "presence": "required",
       "content": "The set of available declarations on the server.",
@@ -41,21 +41,21 @@
           "subkeys": [
             {
               "key": "_Activations",
-              "title": "Manifest Declaration",
+              "title": "Manifest declaration",
               "type": "\u003cdictionary\u003e",
               "content": "Information about an available declaration on the server.",
               "subkeytype": "DeclarationItem",
               "subkeys": [
                 {
                   "key": "Identifier",
-                  "title": "Declaration Identifier",
+                  "title": "Declaration identifier",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The declaration's identifier."
                 },
                 {
                   "key": "ServerToken",
-                  "title": "Declaration Server Token",
+                  "title": "Declaration server token",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The 'ServerToken' value of the declaration.\nThe client uses this to determine if the actual payload is different from the one on the client. Servers must compute the token over the entire declaration content to ensure the value always changes whenever there's any change to the content."
@@ -74,21 +74,21 @@
           "subkeys": [
             {
               "key": "_Configurations",
-              "title": "Manifest Declaration",
+              "title": "Manifest declaration",
               "type": "\u003cdictionary\u003e",
               "content": "Information about an available declaration on the server.",
               "subkeytype": "DeclarationItem",
               "subkeys": [
                 {
                   "key": "Identifier",
-                  "title": "Declaration Identifier",
+                  "title": "Declaration identifier",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The declaration's identifier."
                 },
                 {
                   "key": "ServerToken",
-                  "title": "Declaration Server Token",
+                  "title": "Declaration server token",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The 'ServerToken' value of the declaration.\nThe client uses this to determine if the actual payload is different from the one on the client. Servers must compute the token over the entire declaration content to ensure the value always changes whenever there's any change to the content."
@@ -107,21 +107,21 @@
           "subkeys": [
             {
               "key": "_Assets",
-              "title": "Manifest Declaration",
+              "title": "Manifest declaration",
               "type": "\u003cdictionary\u003e",
               "content": "Information about an available declaration on the server.",
               "subkeytype": "DeclarationItem",
               "subkeys": [
                 {
                   "key": "Identifier",
-                  "title": "Declaration Identifier",
+                  "title": "Declaration identifier",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The declaration's identifier."
                 },
                 {
                   "key": "ServerToken",
-                  "title": "Declaration Server Token",
+                  "title": "Declaration server token",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The 'ServerToken' value of the declaration.\nThe client uses this to determine if the actual payload is different from the one on the client. Servers must compute the token over the entire declaration content to ensure the value always changes whenever there's any change to the content."
@@ -140,21 +140,21 @@
           "subkeys": [
             {
               "key": "_Management",
-              "title": "Manifest Declaration",
+              "title": "Manifest declaration",
               "type": "\u003cdictionary\u003e",
               "content": "Information about an available declaration on the server.",
               "subkeytype": "DeclarationItem",
               "subkeys": [
                 {
                   "key": "Identifier",
-                  "title": "Declaration Identifier",
+                  "title": "Declaration identifier",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The declaration's identifier."
                 },
                 {
                   "key": "ServerToken",
-                  "title": "Declaration Server Token",
+                  "title": "Declaration server token",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The 'ServerToken' value of the declaration.\nThe client uses this to determine if the actual payload is different from the one on the client. Servers must compute the token over the entire declaration content to ensure the value always changes whenever there's any change to the content."
@@ -167,7 +167,7 @@
     },
     {
       "key": "DeclarationsToken",
-      "title": "Declarations Token",
+      "title": "Declarations token",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The current value of the declarations token. Clients use this to detect when declarations change so they can refetch the token."

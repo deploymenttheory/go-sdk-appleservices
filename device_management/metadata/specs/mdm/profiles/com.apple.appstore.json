@@ -43,7 +43,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system prevents App Store from launching. Available in macOS 10.14 and later. Restricts installations to software updates only in macOS 10.10 through 10.13.",
+      "content": "If `true`, the system prevents App Store from launching. Restricts installations to software updates only in macOS 10.10 through 10.13.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.10"
@@ -55,7 +55,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system disables app adoption by users. Available in macOS 10.10 and later.",
+      "content": "If `true`, the system disables app adoption by users.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.10"
@@ -67,7 +67,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system disables software update notifications. Available in macOS 10.10 and later.",
+      "content": "If `true`, the system disables software update notifications.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.10"

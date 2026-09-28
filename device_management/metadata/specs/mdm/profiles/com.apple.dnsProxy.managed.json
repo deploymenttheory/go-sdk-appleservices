@@ -8,16 +8,19 @@
     "content": "As of iOS 15.0 this payload can be installed on unsupervised devices via MDM and can only be installed via MDM. As of iOS 16.0, this can be installed on user enrollments via MDM if DNSProxyUUID is specified.",
     "supportedOS": {
       "iOS": {
-        "introduced": "11.0"
+        "introduced": "11.0",
+        "deprecated": "27.0"
       },
       "macOS": {
-        "introduced": "10.15"
+        "introduced": "10.15",
+        "deprecated": "27.0"
       },
       "tvOS": {
         "introduced": "n/a"
       },
       "visionOS": {
-        "introduced": "1.1"
+        "introduced": "1.1",
+        "deprecated": "27.0"
       },
       "watchOS": {
         "introduced": "n/a"
@@ -27,21 +30,36 @@
   "payloadkeys": [
     {
       "key": "AppBundleIdentifier",
-      "title": "App Bundle Identifier",
+      "title": "App bundle identifier",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The bundle identifier of the app containing the DNS proxy network extension."
     },
     {
       "key": "ProviderBundleIdentifier",
-      "title": "Provider Bundle Identifier",
+      "title": "Provider bundle identifier",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The bundle identifier of the DNS proxy network extension to use. Declaring the bundle identifier is useful for apps that contain more than one DNS proxy extension."
     },
     {
+      "key": "ProviderDesignatedRequirement",
+      "title": "Provider designated requirement",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The designated requirement string that the system embeds in the code signature of the DNS proxy network extension. Use this to correctly identify the DNS proxy extension when `ProviderBundleIdentifier` is present.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
       "key": "ProviderConfiguration",
-      "title": "Provider Configuration",
+      "title": "Provider configuration",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "The dictionary of vendor-specific configuration items.",
@@ -56,7 +74,7 @@
     },
     {
       "key": "DNSProxyUUID",
-      "title": "DNS Proxy UUID",
+      "title": "DNS proxy UUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "A globally unique identifier for this DNS proxy configuration. The proxy processes DNS lookups traffic for managed apps with the same `DNSProxyUUID` in their app attributes. This key is required for user enrollment.",

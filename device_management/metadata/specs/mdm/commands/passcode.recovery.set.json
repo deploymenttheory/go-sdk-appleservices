@@ -5,7 +5,7 @@
   "description": "Set or clear the Recovery Lock password.",
   "payload": {
     "requesttype": "SetRecoveryLock",
-    "content": "Sets or clears the recovery lock password (Apple Silicon devices only). Requires the \"Device lock and passcode removal right\".",
+    "content": "Sets or clears the recovery lock password (Apple silicon devices only). Requires the \"Device lock and passcode removal right\".",
     "supportedOS": {
       "iOS": {
         "introduced": "n/a"

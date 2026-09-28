@@ -128,7 +128,6 @@ type MailManaged struct {
 	//
 	// Default: false.
 	SMIMEEnableEncryptionPerMessageSwitch *bool `plist:"SMIMEEnableEncryptionPerMessageSwitch,omitempty" json:"SMIMEEnableEncryptionPerMessageSwitch,omitempty"`
-	// The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14
-	// and later.
+	// The VPNUUID of the per-app VPN the account uses for network communication.
 	VPNUUID *string `plist:"VPNUUID,omitempty" json:"VPNUUID,omitempty"`
 }

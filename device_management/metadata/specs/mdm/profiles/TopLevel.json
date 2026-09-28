@@ -58,7 +58,7 @@
       "key": "PayloadContent",
       "type": "\u003carray\u003e",
       "presence": "required",
-      "content": "The array of payload dictionaries. If `IsEncrypted` is `true`, this array isn't needed.",
+      "content": "The array of payload dictionaries. Not present for encrypted payloads.",
       "subkeys": [
         {
           "key": "PayloadContentItem",
@@ -79,7 +79,7 @@
       "key": "EncryptedPayloadContent",
       "type": "\u003cdata\u003e",
       "presence": "optional",
-      "content": "Enabled if `IsEncrypted` is `true`."
+      "content": "The encrypted payload content. Only present for encrypted payloads."
     },
     {
       "key": "PayloadDescription",

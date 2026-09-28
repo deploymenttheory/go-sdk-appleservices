@@ -26,7 +26,7 @@
   "payloadkeys": [
     {
       "key": "SyncTokens",
-      "title": "Synchronization Tokens",
+      "title": "Synchronization tokens",
       "type": "\u003cdictionary\u003e",
       "presence": "required",
       "content": "A dictionary of synchronization tokens that describes the state of different types of data on the server. The client uses these tokens to determine which endpoints it needs to use to fetch new or updated data on the server.",

@@ -51,14 +51,14 @@ type EasAccount struct {
 	//
 	// Default: false.
 	SMIMEEnabled *bool `plist:"SMIMEEnabled,omitempty" json:"SMIMEEnabled,omitempty"`
-	// If `true`, the system enables S/MIME signing for this account. Available in iOS 10.0 and later.
+	// If `true`, the system enables S/MIME signing for this account.
 	//
 	// Default: false.
 	SMIMESigningEnabled *bool `plist:"SMIMESigningEnabled,omitempty" json:"SMIMESigningEnabled,omitempty"`
 	// The UUID of the identity certificate used to sign messages sent from this account.
 	SMIMESigningCertificateUUID *string `plist:"SMIMESigningCertificateUUID,omitempty" json:"SMIMESigningCertificateUUID,omitempty"`
-	// If `true`, the system enables S/MIME encryption for this account. Available in iOS 10.0 and
-	// later. As of iOS 12.0, this key is deprecated. Use `SMIMEEncryptByDefault` instead.
+	// If `true`, the system enables S/MIME encryption for this account. This key is deprecated. Use
+	// `SMIMEEncryptByDefault` instead.
 	//
 	// Default: false.
 	SMIMEEncryptionEnabled *bool `plist:"SMIMEEncryptionEnabled,omitempty" json:"SMIMEEncryptionEnabled,omitempty"`
@@ -87,33 +87,28 @@ type EasAccount struct {
 	//
 	// Default: false.
 	AllowMailDrop *bool `plist:"allowMailDrop,omitempty" json:"allowMailDrop,omitempty"`
-	// If `true`, the user can turn S/MIME signing on or off in Settings. Available in iOS 12.0 and
-	// later.
+	// If `true`, the user can turn S/MIME signing on or off in Settings.
 	//
 	// Default: false.
 	SMIMESigningUserOverrideable *bool `plist:"SMIMESigningUserOverrideable,omitempty" json:"SMIMESigningUserOverrideable,omitempty"`
-	// If `true`, the user can select the signing identity. Available in iOS 12.0 and later.
+	// If `true`, the user can select the signing identity.
 	//
 	// Default: false.
 	SMIMESigningCertificateUUIDUserOverrideable *bool `plist:"SMIMESigningCertificateUUIDUserOverrideable,omitempty" json:"SMIMESigningCertificateUUIDUserOverrideable,omitempty"`
 	// If `true`, the system enables S/MIME encryption by default. If
 	// `SMIMEEnableEncryptionPerMessageSwitch` is `false`, the user can't change this default.
-	// Available in iOS 12.0 and later.
 	//
 	// Default: false.
 	SMIMEEncryptByDefault *bool `plist:"SMIMEEncryptByDefault,omitempty" json:"SMIMEEncryptByDefault,omitempty"`
-	// If `true`, the system enables encryption by default and the user can't change it. Available in
-	// iOS 12.0 and later.
+	// If `true`, the system enables encryption by default and the user can't change it.
 	//
 	// Default: false.
 	SMIMEEncryptByDefaultUserOverrideable *bool `plist:"SMIMEEncryptByDefaultUserOverrideable,omitempty" json:"SMIMEEncryptByDefaultUserOverrideable,omitempty"`
-	// If `true`, the user can select the S/MIME encryption identity, and encryption is on.Available in
-	// iOS 12.0 and later.
+	// If `true`, the user can select the S/MIME encryption identity, and encryption is on.
 	//
 	// Default: false.
 	SMIMEEncryptionCertificateUUIDUserOverrideable *bool `plist:"SMIMEEncryptionCertificateUUIDUserOverrideable,omitempty" json:"SMIMEEncryptionCertificateUUIDUserOverrideable,omitempty"`
 	// If `true`, the system displays the per-message encryption switch in the Mail Compose UI.
-	// Available in iOS 12.0 and later.
 	//
 	// Default: false.
 	SMIMEEnableEncryptionPerMessageSwitch *bool `plist:"SMIMEEnableEncryptionPerMessageSwitch,omitempty" json:"SMIMEEnableEncryptionPerMessageSwitch,omitempty"`
@@ -175,12 +170,11 @@ type EasAccount struct {
 	// `true`.
 	OAuthTokenRequestURL *string `plist:"OAuthTokenRequestURL,omitempty" json:"OAuthTokenRequestURL,omitempty"`
 	// If `true`, the system overrides the previous user/EAS password with the new EAS password in the
-	// payload. Available in iOS 14 and later.
+	// payload.
 	//
 	// Default: false.
 	OverridePreviousPassword *bool `plist:"OverridePreviousPassword,omitempty" json:"OverridePreviousPassword,omitempty"`
-	// The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14
-	// and later.
+	// The VPNUUID of the per-app VPN the account uses for network communication.
 	VPNUUID *string `plist:"VPNUUID,omitempty" json:"VPNUUID,omitempty"`
 }
 

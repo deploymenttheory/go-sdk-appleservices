@@ -36,10 +36,10 @@ type Mdm struct {
 	// The Managed Apple Account of the user. Previously required for profile-driven user enrollment.
 	ManagedAppleID *string `plist:"ManagedAppleID,omitempty" json:"ManagedAppleID,omitempty"`
 	// The Managed Apple Account pre-assigned to the authenticated user. Required for account-driven
-	// enrollments. Available in iOS 15 and later, and macOS 14 and later.
+	// enrollments.
 	AssignedManagedAppleID *string `plist:"AssignedManagedAppleID,omitempty" json:"AssignedManagedAppleID,omitempty"`
 	// The enrollment mode the server indicates to use when enrolling. Required for account-driven
-	// enrollment. Available in iOS 15 and macOS 14, and later.
+	// enrollment.
 	EnrollmentMode *MdmEnrollmentMode `plist:"EnrollmentMode,omitempty" json:"EnrollmentMode,omitempty"`
 	// An array of strings, each containing the UUID of a certificate to use when evaluating trust to
 	// the '.../connect/' URLs of MDM servers.

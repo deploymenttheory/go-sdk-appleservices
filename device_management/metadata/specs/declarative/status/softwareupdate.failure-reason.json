@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "softwareupdate.failure-reason",
   "title": "Status Software Update Failure Reason",
-  "description": "A status report of a software update failure reason.",
+  "description": "The status item that reports the device's software update failure reason.",
   "payload": {
     "statusitemtype": "softwareupdate.failure-reason",
     "supportedOS": {

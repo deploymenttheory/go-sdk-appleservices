@@ -27,14 +27,14 @@
   "payloadkeys": [
     {
       "key": "TemporaryPairing",
-      "title": "Temporary Pairing",
+      "title": "Temporary pairing",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "A dictionary that describes audio accessory temporary pairing behavior. The device enables temporary pairing when this key is present and the `Disabled` key isn't `false`. The device doesn't synchronize pairing information with iCloud when temporary pairing is active.",
       "subkeys": [
         {
           "key": "Disabled",
-          "title": "Temporary Pairing Disabled",
+          "title": "Temporary pairing disabled",
           "type": "\u003cboolean\u003e",
           "presence": "optional",
           "default": false,
@@ -43,7 +43,7 @@
         },
         {
           "key": "Configuration",
-          "title": "Temporary Pairing Configuration",
+          "title": "Temporary pairing configuration",
           "type": "\u003cdictionary\u003e",
           "presence": "optional",
           "combinetype": "first",
@@ -51,14 +51,14 @@
           "subkeys": [
             {
               "key": "UnpairingTime",
-              "title": "Temporary Pairing Unpairing Time",
+              "title": "Temporary pairing unpairing time",
               "type": "\u003cdictionary\u003e",
               "presence": "required",
               "content": "A dictionary that describes when the device automatically unpairs temporarily paired audio accessories.",
               "subkeys": [
                 {
                   "key": "Policy",
-                  "title": "Unpairing Policy",
+                  "title": "Unpairing policy",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -69,7 +69,7 @@
                 },
                 {
                   "key": "Hour",
-                  "title": "Hour of Unpairing",
+                  "title": "Hour of unpairing",
                   "type": "\u003cinteger\u003e",
                   "presence": "optional",
                   "range": {
