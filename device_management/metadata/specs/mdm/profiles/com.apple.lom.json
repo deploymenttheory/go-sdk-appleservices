@@ -27,14 +27,14 @@
   "payloadkeys": [
     {
       "key": "DeviceCertificateUUID",
-      "title": "Device Certificate payload UUID",
+      "title": "Device certificate payload UUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The UUID certificate for the device. This key indicates the device can receive `PowerON`, `PowerOFF`, and `Reset` requests from a LOM controller. This certificate must contain the Key Usage attributes of Digital Signature, Key Encipherment and Data Encipherment. As well as the Extended Key Usage attributes of Server Authentication and Client Authentication."
     },
     {
       "key": "ControllerCertificateUUID",
-      "title": "Controller Certificate payload UUID",
+      "title": "Controller certificate payload UUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The UUID certificate for the LOM controller. This key configures the device to accept the `LOMDeviceRequestCommand` from MDM and then send it to the target device."

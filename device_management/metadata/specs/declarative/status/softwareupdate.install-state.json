@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "softwareupdate.install-state",
   "title": "Status Software Update Install State",
-  "description": "A status report of the software update install state.",
+  "description": "The status item that reports the device's software update install state.",
   "payload": {
     "statusitemtype": "softwareupdate.install-state",
     "supportedOS": {
@@ -36,7 +36,7 @@
         "installing",
         "failed"
       ],
-      "content": "The software update install status, which has the following values:\n\n- `none`: There's no software update pending, and any previous software update succeeded.\n- `waiting': A software update is waiting to start.\n- `downloading`: The system is downloading data for a software update.\n- `prepared`: The system prepared the software update and it's ready for installation.\n- `installing`: The system is installing the software update.\n- `failed`: The software update failed."
+      "content": "The software update install status, which has the following values:\n\n- `none`: There's no software update pending, and any previous software update succeeded.\n- `downloading`: The system is downloading data for a software update.\n- `prepared`: The system prepared the software update and it's ready for installation.\n- `installing`: The system is installing the software update.\n- `failed`: The software update failed."
     }
   ]
 }

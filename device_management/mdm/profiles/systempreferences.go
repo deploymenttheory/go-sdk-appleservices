@@ -11,8 +11,8 @@ type Systempreferences struct {
 	EnabledPreferencePanes []string `plist:"EnabledPreferencePanes,omitempty" json:"EnabledPreferencePanes,omitempty"`
 	// The list of disabled System Preferences panes.
 	DisabledPreferencePanes []string `plist:"DisabledPreferencePanes,omitempty" json:"DisabledPreferencePanes,omitempty"`
-	// The list of disabled System Settings extensions. All other items will be enabled. When
-	// `DisabledSystemSettings` is specified, the device ignores `DisabledPreferencePanes` and
+	// The list of disabled System Settings extensions. The device enables all other items. When you
+	// specify `DisabledSystemSettings`, the device ignores `DisabledPreferencePanes` and
 	// `EnabledPreferencePanes`.
 	DisabledSystemSettings []string `plist:"DisabledSystemSettings,omitempty" json:"DisabledSystemSettings,omitempty"`
 }

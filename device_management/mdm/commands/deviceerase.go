@@ -8,28 +8,24 @@ package commands
 // Supported: iOS 4.0+, macOS 10.7+, tvOS 10.2+, visionOS 1.1+, watchOS 10.0+.
 type EraseDevice struct {
 	// If `true`, preserve the data plan on an iPhone or iPad with eSIM functionality, if one exists.
-	// This value is available in iOS 11 and later.
 	//
 	// Default: false.
 	PreserveDataPlan *bool `plist:"PreserveDataPlan,omitempty" json:"PreserveDataPlan,omitempty"`
-	// If `true`, disable Proximity Setup on the next reboot and skip the pane in Setup Assistant. This
-	// value is available in iOS 11 and later. Prior to iOS 14, don't use this option with any other
-	// option.
+	// If `true`, disable Proximity Setup on the next reboot and skip the pane in Setup Assistant.
+	// Prior to iOS 14, don't use this option with any other option.
 	//
 	// Default: false.
 	DisallowProximitySetup *bool `plist:"DisallowProximitySetup,omitempty" json:"DisallowProximitySetup,omitempty"`
-	// The six-character PIN for Find My. This value is available in macOS 10.8 and later.
+	// The six-character PIN for Find My.
 	PIN *string `plist:"PIN,omitempty" json:"PIN,omitempty"`
 	// This key defines the fallback behavior for erasing a device.
 	ObliterationBehavior *EraseDeviceObliterationBehavior `plist:"ObliterationBehavior,omitempty" json:"ObliterationBehavior,omitempty"`
-	// The configuration settings for return to service. This value is available in iOS 17 and later,
-	// with Shared iPad, in tvOS 18 and later, and in visionOS 26 and later.
+	// The configuration settings for return to service.
 	ReturnToService *EraseDeviceReturnToService `plist:"ReturnToService,omitempty" json:"ReturnToService,omitempty"`
 }
 
 // EraseDeviceReturnToService is the ReturnToService dictionary.
-// The configuration settings for return to service. This value is available in iOS 17 and later,
-// with Shared iPad, in tvOS 18 and later, and in visionOS 26 and later.
+// The configuration settings for return to service.
 type EraseDeviceReturnToService struct {
 	// If `true`, the device tries to reenroll itself automatically after erasure. The user needs to
 	// deactivate all activation locks for this feature to work correctly.
@@ -47,4 +43,9 @@ type EraseDeviceReturnToService struct {
 	// The bootstrap token the system uses to implement return to service with app preservation.
 	// Required when enabling return to service through the cloud configuration.
 	BootstrapToken []byte `plist:"BootstrapToken,omitempty" json:"BootstrapToken,omitempty"`
+	// If `true`, the device retries service enrollment when the initial enrollment fails after
+	// erasure.
+	//
+	// Default: false.
+	ShouldRetryEnrollment *bool `plist:"ShouldRetryEnrollment,omitempty" json:"ShouldRetryEnrollment,omitempty"`
 }

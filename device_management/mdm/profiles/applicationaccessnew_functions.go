@@ -15,6 +15,11 @@ func (ApplicationaccessNew) PayloadType() string { return "com.apple.application
 // allowed values, ranges, formats and nested payload keys.
 func (p *ApplicationaccessNew) Validate() error {
 	var errs []error
+	for i := range p.AllowList {
+		if err := p.AllowList[i].Validate(); err != nil {
+			errs = append(errs, validate.Indexed("allowList", i, err))
+		}
+	}
 	for i := range p.WhiteList {
 		if err := p.WhiteList[i].Validate(); err != nil {
 			errs = append(errs, validate.Indexed("whiteList", i, err))
@@ -25,7 +30,7 @@ func (p *ApplicationaccessNew) Validate() error {
 
 // Validate checks the payload against Apple's spec: required keys,
 // allowed values, ranges, formats and nested payload keys.
-func (p *ApplicationaccessNewWhiteListItem) Validate() error {
+func (p *ApplicationaccessNewAllowListItem) Validate() error {
 	var errs []error
 	if p.AppID == nil {
 		errs = append(errs, validate.Required("appID"))

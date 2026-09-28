@@ -7,16 +7,15 @@ package profiles
 //
 // Supported: macOS 10.11+.
 type Screensaver struct {
-	// If `true`, the user is prompted for a password when the screen saver is unlocked or stopped.
-	// When you use this prompt, you must also provide `askForPasswordDelay`. Available in macOS 10.13
-	// and later.
+	// If `true`, the device prompts the user for a password when the screen saver is unlocked or
+	// stopped. When you use this prompt, you must also provide `askForPasswordDelay`.
 	//
 	// Default: false.
 	AskForPassword *bool `plist:"askForPassword,omitempty" json:"askForPassword,omitempty"`
-	// The number of seconds to delay before the password will be required to unlock or stop the screen
-	// saver (the grace period). A value of `2147483647` (for example, `0x7FFFFFFF`) disables this
-	// requirement. To use this option, you must set `askForPassword` to `true`. Available in macOS
-	// 10.13 and later.
+	// The number of seconds to delay before the device requires a password to unlock or stop the
+	// screen saver (the grace period). A value of `2147483647` (hexadecimal equivalent of
+	// `0x7FFFFFFF`) disables this requirement, and a value of `0` immediately requires the password.
+	// To use this option, you must set `askForPassword` to `true`.
 	AskForPasswordDelay *int64 `plist:"askForPasswordDelay,omitempty" json:"askForPasswordDelay,omitempty"`
 	// The number of seconds of inactivity before the screen saver activates (0 = Never activate).
 	IdleTime *int64 `plist:"idleTime,omitempty" json:"idleTime,omitempty"`

@@ -2,7 +2,7 @@
   "category": "mdm/commands",
   "name": "system.update.scan",
   "title": "Schedule OS Update Scan Command",
-  "description": "Schedule a background scan for operating-system updates on a device.",
+  "description": "Schedule a background scan for operating-system updates on a device. Removed: use the declarative management `com.apple.configuration.softwareupdate.enforcement.specific` configuration.",
   "payload": {
     "requesttype": "ScheduleOSUpdateScan",
     "content": "Requests that the device perform a background scan for OS updates.",
@@ -13,6 +13,7 @@
       "macOS": {
         "introduced": "10.11",
         "deprecated": "26.0",
+        "removed": "27.0",
         "accessrights": "None"
       },
       "tvOS": {

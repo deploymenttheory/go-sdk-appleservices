@@ -5,7 +5,7 @@
   "description": "Inform the device that it can allow the user to continue in Setup Assistant.",
   "payload": {
     "requesttype": "DeviceConfigured",
-    "content": "Informs the device that it can continue past DEP enrollment. Only works on devices in DEP that have their cloud configuration set to await configuration.",
+    "content": "Informs the device that it can continue past ADE enrollment. Only works on devices in ADE that have their cloud configuration set to await configuration.",
     "supportedOS": {
       "iOS": {
         "introduced": "9.0",

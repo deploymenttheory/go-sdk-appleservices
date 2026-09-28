@@ -34,6 +34,12 @@ type Loginwindow struct {
 	// allows the user to click the time area of the menu bar to toggle through various computer
 	// information values.
 	AdminHostInfo *LoginwindowAdminHostInfo `plist:"AdminHostInfo,omitempty" json:"AdminHostInfo,omitempty"`
+	// If `true`, a local administrator user can bypass or disable managed preferences (MCX settings)
+	// for their login session. The device presents the user with this option at login only when the
+	// user is a local administrator, and other users are not logged in.
+	//
+	// Default: false.
+	AdminMayDisableMCX *bool `plist:"AdminMayDisableMCX,omitempty" json:"AdminMayDisableMCX,omitempty"`
 	// The list of user GUIDs or group GUIDs of users that the system allows to log in. An asterisk
 	// (`*`) string specifies all users or groups. This only applies to network accounts and mobile
 	// accounts.
@@ -55,6 +61,11 @@ type Loginwindow struct {
 	//
 	// Default: false.
 	RestartDisabled *bool `plist:"RestartDisabled,omitempty" json:"RestartDisabled,omitempty"`
+	// If specified, allows a certain number of retries until the device shows a password hint. The
+	// device shows no hints if set to a value of 0.
+	//
+	// Default: 0.
+	RetriesUntilHint *int64 `plist:"RetriesUntilHint,omitempty" json:"RetriesUntilHint,omitempty"`
 	// If `true`, the system disables the Sleep button.
 	//
 	// Default: false.
@@ -78,13 +89,11 @@ type Loginwindow struct {
 	//
 	// Default: false.
 	PowerOffDisabledWhileLoggedIn *bool `plist:"PowerOffDisabledWhileLoggedIn,omitempty" json:"PowerOffDisabledWhileLoggedIn,omitempty"`
-	// If `true`, the system disables the Log Out menu item when the user is logged in. Available in
-	// macOS 10.13 and later.
+	// If `true`, the system disables the Log Out menu item when the user is logged in.
 	//
 	// Default: false.
 	LogOutDisabledWhileLoggedIn *bool `plist:"LogOutDisabledWhileLoggedIn,omitempty" json:"LogOutDisabledWhileLoggedIn,omitempty"`
-	// If `true`, the system disables the immediate Screen Lock functions. Available in macOS 10.13 and
-	// later.
+	// If `true`, the system disables the immediate Screen Lock functions.
 	//
 	// Default: false.
 	DisableScreenLockImmediate *bool `plist:"DisableScreenLockImmediate,omitempty" json:"DisableScreenLockImmediate,omitempty"`
@@ -101,4 +110,12 @@ type Loginwindow struct {
 	// An optional user password to set up auto login. This must match the `AutologinUsername` user's
 	// current password.
 	AutologinPassword *string `plist:"AutologinPassword,omitempty" json:"AutologinPassword,omitempty"`
+	// If `true`, the system allows the user to select WiFi networks at login or unlock.
+	//
+	// Default: false.
+	ForceWifiConfigurationOnLockScreen *bool `plist:"ForceWifiConfigurationOnLockScreen,omitempty" json:"ForceWifiConfigurationOnLockScreen,omitempty"`
+	// If `true`, the system allows use of the captive WiFi portal at login or unlock.
+	//
+	// Default: false.
+	ForceCaptivePortalConnectionFromLockScreen *bool `plist:"ForceCaptivePortalConnectionFromLockScreen,omitempty" json:"ForceCaptivePortalConnectionFromLockScreen,omitempty"`
 }

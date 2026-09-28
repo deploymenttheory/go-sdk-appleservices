@@ -7,9 +7,10 @@ import (
 )
 
 // OSUpdateStatus — OS Update Status Command.
-// Get the status of operating-system updates on a device.
+// Get the status of operating-system updates on a device. Removed: subscribe to the declarative
+// management `softwareupdate.install-state` status item.
 //
-// Supported: iOS 9.0+, macOS 10.11.5+, tvOS 12.0+.
+// Supported: iOS 9.0–27.0, macOS 10.11.5–27.0, tvOS 12.0–27.0.
 type OSUpdateStatus struct {
 }
 

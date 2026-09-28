@@ -11,6 +11,6 @@ type ShareKitHelper struct {
 	// items are permitted.
 	SHKAllowedShareServices []string `plist:"SHKAllowedShareServices,omitempty" json:"SHKAllowedShareServices,omitempty"`
 	// The list of plugin IDs that won't show up in the user's Share menu. This key is used only if
-	// there is no `SHKAllowedShareServices` key.
+	// there's no `SHKAllowedShareServices` key.
 	SHKDeniedShareServices []string `plist:"SHKDeniedShareServices,omitempty" json:"SHKDeniedShareServices,omitempty"`
 }

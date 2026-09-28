@@ -27,7 +27,7 @@
   "payloadkeys": [
     {
       "key": "ProxyType",
-      "title": "Proxy Type",
+      "title": "Proxy type",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "rangelist": [
@@ -39,7 +39,7 @@
     },
     {
       "key": "ProxyServer",
-      "title": "Proxy Server",
+      "title": "Proxy server",
       "type": "\u003cstring\u003e",
       "subtype": "\u003chostname\u003e",
       "presence": "optional",
@@ -47,21 +47,21 @@
     },
     {
       "key": "ProxyServerPort",
-      "title": "Proxy Server Port",
+      "title": "Proxy server port",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "content": "The proxy server's port number. The device requires this if `ProxyType` is set to `Manual`, and ignores this if `ProxyType` is set to `Automatic`."
     },
     {
       "key": "ProxyUsername",
-      "title": "Proxy Username",
+      "title": "Proxy username",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user name used to authenticate to the proxy server. The device only uses this if `ProxyType` is set to `Manual`, and ignores it if `ProxyType` is set to `Automatic`."
     },
     {
       "key": "ProxyPassword",
-      "title": "Proxy Password",
+      "title": "Proxy password",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The password used to authenticate to the proxy server. The device only uses this if `ProxyType` is set to `Manual`, and ignores it if `ProxyType` is set to `Automatic`."
@@ -75,7 +75,7 @@
     },
     {
       "key": "ProxyPACFallbackAllowed",
-      "title": "Proxy PAC Fallback Allowed",
+      "title": "Proxy PAC fallback allowed",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -88,7 +88,7 @@
     },
     {
       "key": "ProxyCaptiveLoginAllowed",
-      "title": "Proxy Bypass Allowed",
+      "title": "Proxy bypass allowed",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,

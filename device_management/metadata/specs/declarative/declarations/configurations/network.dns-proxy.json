@@ -1,0 +1,77 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "network.dns-proxy",
+  "title": "Network:DNS Proxy",
+  "description": "The declaration to configure DNS proxy settings.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.network.dns-proxy",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "27.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "VisibleName",
+      "title": "Visible name",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The name of the DNS proxy configuration that the system displays on the device."
+    },
+    {
+      "key": "AppBundleIdentifier",
+      "title": "App bundle identifier",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The bundle identifier of the app containing the DNS proxy network extension."
+    },
+    {
+      "key": "ProviderComposedIdentifier",
+      "title": "Provider composed identifier",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The identifier of the provider to use for this configuration. Useful for apps that contain more than one DNS proxy extension.\n\nIn iOS and visionOS, the identifier is a bundle ID, for example, \"com.example.app\".\n\nIn macOS, the identifier is a composed identifier. The format of the composed identifier is either \"Bundle-ID\" or \"Bundle-ID {Designated-Requirement}\". \"Bundle-ID\" is the bundle identifier string of the provider. \"Designated-Requirement\" is the designated requirement string the device uses to match the code signature of the provider. For example, \"com.example.app\" for the bundle ID format, or \"com.example.app {anchor apple generic}\" for the designated requirement format."
+    },
+    {
+      "key": "ProviderConfiguration",
+      "title": "Provider configuration",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The dictionary of vendor-specific configuration items.",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003cany\u003e",
+          "presence": "optional",
+          "content": "Key/value pairs."
+        }
+      ]
+    },
+    {
+      "key": "DNSProxyUUID",
+      "title": "DNS proxy UUID",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "A globally unique identifier for this DNS proxy configuration. The proxy processes DNS lookups traffic for managed apps with the same `DNSProxyUUID` in their app attributes. This key is required for user enrollment.",
+      "supportedOS": {
+        "macOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

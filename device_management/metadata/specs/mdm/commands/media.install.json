@@ -39,7 +39,7 @@
       "key": "MediaURL",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The URL to retrieve the book. This value is available in iOS 8 and later.",
+      "content": "The URL to retrieve the book.",
       "supportedOS": {
         "macOS": {
           "introduced": "n/a"
@@ -59,7 +59,7 @@
       "key": "PersistentID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The book's persistent identifier in reverse-DNS form; for example, `com.acme.manuals.training`. This value is available in iOS 8 and later.",
+      "content": "The book's persistent identifier in reverse-DNS form; for example, `com.acme.manuals.training`.",
       "supportedOS": {
         "macOS": {
           "introduced": "n/a"
@@ -75,7 +75,7 @@
         "epub",
         "ibooks"
       ],
-      "content": "The kind of the media, which can be one of the following values:\n\n- `pdf`: A PDF file\n- `epub`: An EPUB file in `gzip` format.\n- `ibooks`: An iBooks Author file in `gzip` format.\n\nIf you omit this value, its value is the file extension in the URL. This value is available in iOS 8 and later.",
+      "content": "The kind of the media, which can be one of the following values:\n\n- `pdf`: A PDF file\n- `epub`: An EPUB file in `gzip` format.\n- `ibooks`: An iBooks Author file in `gzip` format.\n\nIf you omit this value, its value is the file extension in the URL.",
       "supportedOS": {
         "macOS": {
           "introduced": "n/a"
@@ -86,7 +86,7 @@
       "key": "Version",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The book's version number. This value is available in iOS 8 and later.",
+      "content": "The book's version number.",
       "supportedOS": {
         "macOS": {
           "introduced": "n/a"
@@ -97,7 +97,7 @@
       "key": "Author",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The name of the book's author. This value is available in iOS 8 and later.",
+      "content": "The name of the book's author.",
       "supportedOS": {
         "macOS": {
           "introduced": "n/a"
@@ -108,7 +108,7 @@
       "key": "Title",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The book's title. This value is available in iOS 8 and later.",
+      "content": "The book's title.",
       "supportedOS": {
         "macOS": {
           "introduced": "n/a"
@@ -127,7 +127,7 @@
       "key": "MediaURL",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The URL to retrieve the book, if present in the command. This value is available in iOS 8 and later.",
+      "content": "The URL to retrieve the book, if present in the command.",
       "supportedOS": {
         "macOS": {
           "introduced": "n/a"
@@ -138,7 +138,7 @@
       "key": "PersistentID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The book's persistent identifier, if present in the command. This value is available in iOS 8 and later.",
+      "content": "The book's persistent identifier, if present in the command.",
       "supportedOS": {
         "macOS": {
           "introduced": "n/a"

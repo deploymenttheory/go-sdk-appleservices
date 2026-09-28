@@ -12,6 +12,10 @@ type DnsProxyManaged struct {
 	// The bundle identifier of the DNS proxy network extension to use. Declaring the bundle identifier
 	// is useful for apps that contain more than one DNS proxy extension.
 	ProviderBundleIdentifier *string `plist:"ProviderBundleIdentifier,omitempty" json:"ProviderBundleIdentifier,omitempty"`
+	// The designated requirement string that the system embeds in the code signature of the DNS proxy
+	// network extension. Use this to correctly identify the DNS proxy extension when
+	// `ProviderBundleIdentifier` is present.
+	ProviderDesignatedRequirement *string `plist:"ProviderDesignatedRequirement,omitempty" json:"ProviderDesignatedRequirement,omitempty"`
 	// The dictionary of vendor-specific configuration items.
 	ProviderConfiguration *DnsProxyManagedProviderConfiguration `plist:"ProviderConfiguration,omitempty" json:"ProviderConfiguration,omitempty"`
 	// A globally unique identifier for this DNS proxy configuration. The proxy processes DNS lookups

@@ -56,7 +56,7 @@
           "subkeys": [
             {
               "key": "BundleID",
-              "title": "Application Identifier",
+              "title": "Application identifier",
               "type": "\u003cstring\u003e",
               "presence": "required",
               "content": "The bundle identifier for the app."
@@ -73,42 +73,11 @@
       ]
     },
     {
-      "key": "EnableLogging",
-      "type": "\u003cboolean\u003e",
-      "presence": "optional",
-      "content": "If `true`, the system enables logging. Available in macOS 12 through macOS 14.6.",
-      "supportedOS": {
-        "macOS": {
-          "introduced": "12.0",
-          "deprecated": "15.0",
-          "removed": "15.0"
-        }
-      }
-    },
-    {
-      "key": "LoggingOption",
-      "type": "\u003cstring\u003e",
-      "presence": "optional",
-      "rangelist": [
-        "throttled",
-        "brief",
-        "detail"
-      ],
-      "content": "The type of logging. Available in macOS 12 and through macOS 14.6.",
-      "supportedOS": {
-        "macOS": {
-          "introduced": "12.0",
-          "deprecated": "15.0",
-          "removed": "15.0"
-        }
-      }
-    },
-    {
       "key": "AllowSigned",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `true`, the system allows built-in software to receive incoming connections. Available in macOS 12.3 and later.\n\n\u003e Note:\n\u003e The system ensures that `AllowSigned` always has a value. If missing from the payload, the system sets it to `true`.",
+      "content": "If `true`, the system allows built-in software to receive incoming connections.\n\n\u003e Note:\n\u003e The system ensures that `AllowSigned` always has a value. If missing from the payload, the system sets it to `true`.",
       "supportedOS": {
         "macOS": {
           "introduced": "12.3"
@@ -120,7 +89,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `true`, the system allows downloaded signed software to receive incoming connections. Available in macOS 12.3 and later.\n\n\u003e Note:\n\u003e The system ensures that `AllowSignedApp` always has a value. If missing from the payload, the system sets it to `true`.",
+      "content": "If `true`, the system allows downloaded signed software to receive incoming connections.\n\n\u003e Note:\n\u003e The system ensures that `AllowSignedApp` always has a value. If missing from the payload, the system sets it to `true`.",
       "supportedOS": {
         "macOS": {
           "introduced": "12.3"

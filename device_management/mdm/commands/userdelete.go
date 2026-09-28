@@ -7,17 +7,17 @@ package commands
 //
 // Supported: iOS 9.3+, macOS 10.13+.
 type DeleteUser struct {
-	// The user name of the account to delete. This key is required when the value for `DeleteAllUsers`
-	// is absent or `false`.
+	// The user name of the account to delete. The device requires this key when the value for
+	// `DeleteAllUsers` is absent or `false`.
 	UserName *string `plist:"UserName,omitempty" json:"UserName,omitempty"`
 	// If `true`, the system deletes the account even if the user has data that's pending sync to the
-	// cloud. This value is available on iOS 9.3 and later.
+	// cloud.
 	//
 	// Default: false.
 	ForceDeletion *bool `plist:"ForceDeletion,omitempty" json:"ForceDeletion,omitempty"`
 	// If `true`, the system attempts to delete all users from the device. If `ForceDeletion` is
 	// `false`, the system generates an error instead and doesn't delete users who have data that's
-	// pending sync. This value is available in iOS 14 and later.
+	// pending sync.
 	//
 	// Default: false.
 	DeleteAllUsers *bool `plist:"DeleteAllUsers,omitempty" json:"DeleteAllUsers,omitempty"`

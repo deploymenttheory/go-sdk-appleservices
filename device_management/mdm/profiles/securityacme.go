@@ -41,8 +41,8 @@ type SecurityAcme struct {
 	//
 	// Default: false.
 	Attest *bool `plist:"Attest,omitempty" json:"Attest,omitempty"`
-	// If `true`, the private key of the identity obtained through Automated Certificate Management
-	// Environment (ACME) needs to be tagged as "non-extractable" in the keychain.
+	// If `false`, the device tags the private key of the identity obtained through Automated
+	// Certificate Management Environment (ACME) as "non-extractable" in the keychain.
 	//
 	// Default: true.
 	KeyIsExtractable *bool `plist:"KeyIsExtractable,omitempty" json:"KeyIsExtractable,omitempty"`

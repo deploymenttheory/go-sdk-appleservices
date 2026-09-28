@@ -39,7 +39,7 @@
     },
     {
       "key": "SERIAL",
-      "title": "Serial Number",
+      "title": "Serial number",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The device's serial number.",
@@ -59,17 +59,17 @@
     },
     {
       "key": "VERSION",
-      "title": "Build Version",
+      "title": "Build version",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The build version installed on the device, for example, `7A182`."
     },
     {
       "key": "OS_VERSION",
-      "title": "OS Version",
+      "title": "OS version",
       "type": "\u003cstring\u003e",
       "presence": "required",
-      "content": "The OS version installed on the device, for example, 17.0.\n\nAvailable on iOS 17 and later, macOS 14 and later, tvOS 17 and later, and watchOS 10 and later.",
+      "content": "The OS version installed on the device, for example, 17.0.",
       "supportedOS": {
         "iOS": {
           "introduced": "17.0"
@@ -84,10 +84,10 @@
     },
     {
       "key": "SUPPLEMENTAL_BUILD_VERSION",
-      "title": "Supplemental Build Version",
+      "title": "Supplemental build version",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The device's operating system supplemental build version (if available).\n\nAvailable on iOS 17 and later, macOS 14 and later, tvOS 17 and later, and watchOS 10 and later.",
+      "content": "The device's operating system supplemental build version (if available).",
       "supportedOS": {
         "iOS": {
           "introduced": "17.0"
@@ -102,10 +102,10 @@
     },
     {
       "key": "SUPPLEMENTAL_OS_VERSION_EXTRA",
-      "title": "Supplemental OS Version Extra",
+      "title": "Supplemental OS version extra",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The device's operating system supplemental OS version extra (if available).\n\nAvailable on iOS 17 and later, macOS 14 and later, tvOS 17 and later, and watchOS 10 and later.",
+      "content": "The device's operating system supplemental OS version extra (if available).",
       "supportedOS": {
         "iOS": {
           "introduced": "17.0"
@@ -165,11 +165,11 @@
     },
     {
       "key": "MDM_CAN_REQUEST_SOFTWARE_UPDATE",
-      "title": "MDM Can Request Software Update",
+      "title": "MDM can request software update",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, indicates that the server can trigger the device to do a required software update.\n\nAvailable on iOS 17 and later, and macOS 14 and later.",
+      "content": "If `true`, indicates that the server can trigger the device to do a required software update.",
       "supportedOS": {
         "iOS": {
           "introduced": "17.0"
@@ -181,7 +181,7 @@
           "introduced": "n/a"
         },
         "visionOS": {
-          "introduced": "n/a"
+          "introduced": "26.0"
         },
         "watchOS": {
           "introduced": "n/a"
@@ -190,10 +190,10 @@
     },
     {
       "key": "PAIRING_TOKEN",
-      "title": "Watch Enrollment Pairing Token",
+      "title": "Watch enrollment pairing token",
       "type": "\u003cdata\u003e",
       "presence": "optional",
-      "content": "The pairing token to validate when a watch is enrolling.\n\nAvailable on watchOS 10 and later.",
+      "content": "The pairing token to validate when a watch is enrolling.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"
@@ -211,10 +211,10 @@
     },
     {
       "key": "SOFTWARE_UPDATE_DEVICE_ID",
-      "title": "Software Update Device ID",
+      "title": "Software update device ID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The device model identifier used to lookup available OS updates through https://gdmf.apple.com/v2/pmv. Available on iOS 17.4 and later, macOS 14.4 and later, and visionOS 1.1 and later.",
+      "content": "The device model identifier used to lookup available OS updates through https://gdmf.apple.com/v2/pmv.",
       "supportedOS": {
         "iOS": {
           "introduced": "17.4"
@@ -229,11 +229,11 @@
     },
     {
       "key": "MDM_CAN_REQUEST_PSSO_CONFIG",
-      "title": "Platform SSO is Supported",
+      "title": "Platform SSO is supported",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, indicates that the server can trigger the device to do a required Platform SSO authentication before enrolling.\n\nAvailable on macOS 26 and later.",
+      "content": "If `true`, indicates that the server can trigger the device to do a required Platform SSO authentication before enrolling.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"
@@ -258,7 +258,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, indicates that the device requires a mandatory software update during Setup Assistant. The MDM server can return a 403 with a `ErrorCodeSoftwareUpdateRequired` error to force the device to update to a specific version instead of the device choosing a version.\n\nAvailable on macOS 26.1 and later.",
+      "content": "If `true`, indicates that the device requires a mandatory software update during Setup Assistant. The MDM server can return a 403 with a `ErrorCodeSoftwareUpdateRequired` error to force the device to update to a specific version instead of the device choosing a version.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"

@@ -43,13 +43,13 @@
               "key": "UserName",
               "type": "\u003cstring\u003e",
               "presence": "required",
-              "content": "The user name for the account. In macOS, this is the short name of the user account. This value is available in iOS 9.3 and later, and macOS 10.13 and later."
+              "content": "The user name for the account. In macOS, this is the short name of the user account."
             },
             {
               "key": "FullName",
               "type": "\u003cstring\u003e",
               "presence": "required",
-              "content": "The user's full name. This value is available in macOS 10.13 and later.",
+              "content": "The user's full name.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -60,7 +60,7 @@
               "key": "UID",
               "type": "\u003cinteger\u003e",
               "presence": "required",
-              "content": "The user's unique identifier. This value is available in macOS 10.13 and later.",
+              "content": "The user's unique identifier.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -71,7 +71,7 @@
               "key": "UserGUID",
               "type": "\u003cstring\u003e",
               "presence": "required",
-              "content": "The user's `GeneratedUID`. This value is available in macOS 10.13 and later.",
+              "content": "The user's `GeneratedUID`.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -82,13 +82,13 @@
               "key": "IsLoggedIn",
               "type": "\u003cboolean\u003e",
               "presence": "required",
-              "content": "If `true`, the user is currently logged in on the device. This value is available in iOS 9.3 and later, and macOS 10.13 and later."
+              "content": "If `true`, the user is currently logged in on the device."
             },
             {
               "key": "HasDataToSync",
               "type": "\u003cboolean\u003e",
               "presence": "required",
-              "content": "If `true`, the user has data to sync to the cloud. This value is available in iOS 9.3 and later.",
+              "content": "If `true`, the user has data to sync to the cloud.",
               "supportedOS": {
                 "macOS": {
                   "introduced": "n/a"
@@ -99,7 +99,7 @@
               "key": "DataQuota",
               "type": "\u003cinteger\u003e",
               "presence": "required",
-              "content": "If present, the user's data quota in bytes. This isn't present if the account doesn't enforce a quota. This value is available in iOS 9.3 and later.",
+              "content": "If present, the user's data quota in bytes. This isn't present if the account doesn't enforce a quota.",
               "supportedOS": {
                 "macOS": {
                   "introduced": "n/a"
@@ -110,7 +110,7 @@
               "key": "DataUsed",
               "type": "\u003cinteger\u003e",
               "presence": "required",
-              "content": "The amount of data, in bytes, that the user has used. This value is available in iOS 9.3 and later.",
+              "content": "The amount of data, in bytes, that the user has used.",
               "supportedOS": {
                 "macOS": {
                   "introduced": "n/a"
@@ -121,7 +121,7 @@
               "key": "MobileAccount",
               "type": "\u003cboolean\u003e",
               "presence": "required",
-              "content": "If `true`, the account is a mobile account. This value is available in macOS 10.13 and later.",
+              "content": "If `true`, the account is a mobile account.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -132,7 +132,7 @@
               "key": "HasSecureToken",
               "type": "\u003cboolean\u003e",
               "presence": "required",
-              "content": "If `true`, the user currently has a secure token set. This value is available in macOS 11 and later.",
+              "content": "If `true`, the user currently has a secure token set.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"

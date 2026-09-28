@@ -20,8 +20,8 @@ type AirprintAirPrintItem struct {
 	ResourcePath string `plist:"ResourcePath" json:"ResourcePath"`
 	// The listening port of the AirPrint destination. Available only in iOS 11 and later.
 	Port *int64 `plist:"Port,omitempty" json:"Port,omitempty"`
-	// If `true`, AirPrint connections are secured by Transport Layer Security (TLS). Available only in
-	// iOS 11 and later.
+	// If `true`, Transport Layer Security (TLS) secures AirPrint connections. Available only in iOS 11
+	// and later.
 	//
 	// Default: false.
 	ForceTLS *bool `plist:"ForceTLS,omitempty" json:"ForceTLS,omitempty"`

@@ -5,12 +5,16 @@ package configurations
 // SiriSettings — Siri Settings.
 // The declaration to configure Siri settings.
 //
-// Supported: iOS 26.4+, macOS 26.4+, visionOS 26.4+, watchOS 26.4+.
+// Supported: iOS 26.4+, macOS 26.4+, tvOS 27.0+, visionOS 26.4+, watchOS 26.4+.
 type SiriSettings struct {
 	// If `false`, disables Siri.
 	//
 	// Default: true.
 	Enabled *bool `plist:"Enabled,omitempty" json:"Enabled,omitempty"`
+	// If `false`, disables the Siri AI specific features of Siri.
+	//
+	// Default: true.
+	AllowSiriAI *bool `plist:"AllowSiriAI,omitempty" json:"AllowSiriAI,omitempty"`
 	// If `false`, disables Siri user-generated content.
 	//
 	// Default: true.
@@ -23,4 +27,8 @@ type SiriSettings struct {
 	//
 	// Default: false.
 	ForceProfanityFilter *bool `plist:"ForceProfanityFilter,omitempty" json:"ForceProfanityFilter,omitempty"`
+	// If `true`, forces Siri to reduce sensitive content.
+	//
+	// Default: false.
+	ForceReduceSensitiveContent *bool `plist:"ForceReduceSensitiveContent,omitempty" json:"ForceReduceSensitiveContent,omitempty"`
 }

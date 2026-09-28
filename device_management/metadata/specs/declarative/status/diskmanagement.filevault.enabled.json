@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "diskmanagement.filevault.enabled",
   "title": "Status Disk Management File Vault Enabled",
-  "description": "The enabled status of the File Vault.",
+  "description": "The status item that reports whether FileVault is enabled.",
   "payload": {
     "statusitemtype": "diskmanagement.filevault.enabled",
     "supportedOS": {

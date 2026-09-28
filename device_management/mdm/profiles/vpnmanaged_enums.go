@@ -697,6 +697,7 @@ const (
 	VpnManagedIKEv2TLSMinimumVersionN10 VpnManagedIKEv2TLSMinimumVersion = "1.0"
 	VpnManagedIKEv2TLSMinimumVersionN11 VpnManagedIKEv2TLSMinimumVersion = "1.1"
 	VpnManagedIKEv2TLSMinimumVersionN12 VpnManagedIKEv2TLSMinimumVersion = "1.2"
+	VpnManagedIKEv2TLSMinimumVersionN13 VpnManagedIKEv2TLSMinimumVersion = "1.3"
 )
 
 // String returns the VpnManagedIKEv2TLSMinimumVersion value as a plain string.
@@ -710,6 +711,7 @@ const (
 	VpnManagedIKEv2TLSMaximumVersionN10 VpnManagedIKEv2TLSMaximumVersion = "1.0"
 	VpnManagedIKEv2TLSMaximumVersionN11 VpnManagedIKEv2TLSMaximumVersion = "1.1"
 	VpnManagedIKEv2TLSMaximumVersionN12 VpnManagedIKEv2TLSMaximumVersion = "1.2"
+	VpnManagedIKEv2TLSMaximumVersionN13 VpnManagedIKEv2TLSMaximumVersion = "1.3"
 )
 
 // String returns the VpnManagedIKEv2TLSMaximumVersion value as a plain string.

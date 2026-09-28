@@ -3,7 +3,7 @@
 package configurations
 
 // ServicesConfigurationFiles — Services Configuration Files.
-// The managed configuration files for services.
+// The declaration to configure managed configuration files for services.
 //
 // Supported: macOS 14.0+.
 type ServicesConfigurationFiles struct {

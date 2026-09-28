@@ -50,7 +50,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system enables OAuth for authentication. Don't specify a password if `OAuth` is `true`. Available in macOS 10.14 and later",
+      "content": "If `true`, the system enables OAuth for authentication. Don't specify a password if `OAuth` is `true`.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.14"
@@ -83,7 +83,7 @@
     },
     {
       "key": "PayloadCertificateUUID",
-      "title": "Payload Certificate UUID",
+      "title": "Payload certificate UUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$",
@@ -107,7 +107,7 @@
     },
     {
       "key": "allowMailDrop",
-      "title": "Allow Mail Drop",
+      "title": "Allow mail drop",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,

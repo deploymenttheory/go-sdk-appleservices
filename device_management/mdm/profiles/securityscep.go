@@ -35,8 +35,8 @@ type SecurityScepPayloadContent struct {
 	// SCEP.
 	URL string `plist:"URL" json:"URL"`
 	// A string that's understood by the SCEP server; for example, a domain name like example.org. If a
-	// certificate authority has multiple CA certificates, this field can be used to distinguish which
-	// is required.
+	// certificate authority has multiple CA certificates, use this field to distinguish which is
+	// required.
 	Name *string `plist:"Name,omitempty" json:"Name,omitempty"`
 	// The representation of an X.500 name as an array of OID and value.
 	Subject [][][]string `plist:"Subject,omitempty" json:"Subject,omitempty"`
@@ -60,8 +60,8 @@ type SecurityScepPayloadContent struct {
 	//
 	// Default: 3.
 	Retries *int64 `plist:"Retries,omitempty" json:"Retries,omitempty"`
-	// The number of seconds to wait between subsequent retries. The first retry is attempted without
-	// this delay.
+	// The number of seconds to wait between subsequent retries. The device attempts the first retry
+	// without this delay.
 	//
 	// Default: 10.
 	RetryDelay *int64 `plist:"RetryDelay,omitempty" json:"RetryDelay,omitempty"`

@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.operating-system.marketing-name",
   "title": "Status Device Operating System Marketing Name",
-  "description": "A status report of the device's operating system marketing name.",
+  "description": "The status item that reports the device's operating system marketing name.",
   "payload": {
     "statusitemtype": "device.operating-system.marketing-name",
     "supportedOS": {

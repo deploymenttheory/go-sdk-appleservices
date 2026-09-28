@@ -33,7 +33,7 @@
       "key": "Identifiers",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "The bundle identifiers of the managed apps to include in the response.\n\n\u003e Important:\n\u003e For a watchOS app, the identifier needs to be the watch's bundle identifier, which differs from the main bundle identifier for the iPhone to which the watch is paired. Obtain the watch's bundle identifier for an app with a watch bundle, in the `watchBundleId` key that's part of the Content Metadata query. For more information on this query, see `Getting App and Book Information`.",
+      "content": "The bundle identifiers of the managed apps to include in the response.\n\n\u003e Important:\n\u003e For a watchOS app, the identifier needs to be the watch's bundle identifier, which differs from the main bundle identifier for the iPhone the watch pairs with. Obtain the watch's bundle identifier for an app with a watch bundle, in the `watchBundleId` key that's part of the Content Metadata query. For more information on this query, see `Getting app and book information (Legacy)`.",
       "subkeys": [
         {
           "key": "IdentifiersItem",
@@ -100,7 +100,7 @@
               "key": "UnusedRedemptionCode",
               "type": "\u003cstring\u003e",
               "presence": "required",
-              "content": "If the user already purchased a paid app, this code is available for use by another user. This code reports only once. This value is available in iOS 5 and later.",
+              "content": "If the user already purchased a paid app, this code is available for use by another user. This code reports only once.",
               "supportedOS": {
                 "macOS": {
                   "introduced": "n/a"
@@ -114,7 +114,7 @@
               "key": "HasConfiguration",
               "type": "\u003cboolean\u003e",
               "presence": "required",
-              "content": "If 'true', the app has an update available. This key is present only for App Store apps. In macOS, this key is present only for Volume Purchase Program (VPP) apps. This status updates daily and isn't always up-to-date when installing an app.",
+              "content": "If 'true', the app has a server-provided managed configuration.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "7.0"
@@ -128,7 +128,7 @@
               "key": "HasFeedback",
               "type": "\u003cboolean\u003e",
               "presence": "required",
-              "content": "If 'true', the app has feedback for the server. This value is available in iOS 7 and later, and tvOS 10.2 and later. On macOS 11.3 and later, this value is available if the request was sent on the user channel.",
+              "content": "If 'true', the app has feedback for the server. On macOS 11.3 and later, this value is available if the device management server sent the request on the user channel.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "7.0"
@@ -142,7 +142,7 @@
               "key": "IsValidated",
               "type": "\u003cboolean\u003e",
               "presence": "required",
-              "content": "If 'true', the app is valid and can run on the device. If the app is enterprise-distributed and unvalidated, it won't be able to run until validation has occurred. This value is available in iOS 9.2 and later, and tvOS 10.2 and later.",
+              "content": "If 'true', the app is valid and can run on the device. If the app is enterprise-distributed and unvalidated, it won't be able to run until validation has occurred.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "9.2"
@@ -156,7 +156,7 @@
               "key": "ExternalVersionIdentifier",
               "type": "\u003cinteger\u003e",
               "presence": "required",
-              "content": "The app's external version identifier. You can also retrieve this value from the App Store. For more information, see `Apps and Books for Organizations`.\n\nIf the current external version identifier of an app on the App Store doesn't match the external version identifier reported by the device, there may be an app update available for the device.\n\nAvailable in iOS 10.3 and later, macOS 11.3 and later, and tvOS 10.2 and later.\n\n\u003e Note:\n\u003e A newer version of an app might not be available for installation on the device for a variety of reasons. A common reason is that the device's operating system version or hardware is incompatible with the available version of the app.",
+              "content": "The app's external version identifier. You can also retrieve this value from the App Store. For more information, see `Apps and books metadata for organizations`.\n\nIf the current external version identifier of an app on the App Store doesn't match the external version identifier reported by the device, there may be an app update available for the device.\n\n\u003e Note:\n\u003e A newer version of an app might not be available for installation on the device for a variety of reasons. A common reason is that the device's operating system version or hardware is incompatible with the available version of the app.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "10.3"

@@ -47,7 +47,7 @@
           "subkeys": [
             {
               "key": "DisableTouch",
-              "title": "Disable Touch",
+              "title": "Disable touch",
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
@@ -55,7 +55,7 @@
             },
             {
               "key": "DisableDeviceRotation",
-              "title": "Disable Device Rotation",
+              "title": "Disable device rotation",
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
@@ -68,7 +68,7 @@
             },
             {
               "key": "DisableVolumeButtons",
-              "title": "Disable Volume Buttons",
+              "title": "Disable volume buttons",
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
@@ -81,7 +81,7 @@
             },
             {
               "key": "DisableRingerSwitch",
-              "title": "Disable Ringer Switch",
+              "title": "Disable ringer switch",
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
@@ -94,7 +94,7 @@
             },
             {
               "key": "DisableSleepWakeButton",
-              "title": "Disable Sleep Wake Button",
+              "title": "Disable sleep wake button",
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
@@ -107,7 +107,7 @@
             },
             {
               "key": "DisableAutoLock",
-              "title": "Disable Auto Lock",
+              "title": "Disable auto lock",
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
@@ -115,7 +115,7 @@
             },
             {
               "key": "EnableVoiceOver",
-              "title": "Enable Voice Over",
+              "title": "Enable VoiceOver",
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
@@ -139,7 +139,7 @@
             },
             {
               "key": "EnableAssistiveTouch",
-              "title": "Enable Assistive Touch",
+              "title": "Enable AssistiveTouch",
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
@@ -201,7 +201,7 @@
         },
         {
           "key": "UserEnabledOptions",
-          "title": "User Enabled Options",
+          "title": "User enabled options",
           "type": "\u003cdictionary\u003e",
           "presence": "optional",
           "content": "A dictionary of user-editable options.",
@@ -224,7 +224,7 @@
             },
             {
               "key": "VoiceOver",
-              "title": "Voice Over",
+              "title": "VoiceOver",
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
@@ -248,7 +248,7 @@
             },
             {
               "key": "AssistiveTouch",
-              "title": "Assistive Touch",
+              "title": "AssistiveTouch",
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,

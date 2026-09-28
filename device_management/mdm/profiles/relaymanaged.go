@@ -17,7 +17,7 @@ type RelayManaged struct {
 	// that matches a domain in the list exactly or is a subdomain of the listed domain won't use the
 	// relay server.
 	ExcludedDomains []string `plist:"ExcludedDomains,omitempty" json:"ExcludedDomains,omitempty"`
-	// A list of Fully Qualified Domain Names (FQDNs) to be routed through the servers contained in
+	// A list of Fully Qualified Domain Names (FQDNs) to route through the servers contained in
 	// `Relays`. Any connection that matches an FQDN in the list exactly uses the relay servers. If
 	// this list and `MatchDomains` are empty, the system routes traffic to all domains to the relay
 	// servers, except those that match an excluded domain or excluded FQDN.
@@ -25,7 +25,7 @@ type RelayManaged struct {
 	// A list of Fully Qualified Domain Names (FQDNs) to exclude from routing through the servers
 	// contained in `Relays`. Any connection that matches an FQDN in the list exactly won't use the
 	// relay server. When `MatchDomains` is also present, any FQDN listed in the list should be a
-	// subdomain of at least one `MatchDomain` value, otherwise it will not have any effect.
+	// subdomain of at least one `MatchDomain` value, otherwise it won't have any effect.
 	ExcludedFQDNs []string `plist:"ExcludedFQDNs,omitempty" json:"ExcludedFQDNs,omitempty"`
 	// A globally unique identifier for this relay configuration. The system uses this UUID to route
 	// managed apps through the servers in `Relays`. This key is required for user enrollment.

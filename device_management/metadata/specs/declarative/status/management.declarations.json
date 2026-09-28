@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "management.declarations",
   "title": "Status Management Declarations",
-  "description": "A status report of the client's processed declarations.",
+  "description": "The status item that reports the device's processed declarations.",
   "payload": {
     "statusitemtype": "management.declarations",
     "supportedOS": {
@@ -42,7 +42,7 @@
           "subkeys": [
             {
               "key": "_activations",
-              "title": "Status Declaration Item",
+              "title": "Status declaration item",
               "type": "\u003cdictionary\u003e",
               "content": "Status for a declaration processed by the client.",
               "subkeytype": "Declaration",
@@ -56,21 +56,21 @@
                 },
                 {
                   "key": "server-token",
-                  "title": "Server-Token",
+                  "title": "Server-token",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The `ServerToken` of the declaration this status report refers to."
                 },
                 {
                   "key": "active",
-                  "title": "Declaration's Active State",
+                  "title": "Declaration's active state",
                   "type": "\u003cboolean\u003e",
                   "presence": "required",
                   "content": "If `true`, the declaration is active on the device."
                 },
                 {
                   "key": "valid",
-                  "title": "Declaration's Valid State",
+                  "title": "Declaration's valid state",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -82,7 +82,7 @@
                 },
                 {
                   "key": "reasons",
-                  "title": "Status Reasons",
+                  "title": "Status reasons",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "The details of any client errors.",
@@ -90,28 +90,28 @@
                   "subkeys": [
                     {
                       "key": "_reasons",
-                      "title": "Status Reason",
+                      "title": "Status reason",
                       "type": "\u003cdictionary\u003e",
                       "content": "Information about a status error.",
                       "subkeytype": "StatusReason",
                       "subkeys": [
                         {
                           "key": "code",
-                          "title": "Error Code",
+                          "title": "Error code",
                           "type": "\u003cstring\u003e",
                           "presence": "required",
                           "content": "The error code for this error."
                         },
                         {
                           "key": "description",
-                          "title": "Error Description",
+                          "title": "Error description",
                           "type": "\u003cstring\u003e",
                           "presence": "optional",
                           "content": "The description for this error."
                         },
                         {
                           "key": "details",
-                          "title": "Error Details",
+                          "title": "Error details",
                           "type": "\u003cdictionary\u003e",
                           "presence": "optional",
                           "content": "A dictionary that contains further details about this error.",
@@ -142,7 +142,7 @@
           "subkeys": [
             {
               "key": "_configurations",
-              "title": "Status Declaration Item",
+              "title": "Status declaration item",
               "type": "\u003cdictionary\u003e",
               "content": "Status for a declaration processed by the client.",
               "subkeytype": "Declaration",
@@ -156,21 +156,21 @@
                 },
                 {
                   "key": "server-token",
-                  "title": "Server-Token",
+                  "title": "Server-token",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The `ServerToken` of the declaration this status report refers to."
                 },
                 {
                   "key": "active",
-                  "title": "Declaration's Active State",
+                  "title": "Declaration's active state",
                   "type": "\u003cboolean\u003e",
                   "presence": "required",
                   "content": "If `true`, the declaration is active on the device."
                 },
                 {
                   "key": "valid",
-                  "title": "Declaration's Valid State",
+                  "title": "Declaration's valid state",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -182,7 +182,7 @@
                 },
                 {
                   "key": "reasons",
-                  "title": "Status Reasons",
+                  "title": "Status reasons",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "The details of any client errors.",
@@ -190,28 +190,28 @@
                   "subkeys": [
                     {
                       "key": "_reasons",
-                      "title": "Status Reason",
+                      "title": "Status reason",
                       "type": "\u003cdictionary\u003e",
                       "content": "Information about a status error.",
                       "subkeytype": "StatusReason",
                       "subkeys": [
                         {
                           "key": "code",
-                          "title": "Error Code",
+                          "title": "Error code",
                           "type": "\u003cstring\u003e",
                           "presence": "required",
                           "content": "The error code for this error."
                         },
                         {
                           "key": "description",
-                          "title": "Error Description",
+                          "title": "Error description",
                           "type": "\u003cstring\u003e",
                           "presence": "optional",
                           "content": "The description for this error."
                         },
                         {
                           "key": "details",
-                          "title": "Error Details",
+                          "title": "Error details",
                           "type": "\u003cdictionary\u003e",
                           "presence": "optional",
                           "content": "A dictionary that contains further details about this error.",
@@ -242,7 +242,7 @@
           "subkeys": [
             {
               "key": "_assets",
-              "title": "Status Declaration Item",
+              "title": "Status declaration item",
               "type": "\u003cdictionary\u003e",
               "content": "Status for a declaration processed by the client.",
               "subkeytype": "Declaration",
@@ -256,21 +256,21 @@
                 },
                 {
                   "key": "server-token",
-                  "title": "Server-Token",
+                  "title": "Server-token",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The `ServerToken` of the declaration this status report refers to."
                 },
                 {
                   "key": "active",
-                  "title": "Declaration's Active State",
+                  "title": "Declaration's active state",
                   "type": "\u003cboolean\u003e",
                   "presence": "required",
                   "content": "If `true`, the declaration is active on the device."
                 },
                 {
                   "key": "valid",
-                  "title": "Declaration's Valid State",
+                  "title": "Declaration's valid state",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -282,7 +282,7 @@
                 },
                 {
                   "key": "reasons",
-                  "title": "Status Reasons",
+                  "title": "Status reasons",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "The details of any client errors.",
@@ -290,28 +290,28 @@
                   "subkeys": [
                     {
                       "key": "_reasons",
-                      "title": "Status Reason",
+                      "title": "Status reason",
                       "type": "\u003cdictionary\u003e",
                       "content": "Information about a status error.",
                       "subkeytype": "StatusReason",
                       "subkeys": [
                         {
                           "key": "code",
-                          "title": "Error Code",
+                          "title": "Error code",
                           "type": "\u003cstring\u003e",
                           "presence": "required",
                           "content": "The error code for this error."
                         },
                         {
                           "key": "description",
-                          "title": "Error Description",
+                          "title": "Error description",
                           "type": "\u003cstring\u003e",
                           "presence": "optional",
                           "content": "The description for this error."
                         },
                         {
                           "key": "details",
-                          "title": "Error Details",
+                          "title": "Error details",
                           "type": "\u003cdictionary\u003e",
                           "presence": "optional",
                           "content": "A dictionary that contains further details about this error.",
@@ -342,7 +342,7 @@
           "subkeys": [
             {
               "key": "_management",
-              "title": "Status Declaration Item",
+              "title": "Status declaration item",
               "type": "\u003cdictionary\u003e",
               "content": "Status for a declaration processed by the client.",
               "subkeytype": "Declaration",
@@ -356,21 +356,21 @@
                 },
                 {
                   "key": "server-token",
-                  "title": "Server-Token",
+                  "title": "Server-token",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The `ServerToken` of the declaration this status report refers to."
                 },
                 {
                   "key": "active",
-                  "title": "Declaration's Active State",
+                  "title": "Declaration's active state",
                   "type": "\u003cboolean\u003e",
                   "presence": "required",
                   "content": "If `true`, the declaration is active on the device."
                 },
                 {
                   "key": "valid",
-                  "title": "Declaration's Valid State",
+                  "title": "Declaration's valid state",
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "rangelist": [
@@ -382,7 +382,7 @@
                 },
                 {
                   "key": "reasons",
-                  "title": "Status Reasons",
+                  "title": "Status reasons",
                   "type": "\u003carray\u003e",
                   "presence": "optional",
                   "content": "The details of any client errors.",
@@ -390,28 +390,28 @@
                   "subkeys": [
                     {
                       "key": "_reasons",
-                      "title": "Status Reason",
+                      "title": "Status reason",
                       "type": "\u003cdictionary\u003e",
                       "content": "Information about a status error.",
                       "subkeytype": "StatusReason",
                       "subkeys": [
                         {
                           "key": "code",
-                          "title": "Error Code",
+                          "title": "Error code",
                           "type": "\u003cstring\u003e",
                           "presence": "required",
                           "content": "The error code for this error."
                         },
                         {
                           "key": "description",
-                          "title": "Error Description",
+                          "title": "Error description",
                           "type": "\u003cstring\u003e",
                           "presence": "optional",
                           "content": "The description for this error."
                         },
                         {
                           "key": "details",
-                          "title": "Error Details",
+                          "title": "Error details",
                           "type": "\u003cdictionary\u003e",
                           "presence": "optional",
                           "content": "A dictionary that contains further details about this error.",

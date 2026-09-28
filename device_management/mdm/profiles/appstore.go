@@ -13,17 +13,16 @@ type Appstore struct {
 	//
 	// Default: false.
 	RestrictStoreRequireAdminToInstall *bool `plist:"restrict-store-require-admin-to-install,omitempty" json:"restrict-store-require-admin-to-install,omitempty"`
-	// If `true`, the system prevents App Store from launching. Available in macOS 10.14 and later.
-	// Restricts installations to software updates only in macOS 10.10 through 10.13.
+	// If `true`, the system prevents App Store from launching. Restricts installations to software
+	// updates only in macOS 10.10 through 10.13.
 	//
 	// Default: false.
 	RestrictStoreSoftwareupdateOnly *bool `plist:"restrict-store-softwareupdate-only,omitempty" json:"restrict-store-softwareupdate-only,omitempty"`
-	// If `true`, the system disables app adoption by users. Available in macOS 10.10 and later.
+	// If `true`, the system disables app adoption by users.
 	//
 	// Default: false.
 	RestrictStoreDisableAppAdoption *bool `plist:"restrict-store-disable-app-adoption,omitempty" json:"restrict-store-disable-app-adoption,omitempty"`
-	// If `true`, the system disables software update notifications. Available in macOS 10.10 and
-	// later.
+	// If `true`, the system disables software update notifications.
 	//
 	// Default: false.
 	DisableSoftwareUpdateNotifications *bool `plist:"DisableSoftwareUpdateNotifications,omitempty" json:"DisableSoftwareUpdateNotifications,omitempty"`

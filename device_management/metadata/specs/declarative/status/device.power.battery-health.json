@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.power.battery-health",
   "title": "Status Device Battery Health",
-  "description": "The device's battery health.",
+  "description": "The status item that reports the device's battery health.",
   "payload": {
     "statusitemtype": "device.power.battery-health",
     "supportedOS": {
@@ -36,7 +36,7 @@
         "unknown",
         "unsupported"
       ],
-      "content": "The battery health status, which has the following values:\n\n- `non-genuine`: The battery isn't a genuine Apple battery.\n- `normal`: The battery is operating normally.\n- `service-recommended`: The system recommends battery service.\n- `unknown`: The system couldn't determine battery health information.\n- `unsupported`: The device doesn't support battery health reporting.\n\nAvailable in iOS 17 and later on iPhone, iPadOS 18.4 and later on supported iPad models, and macOS 14.4 and later on a Mac with Apple silicon."
+      "content": "The battery health status, which has the following values:\n\n- `non-genuine`: The battery isn't a genuine Apple battery.\n- `normal`: The battery is operating normally.\n- `service-recommended`: The system recommends battery service.\n- `unknown`: The system couldn't determine battery health information.\n- `unsupported`: The device doesn't support battery health reporting.\n\nSupported on iPhones, specific iPad models, and Mac computers with Apple silicon."
     }
   ]
 }

@@ -26,14 +26,14 @@
   "payloadkeys": [
     {
       "key": "Name",
-      "title": "Organization Name",
+      "title": "Organization name",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The name of the organization."
     },
     {
       "key": "Email",
-      "title": "Organization Email Address",
+      "title": "Organization email address",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The email address of the contact person for the organization."
@@ -47,14 +47,14 @@
     },
     {
       "key": "Proof",
-      "title": "Organization Identity",
+      "title": "Organization identity",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "The additional properties that verify the identity and authenticity of the organization.",
       "subkeys": [
         {
           "key": "IdentityToken",
-          "title": "Organization Identity Token",
+          "title": "Organization identity token",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "A token that verifies the identity of the organization when using this service."

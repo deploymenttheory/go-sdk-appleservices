@@ -9,7 +9,8 @@ package assets
 type CredentialUserpassword struct {
 	// The external reference. Ensure that the asset data:
 	Reference CredentialUserpasswordReference `plist:"Reference" json:"Reference"`
-	// The server authentication details.
+	// The server authentication details. If this key is absent, the default authentication type is
+	// MDM.
 	Authentication *CredentialUserpasswordAuthentication `plist:"Authentication,omitempty" json:"Authentication,omitempty"`
 }
 
@@ -32,7 +33,8 @@ type CredentialUserpasswordReference struct {
 }
 
 // CredentialUserpasswordAuthentication is the Authentication dictionary.
-// The server authentication details.
+// The server authentication details. If this key is absent, the default authentication type is
+// MDM.
 type CredentialUserpasswordAuthentication struct {
 	// The type of authentication, which has these allowed values:
 	Type CredentialUserpasswordAuthenticationType `plist:"Type" json:"Type"`

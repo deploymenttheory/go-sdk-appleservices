@@ -18,29 +18,25 @@ type UserListResponse struct {
 // UserListResponseUsersItem is the UsersItem dictionary.
 // A dictionary that contains information about an active account on a device.
 type UserListResponseUsersItem struct {
-	// The user name for the account. In macOS, this is the short name of the user account. This value
-	// is available in iOS 9.3 and later, and macOS 10.13 and later.
+	// The user name for the account. In macOS, this is the short name of the user account.
 	UserName string `plist:"UserName" json:"UserName"`
-	// The user's full name. This value is available in macOS 10.13 and later.
+	// The user's full name.
 	FullName string `plist:"FullName" json:"FullName"`
-	// The user's unique identifier. This value is available in macOS 10.13 and later.
+	// The user's unique identifier.
 	UID int64 `plist:"UID" json:"UID"`
-	// The user's `GeneratedUID`. This value is available in macOS 10.13 and later.
+	// The user's `GeneratedUID`.
 	UserGUID string `plist:"UserGUID" json:"UserGUID"`
-	// If `true`, the user is currently logged in on the device. This value is available in iOS 9.3 and
-	// later, and macOS 10.13 and later.
+	// If `true`, the user is currently logged in on the device.
 	IsLoggedIn bool `plist:"IsLoggedIn" json:"IsLoggedIn"`
-	// If `true`, the user has data to sync to the cloud. This value is available in iOS 9.3 and later.
+	// If `true`, the user has data to sync to the cloud.
 	HasDataToSync bool `plist:"HasDataToSync" json:"HasDataToSync"`
 	// If present, the user's data quota in bytes. This isn't present if the account doesn't enforce a
-	// quota. This value is available in iOS 9.3 and later.
+	// quota.
 	DataQuota int64 `plist:"DataQuota" json:"DataQuota"`
-	// The amount of data, in bytes, that the user has used. This value is available in iOS 9.3 and
-	// later.
+	// The amount of data, in bytes, that the user has used.
 	DataUsed int64 `plist:"DataUsed" json:"DataUsed"`
-	// If `true`, the account is a mobile account. This value is available in macOS 10.13 and later.
+	// If `true`, the account is a mobile account.
 	MobileAccount bool `plist:"MobileAccount" json:"MobileAccount"`
-	// If `true`, the user currently has a secure token set. This value is available in macOS 11 and
-	// later.
+	// If `true`, the user currently has a secure token set.
 	HasSecureToken bool `plist:"HasSecureToken" json:"HasSecureToken"`
 }

@@ -5,7 +5,7 @@
   "description": "The payload that configures a user's screen saver settings.",
   "payload": {
     "payloadtype": "com.apple.screensaver.user",
-    "content": "Specifies *user* screen saver settings. (Settings for Login Window screen saver use a different payload)",
+    "content": "Specifies user screen saver settings. (Settings for Login Window screen saver use a different payload)",
     "supportedOS": {
       "iOS": {
         "introduced": "n/a"

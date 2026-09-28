@@ -5,7 +5,7 @@
   "description": "Inform the device that it can continue past Setup Assistant and finish login.",
   "payload": {
     "requesttype": "UserConfigured",
-    "content": "Inform the device that it can continue past Setup Assistant and finish login. Only works on Shared iPads that have the AwaitUserConfiguration feature enabled.",
+    "content": "Inform the device that it can continue past Setup Assistant and finish login. Only works on Shared iPad devices that have the AwaitUserConfiguration feature enabled.",
     "supportedOS": {
       "iOS": {
         "introduced": "17.0",

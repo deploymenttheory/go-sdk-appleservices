@@ -3,7 +3,7 @@
 package configurations
 
 // Package — Package.
-// The declaration to install a package.
+// The declaration to configure a package.
 //
 // Supported: macOS 26.0+.
 type Package struct {
@@ -13,6 +13,8 @@ type Package struct {
 	ManifestURL string `plist:"ManifestURL" json:"ManifestURL"`
 	// A dictionary that describes how and when to install the package.
 	InstallBehavior *PackageInstallBehavior `plist:"InstallBehavior,omitempty" json:"InstallBehavior,omitempty"`
+	// A dictionary that describes how to uninstall the package.
+	UninstallBehavior *PackageUninstallBehavior `plist:"UninstallBehavior,omitempty" json:"UninstallBehavior,omitempty"`
 }
 
 // PackageInstallBehavior is the InstallBehavior dictionary.
@@ -22,4 +24,14 @@ type PackageInstallBehavior struct {
 	//
 	// Default: Optional.
 	Install *PackageInstallBehaviorInstall `plist:"Install,omitempty" json:"Install,omitempty"`
+}
+
+// PackageUninstallBehavior is the UninstallBehavior dictionary.
+// A dictionary that describes how to uninstall the package.
+type PackageUninstallBehavior struct {
+	// If `true`, the system removes the files that the package installs when removing the
+	// configuration.
+	//
+	// Default: false.
+	Remove *bool `plist:"Remove,omitempty" json:"Remove,omitempty"`
 }

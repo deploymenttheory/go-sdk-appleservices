@@ -2,7 +2,7 @@
   "category": "declarative/declarations/configurations",
   "name": "management.test",
   "title": "Management:Test",
-  "description": "The declaration to test declarative device management.",
+  "description": "The declaration to configure a declarative device management test.",
   "payload": {
     "declarationtype": "com.apple.configuration.management.test",
     "apply": "multiple",
@@ -27,14 +27,14 @@
   "payloadkeys": [
     {
       "key": "Echo",
-      "title": "Status Echo",
+      "title": "Status echo",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The string to echo back in a status response reason."
     },
     {
       "key": "EchoDataAssetReference",
-      "title": "Status Echo from Asset",
+      "title": "Status echo from asset",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The string to read from a data asset to echo back in status response reason description.",
@@ -55,7 +55,7 @@
     },
     {
       "key": "ReturnStatus",
-      "title": "Status to Return",
+      "title": "Status to return",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "rangelist": [

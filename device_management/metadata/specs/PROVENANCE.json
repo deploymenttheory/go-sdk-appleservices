@@ -1,7 +1,7 @@
 {
   "source": "https://github.com/apple/device-management",
   "ref": "release",
-  "commit": "67045e2fa06f528b196c01edee6a8bf88b844beb",
-  "sha256": "10eca57aee3136c42f288c66309ea1e6d66e63fb276d2017b1f1d6256f1eccb9",
-  "fetched": "2026-09-14"
+  "commit": "09f249a06e7e3289930bf6d05f38fb562f748ebf",
+  "sha256": "646dd2696a38fdad3ad26fb50536c136b1c6d83c4877e6da579f9c4a26c8373c",
+  "fetched": "2026-09-28"
 }

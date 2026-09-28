@@ -7,8 +7,6 @@ package profiles
 //
 // Supported: macOS 10.12+.
 type SystemLogging struct {
-	// Not to be used.
-	Processes *Item `plist:"Processes,omitempty" json:"Processes,omitempty"`
 	// A dictionary enabling the logging level for subsystems. See `Customizing Logging Behavior While
 	// Debugging` for more details about the format of the dictionary.
 	Subsystems *Item `plist:"Subsystems,omitempty" json:"Subsystems,omitempty"`
@@ -17,8 +15,9 @@ type SystemLogging struct {
 	System *Item `plist:"System,omitempty" json:"System,omitempty"`
 }
 
-// Item is the Processes dictionary.
-// Not to be used.
+// Item is the Subsystems dictionary.
+// A dictionary enabling the logging level for subsystems. See `Customizing Logging Behavior While
+// Debugging` for more details about the format of the dictionary.
 type Item struct {
 	// TBD
 	ANY any `plist:"ANY,omitempty" json:"ANY,omitempty"`

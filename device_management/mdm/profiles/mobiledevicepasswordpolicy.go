@@ -57,13 +57,11 @@ type MobiledevicePasswordpolicy struct {
 	// Default: 0.
 	MaxGracePeriod *int64 `plist:"maxGracePeriod,omitempty" json:"maxGracePeriod,omitempty"`
 	// The number of minutes before the system resets the login after the maximum number of
-	// unsuccessful login attempts is reached. This key requires setting `maxFailedAttempts`. Available
-	// in macOS 10.10 and later.
+	// unsuccessful login attempts is reached. This key requires setting `maxFailedAttempts`.
 	MinutesUntilFailedLoginReset *int64 `plist:"minutesUntilFailedLoginReset,omitempty" json:"minutesUntilFailedLoginReset,omitempty"`
 	// If `true`, the system causes a password reset to occur the next time the user tries to
 	// authenticate. If this key is set in a device profile, the setting takes effect for all users,
-	// and admin authentications may fail until the admin user password is also reset. Available in
-	// macOS 10.13 and later.
+	// and admin authentications may fail until the admin user password is also reset.
 	//
 	// Default: false.
 	ChangeAtNextAuth *bool `plist:"changeAtNextAuth,omitempty" json:"changeAtNextAuth,omitempty"`

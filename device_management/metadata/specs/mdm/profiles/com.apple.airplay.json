@@ -34,7 +34,7 @@
       "subkeys": [
         {
           "key": "AllowListItem",
-          "title": "AllowList Content Item",
+          "title": "AllowList content item",
           "type": "\u003cdictionary\u003e",
           "presence": "required",
           "subkeys": [
@@ -56,7 +56,7 @@
             },
             {
               "key": "DeviceName",
-              "title": "Device Name",
+              "title": "Device name",
               "type": "\u003cstring\u003e",
               "presence": "optional",
               "content": "The name of the AirPlay device.\n\nThe system limits the list of visible AirPlay destinations to devices that are present in the `AllowList` field of all installed AirPlay payloads.",
@@ -98,16 +98,16 @@
       "subkeys": [
         {
           "key": "PasswordsItem",
-          "title": "Password Content Item",
+          "title": "Password content item",
           "type": "\u003cdictionary\u003e",
           "presence": "required",
           "subkeys": [
             {
               "key": "DeviceName",
-              "title": "Device Name",
+              "title": "Device name",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The name of the AirPlay destination; used in iOS, and available in macOS 15 and later.",
+              "content": "The name of the AirPlay destination.",
               "supportedOS": {
                 "macOS": {
                   "introduced": "15.0"
@@ -148,7 +148,7 @@
       "subkeys": [
         {
           "key": "AllowListItem",
-          "title": "AllowList Content Item",
+          "title": "AllowList content item",
           "type": "\u003cdictionary\u003e",
           "presence": "required",
           "subkeys": [
@@ -170,7 +170,7 @@
             },
             {
               "key": "DeviceName",
-              "title": "Device Name",
+              "title": "Device name",
               "type": "\u003cstring\u003e",
               "presence": "optional",
               "content": "The name of the AirPlay device.\n\nThe system limits the list of visible AirPlay destinations to devices that are present in the `AllowList` field of all installed AirPlay payloads.",

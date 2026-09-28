@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "mdm.is-awaiting-configuration",
+  "title": "Status MDM Is Awaiting Configuration",
+  "description": "The status item that reports the device management awaiting configuration state.",
+  "payload": {
+    "statusitemtype": "mdm.is-awaiting-configuration",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "27.0"
+      },
+      "visionOS": {
+        "introduced": "27.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "mdm.is-awaiting-configuration",
+      "title": "Status item value.",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "content": "If `true`, the device is awaiting configuration from the MDM server."
+    }
+  ]
+}

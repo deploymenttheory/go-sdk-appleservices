@@ -20,11 +20,6 @@ func (p *SecurityFirewall) Validate() error {
 			errs = append(errs, validate.Indexed("Applications", i, err))
 		}
 	}
-	if p.LoggingOption != nil {
-		if err := validate.InList("LoggingOption", *p.LoggingOption, []SecurityFirewallLoggingOption{SecurityFirewallLoggingOptionThrottled, SecurityFirewallLoggingOptionBrief, SecurityFirewallLoggingOptionDetail}); err != nil {
-			errs = append(errs, err)
-		}
-	}
 	return errors.Join(errs...)
 }
 

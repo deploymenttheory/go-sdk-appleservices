@@ -28,3 +28,27 @@ const (
 
 // String returns the SafariSettingsNewTabStartPagePageType value as a plain string.
 func (e SafariSettingsNewTabStartPagePageType) String() string { return string(e) }
+
+// WebsiteDictionaryCamera — allowed values for WebsiteDictionary.Camera.
+type WebsiteDictionaryCamera string
+
+// WebsiteDictionaryCamera allowed values.
+const (
+	WebsiteDictionaryCameraNone  WebsiteDictionaryCamera = "None"
+	WebsiteDictionaryCameraAllow WebsiteDictionaryCamera = "Allow"
+)
+
+// String returns the WebsiteDictionaryCamera value as a plain string.
+func (e WebsiteDictionaryCamera) String() string { return string(e) }
+
+// WebsiteDictionaryMicrophone — allowed values for WebsiteDictionary.Microphone.
+type WebsiteDictionaryMicrophone string
+
+// WebsiteDictionaryMicrophone allowed values.
+const (
+	WebsiteDictionaryMicrophoneNone  WebsiteDictionaryMicrophone = "None"
+	WebsiteDictionaryMicrophoneAllow WebsiteDictionaryMicrophone = "Allow"
+)
+
+// String returns the WebsiteDictionaryMicrophone value as a plain string.
+func (e WebsiteDictionaryMicrophone) String() string { return string(e) }

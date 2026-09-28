@@ -9,7 +9,8 @@ package profiles
 type Extensiblesso struct {
 	// The bundle identifier of the app extension that performs SSO for the specified URLs.
 	ExtensionIdentifier string `plist:"ExtensionIdentifier" json:"ExtensionIdentifier"`
-	// The team identifier of the app extension. This key is required on macOS and ignored elsewhere.
+	// The team identifier of the app extension. The device requires this key on macOS and ignores it
+	// elsewhere.
 	TeamIdentifier *string `plist:"TeamIdentifier,omitempty" json:"TeamIdentifier,omitempty"`
 	// The type of SSO.
 	Type ExtensiblessoType `plist:"Type" json:"Type"`
@@ -24,22 +25,19 @@ type Extensiblesso struct {
 	Hosts []string `plist:"Hosts,omitempty" json:"Hosts,omitempty"`
 	// If set to `Cancel`, the system cancels authentication requests when the screen is locked. If set
 	// to `DoNotHandle`, the request continues without SSO instead. This doesn't apply to requests
-	// where `userInterfaceEnabled` is `false`, or for background `URLSession` requests. Available in
-	// iOS 15 and later, and macOS 12 and later.
+	// where `userInterfaceEnabled` is `false`, or for background `URLSession` requests.
 	//
 	// Default: Cancel.
 	ScreenLockedBehavior *ExtensiblessoScreenLockedBehavior `plist:"ScreenLockedBehavior,omitempty" json:"ScreenLockedBehavior,omitempty"`
-	// An array of bundle identifiers of apps that don't use SSO provided by this extension. Available
-	// in iOS 15 and later, and macOS 12 and later.
+	// An array of bundle identifiers of apps that don't use SSO provided by this extension.
 	DeniedBundleIdentifiers []string `plist:"DeniedBundleIdentifiers,omitempty" json:"DeniedBundleIdentifiers,omitempty"`
 	// The Platform SSO authentication method the extension uses. Requires that the SSO Extension also
-	// supports the method. Available in macOS 13 and later, and deprecated in macOS 14.
+	// supports the method.
 	AuthenticationMethod *ExtensiblessoAuthenticationMethod `plist:"AuthenticationMethod,omitempty" json:"AuthenticationMethod,omitempty"`
 	// The token this device uses for registration with Platform SSO. Use it for silent registration
 	// with the Identity Provider. Requires that `AuthenticationMethod` in `PlatformSSO` isn't empty.
-	// Available in macOS 13 and later.
 	RegistrationToken *string `plist:"RegistrationToken,omitempty" json:"RegistrationToken,omitempty"`
-	// The dictionary to configure Platform SSO. Requires `Type` to be set to `Redirect`.
+	// The dictionary to configure Platform SSO. Requires setting `Type` to `Redirect`.
 	PlatformSSO *ExtensiblessoPlatformSSO `plist:"PlatformSSO,omitempty" json:"PlatformSSO,omitempty"`
 }
 
@@ -69,10 +67,10 @@ type ExtensiblessoPlatformSSOAuthorizationGroups struct {
 }
 
 // ExtensiblessoPlatformSSO is the PlatformSSO dictionary.
-// The dictionary to configure Platform SSO. Requires `Type` to be set to `Redirect`.
+// The dictionary to configure Platform SSO. Requires setting `Type` to `Redirect`.
 type ExtensiblessoPlatformSSO struct {
 	// The Platform SSO authentication method to use with the extension. Requires that the SSO
-	// Extension also support the method.
+	// Extension also support the method. `OpenID` is available in macOS 27 and later.
 	AuthenticationMethod *ExtensiblessoPlatformSSOAuthenticationMethod `plist:"AuthenticationMethod,omitempty" json:"AuthenticationMethod,omitempty"`
 	// If `true`, the system uses the same signing and encryption keys for all users. Only supported on
 	// the device channel.
@@ -138,25 +136,20 @@ type ExtensiblessoPlatformSSO struct {
 	// Default: false.
 	AllowAccessKeyExpressMode *bool `plist:"AllowAccessKeyExpressMode,omitempty" json:"AllowAccessKeyExpressMode,omitempty"`
 	// The policy to apply when using Platform SSO at FileVault unlock on a Mac with Apple silicon.
-	// Applies when `AuthenticationMethod` is `Password`. Available in macOS 15 and later.
 	FileVaultPolicy []string `plist:"FileVaultPolicy,omitempty" json:"FileVaultPolicy,omitempty"`
-	// The policy to apply when using Platform SSO at the Login Window. Applies when
-	// `AuthenticationMethod` is `Password`. Available in macOS 15 and later.
+	// The policy to apply when using Platform SSO at the Login Window.
 	LoginPolicy []string `plist:"LoginPolicy,omitempty" json:"LoginPolicy,omitempty"`
-	// The policy to apply when using Platform SSO at screensaver unlock. Applies when
-	// `AuthenticationMethod` is `Password`. Available in macOS 15 and later.
+	// The policy to apply when using Platform SSO at screensaver unlock.
 	UnlockPolicy []string `plist:"UnlockPolicy,omitempty" json:"UnlockPolicy,omitempty"`
-	// The amount of time after the last successful Platform SSO login for using a local account
-	// password offline. Required when setting `AllowOfflineGracePeriod`. Available in macOS 15 and
-	// later.
+	// The amount of time (in seconds) after the last successful Platform SSO login for using a local
+	// account password offline. Required when setting `AllowOfflineGracePeriod`.
 	OfflineGracePeriod *int64 `plist:"OfflineGracePeriod,omitempty" json:"OfflineGracePeriod,omitempty"`
-	// The amount of time after receiving or updating a `FileVaultPolicy`, `LoginPolicy`, or
-	// `UnlockPolicy` that the system can use unregistered local accounts. Required when
-	// `AllowAuthenticationGracePeriod` is set. Available in macOS 15 and later.
+	// The amount of time (in seconds) after receiving or updating a `FileVaultPolicy`, `LoginPolicy`,
+	// or `UnlockPolicy` that the system can use unregistered local accounts. Required when
+	// `AllowAuthenticationGracePeriod` is set.
 	AuthenticationGracePeriod *int64 `plist:"AuthenticationGracePeriod,omitempty" json:"AuthenticationGracePeriod,omitempty"`
 	// The list of local accounts that aren't subject to the `FileVaultPolicy`, `LoginPolicy`, or
-	// `UnlockPolicy`. The accounts don't receive a prompt to register for Platform SSO. Available in
-	// macOS 15 and later.
+	// `UnlockPolicy`. The accounts don't receive a prompt to register for Platform SSO.
 	NonPlatformSSOAccounts []string `plist:"NonPlatformSSOAccounts,omitempty" json:"NonPlatformSSOAccounts,omitempty"`
 	// If `true`, the system includes the device UDID and serial number in Platform SSO attestations.
 	//
@@ -179,4 +172,12 @@ type ExtensiblessoPlatformSSO struct {
 	//
 	// Default: false.
 	EnableRegistrationDuringSetup *bool `plist:"EnableRegistrationDuringSetup,omitempty" json:"EnableRegistrationDuringSetup,omitempty"`
+	// The set of allowed hosts that the system can load in the PSSO web view. Required if
+	// `AuthenticationMethod` is `OpenID`, or `NewUserAuthenticationMethods` contains `OpenID`.
+	WebLoginURLAllowList []string `plist:"WebLoginURLAllowList,omitempty" json:"WebLoginURLAllowList,omitempty"`
+	// If `true`, the system detects the password during web login and synchronizes it to the local
+	// account password for the user.
+	//
+	// Default: false.
+	AllowWebLoginPasswordSync *bool `plist:"AllowWebLoginPasswordSync,omitempty" json:"AllowWebLoginPasswordSync,omitempty"`
 }

@@ -171,7 +171,7 @@
       "key": "SkipSetupItems",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "An array of strings that describe the setup items to skip. `SkipKeys` provides a list of valid strings and their meanings. Available in iOS 14 and later, and macOS 15 and later.",
+      "content": "An array of strings that describe the setup items to skip. `SkipKeys` provides a list of valid strings and their meanings.",
       "subkeys": [
         {
           "key": "SkipSetupItems",

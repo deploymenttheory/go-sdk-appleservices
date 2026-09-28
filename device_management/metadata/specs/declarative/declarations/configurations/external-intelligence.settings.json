@@ -6,7 +6,6 @@
   "payload": {
     "declarationtype": "com.apple.configuration.external-intelligence.settings",
     "apply": "combined",
-    "content": "Configures External Intelligence Integrations settings.",
     "supportedOS": {
       "iOS": {
         "introduced": "26.4"
@@ -28,7 +27,7 @@
   "payloadkeys": [
     {
       "key": "Enabled",
-      "title": "Allow External Intelligence Integrations",
+      "title": "Allow external intelligence integrations",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -37,7 +36,7 @@
     },
     {
       "key": "AllowSignIn",
-      "title": "Allow External Intelligence Integrations Sign In",
+      "title": "Allow external intelligence integrations sign in",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -46,7 +45,7 @@
     },
     {
       "key": "AllowedWorkspaceIDs",
-      "title": "Allowed External Intelligence Workspace IDs",
+      "title": "Allowed external intelligence workspace IDs",
       "type": "\u003carray\u003e",
       "presence": "optional",
       "combinetype": "set-intersection",
@@ -54,7 +53,7 @@
       "subkeys": [
         {
           "key": "workspaceID",
-          "title": "Allowed Workspace ID",
+          "title": "Allowed workspace ID",
           "type": "\u003cstring\u003e"
         }
       ]

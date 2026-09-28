@@ -11,8 +11,6 @@ type Finder struct {
 	//
 	// Default: false.
 	ProhibitBurn *bool `plist:"ProhibitBurn,omitempty" json:"ProhibitBurn,omitempty"`
-	// Specifies whether Finder should operate in Simple or Full mode.
-	InterfaceLevel *FinderInterfaceLevel `plist:"InterfaceLevel,omitempty" json:"InterfaceLevel,omitempty"`
 	// If `true`, the system disables Connect to Server.
 	//
 	// Default: false.

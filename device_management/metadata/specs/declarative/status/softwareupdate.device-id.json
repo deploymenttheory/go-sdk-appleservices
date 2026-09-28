@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "softwareupdate.device-id",
   "title": "Status Software Update Device ID",
-  "description": "A status report of the device's update device ID.",
+  "description": "The status item that reports the device's software update device ID.",
   "payload": {
     "statusitemtype": "softwareupdate.device-id",
     "supportedOS": {

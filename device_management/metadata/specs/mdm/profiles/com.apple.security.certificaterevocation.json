@@ -27,7 +27,7 @@
   "payloadkeys": [
     {
       "key": "EnabledForCerts",
-      "title": "Enabled Certs",
+      "title": "Enabled certs",
       "type": "\u003carray\u003e",
       "presence": "optional",
       "content": "An array of certificates that the system checks for revocation.\n\nSpecifying a certificate authority (CA) enables revocation checking for all certificates chaining up to that CA.\n\nIt's not necessary to specify trusted root certificates because they're implicitly specified. See [https://support.apple.com/en-us/HT209143](https://support.apple.com/en-us/HT209143) for the available trusted root certificates for Apple operating systems.",

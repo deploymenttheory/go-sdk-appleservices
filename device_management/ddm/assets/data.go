@@ -9,7 +9,8 @@ package assets
 type Data struct {
 	// The external reference.
 	Reference DataReference `plist:"Reference" json:"Reference"`
-	// The server authentication details.
+	// The server authentication details. If this key is absent, the default authentication type is
+	// MDM.
 	Authentication *DataAuthentication `plist:"Authentication,omitempty" json:"Authentication,omitempty"`
 }
 
@@ -32,7 +33,8 @@ type DataReference struct {
 }
 
 // DataAuthentication is the Authentication dictionary.
-// The server authentication details.
+// The server authentication details. If this key is absent, the default authentication type is
+// MDM.
 type DataAuthentication struct {
 	// The type of authentication, which has these allowed values:
 	Type DataAuthenticationType `plist:"Type" json:"Type"`

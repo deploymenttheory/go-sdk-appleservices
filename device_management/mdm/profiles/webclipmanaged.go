@@ -32,11 +32,11 @@ type WebClipManaged struct {
 	Label string `plist:"Label" json:"Label"`
 	// If `true`, a full screen web clip can navigate to an external web site without showing Safari
 	// UI. Otherwise, Safari UI appears when navigating away from the web clip's URL. This key has no
-	// effect when `FullScreen` is `false`. Available in iOS 14 and later.
+	// effect when `FullScreen` is `false`.
 	//
 	// Default: false.
 	IgnoreManifestScope *bool `plist:"IgnoreManifestScope,omitempty" json:"IgnoreManifestScope,omitempty"`
 	// The application bundle identifier of the application that opens the URL. To use this property,
-	// install the profile through MDM. Available in iOS 14 and later.
+	// install the profile through MDM.
 	TargetApplicationBundleIdentifier *string `plist:"TargetApplicationBundleIdentifier,omitempty" json:"TargetApplicationBundleIdentifier,omitempty"`
 }

@@ -23,9 +23,9 @@ type TopLevel struct {
 	// The version number of the profile format, which needs to be `1`. This number represents the
 	// version of the configuration profile as a whole, not of the individual profiles within it.
 	PayloadVersion int64 `plist:"PayloadVersion" json:"PayloadVersion"`
-	// The array of payload dictionaries. If `IsEncrypted` is `true`, this array isn't needed.
+	// The array of payload dictionaries. Not present for encrypted payloads.
 	PayloadContent []TopLevelPayloadContentItem `plist:"PayloadContent" json:"PayloadContent"`
-	// Enabled if `IsEncrypted` is `true`.
+	// The encrypted payload content. Only present for encrypted payloads.
 	EncryptedPayloadContent []byte `plist:"EncryptedPayloadContent,omitempty" json:"EncryptedPayloadContent,omitempty"`
 	// The description of the profile, shown on the Detail screen for the profile. Make this
 	// description detailed enough to help the user decide whether to install the profile.
