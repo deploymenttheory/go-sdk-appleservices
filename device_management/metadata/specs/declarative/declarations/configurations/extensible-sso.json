@@ -1,0 +1,591 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "extensible-sso",
+  "title": "Extensible SSO",
+  "description": "The declaration to configure Extensible Single Sign-On.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.extensible-sso",
+    "apply": "multiple",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "27.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "ExtensionComposedIdentifier",
+      "title": "Extension composed identifier",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "content": "The identifier of the provider to use for this configuration. Useful for apps that contain more than one DNS proxy extension.\n\nIn iOS and visionOS, the identifier is a bundle ID, for example, \"com.example.app.sso-extension\".\n\nIn macOS, the identifier is a composed identifier. The format of the composed identifier is \"Bundle-ID (Team-ID)\". \"Bundle-ID\" is the bundle identifier string of the app extension. \"Team-ID\" is the team identifier from the app extension's code signature. For example, \"com.example.app.sso-extension (ABCD1234)\"."
+    },
+    {
+      "key": "Type",
+      "title": "Type",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "Credential",
+        "Redirect"
+      ],
+      "content": "The type of SSO."
+    },
+    {
+      "key": "Realm",
+      "title": "Realm",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The realm name for `Credential` payloads. Use proper capitalization for this value. Ignored for `Redirect` payloads."
+    },
+    {
+      "key": "ExtensionData",
+      "title": "Extension data",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary of arbitrary data passed through to the app extension.",
+      "subkeys": [
+        {
+          "key": "ANY",
+          "type": "\u003cany\u003e",
+          "presence": "optional",
+          "content": "Keys and values to pass to the app extension."
+        }
+      ]
+    },
+    {
+      "key": "URLs",
+      "title": "URLs",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of URL prefixes of identity providers where the app extension performs SSO.\n\nRequired for `Redirect` payloads. Ignored for `Credential` payloads.\n\nThe URLs need to begin with `http://` or `https://`.\n\nThe system:\n\n- Matches scheme and host name case-insensitively\n- Doesn't allow query parameters and URL fragments\n- Requires that the URLs of all installed Extensible SSO payloads are unique",
+      "subkeys": [
+        {
+          "key": "URL",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "An http or https URL prefix."
+        }
+      ]
+    },
+    {
+      "key": "Hosts",
+      "title": "Hosts",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of host or domain names that apps can authenticate through the app extension.\n\nRequired for `Credential` payloads. Ignored for `Redirect` payloads.\n\nThe system:\n\n- Matches host or domain names case-insensitively\n- Requires that all the host and domain names of all installed Extensible SSO payloads are unique\n\n\u003e Note:\n\u003e Host names that begin with a \".\" are wildcard suffixes that match all subdomains; otherwise the host name needs be an exact match.",
+      "subkeys": [
+        {
+          "key": "hostname",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "A host or domain name, with or without a leading dot."
+        }
+      ]
+    },
+    {
+      "key": "DeniedBundleIdentifiers",
+      "title": "Denied bundle identifiers",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of bundle identifiers of apps that don't use SSO provided by this extension.",
+      "subkeys": [
+        {
+          "key": "bundleIdentifier",
+          "type": "\u003cstring\u003e",
+          "presence": "required",
+          "content": "The bundle identifier of the app."
+        }
+      ]
+    },
+    {
+      "key": "ScreenLockedBehavior",
+      "title": "Screen locked behavior",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "rangelist": [
+        "Cancel",
+        "DoNotHandle"
+      ],
+      "default": "Cancel",
+      "content": "If set to `Cancel`, the system cancels authentication requests when the screen is locked. If set to `DoNotHandle`, the request continues without SSO instead. This doesn't apply to requests where `userInterfaceEnabled` is `false`, or for background `URLSession` requests."
+    },
+    {
+      "key": "PlatformSSO",
+      "title": "Platform SSO",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The dictionary to configure Platform SSO.",
+      "subkeys": [
+        {
+          "key": "AuthenticationMethod",
+          "title": "Authentication method",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "rangelist": [
+            "Password",
+            "UserSecureEnclaveKey",
+            "SmartCard",
+            "OpenID"
+          ],
+          "content": "The Platform SSO authentication method to use with the extension. Requires that the SSO Extension also support the method."
+        },
+        {
+          "key": "RegistrationToken",
+          "title": "Registration token",
+          "type": "\u003cstring\u003e",
+          "presence": "optional",
+          "content": "The token this device uses for registration with Platform SSO. Use it for silent registration with the Identity Provider. Requires that `AuthenticationMethod` in `PlatformSSO` isn't empty.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "UseSharedDeviceKeys",
+          "title": "Use shared device keys",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, the system uses the same signing and encryption keys for all users.",
+          "supportedOS": {
+            "macOS": {}
+          }
+        },
+        {
+          "key": "LoginFrequency",
+          "title": "Login frequency",
+          "type": "\u003cinteger\u003e",
+          "presence": "optional",
+          "range": {
+            "min": 3600
+          },
+          "default": 64800,
+          "content": "The duration, in seconds, until the system requires a full login instead of a refresh. The default value is 64,800 (18 hours). The minimum value is 3600 (1 hour)."
+        },
+        {
+          "key": "AllowDeviceIdentifiersInAttestation",
+          "title": "Allow device identifiers in attestation",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, the system includes the device UDID and serial number in Platform SSO attestations."
+        },
+        {
+          "key": "Account",
+          "title": "Account",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "Account display and profile settings.",
+          "subkeys": [
+            {
+              "key": "DisplayName",
+              "title": "Display name",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The display name for the account in notifications and authentication requests."
+            },
+            {
+              "key": "SynchronizeProfilePicture",
+              "title": "Synchronize profile picture",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system requests the user's profile picture from the SSO extension."
+            }
+          ]
+        },
+        {
+          "key": "UserCreation",
+          "title": "User creation",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "Settings for creating new users via Platform SSO.",
+          "subkeys": [
+            {
+              "key": "EnableAtLogin",
+              "title": "Enable at login",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "Enables creating users at the Login Window with an `AuthenticationMethod` of either `Password` or `SmartCard`. Requires that `UseSharedDeviceKeys` is `true`."
+            },
+            {
+              "key": "EnableFirstUserDuringSetup",
+              "title": "Enable first user during setup",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": true,
+              "content": "If `true`, the device uses Platform SSO to create the first user account on the Mac during `Setup Assistant`."
+            },
+            {
+              "key": "EnableRegistrationDuringSetup",
+              "title": "Enable registration during setup",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system enables the PlatformSSO registration process during Setup Assistant on devices running macOS 26 and later. Set this key to `true` when configuring PlatformSSO before enrollment using the `com.apple.psso.required` error response."
+            },
+            {
+              "key": "NewUserAuthenticationMethods",
+              "title": "New user authentication methods",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The set of authentication methods to use for newly created accounts at login or during `Setup Assistant`. The system uses `Password` and `SmartCard` if this key isn't present.",
+              "subkeys": [
+                {
+                  "key": "NewUserAuthenticationMethod",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "Password",
+                    "SmartCard",
+                    "AccessKey",
+                    "OpenID"
+                  ],
+                  "content": "An authentication method to use for newly created accounts at login or during `Setup Assistant`. Allowed values:\n\n* `Password`: The account uses a password for authentication.\n* `SmartCard`: The account uses a smart card for authentication.\n* `AccessKey`: The account uses an access key for authentication.\n* `OpenID`: The account uses OpenID for authentication."
+                }
+              ]
+            },
+            {
+              "key": "NewUserAuthorizationMode",
+              "title": "New user authorization mode",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "Standard",
+                "Admin",
+                "Groups",
+                "Temporary"
+              ],
+              "content": "The permission to apply to newly created accounts at login. Allowed values:\n\n* `Standard`: The account is a standard user.\n* `Admin`: The system adds the account to the local administrators group.\n* `Groups`: The system assigns groups to the account using `Authorization.AdministratorGroups`, `Authorization.AdditionalGroups`, or `Authorization.AuthorizationGroups`.\n* `Temporary`: The system uses a temporary session configuration for newly created accounts at login."
+            },
+            {
+              "key": "TokenToUserMapping",
+              "title": "Token to user mapping",
+              "type": "\u003cdictionary\u003e",
+              "presence": "optional",
+              "content": "The attribute mapping to use when creating users, or for authorization.",
+              "subkeys": [
+                {
+                  "key": "AccountName",
+                  "title": "Account name",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The claim name to use for the user's account name."
+                },
+                {
+                  "key": "FullName",
+                  "title": "Full name",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The claim name to use for the user's full name."
+                }
+              ]
+            },
+            {
+              "key": "TemporarySessionQuickLogin",
+              "title": "Temporary session quick login",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system uses a quicker Authenticated Guest Mode login to Mac behavior. The system erases user data from only select locations in the user home directory after each session completes. Once every eight hours the system erases the full user home directory after a session completes. Turn this on for shared environments that have a high frequency of short sessions."
+            }
+          ]
+        },
+        {
+          "key": "Authorization",
+          "title": "Authorization",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "Settings for authorization prompts and group management.",
+          "subkeys": [
+            {
+              "key": "EnableIdentityProviderAccounts",
+              "title": "Enable identity provider accounts",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "Enables using identity provider accounts at authorization prompts. Requires that `UseSharedDeviceKeys` is `true`. The system assigns groups using `AdministratorGroups`, `AdditionalGroups`, or `AuthorizationGroups`."
+            },
+            {
+              "key": "UserAuthorizationMode",
+              "title": "User authorization mode",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "rangelist": [
+                "Standard",
+                "Admin",
+                "Groups"
+              ],
+              "content": "The permission to apply to an account each time the user authenticates. Allowed values:\n\n* `Standard`: The account is a standard user.\n* `Admin`: The system adds the account to the local administrators group.\n* `Groups`: The system assigns group to the account using `AdministratorGroups`, `AdditionalGroups`, or `AuthorizationGroups`."
+            },
+            {
+              "key": "AdministratorGroups",
+              "title": "Administrator groups",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The list of groups to use for administrator access. The system requests membership during authentication.",
+              "subkeys": [
+                {
+                  "key": "Group",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The group name."
+                }
+              ]
+            },
+            {
+              "key": "AdditionalGroups",
+              "title": "Additional groups",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The list of created groups that don't have administrator access.",
+              "subkeys": [
+                {
+                  "key": "Group",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The group name."
+                }
+              ]
+            },
+            {
+              "key": "AuthorizationGroups",
+              "title": "Authorization groups",
+              "type": "\u003cdictionary\u003e",
+              "presence": "optional",
+              "content": "The pairing of Authorization Rights to group names. When using this, the system updates the Authorization Right to use the group.",
+              "subkeys": [
+                {
+                  "key": "ANY",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The key is an access right value, the value is the group to be associated with that access right."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "AccessKey",
+          "title": "Access key",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "Settings for Access Key authentication.",
+          "subkeys": [
+            {
+              "key": "ReaderGroupIdentifier",
+              "title": "Reader group identifier",
+              "type": "\u003cdata\u003e",
+              "presence": "optional",
+              "content": "The reader group identifier for use with the `AccessKey`. The value needs to match the configured access key. Required if `UserCreation.AuthenticationMethods` contains `AccessKey`."
+            },
+            {
+              "key": "TerminalIdentityAssetReference",
+              "title": "Terminal identity asset reference",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The identifier of an asset declaration that contains the identity to use as the Terminal identity of the Access Key. The Access Key needs to trust the identity. Required if `UserCreation.AuthenticationMethods` includes `AccessKey`.",
+              "assettypes": [
+                "com.apple.asset.credential.identity",
+                "com.apple.asset.credential.scep",
+                "com.apple.asset.credential.acme"
+              ]
+            },
+            {
+              "key": "ReaderIssuerCertificateAssetReference",
+              "title": "Reader issuer certificate asset reference",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "The identifier of an asset declaration that contains the certificate for the issuer certificate of the `Terminal` identity of the access key. Other specifications refer to the key as the \"Reader CA Public Key\". The key must be an elliptic curve key. Required if `UserCreation.AuthenticationMethods` includes `AccessKey`. The issuer of the Terminal identity of the access key needs to match this certificate, otherwise the device fails the authentication.",
+              "assettypes": [
+                "com.apple.asset.credential.certificate"
+              ]
+            },
+            {
+              "key": "AllowExpressMode",
+              "title": "Allow express mode",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system uses the access key in express mode, and doesn't require authentication before use."
+            }
+          ]
+        },
+        {
+          "key": "Policies",
+          "title": "Policies",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "Policies for login, unlock, and FileVault behavior.",
+          "subkeys": [
+            {
+              "key": "FileVault",
+              "title": "FileVault",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The policy to apply when using Platform SSO at FileVault unlock on a Mac with Apple silicon.\n\n* `AttemptAuthentication`: The device attempts Platform SSO authentication before proceeding. If offline, unlock continues if the local account password matches. If online and the credential is incorrect, then the device requires a successful Platform SSO authentication is required, even if taken offline. Only use when `AuthenticationMethod` is `Password`.\n* `RequireAuthentication`: The device requires Platform SSO authentication before proceeding. If the device is offline and `AllowOfflineGracePeriod` is enabled, then the device uses the offline `OfflineGracePeriod` to determine if the user can proceed or not. If online and the credential is incorrect, then the device requires a valid Platform SSO authentication to proceed, regardless of the `OfflineGracePeriod`. If the account isn't registered for Platform SSO and `AllowAuthenticationGracePeriod` is enabled, then the device uses `AuthenticationGracePeriod` to determine if the user can proceed or not. Only use when `AuthenticationMethod` is `Password`.\n* `AllowOfflineGracePeriod`: The device allows the use of the `OfflineGracePeriod`. If `AllowOfflineGracePeriod` isn't set, then the device denies offline access. Only use when `AuthenticationMethod` is `Password` and `RequireAuthentication` is enabled, or `AuthenticationMethod` is `OpenID`.\n* `AllowAuthenticationGracePeriod`: The device allows the use of the `AuthenticationGracePeriod` for other local accounts when `RequireAuthentication` is enabled. The `AuthenticationGracePeriod` starts when any of the policies are updated. If `AllowAuthenticationGracePeriod` isn't set, then the device denies unregistered account access. Only use when `AuthenticationMethod` is `Password`.\n* `RequireTouchID`: The device requires the use of Touch ID (and not Apple Watch) for FileVault unlock. Only use when `AuthenticationMethod` is `Password` or `UserSecureEnclaveKey`.\n* `RequireTouchIDOrWatch`: The device requires the use of Touch ID or Apple Watch for FileVault unlock. Only use when `AuthenticationMethod` is `Password` or `UserSecureEnclaveKey`.\n* `AllowOpenIDForTouchIDFallback`: The device allows web login as a fallback if Touch ID fails or isn't available. Only use when `AuthenticationMethod` is `Password` or `UserSecureEnclaveKey`.",
+              "subkeys": [
+                {
+                  "key": "policy",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "rangelist": [
+                    "AttemptAuthentication",
+                    "RequireAuthentication",
+                    "AllowOfflineGracePeriod",
+                    "AllowAuthenticationGracePeriod",
+                    "RequireTouchID",
+                    "RequireTouchIDOrWatch",
+                    "AllowOpenIDForTouchIDFallback"
+                  ],
+                  "content": "The policy to apply."
+                }
+              ]
+            },
+            {
+              "key": "Login",
+              "title": "Login",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The policy to apply when using Platform SSO at the Login Window.\n\n* `AttemptAuthentication`: The device attempts Platform SSO authentication before proceeding. If offline, login continues if the local account password matches. If online and the credential is incorrect, then the device requires a successful Platform SSO authentication to proceed, even if taken offline. Only use when `AuthenticationMethod` is `Password`.\n* `RequireAuthentication`: The device requires Platform SSO authentication before proceeding. If the device is offline and `AllowOfflineGracePeriod` is enabled, then the device uses the offline `OfflineGracePeriod` to determine if the user can proceed or not. If online and the credential is incorrect, then the device requires a valid Platform SSO authentication to proceed, regardless of the `OfflineGracePeriod`. If the account isn't registered for Platform SSO and `AllowAuthenticationGracePeriod` is enabled, then the device uses the `AuthenticationGracePeriod` to determine if the user can proceed or not. Only use when `AuthenticationMethod` is `Password`.\n* `AllowOfflineGracePeriod`: The device allows the use of the `OfflineGracePeriod`. If `AllowOfflineGracePeriod` isn't set, then the device denies offline access. Only use when `AuthenticationMethod` is `Password` and `RequireAuthentication` is enabled, or `AuthenticationMethod` is `OpenID`.\n* `AllowAuthenticationGracePeriod`: The device allows the use of the `AuthenticationGracePeriod` for other local accounts when `RequireAuthentication` is enabled. The `AuthenticationGracePeriod` starts when any of the policies have been updated. If `AllowAuthenticationGracePeriod` isn't set, then the device denies unregistered account access. Only use when `AuthenticationMethod` is `Password`.\n* `RequireTouchID`: The device requires the use of Touch ID (and not Apple Watch) for login. Only use when `AuthenticationMethod` is `Password` or `UserSecureEnclaveKey`.\n* `RequireTouchIDOrWatch`: The device requires the use of Touch ID or Apple Watch for login. Only use when `AuthenticationMethod` is `Password` or `UserSecureEnclaveKey`.\n* `AllowOpenIDForTouchIDFallback`: The device allows web login as fallback if Touch ID fails or isn't available. Only use when `AuthenticationMethod` is `Password` or `UserSecureEnclaveKey`.",
+              "subkeys": [
+                {
+                  "key": "policy",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "rangelist": [
+                    "AttemptAuthentication",
+                    "RequireAuthentication",
+                    "AllowOfflineGracePeriod",
+                    "AllowAuthenticationGracePeriod",
+                    "RequireTouchID",
+                    "RequireTouchIDOrWatch",
+                    "AllowOpenIDForTouchIDFallback"
+                  ],
+                  "content": "The policy to apply."
+                }
+              ]
+            },
+            {
+              "key": "Unlock",
+              "title": "Unlock",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The policy to apply when using Platform SSO at screensaver unlock.\n\n* `AttemptAuthentication`: The device attempts Platform SSO authentication before proceeding. If offline, unlock will continue if the local account password matches. If online and the credential is incorrect, then the device requires a successful Platform SSO authentication to proceed, even if taken offline. Only use when `AuthenticationMethod` is `Password`.\n* `RequireAuthentication`: The device requires Platform SSO authentication before proceeding. If the device is offline and `AllowOfflineGracePeriod` is enabled, then the offline `OfflineGracePeriod` is used to determine if the user can proceed or not. If online and the credential is incorrect, then the device requires a valid Platform SSO authentication to proceed regardless of the `OfflineGracePeriod`. If the account isn't registered for Platform SSO and `AllowAuthenticationGracePeriod` is enabled, then the device uses `AuthenticationGracePeriod` to determine if the user can proceed or not. Only use when `AuthenticationMethod` is `Password`.\n* `AllowOfflineGracePeriod`: The device allows the use of the `OfflineGracePeriod`. If `AllowOfflineGracePeriod` isn't set, then the device denies offline access. Only use when `AuthenticationMethod` is `Password` and `RequireAuthentication` is enabled, or `AuthenticationMethod` is `OpenID`.\n* `AllowAuthenticationGracePeriod`: The device allows the use of the `AuthenticationGracePeriod` for other local accounts when `RequireAuthentication` is enabled. The `AuthenticationGracePeriod` starts when any of the policies have been updated. If `AllowAuthenticationGracePeriod` isn't set, then the device denies the unregistered account access. Only use when `AuthenticationMethod` is `Password`.\n* `AllowTouchIDOrWatchForUnlock`: The device allows Touch ID or Apple Watch to unlock the screensaver instead of Platform SSO authentication when `RequireAuthentication` is enabled. Only use when `AuthenticationMethod` is `Password`.\n* `RequireTouchID`: The device requires the use of Touch ID (and not Apple Watch) for unlock. Only use when `AuthenticationMethod` is `Password` or `UserSecureEnclaveKey`.\n* `RequireTouchIDOrWatch`: The device requires the use of Touch ID or Apple Watch for unlock. Only use when `AuthenticationMethod` is `Password` or `UserSecureEnclaveKey`.\n* `AllowOpenIDForTouchIDFallback`: The device allows web login as fallback if Touch ID fails or isn't available. Only use when `AuthenticationMethod` is `Password` or `UserSecureEnclaveKey`.",
+              "subkeys": [
+                {
+                  "key": "policy",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "rangelist": [
+                    "AttemptAuthentication",
+                    "RequireAuthentication",
+                    "AllowOfflineGracePeriod",
+                    "AllowAuthenticationGracePeriod",
+                    "AllowTouchIDOrWatchForUnlock",
+                    "RequireTouchID",
+                    "RequireTouchIDOrWatch",
+                    "AllowOpenIDForTouchIDFallback"
+                  ],
+                  "content": "The policy to apply."
+                }
+              ]
+            },
+            {
+              "key": "OfflineGracePeriod",
+              "title": "Offline grace period",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The amount of time (in seconds) after the last successful Platform SSO login for using a local account password offline. Required when setting `AllowOfflineGracePeriod`."
+            },
+            {
+              "key": "AuthenticationGracePeriod",
+              "title": "Authentication grace period",
+              "type": "\u003cinteger\u003e",
+              "presence": "optional",
+              "content": "The amount of time (in seconds) after receiving or updating a `Policies.FileVault`, `Policies.Login`, or `Policies.Unlock` that the system can use unregistered local accounts. Required when `AllowAuthenticationGracePeriod` is set."
+            },
+            {
+              "key": "NonPlatformSSOAccounts",
+              "title": "Non-platform SSO accounts",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The list of local accounts that aren't subject to the `Policies.FileVault`, `Policies.Login`, or `Policies.Unlock` policies. The accounts don't receive a prompt to register for Platform SSO.",
+              "subkeys": [
+                {
+                  "key": "username",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "A local account username."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "WebAuthentication",
+          "title": "Web authentication",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "Settings for web authentication behavior.",
+          "subkeys": [
+            {
+              "key": "URLAllowList",
+              "title": "URL allow list",
+              "type": "\u003carray\u003e",
+              "presence": "optional",
+              "content": "The set of allowed hosts that the system can load in the PSSO web view. Required if `AuthenticationMethod` is set to `OpenID`, or `UserCreation.AuthenticationMethods` contains `OpenID`.",
+              "subkeys": [
+                {
+                  "key": "Hosts",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "A host or host prefix."
+                }
+              ]
+            },
+            {
+              "key": "AllowPasswordSync",
+              "title": "Allow password sync",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system detects the password during web authentication and synchronizes it to the local account password for the user."
+            }
+          ],
+          "supportedOS": {
+            "macOS": {
+              "introduced": "27.0"
+            }
+          }
+        }
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

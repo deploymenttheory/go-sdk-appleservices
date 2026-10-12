@@ -35,18 +35,18 @@ type SoftwareupdateSettings struct {
 type SoftwareupdateSettingsDeferrals struct {
 	// Specifies the number of days to defer a major or minor OS software update on the device. When
 	// set, software updates only appear after the specified delay, following the release of the
-	// software update. Available in iOS 18 and later.
+	// software update.
 	CombinedPeriodInDays *int64 `plist:"CombinedPeriodInDays,omitempty" json:"CombinedPeriodInDays,omitempty"`
 	// Specifies the number of days to defer a major OS software update on the device. When set,
 	// software updates only appear after the specified delay, following the release of the software
-	// update. Available in macOS 15 and later.
+	// update.
 	MajorPeriodInDays *int64 `plist:"MajorPeriodInDays,omitempty" json:"MajorPeriodInDays,omitempty"`
 	// Specifies the number of days to defer a minor OS software update on the device. It also defers
 	// major updates for iOS. When set, software updates only appear after the specified delay,
-	// following the release of the software update. Available in macOS 15 and later.
+	// following the release of the software update.
 	MinorPeriodInDays *int64 `plist:"MinorPeriodInDays,omitempty" json:"MinorPeriodInDays,omitempty"`
 	// Specifies the number of days to defer system or non-OS updates. When set, updates only appear
-	// after the specified delay, following the release of the update. Available in macOS 15 and later.
+	// after the specified delay, following the release of the update.
 	SystemPeriodInDays *int64 `plist:"SystemPeriodInDays,omitempty" json:"SystemPeriodInDays,omitempty"`
 }
 
@@ -88,9 +88,9 @@ type SoftwareupdateSettingsRapidSecurityResponse struct {
 type SoftwareupdateSettingsBetaProgram struct {
 	// A human readable description of the beta program.
 	Description string `plist:"Description" json:"Description"`
-	// The Apple Business Manager or Apple School Manager seeding service token for the organization
-	// the MDM server is part of. The system uses this token to enroll the device in the corresponding
-	// beta program.
+	// The Apple School Manager or Apple Business seeding service token for the organization the MDM
+	// server is part of. The system uses this token to enroll the device in the corresponding beta
+	// program.
 	Token string `plist:"Token" json:"Token"`
 }
 
@@ -101,9 +101,9 @@ type SoftwareupdateSettingsBetaProgram struct {
 type SoftwareupdateSettingsBetaRequireProgram struct {
 	// A human readable description of the beta program.
 	Description string `plist:"Description" json:"Description"`
-	// The Apple Business Manager or Apple School Manager seeding service token for the organization
-	// the MDM server is part of. The system uses this token to enroll the device in the corresponding
-	// beta program.
+	// The Apple School Manager or Apple Business seeding service token for the organization the MDM
+	// server is part of. The system uses this token to enroll the device in the corresponding beta
+	// program.
 	Token string `plist:"Token" json:"Token"`
 }
 

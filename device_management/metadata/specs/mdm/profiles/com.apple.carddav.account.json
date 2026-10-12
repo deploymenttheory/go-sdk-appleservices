@@ -26,7 +26,7 @@
   "payloadkeys": [
     {
       "key": "CardDAVAccountDescription",
-      "title": "Account Description",
+      "title": "Account description",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The description of the account.",
@@ -38,7 +38,7 @@
     },
     {
       "key": "CardDAVHostName",
-      "title": "Account Hostname",
+      "title": "Account hostname",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The server's address.",
@@ -50,7 +50,7 @@
     },
     {
       "key": "CardDAVUsername",
-      "title": "Account Username",
+      "title": "Account username",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user name for logins.",
@@ -62,7 +62,7 @@
     },
     {
       "key": "CardDAVPassword",
-      "title": "Account Password",
+      "title": "Account password",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user's password. Only use this in encrypted profiles.",
@@ -99,7 +99,7 @@
     },
     {
       "key": "CardDAVPort",
-      "title": "Port Number",
+      "title": "Port number",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "content": "The server's port.",
@@ -111,14 +111,14 @@
     },
     {
       "key": "CommunicationServiceRules",
-      "title": "Communication Service Rules",
+      "title": "Communication service rules",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "An array of communication service rules for this account.",
       "subkeys": [
         {
           "key": "DefaultServiceHandlers",
-          "title": "Default Service Handlers",
+          "title": "Default service handlers",
           "type": "\u003cdictionary\u003e",
           "presence": "optional",
           "content": "A dictionary of service handlers for contacts from this account.",
@@ -163,7 +163,7 @@
       "title": "VPNUUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14 and later.",
+      "content": "The VPNUUID of the per-app VPN the account uses for network communication.",
       "supportedOS": {
         "iOS": {
           "introduced": "14.0"

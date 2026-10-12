@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.operating-system.family",
   "title": "Status Device Operating System Family",
-  "description": "A status report of the device's operating system family.",
+  "description": "The status item that reports the device's operating system family.",
   "payload": {
     "statusitemtype": "device.operating-system.family",
     "supportedOS": {

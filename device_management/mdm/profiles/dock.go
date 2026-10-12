@@ -95,11 +95,11 @@ type Dock struct {
 	//
 	// Default: false.
 	ContentsImmutable *bool `plist:"contents-immutable,omitempty" json:"contents-immutable,omitempty"`
-	// One or more special folders that may be created at user login time and placed in the Dock.
+	// One or more special folders that the device may create at user login time and place in the Dock.
 	MCXDockSpecialFolders []string `plist:"MCXDockSpecialFolders,omitempty" json:"MCXDockSpecialFolders,omitempty"`
 	// If `true`, use the file in `/Library/Preferences/com.apple.dockfixup.plist` when a new user or
-	// migrated user logs in. This option has no effect for existing users. Available in macOS 10.12
-	// and later. Only available on the device channel.
+	// migrated user logs in. This option has no effect for existing users. Only available on the
+	// device channel.
 	//
 	// Default: false.
 	AllowDockFixupOverride *bool `plist:"AllowDockFixupOverride,omitempty" json:"AllowDockFixupOverride,omitempty"`
@@ -109,16 +109,16 @@ type Dock struct {
 	//
 	// Default: false.
 	StaticOnly *bool `plist:"static-only,omitempty" json:"static-only,omitempty"`
-	// An array of items located on the Documents side of the Dock and cannot be removed from that
+	// An array of items located on the Documents side of the Dock that users can't remove from that
 	// location.
 	StaticOthers []DockStaticItem `plist:"static-others,omitempty" json:"static-others,omitempty"`
-	// An array of items located on the Applications side of the Dock and cannot be removed from that
+	// An array of items located on the Applications side of the Dock that users can't remove from that
 	// location.
 	StaticApps []DockStaticItem `plist:"static-apps,omitempty" json:"static-apps,omitempty"`
-	// An array of items located on the Applications side of the Dock that can be removed from the
+	// An array of items located on the Applications side of the Dock that users can remove from the
 	// Dock.
 	PersistentApps []DockStaticItem `plist:"persistent-apps,omitempty" json:"persistent-apps,omitempty"`
-	// An array of items located on the Documents side of the Dock that can be removed from the Dock.
+	// An array of items located on the Documents side of the Dock that users can remove from the Dock.
 	PersistentOthers []DockStaticItem `plist:"persistent-others,omitempty" json:"persistent-others,omitempty"`
 }
 

@@ -44,7 +44,7 @@ type RotateFileVaultKeyFileVaultUnlock struct {
 // RotateResultItem is the RotateResult dictionary.
 // The result of rotating the personal recovery key.
 type RotateResultItem struct {
-	// A new personal recovery key that is encrypted using a `ReplyEncryptionCertificate` as a
+	// A new personal recovery key that's encrypted using a `ReplyEncryptionCertificate` as a
 	// CMS-compliant envelope.
 	EncryptedNewRecoveryKey []byte `plist:"EncryptedNewRecoveryKey,omitempty" json:"EncryptedNewRecoveryKey,omitempty"`
 }

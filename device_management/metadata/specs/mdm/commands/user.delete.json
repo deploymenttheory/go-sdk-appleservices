@@ -31,14 +31,14 @@
       "key": "UserName",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The user name of the account to delete. This key is required when the value for `DeleteAllUsers` is absent or `false`."
+      "content": "The user name of the account to delete. The device requires this key when the value for `DeleteAllUsers` is absent or `false`."
     },
     {
       "key": "ForceDeletion",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system deletes the account even if the user has data that's pending sync to the cloud. This value is available on iOS 9.3 and later.",
+      "content": "If `true`, the system deletes the account even if the user has data that's pending sync to the cloud.",
       "supportedOS": {
         "macOS": {
           "introduced": "n/a"
@@ -50,7 +50,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system attempts to delete all users from the device. If `ForceDeletion` is `false`, the system generates an error instead and doesn't delete users who have data that's pending sync. This value is available in iOS 14 and later.",
+      "content": "If `true`, the system attempts to delete all users from the device. If `ForceDeletion` is `false`, the system generates an error instead and doesn't delete users who have data that's pending sync.",
       "supportedOS": {
         "iOS": {
           "introduced": "14.0"

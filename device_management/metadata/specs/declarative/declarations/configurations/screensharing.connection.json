@@ -27,7 +27,7 @@
   "payloadkeys": [
     {
       "key": "ConnectionUUID",
-      "title": "Unique Identifier",
+      "title": "Unique identifier",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "A unique identifier for this connection when it's in a connection group."
@@ -41,27 +41,28 @@
     },
     {
       "key": "HostName",
-      "title": "Host Name",
+      "title": "Host name",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The host name or IP address of the Mac that hosts the screen-sharing connection."
     },
     {
       "key": "Port",
-      "title": "TCP Port",
+      "title": "TCP port",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "content": "The TCP port number on the host to initiate the connection."
     },
     {
       "key": "DisplayConfiguration",
-      "title": "Display Configuration",
+      "title": "Display configuration",
       "type": "\u003cdictionary\u003e",
       "presence": "required",
       "content": "The display configuration for this connection.",
       "subkeys": [
         {
           "key": "DisplayType",
+          "title": "Display type",
           "type": "\u003cstring\u003e",
           "presence": "required",
           "rangelist": [
@@ -74,7 +75,7 @@
     },
     {
       "key": "AuthenticationCredentialsAssetReference",
-      "title": "Authentication Credentials Asset Reference",
+      "title": "Authentication credentials asset reference",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The identifier of an asset declaration that contains the required credentials for this connection to authenticate with the screen-sharing server. Set the corresponding asset type to `com.apple.asset.credential.userpassword`.",

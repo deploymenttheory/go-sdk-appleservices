@@ -29,14 +29,14 @@
   "payloadkeys": [
     {
       "key": "AIMAccountDescription",
-      "title": "Account Description",
+      "title": "Account description",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The description of the account."
     },
     {
       "key": "AIMHostName",
-      "title": "Account Hostname",
+      "title": "Account hostname",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "rangelist": [
@@ -46,14 +46,14 @@
     },
     {
       "key": "AIMUserName",
-      "title": "Account Username",
+      "title": "Account username",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user's login name."
     },
     {
       "key": "AIMPassword",
-      "title": "Account Password",
+      "title": "Account password",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user's password."
@@ -68,7 +68,7 @@
     },
     {
       "key": "AIMPort",
-      "title": "Port Number",
+      "title": "Port number",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -80,7 +80,7 @@
     },
     {
       "key": "AIMAuthentication",
-      "title": "AIM Authentication",
+      "title": "AIM authentication",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "rangelist": [

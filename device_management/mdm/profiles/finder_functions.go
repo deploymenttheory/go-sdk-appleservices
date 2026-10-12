@@ -2,23 +2,9 @@
 
 package profiles
 
-import (
-	"errors"
-
-	"github.com/deploymenttheory/go-sdk-appleservices/device_management/validate"
-)
-
 // PayloadType returns the wire type identifier for Finder.
 func (Finder) PayloadType() string { return "com.apple.finder" }
 
-// Validate checks the payload against Apple's spec: required keys,
-// allowed values, ranges, formats and nested payload keys.
-func (p *Finder) Validate() error {
-	var errs []error
-	if p.InterfaceLevel != nil {
-		if err := validate.InList("InterfaceLevel", *p.InterfaceLevel, []FinderInterfaceLevel{FinderInterfaceLevelSimple, FinderInterfaceLevelFull}); err != nil {
-			errs = append(errs, err)
-		}
-	}
-	return errors.Join(errs...)
-}
+// Validate checks the payload against Apple's spec. Finder has no
+// constraints beyond its field types.
+func (p *Finder) Validate() error { return nil }

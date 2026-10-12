@@ -2,7 +2,7 @@
   "category": "declarative/declarations/configurations",
   "name": "security.identity",
   "title": "Security:Identity",
-  "description": "The declaration to install an identity on the device.",
+  "description": "The declaration to configure an identity.",
   "payload": {
     "declarationtype": "com.apple.configuration.security.identity",
     "apply": "multiple",

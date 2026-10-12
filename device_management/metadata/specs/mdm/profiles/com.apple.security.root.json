@@ -27,14 +27,14 @@
   "payloadkeys": [
     {
       "key": "PayloadCertificateFileName",
-      "title": "Payload Certificate Filename",
+      "title": "Payload certificate filename",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The file name of the enclosed certificate."
     },
     {
       "key": "PayloadContent",
-      "title": "Payload Certificate Data",
+      "title": "Payload certificate data",
       "type": "\u003cdata\u003e",
       "presence": "required",
       "content": "The binary representation of the payload encoded in base64."

@@ -7,9 +7,9 @@ package profiles
 //
 // Supported: iOS 7.0+, macOS 10.9+, visionOS 2.0+.
 type Font struct {
-	// The user-visible name for the font. This field is replaced by the actual name of the font after
-	// installation. Each payload must contain exactly one font file in trueType (.ttf) or OpenType
-	// (.otf) format. Collection formats (.ttc or .otc) are not supported.
+	// The user-visible name for the font. The device replaces this field with the actual name of the
+	// font after installation. Each payload must contain exactly one font file in trueType (.ttf) or
+	// OpenType (.otf) format. The device doesn't support collection formats (.ttc or .otc).
 	//
 	// Default: .
 	Name *string `plist:"Name,omitempty" json:"Name,omitempty"`

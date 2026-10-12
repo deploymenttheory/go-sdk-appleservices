@@ -1,0 +1,47 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "accessibility.settings",
+  "title": "Accessibility Settings",
+  "description": "The declaration to configure accessibility settings.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.accessibility.settings",
+    "apply": "combined",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "27.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Vision",
+      "title": "Vision",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "If present, configures vision accessibility settings.",
+      "subkeys": [
+        {
+          "key": "AllowLiveRecognition",
+          "title": "Allow live recognition",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": true,
+          "combinetype": "boolean-and",
+          "content": "If `false`, disables the Accessibility Live Recognition Ask about Images and Surroundings features."
+        }
+      ]
+    }
+  ]
+}

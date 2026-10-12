@@ -27,8 +27,7 @@ type SecurityInfoResponseSecurityInfoFirewallSettingsApplicationsItem struct {
 }
 
 // SecurityInfoResponseSecurityInfoFirewallSettings is the FirewallSettings dictionary.
-// A dictionary that contains the firewall settings. This value is available in macOS 10.12 and
-// later.
+// A dictionary that contains the firewall settings.
 type SecurityInfoResponseSecurityInfoFirewallSettings struct {
 	// If `true`, the firewall is on.
 	FirewallEnabled *bool `plist:"FirewallEnabled,omitempty" json:"FirewallEnabled,omitempty"`
@@ -45,8 +44,7 @@ type SecurityInfoResponseSecurityInfoFirewallSettings struct {
 }
 
 // SecurityInfoResponseSecurityInfoFirmwarePasswordStatus is the FirmwarePasswordStatus dictionary.
-// A dictionary that contains the status of the EFI firmware password. This value is available in
-// macOS 10.13 and later.
+// A dictionary that contains the status of the EFI firmware password.
 type SecurityInfoResponseSecurityInfoFirmwarePasswordStatus struct {
 	// If `true`, the device has an EFI firmware password.
 	PasswordExists *bool `plist:"PasswordExists,omitempty" json:"PasswordExists,omitempty"`
@@ -60,23 +58,19 @@ type SecurityInfoResponseSecurityInfoFirmwarePasswordStatus struct {
 // SecurityInfoResponseSecurityInfoManagementStatus is the ManagementStatus dictionary.
 // A dictionary that contains the status of the device's MDM enrollment.
 type SecurityInfoResponseSecurityInfoManagementStatus struct {
-	// If `true`, the device enrolled in MDM through the Device Enrollment Program (DEP). This value is
-	// available in macOS 10.13.2 and later.
+	// If `true`, the device enrolled in MDM through Automated Device Enrollment (ADE).
 	EnrolledViaDEP *bool `plist:"EnrolledViaDEP,omitempty" json:"EnrolledViaDEP,omitempty"`
 	// If `true`, the enrollment was user-approved. If `false`, the device may reject certain
-	// security-sensitive payloads or commands. This value is available in macOS 10.13.2 and later.
+	// security-sensitive payloads or commands.
 	UserApprovedEnrollment *bool `plist:"UserApprovedEnrollment,omitempty" json:"UserApprovedEnrollment,omitempty"`
-	// If `true`, the device is user-enrolled. This value is available in iOS 13 and later, and macOS
-	// 10.15 and later.
+	// If `true`, the device is user-enrolled.
 	IsUserEnrollment *bool `plist:"IsUserEnrollment,omitempty" json:"IsUserEnrollment,omitempty"`
-	// If `true`, the type of enrollment allows the MDM to manage Activation Lock for this device. This
-	// value is available in macOS 10.15 and later.
+	// If `true`, the type of enrollment allows the MDM to manage Activation Lock for this device.
 	IsActivationLockManageable *bool `plist:"IsActivationLockManageable,omitempty" json:"IsActivationLockManageable,omitempty"`
 }
 
 // SecurityInfoResponseSecurityInfoSecureBoot is the SecureBoot dictionary.
-// A dictionary that contains the device's Secure Boot settings. This value is available in macOS
-// 10.15 and later.
+// A dictionary that contains the device's Secure Boot settings.
 type SecurityInfoResponseSecurityInfoSecureBoot struct {
 	// The security level for the bootable operating system versions.
 	SecureBootLevel *SecurityInfoResponseSecurityInfoSecureBootSecureBootLevel `plist:"SecureBootLevel,omitempty" json:"SecureBootLevel,omitempty"`
@@ -94,15 +88,13 @@ type SecurityInfoResponseSecurityInfo struct {
 	// An integer that indicates the underlying hardware encryption capabilities of the device, which
 	// is one of the following values:
 	HardwareEncryptionCaps *int64 `plist:"HardwareEncryptionCaps,omitempty" json:"HardwareEncryptionCaps,omitempty"`
-	// If `true`, the device has a passcode. This key doesn't apply to User-Enrolled devices. This
-	// value is available in iOS 4 and later, and tvOS 6 and later.
+	// If `true`, the device has a passcode. This key doesn't apply to User-Enrolled devices.
 	PasscodePresent *bool `plist:"PasscodePresent,omitempty" json:"PasscodePresent,omitempty"`
 	// If `true`, the user's passcode is compliant with all requirements on the device, including
-	// Exchange and other accounts. This value is available in iOS 4 and later, and tvOS 6 and later.
+	// Exchange and other accounts.
 	PasscodeCompliant *bool `plist:"PasscodeCompliant,omitempty" json:"PasscodeCompliant,omitempty"`
 	// If `true`, the user's passcode is compliant with requirements from profiles. This key doesn't
-	// apply to User-Enrolled devices. This value is available in iOS 4 and later, and tvOS 6 and
-	// later.
+	// apply to User-Enrolled devices.
 	PasscodeCompliantWithProfiles *bool `plist:"PasscodeCompliantWithProfiles,omitempty" json:"PasscodeCompliantWithProfiles,omitempty"`
 	// The user preference for the number of seconds before a locked screen requires the device
 	// passcode to unlock it. This value is only available for Shared iPad.
@@ -115,49 +107,39 @@ type SecurityInfoResponseSecurityInfo struct {
 	// The number of seconds before a device goes to sleep after being idle. This value is only
 	// available on Shared iPad in iOS 17 and later.
 	AutoLockTime *int64 `plist:"AutoLockTime,omitempty" json:"AutoLockTime,omitempty"`
-	// If `true`, the device has enabled FileVault full disk encryption (FDE). This value is available
-	// in macOS 10.9 and later.
+	// If `true`, the device has enabled FileVault full disk encryption (FDE).
 	FDEEnabled *bool `plist:"FDE_Enabled,omitempty" json:"FDE_Enabled,omitempty"`
-	// If `true`, FileVault FDE has a personal recovery key. This value is available in macOS 10.9 and
-	// later.
+	// If `true`, FileVault FDE has a personal recovery key.
 	FDEHasPersonalRecoveryKey *bool `plist:"FDE_HasPersonalRecoveryKey,omitempty" json:"FDE_HasPersonalRecoveryKey,omitempty"`
-	// If `true`, FileVault FDE has an institutional recovery key. This value is available in macOS
-	// 10.9 and later.
+	// If `true`, FileVault FDE has an institutional recovery key.
 	FDEHasInstitutionalRecoveryKey *bool `plist:"FDE_HasInstitutionalRecoveryKey,omitempty" json:"FDE_HasInstitutionalRecoveryKey,omitempty"`
 	// If the FileVault personal recovery key has enabled escrow with a recovery key, this value
 	// contains the key. The certificate from the `FDERecoveryKeyEscrow` profile encrypts the key and
-	// wraps it as CMS data. This value is available in macOS 10.13 and later.
+	// wraps it as CMS data.
 	FDEPersonalRecoveryKeyCMS []byte `plist:"FDE_PersonalRecoveryKeyCMS,omitempty" json:"FDE_PersonalRecoveryKeyCMS,omitempty"`
 	// If the FileVault personal recovery key has enabled escrow with a recovery key, this value is the
 	// device serial number. This is the value that displays to the user at the EFI Login Window as
 	// part of the help message if they enter their password incorrectly three times. The server also
 	// uses this value as an index when saving the device personal recovery key. This replaces the
-	// `recordNumber` that the server returned in the previous escrow mechanism. This value is
-	// available in macOS 10.13 and later.
+	// `recordNumber` that the server returned in the previous escrow mechanism.
 	FDEPersonalRecoveryKeyDeviceKey *string `plist:"FDE_PersonalRecoveryKeyDeviceKey,omitempty" json:"FDE_PersonalRecoveryKeyDeviceKey,omitempty"`
-	// If `true`, System Integrity Protection (SIP) is active on the device. This value is available in
-	// macOS 10.12 and later.
+	// If `true`, System Integrity Protection (SIP) is active on the device.
 	SystemIntegrityProtectionEnabled *bool `plist:"SystemIntegrityProtectionEnabled,omitempty" json:"SystemIntegrityProtectionEnabled,omitempty"`
-	// A dictionary that contains the firewall settings. This value is available in macOS 10.12 and
-	// later.
+	// A dictionary that contains the firewall settings.
 	FirewallSettings *SecurityInfoResponseSecurityInfoFirewallSettings `plist:"FirewallSettings,omitempty" json:"FirewallSettings,omitempty"`
-	// A dictionary that contains the status of the EFI firmware password. This value is available in
-	// macOS 10.13 and later.
+	// A dictionary that contains the status of the EFI firmware password.
 	FirmwarePasswordStatus *SecurityInfoResponseSecurityInfoFirmwarePasswordStatus `plist:"FirmwarePasswordStatus,omitempty" json:"FirmwarePasswordStatus,omitempty"`
 	// A dictionary that contains the status of the device's MDM enrollment.
 	ManagementStatus *SecurityInfoResponseSecurityInfoManagementStatus `plist:"ManagementStatus,omitempty" json:"ManagementStatus,omitempty"`
-	// A dictionary that contains the device's Secure Boot settings. This value is available in macOS
-	// 10.15 and later.
+	// A dictionary that contains the device's Secure Boot settings.
 	SecureBoot *SecurityInfoResponseSecurityInfoSecureBoot `plist:"SecureBoot,omitempty" json:"SecureBoot,omitempty"`
-	// If `true`, Remote Desktop is active on the device. This value is available in macOS 10.14.4 and
-	// later.
+	// If `true`, Remote Desktop is active on the device.
 	RemoteDesktopEnabled *bool `plist:"RemoteDesktopEnabled,omitempty" json:"RemoteDesktopEnabled,omitempty"`
-	// If `true`, the system booted using an Authenticated Root Volume. This value is available in
-	// macOS 11 and later.
+	// If `true`, the system booted using an Authenticated Root Volume.
 	AuthenticatedRootVolumeEnabled *bool `plist:"AuthenticatedRootVolumeEnabled,omitempty" json:"AuthenticatedRootVolumeEnabled,omitempty"`
 	// This value specifies whether the Secure Enclave Processor (SEP) supports and allows secure
-	// operations to use the Bootstrap Token. The value is automatically set for devices enrolled
-	// through the Device Enrollment Program (DEP). The user can also manually set this value in the
+	// operations to use the Bootstrap Token. The device automatically sets this value if enrolled
+	// through Automated Device Enrollment (ADE). The user can also manually set this value in the
 	// RecoveryOS.
 	BootstrapTokenAllowedForAuthentication *SecurityInfoResponseSecurityInfoBootstrapTokenAllowedForAuthentication `plist:"BootstrapTokenAllowedForAuthentication,omitempty" json:"BootstrapTokenAllowedForAuthentication,omitempty"`
 	// If `true`, the device can accept a Bootstrap Token from the MDM server instead of prompting for

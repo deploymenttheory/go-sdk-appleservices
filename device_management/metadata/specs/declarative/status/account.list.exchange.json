@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "account.list.exchange",
   "title": "Status Account List Exchange",
-  "description": "A status report of the client's Exchange accounts.",
+  "description": "The status item that lists the devices's Exchange accounts.",
   "payload": {
     "statusitemtype": "account.list.exchange",
     "supportedOS": {
@@ -34,8 +34,9 @@
       "subkeys": [
         {
           "key": "status_value",
+          "title": "Status value",
           "type": "\u003cdictionary\u003e",
-          "content": "A status report of the client's Exchange account details.",
+          "content": "An Exchange account.",
           "subkeys": [
             {
               "key": "identifier",
@@ -50,7 +51,7 @@
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
-              "content": "If `true`, the account is removed and the status item object only contains this key and the `identifier` key."
+              "content": "If `true`, the device has removed the account and the status item object only contains this key and the `identifier` key."
             },
             {
               "key": "declaration-identifier",
@@ -75,7 +76,7 @@
             },
             {
               "key": "port",
-              "title": "Server Port",
+              "title": "Server port",
               "type": "\u003cinteger\u003e",
               "presence": "optional",
               "content": "The server port for the account."

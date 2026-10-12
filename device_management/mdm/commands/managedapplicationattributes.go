@@ -28,16 +28,14 @@ type ManagedApplicationAttributesResponseApplicationAttributesItemAttributes str
 	DNSProxyUUID *string `plist:"DNSProxyUUID,omitempty" json:"DNSProxyUUID,omitempty"`
 	// The relay UUID for this app.
 	RelayUUID *string `plist:"RelayUUID,omitempty" json:"RelayUUID,omitempty"`
-	// This app's associated domains. This value is available in iOS 13 and later.
+	// This app's associated domains.
 	AssociatedDomains []string `plist:"AssociatedDomains,omitempty" json:"AssociatedDomains,omitempty"`
 	// If `true`, perform claimed site association verification directly at the domain instead of on
-	// Apple's servers. Only set this to `true` for domains that can't access the internet. This value
-	// is available in iOS 14 and later.
+	// Apple's servers. Only set this to `true` for domains that can't access the internet.
 	//
 	// Default: false.
 	AssociatedDomainsEnableDirectDownloads *bool `plist:"AssociatedDomainsEnableDirectDownloads,omitempty" json:"AssociatedDomainsEnableDirectDownloads,omitempty"`
-	// If `false`, this app isn't removable while it's a managed app. This value is available in iOS 14
-	// and later.
+	// If `false`, this app isn't removable while it's a managed app.
 	//
 	// Default: true.
 	Removable *bool `plist:"Removable,omitempty" json:"Removable,omitempty"`

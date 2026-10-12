@@ -2,7 +2,7 @@
   "category": "declarative/declarations/configurations",
   "name": "package",
   "title": "Package",
-  "description": "The declaration to install a package.",
+  "description": "The declaration to configure a package.",
   "payload": {
     "declarationtype": "com.apple.configuration.package",
     "apply": "multiple",
@@ -34,7 +34,7 @@
     },
     {
       "key": "InstallBehavior",
-      "title": "Install Behavior",
+      "title": "Install behavior",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "A dictionary that describes how and when to install the package.",
@@ -52,6 +52,28 @@
           "content": "A string that specifies when the system installs the package:\n\n- `Optional`: The user can install the package after the system activates the configuration.\n- `Required`: The system installs the package after it activates the configuration."
         }
       ]
+    },
+    {
+      "key": "UninstallBehavior",
+      "title": "Uninstall behavior",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "A dictionary that describes how to uninstall the package.",
+      "subkeys": [
+        {
+          "key": "Remove",
+          "title": "Remove",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, the system removes the files that the package installs when removing the configuration."
+        }
+      ],
+      "supportedOS": {
+        "macOS": {
+          "introduced": "27.0"
+        }
+      }
     }
   ]
 }
