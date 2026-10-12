@@ -63,28 +63,28 @@
                     },
                     {
                       "key": "md5",
-                      "title": "md5 hash",
+                      "title": "MD5 hash",
                       "type": "\u003cstring\u003e",
                       "presence": "optional",
                       "content": "The MD5 hash value the device uses when verifying the hash of the manifest item data. When this key is present, the device ignores the `md5-size` and `md5s` keys."
                     },
                     {
                       "key": "md5-size",
-                      "title": "md5 chunk size",
+                      "title": "MD5 chunk size",
                       "type": "\u003cinteger\u003e",
                       "presence": "optional",
-                      "content": "The data *chunk* size the device uses when verifying the hash of the manifest item data. Required when the `md5s` key is present."
+                      "content": "The data chunk size the device uses when verifying the hash of the manifest item data. The device requires this key when the `md5s` key is present."
                     },
                     {
                       "key": "md5s",
-                      "title": "md5 hashes",
+                      "title": "MD5 hashes",
                       "type": "\u003carray\u003e",
                       "presence": "optional",
-                      "content": "An array of strings representing a set of MD5 hash values. The device uses these values to verify the integrity of the downloaded manifest item data. Required when the `md5-size` key is present.",
+                      "content": "An array of strings representing a set of MD5 hash values. The device uses these values to verify the integrity of the downloaded manifest item data. The device requires this key when the `md5-size` key is present.",
                       "subkeys": [
                         {
                           "key": "md5s-item",
-                          "title": "md5 hash",
+                          "title": "MD5 hash",
                           "type": "\u003cstring\u003e",
                           "presence": "required",
                           "content": "An MD5 hash value."
@@ -93,28 +93,28 @@
                     },
                     {
                       "key": "sha256",
-                      "title": "sha256 hash",
+                      "title": "SHA256 hash",
                       "type": "\u003cstring\u003e",
                       "presence": "optional",
                       "content": "The SHA-256 hash value the device uses when verifying the hash of the manifest item data. When this key is present, the device ignores the `sha256-size` and `sha256` keys."
                     },
                     {
                       "key": "sha256-size",
-                      "title": "sha256 chunk size",
+                      "title": "SHA256 chunk size",
                       "type": "\u003cinteger\u003e",
                       "presence": "optional",
-                      "content": "The data *chunk* size the device uses when verifying the hash of the manifest item data. Required when the `sha256s` key is present."
+                      "content": "The data chunk size the device uses when verifying the hash of the manifest item data. The device requires this key when the `sha256s` key is present."
                     },
                     {
                       "key": "sha256s",
-                      "title": "If there are multiple sha256 hashes provide a chunk size",
+                      "title": "If there are multiple SHA256 hashes provide a chunk size",
                       "type": "\u003carray\u003e",
                       "presence": "optional",
-                      "content": "An array of strings representing a set of SHA-256 hash values. The device uses these values to verify the integrity of the downloaded manifest item data. Required when the `sha256-size` key is present.",
+                      "content": "An array of strings representing a set of SHA-256 hash values. The device uses these values to verify the integrity of the downloaded manifest item data. The device requires this key when the `sha256-size` key is present.",
                       "subkeys": [
                         {
                           "key": "sha256s-item",
-                          "title": "sha256 hash",
+                          "title": "SHA256 hash",
                           "type": "\u003cstring\u003e",
                           "presence": "required",
                           "content": "A SHA-256 hash value."
@@ -127,31 +127,6 @@
                       "type": "\u003cstring\u003e",
                       "presence": "required",
                       "content": "The URL that hosts the manifest item data. The URL needs to start with `https://`."
-                    },
-                    {
-                      "key": "needs-shine",
-                      "title": "Icon treatment",
-                      "type": "\u003cboolean\u003e",
-                      "presence": "optional",
-                      "default": false,
-                      "content": "removed",
-                      "supportedOS": {
-                        "iOS": {
-                          "removed": "0"
-                        },
-                        "macOS": {
-                          "removed": "0"
-                        },
-                        "tvOS": {
-                          "removed": "0"
-                        },
-                        "visionOS": {
-                          "removed": "0"
-                        },
-                        "watchOS": {
-                          "introduced": "n/a"
-                        }
-                      }
                     }
                   ]
                 }
@@ -189,30 +164,6 @@
                   "content": "The type of manifest item. For an app or package, this needs to be `software`."
                 },
                 {
-                  "key": "sizeInBytes",
-                  "title": "Size in bytes",
-                  "type": "\u003cinteger\u003e",
-                  "presence": "optional",
-                  "content": "removed",
-                  "supportedOS": {
-                    "iOS": {
-                      "removed": "0"
-                    },
-                    "macOS": {
-                      "removed": "0"
-                    },
-                    "tvOS": {
-                      "removed": "0"
-                    },
-                    "visionOS": {
-                      "removed": "0"
-                    },
-                    "watchOS": {
-                      "introduced": "n/a"
-                    }
-                  }
-                },
-                {
                   "key": "subtitle",
                   "title": "The application subtitle",
                   "type": "\u003cstring\u003e",
@@ -225,53 +176,6 @@
                   "type": "\u003cstring\u003e",
                   "presence": "required",
                   "content": "The title of the app or package being installed."
-                },
-                {
-                  "key": "items",
-                  "title": "The items",
-                  "type": "\u003carray\u003e",
-                  "presence": "optional",
-                  "content": "Removed",
-                  "subkeys": [
-                    {
-                      "key": "metadata-items-item",
-                      "type": "\u003cdictionary\u003e",
-                      "presence": "optional",
-                      "subkeys": [
-                        {
-                          "key": "bundle-identifier",
-                          "title": "removed",
-                          "type": "\u003cstring\u003e",
-                          "presence": "optional",
-                          "content": "removed"
-                        },
-                        {
-                          "key": "bundle-version",
-                          "title": "removed",
-                          "type": "\u003cstring\u003e",
-                          "presence": "optional",
-                          "content": "removed"
-                        }
-                      ]
-                    }
-                  ],
-                  "supportedOS": {
-                    "iOS": {
-                      "removed": "0"
-                    },
-                    "macOS": {
-                      "removed": "0"
-                    },
-                    "tvOS": {
-                      "removed": "0"
-                    },
-                    "visionOS": {
-                      "removed": "0"
-                    },
-                    "watchOS": {
-                      "introduced": "n/a"
-                    }
-                  }
                 }
               ]
             }

@@ -37,6 +37,8 @@ type SafariSettings struct {
 	AllowSummary *bool `plist:"AllowSummary,omitempty" json:"AllowSummary,omitempty"`
 	// Sets the start page for new tabs in Safari.
 	NewTabStartPage *SafariSettingsNewTabStartPage `plist:"NewTabStartPage,omitempty" json:"NewTabStartPage,omitempty"`
+	// The dictionary of website privacy settings.
+	Privacy *SafariSettingsPrivacy `plist:"Privacy,omitempty" json:"Privacy,omitempty"`
 }
 
 // SafariSettingsNewTabStartPage is the NewTabStartPage dictionary.
@@ -51,4 +53,37 @@ type SafariSettingsNewTabStartPage struct {
 	// "Identifier (TeamIdentifier)", for example "com.example.app (ABCD1234)". Required when setting
 	// `PageType` to `Extension`.
 	ExtensionIdentifier *string `plist:"ExtensionIdentifier,omitempty" json:"ExtensionIdentifier,omitempty"`
+}
+
+// WebsiteDictionary is the ANY dictionary.
+// The dictionary that defines the website privacy permission defaults. Each key represents a
+// website.
+type WebsiteDictionary struct {
+	// Text that clearly explains to the Safari user the reason why the organization requires these
+	// website privacy permission defaults. Safari includes this text in the permission consent prompt
+	// it displays when it first displays the website.
+	OrganizationJustification string `plist:"OrganizationJustification" json:"OrganizationJustification"`
+	// Controls whether a website privacy permission default is set.
+	Camera *WebsiteDictionaryCamera `plist:"Camera,omitempty" json:"Camera,omitempty"`
+	// Controls whether a website privacy permission default is set.
+	Microphone *WebsiteDictionaryMicrophone `plist:"Microphone,omitempty" json:"Microphone,omitempty"`
+}
+
+// SafariSettingsPrivacyPermissionDefaults is the PermissionDefaults dictionary.
+// The dictionary of website permission defaults. Each key in the dictionary represents a single
+// website, or a website and its sub-domains. The dictionary values represent the permission
+// defaults that Safari applies for each website that matches the key.
+type SafariSettingsPrivacyPermissionDefaults struct {
+	// The dictionary that defines the website privacy permission defaults. Each key represents a
+	// website.
+	ANY *WebsiteDictionary `plist:"ANY,omitempty" json:"ANY,omitempty"`
+}
+
+// SafariSettingsPrivacy is the Privacy dictionary.
+// The dictionary of website privacy settings.
+type SafariSettingsPrivacy struct {
+	// The dictionary of website permission defaults. Each key in the dictionary represents a single
+	// website, or a website and its sub-domains. The dictionary values represent the permission
+	// defaults that Safari applies for each website that matches the key.
+	PermissionDefaults *SafariSettingsPrivacyPermissionDefaults `plist:"PermissionDefaults,omitempty" json:"PermissionDefaults,omitempty"`
 }

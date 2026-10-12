@@ -26,21 +26,21 @@
   "payloadkeys": [
     {
       "key": "code",
-      "title": "Error Code",
+      "title": "Error code",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The error code for this error."
     },
     {
       "key": "description",
-      "title": "Error Description",
+      "title": "Error description",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "A description of this error."
     },
     {
       "key": "details",
-      "title": "Error Details",
+      "title": "Error details",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "A dictionary that contains additional details about the error."

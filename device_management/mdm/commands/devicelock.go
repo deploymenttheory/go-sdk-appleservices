@@ -8,13 +8,12 @@ package commands
 // Supported: iOS 4.0+, macOS 10.7+, visionOS 2.0+, watchOS 10.0+.
 type DeviceLock struct {
 	// The message to display on the Lock Screen of the device. This value doesn't apply to a Shared
-	// iPad device. This value is available in iOS 4 and later, and macOS 10.14 and later.
+	// iPad device.
 	Message *string `plist:"Message,omitempty" json:"Message,omitempty"`
 	// The phone number to display on the Lock Screen. This value doesn't apply to a Shared iPad
-	// device. This value is available in iOS 7 and later and macOS 11.5 and later (for a Mac with
-	// Apple silicon only).
+	// device. This value is available for a Mac with Apple silicon only.
 	PhoneNumber *string `plist:"PhoneNumber,omitempty" json:"PhoneNumber,omitempty"`
-	// The six-character PIN for Find My. This value is available in macOS 10.8 and later.
+	// The six-character PIN for Find My.
 	PIN *string `plist:"PIN,omitempty" json:"PIN,omitempty"`
 }
 

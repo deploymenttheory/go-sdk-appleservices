@@ -66,7 +66,7 @@
       "key": "siteAllowList",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "An array of sites that defines an allow list. If specified, this defines additional allowed sites besides those in the automated allow list and deny list, including disallowed adult sites.\n\nThis key is required if `allowListEnabled` is `true`.",
+      "content": "An array of sites that defines an allow list. If specified, this defines additional allowed sites besides those in the automated allow list and deny list, including disallowed adult sites.\n\nThe device requires this key if `allowListEnabled` is `true`.",
       "subkeys": [
         {
           "key": "siteAllowListItem",

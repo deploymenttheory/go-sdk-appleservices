@@ -38,8 +38,8 @@ type MediaItems struct {
 	DiskImage []string `plist:"disk-image,omitempty" json:"disk-image,omitempty"`
 	// A media action string or an array of media action strings.
 	HarddiskInternal []string `plist:"harddisk-internal,omitempty" json:"harddisk-internal,omitempty"`
-	// A string or an array of media action strings. Internally installed SD cards and USB flash drives
-	// are included in the hard disk-external category.
+	// A string or an array of media action strings. The hard disk-external category includes
+	// internally installed SD cards and USB flash drives.
 	HarddiskExternal []string `plist:"harddisk-external,omitempty" json:"harddisk-external,omitempty"`
 	// A media action string or an array of media action strings.
 	Networkdisk []string `plist:"networkdisk,omitempty" json:"networkdisk,omitempty"`

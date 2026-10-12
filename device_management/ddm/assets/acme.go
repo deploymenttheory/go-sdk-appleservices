@@ -38,9 +38,7 @@ type Acme struct {
 	// If `true`, the device provides attestations that describe the device and the generated key to
 	// the ACME server. The server can use the attestations as strong evidence that the key is bound to
 	// the device, and that the device has properties listed in the attestation. The server can use
-	// that as part of a trust score to decide whether to issue the requested certificate. When
-	// `Attest` is `true`, set `HardwareBound` to `true`. On macOS, set this key, if present, to
-	// `false`. The hardware requirements for attestation are described below.
+	// that as part of a trust score to decide whether to issue the requested certificate.
 	//
 	// Default: false.
 	Attest *bool `plist:"Attest,omitempty" json:"Attest,omitempty"`

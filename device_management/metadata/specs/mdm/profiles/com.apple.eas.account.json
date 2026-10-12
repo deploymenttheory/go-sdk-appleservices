@@ -27,14 +27,14 @@
   "payloadkeys": [
     {
       "key": "EmailAddress",
-      "title": "Email Address",
+      "title": "Email address",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The full email address for the account. If not present in the payload, the device prompts for this string during profile installation."
     },
     {
       "key": "Host",
-      "title": "Exchange ActiveSync Host",
+      "title": "Exchange ActiveSync host",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The Exchange server host name or IP address."
@@ -76,7 +76,7 @@
     },
     {
       "key": "Certificate",
-      "title": "Authentication Credential",
+      "title": "Authentication credential",
       "type": "\u003cdata\u003e",
       "presence": "optional",
       "content": "The `.p12` identity certificate in NSData blob format, for accounts that allow authentication via certificate.",
@@ -88,7 +88,7 @@
     },
     {
       "key": "CertificateName",
-      "title": "Authentication Credential Name",
+      "title": "Authentication credential name",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The name or description of the certificate.",
@@ -100,14 +100,14 @@
     },
     {
       "key": "CertificatePassword",
-      "title": "Authentication Credential Password",
+      "title": "Authentication credential password",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The password necessary for the `.p12` identity certificate. Used with mandatory encryption of profiles."
     },
     {
       "key": "PreventMove",
-      "title": "Prevent Move",
+      "title": "Prevent move",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -120,7 +120,7 @@
     },
     {
       "key": "PreventAppSheet",
-      "title": "Prevent App Sheet",
+      "title": "Prevent app sheet",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -133,7 +133,7 @@
     },
     {
       "key": "PayloadCertificateUUID",
-      "title": "Payload Certificate UUID",
+      "title": "Payload certificate UUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$",
@@ -141,7 +141,7 @@
     },
     {
       "key": "SMIMEEnabled",
-      "title": "S/MIME Enabled",
+      "title": "S/MIME enabled",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -158,11 +158,11 @@
     },
     {
       "key": "SMIMESigningEnabled",
-      "title": "S/MIME Signing Enabled",
+      "title": "S/MIME signing enabled",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system enables S/MIME signing for this account. Available in iOS 10.0 and later.",
+      "content": "If `true`, the system enables S/MIME signing for this account.",
       "supportedOS": {
         "iOS": {
           "introduced": "10.3"
@@ -171,7 +171,7 @@
     },
     {
       "key": "SMIMESigningCertificateUUID",
-      "title": "S/MIME Signing Certificate",
+      "title": "S/MIME signing certificate",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$",
@@ -184,11 +184,11 @@
     },
     {
       "key": "SMIMEEncryptionEnabled",
-      "title": "S/MIME Encryption Enabled",
+      "title": "S/MIME encryption enabled",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system enables S/MIME encryption for this account. Available in iOS 10.0 and later. As of iOS 12.0, this key is deprecated. Use `SMIMEEncryptByDefault` instead.",
+      "content": "If `true`, the system enables S/MIME encryption for this account. This key is deprecated. Use `SMIMEEncryptByDefault` instead.",
       "supportedOS": {
         "iOS": {
           "introduced": "10.3",
@@ -201,7 +201,7 @@
     },
     {
       "key": "SMIMEEncryptionCertificateUUID",
-      "title": "S/MIME Encryption Certificate",
+      "title": "S/MIME encryption certificate",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "format": "^[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}$",
@@ -214,11 +214,11 @@
     },
     {
       "key": "SMIMEEnablePerMessageSwitch",
-      "title": "S/MIME Enable Per-Message Switch",
+      "title": "S/MIME enable per-message switch",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system displays the per-message encryption switch in the Mail Compose UI.\n\nAvailable in iOS 8.0 and later. As of iOS 12.0, this key is deprecated. Use `SMIMEEnableEncryptionPerMessageSwitch` instead.",
+      "content": "If `true`, the system displays the per-message encryption switch in the Mail Compose UI.\n\n This key is deprecated. Use `SMIMEEnableEncryptionPerMessageSwitch` instead.",
       "supportedOS": {
         "iOS": {
           "introduced": "8.0",
@@ -231,7 +231,7 @@
     },
     {
       "key": "disableMailRecentsSyncing",
-      "title": "Disable Mail Recents Syncing",
+      "title": "Disable mail recents syncing",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -239,7 +239,7 @@
     },
     {
       "key": "MailNumberOfPastDaysToSync",
-      "title": "Past Days of Mail to Sync",
+      "title": "Past days of mail to sync",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "rangelist": [
@@ -269,14 +269,14 @@
     },
     {
       "key": "CommunicationServiceRules",
-      "title": "Communication Service Rules",
+      "title": "Communication service rules",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "The communication service handler rules for this account.",
       "subkeys": [
         {
           "key": "DefaultServiceHandlers",
-          "title": "Default Service Handlers",
+          "title": "Default service handlers",
           "type": "\u003cdictionary\u003e",
           "presence": "optional",
           "content": "The default handlers to use for contacts from this account.",
@@ -309,7 +309,7 @@
     },
     {
       "key": "allowMailDrop",
-      "title": "Allow Mail Drop",
+      "title": "Allow mail drop",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -325,7 +325,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the user can turn S/MIME signing on or off in Settings. Available in iOS 12.0 and later.",
+      "content": "If `true`, the user can turn S/MIME signing on or off in Settings.",
       "supportedOS": {
         "iOS": {
           "introduced": "12.0"
@@ -337,7 +337,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the user can select the signing identity. Available in iOS 12.0 and later.",
+      "content": "If `true`, the user can select the signing identity.",
       "supportedOS": {
         "iOS": {
           "introduced": "12.0"
@@ -349,7 +349,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system enables S/MIME encryption by default. If `SMIMEEnableEncryptionPerMessageSwitch` is `false`, the user can't change this default. Available in iOS 12.0 and later.",
+      "content": "If `true`, the system enables S/MIME encryption by default. If `SMIMEEnableEncryptionPerMessageSwitch` is `false`, the user can't change this default.",
       "supportedOS": {
         "iOS": {
           "introduced": "12.0"
@@ -361,7 +361,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system enables encryption by default and the user can't change it. Available in iOS 12.0 and later.",
+      "content": "If `true`, the system enables encryption by default and the user can't change it.",
       "supportedOS": {
         "iOS": {
           "introduced": "12.0"
@@ -373,7 +373,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the user can select the S/MIME encryption identity, and encryption is on.Available in iOS 12.0 and later.",
+      "content": "If `true`, the user can select the S/MIME encryption identity, and encryption is on.",
       "supportedOS": {
         "iOS": {
           "introduced": "12.0"
@@ -385,7 +385,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system displays the per-message encryption switch in the Mail Compose UI. Available in iOS 12.0 and later.",
+      "content": "If `true`, the system displays the per-message encryption switch in the Mail Compose UI.",
       "supportedOS": {
         "iOS": {
           "introduced": "12.0"
@@ -539,7 +539,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system overrides the previous user/EAS password with the new EAS password in the payload. Available in iOS 14 and later.",
+      "content": "If `true`, the system overrides the previous user/EAS password with the new EAS password in the payload.",
       "supportedOS": {
         "iOS": {
           "introduced": "14.0"
@@ -551,7 +551,7 @@
       "title": "VPNUUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14 and later.",
+      "content": "The VPNUUID of the per-app VPN the account uses for network communication.",
       "supportedOS": {
         "iOS": {
           "introduced": "14.0"

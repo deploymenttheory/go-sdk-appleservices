@@ -15,17 +15,11 @@ type SecurityFirewall struct {
 	EnableStealthMode *bool `plist:"EnableStealthMode,omitempty" json:"EnableStealthMode,omitempty"`
 	// The list of apps with connections that the firewall controls.
 	Applications []SecurityFirewallApplicationsItem `plist:"Applications,omitempty" json:"Applications,omitempty"`
-	// If `true`, the system enables logging. Available in macOS 12 through macOS 14.6.
-	EnableLogging *bool `plist:"EnableLogging,omitempty" json:"EnableLogging,omitempty"`
-	// The type of logging. Available in macOS 12 and through macOS 14.6.
-	LoggingOption *SecurityFirewallLoggingOption `plist:"LoggingOption,omitempty" json:"LoggingOption,omitempty"`
-	// If `true`, the system allows built-in software to receive incoming connections. Available in
-	// macOS 12.3 and later.
+	// If `true`, the system allows built-in software to receive incoming connections.
 	//
 	// Default: true.
 	AllowSigned *bool `plist:"AllowSigned,omitempty" json:"AllowSigned,omitempty"`
 	// If `true`, the system allows downloaded signed software to receive incoming connections.
-	// Available in macOS 12.3 and later.
 	//
 	// Default: true.
 	AllowSignedApp *bool `plist:"AllowSignedApp,omitempty" json:"AllowSignedApp,omitempty"`

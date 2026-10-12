@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "services.background-task",
   "title": "Status Services Background Task",
-  "description": "A status report of the device's background task details.",
+  "description": "The status item that reports the device's background task details.",
   "payload": {
     "statusitemtype": "services.background-task",
     "supportedOS": {
@@ -34,8 +34,9 @@
       "subkeys": [
         {
           "key": "status_value",
+          "title": "Status value",
           "type": "\u003cdictionary\u003e",
-          "content": "A status report of a background task.",
+          "content": "The status item that reports a background task.",
           "subkeys": [
             {
               "key": "identifier",
@@ -50,7 +51,7 @@
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
-              "content": "If `true`, the background task is removed and the status item object only contains this key and the `identifier` key."
+              "content": "If `true`, the system removed the background task and the status item object only contains this key and the `identifier` key."
             },
             {
               "key": "code-signature",
@@ -144,28 +145,28 @@
                 },
                 {
                   "key": "device-management",
-                  "title": "Device Management",
+                  "title": "Device management",
                   "type": "\u003cdictionary\u003e",
                   "presence": "optional",
                   "content": "A dictionary that indicates a `ServicesBackgroundTasks` configuration created this background task. The dictionary contains properties that identify the configuration and the declaration asset that provided the launchd plist for the task.",
                   "subkeys": [
                     {
                       "key": "configuration-identifier",
-                      "title": "Configuration Identifier",
+                      "title": "Configuration identifier",
                       "type": "\u003cstring\u003e",
                       "presence": "required",
                       "content": "The identifier of the `ServicesBackgroundTasks` configuration that created this task."
                     },
                     {
                       "key": "asset-identifier",
-                      "title": "Asset Identifier",
+                      "title": "Asset identifier",
                       "type": "\u003cstring\u003e",
                       "presence": "required",
                       "content": "The `Identifier` of the declaration asset that provided the launchd plist for this task."
                     },
                     {
                       "key": "asset-server-token",
-                      "title": "Asset Server Token",
+                      "title": "Asset server token",
                       "type": "\u003cstring\u003e",
                       "presence": "required",
                       "content": "The `ServerToken` of the declaration asset that provided the launchd plist for this task."

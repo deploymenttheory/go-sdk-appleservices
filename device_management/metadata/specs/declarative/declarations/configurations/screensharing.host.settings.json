@@ -27,7 +27,7 @@
   "payloadkeys": [
     {
       "key": "MaximumVirtualDisplays",
-      "title": "Maximum number of Virtual Displays",
+      "title": "Maximum number of virtual displays",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -38,7 +38,7 @@
     },
     {
       "key": "PortBase",
-      "title": "UDP Port base",
+      "title": "UDP port base",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -65,7 +65,7 @@
     },
     {
       "key": "PreventHighPerformanceConnections",
-      "title": "Prevent High Performance connections",
+      "title": "Prevent high performance connections",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,

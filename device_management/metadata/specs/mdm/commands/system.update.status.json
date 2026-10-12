@@ -2,7 +2,7 @@
   "category": "mdm/commands",
   "name": "system.update.status",
   "title": "OS Update Status Command",
-  "description": "Get the status of operating-system updates on a device.",
+  "description": "Get the status of operating-system updates on a device. Removed: subscribe to the declarative management `softwareupdate.install-state` status item.",
   "payload": {
     "requesttype": "OSUpdateStatus",
     "content": "Queries the device for the status of software updates.",
@@ -10,16 +10,19 @@
       "iOS": {
         "introduced": "9.0",
         "deprecated": "26.0",
+        "removed": "27.0",
         "accessrights": "AllowAppInstallation"
       },
       "macOS": {
         "introduced": "10.11.5",
         "deprecated": "26.0",
+        "removed": "27.0",
         "accessrights": "None"
       },
       "tvOS": {
         "introduced": "12.0",
         "deprecated": "26.0",
+        "removed": "27.0",
         "accessrights": "AllowAppInstallation"
       },
       "visionOS": {
@@ -35,7 +38,7 @@
       "key": "OSUpdateStatus",
       "type": "\u003carray\u003e",
       "presence": "required",
-      "content": "An array of dictionaries that describes the statuses of software updates. The array is empty if there are no software updates currently in progress.\nThis command only returns the status for System Applications and Configuration Data updates when a software update is managed by a Declarative Device Management `SoftwareUpdateEnforcementSpecific` configuration.",
+      "content": "An array of dictionaries that describes the statuses of software updates. The array is empty if there are no software updates currently in progress.\nThis command only returns the status for System Applications and Configuration Data updates when a Declarative Device Management `SoftwareUpdateEnforcementSpecific` configuration manages a software update.",
       "subkeys": [
         {
           "key": "OSUpdateStatusItem",
@@ -71,7 +74,7 @@
               "key": "MaxDeferrals",
               "type": "\u003cinteger\u003e",
               "presence": "optional",
-              "content": "The number of times a user can defer this OS update.\n\nAvailable in macOS 12.3 and later.",
+              "content": "The number of times a user can defer this OS update.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -88,7 +91,7 @@
               "key": "DeferralsRemaining",
               "type": "\u003cinteger\u003e",
               "presence": "optional",
-              "content": "The number of remaining user deferrals for this OS update.\n\nAvailable in macOS 12.3 and later.",
+              "content": "The number of remaining user deferrals for this OS update.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -105,7 +108,7 @@
               "key": "NextScheduledInstall",
               "type": "\u003cdate\u003e",
               "presence": "optional",
-              "content": "The date of the next attempt at installing this OS update.\n\nAvailable in macOS 12.3 and later.",
+              "content": "The date of the next attempt at installing this OS update.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -122,11 +125,11 @@
               "key": "PastNotifications",
               "type": "\u003carray\u003e",
               "presence": "optional",
-              "content": "The dates/times when the OS notified the user about installing this OS update.\n\nAvailable in macOS 12.3 and later.",
+              "content": "The dates/times when the OS notified the user about installing this OS update.",
               "subkeys": [
                 {
                   "key": "PastNotificationDate",
-                  "title": "Past Notification Date",
+                  "title": "Past notification date",
                   "type": "\u003cdate\u003e"
                 }
               ],

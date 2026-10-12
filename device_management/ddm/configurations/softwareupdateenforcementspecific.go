@@ -3,7 +3,7 @@
 package configurations
 
 // SoftwareupdateEnforcementSpecific — Software Update:Enforcement:Specific.
-// A software update enforcement policy for a specific OS release.
+// The declaration to configure a software update enforcement policy for a specific OS release.
 //
 // Supported: iOS 17.0+, macOS 14.0+, tvOS 18.4+, visionOS 26.0+.
 type SoftwareupdateEnforcementSpecific struct {
@@ -15,9 +15,9 @@ type SoftwareupdateEnforcementSpecific struct {
 	// supplemental version identifier, for example, `20A242a`.
 	TargetBuildVersion *string `plist:"TargetBuildVersion,omitempty" json:"TargetBuildVersion,omitempty"`
 	// The local date time value that specifies when to force install the software update. Use the
-	// format `yyyy-mm-ddThh:mm:ss`, which is derived from RFC3339 but doesn't include a time zone
-	// offset. If the user doesn't trigger the software update before this time, the device force
-	// installs it.
+	// format `yyyy-mm-ddThh:mm:ss`, which is derived from RFC 3339 but doesn't include a time zone
+	// offset or fractional seconds. If the user doesn't trigger the software update before this time,
+	// the device force installs it.
 	TargetLocalDateTime string `plist:"TargetLocalDateTime" json:"TargetLocalDateTime"`
 	// The URL of a web page that shows details that the organization provides about the enforced
 	// software update.

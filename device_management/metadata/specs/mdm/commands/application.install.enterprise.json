@@ -71,7 +71,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, install the app as a managed app. Otherwise, the system installs the app as unmanaged. If you reinstall a manged app and omit this value or set it to `false`, the app becomes unmanaged.\n\nFor manifest-based installs, if `true`, the system only considers apps installed in `/Applications` as managed. In macOS 11 through 13, the system requires that the `pkg` only contains a single signed app.\n\nAvailable in macOS 11 and later.",
+      "content": "If `true`, install the app as a managed app. Otherwise, the system installs the app as unmanaged. If you reinstall a manged app and omit this value or set it to `false`, the app becomes unmanaged.\n\nFor manifest-based installs, if `true`, the system only considers apps installed in `/Applications` as managed. In macOS 11 through 13, the system requires that the `pkg` only contains a single signed app.",
       "supportedOS": {
         "macOS": {
           "introduced": "11.0"
@@ -85,7 +85,7 @@
       "rangelist": [
         1
       ],
-      "content": "The management flags. The possible values are:\n\n- `1`: If `InstallAsManaged` is `true`, remove the app upon removal of the MDM profile.\n\nAvailable in macOS 11 and later.",
+      "content": "The management flags. The possible values are:\n\n* `1`: If `InstallAsManaged` is `true`, remove the app upon removal of the MDM profile.",
       "supportedOS": {
         "macOS": {
           "introduced": "11.0"
@@ -96,7 +96,7 @@
       "key": "Configuration",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
-      "content": "A dictionary that contains the initial configuration of the app, if you choose to provide it. Available in macOS 11 and later.",
+      "content": "A dictionary that contains the initial configuration of the app, if you choose to provide it.",
       "subkeys": [
         {
           "key": "ANY",
@@ -118,7 +118,7 @@
       "rangelist": [
         "Managed"
       ],
-      "content": "The change management state. This value doesn't work with the user enrollments. The only possible value is:\n\n- `Managed`: Take management of the app if the user installed it already and `InstallAsManaged` is `true`.\n\nAvailable in macOS 11 and later.",
+      "content": "The change management state. This value doesn't work with the user enrollments. The only possible value is:\n\n* `Managed`: Take management of the app if the user installed it already and `InstallAsManaged` is `true`.",
       "supportedOS": {
         "macOS": {
           "introduced": "11.0"

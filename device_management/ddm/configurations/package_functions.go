@@ -20,6 +20,11 @@ func (p *Package) Validate() error {
 			errs = append(errs, validate.Nested("InstallBehavior", err))
 		}
 	}
+	if p.UninstallBehavior != nil {
+		if err := p.UninstallBehavior.Validate(); err != nil {
+			errs = append(errs, validate.Nested("UninstallBehavior", err))
+		}
+	}
 	return errors.Join(errs...)
 }
 
@@ -34,3 +39,7 @@ func (p *PackageInstallBehavior) Validate() error {
 	}
 	return errors.Join(errs...)
 }
+
+// Validate checks the payload against Apple's spec. PackageUninstallBehavior has no
+// constraints beyond its field types.
+func (p *PackageUninstallBehavior) Validate() error { return nil }

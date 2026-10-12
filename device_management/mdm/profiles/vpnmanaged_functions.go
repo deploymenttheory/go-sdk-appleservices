@@ -408,12 +408,12 @@ func (p *VpnManagedIKEv2) Validate() error {
 		}
 	}
 	if p.TLSMinimumVersion != nil {
-		if err := validate.InList("TLSMinimumVersion", *p.TLSMinimumVersion, []VpnManagedIKEv2TLSMinimumVersion{VpnManagedIKEv2TLSMinimumVersionN10, VpnManagedIKEv2TLSMinimumVersionN11, VpnManagedIKEv2TLSMinimumVersionN12}); err != nil {
+		if err := validate.InList("TLSMinimumVersion", *p.TLSMinimumVersion, []VpnManagedIKEv2TLSMinimumVersion{VpnManagedIKEv2TLSMinimumVersionN10, VpnManagedIKEv2TLSMinimumVersionN11, VpnManagedIKEv2TLSMinimumVersionN12, VpnManagedIKEv2TLSMinimumVersionN13}); err != nil {
 			errs = append(errs, err)
 		}
 	}
 	if p.TLSMaximumVersion != nil {
-		if err := validate.InList("TLSMaximumVersion", *p.TLSMaximumVersion, []VpnManagedIKEv2TLSMaximumVersion{VpnManagedIKEv2TLSMaximumVersionN10, VpnManagedIKEv2TLSMaximumVersionN11, VpnManagedIKEv2TLSMaximumVersionN12}); err != nil {
+		if err := validate.InList("TLSMaximumVersion", *p.TLSMaximumVersion, []VpnManagedIKEv2TLSMaximumVersion{VpnManagedIKEv2TLSMaximumVersionN10, VpnManagedIKEv2TLSMaximumVersionN11, VpnManagedIKEv2TLSMaximumVersionN12, VpnManagedIKEv2TLSMaximumVersionN13}); err != nil {
 			errs = append(errs, err)
 		}
 	}

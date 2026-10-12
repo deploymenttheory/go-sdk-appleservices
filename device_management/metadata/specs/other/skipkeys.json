@@ -46,6 +46,27 @@
       }
     },
     {
+      "key": "AccessibilityAppearance",
+      "title": "Skip Accessibility Appearance setup pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Accessibility Appearance configuration pane. This pane isn't always skippable because it appears before the device retrieves the Cloud Configuration from the server.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "17.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
       "key": "ActionButton",
       "title": "Skip Action Button setup pane",
       "type": "\u003cstring\u003e",
@@ -89,7 +110,7 @@
     },
     {
       "key": "Appearance",
-      "title": "Skip Choose your Look setup pane",
+      "title": "Skip Choose Your Look setup pane",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The key to skip the Choose Your Look screen.",
@@ -176,6 +197,27 @@
       }
     },
     {
+      "key": "DeviceFeaturesTour",
+      "title": "Skip Device Features tour pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Device Features Tour pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "27.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
       "key": "DeviceToDeviceMigration",
       "title": "Skip Device To Device Migration pane",
       "type": "\u003cstring\u003e",
@@ -205,7 +247,7 @@
     },
     {
       "key": "DisplayTone",
-      "title": "Disables True Tone",
+      "title": "Disables True Tone pane",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The key to skip DisplayTone setup.",
@@ -228,7 +270,7 @@
     },
     {
       "key": "EnableLockdownMode",
-      "title": "Skips Enable Lockdown Mode",
+      "title": "Skips enable Lockdown Mode",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The key to skip the Lockdown Mode pane if an Apple Account is set up.",
@@ -393,6 +435,27 @@
       }
     },
     {
+      "key": "LiquidGlass",
+      "title": "Skip Liquid Glass pane",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The key to skip the Liquid Glass pane.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "27.0"
+        },
+        "macOS": {
+          "introduced": "27.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
       "key": "Location",
       "title": "Disables Location Services",
       "type": "\u003cstring\u003e",
@@ -476,10 +539,12 @@
       "content": "The key to skip the OS Showcase pane.",
       "supportedOS": {
         "iOS": {
-          "introduced": "26.0"
+          "introduced": "26.0",
+          "removed": "27.0"
         },
         "macOS": {
-          "introduced": "26.1"
+          "introduced": "26.1",
+          "removed": "27.0"
         },
         "tvOS": {
           "introduced": "n/a"
@@ -653,7 +718,7 @@
     },
     {
       "key": "SIMSetup",
-      "title": "Skip SIM-related setup",
+      "title": "Skip sim-related setup",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The key to skip the add cellular plan pane. Skipping this pane prevents automatic eSIM setup during Setup Assistant.",
@@ -790,7 +855,7 @@
     },
     {
       "key": "TVHomeScreenSync",
-      "title": "Skip TV Home Screen",
+      "title": "Skip TV Home Screen Layout",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The key to skip TV Home Screen layout sync screen.",
@@ -811,7 +876,7 @@
     },
     {
       "key": "TVProviderSignIn",
-      "title": "Skip TV provider sign in",
+      "title": "Skip TV Provider sign in",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The key to skip the TV provider sign in screen.",
@@ -832,7 +897,7 @@
     },
     {
       "key": "TVRoom",
-      "title": "Skip Where is this Apple TV pane",
+      "title": "Skip where is this Apple TV pane",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The key to skip the \"Where is this Apple TV?\" screen.",
@@ -853,7 +918,7 @@
     },
     {
       "key": "UnlockWithWatch",
-      "title": "Skips Unlock With Watch pane",
+      "title": "Skips Unlock with Apple Watch pane",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The key to skip the \"Unlock with Apple Watch\" screen.",
@@ -938,13 +1003,14 @@
     },
     {
       "key": "WebContentFiltering",
-      "title": "Skip web content filtering pane",
+      "title": "Skip Web Content Filtering pane",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The key to skip the Web Content Filtering pane.",
       "supportedOS": {
         "iOS": {
-          "introduced": "18.2"
+          "introduced": "18.2",
+          "removed": "26.1"
         },
         "macOS": {
           "introduced": "n/a"

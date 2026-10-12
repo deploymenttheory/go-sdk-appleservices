@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "softwareupdate.pending-version",
   "title": "Status Software Update Pending Version",
-  "description": "A status report of the pending software update version.",
+  "description": "The status item that reports the device's pending software update version.",
   "payload": {
     "statusitemtype": "softwareupdate.pending-version",
     "supportedOS": {

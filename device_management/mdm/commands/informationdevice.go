@@ -27,20 +27,15 @@ type DeviceInformationResponse struct {
 // DeviceInformationResponseQueryResponsesOrganizationInfo is the OrganizationInfo dictionary.
 // The contents of `OrganizationInfo`.
 type DeviceInformationResponseQueryResponsesOrganizationInfo struct {
-	// A string that describes the organization operating the MDM server. This value is available in
-	// iOS 7 and later, macOS 10.11 and later, and tvOS 9 and later.
+	// A string that describes the organization operating the MDM server.
 	OrganizationName string `plist:"OrganizationName" json:"OrganizationName"`
-	// The organization's address. Use the LF character (`&#10`) to insert line breaks. This value is
-	// available in iOS 7 and later, macOS 10.11 and later, and tvOS 9 and later.
+	// The organization's address. Use the LF character (`&#10`) to insert line breaks.
 	OrganizationAddress *string `plist:"OrganizationAddress,omitempty" json:"OrganizationAddress,omitempty"`
-	// The organization's phone number. This value is available in iOS 7 and later, macOS 10.11 and
-	// later, and tvOS 9 and later.
+	// The organization's phone number.
 	OrganizationPhone *string `plist:"OrganizationPhone,omitempty" json:"OrganizationPhone,omitempty"`
-	// The organization's support email address. This value is available in iOS 7 and later, macOS
-	// 10.11 and later, and tvOS 9 and later.
+	// The organization's support email address.
 	OrganizationEmail *string `plist:"OrganizationEmail,omitempty" json:"OrganizationEmail,omitempty"`
-	// A unique identifier for the various services a single organization manages. This value is
-	// available in iOS 7 and later, macOS 10.11 and later, and tvOS 9 and later.
+	// A unique identifier for the various services a single organization manages.
 	OrganizationMagic *string `plist:"OrganizationMagic,omitempty" json:"OrganizationMagic,omitempty"`
 }
 
@@ -48,13 +43,11 @@ type DeviceInformationResponseQueryResponsesOrganizationInfo struct {
 // The contents of `MDMOptions`.
 type DeviceInformationResponseQueryResponsesMDMOptions struct {
 	// If `true`, a supervised device registers itself with Activation Lock when the user enables Find
-	// My. Unsupervised devices ignore this value. This value is available in iOS 7 and later, macOS 11
-	// and later, and tvOS 9 and later.
+	// My. Unsupervised devices ignore this value.
 	//
 	// Default: false.
 	ActivationLockAllowedWhileSupervised *bool `plist:"ActivationLockAllowedWhileSupervised,omitempty" json:"ActivationLockAllowedWhileSupervised,omitempty"`
-	// If `true`, the server supports Bootstrap Token commands. This value is available in macOS 11 and
-	// later.
+	// If `true`, the server supports Bootstrap Token commands.
 	//
 	// Default: false.
 	BootstrapTokenAllowed *bool `plist:"BootstrapTokenAllowed,omitempty" json:"BootstrapTokenAllowed,omitempty"`
@@ -69,102 +62,84 @@ type DeviceInformationResponseQueryResponsesMDMOptions struct {
 
 // DeviceInformationResponseQueryResponsesOSUpdateSettings is the OSUpdateSettings dictionary.
 // The contents of “OSUpdateSettings-dictionary“. Requires the Device Information access right.
-// Available in macOS 10.11 and later.
 type DeviceInformationResponseQueryResponsesOSUpdateSettings struct {
-	// The URL to the software update catalog the client is using. This value is available in macOS
-	// 10.11 and later.
+	// The URL to the software update catalog the client is using.
 	CatalogURL *string `plist:"CatalogURL,omitempty" json:"CatalogURL,omitempty"`
-	// If `true`, `CatalogURL` is the default catalog. This value is available in macOS 10.11 and
-	// later.
+	// If `true`, `CatalogURL` is the default catalog.
 	IsDefaultCatalog *bool `plist:"IsDefaultCatalog,omitempty" json:"IsDefaultCatalog,omitempty"`
-	// The date of the last software update scan. This value is available in macOS 10.11 and later.
+	// The date of the last software update scan.
 	PreviousScanDate *time.Time `plist:"PreviousScanDate,omitempty" json:"PreviousScanDate,omitempty"`
-	// The result code of last software update scan; `0` = success. This value is available in macOS
-	// 10.11 and no longer available in macOS 15 and later.
+	// The result code of last software update scan; `0` = success.
 	PreviousScanResult *string `plist:"PreviousScanResult,omitempty" json:"PreviousScanResult,omitempty"`
-	// If `true`, start a new scan. This value is available in macOS 10.11 and later.
+	// If `true`, start a new scan.
 	PerformPeriodicCheck *bool `plist:"PerformPeriodicCheck,omitempty" json:"PerformPeriodicCheck,omitempty"`
-	// The preference to automatically check for app updates. This value is available in macOS 10.11
-	// and later.
+	// The preference to automatically check for app updates.
 	AutoCheckEnabled *bool `plist:"AutoCheckEnabled,omitempty" json:"AutoCheckEnabled,omitempty"`
-	// The preference to download app updates in the background. This value is available in macOS 10.11
-	// and later.
+	// The preference to download app updates in the background.
 	BackgroundDownloadEnabled *bool `plist:"BackgroundDownloadEnabled,omitempty" json:"BackgroundDownloadEnabled,omitempty"`
-	// The preference to automatically install app updates. This value is available in macOS 10.11 and
-	// later.
+	// The preference to automatically install app updates.
 	AutomaticAppInstallationEnabled *bool `plist:"AutomaticAppInstallationEnabled,omitempty" json:"AutomaticAppInstallationEnabled,omitempty"`
-	// The preference to automatically install operating system updates. This value is available in
-	// macOS 10.11 and later.
+	// The preference to automatically install operating system updates.
 	AutomaticOSInstallationEnabled *bool `plist:"AutomaticOSInstallationEnabled,omitempty" json:"AutomaticOSInstallationEnabled,omitempty"`
-	// The preference to automatically install system data files and security updates. This value is
-	// available in macOS 10.11 and later.
+	// The preference to automatically install system data files and security updates.
 	AutomaticSecurityUpdatesEnabled *bool `plist:"AutomaticSecurityUpdatesEnabled,omitempty" json:"AutomaticSecurityUpdatesEnabled,omitempty"`
 }
 
 // DeviceInformationResponseQueryResponsesAutoSetupAdminAccountsItem is the AutoSetupAdminAccountsItem dictionary.
 // The response dictionary that contains the administrator setup information.
 type DeviceInformationResponseQueryResponsesAutoSetupAdminAccountsItem struct {
-	// The `GeneratedUID` of the administrator account. This value is available in macOS 10.11 and
-	// later.
+	// The `GeneratedUID` of the administrator account.
 	GUID *string `plist:"GUID,omitempty" json:"GUID,omitempty"`
-	// The short name of the administrator account. This value is available in macOS 10.11 and later.
+	// The short name of the administrator account.
 	ShortName *string `plist:"shortName,omitempty" json:"shortName,omitempty"`
 }
 
 // DeviceInformationResponseQueryResponsesServiceSubscriptionProperty is the ServiceSubscriptionProperty dictionary.
 // Properties of this Service Subscription. See below.
 type DeviceInformationResponseQueryResponsesServiceSubscriptionProperty struct {
-	// The version of the carrier settings. This value is available in iOS 12 and later.
+	// The version of the carrier settings.
 	CarrierSettingsVersion *string `plist:"CarrierSettingsVersion,omitempty" json:"CarrierSettingsVersion,omitempty"`
-	// The name of the current carrier network. This value is available in iOS 12 and later.
+	// The name of the current carrier network.
 	CurrentCarrierNetwork *string `plist:"CurrentCarrierNetwork,omitempty" json:"CurrentCarrierNetwork,omitempty"`
-	// The current mobile country code (MCC). This value is available in iOS 12 and later.
+	// The current mobile country code (MCC).
 	CurrentMCC *string `plist:"CurrentMCC,omitempty" json:"CurrentMCC,omitempty"`
-	// The current mobile network code (MNC). This value is available in iOS 12 and later.
+	// The current mobile network code (MNC).
 	CurrentMNC *string `plist:"CurrentMNC,omitempty" json:"CurrentMNC,omitempty"`
-	// The integrated circuit card identifier (ICCID) value. This value is available in iOS 12 and
-	// later.
+	// The integrated circuit card identifier (ICCID) value.
 	ICCID *string `plist:"ICCID,omitempty" json:"ICCID,omitempty"`
-	// The eSIM identifier. This value is available in iOS 14 and later.
+	// The eSIM identifier.
 	EID *string `plist:"EID,omitempty" json:"EID,omitempty"`
-	// The device International Mobile Equipment Identity (IMEI) number. This value is available in iOS
-	// 12 and later.
+	// The device International Mobile Equipment Identity (IMEI) number.
 	IMEI *string `plist:"IMEI,omitempty" json:"IMEI,omitempty"`
-	// If `true`, this subscription is the preference for data. This value is available in iOS 12 and
-	// later.
+	// If `true`, this subscription is the preference for data.
 	IsDataPreferred *bool `plist:"IsDataPreferred,omitempty" json:"IsDataPreferred,omitempty"`
-	// If `true`, the phone is roaming. This value is available in iOS 12 and later.
+	// If `true`, the phone is roaming.
 	IsRoaming *bool `plist:"IsRoaming,omitempty" json:"IsRoaming,omitempty"`
-	// If `true`, this subscription is the preference for voice. This value is available in iOS 12 and
-	// later.
+	// If `true`, this subscription is the preference for voice.
 	IsVoicePreferred *bool `plist:"IsVoicePreferred,omitempty" json:"IsVoicePreferred,omitempty"`
-	// The label of this subscription. This value is available in iOS 12 and later.
+	// The label of this subscription.
 	Label *string `plist:"Label,omitempty" json:"Label,omitempty"`
-	// The unique identifier for this subscription. This value is available in iOS 12 and later.
+	// The unique identifier for this subscription.
 	LabelID *string `plist:"LabelID,omitempty" json:"LabelID,omitempty"`
-	// The device Mobile Equipment Identifier (MEID) number. This query is available in iOS 12 and
-	// later.
+	// The device Mobile Equipment Identifier (MEID) number.
 	MEID *string `plist:"MEID,omitempty" json:"MEID,omitempty"`
-	// The raw phone number without punctuation and including country code. This value is available in
-	// iOS 12 and later.
+	// The raw phone number without punctuation and including country code.
 	PhoneNumber *string `plist:"PhoneNumber,omitempty" json:"PhoneNumber,omitempty"`
-	// The description of the slot that contains the SIM representing this subscription. This value is
-	// available in iOS 12 and later.
+	// The description of the slot that contains the SIM representing this subscription.
 	Slot *string `plist:"Slot,omitempty" json:"Slot,omitempty"`
-	// The name of the home carrier network. This value is available in iOS 16 and later.
+	// The name of the home carrier network.
 	SubscriberCarrierNetwork *string `plist:"SubscriberCarrierNetwork,omitempty" json:"SubscriberCarrierNetwork,omitempty"`
 }
 
 // DeviceInformationResponseQueryResponsesSoftwareUpdateSettings is the SoftwareUpdateSettings dictionary.
 // The device settings that control which updates appear in the Software Update pane in Settings.
-// Available in iOS 14.5 and later.
 type DeviceInformationResponseQueryResponsesSoftwareUpdateSettings struct {
 	// Which software updates to present to the user.
-	RecommendationsCadence *int64 `plist:"RecommendationsCadence,omitempty" json:"RecommendationsCadence,omitempty"`
+	RecommendationCadence *int64 `plist:"RecommendationCadence,omitempty" json:"RecommendationCadence,omitempty"`
 }
 
 // DeviceInformationResponseQueryResponsesAccessibilitySettings is the AccessibilitySettings dictionary.
-// The current state of settable accessibility settings. Available in iOS 16 and later.
+// The current state of settable accessibility settings.
 type DeviceInformationResponseQueryResponsesAccessibilitySettings struct {
 	// If `true`, the device has enabled bold text.
 	BoldTextEnabled *bool `plist:"BoldTextEnabled,omitempty" json:"BoldTextEnabled,omitempty"`
@@ -193,13 +168,13 @@ type DeviceInformationResponseQueryResponses struct {
 	// The unique identifier of the device.
 	UDID *string `plist:"UDID,omitempty" json:"UDID,omitempty"`
 	// The device identifier to use in provisioning profiles. This value differs from the UDID on a Mac
-	// with Apple silicon. Available in macOS 11.3 and later.
+	// with Apple silicon.
 	ProvisioningUDID *string `plist:"ProvisioningUDID,omitempty" json:"ProvisioningUDID,omitempty"`
 	// The contents of `OrganizationInfo`.
 	OrganizationInfo *DeviceInformationResponseQueryResponsesOrganizationInfo `plist:"OrganizationInfo,omitempty" json:"OrganizationInfo,omitempty"`
 	// The contents of `MDMOptions`.
 	MDMOptions *DeviceInformationResponseQueryResponsesMDMOptions `plist:"MDMOptions,omitempty" json:"MDMOptions,omitempty"`
-	// The date of the last iCloud backup. Available in iOS 8 and later.
+	// The date of the last iCloud backup.
 	LastCloudBackupDate *time.Time `plist:"LastCloudBackupDate,omitempty" json:"LastCloudBackupDate,omitempty"`
 	// If `true` on the device channel, the device is still waiting for a `Device-Configured-Command`
 	// command to continue through Setup Assistant.
@@ -235,11 +210,11 @@ type DeviceInformationResponseQueryResponses struct {
 	SerialNumber *string `plist:"SerialNumber,omitempty" json:"SerialNumber,omitempty"`
 	// The total capacity in floating-point base-10 gigabytes (GB) on iOS and macOS 12 or later. The
 	// capacity is in base-2 gibibytes (GiB) on macOS 11 and earlier. Requires the Device Information
-	// access right. Available in iOS 4 and later, and macOS 10.7 and later.
+	// access right.
 	DeviceCapacity *float64 `plist:"DeviceCapacity,omitempty" json:"DeviceCapacity,omitempty"`
 	// The available capacity in floating-point base-10 gigabytes (GB) in iOS and macOS 12 or later.
 	// The capacity is in base-2 gibibytes (GiB) in macOS 11 and earlier. Requires the Device
-	// Information access right. Available in iOS 4 and later, and macOS 10.7 and later.
+	// Information access right.
 	AvailableDeviceCapacity *float64 `plist:"AvailableDeviceCapacity,omitempty" json:"AvailableDeviceCapacity,omitempty"`
 	// The International Mobile Equipment Identity (IMEI) number. Requires the Device Information
 	// access right. Available as of iOS 4 and deprecated in iOS 16.
@@ -247,82 +222,71 @@ type DeviceInformationResponseQueryResponses struct {
 	// The mobile equipment identifier (MEID) number. Requires the Device Information access right.
 	// Available as of iOS 4 and deprecated in iOS 16.
 	MEID *string `plist:"MEID,omitempty" json:"MEID,omitempty"`
-	// The modem firmware version. Requires the Device Information access right. Available in iOS 4 and
-	// later.
+	// The modem firmware version. Requires the Device Information access right.
 	ModemFirmwareVersion *string `plist:"ModemFirmwareVersion,omitempty" json:"ModemFirmwareVersion,omitempty"`
 	// The cellular technology type, which is one of the following values:
 	CellularTechnology *DeviceInformationResponseQueryResponsesCellularTechnology `plist:"CellularTechnology,omitempty" json:"CellularTechnology,omitempty"`
 	// The battery level, between `0.0` and `1.0`, or `-1.0` if MDM can't determine the battery level.
-	// Requires the Device Information access right. Available in iOS 5 and later, and macOS 13.3 and
-	// later.
+	// Requires the Device Information access right.
 	BatteryLevel *float64 `plist:"BatteryLevel,omitempty" json:"BatteryLevel,omitempty"`
 	// If `true`, the device has an internal battery.
 	HasBattery *bool `plist:"HasBattery,omitempty" json:"HasBattery,omitempty"`
-	// If `true`, it's a supervised device. Requires the Device Information access right. Available in
-	// iOS 6 and later, macOS 10.15 and later, and tvOS 9 and later.
+	// If `true`, it's a supervised device. Requires the Device Information access right.
 	IsSupervised *bool `plist:"IsSupervised,omitempty" json:"IsSupervised,omitempty"`
-	// If `true`, the device is a Shared iPad. Requires the Device Information access right. Available
-	// in iOS 9.3 and later.
+	// If `true`, the device is a Shared iPad. Requires the Device Information access right.
 	IsMultiUser *bool `plist:"IsMultiUser,omitempty" json:"IsMultiUser,omitempty"`
 	// If `true`, the device has enabled a device locator service, such as Find My. Requires the Device
-	// Information access right. Available in iOS 7 and later.
+	// Information access right.
 	IsDeviceLocatorServiceEnabled *bool `plist:"IsDeviceLocatorServiceEnabled,omitempty" json:"IsDeviceLocatorServiceEnabled,omitempty"`
 	// If `true`, the device has enabled Activation Lock. Requires the Device Information access right.
 	// Available as of iOS 7 and macOS 10.9, and deprecated in iOS 16 and macOS 13.
 	IsActivationLockEnabled *bool `plist:"IsActivationLockEnabled,omitempty" json:"IsActivationLockEnabled,omitempty"`
 	// If `true`, the device supports Activation Lock. Also see `IsActivationLockManageable` in
-	// `ManagementStatus`. Available in macOS 10.9 and later.
+	// `ManagementStatus`.
 	IsActivationLockSupported *bool `plist:"IsActivationLockSupported,omitempty" json:"IsActivationLockSupported,omitempty"`
 	// If `true`, the device is in Do Not Disturb (DND) mode. This value is `true` even if DND is only
-	// in effect for a locked device. Requires the Device Information access right. Available in iOS 7
-	// and later.
+	// in effect for a locked device. Requires the Device Information access right.
 	IsDoNotDisturbInEffect *bool `plist:"IsDoNotDisturbInEffect,omitempty" json:"IsDoNotDisturbInEffect,omitempty"`
 	// If `true`, the device can receive `PowerON`, `PowerOFF`, and `Reset` commands from a lights-out
-	// management (LOM) controller. Available in macOS 11 and later.
+	// management (LOM) controller.
 	SupportsLOMDevice *bool `plist:"SupportsLOMDevice,omitempty" json:"SupportsLOMDevice,omitempty"`
-	// The device identifier. Requires the Device Information access right. Available in tvOS 6 and
-	// later.
+	// The device identifier. Requires the Device Information access right.
 	DeviceID *string `plist:"DeviceID,omitempty" json:"DeviceID,omitempty"`
 	// The device identifier for Exchange Active Sync (EAS). Requires the Device Information access
-	// right. Available in iOS 7 and later.
+	// right.
 	EASDeviceIdentifier *string `plist:"EASDeviceIdentifier,omitempty" json:"EASDeviceIdentifier,omitempty"`
 	// If `true`, the device has enabled iCloud backup. Requires the Device Information access right.
-	// Available in iOS 7.1 and later.
 	IsCloudBackupEnabled *bool `plist:"IsCloudBackupEnabled,omitempty" json:"IsCloudBackupEnabled,omitempty"`
 	// An array of the directory GUIDs of the logged-in managed users. If one of these users is
 	// currently logged in to the console, the `CurrentConsoleManagedUser` key returns the GUID of that
-	// user. Requires the Device Information access right. Available in macOS 10.11 and later.
+	// user. Requires the Device Information access right.
 	ActiveManagedUsers []string `plist:"ActiveManagedUsers,omitempty" json:"ActiveManagedUsers,omitempty"`
 	// The contents of ``OSUpdateSettings-dictionary``. Requires the Device Information access right.
-	// Available in macOS 10.11 and later.
 	OSUpdateSettings *DeviceInformationResponseQueryResponsesOSUpdateSettings `plist:"OSUpdateSettings,omitempty" json:"OSUpdateSettings,omitempty"`
-	// The local host name from Bonjour. Available in macOS 10.11 and later.
+	// The local host name from Bonjour.
 	LocalHostName *string `plist:"LocalHostName,omitempty" json:"LocalHostName,omitempty"`
-	// The host name. Available in macOS 10.11 and later.
+	// The host name.
 	HostName *string `plist:"HostName,omitempty" json:"HostName,omitempty"`
 	// The contents of ``AutoSetupAdminAccountsItem``, which Setup Assistant automatically creates
-	// during DEP enrollment. Requires the Device Information access right. Available in macOS 10.11
-	// and later.
+	// during ADE enrollment. Requires the Device Information access right.
 	AutoSetupAdminAccounts []DeviceInformationResponseQueryResponsesAutoSetupAdminAccountsItem `plist:"AutoSetupAdminAccounts,omitempty" json:"AutoSetupAdminAccounts,omitempty"`
 	// If `true`, the device has enabled System Integrity Protection. Requires the Device Information
-	// access right. Available in macOS 10.12 and later.
+	// access right.
 	SystemIntegrityProtectionEnabled *bool `plist:"SystemIntegrityProtectionEnabled,omitempty" json:"SystemIntegrityProtectionEnabled,omitempty"`
 	// If `true`, the device has enabled Managed Lost Mode. Requires the Device Information access
-	// right. Available in iOS 9.3 and later.
+	// right.
 	IsMDMLostModeEnabled *bool `plist:"IsMDMLostModeEnabled,omitempty" json:"IsMDMLostModeEnabled,omitempty"`
 	// The maximum number of users that can use this Shared iPad device. Starting with iOS 13.4, the
-	// value that returns is always `32`. Requires the Device Information access right. Available in
-	// iOS 9.3 and later.
+	// value that returns is always `32`. Requires the Device Information access right.
 	MaximumResidentUsers *int64 `plist:"MaximumResidentUsers,omitempty" json:"MaximumResidentUsers,omitempty"`
 	// The estimated number of users that can use this Shared iPad device, according to the space
 	// available on the device and each user's quota. Requires the Device Information access right.
-	// Available in iOS 14 and later.
 	EstimatedResidentUsers *int64 `plist:"EstimatedResidentUsers,omitempty" json:"EstimatedResidentUsers,omitempty"`
 	// The quota size in megabytes for each user on this Shared iPad device. Requires the Device
-	// Information access right. Available in iOS 13.4 and later.
+	// Information access right.
 	QuotaSize *int64 `plist:"QuotaSize,omitempty" json:"QuotaSize,omitempty"`
 	// The number of users currently on this Shared iPad device. Requires the Device Information access
-	// right. Available in iOS 13.4 and later.
+	// right.
 	ResidentUsers *int64 `plist:"ResidentUsers,omitempty" json:"ResidentUsers,omitempty"`
 	// The timeout interval for the user session. A value of `0` indicates that there's no timeout.
 	UserSessionTimeout *int64 `plist:"UserSessionTimeout,omitempty" json:"UserSessionTimeout,omitempty"`
@@ -331,26 +295,23 @@ type DeviceInformationResponseQueryResponses struct {
 	TemporarySessionTimeout *int64 `plist:"TemporarySessionTimeout,omitempty" json:"TemporarySessionTimeout,omitempty"`
 	// If `true`, the device allows only temporary sessions.
 	TemporarySessionOnly *bool `plist:"TemporarySessionOnly,omitempty" json:"TemporarySessionOnly,omitempty"`
-	// The list of domains that the device suggests on the Shared iPad login screen. Available in iOS
-	// 16 and later.
+	// The list of domains that the device suggests on the Shared iPad login screen.
 	ManagedAppleIDDefaultDomains []string `plist:"ManagedAppleIDDefaultDomains,omitempty" json:"ManagedAppleIDDefaultDomains,omitempty"`
 	// The grace period for Shared iPad online authentication (in days). A value of `0` indicates that
-	// the device requires online authentication for every login. Available in iOS 16 and later.
+	// the device requires online authentication for every login.
 	OnlineAuthenticationGracePeriod *int64 `plist:"OnlineAuthenticationGracePeriod,omitempty" json:"OnlineAuthenticationGracePeriod,omitempty"`
 	// If `true`, skip the language and country/region panes for new users on Shared iPad.
 	SkipLanguageAndLocaleSetupForNewUsers *bool `plist:"SkipLanguageAndLocaleSetupForNewUsers,omitempty" json:"SkipLanguageAndLocaleSetupForNewUsers,omitempty"`
 	// The push token for the user-channel connection, in the same format as in `TokenUpdateRequest`.
 	// MDM ignores this query for the device channel. Requires the Device Information access right.
-	// Available in iOS 9.3 and later, and macOS 10.12 and later.
 	PushToken []byte `plist:"PushToken,omitempty" json:"PushToken,omitempty"`
 	// If `true`, the device has enabled diagnostic submission. Requires the Device Information access
-	// right. Available in iOS 9.3 and later.
+	// right.
 	DiagnosticSubmissionEnabled *bool `plist:"DiagnosticSubmissionEnabled,omitempty" json:"DiagnosticSubmissionEnabled,omitempty"`
 	// If `true`, the device is sharing app analytics. Requires the Device Information access right.
-	// Available in iOS 9.3 and later.
 	AppAnalyticsEnabled *bool `plist:"AppAnalyticsEnabled,omitempty" json:"AppAnalyticsEnabled,omitempty"`
 	// The current Internet Assigned Numbers Authority (IANA) time zone database name. Requires the
-	// Device Information access right. Available in iOS 14 and later, and tvOS 14 and later.
+	// Device Information access right.
 	TimeZone *string `plist:"TimeZone,omitempty" json:"TimeZone,omitempty"`
 	// The integrated circuit card (ICC) identifier for the installed SIM card. Requires the Network
 	// Information access right. Available as of iOS 4 and deprecated in iOS 16.
@@ -359,8 +320,7 @@ type DeviceInformationResponseQueryResponses struct {
 	BluetoothMAC *string `plist:"BluetoothMAC,omitempty" json:"BluetoothMAC,omitempty"`
 	// The Wi-Fi MAC address. Requires the Network Information access right.
 	WiFiMAC *string `plist:"WiFiMAC,omitempty" json:"WiFiMAC,omitempty"`
-	// The primary Ethernet MAC address. Requires the Network Information access right. Available in
-	// macOS 10.7 and later.
+	// The primary Ethernet MAC address. Requires the Network Information access right.
 	EthernetMAC *string `plist:"EthernetMAC,omitempty" json:"EthernetMAC,omitempty"`
 	// The name of the current carrier network. Requires the Network Information access right.
 	// Available as of iOS 4 and deprecated in iOS 16.
@@ -377,17 +337,15 @@ type DeviceInformationResponseQueryResponses struct {
 	// Information access right. Available as of iOS 4 and deprecated in iOS 16.
 	PhoneNumber *string `plist:"PhoneNumber,omitempty" json:"PhoneNumber,omitempty"`
 	// If `true`, the device has enabled data roaming. Requires the Network Information access right.
-	// Available in iOS 5 and later.
 	DataRoamingEnabled *bool `plist:"DataRoamingEnabled,omitempty" json:"DataRoamingEnabled,omitempty"`
 	// If `true`, the device has enabled voice roaming, which isn't available for all carriers.
 	// Requires the Network Information access right. Requires the Device Information access right.
 	// Available as of iOS 5 and deprecated in iOS 16.
 	VoiceRoamingEnabled *bool `plist:"VoiceRoamingEnabled,omitempty" json:"VoiceRoamingEnabled,omitempty"`
 	// If `true,` the device has enabled Personal Hotspot, which isn't available for all carriers.
-	// Requires the Network Information access right. Available in iOS 7 and later.
+	// Requires the Network Information access right.
 	PersonalHotspotEnabled *bool `plist:"PersonalHotspotEnabled,omitempty" json:"PersonalHotspotEnabled,omitempty"`
 	// If `true`, the device is network-tethered. Requires the Network Information access right.
-	// Available in iOS 10.3 and later.
 	IsNetworkTethered *bool `plist:"IsNetworkTethered,omitempty" json:"IsNetworkTethered,omitempty"`
 	// If `true`, the device is roaming. Requires the Network Information access right. IAvailable as
 	// of iOS 4.2 and deprecated in iOS 16.
@@ -410,25 +368,21 @@ type DeviceInformationResponseQueryResponses struct {
 	CurrentMNC *string `plist:"CurrentMNC,omitempty" json:"CurrentMNC,omitempty"`
 	// The contents of ``ServiceSubscriptionProperty``. Requires the Network Information access right.
 	ServiceSubscriptions []DeviceInformationResponseQueryResponsesServiceSubscriptionProperty `plist:"ServiceSubscriptions,omitempty" json:"ServiceSubscriptions,omitempty"`
-	// If `true`, the `EraseDeviceCommand` requires a PIN. Available in macOS 11 and later.
+	// If `true`, the `EraseDeviceCommand` requires a PIN.
 	PINRequiredForEraseDevice *bool `plist:"PINRequiredForEraseDevice,omitempty" json:"PINRequiredForEraseDevice,omitempty"`
-	// If `true`, the `DeviceLockCommand` requires a PIN. Available in macOS 11 and later.
+	// If `true`, the `DeviceLockCommand` requires a PIN.
 	PINRequiredForDeviceLock *bool `plist:"PINRequiredForDeviceLock,omitempty" json:"PINRequiredForDeviceLock,omitempty"`
-	// If `true`, the device supports iOS or iPadOS app installs through MDM. Available in macOS 11 and
-	// later.
+	// If `true`, the device supports iOS or iPadOS app installs through MDM.
 	SupportsiOSAppInstalls *bool `plist:"SupportsiOSAppInstalls,omitempty" json:"SupportsiOSAppInstalls,omitempty"`
 	// The device identifier to look up available OS updates through
-	// [https://gdmf.apple.com/v2/pmv](https://gdmf.apple.com/v2/pmv). Available in iOS 15 and later,
-	// and macOS 12 and later.
+	// [https://gdmf.apple.com/v2/pmv](https://gdmf.apple.com/v2/pmv).
 	SoftwareUpdateDeviceID *string `plist:"SoftwareUpdateDeviceID,omitempty" json:"SoftwareUpdateDeviceID,omitempty"`
 	// The device settings that control which updates appear in the Software Update pane in Settings.
-	// Available in iOS 14.5 and later.
 	SoftwareUpdateSettings *DeviceInformationResponseQueryResponsesSoftwareUpdateSettings `plist:"SoftwareUpdateSettings,omitempty" json:"SoftwareUpdateSettings,omitempty"`
-	// The current state of settable accessibility settings. Available in iOS 16 and later.
+	// The current state of settable accessibility settings.
 	AccessibilitySettings *DeviceInformationResponseQueryResponsesAccessibilitySettings `plist:"AccessibilitySettings,omitempty" json:"AccessibilitySettings,omitempty"`
-	// The key to get an attestation of the device's properties. Available in iOS 16 and later, macOS
-	// 14 and later, tvOS 16 and later, and watchOS 10 and later. The hardware requirements for
-	// attestation are described below.
+	// The key to get an attestation of the device's properties. See the hardware requirements for
+	// attestation below.
 	DevicePropertiesAttestation [][]byte `plist:"DevicePropertiesAttestation,omitempty" json:"DevicePropertiesAttestation,omitempty"`
 	// Specifies whether the device can perform an `EraseDeviceCommand` using Erase All Content and
 	// Settings (EACS), which is one of the following values:

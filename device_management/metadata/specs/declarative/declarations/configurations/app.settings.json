@@ -1,0 +1,413 @@
+{
+  "category": "declarative/declarations/configurations",
+  "name": "app.settings",
+  "title": "App:Settings",
+  "description": "The declaration to configure app settings.",
+  "payload": {
+    "declarationtype": "com.apple.configuration.app.settings",
+    "apply": "combined",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "27.0"
+      },
+      "visionOS": {
+        "introduced": "27.0"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "Allowed",
+      "title": "Allowed apps",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The dictionary of allowed app settings.",
+      "subkeys": [
+        {
+          "key": "AllowedApps",
+          "title": "Allowed apps",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "combinetype": "set-intersection",
+          "content": "If present, the device only shows or launches apps with bundle IDs in the array. Include the value `com.apple.webapp` to allow all webclips. This applies to App Store apps, marketplace apps, and locally installed apps (using Configurator, Xcode, and so forth).",
+          "subkeys": [
+            {
+              "key": "AppIdentifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "String containing an identifier to match an app."
+            }
+          ],
+          "supportedOS": {
+            "macOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "DeniedApps",
+          "title": "Denied apps",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "combinetype": "set-union",
+          "content": "If present, the device prevents showing or launching apps with bundle IDs in the\narray. Include the value `com.apple.webapp` to restrict all webclips. This applies to\nApp Store apps, marketplace apps, and locally installed apps (using Configurator,\nXcode, and so forth).\n\u003e Note:\n\u003e Denying system apps may disable other functionality. For example, denying the App\nStore app may prevent users from accepting the terms and conditions for the user-based\nVolume Purchase Program (VPP).",
+          "subkeys": [
+            {
+              "key": "AppIdentifier",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "String containing an identifier to match an app."
+            }
+          ],
+          "supportedOS": {
+            "macOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "AllowedBinaries",
+          "title": "Allowed binaries",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "combinetype": "set-intersection",
+          "content": "If present, the device only allows binaries that match the binary identifier properties to run. A binary only matches when all the binary identifiers match. The device always runs system critical processes. Use \"codesign -dvvv \u003cpath_to_binary\u003e\" to show the information you need to generate these values.",
+          "subkeys": [
+            {
+              "key": "BinaryIdentifier",
+              "title": "Binary identifier",
+              "type": "\u003cdictionary\u003e",
+              "presence": "required",
+              "content": "Dictionary containing one or more identifier fields to match a binary.",
+              "subkeys": [
+                {
+                  "key": "CDHash",
+                  "title": "Code directory hash",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The 40 character code signature code directory hash of the binary."
+                },
+                {
+                  "key": "SigningID",
+                  "title": "Signing ID",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The code signature signing identifier of the binary."
+                },
+                {
+                  "key": "TeamID",
+                  "title": "Team ID",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The code signature team identifier of the binary. Use the value \"\\*APPLE\\*\" instead of an empty string for Apple binaries with an empty team identifier."
+                },
+                {
+                  "key": "PathPrefix",
+                  "title": "Path prefix",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The file system path prefix to match binaries."
+                },
+                {
+                  "key": "SigningState",
+                  "title": "Signing state",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "All",
+                    "TestFlight",
+                    "DeveloperID",
+                    "Enterprise",
+                    "AppStore",
+                    "Apple"
+                  ],
+                  "default": "All",
+                  "combinetype": "enum-last",
+                  "content": "The code signing state to match binaries."
+                }
+              ]
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {},
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "DeniedBinaries",
+          "title": "Denied binaries",
+          "type": "\u003carray\u003e",
+          "presence": "optional",
+          "combinetype": "set-union",
+          "content": "If present, the device doesn't allow binaries that match the binary identifier properties to run. A binary only matches when all the binary identifiers match.",
+          "subkeys": [
+            {
+              "key": "BinaryIdentifier",
+              "title": "Binary identifier",
+              "type": "\u003cdictionary\u003e",
+              "presence": "required",
+              "content": "Dictionary containing one or more identifier fields to match a binary.",
+              "subkeys": [
+                {
+                  "key": "CDHash",
+                  "title": "Code directory hash",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The 40 character code signature code directory hash of the binary."
+                },
+                {
+                  "key": "SigningID",
+                  "title": "Signing ID",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The code signature signing identifier of the binary."
+                },
+                {
+                  "key": "TeamID",
+                  "title": "Team ID",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The code signature team identifier of the binary. Use the value \"\\*APPLE\\*\" instead of an empty string for Apple binaries with an empty team identifier."
+                },
+                {
+                  "key": "PathPrefix",
+                  "title": "Path prefix",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "content": "The file system path prefix to match binaries."
+                },
+                {
+                  "key": "SigningState",
+                  "title": "Signing state",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "All",
+                    "TestFlight",
+                    "DeveloperID",
+                    "Enterprise",
+                    "AppStore",
+                    "Apple"
+                  ],
+                  "default": "All",
+                  "combinetype": "enum-last",
+                  "content": "The code signing state to match binaries."
+                }
+              ]
+            }
+          ],
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {},
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "AlwaysAllowManagedApps",
+          "title": "Always allow managed apps",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "combinetype": "boolean-or",
+          "content": "If `true`, the device implicitly includes managed apps in the effective allow list when `AllowedBinaries` is present.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "n/a"
+            },
+            "macOS": {},
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "Privacy",
+      "title": "App privacy",
+      "type": "\u003cdictionary\u003e",
+      "presence": "optional",
+      "content": "The dictionary of app settings.",
+      "subkeys": [
+        {
+          "key": "PermissionDefaults",
+          "title": "App privacy permission defaults",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "The dictionary of app privacy permission defaults. Each key in the dictionary is an app identifier. The dictionary values represent the permission defaults that the device applies for each matching app.\n\nIn iOS, the app identifier is a bundle ID, for example, \"com.example.app\".\n\nIn macOS, the app identifier is a composed identifier. The format of the composed identifier is \"Bundle-ID {Designated-Requirement}\". \"Bundle-ID\" is the bundle identifier string of the app. \"Designated-Requirement\" is the designated requirement string the device uses to match the code signature of the app. For example, \"com.example.app {anchor apple generic}\". The device only applies defaults for an app if its code signature matches the composed identifier.",
+          "subkeys": [
+            {
+              "key": "ANY",
+              "type": "\u003cdictionary\u003e",
+              "presence": "optional",
+              "content": "The dictionary that defines the app privacy permission defaults. Each key is an app identifier.",
+              "subkeytype": "AppDictionary",
+              "subkeys": [
+                {
+                  "key": "OrganizationJustification",
+                  "title": "Organization justification",
+                  "type": "\u003cstring\u003e",
+                  "presence": "required",
+                  "content": "Text you provide that clearly explains to the user the reason why the organization requires these app permission defaults. The device includes this text in the permission consent prompt it displays when it launches the app."
+                },
+                {
+                  "key": "Accessibility",
+                  "title": "Accessibility permission",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "None",
+                    "Allow"
+                  ],
+                  "combinetype": "enum-last",
+                  "content": "Controls whether an app privacy permission default is set.\n* `None`: No app privacy permission default is set for use of accessibility.\n* `Allow`: The app privacy permission default is set to allow use of accessibility.",
+                  "supportedOS": {
+                    "iOS": {
+                      "introduced": "n/a"
+                    }
+                  }
+                },
+                {
+                  "key": "Bluetooth",
+                  "title": "Bluetooth permission",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "None",
+                    "Allow"
+                  ],
+                  "combinetype": "enum-last",
+                  "content": "Controls whether an app privacy permission default is set.\n* `None`: No app privacy permission default is set for use of Bluetooth.\n* `Allow`: The app privacy permission default is set to allow use of Bluetooth."
+                },
+                {
+                  "key": "Camera",
+                  "title": "Camera permission",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "None",
+                    "Allow"
+                  ],
+                  "combinetype": "enum-last",
+                  "content": "Controls whether an app privacy permission default is set.\n* `None`: No app privacy permission default is set for use of the camera.\n* `Allow`: The app privacy permission default is set to allow use of the camera."
+                },
+                {
+                  "key": "Dictation",
+                  "title": "Dictation permission",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "None",
+                    "Allow"
+                  ],
+                  "combinetype": "enum-last",
+                  "content": "Controls whether an app privacy permission default is set.\n* `None`: No app privacy permission default is set for use of dictation.\n* `Allow`: The app privacy permission default is set to allow use of dictation."
+                },
+                {
+                  "key": "LocalNetwork",
+                  "title": "Local network permission",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "None",
+                    "Allow"
+                  ],
+                  "combinetype": "enum-last",
+                  "content": "Controls whether an app privacy permission default is set.\n* `None`: No app privacy permission default is set for use of the local network.\n* `Allow`: The app privacy permission default is set to allow use of the local network."
+                },
+                {
+                  "key": "Location",
+                  "title": "Location permission",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "None",
+                    "WhileUsing",
+                    "Always"
+                  ],
+                  "combinetype": "enum-last",
+                  "content": "Controls whether an app privacy permission default is set.\n* `None`: No app privacy permission default is set for access to location.\n* `WhileUsing`: The app privacy permission default is set to allow access to location only while the user is using the app In macOS, this is equivalent to `Always`.\n* `Always`: The app privacy permission default is set to allow access to location always."
+                },
+                {
+                  "key": "LocationAccuracy",
+                  "title": "Location accuracy permission",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "None",
+                    "Approximate",
+                    "Precise"
+                  ],
+                  "combinetype": "enum-last",
+                  "content": "Controls whether an app privacy permission default is set.\n* `None`: No app privacy permission default is set for access to precise location.\n* `Approximate`: The app privacy permission default is set to allow approximate access to location.\n* `Precise`: The app privacy permission default is set to allow precise access to location.",
+                  "supportedOS": {
+                    "macOS": {
+                      "introduced": "n/a"
+                    }
+                  }
+                },
+                {
+                  "key": "Microphone",
+                  "title": "Microphone permission",
+                  "type": "\u003cstring\u003e",
+                  "presence": "optional",
+                  "rangelist": [
+                    "None",
+                    "Allow"
+                  ],
+                  "combinetype": "enum-last",
+                  "content": "Controls whether an app privacy permission default is set.\n* `None`: No app privacy permission default is set for use of the microphone.\n* `Allow`: The app privacy permission default is set to allow use of the microphone."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "supportedOS": {
+        "macOS": {},
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    }
+  ]
+}

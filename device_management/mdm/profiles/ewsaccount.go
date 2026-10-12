@@ -17,7 +17,7 @@ type EwsAccount struct {
 	// Default: true.
 	SSL *bool `plist:"SSL,omitempty" json:"SSL,omitempty"`
 	// If `true`, the system enables OAuth for authentication. Don't specify a password if `OAuth` is
-	// `true`. Available in macOS 10.14 and later
+	// `true`.
 	//
 	// Default: false.
 	OAuth *bool `plist:"OAuth,omitempty" json:"OAuth,omitempty"`
