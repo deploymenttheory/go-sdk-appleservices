@@ -259,7 +259,7 @@
       "key": "MCXDockSpecialFolders",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "One or more special folders that may be created at user login time and placed in the Dock.\n\n\n\nThe \"My Applications\" item is only used for Simple Finder environments. The \"Original Network Home\" item is only used for mobile account users.",
+      "content": "One or more special folders that the device may create at user login time and place in the Dock.\n\n\n\nThe \"My Applications\" item is only used for Simple Finder environments. The \"Original Network Home\" item is only used for mobile account users.",
       "subkeys": [
         {
           "key": "MCXDockSpecialFoldersItems",
@@ -278,7 +278,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, use the file in `/Library/Preferences/com.apple.dockfixup.plist` when a new user or migrated user logs in. This option has no effect for existing users. Available in macOS 10.12 and later. Only available on the device channel.",
+      "content": "If `true`, use the file in `/Library/Preferences/com.apple.dockfixup.plist` when a new user or migrated user logs in. This option has no effect for existing users. Only available on the device channel.",
       "supportedOS": {
         "macOS": {
           "introduced": "10.12"
@@ -296,7 +296,7 @@
       "key": "static-others",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "An array of items located on the Documents side of the Dock and cannot be removed from that location.",
+      "content": "An array of items located on the Documents side of the Dock that users can't remove from that location.",
       "subkeytype": "StaticItem",
       "subkeys": [
         {
@@ -368,7 +368,7 @@
       "key": "static-apps",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "An array of items located on the Applications side of the Dock and cannot be removed from that location.",
+      "content": "An array of items located on the Applications side of the Dock that users can't remove from that location.",
       "subkeytype": "StaticItem",
       "subkeys": [
         {
@@ -440,7 +440,7 @@
       "key": "persistent-apps",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "An array of items located on the Applications side of the Dock that can be removed from the Dock.",
+      "content": "An array of items located on the Applications side of the Dock that users can remove from the Dock.",
       "subkeytype": "StaticItem",
       "subkeys": [
         {
@@ -512,7 +512,7 @@
       "key": "persistent-others",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "An array of items located on the Documents side of the Dock that can be removed from the Dock.",
+      "content": "An array of items located on the Documents side of the Dock that users can remove from the Dock.",
       "subkeytype": "StaticItem",
       "subkeys": [
         {

@@ -3,9 +3,10 @@
 package commands
 
 // ScheduleOSUpdate — Schedule OS Update Command.
-// Schedule an update of the operating system on a device.
+// Schedule an update of the operating system on a device. Removed: use the declarative management
+// `com.apple.configuration.softwareupdate.enforcement.specific` configuration.
 //
-// Supported: iOS 9.0+, macOS 10.11+, tvOS 12.0+.
+// Supported: iOS 9.0–27.0, macOS 10.11–27.0, tvOS 12.0–27.0.
 type ScheduleOSUpdate struct {
 	// An array of dictionaries specifying the updates to download or install. If this value is
 	// missing, the device applies the default behavior for handling updates.
@@ -23,8 +24,7 @@ type ScheduleOSUpdateResponse struct {
 type ScheduleOSUpdateUpdatesItem struct {
 	// The product key that represents the update.
 	ProductKey *string `plist:"ProductKey,omitempty" json:"ProductKey,omitempty"`
-	// The version of the update, which the system requires if `ProductKey` isn't present. This value
-	// is available in iOS 11.3 and later, macOS 12 and later, and tvOS 12.2 and later.
+	// The version of the update, which the system requires if `ProductKey` isn't present.
 	ProductVersion *string `plist:"ProductVersion,omitempty" json:"ProductVersion,omitempty"`
 	// The install action, which is one of the following values:
 	InstallAction ScheduleOSUpdateUpdatesItemInstallAction `plist:"InstallAction" json:"InstallAction"`

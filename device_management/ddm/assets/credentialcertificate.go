@@ -3,22 +3,27 @@
 package assets
 
 // CredentialCertificate — Asset:Credential Certificate.
-// A reference to a PKCS #1 or PEM encoded certificate.
+// A reference to one PKCS #1 or PEM encoded certificate.
 //
 // Supported: iOS 17.0+, macOS 14.0+, tvOS 17.0+, visionOS 1.1+, watchOS 10.0+.
 type CredentialCertificate struct {
-	// The external reference. Ensure that the asset data uses a media type of `application/pkcs1` or
-	// `application/pem` to correctly identify the type of encoded certificate. If the asset data
-	// includes a `ContentType` sub-key, set it to the corresponding media type.
+	// The external reference. Ensure the asset data contains exactly one certificate. If the PEM data
+	// contains more than one certificate, the system installs the first certificate and ignores the
+	// rest. Ensure that the asset data uses a media type of `application/pkcs1` or `application/pem`
+	// to correctly identify the type of encoded certificate. If the asset data includes a
+	// `ContentType` sub-key, set it to the corresponding media type.
 	Reference CredentialCertificateReference `plist:"Reference" json:"Reference"`
-	// The server authentication details.
+	// The server authentication details. If this key is absent, the default authentication type is
+	// MDM.
 	Authentication *CredentialCertificateAuthentication `plist:"Authentication,omitempty" json:"Authentication,omitempty"`
 }
 
 // CredentialCertificateReference is the Reference dictionary.
-// The external reference. Ensure that the asset data uses a media type of `application/pkcs1` or
-// `application/pem` to correctly identify the type of encoded certificate. If the asset data
-// includes a `ContentType` sub-key, set it to the corresponding media type.
+// The external reference. Ensure the asset data contains exactly one certificate. If the PEM data
+// contains more than one certificate, the system installs the first certificate and ignores the
+// rest. Ensure that the asset data uses a media type of `application/pkcs1` or `application/pem`
+// to correctly identify the type of encoded certificate. If the asset data includes a
+// `ContentType` sub-key, set it to the corresponding media type.
 type CredentialCertificateReference struct {
 	// The URL to retrieve data, which needs to start with `https://`.
 	DataURL string `plist:"DataURL" json:"DataURL"`
@@ -36,7 +41,8 @@ type CredentialCertificateReference struct {
 }
 
 // CredentialCertificateAuthentication is the Authentication dictionary.
-// The server authentication details.
+// The server authentication details. If this key is absent, the default authentication type is
+// MDM.
 type CredentialCertificateAuthentication struct {
 	// The type of authentication, which has these allowed values:
 	Type CredentialCertificateAuthenticationType `plist:"Type" json:"Type"`

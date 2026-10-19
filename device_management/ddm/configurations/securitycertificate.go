@@ -3,7 +3,7 @@
 package configurations
 
 // SecurityCertificate — Security:Certificate.
-// The declaration to add a certificate to the device.
+// The declaration to configure a certificate.
 //
 // Supported: iOS 17.0+, macOS 14.0+, tvOS 17.0+, visionOS 1.1+, watchOS 10.0+.
 type SecurityCertificate struct {

@@ -33,6 +33,8 @@ type ExtensiblessoAuthenticationMethod string
 const (
 	ExtensiblessoAuthenticationMethodPassword             ExtensiblessoAuthenticationMethod = "Password"
 	ExtensiblessoAuthenticationMethodUserSecureEnclaveKey ExtensiblessoAuthenticationMethod = "UserSecureEnclaveKey"
+	ExtensiblessoAuthenticationMethodSmartCard            ExtensiblessoAuthenticationMethod = "SmartCard"
+	ExtensiblessoAuthenticationMethodOpenID               ExtensiblessoAuthenticationMethod = "OpenID"
 )
 
 // String returns the ExtensiblessoAuthenticationMethod value as a plain string.
@@ -46,6 +48,7 @@ const (
 	ExtensiblessoPlatformSSOAuthenticationMethodPassword             ExtensiblessoPlatformSSOAuthenticationMethod = "Password"
 	ExtensiblessoPlatformSSOAuthenticationMethodUserSecureEnclaveKey ExtensiblessoPlatformSSOAuthenticationMethod = "UserSecureEnclaveKey"
 	ExtensiblessoPlatformSSOAuthenticationMethodSmartCard            ExtensiblessoPlatformSSOAuthenticationMethod = "SmartCard"
+	ExtensiblessoPlatformSSOAuthenticationMethodOpenID               ExtensiblessoPlatformSSOAuthenticationMethod = "OpenID"
 )
 
 // String returns the ExtensiblessoPlatformSSOAuthenticationMethod value as a plain string.

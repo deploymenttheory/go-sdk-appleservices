@@ -48,7 +48,7 @@
     },
     {
       "key": "allowActivityContinuation",
-      "title": "Allow Handoff",
+      "title": "Allow handoff",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -73,7 +73,7 @@
     },
     {
       "key": "allowAddingGameCenterFriends",
-      "title": "Allow Adding Game Center Friends",
+      "title": "Allow adding Game Center friends",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -172,7 +172,7 @@
     },
     {
       "key": "allowAirPrintCredentialsStorage",
-      "title": "Allow storage of AirPrint credentials in Keychain",
+      "title": "Allow storage of AirPrint credentials in keychain",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -222,7 +222,7 @@
     },
     {
       "key": "allowAppCellularDataModification",
-      "title": "Allow Modifying Cellular Data Usage for Apps Settings",
+      "title": "Allow modifying cellular data usage for apps settings",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -272,7 +272,7 @@
     },
     {
       "key": "allowAppInstallation",
-      "title": "Allow App Installation",
+      "title": "Allow app installation",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -293,11 +293,11 @@
     },
     {
       "key": "allowAppleIntelligenceReport",
-      "title": "Allow Apple Intelligence Report",
+      "title": "Allow Apple Intelligence report",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables Apple Intelligence reports.",
+      "content": "If `false`, the system disables Apple Intelligence reports.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.4",
@@ -344,7 +344,7 @@
     },
     {
       "key": "allowAppRemoval",
-      "title": "Allow App Removal",
+      "title": "Allow app removal",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -367,7 +367,7 @@
     },
     {
       "key": "allowAppsToBeHidden",
-      "title": "Allow Hiding Apps",
+      "title": "Allow hiding apps",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -392,7 +392,7 @@
     },
     {
       "key": "allowAppsToBeLocked",
-      "title": "Allow Locking Apps",
+      "title": "Allow locking apps",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -446,7 +446,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables Siri.",
+      "content": "If `false`, the system disables Siri.\n\nDeprecated: use the declarative management `com.apple.configuration.siri.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "5.0",
@@ -473,7 +473,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system prevents Siri from querying user-generated content from the web.",
+      "content": "If `false`, the system prevents Siri from querying user-generated content from the web.\n\nDeprecated: use the declarative management `com.apple.configuration.siri.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "7.0",
@@ -495,11 +495,11 @@
     },
     {
       "key": "allowAssistantWhileLocked",
-      "title": "Allow Siri While Locked",
+      "title": "Allow Siri while locked",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables Siri when the device is locked. The system ignores this restriction if the device doesn't have a passcode set.",
+      "content": "If `false`, the system disables Siri when the device is locked. The system ignores this restriction if the device doesn't have a passcode set.\n\nDeprecated: use the declarative management `com.apple.configuration.siri.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "5.1",
@@ -521,11 +521,11 @@
     },
     {
       "key": "allowAutoCorrection",
-      "title": "Allow Auto Correction",
+      "title": "Allow auto correction",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables keyboard autocorrection.",
+      "content": "If `false`, the system disables keyboard autocorrection.\n\nDeprecated: use the declarative management `com.apple.configuration.keyboard.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "8.1.3",
@@ -547,7 +547,7 @@
     },
     {
       "key": "allowAutoDim",
-      "title": "Allow Auto Dim",
+      "title": "Allow auto dim",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -572,7 +572,7 @@
     },
     {
       "key": "allowAutomaticAppDownloads",
-      "title": "Allow Automatic App Downloads",
+      "title": "Allow automatic app downloads",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -659,7 +659,7 @@
           "introduced": "n/a"
         },
         "visionOS": {
-          "introduced": "n/a"
+          "introduced": "27.0"
         },
         "watchOS": {
           "introduced": "n/a"
@@ -668,7 +668,7 @@
     },
     {
       "key": "allowBluetoothSharingModification",
-      "title": "Allow modifying Bluetooth Sharing setting",
+      "title": "Allow modifying Bluetooth sharing setting",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -693,7 +693,7 @@
     },
     {
       "key": "allowBookstore",
-      "title": "Allow Bookstore",
+      "title": "Allow Book Store",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -718,7 +718,7 @@
     },
     {
       "key": "allowBookstoreErotica",
-      "title": "Allow Bookstore Erotica",
+      "title": "Allow Book Store erotica",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -744,7 +744,7 @@
     },
     {
       "key": "allowCallRecording",
-      "title": "Allow Call Recording",
+      "title": "Allow call recording",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -769,7 +769,7 @@
     },
     {
       "key": "allowCamera",
-      "title": "Allow Camera Use",
+      "title": "Allow camera use",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -832,7 +832,7 @@
           "introduced": "n/a"
         },
         "visionOS": {
-          "introduced": "n/a"
+          "introduced": "27.0"
         },
         "watchOS": {
           "introduced": "n/a"
@@ -865,7 +865,7 @@
     },
     {
       "key": "allowCloudBackup",
-      "title": "Allow iCloud Backup",
+      "title": "Allow iCloud backup",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -962,7 +962,7 @@
     },
     {
       "key": "allowCloudDocumentSync",
-      "title": "Allow iCloud Document Sync",
+      "title": "Allow iCloud document sync",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1083,7 +1083,7 @@
     },
     {
       "key": "allowCloudPhotoLibrary",
-      "title": "Allow iCloud Photo Library",
+      "title": "Allow iCloud photo library",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1180,11 +1180,11 @@
     },
     {
       "key": "allowContinuousPathKeyboard",
-      "title": "Allow Continuous Path Keyboard",
+      "title": "Allow continuous path keyboard",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables QuickPath keyboard.",
+      "content": "If `false`, the system disables QuickPath keyboard.\n\nDeprecated: use the declarative management `com.apple.configuration.keyboard.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "13.0",
@@ -1281,11 +1281,11 @@
     },
     {
       "key": "allowDefinitionLookup",
-      "title": "Allow Define",
+      "title": "Allow definition lookup",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables definition lookup.",
+      "content": "If `false`, the system disables definition lookup.\n\nDeprecated: use the declarative management `com.apple.configuration.keyboard.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "8.1.3",
@@ -1308,7 +1308,7 @@
     },
     {
       "key": "allowDeviceNameModification",
-      "title": "Allow Modifying Device Name",
+      "title": "Allow modifying device name",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1333,7 +1333,7 @@
     },
     {
       "key": "allowDeviceSleep",
-      "title": "Allow Device Sleep",
+      "title": "Allow device sleep",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1409,7 +1409,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disallows dictation input.",
+      "content": "If `false`, the system disallows dictation input.\n\nDeprecated: use the declarative management `com.apple.configuration.keyboard.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "10.3",
@@ -1432,7 +1432,7 @@
     },
     {
       "key": "allowedCameraRestrictionBundleIDs",
-      "title": "Allowed Exceptions to Camera Restriction",
+      "title": "Allowed exceptions to camera restriction",
       "type": "\u003carray\u003e",
       "presence": "optional",
       "content": "If present, the system exempts apps with bundle IDs in the array from the `allowCamera` restriction. The system doesn't grant these apps access to the camera automatically; they're only exempted from the `allowCamera` restriction. This key has no effect when the camera isn't restricted. Multiple payloads combine using an intersect operation. Requires a supervised device.",
@@ -1463,14 +1463,14 @@
     },
     {
       "key": "allowedExternalIntelligenceWorkspaceIDs",
-      "title": "Allowed External Intelligence Workspace IDs",
+      "title": "Allowed external intelligence workspace IDs",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "An array of strings, but currently restricted to a single element. If present, Apple Intelligence allows use of only the given external integration workspace ID, and requires a sign-in to make requests. The user is required to sign in to integrations that support signing in. Multiple payloads combine using an intersect operation. This means the allowed set of workspace IDs can become the empty set if multiple payloads specify conflicting values.",
+      "content": "An array of strings, but currently restricted to a single element. If present, Apple Intelligence allows use of only the given external integration workspace ID, and requires a sign-in to make requests. The user is required to sign in to integrations that support signing in. Multiple payloads combine using an intersect operation. This means the allowed set of workspace IDs can become the empty set if multiple payloads specify conflicting values.\n\nDeprecated: use the declarative management `com.apple.configuration.external-intelligence.settings` configuration.",
       "subkeys": [
         {
           "key": "allowedWorkspaceID",
-          "title": "Allowed Workspace ID",
+          "title": "Allowed workspace ID",
           "type": "\u003cstring\u003e"
         }
       ],
@@ -1497,7 +1497,7 @@
     },
     {
       "key": "allowEnablingRestrictions",
-      "title": "Allow Configuring Restrictions or ScreenTime",
+      "title": "Allow configuring restrictions or ScreenTime",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1522,7 +1522,7 @@
     },
     {
       "key": "allowEnterpriseAppTrust",
-      "title": "Allow Trusting Enterprise Apps",
+      "title": "Allow trusting enterprise apps",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1547,7 +1547,7 @@
     },
     {
       "key": "allowEnterpriseBookBackup",
-      "title": "Allow Enterprise Books Backup",
+      "title": "Allow enterprise books backup",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1572,7 +1572,7 @@
     },
     {
       "key": "allowEnterpriseBookMetadataSync",
-      "title": "Allow Enterprise Books Notes and Highlights Sync",
+      "title": "Allow enterprise books notes and highlights sync",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1597,7 +1597,7 @@
     },
     {
       "key": "allowEraseContentAndSettings",
-      "title": "Allow Erase All Content and Settings",
+      "title": "Allow erase all content and settings",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1622,11 +1622,11 @@
     },
     {
       "key": "allowESIMModification",
-      "title": "Allow eSIM Modification",
+      "title": "Allow eSIM modification",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables modifications of eSIMs.",
+      "content": "If `false`, the system disables modifications of eSIMs. This also disables the phone number sharing setup on iPhones, in iOS 27 and later.",
       "supportedOS": {
         "iOS": {
           "introduced": "12.1"
@@ -1647,7 +1647,7 @@
     },
     {
       "key": "allowESIMOutgoingTransfers",
-      "title": "Allow eSIM Outgoing Transfers",
+      "title": "Allow eSIM outgoing transfers",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1672,7 +1672,7 @@
     },
     {
       "key": "allowExplicitContent",
-      "title": "Allow Explicit Content",
+      "title": "Allow explicit content",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1699,7 +1699,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, disables the use of external, cloud-based intelligence services with Siri. In iOS, this restriction is temporarily allowed on unsupervised and user enrollments. In a future release, this restriction will require supervision, and will be ignored on unsupervised devices.",
+      "content": "If `false`, disables the use of external, cloud-based intelligence services with Siri. In iOS, this restriction is temporarily allowed on unsupervised and user enrollments. In a future release, this restriction will require supervision, and will be ignored on unsupervised devices.\n\nDeprecated: use the declarative management `com.apple.configuration.external-intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.2",
@@ -1727,7 +1727,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, forces external intelligence providers into anonymous mode. If a user is already signed in to an external intelligence provider, applying this restriction signs them out when attempting the next request.",
+      "content": "If `false`, forces external intelligence providers into anonymous mode. If a user is already signed in to an external intelligence provider, applying this restriction signs them out when attempting the next request.\n\nDeprecated: use the declarative management `com.apple.configuration.external-intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.2",
@@ -1751,7 +1751,7 @@
     },
     {
       "key": "allowFileSharingModification",
-      "title": "Allow modifying File Sharing setting",
+      "title": "Allow modifying file sharing setting",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1896,7 +1896,7 @@
     },
     {
       "key": "allowFingerprintForUnlock",
-      "title": "Allow Touch ID to Unlock Device",
+      "title": "Allow Touch ID to unlock device",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1921,7 +1921,7 @@
     },
     {
       "key": "allowFingerprintModification",
-      "title": "Allow Modifying Touch ID Fingerprints",
+      "title": "Allow modifying Touch ID fingerprints",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -1975,7 +1975,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, prohibits creating new Genmoji.",
+      "content": "If `false`, prohibits creating new Genmoji.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.0",
@@ -1999,7 +1999,7 @@
     },
     {
       "key": "allowGlobalBackgroundFetchWhenRoaming",
-      "title": "Allow Automatic Sync While Roaming",
+      "title": "Allow automatic sync while roaming",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2050,7 +2050,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, prohibits the use of image generation.",
+      "content": "If `false`, prohibits the use of image generation.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.0",
@@ -2078,7 +2078,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, prohibits the use of Image Wand.",
+      "content": "If `false`, prohibits the use of Image Wand.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.0",
@@ -2101,7 +2101,7 @@
     },
     {
       "key": "allowInAppPurchases",
-      "title": "Allow In App Purchases",
+      "title": "Allow in app purchases",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2124,7 +2124,7 @@
     },
     {
       "key": "allowInternetSharingModification",
-      "title": "Allow modifying Internet Sharing setting",
+      "title": "Allow modifying internet sharing setting",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2246,11 +2246,11 @@
     },
     {
       "key": "allowKeyboardShortcuts",
-      "title": "Allow Keyboard Shortcuts",
+      "title": "Allow keyboard shortcuts",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables keyboard shortcuts.",
+      "content": "If `false`, the system disables keyboard shortcuts.\n\nDeprecated: use the declarative management `com.apple.configuration.keyboard.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "9.0",
@@ -2272,29 +2272,32 @@
     },
     {
       "key": "allowListedAppBundleIDs",
-      "title": "Allow Listed Apps",
+      "title": "Allow listed apps",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "If present, the system only shows or can launch apps with bundle IDs in the array. Include the value `com.apple.webapp` to allow all webclips. This applies to App Store apps, marketplace apps, and locally installed apps (using Configurator, Xcode, and so forth).",
+      "content": "If present, the system only shows or can launch apps with bundle IDs in the array. Include the value `com.apple.webapp` to allow all webclips. This applies to App Store apps, marketplace apps, and locally installed apps (using Configurator, Xcode, and so forth).\n\nDeprecated: use the declarative management `com.apple.configuration.app.settings` configuration.",
       "subkeys": [
         {
           "key": "appAllowlistedBundleID",
-          "title": "Allow Listed App",
+          "title": "Allow listed app",
           "type": "\u003cstring\u003e"
         }
       ],
       "supportedOS": {
         "iOS": {
-          "introduced": "15.0"
+          "introduced": "15.0",
+          "deprecated": "27.0"
         },
         "macOS": {
           "introduced": "n/a"
         },
         "tvOS": {
-          "introduced": "15.0"
+          "introduced": "15.0",
+          "deprecated": "27.0"
         },
         "visionOS": {
-          "introduced": "n/a"
+          "introduced": "27.0",
+          "deprecated": "27.0"
         },
         "watchOS": {
           "introduced": "n/a"
@@ -2303,7 +2306,7 @@
     },
     {
       "key": "allowLiveVoicemail",
-      "title": "Allow Live Voicemail",
+      "title": "Allow live voicemail",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2449,7 +2452,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, disables smart replies in Mail.",
+      "content": "If `false`, disables smart replies in Mail.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.4",
@@ -2476,7 +2479,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, disables the ability to create summaries of email messages manually. This doesn't affect automatic summary generation.",
+      "content": "If `false`, disables the ability to create summaries of email messages manually. This doesn't affect automatic summary generation.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.1",
@@ -2500,7 +2503,7 @@
     },
     {
       "key": "allowManagedAppsCloudSync",
-      "title": "Allow iCloud Sync for Managed Apps",
+      "title": "Allow iCloud sync for managed apps",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2550,7 +2553,7 @@
     },
     {
       "key": "allowMarketplaceAppInstallation",
-      "title": "Allow App Installation from alternative marketplaces",
+      "title": "Allow app installation from alternative marketplaces",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2600,7 +2603,7 @@
     },
     {
       "key": "allowMultiplayerGaming",
-      "title": "Allow Multiplayer Gaming",
+      "title": "Allow multiplayer gaming",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2702,7 +2705,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, disables transcription in Notes.",
+      "content": "If `false`, disables transcription in Notes.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.4",
@@ -2728,7 +2731,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, disables transcription summarization in Notes.",
+      "content": "If `false`, disables transcription summarization in Notes.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.3",
@@ -2751,7 +2754,7 @@
     },
     {
       "key": "allowNotificationsModification",
-      "title": "Allow Modifying Notifications Settings",
+      "title": "Allow modifying notifications settings",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2850,7 +2853,7 @@
     },
     {
       "key": "allowPairedWatch",
-      "title": "Allow Pairing With Apple Watch",
+      "title": "Allow pairing with Apple Watch",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2875,7 +2878,7 @@
     },
     {
       "key": "allowPassbookWhileLocked",
-      "title": "Allow Wallet While Locked",
+      "title": "Allow Wallet while locked",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2900,7 +2903,7 @@
     },
     {
       "key": "allowPasscodeModification",
-      "title": "Allow Modifying Passcode",
+      "title": "Allow modifying passcode",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -2999,7 +3002,7 @@
     },
     {
       "key": "allowPersonalHotspotModification",
-      "title": "Allow modifying Personal Hotspot settings",
+      "title": "Allow modifying personal hotspot settings",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3028,7 +3031,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If false, prevents the system from generating text in the user's handwriting.",
+      "content": "If false, prevents the system from generating text in the user's handwriting.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.0",
@@ -3100,11 +3103,11 @@
     },
     {
       "key": "allowPredictiveKeyboard",
-      "title": "Allow Predictive Keyboard",
+      "title": "Allow predictive keyboard",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables predictive keyboards.",
+      "content": "If `false`, the system disables predictive keyboards.\n\nDeprecated: use the declarative management `com.apple.configuration.keyboard.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "8.1.3",
@@ -3175,7 +3178,7 @@
     },
     {
       "key": "allowRadioService",
-      "title": "Allow iTunes Radio",
+      "title": "Allow iTunes radio",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3200,19 +3203,21 @@
     },
     {
       "key": "allowRapidSecurityResponseInstallation",
-      "title": "Allow Background Security Improvement Installation",
+      "title": "Allow Background Security Improvements installation",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system prohibits installation of Background Security Improvements.",
+      "content": "If `false`, the system prohibits installation of Background Security Improvements.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "16.0",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "macOS": {
           "introduced": "13.0",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "tvOS": {
           "introduced": "n/a"
@@ -3227,19 +3232,21 @@
     },
     {
       "key": "allowRapidSecurityResponseRemoval",
-      "title": "Allow Background Security Improvement Removal",
+      "title": "Allow Background Security Improvements removal",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system prohibits removal of Background Security Improvements.",
+      "content": "If `false`, the system prohibits removal of Background Security Improvements.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "16.0",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "macOS": {
           "introduced": "13.0",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "tvOS": {
           "introduced": "n/a"
@@ -3278,7 +3285,7 @@
     },
     {
       "key": "allowRemoteAppleEventsModification",
-      "title": "Allow modifying Remote Apple Events Sharing setting",
+      "title": "Allow modifying remote Apple Events Sharing setting",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3328,7 +3335,7 @@
     },
     {
       "key": "allowRemoteScreenObservation",
-      "title": "Allow Remote Screen Observation",
+      "title": "Allow remote screen observation",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3356,7 +3363,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, disables Rosetta usage awareness. When Rosetta usage awareness is active, a pop-up dialog is displayed to the user when an app that is using Rosetta is launched. The pop-up dialog indicates that Rosetta will be removed in a future version of the operating system so that the user can contact the app vendor regarding a replacement for the current app.",
+      "content": "If `false`, disables Rosetta usage awareness. When Rosetta usage awareness is active, the device displays a pop-up dialog to the user when launching an app that uses Rosetta. The pop-up dialog indicates that Rosetta will be removed in a future version of the operating system so that the user can contact the app vendor regarding a replacement for the current app.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"
@@ -3451,7 +3458,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables the ability to summarize content in Safari.",
+      "content": "If `false`, the system disables the ability to summarize content in Safari.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.4",
@@ -3500,7 +3507,7 @@
     },
     {
       "key": "allowScreenShot",
-      "title": "Allow Screenshots and Screen Recording",
+      "title": "Allow screenshots and screen recording",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3546,7 +3553,7 @@
     },
     {
       "key": "allowSharedStream",
-      "title": "Allow Shared Stream",
+      "title": "Allow shared stream",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3570,12 +3577,38 @@
       }
     },
     {
-      "key": "allowSpellCheck",
-      "title": "Allow Spell Check",
+      "key": "allowSiriAI",
+      "title": "Allow Siri Apple Intelligence integration",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables the keyboard spell checker.",
+      "content": "If `false`, the system disables Apple Intelligence integration in Siri.\n\nDeprecated: use the declarative management `com.apple.configuration.siri.settings` configuration.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "27.0",
+          "deprecated": "27.0"
+        },
+        "macOS": {
+          "introduced": "n/a"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "allowSpellCheck",
+      "title": "Allow spell check",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "content": "If `false`, the system disables the keyboard spell checker.\n\nDeprecated: use the declarative management `com.apple.configuration.keyboard.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "8.1.3",
@@ -3597,7 +3630,7 @@
     },
     {
       "key": "allowSpotlightInternetResults",
-      "title": "Allow Siri Suggestions",
+      "title": "Allow Siri suggestions",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3622,7 +3655,7 @@
     },
     {
       "key": "allowStartupDiskModification",
-      "title": "Allow modifying Startup Disk settings",
+      "title": "Allow modifying startup disk settings",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3675,7 +3708,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system prevents modification of Time Machine settings in System Settings. This restriction is not supported on the user channel.",
+      "content": "If `false`, the system prevents modification of Time Machine settings in System Settings. This restriction isn't supported on the user channel.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"
@@ -3696,7 +3729,7 @@
     },
     {
       "key": "allowUIAppInstallation",
-      "title": "Allow App Installation from App Store",
+      "title": "Allow app installation from app store",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3719,7 +3752,7 @@
     },
     {
       "key": "allowUIConfigurationProfileInstallation",
-      "title": "Allow UI Configuration Profile Installation",
+      "title": "Allow UI configuration profile installation",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3846,7 +3879,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system allows iOS devices to always connect to USB accessories while locked. In macOS, allows new USB and Thunderbolt accessories, and SD cards to connect without authorization. If the system has Lockdown mode enabled, it ignores this value. This restriction is not supported on the user channel.",
+      "content": "If `false`, the system allows iOS devices to always connect to USB accessories while locked. In macOS, allows new USB and Thunderbolt accessories, and SD cards to connect without authorization. If the system has Lockdown mode enabled, it ignores this value. This restriction isn't supported on the user channel.",
       "supportedOS": {
         "iOS": {
           "introduced": "11.4.1"
@@ -3867,7 +3900,7 @@
     },
     {
       "key": "allowVideoConferencing",
-      "title": "Allow Video Conferencing",
+      "title": "Allow video conferencing",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3890,7 +3923,7 @@
     },
     {
       "key": "allowVideoConferencingRemoteControl",
-      "title": "Allow Video Conferencing Remote Control",
+      "title": "Allow video conferencing remote control",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3915,11 +3948,11 @@
     },
     {
       "key": "allowVisualIntelligenceSummary",
-      "title": "Allow Visual Intelligence Summary",
+      "title": "Allow visual intelligence summary",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, the system disables visual intelligence summarization.",
+      "content": "If `false`, the system disables visual intelligence summarization.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.3",
@@ -3941,7 +3974,7 @@
     },
     {
       "key": "allowVoiceDialing",
-      "title": "Allow Voice Dialing While Device is Locked",
+      "title": "Allow voice dialing while device is locked",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3966,7 +3999,7 @@
     },
     {
       "key": "allowVPNCreation",
-      "title": "Allow Adding VPN Configurations (Supervised devices only)",
+      "title": "Allow adding VPN configurations (supervised devices only)",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -3991,7 +4024,7 @@
     },
     {
       "key": "allowWallpaperModification",
-      "title": "Allow Modifying Wallpaper",
+      "title": "Allow modifying wallpaper",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -4016,7 +4049,7 @@
     },
     {
       "key": "allowWebDistributionAppInstallation",
-      "title": "Allow App Installation from web sites",
+      "title": "Allow app installation from web sites",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -4045,7 +4078,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
-      "content": "If `false`, disables Apple Intelligence writing tools.",
+      "content": "If `false`, disables Apple Intelligence writing tools.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "18.0",
@@ -4075,7 +4108,7 @@
       "subkeys": [
         {
           "key": "appAutonomousSingleAppModePermittedID",
-          "title": "Apps allow list for Autonomous Single App Mode",
+          "title": "Apps allow list for autonomous single app mode",
           "type": "\u003cstring\u003e"
         }
       ],
@@ -4099,14 +4132,14 @@
     },
     {
       "key": "blacklistedAppBundleIDs",
-      "title": "Blacklisted Apps",
+      "title": "Blacklisted apps",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "Use `blockedAppBundleIDs` instead.",
+      "content": "Deprecated: use the declarative management `com.apple.configuration.app.settings` configuration.",
       "subkeys": [
         {
           "key": "appBlacklistedBundleID",
-          "title": "Blacklisted App",
+          "title": "Blacklisted app",
           "type": "\u003cstring\u003e"
         }
       ],
@@ -4132,29 +4165,32 @@
     },
     {
       "key": "blockedAppBundleIDs",
-      "title": "Blocked Apps",
+      "title": "Blocked apps",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "If present, the system prevents showing or launching apps with bundle IDs in the array. Include the value `com.apple.webapp` to restrict all webclips. This applies to App Store apps, marketplace apps, and locally installed apps (using Configurator, Xcode, and so forth).\n\n\u003e Note:\n\u003e Denying system apps may disable other functionality. For example, denying the App Store app may prevent users from accepting the terms and conditions for the user-based Volume Purchase Program (VPP).",
+      "content": "If present, the system prevents showing or launching apps with bundle IDs in the array. Include the value `com.apple.webapp` to restrict all webclips. This applies to App Store apps, marketplace apps, and locally installed apps (using Configurator, Xcode, and so forth).\n\nDeprecated: use the declarative management `com.apple.configuration.app.settings` configuration.\n\n\u003e Note:\n\u003e Denying system apps may disable other functionality. For example, denying the App Store app may prevent users from accepting the terms and conditions for the user-based Volume Purchase Program (VPP).",
       "subkeys": [
         {
           "key": "appBlockedBundleID",
-          "title": "Blocked App",
+          "title": "Blocked app",
           "type": "\u003cstring\u003e"
         }
       ],
       "supportedOS": {
         "iOS": {
-          "introduced": "15.0"
+          "introduced": "15.0",
+          "deprecated": "27.0"
         },
         "macOS": {
           "introduced": "n/a"
         },
         "tvOS": {
-          "introduced": "15.0"
+          "introduced": "15.0",
+          "deprecated": "27.0"
         },
         "visionOS": {
-          "introduced": "n/a"
+          "introduced": "27.0",
+          "deprecated": "27.0"
         },
         "watchOS": {
           "introduced": "n/a"
@@ -4256,19 +4292,22 @@
         "max": 90
       },
       "default": 30,
-      "content": "How many days to delay a software update on the device. With this restriction in place, the user doesn't see a software update until the specified number of days after the software update release date. The restrictions `forceDelayedAppSoftwareUpdates` and `forceDelayedSoftwareUpdates` use this value.",
+      "content": "How many days to delay a software update on the device. With this restriction in place, the user doesn't see a software update until the specified number of days after the software update release date. The restrictions `forceDelayedAppSoftwareUpdates` and `forceDelayedSoftwareUpdates` use this value.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "11.3",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "macOS": {
           "introduced": "10.13.4",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "tvOS": {
           "introduced": "12.2",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "visionOS": {
           "introduced": "n/a"
@@ -4287,14 +4326,15 @@
         "max": 90
       },
       "default": 30,
-      "content": "This restriction allows the administrator to set the number of days to delay a major software upgrade on the device. When this restriction is in place, the user sees a software upgrade only after the specified delay after the release of the software upgrade. This value controls the delay for `forceDelayedMajorSoftwareUpdates`.",
+      "content": "This restriction allows the administrator to set the number of days to delay a major software upgrade on the device. When this restriction is in place, the user sees a software upgrade only after the specified delay after the release of the software upgrade. This value controls the delay for `forceDelayedMajorSoftwareUpdates`.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"
         },
         "macOS": {
           "introduced": "11.3",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "tvOS": {
           "introduced": "n/a"
@@ -4316,14 +4356,15 @@
         "max": 90
       },
       "default": 30,
-      "content": "This restriction allows the administrator to set the number of days to delay a minor OS software update on the device. When this restriction is in place, the user sees a software update only after the specified delay after the release of the software update. This value controls the delay for `forceDelayedSoftwareUpdates`.",
+      "content": "This restriction allows the administrator to set the number of days to delay a minor OS software update on the device. When this restriction is in place, the user sees a software update only after the specified delay after the release of the software update. This value controls the delay for `forceDelayedSoftwareUpdates`.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"
         },
         "macOS": {
           "introduced": "11.3",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "tvOS": {
           "introduced": "n/a"
@@ -4345,14 +4386,15 @@
         "max": 90
       },
       "default": 30,
-      "content": "This restriction allows the administrator to set the number of days to delay an app software update on the device. When this restriction is in place, the user sees a non-OS software update only after the specified delay after the release of the software. This value controls the delay for `forceDelayedAppSoftwareUpdates`.",
+      "content": "This restriction allows the administrator to set the number of days to delay an app software update on the device. When this restriction is in place, the user sees a non-OS software update only after the specified delay after the release of the software. This value controls the delay for `forceDelayedAppSoftwareUpdates`.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"
         },
         "macOS": {
           "introduced": "11.3",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "tvOS": {
           "introduced": "n/a"
@@ -4367,7 +4409,7 @@
     },
     {
       "key": "forceAirDropUnmanaged",
-      "title": "Treat AirDrop as Unmanaged Destination",
+      "title": "Treat AirDrop as unmanaged destination",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -4462,11 +4504,11 @@
     },
     {
       "key": "forceAssistantProfanityFilter",
-      "title": "Enable Siri Profanity Filter",
+      "title": "Enable Siri profanity filter",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system forces the use of the profanity filter for Siri and dictation. Requires a supervised device in iOS.",
+      "content": "If `true`, the system forces the use of the profanity filter for Siri and dictation. Requires a supervised device in iOS.\n\nDeprecated: use the declarative management `com.apple.configuration.siri.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "5.0",
@@ -4667,7 +4709,8 @@
         },
         "macOS": {
           "introduced": "11.0",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "tvOS": {
           "introduced": "n/a"
@@ -4685,14 +4728,15 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system delays user visibility of major OS updates.",
+      "content": "If `true`, the system delays user visibility of major OS updates.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"
         },
         "macOS": {
           "introduced": "11.3",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "tvOS": {
           "introduced": "n/a"
@@ -4710,19 +4754,22 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system delays user visibility of software updates. In macOS, the system allows seed build updates without delay. The delay is 30 days unless you set `enforcedSoftwareUpdateDelay` to another value.",
+      "content": "If `true`, the system delays user visibility of software updates. In macOS, the system allows seed build updates without delay. The delay is 30 days unless you set `enforcedSoftwareUpdateDelay` to another value.\n\nRemoved: use the declarative management `com.apple.configuration.softwareupdate.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "11.3",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "macOS": {
           "introduced": "10.13",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "tvOS": {
           "introduced": "12.2",
-          "deprecated": "26.0"
+          "deprecated": "26.0",
+          "removed": "27.0"
         },
         "visionOS": {
           "introduced": "n/a"
@@ -4734,7 +4781,7 @@
     },
     {
       "key": "forceEncryptedBackup",
-      "title": "Force Encrypted Backups",
+      "title": "Force encrypted backups",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -4809,7 +4856,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system disables connections to Siri servers for the purposes of dictation.",
+      "content": "If `true`, the system disables connections to Siri servers for the purposes of dictation.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "14.5",
@@ -4836,7 +4883,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the device can't connect to Siri servers for the purposes of translation.",
+      "content": "If `true`, the device can't connect to Siri servers for the purposes of translation.\n\nDeprecated: use the declarative management `com.apple.configuration.intelligence.settings` configuration.",
       "supportedOS": {
         "iOS": {
           "introduced": "15.0",
@@ -4858,7 +4905,7 @@
     },
     {
       "key": "forcePreserveESIMOnErase",
-      "title": "Force Preserve ESIM on Erase",
+      "title": "Force preserve ESIM on erase",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -4883,7 +4930,7 @@
     },
     {
       "key": "forceWatchWristDetection",
-      "title": "Force Apple Watch Wrist Detection",
+      "title": "Force Apple Watch wrist detection",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -4980,7 +5027,7 @@
     },
     {
       "key": "ratingApps",
-      "title": "Apps Ranking Number",
+      "title": "Apps ranking number",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -5007,14 +5054,14 @@
     },
     {
       "key": "ratingAppsExemptedBundleIDs",
-      "title": "Apps Exempted from Rating Restrictions",
+      "title": "Apps exempted from rating restrictions",
       "type": "\u003carray\u003e",
       "presence": "optional",
       "content": "If present, the system exempts apps with bundle IDs in the array from age-based rating restrictions. The system uses intersection combine rules to combine multiple payloads and any exceptions that parental control apps provide, including ScreenTime.",
       "subkeys": [
         {
           "key": "ratingAppsExemptedBundleID",
-          "title": "Exempted App",
+          "title": "Exempted app",
           "type": "\u003cstring\u003e"
         }
       ],
@@ -5038,7 +5085,7 @@
     },
     {
       "key": "ratingMovies",
-      "title": "Movies Ranking Number",
+      "title": "Movies ranking number",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -5065,7 +5112,7 @@
     },
     {
       "key": "ratingRegion",
-      "title": "Region Code",
+      "title": "Region code",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "rangelist": [
@@ -5091,7 +5138,7 @@
     },
     {
       "key": "ratingTVShows",
-      "title": "TV Shows Ranking Number",
+      "title": "TV shows ranking number",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -5121,7 +5168,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, copy-and-paste functionality is limited by the `allowOpenFromManagedToUnmanaged` and `allowOpenFromUnmanagedToManaged` restrictions.",
+      "content": "If `true`, the `allowOpenFromManagedToUnmanaged` and `allowOpenFromUnmanagedToManaged` restrictions also limit copy-and-paste functionality.",
       "supportedOS": {
         "iOS": {
           "introduced": "15.0"
@@ -5142,7 +5189,7 @@
     },
     {
       "key": "safariAcceptCookies",
-      "title": "Accept Cookies in Safari",
+      "title": "Accept cookies in Safari",
       "type": "\u003creal\u003e",
       "presence": "optional",
       "rangelist": [
@@ -5217,7 +5264,7 @@
     },
     {
       "key": "safariAllowPopups",
-      "title": "Allow Pop-ups",
+      "title": "Allow pop-ups",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -5240,7 +5287,7 @@
     },
     {
       "key": "safariForceFraudWarning",
-      "title": "Enable Fraud Warning",
+      "title": "Enable fraud warning",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -5262,14 +5309,14 @@
     },
     {
       "key": "whitelistedAppBundleIDs",
-      "title": "Whitelisted Apps",
+      "title": "Whitelisted apps",
       "type": "\u003carray\u003e",
       "presence": "optional",
-      "content": "Use `allowListedAppBundleIDs` instead.",
+      "content": "Deprecated: use the declarative management `com.apple.configuration.app.settings` configuration.",
       "subkeys": [
         {
           "key": "appWhitelistedBundleID",
-          "title": "Whitelisted App",
+          "title": "Whitelisted app",
           "type": "\u003cstring\u003e"
         }
       ],

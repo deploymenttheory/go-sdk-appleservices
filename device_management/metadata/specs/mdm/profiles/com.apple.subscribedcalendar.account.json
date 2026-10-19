@@ -65,7 +65,7 @@
       "title": "VPNUUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14 and later.",
+      "content": "The VPNUUID of the per-app VPN the account uses for network communication.",
       "supportedOS": {
         "iOS": {
           "introduced": "14.0"

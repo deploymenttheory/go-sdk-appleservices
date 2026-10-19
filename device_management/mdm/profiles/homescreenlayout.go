@@ -21,13 +21,13 @@ type HomescreenlayoutIconItem struct {
 	Type HomescreenlayoutIconItemType `plist:"Type" json:"Type"`
 	// The human-readable string shown to the user. This setting is valid only if the type is `Folder`.
 	DisplayName *string `plist:"DisplayName,omitempty" json:"DisplayName,omitempty"`
-	// The bundle identifier of the app. This setting is required if the type is `Application`.
+	// The bundle identifier of the app. The device requires this setting if the type is `Application`.
 	BundleID *string `plist:"BundleID,omitempty" json:"BundleID,omitempty"`
 	// An array of arrays of dictionaries, each conforming to the icon dictionary format. This setting
 	// is valid only if the type is `Folder`.
 	Pages [][]any `plist:"Pages,omitempty" json:"Pages,omitempty"`
-	// The URL of the existing web clip for this item. This setting is required if `type` is `WebClip`.
-	// If more than one web clip exists with the same URL, the behavior is undefined.
+	// The URL of the existing web clip for this item. The device requires this setting if `type` is
+	// `WebClip`. If more than one web clip exists with the same URL, the behavior is undefined.
 	URL *string `plist:"URL,omitempty" json:"URL,omitempty"`
 }
 
@@ -38,12 +38,12 @@ type HomescreenlayoutIconItem2 struct {
 	Type HomescreenlayoutIconItem2Type `plist:"Type" json:"Type"`
 	// The human-readable string shown to the user. This setting is valid only if the type is `Folder`.
 	DisplayName *string `plist:"DisplayName,omitempty" json:"DisplayName,omitempty"`
-	// The bundle identifier of the app. This setting is required if the type is `Application`.
+	// The bundle identifier of the app. The device requires this setting if the type is `Application`.
 	BundleID *string `plist:"BundleID,omitempty" json:"BundleID,omitempty"`
 	// An array of arrays of dictionaries, each conforming to the icon dictionary format. This setting
 	// is valid only if the type is `Folder`.
 	Pages []any `plist:"Pages,omitempty" json:"Pages,omitempty"`
-	// The URL of the existing web clip for this item. This setting is required if `type` is `WebClip`.
-	// If more than one web clip exists with the same URL, the behavior is undefined.
+	// The URL of the existing web clip for this item. The device requires this setting if `type` is
+	// `WebClip`. If more than one web clip exists with the same URL, the behavior is undefined.
 	URL *string `plist:"URL,omitempty" json:"URL,omitempty"`
 }

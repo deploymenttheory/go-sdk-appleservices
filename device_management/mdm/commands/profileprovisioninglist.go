@@ -12,8 +12,7 @@ import (
 // Supported: iOS 4.0+, macOS 11.0+, tvOS 10.2+, visionOS 1.1+, watchOS 10.0+.
 type ProvisioningProfileList struct {
 	// If `true`, only include profiles that MDM has installed. For user enrollments, the device
-	// ignores this key and always limits the results to managed profiles. This value is available in
-	// iOS 13 and later, and tvOS 13 and later.
+	// ignores this key and always limits the results to managed profiles.
 	//
 	// Default: false.
 	ManagedOnly *bool `plist:"ManagedOnly,omitempty" json:"ManagedOnly,omitempty"`

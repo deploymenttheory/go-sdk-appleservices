@@ -26,18 +26,6 @@ const (
 // String returns the AppManagedInstallBehaviorLicenseAssignment value as a plain string.
 func (e AppManagedInstallBehaviorLicenseAssignment) String() string { return string(e) }
 
-// AppManagedInstallBehaviorLicenseVPPType — allowed values for AppManagedInstallBehaviorLicense.VPPType.
-type AppManagedInstallBehaviorLicenseVPPType string
-
-// AppManagedInstallBehaviorLicenseVPPType allowed values.
-const (
-	AppManagedInstallBehaviorLicenseVPPTypeDevice AppManagedInstallBehaviorLicenseVPPType = "Device"
-	AppManagedInstallBehaviorLicenseVPPTypeUser   AppManagedInstallBehaviorLicenseVPPType = "User"
-)
-
-// String returns the AppManagedInstallBehaviorLicenseVPPType value as a plain string.
-func (e AppManagedInstallBehaviorLicenseVPPType) String() string { return string(e) }
-
 // AppManagedInstallBehaviorAllowDownloadsOverCellular — allowed values for AppManagedInstallBehavior.AllowDownloadsOverCellular.
 type AppManagedInstallBehaviorAllowDownloadsOverCellular string
 

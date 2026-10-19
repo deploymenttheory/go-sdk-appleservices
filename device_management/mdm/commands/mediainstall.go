@@ -9,20 +9,19 @@ package commands
 type InstallMedia struct {
 	// The book's iTunes Store identifier.
 	ITunesStoreID *int64 `plist:"iTunesStoreID,omitempty" json:"iTunesStoreID,omitempty"`
-	// The URL to retrieve the book. This value is available in iOS 8 and later.
+	// The URL to retrieve the book.
 	MediaURL *string `plist:"MediaURL,omitempty" json:"MediaURL,omitempty"`
 	// The media type, which can only be `Book`.
 	MediaType string `plist:"MediaType" json:"MediaType"`
 	// The book's persistent identifier in reverse-DNS form; for example, `com.acme.manuals.training`.
-	// This value is available in iOS 8 and later.
 	PersistentID *string `plist:"PersistentID,omitempty" json:"PersistentID,omitempty"`
 	// The kind of the media, which can be one of the following values:
 	Kind *InstallMediaKind `plist:"Kind,omitempty" json:"Kind,omitempty"`
-	// The book's version number. This value is available in iOS 8 and later.
+	// The book's version number.
 	Version *string `plist:"Version,omitempty" json:"Version,omitempty"`
-	// The name of the book's author. This value is available in iOS 8 and later.
+	// The name of the book's author.
 	Author *string `plist:"Author,omitempty" json:"Author,omitempty"`
-	// The book's title. This value is available in iOS 8 and later.
+	// The book's title.
 	Title *string `plist:"Title,omitempty" json:"Title,omitempty"`
 }
 
@@ -30,11 +29,9 @@ type InstallMedia struct {
 type InstallMediaResponse struct {
 	// The book's iTunes Store identifier, if present in the command.
 	ITunesStoreID *int64 `plist:"iTunesStoreID,omitempty" json:"iTunesStoreID,omitempty"`
-	// The URL to retrieve the book, if present in the command. This value is available in iOS 8 and
-	// later.
+	// The URL to retrieve the book, if present in the command.
 	MediaURL *string `plist:"MediaURL,omitempty" json:"MediaURL,omitempty"`
-	// The book's persistent identifier, if present in the command. This value is available in iOS 8
-	// and later.
+	// The book's persistent identifier, if present in the command.
 	PersistentID *string `plist:"PersistentID,omitempty" json:"PersistentID,omitempty"`
 	// The media type, which can only be `Book`.
 	MediaType *string `plist:"MediaType,omitempty" json:"MediaType,omitempty"`

@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "mdm.app",
   "title": "Status MDM App",
-  "description": "A status report of the client's MDM-installed apps.",
+  "description": "The status item that lists the devices's MDM-installed apps.",
   "payload": {
     "statusitemtype": "mdm.app",
     "supportedOS": {
@@ -29,11 +29,12 @@
       "title": "Status item value.",
       "type": "\u003carray\u003e",
       "presence": "required",
-      "content": "The list of apps. The response doesn't include apps that are managed by Declarative Device Management.",
+      "content": "The list of apps. The response doesn't include apps that Declarative Device Management manages.",
       "subkeytype": "App",
       "subkeys": [
         {
           "key": "status_value",
+          "title": "Status value",
           "type": "\u003cdictionary\u003e",
           "content": "A status report that contains details about an MDM-installed app.",
           "subkeys": [
@@ -64,7 +65,7 @@
               "title": "External version identifier",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The app's external version identifier. You can also retrieve this value from the App Store. For more information, see `Apps and Books for Organizations`.\n\nIf the current external version identifier of an app on the App Store doesn't match the external version identifier reported by the device, there may be an app update available for the device."
+              "content": "The app's external version identifier. You can also retrieve this value from the App Store. For more information, see `Apps and books metadata for organizations`.\n\nIf the current external version identifier of an app on the App Store doesn't match the external version identifier reported by the device, there may be an app update available for the device."
             },
             {
               "key": "version",

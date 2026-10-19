@@ -53,15 +53,13 @@ type Extensiblesso2ExtensionData struct {
 	// A list of bundle IDs allowed to access the ticket-granting ticket (TGT).
 	CredentialBundleIdACL []string `plist:"credentialBundleIdACL,omitempty" json:"credentialBundleIdACL,omitempty"`
 	// If `true`, the Kerberos extension allows only managed apps to access and use the credential.
-	// This is in addition to the `credentialBundleIDACL`, if you specify that value. Available in iOS
-	// 14 and later, and macOS 12 and later.
+	// This is in addition to the `credentialBundleIDACL`, if you specify that value.
 	//
 	// Default: false.
 	IncludeManagedAppsInBundleIdACL *bool `plist:"includeManagedAppsInBundleIdACL,omitempty" json:"includeManagedAppsInBundleIdACL,omitempty"`
 	// If `true`, the Kerberos extension allows the standard Kerberos utilities including
 	// `TicketViewer` and `klist` to access and use the credential. This is in addition to
 	// `includeManagedAppsInBundleIdACL` or the `credentialBundleIdACL`, if you specify those values.
-	// Available in macOS 12 and later.
 	//
 	// Default: false.
 	IncludeKerberosAppsInBundleIdACL *bool `plist:"includeKerberosAppsInBundleIdACL,omitempty" json:"includeKerberosAppsInBundleIdACL,omitempty"`
@@ -74,13 +72,12 @@ type Extensiblesso2ExtensionData struct {
 	// Default: false.
 	IsDefaultRealm *bool `plist:"isDefaultRealm,omitempty" json:"isDefaultRealm,omitempty"`
 	// The custom user name label used in the Kerberos extension instead of "Username," such as
-	// "Company ID". Available in macOS 11 and later.
+	// "Company ID".
 	CustomUsernameLabel *string `plist:"customUsernameLabel,omitempty" json:"customUsernameLabel,omitempty"`
 	// The text to display to the user at the bottom of the Kerberos Login Window. You can also use
-	// this to display help information or disclaimer text. Available in iOS 14 and later, and macOS 11
-	// and later.
+	// this to display help information or disclaimer text.
 	HelpText *string `plist:"helpText,omitempty" json:"helpText,omitempty"`
-	// If `false`, the system disables password changes. Available in macOS 10.15 and later.
+	// If `false`, the system disables password changes.
 	//
 	// Default: true.
 	AllowPasswordChange *bool `plist:"allowPasswordChange,omitempty" json:"allowPasswordChange,omitempty"`
@@ -94,58 +91,52 @@ type Extensiblesso2ExtensionData struct {
 	// Default: false.
 	RequireUserPresence *bool `plist:"requireUserPresence,omitempty" json:"requireUserPresence,omitempty"`
 	// The number of days that the system allows using passwords on this domain. For most domains, this
-	// calculation is automatic. Available in macOS 10.15 and later.
+	// calculation is automatic.
 	PwExpireOverride *int64 `plist:"pwExpireOverride,omitempty" json:"pwExpireOverride,omitempty"`
 	// The number of days prior to password expiration when the system sends a notification of password
-	// expiration to the user. Available in macOS 10.15 and later.
+	// expiration to the user.
 	//
 	// Default: 15.
 	PwNotificationDays *int64 `plist:"pwNotificationDays,omitempty" json:"pwNotificationDays,omitempty"`
-	// The minimum length of passwords on the domain.Available in macOS 10.15 and later.
+	// The minimum length of passwords on the domain.
 	PwReqLength *int64 `plist:"pwReqLength,omitempty" json:"pwReqLength,omitempty"`
 	// If `true`, the system requires passwords to meet Active Directory's definition of "complex".
-	// Available in macOS 10.15 and later.
 	//
 	// Default: false.
 	PwReqComplexity *bool `plist:"pwReqComplexity,omitempty" json:"pwReqComplexity,omitempty"`
-	// The minimum age of passwords before the system allows changing them on this domain. Available in
-	// macOS 10.15 and later.
+	// The minimum age of passwords before the system allows changing them on this domain.
 	PwReqMinAge *int64 `plist:"pwReqMinAge,omitempty" json:"pwReqMinAge,omitempty"`
-	// The number of prior passwords that the system disallows reuse on this domain. Available in macOS
-	// 10.15 and later.
+	// The number of prior passwords that the system disallows reuse on this domain.
 	PwReqHistory *int64 `plist:"pwReqHistory,omitempty" json:"pwReqHistory,omitempty"`
 	// The text version of the domain's password requirements. Only for use if `pwReqComplexity` or
-	// `pwReqLength` aren't specified. Available in macOS 10.15 and later.
+	// `pwReqLength` aren't specified.
 	PwReqText *string `plist:"pwReqText,omitempty" json:"pwReqText,omitempty"`
 	// The RTF file formatted version of the domain's password requirements. Only for use if
-	// `pwReqComplexity` or `pwReqLength` aren't specified. Available in macOS 15 and later.
+	// `pwReqComplexity` or `pwReqLength` aren't specified.
 	PwReqRTFData []byte `plist:"pwReqRTFData,omitempty" json:"pwReqRTFData,omitempty"`
 	// This URL will launch in the user's default web browser when they initiate a password change.
-	// Available in macOS 10.15 and later.
 	PwChangeURL *string `plist:"pwChangeURL,omitempty" json:"pwChangeURL,omitempty"`
 	// If `false`, the system disables password sync. Note that this will not work if the user is
-	// logged in with a mobile account. Available in macOS 10.15 and later.
+	// logged in with a mobile account.
 	//
 	// Default: false.
 	SyncLocalPassword *bool `plist:"syncLocalPassword,omitempty" json:"syncLocalPassword,omitempty"`
 	// The time, in seconds, required to replicate changes in the Active Directory domain. The Kerberos
-	// extension uses this when checking password age after a change. Available in macOS 11 and later.
+	// extension uses this when checking password age after a change.
 	//
 	// Default: 900.
 	ReplicationTime *int64 `plist:"replicationTime,omitempty" json:"replicationTime,omitempty"`
 	// If `true`, the system doesn't prompt the user to setup the Kerberos extension until either the
 	// administrator enables it with the `app-sso` tool or the system receives a Kerberos challenge.
-	// Available in macOS 11 and later.
 	//
 	// Default: false.
 	DelayUserSetup *bool `plist:"delayUserSetup,omitempty" json:"delayUserSetup,omitempty"`
 	// If `false`, the system requests the credential on the next matching Kerberos challenge or
 	// network state change. If the credential is expired or missing, the system creates a new one.
-	// Available in macOS 11 and later.
 	//
 	// Default: true.
 	MonitorCredentialsCache *bool `plist:"monitorCredentialsCache,omitempty" json:"monitorCredentialsCache,omitempty"`
-	// Require that LDAP connections use TLS. Available in macOS 11 and later.
+	// Require that LDAP connections use TLS.
 	//
 	// Default: false.
 	RequireTLSForLDAP *bool `plist:"requireTLSForLDAP,omitempty" json:"requireTLSForLDAP,omitempty"`
@@ -154,42 +145,39 @@ type Extensiblesso2ExtensionData struct {
 	// Default: always.
 	CredentialUseMode *Extensiblesso2ExtensionDataCredentialUseMode `plist:"credentialUseMode,omitempty" json:"credentialUseMode,omitempty"`
 	// The ordered list of preferred Key Distribution Centers (KDCs) to use for Kerberos traffic. Use
-	// this if the servers aren't discoverable through DNS. If the servers are specified, then the
-	// system uses them for both connectivity checks and attempts to use them first for Kerberos
-	// traffic. If the servers don't respond, the device falls back to DNS discovery. Format each entry
-	// the same as it would be in a `krb5.conf` file, for example:
+	// this if the servers aren't discoverable through DNS. If you specify the servers, the system uses
+	// them for both connectivity checks and attempts to use them first for Kerberos traffic. If the
+	// servers don't respond, the device falls back to DNS discovery. Format each entry the same as it
+	// would be in a `krb5.conf` file, for example:
 	PreferredKDCs []string `plist:"preferredKDCs,omitempty" json:"preferredKDCs,omitempty"`
 	// If `true`, the system requires this configuration uses a TGT from Platform SSO instead of
-	// requesting a new one. Available in macOS 13 and later.
+	// requesting a new one.
 	//
 	// Default: false.
 	UsePlatformSSOTGT *bool `plist:"usePlatformSSOTGT,omitempty" json:"usePlatformSSOTGT,omitempty"`
 	// If `true` and `usePlatformSSOTGT` is `true`, the system allows the user to manually sign in.
-	// Available in macOS 13 and later.
 	//
 	// Default: true.
 	AllowPlatformSSOAuthFallback *bool `plist:"allowPlatformSSOAuthFallback,omitempty" json:"allowPlatformSSOAuthFallback,omitempty"`
 	// If `true`, the Kerberos Extension handles Kerberos requests only. It doesn't check for password
 	// expiration, show the password expiration in the menu, check for external password changes,
-	// perform password sync, or retrieve the home directory. Available in macOS 13 and later.
+	// perform password sync, or retrieve the home directory.
 	//
 	// Default: false.
 	PerformKerberosOnly *bool `plist:"performKerberosOnly,omitempty" json:"performKerberosOnly,omitempty"`
 	// A string with wildcards that can use used to filter the list of available SmartCards by issuer.
-	// e.g "\*My CA2\*". If there is one remaining, it will be auto-selected. If there more than one
-	// remaining, then the list is shorter. Available in macOS 15 and later.
+	// e.g "\*My CA2\*". If there's one remaining, it will be auto-selected. If there more than one
+	// remaining, then the list is shorter.
 	IdentityIssuerAutoSelectFilter *string `plist:"identityIssuerAutoSelectFilter,omitempty" json:"identityIssuerAutoSelectFilter,omitempty"`
-	// If `true`, allow the user to switch the user interface to SmartCard mode. Available in macOS 15
-	// and later.
+	// If `true`, allow the user to switch the user interface to SmartCard mode.
 	//
 	// Default: true.
 	AllowSmartCard *bool `plist:"allowSmartCard,omitempty" json:"allowSmartCard,omitempty"`
-	// If `true`, allow the user to switch the user interface to Password mode. Available in macOS 15
-	// and later.
+	// If `true`, allow the user to switch the user interface to Password mode.
 	//
 	// Default: true.
 	AllowPassword *bool `plist:"allowPassword,omitempty" json:"allowPassword,omitempty"`
-	// If `true`, the user interface will start in SmartCard mode. Available in macOS 15 and later.
+	// If `true`, the user interface will start in SmartCard mode.
 	//
 	// Default: false.
 	StartInSmartCardMode *bool `plist:"startInSmartCardMode,omitempty" json:"startInSmartCardMode,omitempty"`

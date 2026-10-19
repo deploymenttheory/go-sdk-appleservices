@@ -2,7 +2,7 @@
   "category": "declarative/declarations/configurations",
   "name": "security.certificate",
   "title": "Security:Certificate",
-  "description": "The declaration to add a certificate to the device.",
+  "description": "The declaration to configure a certificate.",
   "payload": {
     "declarationtype": "com.apple.configuration.security.certificate",
     "apply": "multiple",

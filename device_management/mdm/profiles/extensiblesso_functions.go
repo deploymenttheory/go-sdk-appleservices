@@ -30,7 +30,7 @@ func (p *Extensiblesso) Validate() error {
 		}
 	}
 	if p.AuthenticationMethod != nil {
-		if err := validate.InList("AuthenticationMethod", *p.AuthenticationMethod, []ExtensiblessoAuthenticationMethod{ExtensiblessoAuthenticationMethodPassword, ExtensiblessoAuthenticationMethodUserSecureEnclaveKey}); err != nil {
+		if err := validate.InList("AuthenticationMethod", *p.AuthenticationMethod, []ExtensiblessoAuthenticationMethod{ExtensiblessoAuthenticationMethodPassword, ExtensiblessoAuthenticationMethodUserSecureEnclaveKey, ExtensiblessoAuthenticationMethodSmartCard, ExtensiblessoAuthenticationMethodOpenID}); err != nil {
 			errs = append(errs, err)
 		}
 	}
@@ -59,7 +59,7 @@ func (p *ExtensiblessoPlatformSSOAuthorizationGroups) Validate() error { return 
 func (p *ExtensiblessoPlatformSSO) Validate() error {
 	var errs []error
 	if p.AuthenticationMethod != nil {
-		if err := validate.InList("AuthenticationMethod", *p.AuthenticationMethod, []ExtensiblessoPlatformSSOAuthenticationMethod{ExtensiblessoPlatformSSOAuthenticationMethodPassword, ExtensiblessoPlatformSSOAuthenticationMethodUserSecureEnclaveKey, ExtensiblessoPlatformSSOAuthenticationMethodSmartCard}); err != nil {
+		if err := validate.InList("AuthenticationMethod", *p.AuthenticationMethod, []ExtensiblessoPlatformSSOAuthenticationMethod{ExtensiblessoPlatformSSOAuthenticationMethodPassword, ExtensiblessoPlatformSSOAuthenticationMethodUserSecureEnclaveKey, ExtensiblessoPlatformSSOAuthenticationMethodSmartCard, ExtensiblessoPlatformSSOAuthenticationMethodOpenID}); err != nil {
 			errs = append(errs, err)
 		}
 	}
@@ -74,7 +74,7 @@ func (p *ExtensiblessoPlatformSSO) Validate() error {
 		}
 	}
 	for i := range p.NewUserAuthenticationMethods {
-		if err := validate.InList("NewUserAuthenticationMethods", p.NewUserAuthenticationMethods[i], []string{"Password", "SmartCard", "AccessKey"}); err != nil {
+		if err := validate.InList("NewUserAuthenticationMethods", p.NewUserAuthenticationMethods[i], []string{"Password", "SmartCard", "AccessKey", "OpenID"}); err != nil {
 			errs = append(errs, err)
 		}
 	}
@@ -94,17 +94,17 @@ func (p *ExtensiblessoPlatformSSO) Validate() error {
 		}
 	}
 	for i := range p.FileVaultPolicy {
-		if err := validate.InList("FileVaultPolicy", p.FileVaultPolicy[i], []string{"AttemptAuthentication", "RequireAuthentication", "AllowOfflineGracePeriod", "AllowAuthenticationGracePeriod"}); err != nil {
+		if err := validate.InList("FileVaultPolicy", p.FileVaultPolicy[i], []string{"AttemptAuthentication", "RequireAuthentication", "AllowOfflineGracePeriod", "AllowAuthenticationGracePeriod", "RequireTouchID", "RequireTouchIDOrWatch", "AllowOpenIDForTouchIDFallback"}); err != nil {
 			errs = append(errs, err)
 		}
 	}
 	for i := range p.LoginPolicy {
-		if err := validate.InList("LoginPolicy", p.LoginPolicy[i], []string{"AttemptAuthentication", "RequireAuthentication", "AllowOfflineGracePeriod", "AllowAuthenticationGracePeriod"}); err != nil {
+		if err := validate.InList("LoginPolicy", p.LoginPolicy[i], []string{"AttemptAuthentication", "RequireAuthentication", "AllowOfflineGracePeriod", "AllowAuthenticationGracePeriod", "RequireTouchID", "RequireTouchIDOrWatch", "AllowOpenIDForTouchIDFallback"}); err != nil {
 			errs = append(errs, err)
 		}
 	}
 	for i := range p.UnlockPolicy {
-		if err := validate.InList("UnlockPolicy", p.UnlockPolicy[i], []string{"AttemptAuthentication", "RequireAuthentication", "AllowOfflineGracePeriod", "AllowAuthenticationGracePeriod", "AllowTouchIDOrWatchForUnlock"}); err != nil {
+		if err := validate.InList("UnlockPolicy", p.UnlockPolicy[i], []string{"AttemptAuthentication", "RequireAuthentication", "AllowOfflineGracePeriod", "AllowAuthenticationGracePeriod", "AllowTouchIDOrWatchForUnlock", "RequireTouchID", "RequireTouchIDOrWatch", "AllowOpenIDForTouchIDFallback"}); err != nil {
 			errs = append(errs, err)
 		}
 	}

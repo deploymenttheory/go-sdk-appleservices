@@ -29,8 +29,35 @@
       "key": "ProfileURL",
       "title": "Profile's URL.",
       "type": "\u003cstring\u003e",
-      "presence": "required",
-      "content": "The URL of the profile to download and install, which needs to start with `https://`, and must be hosted by the MDM server.\n\nIf a user enrollment triggers this configuration, the system silently ignores any MDMv1 payloads in macOS where the User Enrollment Mode setting is `forbidden`. In iOS, the system rejects the entire profile."
+      "presence": "optional",
+      "content": "The URL of the profile to download and install, which needs to start with `https://`. The request uses MDM semantics, which includes the device-identity certificate, and any user authentication. This is equivalent to an MDM request made to the `CheckInURL` or `ServerURL`.\n\nOne of `ProfileURL` or `ProfileAssetReference` needs to be present."
+    },
+    {
+      "key": "ProfileAssetReference",
+      "title": "Profile asset reference",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The identifier of an asset declaration containing a reference to the profile data. The corresponding asset needs to be of type `com.apple.asset.data`. The referenced data needs to be a property list file, and the asset's \"ContentType\" value set to match the data type.\n\nOne of `ProfileURL` or `ProfileAssetReference` needs to be present.",
+      "assettypes": [
+        "com.apple.asset.data"
+      ],
+      "supportedOS": {
+        "iOS": {
+          "introduced": "27.0"
+        },
+        "macOS": {
+          "introduced": "27.0"
+        },
+        "tvOS": {
+          "introduced": "27.0"
+        },
+        "visionOS": {
+          "introduced": "27.0"
+        },
+        "watchOS": {
+          "introduced": "27.0"
+        }
+      }
     }
   ]
 }

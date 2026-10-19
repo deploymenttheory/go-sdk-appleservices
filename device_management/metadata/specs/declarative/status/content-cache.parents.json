@@ -1,0 +1,89 @@
+{
+  "category": "declarative/status",
+  "name": "content-cache.parents",
+  "title": "Status Content Cache Parents",
+  "description": "The status item that reports information about the Content Cache service parent caches.",
+  "payload": {
+    "statusitemtype": "content-cache.parents",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "n/a"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "n/a"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "content-cache.parents",
+      "title": "Content cache parents",
+      "type": "\u003carray\u003e",
+      "presence": "optional",
+      "content": "An array of dictionaries that describes parent Content Caches.",
+      "subkeys": [
+        {
+          "key": "parents-item",
+          "title": "Parent item",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "A parent Content Cache.",
+          "subkeys": [
+            {
+              "key": "identifier",
+              "title": "Parent GUID",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The unique identifier of the parent Content Cache."
+            },
+            {
+              "key": "_removed",
+              "title": "Indicates removal of the entry.",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system removed the parent entry and only this key and the `identifier` key are present in the status item object."
+            },
+            {
+              "key": "address",
+              "title": "IP address",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The local IPv4 address of the parent Content Cache."
+            },
+            {
+              "key": "port",
+              "title": "Port",
+              "type": "\u003cinteger\u003e",
+              "presence": "required",
+              "content": "The IP port number the parent Content Cache listens to for requests."
+            },
+            {
+              "key": "healthy",
+              "title": "Cache health",
+              "type": "\u003cboolean\u003e",
+              "presence": "required",
+              "content": "If `true,` the parent Content Cache is able to respond to requests from this Content Cache."
+            },
+            {
+              "key": "version",
+              "title": "Version",
+              "type": "\u003cstring\u003e",
+              "presence": "required",
+              "content": "The version number of the parent Content Cache software."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

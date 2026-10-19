@@ -34,7 +34,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the device reports restrictions from each profile. This value is available in iOS 4 and later, and tvOS 6.1 and later."
+      "content": "If `true`, the device reports restrictions from each profile."
     }
   ],
   "responsekeys": [
@@ -42,7 +42,7 @@
       "key": "GlobalRestrictions",
       "type": "\u003cdictionary\u003e",
       "presence": "required",
-      "content": "A dictionary that contains the global restrictions in effect. This value is available in iOS 4 and later, and tvOS 6.1 and later.",
+      "content": "A dictionary that contains the global restrictions in effect.",
       "subkeytype": "RestrictionsDictionary",
       "subkeys": [
         {
@@ -155,7 +155,7 @@
       "key": "ProfileRestrictions",
       "type": "\u003cdictionary\u003e",
       "presence": "required",
-      "content": "A dictionary that contains dictionaries of restrictions from each profile. This value is only available when `ProfileRestrictions` is `true` in the command. The keys are the identifiers of the profiles. This value is available in iOS 4 and later, and tvOS 6.1 and later.",
+      "content": "A dictionary that contains dictionaries of restrictions from each profile. This value is only available when `ProfileRestrictions` is `true` in the command. The keys are the identifiers of the profiles.",
       "subkeys": [
         {
           "key": "ANY profile identifier",

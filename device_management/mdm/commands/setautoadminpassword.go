@@ -8,8 +8,8 @@ package commands
 // Supported: macOS 10.11+.
 type SetAutoAdminPassword struct {
 	// The unique identifier of the local administrator account. If this value doesn't match the GUID
-	// of an administrator account that MDM created during Device Enrollment Program (DEP) enrollment,
-	// the command returns an error.
+	// of an administrator account that MDM created during Automated Device Enrollment (ADE)
+	// enrollment, the command returns an error.
 	GUID string `plist:"GUID" json:"GUID"`
 	// The precreated salted SHA-512 PBKDF2 password hash for the account.
 	PasswordHash []byte `plist:"passwordHash" json:"passwordHash"`

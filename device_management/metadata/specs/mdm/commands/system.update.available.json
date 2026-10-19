@@ -2,24 +2,27 @@
   "category": "mdm/commands",
   "name": "system.update.available",
   "title": "Available OS Updates Command",
-  "description": "Get a list of available operating-system updates for a device.",
+  "description": "Get a list of available operating-system updates for a device. Removed: use the declarative management `com.apple.configuration.softwareupdate.enforcement.specific` configuration.",
   "payload": {
     "requesttype": "AvailableOSUpdates",
-    "content": "Queries the device for a list of available OS updates. On OS X, a ScheduleOSUpdateScan must be performed to update the results returned by this query.",
+    "content": "Queries the device for a list of available OS updates. On macOS, a ScheduleOSUpdateScan must be performed to update the results returned by this query.",
     "supportedOS": {
       "iOS": {
         "introduced": "9.0",
         "deprecated": "26.0",
+        "removed": "27.0",
         "accessrights": "AllowAppInstallation"
       },
       "macOS": {
         "introduced": "10.11",
         "deprecated": "26.0",
+        "removed": "27.0",
         "accessrights": "None"
       },
       "tvOS": {
         "introduced": "12.0",
         "deprecated": "26.0",
+        "removed": "27.0",
         "accessrights": "AllowAppInstallation"
       },
       "visionOS": {
@@ -59,7 +62,7 @@
               "key": "HumanReadableNameLocale",
               "type": "\u003cstring\u003e",
               "presence": "required",
-              "content": "The locale, in IOS639-1 Alpha-2 code format, of the `HumanReadableName` value. This value is available in macOS 10.11 and later.",
+              "content": "The locale, in IOS639-1 Alpha-2 code format, of the `HumanReadableName` value.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -73,7 +76,7 @@
               "key": "MetadataURL",
               "type": "\u003cstring\u003e",
               "presence": "required",
-              "content": "A URL where the MDM server can request additional localized names for this update. This key isn't present for certain updates, such as mobile software updates (MSUs) or major OS updates. This value is available in macOS 10.11 and later.",
+              "content": "A URL where the MDM server can request additional localized names for this update. This key isn't present for certain updates, such as mobile software updates (MSUs) or major OS updates.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -87,7 +90,7 @@
               "key": "ProductName",
               "type": "\u003cstring\u003e",
               "presence": "required",
-              "content": "The product name; for example, _iOS_. This value is available in iOS 9.0 and later, and tvOS 12.0 and later.",
+              "content": "The product name; for example, _iOS_.",
               "supportedOS": {
                 "macOS": {
                   "introduced": "n/a"
@@ -121,7 +124,7 @@
               "key": "InstallSize",
               "type": "\u003cinteger\u003e",
               "presence": "required",
-              "content": "The storage size necessary to install the update. This value is available in iOS 9.0 and later, and tvOS 12.0 and later.",
+              "content": "The storage size necessary to install the update.",
               "supportedOS": {
                 "macOS": {
                   "introduced": "n/a"
@@ -132,7 +135,7 @@
               "key": "AppIdentifiersToClose",
               "type": "\u003carray\u003e",
               "presence": "required",
-              "content": "An array that contains app identifiers of apps to close so you can install the update. This value is available in macOS 10.11 and later.",
+              "content": "An array that contains app identifiers of apps to close so you can install the update.",
               "subkeys": [
                 {
                   "key": "AppIdentifiersToCloseItem",
@@ -160,7 +163,7 @@
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
-              "content": "If `true`, this is an update to a configuration file. This value is available in macOS 10.11 and later.",
+              "content": "If `true`, this is an update to a configuration file.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -175,7 +178,7 @@
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
-              "content": "If `true`, this is an update to firmware. This value is available in macOS 10.11 and later.",
+              "content": "If `true`, this is an update to firmware.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -190,7 +193,7 @@
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
-              "content": "If `true`, this is a major update; for example, 10.15.x to 11. This value is available in macOS 10.11 and later.",
+              "content": "If `true`, this is a major update; for example, 10.15.x to 11.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -221,7 +224,7 @@
               "key": "DeferredUntil",
               "type": "\u003cdate\u003e",
               "presence": "optional",
-              "content": "If present, the date when you want the update to install. This value is available in macOS 10.12.4 and later.",
+              "content": "If present, the date when you want the update to install.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"

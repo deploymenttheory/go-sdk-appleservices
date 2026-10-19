@@ -29,28 +29,28 @@
   "payloadkeys": [
     {
       "key": "JabberAccountDescription",
-      "title": "Account Description",
+      "title": "Account description",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The description of the account."
     },
     {
       "key": "JabberHostName",
-      "title": "Account Hostname",
+      "title": "Account hostname",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The server's address."
     },
     {
       "key": "JabberUserName",
-      "title": "Account Username",
+      "title": "Account username",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user's user name."
     },
     {
       "key": "JabberPassword",
-      "title": "Account Password",
+      "title": "Account password",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user's password."
@@ -65,7 +65,7 @@
     },
     {
       "key": "JabberPort",
-      "title": "Port Number",
+      "title": "Port number",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "range": {
@@ -77,7 +77,7 @@
     },
     {
       "key": "JabberAuthentication",
-      "title": "Jabber Authentication",
+      "title": "Jabber authentication",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "rangelist": [

@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "enhanced-logging.applecare-token",
+  "title": "Status Enhanced Logging AppleCare Token",
+  "description": "The status item that reports the device's enhanced log collection session AppleCare token.",
+  "payload": {
+    "statusitemtype": "enhanced-logging.applecare-token",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "27.0"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "enhanced-logging.applecare-token",
+      "title": "AppleCare token value.",
+      "type": "\u003cstring\u003e",
+      "presence": "optional",
+      "content": "The current enhanced log collection session AppleCare token. The device returns an empty string if there's no session status to report."
+    }
+  ]
+}

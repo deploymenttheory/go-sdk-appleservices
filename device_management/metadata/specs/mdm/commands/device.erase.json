@@ -35,7 +35,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, preserve the data plan on an iPhone or iPad with eSIM functionality, if one exists. This value is available in iOS 11 and later.",
+      "content": "If `true`, preserve the data plan on an iPhone or iPad with eSIM functionality, if one exists.",
       "supportedOS": {
         "iOS": {
           "introduced": "11.0"
@@ -56,7 +56,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, disable Proximity Setup on the next reboot and skip the pane in Setup Assistant. This value is available in iOS 11 and later. Prior to iOS 14, don't use this option with any other option.",
+      "content": "If `true`, disable Proximity Setup on the next reboot and skip the pane in Setup Assistant. Prior to iOS 14, don't use this option with any other option.",
       "supportedOS": {
         "iOS": {
           "introduced": "11.3"
@@ -79,7 +79,7 @@
       "key": "PIN",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The six-character PIN for Find My. This value is available in macOS 10.8 and later.",
+      "content": "The six-character PIN for Find My.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"
@@ -131,7 +131,7 @@
       "key": "ReturnToService",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
-      "content": "The configuration settings for return to service. This value is available in iOS 17 and later, with Shared iPad, in tvOS 18 and later, and in visionOS 26 and later.",
+      "content": "The configuration settings for return to service.",
       "subkeys": [
         {
           "key": "Enabled",
@@ -169,6 +169,30 @@
             },
             "visionOS": {
               "introduced": "26.0"
+            },
+            "watchOS": {
+              "introduced": "n/a"
+            }
+          }
+        },
+        {
+          "key": "ShouldRetryEnrollment",
+          "type": "\u003cboolean\u003e",
+          "presence": "optional",
+          "default": false,
+          "content": "If `true`, the device retries service enrollment when the initial enrollment fails after erasure.",
+          "supportedOS": {
+            "iOS": {
+              "introduced": "27.0"
+            },
+            "macOS": {
+              "introduced": "n/a"
+            },
+            "tvOS": {
+              "introduced": "n/a"
+            },
+            "visionOS": {
+              "introduced": "n/a"
             },
             "watchOS": {
               "introduced": "n/a"

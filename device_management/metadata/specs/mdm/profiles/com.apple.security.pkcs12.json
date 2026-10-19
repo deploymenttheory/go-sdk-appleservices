@@ -27,14 +27,14 @@
   "payloadkeys": [
     {
       "key": "PayloadCertificateFileName",
-      "title": "Payload Certificate Filename",
+      "title": "Payload certificate filename",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The file name of the enclosed certificate."
     },
     {
       "key": "PayloadContent",
-      "title": "Payload Certificate Data",
+      "title": "Payload certificate data",
       "type": "\u003cdata\u003e",
       "presence": "required",
       "content": "The binary representation of the payload, encoded in Base64."
@@ -48,11 +48,11 @@
     },
     {
       "key": "AllowAllAppsAccess",
-      "title": "Allow All Apps Access",
+      "title": "Allow all apps access",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system allows apps access to the private key. Available in macOS 10.10 and later.",
+      "content": "If `true`, the system allows apps access to the private key.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"

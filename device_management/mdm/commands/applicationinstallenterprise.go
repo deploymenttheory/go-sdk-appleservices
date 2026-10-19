@@ -28,7 +28,6 @@ type InstallEnterpriseApplication struct {
 	// The management flags. The possible values are:
 	ManagementFlags *int64 `plist:"ManagementFlags,omitempty" json:"ManagementFlags,omitempty"`
 	// A dictionary that contains the initial configuration of the app, if you choose to provide it.
-	// Available in macOS 11 and later.
 	Configuration *InstallEnterpriseApplicationConfiguration `plist:"Configuration,omitempty" json:"Configuration,omitempty"`
 	// The change management state. This value doesn't work with the user enrollments. The only
 	// possible value is:
@@ -48,7 +47,6 @@ type InstallEnterpriseApplicationManifest struct {
 
 // InstallEnterpriseApplicationConfiguration is the Configuration dictionary.
 // A dictionary that contains the initial configuration of the app, if you choose to provide it.
-// Available in macOS 11 and later.
 type InstallEnterpriseApplicationConfiguration struct {
 	// An app configuration.
 	ANY any `plist:"ANY,omitempty" json:"ANY,omitempty"`

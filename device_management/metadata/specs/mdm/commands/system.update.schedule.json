@@ -2,7 +2,7 @@
   "category": "mdm/commands",
   "name": "system.update.schedule",
   "title": "Schedule OS Update Command",
-  "description": "Schedule an update of the operating system on a device.",
+  "description": "Schedule an update of the operating system on a device. Removed: use the declarative management `com.apple.configuration.softwareupdate.enforcement.specific` configuration.",
   "payload": {
     "requesttype": "ScheduleOSUpdate",
     "content": "This command allows the server to schedule an OS update.",
@@ -10,16 +10,19 @@
       "iOS": {
         "introduced": "9.0",
         "deprecated": "26.0",
+        "removed": "27.0",
         "accessrights": "AllowAppInstallation"
       },
       "macOS": {
         "introduced": "10.11",
         "deprecated": "26.0",
+        "removed": "27.0",
         "accessrights": "None"
       },
       "tvOS": {
         "introduced": "12.0",
         "deprecated": "26.0",
+        "removed": "27.0",
         "accessrights": "AllowAppInstallation"
       },
       "visionOS": {
@@ -35,7 +38,7 @@
       "key": "Updates",
       "type": "\u003carray\u003e",
       "presence": "required",
-      "content": "An array of dictionaries specifying the updates to download or install. If this value is missing, the device applies the default behavior for handling updates.\nThe device ignores this command and an informational error is returned, if a software update is managed by a Declarative Device Management `SoftwareUpdateEnforcementSpecific` configuration, as the configuration takes precedence.",
+      "content": "An array of dictionaries specifying the updates to download or install. If this value is missing, the device applies the default behavior for handling updates.\nThe device ignores this command and returns an informational error if a Declarative Device Management `SoftwareUpdateEnforcementSpecific` configuration manages the software update, as the configuration takes precedence.",
       "subkeys": [
         {
           "key": "UpdatesItem",
@@ -53,7 +56,7 @@
               "key": "ProductVersion",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The version of the update, which the system requires if `ProductKey` isn't present. This value is available in iOS 11.3 and later, macOS 12 and later, and tvOS 12.2 and later.\n\n\u003e Note:\n\u003e This value isn't available for use with Background Security Improvement updates.",
+              "content": "The version of the update, which the system requires if `ProductKey` isn't present.\n\n\u003e Note:\n\u003e This value isn't available for use with Background Security Improvement updates.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "11.3"
@@ -78,7 +81,7 @@
                 "InstallLater",
                 "InstallForceRestart"
               ],
-              "content": "The install action, which is one of the following values:\n\n- `Default`: Download or install the update, depending on the current state. You can check the `UpdateResults` dictionary to review scheduled updates. This value is available in iOS 9 and later, macOS 10.11 and later, and tvOS 12 and later.\n- `DownloadOnly`: Download the software update without installing it. This value is available in iOS 9 and later, macOS 11 and later, and tvOS 12 and later.\n- `InstallASAP`: In iOS and tvOS, install a previously downloaded software update. In macOS, download the software update and trigger the restart countdown notification. This value is available in iOS 9 and later, macOS 10.11 and later, and tvOS 12 and later.\n- `NotifyOnly`: Download the software update and notify the user through the App Store. This value is available in macOS 10.11 and later.\n- `InstallLater`: Download the software update and install it at a later time. This value is available in macOS 10.11 and later.\n- `InstallForceRestart`: Perform the `Default` action, and then force a restart if the update requires it. This value is available in macOS 11 and later.\n\n\n\u003e Warning:\n\u003e `InstallForceRestart` may result in data loss."
+              "content": "The install action, which is one of the following values:\n\n* `Default`: Download or install the update, depending on the current state. You can check the `UpdateResults` dictionary to review scheduled updates. This value is available in iOS 9 and later, macOS 10.11 and later, and tvOS 12 and later.\n* `DownloadOnly`: Download the software update without installing it. This value is available in iOS 9 and later, macOS 11 and later, and tvOS 12 and later.\n* `InstallASAP`: In iOS and tvOS, install a previously downloaded software update. In macOS, download the software update and trigger the restart countdown notification. This value is available in iOS 9 and later, macOS 10.11 and later, and tvOS 12 and later.\n* `NotifyOnly`: Download the software update and notify the user through the App Store. This value is available in macOS 10.11 and later.\n* `InstallLater`: Download the software update and install it at a later time. This value is available in macOS 10.11 and later.\n* `InstallForceRestart`: Perform the `Default` action, and then force a restart if the update requires it. This value is available in macOS 11 and later.\n\n\n\u003e Warning:\n\u003e `InstallForceRestart` may result in data loss."
             },
             {
               "key": "MaxUserDeferrals",
@@ -106,7 +109,7 @@
                 "High"
               ],
               "default": "Low",
-              "content": "The scheduling priority for downloading and preparing the requested update. This is only supported for minor OS updates (macOS 12.x to 12.y).\n\nAvailable in macOS 12.3 and later. Prior versions of macOS used a priority of `Low`.",
+              "content": "The scheduling priority for downloading and preparing the requested update. This is only supported for minor OS updates (macOS 12.x to 12.y).\n\n Prior versions of macOS used a priority of `Low`.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"

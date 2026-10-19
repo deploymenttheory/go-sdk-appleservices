@@ -12,8 +12,8 @@ type SecuritySmartcard struct {
 	// Default: true.
 	UserPairing *bool `plist:"UserPairing,omitempty" json:"UserPairing,omitempty"`
 	// If `false`, the system disables smart cards for logins, authorizations, and screen saver
-	// unlocking. It is still allowed for other functions, such as signing emails and accessing the
-	// web. A restart is required for a setting change to take effect.
+	// unlocking. It's still allowed for other functions, such as signing emails and accessing the web.
+	// The device requires a restart for a setting change to take effect.
 	//
 	// Default: true.
 	AllowSmartCard *bool `plist:"allowSmartCard,omitempty" json:"allowSmartCard,omitempty"`
@@ -26,13 +26,11 @@ type SecuritySmartcard struct {
 	//
 	// Default: false.
 	OneCardPerUser *bool `plist:"oneCardPerUser,omitempty" json:"oneCardPerUser,omitempty"`
-	// If `1`, the system enables the screen saver when the smart card is removed. Available in macOS
-	// 10.13.4 and later.
+	// If `1`, the device enables the screen saver when the user removes the smart card.
 	//
 	// Default: 0.
 	TokenRemovalAction *SecuritySmartcardTokenRemovalAction `plist:"tokenRemovalAction,omitempty" json:"tokenRemovalAction,omitempty"`
-	// If `true`, a user can only log in or authenticate with a smart card. Available in macOS 10.13.2
-	// and later.
+	// If `true`, a user can only log in or authenticate with a smart card.
 	//
 	// Default: false.
 	EnforceSmartCard *bool `plist:"enforceSmartCard,omitempty" json:"enforceSmartCard,omitempty"`

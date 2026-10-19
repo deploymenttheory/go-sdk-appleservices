@@ -26,28 +26,28 @@
   "payloadkeys": [
     {
       "key": "LDAPAccountDescription",
-      "title": "Account Description",
+      "title": "Account description",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The description of the account."
     },
     {
       "key": "LDAPAccountHostName",
-      "title": "Account Hostname",
+      "title": "Account hostname",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The server's address."
     },
     {
       "key": "LDAPAccountUserName",
-      "title": "Account Username",
+      "title": "Account username",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user's user name."
     },
     {
       "key": "LDAPAccountPassword",
-      "title": "Account Password",
+      "title": "Account password",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user's password. Only use this in encrypted profiles."
@@ -62,14 +62,14 @@
     },
     {
       "key": "LDAPSearchSettings",
-      "title": "Search Settings",
+      "title": "Search settings",
       "type": "\u003carray\u003e",
       "presence": "optional",
       "content": "An array of search settings dictionaries.",
       "subkeys": [
         {
           "key": "LDAPSearchSettingsItem",
-          "title": "An LDAP Search Setting",
+          "title": "An LDAP search setting",
           "type": "\u003cdictionary\u003e",
           "subkeys": [
             {
@@ -81,14 +81,14 @@
             },
             {
               "key": "LDAPSearchSettingSearchBase",
-              "title": "Search Setting Search Base",
+              "title": "Search setting search base",
               "type": "\u003cstring\u003e",
               "presence": "required",
               "content": "The path to the node where a search should start."
             },
             {
               "key": "LDAPSearchSettingScope",
-              "title": "Search Setting Scope",
+              "title": "Search setting scope",
               "type": "\u003cstring\u003e",
               "presence": "optional",
               "rangelist": [
@@ -108,7 +108,7 @@
       "title": "VPNUUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14 and later.",
+      "content": "The VPNUUID of the per-app VPN the account uses for network communication.",
       "supportedOS": {
         "iOS": {
           "introduced": "14.0"

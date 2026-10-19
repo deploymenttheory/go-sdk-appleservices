@@ -33,7 +33,7 @@
       "subkeys": [
         {
           "key": "DeclarationsItem",
-          "title": "Declarations Content Item",
+          "title": "Declarations content item",
           "type": "\u003cdata\u003e",
           "presence": "required",
           "content": "An item in the declarations list"
