@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.10.0...v0.11.0) (2026-10-24)
+
+
+### Features
+
+* **axm:** add Activation Lock and identity audit event support ([847bf06](https://github.com/deploymenttheory/go-sdk-appleservices/commit/847bf06b10b49ff2bd14c73016961154c326b8f0))
+* **axm:** add Activation Lock and identity audit event support (api 2.5 + 2.6 additions) ([f5193ed](https://github.com/deploymenttheory/go-sdk-appleservices/commit/f5193ed6b76b607b8d3f2c063f1c926a93522c9b))
+
 ## [0.10.0](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.9.0...v0.10.0) (2026-09-01)
 
 
