@@ -149,6 +149,10 @@ func (t *Transport) Close() error {
 
 // execute implements requestExecutor — handles all HTTP method routing and error processing.
 func (t *Transport) execute(req *resty.Request, method, path string, result any) (*resty.Response, error) {
+	if err := req.Context().Err(); err != nil {
+		return nil, fmt.Errorf("request failed: %w", err)
+	}
+
 	var apiErr ErrorResponse
 	req.SetResultError(&apiErr)
 
@@ -207,6 +211,10 @@ func (t *Transport) executePaginated(req *resty.Request, path string, mergePage 
 	var lastResp *resty.Response
 
 	for {
+		if err := req.Context().Err(); err != nil {
+			return lastResp, fmt.Errorf("request failed: %w", err)
+		}
+
 		// Build a fresh request for each page (reuse auth, headers)
 		pageReq := t.httpClient.R().SetContext(req.Context())
 		for k, v := range req.Header {

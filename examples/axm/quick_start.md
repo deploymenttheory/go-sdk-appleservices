@@ -190,6 +190,59 @@ fmt.Printf("Found %d coverage plan(s)\n", len(response.Data))
 
 See full example: [GetAppleCareInformationByDeviceID/main.go](./devices/GetAppleCareInformationByDeviceID/main.go)
 
+### Get Activation Lock status
+
+```go
+response, _, err := c.AXMAPI.Devices.GetActivationLockStatusByDeviceIDV1(ctx, deviceID)
+if err != nil {
+    log.Fatalf("Error: %v", err)
+}
+if attrs := response.Data.Attributes; attrs != nil && attrs.IsLocked != nil {
+    fmt.Printf("Locked: %t; type: %s\n", *attrs.IsLocked, attrs.LockType)
+}
+```
+
+`IsLocked` is a pointer so an omitted status is distinguishable from `false`. The
+documented lock types are `devices.ActivationLockTypeMDM`,
+`devices.ActivationLockTypeUser`, and `devices.ActivationLockTypeNone`.
+
+See full example: [GetActivationLockStatusByDeviceID/main.go](./devices/GetActivationLockStatusByDeviceID/main.go)
+
+### Read identity audit events
+
+Import `github.com/deploymenttheory/go-sdk-appleservices/axm/axm_api/auditevents` and `time`.
+The timestamp filters are required; use an API account with permission to read audit events.
+
+```go
+now := time.Now().UTC()
+response, _, err := c.AXMAPI.AuditEvents.GetV1(ctx, &auditevents.RequestQueryOptions{
+    FilterStartTimestamp: now.Add(-24 * time.Hour).Format(time.RFC3339),
+    FilterEndTimestamp: now.Format(time.RFC3339),
+    FilterType: auditevents.AuditEventTypeTermsAccepted,
+    Fields: []string{
+        auditevents.FieldType,
+        auditevents.FieldEventDataPropertyKey,
+        auditevents.FieldEventDataTermsAccepted,
+    },
+})
+if err != nil {
+    log.Fatalf("Error: %v", err)
+}
+for _, event := range response.Data {
+    if attrs := event.Attributes; attrs != nil && attrs.EventDataTermsAccepted != nil {
+        fmt.Printf("Accepted terms: %s\n", attrs.EventDataTermsAccepted.TermsName)
+    }
+}
+```
+
+All 17 identity event types added in Apple Business API 2.6 have corresponding
+`AuditEventType*` constants, `FieldEventData*` constants and optional `EventData*`
+payloads. Identity provider payloads expose vendor and protocol strings with
+`IDPVendor*` and `IDPProtocol*` constants. Only the payload for the event type is
+normally populated. An empty event-data object is preserved as a non-nil pointer.
+
+See full example: [GetIdentityAuditEvents/main.go](./auditevents/GetIdentityAuditEvents/main.go)
+
 ---
 
 ## Device Management API

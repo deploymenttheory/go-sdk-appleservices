@@ -44,6 +44,7 @@ Complete implementation of the [Apple Business Manager API](https://developer.ap
 **Devices API:**
 - Get organization devices with filtering and pagination
 - Get detailed device information by serial number
+- Get a device's Activation Lock status and lock type
 - Support for all device types (iPhone, iPad, Mac, Apple TV, Apple Watch)
 - Device management service migration attributes (`isMdmMigrationCapable`, `mdmMigrationStatus`, `mdmMigrationDeadlineDateTime`)
 
@@ -56,6 +57,11 @@ Complete implementation of the [Apple Business Manager API](https://developer.ap
 - Schedule, update and cancel a device management service migration — move managed devices between services without erasing them
 - Release devices from the organization
 - Poll organization device activities to completion, including the CSV activity log
+
+**Audit Events API:**
+- Retrieve and filter audit events with automatic pagination
+- Typed event payloads for all 17 identity events added in Apple Business API 2.6, including account, role, identity provider, federation and terms changes
+- Constants for event types, field selection, identity provider vendors and federation protocols
 
 **Key Features:**
 - JWT authentication — built-in Apple JWT token generation and management

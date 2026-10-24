@@ -31,8 +31,8 @@ type AuditEventsResponse struct {
 
 // AuditEvent represents a single audit event resource.
 type AuditEvent struct {
-	ID         string              `json:"id"`
-	Type       string              `json:"type"`
+	ID         string                `json:"id"`
+	Type       string                `json:"type"`
 	Attributes *AuditEventAttributes `json:"attributes,omitempty"`
 }
 
@@ -51,39 +51,57 @@ type AuditEventAttributes struct {
 	GroupId              string     `json:"groupId,omitempty"`
 	EventDataPropertyKey string     `json:"eventDataPropertyKey,omitempty"`
 
-	EventDataDeviceAddedToOrg               *EventDataDeviceAddedToOrg               `json:"eventDataDeviceAddedToOrg,omitempty"`
-	EventDataDeviceRemovedFromOrg           *EventDataDeviceRemovedFromOrg           `json:"eventDataDeviceRemovedFromOrg,omitempty"`
-	EventDataDeviceAssignedToServer         *EventDataDeviceAssignedToServer         `json:"eventDataDeviceAssignedToServer,omitempty"`
-	EventDataDeviceUnassignedFromServer     *EventDataDeviceUnassignedFromServer     `json:"eventDataDeviceUnassignedFromServer,omitempty"`
-	EventDataDeviceIsErased                 *EventDataDeviceIsErased                 `json:"eventDataDeviceIsErased,omitempty"`
-	EventDataConfigSettingsCreated          *EventDataConfigSettings                 `json:"eventDataConfigSettingsCreated,omitempty"`
-	EventDataConfigSettingsUpdated          *EventDataConfigSettings                 `json:"eventDataConfigSettingsUpdated,omitempty"`
-	EventDataConfigSettingsDeleted          *EventDataConfigSettings                 `json:"eventDataConfigSettingsDeleted,omitempty"`
-	EventDataCollectionCreated              *EventDataCollection                     `json:"eventDataCollectionCreated,omitempty"`
-	EventDataCollectionUpdated              *EventDataCollection                     `json:"eventDataCollectionUpdated,omitempty"`
-	EventDataCollectionDeleted              *EventDataCollection                     `json:"eventDataCollectionDeleted,omitempty"`
-	EventDataSubscriptionCreated            *EventDataSubscription                   `json:"eventDataSubscriptionCreated,omitempty"`
-	EventDataSubscriptionUpdated            *EventDataSubscription                   `json:"eventDataSubscriptionUpdated,omitempty"`
-	EventDataSubscriptionDeleted            *EventDataSubscription                   `json:"eventDataSubscriptionDeleted,omitempty"`
-	EventDataAccountRoleLocationChanged     *EventDataAccountRoleLocationChanged     `json:"eventDataAccountRoleLocationChanged,omitempty"`
-	EventDataAccountAdded                   *EventDataAccountAdded                   `json:"eventDataAccountAdded,omitempty"`
-	EventDataAccountDeleted                 *EventDataAccountDeleted                 `json:"eventDataAccountDeleted,omitempty"`
-	EventDataExternalAccountAssociated      *EventDataExternalAccount                `json:"eventDataExternalAccountAssociated,omitempty"`
-	EventDataExternalAccountDisassociated   *EventDataExternalAccount                `json:"eventDataExternalAccountDisassociated,omitempty"`
-	EventDataDomainAdded                    *EventDataDomain                         `json:"eventDataDomainAdded,omitempty"`
-	EventDataDomainRemoved                  *EventDataDomain                         `json:"eventDataDomainRemoved,omitempty"`
-	EventDataDomainVerified                 *EventDataDomain                         `json:"eventDataDomainVerified,omitempty"`
-	EventDataApiAccountCreatedWithKey       *EventDataApiAccount                     `json:"eventDataApiAccountCreatedWithKey,omitempty"`
-	EventDataApiAccountCreatedWithoutKey    *EventDataApiAccount                     `json:"eventDataApiAccountCreatedWithoutKey,omitempty"`
-	EventDataApiAccountDeleted              *EventDataApiAccount                     `json:"eventDataApiAccountDeleted,omitempty"`
-	EventDataApiAccountKeyGenerated         *EventDataApiAccount                     `json:"eventDataApiAccountKeyGenerated,omitempty"`
-	EventDataApiAccountKeyRevoked           *EventDataApiAccount                     `json:"eventDataApiAccountKeyRevoked,omitempty"`
-	EventDataApiAccountNameChanged          *EventDataApiAccount                     `json:"eventDataApiAccountNameChanged,omitempty"`
-	EventDataApiAccountRoleLocationChanged  *EventDataApiAccountRoleLocationChanged  `json:"eventDataApiAccountRoleLocationChanged,omitempty"`
-	EventDataSubjectHasICloudStoragePurchaseAdded    *EventDataPurchase `json:"eventDataSubjectHasICloudStoragePurchaseAdded,omitempty"`
-	EventDataSubjectHasICloudStoragePurchaseRemoved  *EventDataPurchase `json:"eventDataSubjectHasICloudStoragePurchaseRemoved,omitempty"`
-	EventDataSubjectHasAppleCarePurchaseAdded        *EventDataPurchase `json:"eventDataSubjectHasAppleCarePurchaseAdded,omitempty"`
-	EventDataSubjectHasAppleCarePurchaseRemoved      *EventDataPurchase `json:"eventDataSubjectHasAppleCarePurchaseRemoved,omitempty"`
+	EventDataDeviceAddedToOrg                       *EventDataDeviceAddedToOrg              `json:"eventDataDeviceAddedToOrg,omitempty"`
+	EventDataDeviceRemovedFromOrg                   *EventDataDeviceRemovedFromOrg          `json:"eventDataDeviceRemovedFromOrg,omitempty"`
+	EventDataDeviceAssignedToServer                 *EventDataDeviceAssignedToServer        `json:"eventDataDeviceAssignedToServer,omitempty"`
+	EventDataDeviceUnassignedFromServer             *EventDataDeviceUnassignedFromServer    `json:"eventDataDeviceUnassignedFromServer,omitempty"`
+	EventDataDeviceIsErased                         *EventDataDeviceIsErased                `json:"eventDataDeviceIsErased,omitempty"`
+	EventDataConfigSettingsCreated                  *EventDataConfigSettings                `json:"eventDataConfigSettingsCreated,omitempty"`
+	EventDataConfigSettingsUpdated                  *EventDataConfigSettings                `json:"eventDataConfigSettingsUpdated,omitempty"`
+	EventDataConfigSettingsDeleted                  *EventDataConfigSettings                `json:"eventDataConfigSettingsDeleted,omitempty"`
+	EventDataCollectionCreated                      *EventDataCollection                    `json:"eventDataCollectionCreated,omitempty"`
+	EventDataCollectionUpdated                      *EventDataCollection                    `json:"eventDataCollectionUpdated,omitempty"`
+	EventDataCollectionDeleted                      *EventDataCollection                    `json:"eventDataCollectionDeleted,omitempty"`
+	EventDataSubscriptionCreated                    *EventDataSubscription                  `json:"eventDataSubscriptionCreated,omitempty"`
+	EventDataSubscriptionUpdated                    *EventDataSubscription                  `json:"eventDataSubscriptionUpdated,omitempty"`
+	EventDataSubscriptionDeleted                    *EventDataSubscription                  `json:"eventDataSubscriptionDeleted,omitempty"`
+	EventDataAccountRoleLocationChanged             *EventDataAccountRoleLocationChanged    `json:"eventDataAccountRoleLocationChanged,omitempty"`
+	EventDataAccountAdded                           *EventDataAccountAdded                  `json:"eventDataAccountAdded,omitempty"`
+	EventDataAccountDeleted                         *EventDataAccountDeleted                `json:"eventDataAccountDeleted,omitempty"`
+	EventDataExternalAccountAssociated              *EventDataExternalAccount               `json:"eventDataExternalAccountAssociated,omitempty"`
+	EventDataExternalAccountDisassociated           *EventDataExternalAccount               `json:"eventDataExternalAccountDisassociated,omitempty"`
+	EventDataDomainAdded                            *EventDataDomain                        `json:"eventDataDomainAdded,omitempty"`
+	EventDataDomainRemoved                          *EventDataDomain                        `json:"eventDataDomainRemoved,omitempty"`
+	EventDataDomainVerified                         *EventDataDomain                        `json:"eventDataDomainVerified,omitempty"`
+	EventDataApiAccountCreatedWithKey               *EventDataApiAccount                    `json:"eventDataApiAccountCreatedWithKey,omitempty"`
+	EventDataApiAccountCreatedWithoutKey            *EventDataApiAccount                    `json:"eventDataApiAccountCreatedWithoutKey,omitempty"`
+	EventDataApiAccountDeleted                      *EventDataApiAccount                    `json:"eventDataApiAccountDeleted,omitempty"`
+	EventDataApiAccountKeyGenerated                 *EventDataApiAccount                    `json:"eventDataApiAccountKeyGenerated,omitempty"`
+	EventDataApiAccountKeyRevoked                   *EventDataApiAccount                    `json:"eventDataApiAccountKeyRevoked,omitempty"`
+	EventDataApiAccountNameChanged                  *EventDataApiAccount                    `json:"eventDataApiAccountNameChanged,omitempty"`
+	EventDataApiAccountRoleLocationChanged          *EventDataApiAccountRoleLocationChanged `json:"eventDataApiAccountRoleLocationChanged,omitempty"`
+	EventDataSubjectHasICloudStoragePurchaseAdded   *EventDataPurchase                      `json:"eventDataSubjectHasICloudStoragePurchaseAdded,omitempty"`
+	EventDataSubjectHasICloudStoragePurchaseRemoved *EventDataPurchase                      `json:"eventDataSubjectHasICloudStoragePurchaseRemoved,omitempty"`
+	EventDataSubjectHasAppleCarePurchaseAdded       *EventDataPurchase                      `json:"eventDataSubjectHasAppleCarePurchaseAdded,omitempty"`
+	EventDataSubjectHasAppleCarePurchaseRemoved     *EventDataPurchase                      `json:"eventDataSubjectHasAppleCarePurchaseRemoved,omitempty"`
+	// Identity event payloads added in Apple Business API 2.6.
+	EventDataExternalAccountInvited       *EventDataExternalAccountInvited       `json:"eventDataExternalAccountInvited,omitempty"`
+	EventDataAccountPasswordChanged       *EventDataAccountPasswordChanged       `json:"eventDataAccountPasswordChanged,omitempty"`
+	EventDataBatchPasswordResetInitiated  *EventDataBatchPasswordResetInitiated  `json:"eventDataBatchPasswordResetInitiated,omitempty"`
+	EventDataAccountImageSet              *EventDataAccountImageSet              `json:"eventDataAccountImageSet,omitempty"`
+	EventDataAccountImageReplaced         *EventDataAccountImageReplaced         `json:"eventDataAccountImageReplaced,omitempty"`
+	EventDataAccountImageRemoved          *EventDataAccountImageRemoved          `json:"eventDataAccountImageRemoved,omitempty"`
+	EventDataAppleServicesSettingsUpdated *EventDataAppleServicesSettingsUpdated `json:"eventDataAppleServicesSettingsUpdated,omitempty"`
+	EventDataRoleCreated                  *EventDataRoleCreated                  `json:"eventDataRoleCreated,omitempty"`
+	EventDataRoleUpdated                  *EventDataRoleUpdated                  `json:"eventDataRoleUpdated,omitempty"`
+	EventDataTermsAccepted                *EventDataTermsAccepted                `json:"eventDataTermsAccepted,omitempty"`
+	EventDataIdpCreated                   *EventDataIdpCreated                   `json:"eventDataIdpCreated,omitempty"`
+	EventDataIdpUpdated                   *EventDataIdpUpdated                   `json:"eventDataIdpUpdated,omitempty"`
+	EventDataIdpDeleted                   *EventDataIdpDeleted                   `json:"eventDataIdpDeleted,omitempty"`
+	EventDataIdpAccountSyncEnabled        *EventDataIdpAccountSyncEnabled        `json:"eventDataIdpAccountSyncEnabled,omitempty"`
+	EventDataIdpAccountSyncDisabled       *EventDataIdpAccountSyncDisabled       `json:"eventDataIdpAccountSyncDisabled,omitempty"`
+	EventDataDomainFederationEnabled      *EventDataDomainFederationEnabled      `json:"eventDataDomainFederationEnabled,omitempty"`
+	EventDataDomainFederationDisabled     *EventDataDomainFederationDisabled     `json:"eventDataDomainFederationDisabled,omitempty"`
 }
 
 // EventDataDeviceAddedToOrg contains data for a device added to org event.
@@ -193,4 +211,93 @@ type RequestQueryOptions struct {
 	Fields []string
 	// Limit is the number of resources to return (max 1000).
 	Limit int
+}
+
+// Identity event data schemas: https://developer.apple.com/documentation/applebusinessapi/auditevent
+
+// EventDataExternalAccountInvited contains the event-specific data for EXTERNAL_ACCOUNT_INVITED.
+type EventDataExternalAccountInvited struct {
+}
+
+// EventDataAccountPasswordChanged contains the event-specific data for ACCOUNT_PASSWORD_CHANGED.
+type EventDataAccountPasswordChanged struct {
+	ActivityID string `json:"activityId,omitempty"`
+}
+
+// EventDataBatchPasswordResetInitiated contains the event-specific data for BATCH_PASSWORD_RESET_INITIATED.
+type EventDataBatchPasswordResetInitiated struct {
+	ActivityID string `json:"activityId,omitempty"`
+}
+
+// EventDataAccountImageSet contains the event-specific data for ACCOUNT_IMAGE_SET.
+type EventDataAccountImageSet struct {
+}
+
+// EventDataAccountImageReplaced contains the event-specific data for ACCOUNT_IMAGE_REPLACED.
+type EventDataAccountImageReplaced struct {
+}
+
+// EventDataAccountImageRemoved contains the event-specific data for ACCOUNT_IMAGE_REMOVED.
+type EventDataAccountImageRemoved struct {
+}
+
+// EventDataAppleServicesSettingsUpdated contains the event-specific data for APPLE_SERVICES_SETTINGS_UPDATED.
+type EventDataAppleServicesSettingsUpdated struct {
+	SettingsEnabled  []string `json:"settingsEnabled,omitempty"`
+	SettingsDisabled []string `json:"settingsDisabled,omitempty"`
+}
+
+// EventDataRoleCreated contains the event-specific data for ROLE_CREATED.
+type EventDataRoleCreated struct {
+	Privileges []string `json:"privileges,omitempty"`
+}
+
+// EventDataRoleUpdated contains the event-specific data for ROLE_UPDATED.
+type EventDataRoleUpdated struct {
+	PrivilegesAdded   []string `json:"privilegesAdded,omitempty"`
+	PrivilegesRemoved []string `json:"privilegesRemoved,omitempty"`
+}
+
+// EventDataTermsAccepted contains the event-specific data for TERMS_ACCEPTED.
+type EventDataTermsAccepted struct {
+	TermsName string `json:"termsName,omitempty"`
+}
+
+// EventDataIdpCreated contains the event-specific data for IDP_CREATED.
+type EventDataIdpCreated struct {
+	VendorName string `json:"vendorName,omitempty"`
+	Protocol   string `json:"protocol,omitempty"`
+}
+
+// EventDataIdpUpdated contains the event-specific data for IDP_UPDATED.
+type EventDataIdpUpdated struct {
+	VendorName string `json:"vendorName,omitempty"`
+}
+
+// EventDataIdpDeleted contains the event-specific data for IDP_DELETED.
+type EventDataIdpDeleted struct {
+	VendorName string `json:"vendorName,omitempty"`
+}
+
+// EventDataIdpAccountSyncEnabled contains the event-specific data for IDP_ACCOUNT_SYNC_ENABLED.
+type EventDataIdpAccountSyncEnabled struct {
+	VendorName string `json:"vendorName,omitempty"`
+	ActivityID string `json:"activityId,omitempty"`
+}
+
+// EventDataIdpAccountSyncDisabled contains the event-specific data for IDP_ACCOUNT_SYNC_DISABLED.
+type EventDataIdpAccountSyncDisabled struct {
+	VendorName string `json:"vendorName,omitempty"`
+	ActivityID string `json:"activityId,omitempty"`
+}
+
+// EventDataDomainFederationEnabled contains the event-specific data for DOMAIN_FEDERATION_ENABLED.
+type EventDataDomainFederationEnabled struct {
+	ActivityID     string `json:"activityId,omitempty"`
+	SCIMActivityID string `json:"scimActivityId,omitempty"`
+}
+
+// EventDataDomainFederationDisabled contains the event-specific data for DOMAIN_FEDERATION_DISABLED.
+type EventDataDomainFederationDisabled struct {
+	ActivityID string `json:"activityId,omitempty"`
 }

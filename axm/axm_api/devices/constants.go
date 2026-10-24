@@ -1,5 +1,12 @@
 package devices
 
+// Activation Lock types returned by the device Activation Lock status endpoint.
+const (
+	ActivationLockTypeMDM  = "MDM"
+	ActivationLockTypeUser = "USER"
+	ActivationLockTypeNone = "NONE"
+)
+
 // ProfileStatus constants for device profile status
 const (
 	ProfileStatusEmpty    = "empty"
