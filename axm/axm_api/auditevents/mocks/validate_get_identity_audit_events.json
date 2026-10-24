@@ -1,0 +1,199 @@
+{
+  "data": [
+    {
+      "id": "identity-event-1",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "EXTERNAL_ACCOUNT_INVITED",
+        "eventDataPropertyKey": "eventDataExternalAccountInvited",
+        "eventDataExternalAccountInvited": {}
+      }
+    },
+    {
+      "id": "identity-event-2",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "ACCOUNT_PASSWORD_CHANGED",
+        "eventDataPropertyKey": "eventDataAccountPasswordChanged",
+        "eventDataAccountPasswordChanged": {
+          "activityId": "password-change-1"
+        }
+      }
+    },
+    {
+      "id": "identity-event-3",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "BATCH_PASSWORD_RESET_INITIATED",
+        "eventDataPropertyKey": "eventDataBatchPasswordResetInitiated",
+        "eventDataBatchPasswordResetInitiated": {
+          "activityId": "password-reset-1"
+        }
+      }
+    },
+    {
+      "id": "identity-event-4",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "ACCOUNT_IMAGE_SET",
+        "eventDataPropertyKey": "eventDataAccountImageSet",
+        "eventDataAccountImageSet": {}
+      }
+    },
+    {
+      "id": "identity-event-5",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "ACCOUNT_IMAGE_REPLACED",
+        "eventDataPropertyKey": "eventDataAccountImageReplaced",
+        "eventDataAccountImageReplaced": {}
+      }
+    },
+    {
+      "id": "identity-event-6",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "ACCOUNT_IMAGE_REMOVED",
+        "eventDataPropertyKey": "eventDataAccountImageRemoved",
+        "eventDataAccountImageRemoved": {}
+      }
+    },
+    {
+      "id": "identity-event-7",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "APPLE_SERVICES_SETTINGS_UPDATED",
+        "eventDataPropertyKey": "eventDataAppleServicesSettingsUpdated",
+        "eventDataAppleServicesSettingsUpdated": {
+          "settingsEnabled": [
+            "ICLOUD"
+          ],
+          "settingsDisabled": [
+            "FACETIME"
+          ]
+        }
+      }
+    },
+    {
+      "id": "identity-event-8",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "ROLE_CREATED",
+        "eventDataPropertyKey": "eventDataRoleCreated",
+        "eventDataRoleCreated": {
+          "privileges": [
+            "VIEW_DEVICES"
+          ]
+        }
+      }
+    },
+    {
+      "id": "identity-event-9",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "ROLE_UPDATED",
+        "eventDataPropertyKey": "eventDataRoleUpdated",
+        "eventDataRoleUpdated": {
+          "privilegesAdded": [
+            "VIEW_AUDIT_EVENTS"
+          ],
+          "privilegesRemoved": [
+            "MANAGE_DEVICES"
+          ]
+        }
+      }
+    },
+    {
+      "id": "identity-event-10",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "TERMS_ACCEPTED",
+        "eventDataPropertyKey": "eventDataTermsAccepted",
+        "eventDataTermsAccepted": {
+          "termsName": "Example Terms"
+        }
+      }
+    },
+    {
+      "id": "identity-event-11",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "IDP_CREATED",
+        "eventDataPropertyKey": "eventDataIdpCreated",
+        "eventDataIdpCreated": {
+          "vendorName": "MICROSOFT_OIDC",
+          "protocol": "OIDC"
+        }
+      }
+    },
+    {
+      "id": "identity-event-12",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "IDP_UPDATED",
+        "eventDataPropertyKey": "eventDataIdpUpdated",
+        "eventDataIdpUpdated": {
+          "vendorName": "GOOGLE"
+        }
+      }
+    },
+    {
+      "id": "identity-event-13",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "IDP_DELETED",
+        "eventDataPropertyKey": "eventDataIdpDeleted",
+        "eventDataIdpDeleted": {
+          "vendorName": "GENERIC_IDP"
+        }
+      }
+    },
+    {
+      "id": "identity-event-14",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "IDP_ACCOUNT_SYNC_ENABLED",
+        "eventDataPropertyKey": "eventDataIdpAccountSyncEnabled",
+        "eventDataIdpAccountSyncEnabled": {
+          "vendorName": "MICROSOFT",
+          "activityId": "sync-enable-1"
+        }
+      }
+    },
+    {
+      "id": "identity-event-15",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "IDP_ACCOUNT_SYNC_DISABLED",
+        "eventDataPropertyKey": "eventDataIdpAccountSyncDisabled",
+        "eventDataIdpAccountSyncDisabled": {
+          "vendorName": "MICROSOFT",
+          "activityId": "sync-disable-1"
+        }
+      }
+    },
+    {
+      "id": "identity-event-16",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "DOMAIN_FEDERATION_ENABLED",
+        "eventDataPropertyKey": "eventDataDomainFederationEnabled",
+        "eventDataDomainFederationEnabled": {
+          "activityId": "federation-enable-1",
+          "scimActivityId": "scim-1"
+        }
+      }
+    },
+    {
+      "id": "identity-event-17",
+      "type": "auditEvents",
+      "attributes": {
+        "type": "DOMAIN_FEDERATION_DISABLED",
+        "eventDataPropertyKey": "eventDataDomainFederationDisabled",
+        "eventDataDomainFederationDisabled": {
+          "activityId": "federation-disable-1"
+        }
+      }
+    }
+  ]
+}

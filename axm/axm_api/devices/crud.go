@@ -25,6 +25,26 @@ func NewService(c client.Client) *Devices {
 	return &Devices{client: c}
 }
 
+// GetActivationLockStatusByDeviceIDV1 retrieves a device's Activation Lock status.
+// URL: GET https://api-business.apple.com/v1/orgDevices/{id}/activationLockStatus
+// https://developer.apple.com/documentation/applebusinessapi/get-the-activation-lock-status-information-for-an-orgdevice
+func (s *Devices) GetActivationLockStatusByDeviceIDV1(ctx context.Context, deviceID string) (*ActivationLockStatusResponse, *resty.Response, error) {
+	if deviceID == "" {
+		return nil, nil, fmt.Errorf("device ID is required")
+	}
+
+	var result ActivationLockStatusResponse
+	resp, err := s.client.NewRequest(ctx).
+		SetHeader("Accept", constants.ApplicationJSON).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetResult(&result).
+		Get(constants.EndpointOrgDevices + "/" + deviceID + "/activationLockStatus")
+	if err != nil {
+		return nil, resp, err
+	}
+	return &result, resp, nil
+}
+
 // GetV1 retrieves a list of devices in an organization that enroll using Automated Device Enrollment.
 // URL: GET https://api-business.apple.com/v1/orgDevices
 // https://developer.apple.com/documentation/applebusinessmanagerapi/get-org-devices

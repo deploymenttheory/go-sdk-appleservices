@@ -2,6 +2,27 @@ package devices
 
 import "time"
 
+// ActivationLockStatusResponse contains the Activation Lock status of a device.
+type ActivationLockStatusResponse struct {
+	Data  ActivationLockStatus `json:"data"`
+	Links *Links               `json:"links,omitempty"`
+}
+
+// ActivationLockStatus is an activationLockStatus resource.
+type ActivationLockStatus struct {
+	ID         string                          `json:"id"`
+	Type       string                          `json:"type"`
+	Attributes *ActivationLockStatusAttributes `json:"attributes,omitempty"`
+}
+
+// ActivationLockStatusAttributes describes whether and how a device is locked.
+type ActivationLockStatusAttributes struct {
+	// IsLocked is nil when Apple omits the value, and points to false for an unlocked device.
+	IsLocked *bool `json:"isLocked,omitempty"`
+	// LockType is one of the ActivationLockType* constants when supplied by Apple.
+	LockType string `json:"lockType,omitempty"`
+}
+
 // Shared types for pagination and links
 type Meta struct {
 	Paging *Paging `json:"paging,omitempty"`

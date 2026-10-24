@@ -17,7 +17,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Features
 
+* **axm:** add device Activation Lock status reads, including optional lock-state decoding and all documented lock types.
+* **axm:** support all 17 identity audit events added in Apple Business API 2.6 with typed payloads, event and field constants, and identity provider vendor/protocol constants.
+
 * **notary:** add S3 upload and end-to-end `SubmitAndWait` workflow. The notary service can now notarize a file from hash to verdict in one call: it submits the software, uploads it to the S3 bucket Apple hands out (AWS Signature Version 4, standard-library only, no AWS SDK dependency), polls for the verdict, and fetches and parses the developer log on a rejection. A new `notary/upload` package holds the stand-alone SigV4 uploader, and `examples/notary/` shows the flow.
+
+### Bug Fixes
+
+* **axm:** reject cancelled or expired requests before execution and before fetching another page, avoiding nondeterministic success with immediate HTTP responders.
+
 
 ## [0.9.0](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.8.1...v0.9.0) (2026-08-30)
 
