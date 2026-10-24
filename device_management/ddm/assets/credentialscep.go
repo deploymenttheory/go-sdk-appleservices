@@ -9,7 +9,8 @@ package assets
 type CredentialScep struct {
 	// The external reference. Ensure that the asset data:
 	Reference CredentialScepReference `plist:"Reference" json:"Reference"`
-	// The server authentication details.
+	// The server authentication details. If this key is absent, the default authentication type is
+	// MDM.
 	Authentication *CredentialScepAuthentication `plist:"Authentication,omitempty" json:"Authentication,omitempty"`
 	// The keychain accessibility that determines when the keychain item is available for use, which
 	// has these allowed values:
@@ -37,7 +38,8 @@ type CredentialScepReference struct {
 }
 
 // CredentialScepAuthentication is the Authentication dictionary.
-// The server authentication details.
+// The server authentication details. If this key is absent, the default authentication type is
+// MDM.
 type CredentialScepAuthentication struct {
 	// The type of authentication, which has these allowed values:
 	Type CredentialScepAuthenticationType `plist:"Type" json:"Type"`

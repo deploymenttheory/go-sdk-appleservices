@@ -6,7 +6,6 @@
   "payload": {
     "declarationtype": "com.apple.configuration.account.subscribed-calendar",
     "apply": "multiple",
-    "content": "A subscribed calendar configuration defines a subscribed calendar for a user.",
     "supportedOS": {
       "iOS": {
         "introduced": "15.0"
@@ -28,7 +27,7 @@
   "payloadkeys": [
     {
       "key": "VisibleName",
-      "title": "Account Name",
+      "title": "Account name",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The name that apps show to the user for this calendar account. If not present, the system generates a suitable default."
@@ -42,7 +41,7 @@
     },
     {
       "key": "AuthenticationCredentialsAssetReference",
-      "title": "Authentication Credentials Asset Reference",
+      "title": "Authentication credentials asset reference",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The identifier of an asset declaration that contains the credentials for this account to authenticate with a calendar server. Set the corresponding asset type to `CredentialUserNameAndPassword`.",

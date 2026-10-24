@@ -1,0 +1,47 @@
+{
+  "category": "declarative/status",
+  "name": "enhanced-logging.status",
+  "title": "Status Enhanced Logging Status",
+  "description": "The status item that reports the device's enhanced log collection session status.",
+  "payload": {
+    "statusitemtype": "enhanced-logging.status",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "27.0"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "enhanced-logging.status",
+      "title": "Status item value.",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "none",
+        "waiting-for-consent",
+        "collecting",
+        "follow-up-question",
+        "upload-consent",
+        "uploading",
+        "finished",
+        "failed",
+        "cancelled",
+        "declined"
+      ],
+      "content": "The enhanced log collection session status, which has the following values:\n\n- `none`: The device has never run an enhanced log collection session.\n- `waiting-for-consent`: The device is waiting for the user to consent to the enhanced log collection.\n- `collecting`: The enhanced log collection is in progress.\n- `follow-up-question`: The device is waiting for follow-up response from the user.\n- `upload-consent`: The device is waiting for the user to approve upload of the enhanced logs.\n- `uploading`: The device is uploading the enhanced logs.\n- `finished`: The device completed the enhanced log collection session.\n- `failed`: The device failed to complete the enhanced log collection session.\n- `cancelled` - The device management service cancelled the enhanced log collection session.\n- `declined` - The user declined the enhanced log collection session."
+    }
+  ]
+}

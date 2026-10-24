@@ -39,7 +39,7 @@
         {
           "key": "HardwareEncryptionCaps",
           "type": "\u003cinteger\u003e",
-          "content": "An integer that indicates the underlying hardware encryption capabilities of the device, which is one of the following values:\n\n- `1`: Block-level encryption\n- `2`: File-level encryption\n- `3`: Both block-level and file-level encryption\n\n\u003e Important:\n\u003e For a device to have data protection, `HardwareEncryptionCaps` must be `3` and `PasscodePresent` must `true`.\n\nThis value is available in iOS 4 and later, and tvOS 6 and later.",
+          "content": "An integer that indicates the underlying hardware encryption capabilities of the device, which is one of the following values:\n\n- `1`: Block-level encryption\n- `2`: File-level encryption\n- `3`: Both block-level and file-level encryption\n\n\u003e Important:\n\u003e For a device to have data protection, `HardwareEncryptionCaps` must be `3` and `PasscodePresent` must `true`.",
           "supportedOS": {
             "macOS": {
               "introduced": "n/a"
@@ -49,7 +49,7 @@
         {
           "key": "PasscodePresent",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device has a passcode. This key doesn't apply to User-Enrolled devices. This value is available in iOS 4 and later, and tvOS 6 and later.",
+          "content": "If `true`, the device has a passcode. This key doesn't apply to User-Enrolled devices.",
           "supportedOS": {
             "iOS": {},
             "macOS": {
@@ -61,7 +61,7 @@
         {
           "key": "PasscodeCompliant",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the user's passcode is compliant with all requirements on the device, including Exchange and other accounts. This value is available in iOS 4 and later, and tvOS 6 and later.",
+          "content": "If `true`, the user's passcode is compliant with all requirements on the device, including Exchange and other accounts.",
           "supportedOS": {
             "macOS": {
               "introduced": "n/a"
@@ -71,7 +71,7 @@
         {
           "key": "PasscodeCompliantWithProfiles",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the user's passcode is compliant with requirements from profiles. This key doesn't apply to User-Enrolled devices. This value is available in iOS 4 and later, and tvOS 6 and later.",
+          "content": "If `true`, the user's passcode is compliant with requirements from profiles. This key doesn't apply to User-Enrolled devices.",
           "supportedOS": {
             "iOS": {},
             "macOS": {
@@ -133,7 +133,7 @@
         {
           "key": "FDE_Enabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the device has enabled FileVault full disk encryption (FDE). This value is available in macOS 10.9 and later.",
+          "content": "If `true`, the device has enabled FileVault full disk encryption (FDE).",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -155,7 +155,7 @@
         {
           "key": "FDE_HasPersonalRecoveryKey",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, FileVault FDE has a personal recovery key. This value is available in macOS 10.9 and later.",
+          "content": "If `true`, FileVault FDE has a personal recovery key.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -177,7 +177,7 @@
         {
           "key": "FDE_HasInstitutionalRecoveryKey",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, FileVault FDE has an institutional recovery key. This value is available in macOS 10.9 and later.",
+          "content": "If `true`, FileVault FDE has an institutional recovery key.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -199,7 +199,7 @@
         {
           "key": "FDE_PersonalRecoveryKeyCMS",
           "type": "\u003cdata\u003e",
-          "content": "If the FileVault personal recovery key has enabled escrow with a recovery key, this value contains the key. The certificate from the `FDERecoveryKeyEscrow` profile encrypts the key and wraps it as CMS data. This value is available in macOS 10.13 and later.",
+          "content": "If the FileVault personal recovery key has enabled escrow with a recovery key, this value contains the key. The certificate from the `FDERecoveryKeyEscrow` profile encrypts the key and wraps it as CMS data.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -221,7 +221,7 @@
         {
           "key": "FDE_PersonalRecoveryKeyDeviceKey",
           "type": "\u003cstring\u003e",
-          "content": "If the FileVault personal recovery key has enabled escrow with a recovery key, this value is the device serial number. This is the value that displays to the user at the EFI Login Window as part of the help message if they enter their password incorrectly three times. The server also uses this value as an index when saving the device personal recovery key. This replaces the `recordNumber` that the server returned in the previous escrow mechanism. This value is available in macOS 10.13 and later.",
+          "content": "If the FileVault personal recovery key has enabled escrow with a recovery key, this value is the device serial number. This is the value that displays to the user at the EFI Login Window as part of the help message if they enter their password incorrectly three times. The server also uses this value as an index when saving the device personal recovery key. This replaces the `recordNumber` that the server returned in the previous escrow mechanism.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -243,7 +243,7 @@
         {
           "key": "SystemIntegrityProtectionEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, System Integrity Protection (SIP) is active on the device. This value is available in macOS 10.12 and later.",
+          "content": "If `true`, System Integrity Protection (SIP) is active on the device.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -265,7 +265,7 @@
         {
           "key": "FirewallSettings",
           "type": "\u003cdictionary\u003e",
-          "content": "A dictionary that contains the firewall settings. This value is available in macOS 10.12 and later.",
+          "content": "A dictionary that contains the firewall settings.",
           "subkeys": [
             {
               "key": "FirewallEnabled",
@@ -363,7 +363,7 @@
         {
           "key": "FirmwarePasswordStatus",
           "type": "\u003cdictionary\u003e",
-          "content": "A dictionary that contains the status of the EFI firmware password. This value is available in macOS 10.13 and later.",
+          "content": "A dictionary that contains the status of the EFI firmware password.",
           "subkeys": [
             {
               "key": "PasswordExists",
@@ -407,7 +407,7 @@
             {
               "key": "EnrolledViaDEP",
               "type": "\u003cboolean\u003e",
-              "content": "If `true`, the device enrolled in MDM through the Device Enrollment Program (DEP). This value is available in macOS 10.13.2 and later.",
+              "content": "If `true`, the device enrolled in MDM through Automated Device Enrollment (ADE).",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -426,7 +426,7 @@
             {
               "key": "UserApprovedEnrollment",
               "type": "\u003cboolean\u003e",
-              "content": "If `true`, the enrollment was user-approved. If `false`, the device may reject certain security-sensitive payloads or commands. This value is available in macOS 10.13.2 and later.",
+              "content": "If `true`, the enrollment was user-approved. If `false`, the device may reject certain security-sensitive payloads or commands.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -445,7 +445,7 @@
             {
               "key": "IsUserEnrollment",
               "type": "\u003cboolean\u003e",
-              "content": "If `true`, the device is user-enrolled. This value is available in iOS 13 and later, and macOS 10.15 and later.",
+              "content": "If `true`, the device is user-enrolled.",
               "supportedOS": {
                 "macOS": {
                   "introduced": "10.15"
@@ -455,7 +455,7 @@
             {
               "key": "IsActivationLockManageable",
               "type": "\u003cboolean\u003e",
-              "content": "If `true`, the type of enrollment allows the MDM to manage Activation Lock for this device. This value is available in macOS 10.15 and later.",
+              "content": "If `true`, the type of enrollment allows the MDM to manage Activation Lock for this device.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "n/a"
@@ -490,7 +490,7 @@
         {
           "key": "SecureBoot",
           "type": "\u003cdictionary\u003e",
-          "content": "A dictionary that contains the device's Secure Boot settings. This value is available in macOS 10.15 and later.",
+          "content": "A dictionary that contains the device's Secure Boot settings.",
           "subkeys": [
             {
               "key": "SecureBootLevel",
@@ -516,7 +516,7 @@
             {
               "key": "ReducedSecurity",
               "type": "\u003carray\u003e",
-              "content": "Reports which security features the user disables in `recoveryOS`. This property is only present for a Mac with Apple silicon when `SecureBootLevel` is `medium`.\n\nAvailable in iOS 11 and later.",
+              "content": "Reports which security features the user disables in `recoveryOS`. This property is only present for a Mac with Apple silicon when `SecureBootLevel` is `medium`.",
               "subkeys": [
                 {
                   "key": "ReducedSecurityItems",
@@ -568,7 +568,7 @@
         {
           "key": "RemoteDesktopEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, Remote Desktop is active on the device. This value is available in macOS 10.14.4 and later.",
+          "content": "If `true`, Remote Desktop is active on the device.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -590,7 +590,7 @@
         {
           "key": "AuthenticatedRootVolumeEnabled",
           "type": "\u003cboolean\u003e",
-          "content": "If `true`, the system booted using an Authenticated Root Volume. This value is available in macOS 11 and later.",
+          "content": "If `true`, the system booted using an Authenticated Root Volume.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"
@@ -617,7 +617,7 @@
             "disallowed",
             "not supported"
           ],
-          "content": "This value specifies whether the Secure Enclave Processor (SEP) supports and allows secure operations to use the Bootstrap Token. The value is automatically set for devices enrolled through the Device Enrollment Program (DEP). The user can also manually set this value in the RecoveryOS.\n\nThis value is available for a Mac with Apple silicon in macOS 11 and later. Not available for user enrollment.",
+          "content": "This value specifies whether the Secure Enclave Processor (SEP) supports and allows secure operations to use the Bootstrap Token. The device automatically sets this value if enrolled through Automated Device Enrollment (ADE). The user can also manually set this value in the RecoveryOS.\n\nThis value is available for a Mac with Apple silicon in macOS 11 and later. Not available for user enrollment.",
           "supportedOS": {
             "iOS": {
               "introduced": "n/a"

@@ -325,16 +325,13 @@
     },
     {
       "key": "FilterDataProviderDesignatedRequirement",
-      "title": "Filter Data Provider Designated Requirement",
+      "title": "Filter data provider designated requirement",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The designated requirement string that the system embeds in the code signature of the filter data provider system extension. This string identifies the filter data provider when the filter starts running. Required if `FilterSockets` is `true`.",
       "supportedOS": {
         "iOS": {
           "introduced": "n/a"
-        },
-        "macOS": {
-          "introduced": "10.15"
         },
         "visionOS": {
           "introduced": "n/a"
@@ -343,25 +340,14 @@
     },
     {
       "key": "FilterDataProviderBundleIdentifier",
-      "title": "Filter Data Provider Bundle Identifier",
+      "title": "Filter data provider bundle identifier",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The bundle identifier string of the filter data provider system extension. This string identifies the filter data provider when the filter starts running. Required if `FilterSockets` is `true`.",
-      "supportedOS": {
-        "iOS": {
-          "introduced": "n/a"
-        },
-        "macOS": {
-          "introduced": "10.15"
-        },
-        "visionOS": {
-          "introduced": "n/a"
-        }
-      }
+      "content": "The bundle identifier string of the filter data provider system extension. This string identifies the filter data provider when the filter starts running. Required if `FilterSockets` is `true`."
     },
     {
       "key": "FilterPackets",
-      "title": "Filter Network Packets",
+      "title": "Filter network packets",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
@@ -380,7 +366,7 @@
     },
     {
       "key": "FilterPacketProviderDesignatedRequirement",
-      "title": "Filter Packet Provider Designated Requirement",
+      "title": "Filter packet provider designated requirement",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The designated requirement string that the system embeds in the code signature of the filter packet provider system extension. This string identifies the filter packet provider when the filter starts running. Required if `FilterPackets` is `true`.",
@@ -398,7 +384,7 @@
     },
     {
       "key": "FilterPacketProviderBundleIdentifier",
-      "title": "Filter Packet Provider Bundle Identifier",
+      "title": "Filter packet provider bundle identifier",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The bundle identifier string of the filter packet provider system extension. This string identifies the filter packet provider when the filter starts running. Required if `FilterPackets` is `true`.",
@@ -416,7 +402,7 @@
     },
     {
       "key": "FilterGrade",
-      "title": "Filter Grade",
+      "title": "Filter grade",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "rangelist": [
@@ -439,7 +425,7 @@
     },
     {
       "key": "ContentFilterUUID",
-      "title": "Content Filter UUID",
+      "title": "Content filter UUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "A globally unique identifier for this content filter configuration. The content filter processes network traffic for managed apps with the same `ContentFilterUUID` in their app attributes. Use when `FilterType` is `Plugin`.This key must be present for unsupervised devices and user enrollment.",
@@ -458,7 +444,7 @@
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
-      "content": "If `true`, the system filters URL requests. Use when `FilterType` is `Plugin`. Available in iOS 26 and macOS 26, and later.",
+      "content": "If `true`, the system filters URL requests. Use when `FilterType` is `Plugin`.",
       "supportedOS": {
         "iOS": {
           "introduced": "26.0"
@@ -475,39 +461,39 @@
       "key": "URLFilterParameters",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
-      "content": "A dictionary containing URL filter parameters. Required when `FilterURLs` is `true`. Available in iOS 26 and macOS 26 and later.",
+      "content": "A dictionary containing URL filter parameters. Required when `FilterURLs` is `true`.",
       "subkeys": [
         {
           "key": "URLFilterControlProviderDesignatedRequirement",
-          "title": "URL Filter Control Provider Designated Requirement",
+          "title": "URL filter control provider designated requirement",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "content": "The designated requirement string in the code signature of the URL filter control provider app extension. The system uses this string to identify the URL filter control provider when the filter starts running. Required in macOS."
         },
         {
           "key": "URLFilterControlProviderBundleIdentifier",
-          "title": "URL Filter Control Provider Bundle Identifier",
+          "title": "URL filter control provider bundle identifier",
           "type": "\u003cstring\u003e",
           "presence": "required",
           "content": "The bundle identifier string of the URL filter control provider app extension. The system uses this string to identify the URL filter control provider when the filter starts running."
         },
         {
           "key": "PIRServerURL",
-          "title": "Private Information Retrieval server URL",
+          "title": "Private information retrieval server URL",
           "type": "\u003cstring\u003e",
           "presence": "required",
           "content": "The URL containing the domain name of the private information retrieval server."
         },
         {
           "key": "PIRPrivacyPassIssuerURL",
-          "title": "Privacy Pass Issuer URL",
+          "title": "Privacy pass issuer URL",
           "type": "\u003cstring\u003e",
           "presence": "required",
           "content": "The URL containing the domain name of Privacy Pass Issuer."
         },
         {
           "key": "PIRAuthenticationToken",
-          "title": "Authentication Token",
+          "title": "Authentication token",
           "type": "\u003cstring\u003e",
           "presence": "required",
           "content": "The per-user authentication token string, which is an HTTP bearer token for the person using your app. The system uses this token to attest that it is a valid user when requesting anonymous authentication tokens for PIR exchanges."

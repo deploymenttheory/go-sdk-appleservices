@@ -19,18 +19,15 @@ type AccountConfiguration struct {
 	SetPrimarySetupAccountAsRegularUser *bool `plist:"SetPrimarySetupAccountAsRegularUser,omitempty" json:"SetPrimarySetupAccountAsRegularUser,omitempty"`
 	// The full name for the primary account. If present, Setup Assistant uses this value to prefill
 	// the Full Name field. However, Setup Assistant ignores this value if
-	// `DontAutoPopulatePrimaryAccountInfo` is `true`. This value is available in macOS 10.15 and
-	// later.
+	// `DontAutoPopulatePrimaryAccountInfo` is `true`.
 	PrimaryAccountFullName *string `plist:"PrimaryAccountFullName,omitempty" json:"PrimaryAccountFullName,omitempty"`
 	// The account name for the primary account. If present, Setup Assistant uses this value to prefill
 	// the User Name field. However, Setup Assistant ignores this value if
-	// `DontAutoPopulatePrimaryAccountInfo` is `true`. This value is available in macOS 10.15 and
-	// later.
+	// `DontAutoPopulatePrimaryAccountInfo` is `true`.
 	PrimaryAccountUserName *string `plist:"PrimaryAccountUserName,omitempty" json:"PrimaryAccountUserName,omitempty"`
 	// If `true`, Setup Assistant ignores the primary account information and requires the user to
 	// enter that information. If `false`, Setup Assistant prefills the Full Name field with
-	// `PrimaryAccountFullName` and the User Name field with `PrimaryAccountUserName`. This value is
-	// available in macOS 10.15 and later.
+	// `PrimaryAccountFullName` and the User Name field with `PrimaryAccountUserName`.
 	//
 	// Default: false.
 	DontAutoPopulatePrimaryAccountInfo *bool `plist:"DontAutoPopulatePrimaryAccountInfo,omitempty" json:"DontAutoPopulatePrimaryAccountInfo,omitempty"`
@@ -45,8 +42,7 @@ type AccountConfiguration struct {
 	AutoSetupAdminAccounts []AccountConfigurationAutoSetupAdminAccountItem `plist:"AutoSetupAdminAccounts,omitempty" json:"AutoSetupAdminAccounts,omitempty"`
 	// If present, this is the short name of the local account to manage, which can also be the account
 	// that results from setting `AutoSetupAdminAccounts` to `true`. Otherwise, only the local account
-	// that Setup Assistant creates is a managed account. This value is available in macOS 11 and
-	// later.
+	// that Setup Assistant creates is a managed account.
 	ManagedLocalUserShortName *string `plist:"ManagedLocalUserShortName,omitempty" json:"ManagedLocalUserShortName,omitempty"`
 }
 
@@ -58,7 +54,7 @@ type AccountConfigurationAutoSetupAdminAccountItem struct {
 	ShortName string `plist:"shortName" json:"shortName"`
 	// The full name of the user, which defaults to `shortName` if not specified.
 	FullName *string `plist:"fullName,omitempty" json:"fullName,omitempty"`
-	// Data that contains the pre-created salted PBKDF2 SHA512 password hash for the account.
+	// Data that contains the pre-created salted PBKDF2 SHA512 `PasswordHash` for the account.
 	PasswordHash []byte `plist:"passwordHash,omitempty" json:"passwordHash,omitempty"`
 	// If `true`, this sets the account attribute to make the account hidden in the Login Window and
 	// Users & Groups.

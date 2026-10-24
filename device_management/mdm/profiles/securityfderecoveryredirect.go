@@ -7,11 +7,11 @@ package profiles
 //
 // Supported: macOS 10.9+.
 type SecurityFDERecoveryRedirect struct {
-	// The URL to which FDE recovery keys should be sent instead of to Apple. The URL must begin with
+	// The URL to which the device sends FDE recovery keys instead of to Apple. The URL must begin with
 	// https://.
 	RedirectURL string `plist:"RedirectURL" json:"RedirectURL"`
 	// The UUID of a payload within the same profile that contains a certificate used to encrypt the
-	// recovery key when it's sent to the redirected URL. The referenced payload must be of type
-	// \`com.apple.security.pkcs1\`.
+	// recovery key when the device sends it to the redirected URL. The referenced payload must be of
+	// type `com.apple.security.pkcs1`.
 	EncryptCertPayloadUUID string `plist:"EncryptCertPayloadUUID" json:"EncryptCertPayloadUUID"`
 }

@@ -27,10 +27,10 @@
   "payloadkeys": [
     {
       "key": "ManagedExtensions",
-      "title": "Managed Extensions",
+      "title": "Managed extensions",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
-      "content": "The dictionary of managed extensions settings. Each key in the dictionary represents a composed identifier for a specific managed extension, or you can specify a single \"*\" character to match any extension. The dictionary values represent the settings that Safari applies to each extension that matches the key. In order for the extension to be managed, its host app needs to be present on the device.\n\nThe composed identifier of a managed extension uses the format \"Identifier (TeamIdentifier)\", for example \"com.example.app (ABCD1234)\". Use `codesign -dv \u003cpath_to_appex\u003e` to show the information you need to generate this string on macOS, using the path to the extension bundle located in the \"PlugIns\" folder inside the app bundle. For other platforms, request this information from the app developer.",
+      "content": "The dictionary of managed extensions settings. Each key in the dictionary represents a composed identifier for a specific managed extension, or you can specify a single \"\\*\" character to match any extension. The dictionary values represent the settings that Safari applies to each extension that matches the key. In order for the extension to be managed, its host app needs to be present on the device.\n\nThe composed identifier of a managed extension uses the format \"Identifier (TeamIdentifier)\", for example \"com.example.app (ABCD1234)\". Use `codesign -dv \u003cpath_to_appex\u003e` to show the information you need to generate this string on macOS, using the path to the extension bundle located in the \"PlugIns\" folder inside the app bundle. For other platforms, request this information from the app developer.",
       "subkeys": [
         {
           "key": "ANY",
@@ -50,11 +50,11 @@
                 "AlwaysOff"
               ],
               "combinetype": "enum-last",
-              "content": "Controls whether an extension is allowed.\n* `Allowed` - The user is allowed to turn the extension on or off.\n* `AlwaysOn` - The extension will always be on.\n* `AlwaysOff` - The extension will always be off."
+              "content": "Controls whether an extension is allowed. The device uses this key when the extension identifier is a composed identifier or a single \"\\*\" character.\n* `Allowed` - The user is allowed to turn the extension on or off.\n* `AlwaysOn` - The extension will always be on.\n* `AlwaysOff` - The extension will always be off."
             },
             {
               "key": "PrivateBrowsing",
-              "title": "Private Browsing state",
+              "title": "Private browsing state",
               "type": "\u003cstring\u003e",
               "presence": "optional",
               "rangelist": [
@@ -63,7 +63,7 @@
                 "AlwaysOff"
               ],
               "combinetype": "enum-last",
-              "content": "Controls whether an extension is allowed in Private Browsing.\n* `Allowed` - The user is allowed to turn the extension on or off in Private Browsing.\n* `AlwaysOn` - The extension will always be on in Private Browsing if the extension is on outside of Private Browsing.\n* `AlwaysOff` - The extension will never be on in Private Browsing."
+              "content": "Controls whether an extension is allowed in Private Browsing. The device uses this key when the extension identifier is a composed identifier or a single \"\\*\" character.\n* `Allowed` - The user is allowed to turn the extension on or off in Private Browsing.\n* `AlwaysOn` - The extension will always be on in Private Browsing if the extension is on outside of Private Browsing.\n* `AlwaysOff` - The extension will never be on in Private Browsing."
             },
             {
               "key": "AllowedDomains",
@@ -71,7 +71,7 @@
               "type": "\u003carray\u003e",
               "presence": "optional",
               "combinetype": "set-union",
-              "content": "Controls the domains and sub-domains the extension is granted access to.",
+              "content": "Controls the domains and sub-domains the extension can access. The device ignores this key when the extension identifier is a single \"*\" character.",
               "subkeys": [
                 {
                   "key": "Domain",
@@ -87,7 +87,7 @@
               "type": "\u003carray\u003e",
               "presence": "optional",
               "combinetype": "set-union",
-              "content": "Controls the domains and sub-domains the extension isn't allowed to access.",
+              "content": "Controls the domains and sub-domains the extension isn't allowed to access. The device uses this key when the extension identifier is a composed identifier or a single \"*\" character.",
               "subkeys": [
                 {
                   "key": "Domain",

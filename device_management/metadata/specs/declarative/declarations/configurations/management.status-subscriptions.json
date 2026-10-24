@@ -27,7 +27,7 @@
   "payloadkeys": [
     {
       "key": "StatusItems",
-      "title": "Status Items",
+      "title": "Status items",
       "type": "\u003carray\u003e",
       "presence": "required",
       "combinetype": "set-union",
@@ -35,11 +35,13 @@
       "subkeys": [
         {
           "key": "StatusItem",
+          "title": "Status item",
           "type": "\u003cdictionary\u003e",
           "content": "The declaration for configuring a specific status subscription.",
           "subkeys": [
             {
               "key": "Name",
+              "title": "Name",
               "type": "\u003cstring\u003e",
               "presence": "required",
               "content": "The name of the status item to send to subscribers."

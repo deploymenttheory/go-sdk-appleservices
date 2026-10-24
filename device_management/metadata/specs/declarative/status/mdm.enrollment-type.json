@@ -1,0 +1,41 @@
+{
+  "category": "declarative/status",
+  "name": "mdm.enrollment-type",
+  "title": "Status MDM Enrollment Type",
+  "description": "The status item that reports the device's management enrollment type.",
+  "payload": {
+    "statusitemtype": "mdm.enrollment-type",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.0"
+      },
+      "macOS": {
+        "introduced": "27.0"
+      },
+      "tvOS": {
+        "introduced": "27.0"
+      },
+      "visionOS": {
+        "introduced": "27.0"
+      },
+      "watchOS": {
+        "introduced": "27.0"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "mdm.enrollment-type",
+      "title": "Status item value.",
+      "type": "\u003cstring\u003e",
+      "presence": "required",
+      "rangelist": [
+        "none",
+        "supervised",
+        "device",
+        "user"
+      ],
+      "content": "The device management enrollment type that indicates how the device is enrolled, which has the following possible values:\n\n- `none`: Device isn't enrolled\n- `supervised`: Device is supervised\n- `device`: Device enrollment\n- `user`: User enrollment"
+    }
+  ]
+}

@@ -6,7 +6,6 @@
   "payload": {
     "declarationtype": "com.apple.configuration.siri.settings",
     "apply": "combined",
-    "content": "Configures Siri settings.",
     "supportedOS": {
       "iOS": {
         "introduced": "26.4"
@@ -15,7 +14,7 @@
         "introduced": "26.4"
       },
       "tvOS": {
-        "introduced": "n/a"
+        "introduced": "27.0"
       },
       "visionOS": {
         "introduced": "26.4"
@@ -41,8 +40,34 @@
       }
     },
     {
+      "key": "AllowSiriAI",
+      "title": "Allow Siri AI",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": true,
+      "combinetype": "boolean-and",
+      "content": "If `false`, disables the Siri AI specific features of Siri.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "27.0"
+        },
+        "macOS": {
+          "introduced": "27.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "27.0"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
       "key": "AllowUserGeneratedContent",
-      "title": "Allow User Generated Content",
+      "title": "Allow user generated content",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -52,6 +77,9 @@
         "macOS": {
           "introduced": "n/a"
         },
+        "tvOS": {
+          "introduced": "n/a"
+        },
         "visionOS": {
           "introduced": "n/a"
         }
@@ -59,7 +87,7 @@
     },
     {
       "key": "AllowWhileLocked",
-      "title": "Allow While Locked",
+      "title": "Allow while locked",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": true,
@@ -69,6 +97,9 @@
         "macOS": {
           "introduced": "n/a"
         },
+        "tvOS": {
+          "introduced": "n/a"
+        },
         "visionOS": {
           "introduced": "n/a"
         }
@@ -76,15 +107,44 @@
     },
     {
       "key": "ForceProfanityFilter",
-      "title": "Force Profanity Filter",
+      "title": "Force profanity filter",
       "type": "\u003cboolean\u003e",
       "presence": "optional",
       "default": false,
       "combinetype": "boolean-or",
       "content": "If `true`, forces Siri profanity filter.",
       "supportedOS": {
+        "tvOS": {
+          "introduced": "n/a"
+        },
         "visionOS": {
           "introduced": "n/a"
+        },
+        "watchOS": {
+          "introduced": "n/a"
+        }
+      }
+    },
+    {
+      "key": "ForceReduceSensitiveContent",
+      "title": "Force reduce sensitive content",
+      "type": "\u003cboolean\u003e",
+      "presence": "optional",
+      "default": false,
+      "combinetype": "boolean-or",
+      "content": "If `true`, forces Siri to reduce sensitive content.",
+      "supportedOS": {
+        "iOS": {
+          "introduced": "27.0"
+        },
+        "macOS": {
+          "introduced": "27.0"
+        },
+        "tvOS": {
+          "introduced": "n/a"
+        },
+        "visionOS": {
+          "introduced": "27.0"
         },
         "watchOS": {
           "introduced": "n/a"

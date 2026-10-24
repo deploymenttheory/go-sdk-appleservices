@@ -6,7 +6,6 @@
   "payload": {
     "declarationtype": "com.apple.configuration.account.ldap",
     "apply": "multiple",
-    "content": "An LDAP configuration defines an LDAP directory account for a user.",
     "supportedOS": {
       "iOS": {
         "introduced": "15.0"
@@ -28,28 +27,28 @@
   "payloadkeys": [
     {
       "key": "VisibleName",
-      "title": "Account Name",
+      "title": "Account name",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The name that apps show to the user for this LDAP account. If not present, the system generates a suitable default."
     },
     {
       "key": "HostName",
-      "title": "Server Host Name",
+      "title": "Server host name",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The hostname or IP address of the LDAP server."
     },
     {
       "key": "Port",
-      "title": "Server Port",
+      "title": "Server port",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "content": "The port number or IP address of the LDAP server."
     },
     {
       "key": "AuthenticationCredentialsAssetReference",
-      "title": "Authentication Credentials Asset Reference",
+      "title": "Authentication credentials asset reference",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The identifier of an asset declaration that contains the credentials for this account. Set the corresponding asset type to `CredentialUserNameAndPassword`.",
@@ -59,26 +58,26 @@
     },
     {
       "key": "SearchSettings",
-      "title": "Search Settings",
+      "title": "Search settings",
       "type": "\u003carray\u003e",
       "presence": "optional",
       "content": "The array of nodes to start LDAP searches from. There must be at least one node for this account to be useful. macOS only searches one node and ignores other items in the array.",
       "subkeys": [
         {
           "key": "SearchSettingsItem",
-          "title": "An LDAP Search Setting",
+          "title": "An LDAP search setting",
           "type": "\u003cdictionary\u003e",
           "subkeys": [
             {
               "key": "VisibleDescription",
-              "title": "Visible Description",
+              "title": "Visible description",
               "type": "\u003cstring\u003e",
               "presence": "optional",
               "content": "The description of this search setting in the Contacts and Settings apps. If not present, the apps display no name."
             },
             {
               "key": "SearchBase",
-              "title": "Search Base",
+              "title": "Search base",
               "type": "\u003cstring\u003e",
               "presence": "required",
               "content": "The path to the node where a search starts. For example, `ou=people,o=example corp`."

@@ -24,7 +24,6 @@ type CaldavAccount struct {
 	CalDAVUseSSL *bool `plist:"CalDAVUseSSL,omitempty" json:"CalDAVUseSSL,omitempty"`
 	// The server's port.
 	CalDAVPort *int64 `plist:"CalDAVPort,omitempty" json:"CalDAVPort,omitempty"`
-	// The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14
-	// and later.
+	// The VPNUUID of the per-app VPN the account uses for network communication.
 	VPNUUID *string `plist:"VPNUUID,omitempty" json:"VPNUUID,omitempty"`
 }

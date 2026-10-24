@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "softwareupdate.beta-enrollment",
   "title": "Status Software Update Beta Enrollment",
-  "description": "A status report of the device's enrolled beta program.",
+  "description": "The status item that reports the device's enrolled beta program.",
   "payload": {
     "statusitemtype": "softwareupdate.beta-enrollment",
     "supportedOS": {

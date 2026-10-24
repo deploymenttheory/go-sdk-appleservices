@@ -19,6 +19,8 @@ type MathSettingsCalculatorBasicMode struct {
 	// Add the square root button to the basic calculator by replacing the +/- button. Normally, the
 	// square root button is available in scientific mode, so this key can be used to make it available
 	// when the scientific mode is restricted.
+	//
+	// Default: false.
 	AddSquareRoot bool `plist:"AddSquareRoot" json:"AddSquareRoot"`
 }
 
@@ -27,6 +29,8 @@ type MathSettingsCalculatorBasicMode struct {
 // enabled.
 type MathSettingsCalculatorScientificMode struct {
 	// Controls whether the mode is enabled.
+	//
+	// Default: true.
 	Enabled bool `plist:"Enabled" json:"Enabled"`
 }
 
@@ -35,6 +39,8 @@ type MathSettingsCalculatorScientificMode struct {
 // enabled.
 type MathSettingsCalculatorProgrammerMode struct {
 	// Controls whether the mode is enabled.
+	//
+	// Default: true.
 	Enabled bool `plist:"Enabled" json:"Enabled"`
 }
 
@@ -43,6 +49,8 @@ type MathSettingsCalculatorProgrammerMode struct {
 // enabled.
 type MathSettingsCalculatorMathNotesMode struct {
 	// Controls whether the mode is enabled.
+	//
+	// Default: true.
 	Enabled bool `plist:"Enabled" json:"Enabled"`
 }
 
@@ -51,8 +59,12 @@ type MathSettingsCalculatorMathNotesMode struct {
 // enabled.
 type MathSettingsCalculatorInputModes struct {
 	// Configures whether unit conversions are enabled.
+	//
+	// Default: true.
 	UnitConversion bool `plist:"UnitConversion" json:"UnitConversion"`
 	// Configures whether RPN input is enabled.
+	//
+	// Default: true.
 	RPN bool `plist:"RPN" json:"RPN"`
 }
 
@@ -80,7 +92,11 @@ type MathSettingsCalculator struct {
 type MathSettingsSystemBehavior struct {
 	// Controls whether keyboard suggestions include math solutions. This key is also supported by the
 	// keyboard.settings configuration.
+	//
+	// Default: true.
 	KeyboardSuggestions bool `plist:"KeyboardSuggestions" json:"KeyboardSuggestions"`
 	// Controls whether Math Notes is allowed in other apps such as Notes.
+	//
+	// Default: true.
 	MathNotes bool `plist:"MathNotes" json:"MathNotes"`
 }

@@ -2,14 +2,14 @@
 
 package profiles
 
-// AssetCacheManaged — Content Caching.
+// AssetCacheManaged — Content Caching Service.
 // The payload that configures the Content Caching service.
 //
 // Supported: macOS 10.13.4+.
 type AssetCacheManaged struct {
 	// If true, the system purges content from the cache automatically when it needs disk space for
 	// other apps when free disk space runs low on the computer. Set to `false` to maximize
-	// effectiveness of Content Caching. Available in macOS 10.15 and later.
+	// effectiveness of Content Caching.
 	//
 	// Default: true.
 	AllowCacheDelete *bool `plist:"AllowCacheDelete,omitempty" json:"AllowCacheDelete,omitempty"`
@@ -52,16 +52,14 @@ type AssetCacheManaged struct {
 	// Default: false.
 	DenyTetheredCaching *bool `plist:"DenyTetheredCaching,omitempty" json:"DenyTetheredCaching,omitempty"`
 	// If `true`, Content Caching displays exceptional conditions (alerts) as system notifications in
-	// the upper corner of the screen. Alerts were automatically displayed starting in macOS 10.13. In
-	// macOS 10.15 the alerts are off by default, but still available through this setting. Available
-	// in macOS 10.15 and later.
+	// the upper corner of the screen. The device automatically displayed alerts starting in macOS
+	// 10.13. In macOS 10.15 the alerts are off by default, but still available through this setting.
 	//
 	// Default: false.
 	DisplayAlerts *bool `plist:"DisplayAlerts,omitempty" json:"DisplayAlerts,omitempty"`
 	// If `true`, the system prevents the computer from sleeping as long as Content Caching is on
 	// (System Preferences > Sharing > Content Caching is on). Customers who want Content Caching to be
-	// as available as much as possible should turn this setting on. Available in macOS 10.15 and
-	// later.
+	// as available as much as possible should turn this setting on.
 	//
 	// Default: false.
 	KeepAwake *bool `plist:"KeepAwake,omitempty" json:"KeepAwake,omitempty"`

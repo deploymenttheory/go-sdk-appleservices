@@ -25,8 +25,7 @@ type CarddavAccount struct {
 	CardDAVPort *int64 `plist:"CardDAVPort,omitempty" json:"CardDAVPort,omitempty"`
 	// An array of communication service rules for this account.
 	CommunicationServiceRules *CarddavAccountCommunicationServiceRules `plist:"CommunicationServiceRules,omitempty" json:"CommunicationServiceRules,omitempty"`
-	// The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14
-	// and later.
+	// The VPNUUID of the per-app VPN the account uses for network communication.
 	VPNUUID *string `plist:"VPNUUID,omitempty" json:"VPNUUID,omitempty"`
 }
 

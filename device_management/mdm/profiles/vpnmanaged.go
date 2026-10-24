@@ -34,7 +34,7 @@ type VpnManaged struct {
 	Proxies *VpnManagedProxies `plist:"Proxies,omitempty" json:"Proxies,omitempty"`
 	// The dictionary to use when `VPNType` is `AlwaysOn`. Not available in tvOS or watchOS.
 	AlwaysOn *VpnManagedAlwaysOn `plist:"AlwaysOn,omitempty" json:"AlwaysOn,omitempty"`
-	// The dictionary to use when `VPNType` is `TransparentProxy`. Available in macOS 14 and later.
+	// The dictionary to use when `VPNType` is `TransparentProxy`.
 	TransparentProxy *VpnManagedTransparentProxy `plist:"TransparentProxy,omitempty" json:"TransparentProxy,omitempty"`
 }
 
@@ -71,7 +71,7 @@ type VpnManagedVPNOnDemandRulesElementActionParameter struct {
 	RequiredDNSServers []string `plist:"RequiredDNSServers,omitempty" json:"RequiredDNSServers,omitempty"`
 	// An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be
 	// resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status
-	// code, a VPN connection is established in response.
+	// code, the device establishes a VPN connection in response.
 	RequiredURLStringProbe *string `plist:"RequiredURLStringProbe,omitempty" json:"RequiredURLStringProbe,omitempty"`
 }
 
@@ -119,8 +119,7 @@ type VpnManagedVPN struct {
 	PayloadCertificateUUID *string `plist:"PayloadCertificateUUID,omitempty" json:"PayloadCertificateUUID,omitempty"`
 	// The bundle identifier for the VPN provider. Not available in watchOS.
 	ProviderBundleIdentifier *string `plist:"ProviderBundleIdentifier,omitempty" json:"ProviderBundleIdentifier,omitempty"`
-	// If the VPN provider is implemented as a system extension, this field is required. Not available
-	// in watchOS.
+	// If the VPN provider uses a system extension, this field is required. Not available in watchOS.
 	ProviderDesignatedRequirement *string `plist:"ProviderDesignatedRequirement,omitempty" json:"ProviderDesignatedRequirement,omitempty"`
 	// If `1`, disconnects after an on-demand connection idles.
 	//
@@ -137,8 +136,8 @@ type VpnManagedVPN struct {
 	ProviderType *VpnManagedVPNProviderType `plist:"ProviderType,omitempty" json:"ProviderType,omitempty"`
 	// If `1``, routes all traffic through the VPN, with some exclusions. Several of the exclusions can
 	// be controlled with the `ExcludeLocalNetworks`, `ExcludeCellularServices`, `ExcludeAPNs` and
-	// `ExcludeDeviceCommunication` properties. The following traffic is always excluded from the
-	// tunnel:
+	// `ExcludeDeviceCommunication` properties. The system always excludes the following traffic from
+	// the tunnel:
 	//
 	// Default: 0.
 	IncludeAllNetworks *VpnManagedVPNIncludeAllNetworks `plist:"IncludeAllNetworks,omitempty" json:"IncludeAllNetworks,omitempty"`
@@ -171,8 +170,8 @@ type VpnManagedVPN struct {
 	//
 	// Default: 0.
 	OnDemandEnabled *VpnManagedVPNOnDemandEnabled `plist:"OnDemandEnabled,omitempty" json:"OnDemandEnabled,omitempty"`
-	// If `1`, the Connect On Demand toggle in Settings is disabled for this configuration. Available
-	// in iOS 14 and later. Not available in watchOS.
+	// If `1`, the device disables the Connect On Demand toggle in Settings for this configuration. Not
+	// available in watchOS.
 	//
 	// Default: 0.
 	OnDemandUserOverrideDisabled *VpnManagedVPNOnDemandUserOverrideDisabled `plist:"OnDemandUserOverrideDisabled,omitempty" json:"OnDemandUserOverrideDisabled,omitempty"`
@@ -251,7 +250,7 @@ type VpnManagedIPSecOnDemandRulesElementActionParameter struct {
 	RequiredDNSServers []string `plist:"RequiredDNSServers,omitempty" json:"RequiredDNSServers,omitempty"`
 	// An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be
 	// resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status
-	// code, a VPN connection is established in response.
+	// code, the device establishes a VPN connection in response.
 	RequiredURLStringProbe *string `plist:"RequiredURLStringProbe,omitempty" json:"RequiredURLStringProbe,omitempty"`
 }
 
@@ -354,7 +353,7 @@ type VpnManagedIKEv2OnDemandRulesElementActionParameter struct {
 	RequiredDNSServers []string `plist:"RequiredDNSServers,omitempty" json:"RequiredDNSServers,omitempty"`
 	// An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be
 	// resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status
-	// code, a VPN connection is established in response.
+	// code, the device establishes a VPN connection in response.
 	RequiredURLStringProbe *string `plist:"RequiredURLStringProbe,omitempty" json:"RequiredURLStringProbe,omitempty"`
 }
 
@@ -401,7 +400,7 @@ type SecurityAssociationParameters struct {
 	//
 	// Default: 14.
 	DiffieHellmanGroup *SecurityAssociationParametersDiffieHellmanGroup `plist:"DiffieHellmanGroup,omitempty" json:"DiffieHellmanGroup,omitempty"`
-	// An array of strings representing postquantum key exchange methods the device uses during SA
+	// An array of integers representing postquantum key exchange methods the device uses during SA
 	// establishment and rekey. You can specify up to seven items, which correspond to ADDKE1 - ADDKE7
 	// from RFC 9370.
 	PostQuantumKeyExchangeMethods []int64 `plist:"PostQuantumKeyExchangeMethods,omitempty" json:"PostQuantumKeyExchangeMethods,omitempty"`
@@ -437,13 +436,12 @@ type VpnManagedIKEv2 struct {
 	Password *string `plist:"Password,omitempty" json:"Password,omitempty"`
 	// If the VPNSubType field contains the bundle identifier of an app that contains multiple VPN
 	// providers of the same type (app-proxy or packet-tunnel), then the system uses this field to
-	// choose which provider to use for this configuration. If the VPN provider is implemented as a
-	// System Extension, then this field is required.
+	// choose which provider to use for this configuration. If the VPN provider uses a system
+	// extension, then this field is required.
 	ProviderBundleIdentifier *string `plist:"ProviderBundleIdentifier,omitempty" json:"ProviderBundleIdentifier,omitempty"`
-	// If the VPN provider is implemented as a System Extension, then this field is required. Available
-	// in macOS 10.15 and later, tvOS 17 and later, and watchOS 10 and later.
+	// If the VPN provider uses a system extension, then this field is required.
 	ProviderDesignatedRequirement *string `plist:"ProviderDesignatedRequirement,omitempty" json:"ProviderDesignatedRequirement,omitempty"`
-	// If `AuthenticationMethod` is `SharedSecret`, this value is used for IKE authentication.
+	// If `AuthenticationMethod` is `SharedSecret`, the device uses this value for IKE authentication.
 	SharedSecret *string `plist:"SharedSecret,omitempty" json:"SharedSecret,omitempty"`
 	// If `1`, enables EAP-only authentication.
 	//
@@ -533,8 +531,7 @@ type VpnManagedIKEv2 struct {
 	// Default: 0.
 	EnableFallback *VpnManagedIKEv2EnableFallback `plist:"EnableFallback,omitempty" json:"EnableFallback,omitempty"`
 	// The Maximum Transmission Unit (MTU) specifies the maximum size in bytes of each packet that the
-	// system sends over the IKEv2 VPN interface. Available in iOS 14 and later, and macOS 11 and
-	// later.
+	// system sends over the IKEv2 VPN interface.
 	//
 	// Default: 1280.
 	MTU *int64 `plist:"MTU,omitempty" json:"MTU,omitempty"`
@@ -585,20 +582,20 @@ type VpnManagedIKEv2 struct {
 	PPKIdentifier *string `plist:"PPKIdentifier,omitempty" json:"PPKIdentifier,omitempty"`
 	// If set to `1`, the VPN doesn't establish a connection if the server doesn't support RFC 8784 or
 	// doesn't accept the PPK identifier specified in `PPKIdentifier`. The device ignores this key if
-	// `PPK` and `PPKIdentifier` are not present.
+	// `PPK` and `PPKIdentifier` aren't present.
 	//
 	// Default: 1.
 	PPKMandatory *VpnManagedIKEv2PPKMandatory `plist:"PPKMandatory,omitempty" json:"PPKMandatory,omitempty"`
 	// If set to `0`, the VPN doesn't establish a connection if the server does not support or doesn't
 	// allow post-quantum key exchanges. Thd device ignores this key if `PostQuantumKeyExchangeMethods`
-	// is not present in `IKESecurityAssociationParameters` or `ChildSecurityAssociationParameters`.
+	// isn't present in `IKESecurityAssociationParameters` or `ChildSecurityAssociationParameters`.
 	//
 	// Default: 0.
 	AllowPostQuantumKeyExchangeFallback *VpnManagedIKEv2AllowPostQuantumKeyExchangeFallback `plist:"AllowPostQuantumKeyExchangeFallback,omitempty" json:"AllowPostQuantumKeyExchangeFallback,omitempty"`
 	// If set to `1`, the device doesn't allow DES, 3DES, and Diffie-Hellman groups less than 14. Also
 	// the device requires the encryption algorithm specified for the IKE SA to be at least as
 	// cryptographically strong as the algorithm specified for the child SA. The device rejects this
-	// profile payload if these requirements are not met.
+	// profile payload if these requirements aren't met.
 	//
 	// Default: 0.
 	EnforceStrictAlgorithmSelection *VpnManagedIKEv2EnforceStrictAlgorithmSelection `plist:"EnforceStrictAlgorithmSelection,omitempty" json:"EnforceStrictAlgorithmSelection,omitempty"`
@@ -754,7 +751,7 @@ type VpnManagedTransparentProxyOnDemandRulesElementActionParameter struct {
 	RequiredDNSServers []string `plist:"RequiredDNSServers,omitempty" json:"RequiredDNSServers,omitempty"`
 	// An HTTP or HTTPS (preferred) URL to probe, using a GET request. If the URL's hostname can't be
 	// resolved, if the server is unreachable, or if the server doesn't respond with a 200 HTTP status
-	// code, a VPN connection is established in response.
+	// code, the device establishes a VPN connection in response.
 	RequiredURLStringProbe *string `plist:"RequiredURLStringProbe,omitempty" json:"RequiredURLStringProbe,omitempty"`
 }
 
@@ -786,7 +783,7 @@ type VpnManagedTransparentProxyOnDemandRulesElement struct {
 }
 
 // VpnManagedTransparentProxy is the TransparentProxy dictionary.
-// The dictionary to use when `VPNType` is `TransparentProxy`. Available in macOS 14 and later.
+// The dictionary to use when `VPNType` is `TransparentProxy`.
 type VpnManagedTransparentProxy struct {
 	// The type of authentication method to use: `Password`, `Certificate`, or `Password+Certificate`.
 	//
@@ -812,19 +809,19 @@ type VpnManagedTransparentProxy struct {
 	// Determines when and how the system uses an OnDemand VPN.
 	OnDemandRules []VpnManagedTransparentProxyOnDemandRulesElement `plist:"OnDemandRules,omitempty" json:"OnDemandRules,omitempty"`
 	// The UUID of the identity certificate as the account credential. If `AuthenticationMethod` is
-	// `Certificate`, and extended authentication (EAP) isn't used, this certificate is sent out for
-	// IKE client authentication. If extended authentication is used, this certificate can be used for
-	// EAP-TLS.
+	// `Certificate`, and extended authentication (EAP) isn't used, the device sends this certificate
+	// for IKE client authentication. If extended authentication is used, this certificate can be used
+	// for EAP-TLS.
 	PayloadCertificateUUID *string `plist:"PayloadCertificateUUID,omitempty" json:"PayloadCertificateUUID,omitempty"`
 	// The password to use for the account credentials. Only used if `AuthenticationMethod` is
 	// `Password`.
 	Password *string `plist:"Password,omitempty" json:"Password,omitempty"`
 	// If the VPNSubType field contains the bundle identifier of an app that contains multiple VPN
 	// providers of the same type (app-proxy or packet-tunnel), then the system uses this field to
-	// choose which provider to use for this configuration. If the VPN provider is implemented as a
-	// System Extension, then this field is required.
+	// choose which provider to use for this configuration. If the VPN provider uses a system
+	// extension, then this field is required.
 	ProviderBundleIdentifier *string `plist:"ProviderBundleIdentifier,omitempty" json:"ProviderBundleIdentifier,omitempty"`
-	// If the VPN provider is implemented as a System Extension, then this field is required.
+	// If the VPN provider uses a system extension, then this field is required.
 	ProviderDesignatedRequirement *string `plist:"ProviderDesignatedRequirement,omitempty" json:"ProviderDesignatedRequirement,omitempty"`
 	// If the value of this key is `app-proxy`, the VPN service tunnels traffic at the application
 	// layer. If the value of this key is `packet-tunnel`, the VPN service tunnels traffic at the IP

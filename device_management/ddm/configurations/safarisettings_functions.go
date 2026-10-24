@@ -25,6 +25,11 @@ func (p *SafariSettings) Validate() error {
 			errs = append(errs, validate.Nested("NewTabStartPage", err))
 		}
 	}
+	if p.Privacy != nil {
+		if err := p.Privacy.Validate(); err != nil {
+			errs = append(errs, validate.Nested("Privacy", err))
+		}
+	}
 	return errors.Join(errs...)
 }
 
@@ -34,6 +39,47 @@ func (p *SafariSettingsNewTabStartPage) Validate() error {
 	var errs []error
 	if err := validate.InList("PageType", p.PageType, []SafariSettingsNewTabStartPagePageType{SafariSettingsNewTabStartPagePageTypeStart, SafariSettingsNewTabStartPagePageTypeHome, SafariSettingsNewTabStartPagePageTypeExtension}); err != nil {
 		errs = append(errs, err)
+	}
+	return errors.Join(errs...)
+}
+
+// Validate checks the payload against Apple's spec: required keys,
+// allowed values, ranges, formats and nested payload keys.
+func (p *WebsiteDictionary) Validate() error {
+	var errs []error
+	if p.Camera != nil {
+		if err := validate.InList("Camera", *p.Camera, []WebsiteDictionaryCamera{WebsiteDictionaryCameraNone, WebsiteDictionaryCameraAllow}); err != nil {
+			errs = append(errs, err)
+		}
+	}
+	if p.Microphone != nil {
+		if err := validate.InList("Microphone", *p.Microphone, []WebsiteDictionaryMicrophone{WebsiteDictionaryMicrophoneNone, WebsiteDictionaryMicrophoneAllow}); err != nil {
+			errs = append(errs, err)
+		}
+	}
+	return errors.Join(errs...)
+}
+
+// Validate checks the payload against Apple's spec: required keys,
+// allowed values, ranges, formats and nested payload keys.
+func (p *SafariSettingsPrivacyPermissionDefaults) Validate() error {
+	var errs []error
+	if p.ANY != nil {
+		if err := p.ANY.Validate(); err != nil {
+			errs = append(errs, validate.Nested("ANY", err))
+		}
+	}
+	return errors.Join(errs...)
+}
+
+// Validate checks the payload against Apple's spec: required keys,
+// allowed values, ranges, formats and nested payload keys.
+func (p *SafariSettingsPrivacy) Validate() error {
+	var errs []error
+	if p.PermissionDefaults != nil {
+		if err := p.PermissionDefaults.Validate(); err != nil {
+			errs = append(errs, validate.Nested("PermissionDefaults", err))
+		}
 	}
 	return errors.Join(errs...)
 }

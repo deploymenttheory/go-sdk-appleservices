@@ -67,7 +67,7 @@
         },
         {
           "key": "AllowedProtocolMask",
-          "title": "Supported IP Versions",
+          "title": "Supported IP versions",
           "type": "\u003cinteger\u003e",
           "presence": "optional",
           "rangelist": [
@@ -157,7 +157,7 @@
                 2,
                 3
               ],
-              "content": "The default Internet Protocol versions. Available in iOS 10.3 but no longer used in iOS 11 and later. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
+              "content": "The default Internet Protocol versions. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
               "supportedOS": {
                 "iOS": {
                   "introduced": "10.3",
@@ -167,7 +167,7 @@
             },
             {
               "key": "AllowedProtocolMask",
-              "title": "Supported IP Versions",
+              "title": "Supported IP versions",
               "type": "\u003cinteger\u003e",
               "presence": "optional",
               "rangelist": [
@@ -175,7 +175,7 @@
                 2,
                 3
               ],
-              "content": "The Internet Protocol versions that the system supports. Available in iOS 10.3 and later. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
+              "content": "The Internet Protocol versions that the system supports. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
               "supportedOS": {
                 "iOS": {
                   "introduced": "10.3"
@@ -184,7 +184,7 @@
             },
             {
               "key": "AllowedProtocolMaskInRoaming",
-              "title": "Supported Roaming IP Versions",
+              "title": "Supported roaming IP versions",
               "type": "\u003cinteger\u003e",
               "presence": "optional",
               "rangelist": [
@@ -192,7 +192,7 @@
                 2,
                 3
               ],
-              "content": "The Internet Protocol versions that the system supports while roaming. Available in iOS 10.3 and later. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
+              "content": "The Internet Protocol versions that the system supports while roaming. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
               "supportedOS": {
                 "iOS": {
                   "introduced": "10.3"
@@ -201,7 +201,7 @@
             },
             {
               "key": "AllowedProtocolMaskInDomesticRoaming",
-              "title": "Supported Roaming IP Versions",
+              "title": "Supported roaming IP versions",
               "type": "\u003cinteger\u003e",
               "presence": "optional",
               "rangelist": [
@@ -209,7 +209,7 @@
                 2,
                 3
               ],
-              "content": "The Internet Protocol versions that the system supports while roaming. Available in iOS 10.3 and later. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
+              "content": "The Internet Protocol versions that the system supports while roaming. Allowed values:\n\n- `1`: IPv4\n- `2`: IPv6\n- `3`: Both",
               "supportedOS": {
                 "iOS": {
                   "introduced": "10.3"
@@ -222,7 +222,7 @@
               "type": "\u003cboolean\u003e",
               "presence": "optional",
               "default": false,
-              "content": "If `true`, the system enables XLAT464. Available in iOS 16 and later and watchOS 9 and later.",
+              "content": "If `true`, the system enables XLAT464.",
               "supportedOS": {
                 "iOS": {
                   "introduced": "16.0"

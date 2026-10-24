@@ -32,6 +32,6 @@ type ApnManagedDefaultsDataApnsItem struct {
 // ApnManagedDefaultsData is the DefaultsData dictionary.
 // The list of access point names (APNs).
 type ApnManagedDefaultsData struct {
-	// An array of APN dictionaries (\`APN.DefaultsData.Apns\`).
+	// An array of APN dictionaries.
 	Apns []ApnManagedDefaultsDataApnsItem `plist:"apns" json:"apns"`
 }

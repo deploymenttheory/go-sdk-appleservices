@@ -1,6 +1,6 @@
 {
   "category": "mdm/profiles",
-  "name": "com.apple.MCX(Mobililty)",
+  "name": "com.apple.MCX(Mobility)",
   "title": "Mobile Accounts",
   "description": "The payload that configures mobile accounts on the device.",
   "payload": {

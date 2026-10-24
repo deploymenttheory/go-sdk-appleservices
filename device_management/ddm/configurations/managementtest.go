@@ -3,7 +3,7 @@
 package configurations
 
 // ManagementTest — Management:Test.
-// The declaration to test declarative device management.
+// The declaration to configure a declarative device management test.
 //
 // Supported: iOS 15.0+, macOS 13.0+, tvOS 16.0+, visionOS 1.1+, watchOS 10.0+.
 type ManagementTest struct {

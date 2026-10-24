@@ -36,7 +36,7 @@
           "key": "apns",
           "type": "\u003carray\u003e",
           "presence": "required",
-          "content": "An array of APN dictionaries (\\`APN.DefaultsData.Apns\\`).",
+          "content": "An array of APN dictionaries.",
           "subkeys": [
             {
               "key": "apnsItem",

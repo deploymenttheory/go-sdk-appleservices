@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.identifier.udid",
   "title": "Status Device UDID",
-  "description": "A status report of the device's UDID.",
+  "description": "The status item that reports the device's UDID.",
   "payload": {
     "statusitemtype": "device.identifier.udid",
     "supportedOS": {

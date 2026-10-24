@@ -7,7 +7,14 @@ package configurations
 //
 // Supported: iOS 15.0+, macOS 13.0+, tvOS 16.0+, visionOS 1.1+, watchOS 10.0+.
 type Legacy struct {
-	// The URL of the profile to download and install, which needs to start with `https://`, and must
-	// be hosted by the MDM server.
-	ProfileURL string `plist:"ProfileURL" json:"ProfileURL"`
+	// The URL of the profile to download and install, which needs to start with `https://`. The
+	// request uses MDM semantics, which includes the device-identity certificate, and any user
+	// authentication. This is equivalent to an MDM request made to the `CheckInURL` or `ServerURL`.
+	ProfileURL *string `plist:"ProfileURL,omitempty" json:"ProfileURL,omitempty"`
+	// The identifier of an asset declaration containing a reference to the profile data. The
+	// corresponding asset needs to be of type `com.apple.asset.data`. The referenced data needs to be
+	// a property list file, and the asset's "ContentType" value set to match the data type.
+	//
+	// Allowed asset types: com.apple.asset.data.
+	ProfileAssetReference *string `plist:"ProfileAssetReference,omitempty" json:"ProfileAssetReference,omitempty"`
 }

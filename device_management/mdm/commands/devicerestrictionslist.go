@@ -7,8 +7,7 @@ package commands
 //
 // Supported: iOS 4.0+, tvOS 9.0+, visionOS 1.1+, watchOS 10.0+.
 type Restrictions struct {
-	// If `true`, the device reports restrictions from each profile. This value is available in iOS 4
-	// and later, and tvOS 6.1 and later.
+	// If `true`, the device reports restrictions from each profile.
 	//
 	// Default: false.
 	ProfileRestrictions *bool `plist:"ProfileRestrictions,omitempty" json:"ProfileRestrictions,omitempty"`
@@ -16,12 +15,11 @@ type Restrictions struct {
 
 // RestrictionsResponse models the device response to the Restrictions command.
 type RestrictionsResponse struct {
-	// A dictionary that contains the global restrictions in effect. This value is available in iOS 4
-	// and later, and tvOS 6.1 and later.
+	// A dictionary that contains the global restrictions in effect.
 	GlobalRestrictions RestrictionsDictionary `plist:"GlobalRestrictions" json:"GlobalRestrictions"`
 	// A dictionary that contains dictionaries of restrictions from each profile. This value is only
 	// available when `ProfileRestrictions` is `true` in the command. The keys are the identifiers of
-	// the profiles. This value is available in iOS 4 and later, and tvOS 6.1 and later.
+	// the profiles.
 	ProfileRestrictions RestrictionsResponseProfileRestrictions `plist:"ProfileRestrictions" json:"ProfileRestrictions"`
 }
 
@@ -84,8 +82,7 @@ type UnionDictionary struct {
 }
 
 // RestrictionsDictionary is the GlobalRestrictions dictionary.
-// A dictionary that contains the global restrictions in effect. This value is available in iOS 4
-// and later, and tvOS 6.1 and later.
+// A dictionary that contains the global restrictions in effect.
 type RestrictionsDictionary struct {
 	// A dictionary of Boolean profile restrictions.
 	RestrictedBool *BooleanDictionary `plist:"restrictedBool,omitempty" json:"restrictedBool,omitempty"`
@@ -102,7 +99,7 @@ type RestrictionsDictionary struct {
 // RestrictionsResponseProfileRestrictions is the ProfileRestrictions dictionary.
 // A dictionary that contains dictionaries of restrictions from each profile. This value is only
 // available when `ProfileRestrictions` is `true` in the command. The keys are the identifiers of
-// the profiles. This value is available in iOS 4 and later, and tvOS 6.1 and later.
+// the profiles.
 type RestrictionsResponseProfileRestrictions struct {
 	// The profile identifiers. This dictionary is only available if `ProfileRestrictions` is `true` in
 	// the command.

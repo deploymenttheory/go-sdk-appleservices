@@ -3,9 +3,11 @@
 package commands
 
 // ScheduleOSUpdateScan — Schedule OS Update Scan Command.
-// Schedule a background scan for operating-system updates on a device.
+// Schedule a background scan for operating-system updates on a device. Removed: use the
+// declarative management `com.apple.configuration.softwareupdate.enforcement.specific`
+// configuration.
 //
-// Supported: macOS 10.11+.
+// Supported: macOS 10.11–27.0.
 type ScheduleOSUpdateScan struct {
 	// If `true`, force a scan to start immediately. Otherwise, the scan starts at a system-determined
 	// time.

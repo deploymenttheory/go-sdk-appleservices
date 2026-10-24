@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.operating-system.supplemental.build-version",
   "title": "Status Device Operating System Supplemental Build Version",
-  "description": "A status report of the device's operating system supplemental build identifier.",
+  "description": "The status item that reports the device's operating system supplemental build version and Background Security Improvement version.",
   "payload": {
     "statusitemtype": "device.operating-system.supplemental.build-version",
     "supportedOS": {

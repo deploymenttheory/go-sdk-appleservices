@@ -2,7 +2,7 @@
   "category": "declarative/status",
   "name": "device.operating-system.build-version",
   "title": "Status Device Operating System Build Version",
-  "description": "A status report of the device's software build identifier.",
+  "description": "The status item that reports the device's operating system build version.",
   "payload": {
     "statusitemtype": "device.operating-system.build-version",
     "supportedOS": {

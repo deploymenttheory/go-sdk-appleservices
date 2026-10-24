@@ -27,27 +27,28 @@
   "payloadkeys": [
     {
       "key": "ConnectionGroupUUID",
-      "title": "Unique Identifier",
+      "title": "Unique identifier",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "A unique identifier for this connection group."
     },
     {
       "key": "GroupName",
-      "title": "Group Name",
+      "title": "Group name",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The name of the connection group."
     },
     {
       "key": "Members",
-      "title": "Group Members",
+      "title": "Group members",
       "type": "\u003carray\u003e",
       "presence": "required",
       "content": "An array of `ConnectionUUID`s that represent connections declared in `ScreenSharingConnection` configurations that are members of this group.",
       "subkeys": [
         {
           "key": "ConnectionUUID",
+          "title": "Connection UUID",
           "type": "\u003cstring\u003e"
         }
       ]

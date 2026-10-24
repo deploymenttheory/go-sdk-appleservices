@@ -100,13 +100,11 @@ type WebcontentFilter struct {
 	// when `FilterType` is `Plugin`.This key must be present for unsupervised devices and user
 	// enrollment.
 	ContentFilterUUID *string `plist:"ContentFilterUUID,omitempty" json:"ContentFilterUUID,omitempty"`
-	// If `true`, the system filters URL requests. Use when `FilterType` is `Plugin`. Available in iOS
-	// 26 and macOS 26, and later.
+	// If `true`, the system filters URL requests. Use when `FilterType` is `Plugin`.
 	//
 	// Default: false.
 	FilterURLs *bool `plist:"FilterURLs,omitempty" json:"FilterURLs,omitempty"`
-	// A dictionary containing URL filter parameters. Required when `FilterURLs` is `true`. Available
-	// in iOS 26 and macOS 26 and later.
+	// A dictionary containing URL filter parameters. Required when `FilterURLs` is `true`.
 	URLFilterParameters *WebcontentFilterURLFilterParameters `plist:"URLFilterParameters,omitempty" json:"URLFilterParameters,omitempty"`
 }
 
@@ -135,8 +133,7 @@ type WebcontentFilterVendorConfig struct {
 }
 
 // WebcontentFilterURLFilterParameters is the URLFilterParameters dictionary.
-// A dictionary containing URL filter parameters. Required when `FilterURLs` is `true`. Available
-// in iOS 26 and macOS 26 and later.
+// A dictionary containing URL filter parameters. Required when `FilterURLs` is `true`.
 type WebcontentFilterURLFilterParameters struct {
 	// The designated requirement string in the code signature of the URL filter control provider app
 	// extension. The system uses this string to identify the URL filter control provider when the

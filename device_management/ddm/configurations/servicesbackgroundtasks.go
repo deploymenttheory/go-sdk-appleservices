@@ -8,10 +8,10 @@ package configurations
 // Supported: macOS 15.0+.
 type ServicesBackgroundTasks struct {
 	// The unique identifier of the set of background tasks managed with this configuration. This
-	// should be a reverse DNS style identifier. The system uses this identifier to differentiate
+	// should be a reverse DNS style identifier. The device uses this identifier to differentiate
 	// between tasks in different configurations.
 	TaskType string `plist:"TaskType" json:"TaskType"`
-	// A description of the set of background tasks managed by this configuration.
+	// A description of the set of background tasks this configuration manages.
 	TaskDescription *string `plist:"TaskDescription,omitempty" json:"TaskDescription,omitempty"`
 	// Specifies the identifier of an asset declaration containing a reference to the files to be used
 	// for the background task configuration. The corresponding asset must be of type
@@ -33,7 +33,7 @@ type ServicesBackgroundTasksLaunchdItem struct {
 	//
 	// Allowed asset types: com.apple.asset.data.
 	FileAssetReference string `plist:"FileAssetReference" json:"FileAssetReference"`
-	// Indicates whether the launchd configuration file is applied to the system daemon, or system
-	// agent domain.
+	// Indicates whether the device applies the launchd configuration file to the system daemon or
+	// system agent domain.
 	Context ServicesBackgroundTasksLaunchdItemContext `plist:"Context" json:"Context"`
 }

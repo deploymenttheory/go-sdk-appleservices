@@ -27,13 +27,14 @@
   "payloadkeys": [
     {
       "key": "Restrictions",
+      "title": "Restrictions",
       "type": "\u003cdictionary\u003e",
       "presence": "optional",
       "content": "The restrictions for the disk.",
       "subkeys": [
         {
           "key": "ExternalStorage",
-          "title": "External Storage",
+          "title": "External storage",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
@@ -42,11 +43,11 @@
             "Disallowed"
           ],
           "combinetype": "enum-last",
-          "content": "Specifies the mount policy for external storage:\n\n- `Allowed`: The system can mount external storage that is read-write or read-only.\n- `ReadOnly`: The system can only mount read-only external storage. Note that external storage that is read-write will not be mounted read-only.\n- `Disallowed`: The system can't mount any external storage."
+          "content": "Specifies the mount policy for external storage:\n\n- `Allowed`: The system can mount external storage that's read-write or read-only.\n- `ReadOnly`: The system can only mount read-only external storage. Note that external storage that's read-write won't be mounted read-only.\n- `Disallowed`: The system can't mount any external storage."
         },
         {
           "key": "NetworkStorage",
-          "title": "Network Storage",
+          "title": "Network storage",
           "type": "\u003cstring\u003e",
           "presence": "optional",
           "rangelist": [
@@ -55,7 +56,7 @@
             "Disallowed"
           ],
           "combinetype": "enum-last",
-          "content": "Specifies the mount policy for network storage:\n\n- `Allowed`: The system can mount network storage that is read-write or read-only.\n- `ReadOnly`: The system can only mount read-only network storage. Note that network storage that is read-write will not be mounted read-only.\n- `Disallowed`: The system can't mount any network storage."
+          "content": "Specifies the mount policy for network storage:\n\n- `Allowed`: The system can mount network storage that's read-write or read-only.\n- `ReadOnly`: The system can only mount read-only network storage. Note that network storage that's read-write won't be mounted read-only.\n- `Disallowed`: The system can't mount any network storage."
         }
       ]
     }

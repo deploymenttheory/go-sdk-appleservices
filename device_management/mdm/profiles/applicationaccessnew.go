@@ -10,16 +10,25 @@ type ApplicationaccessNew struct {
 	// If `true`, enables app access restrictions.
 	FamilyControlsEnabled bool `plist:"familyControlsEnabled" json:"familyControlsEnabled"`
 	// The allow list of app item dictionaries.
-	WhiteList []ApplicationaccessNewWhiteListItem `plist:"whiteList,omitempty" json:"whiteList,omitempty"`
-	// The paths to apps in the deny list. This property is deprecated in macOS 10.15 and later.
+	AllowList []ApplicationaccessNewAllowListItem `plist:"allowList,omitempty" json:"allowList,omitempty"`
+	// The allow list of app item dictionaries. This property is deprecated in macOS 10.15 and later -
+	// use `allowList` instead.
+	WhiteList []ApplicationaccessNewAllowListItem `plist:"whiteList,omitempty" json:"whiteList,omitempty"`
+	// The paths to apps in the deny list.
+	PathDenyList []string `plist:"pathDenyList,omitempty" json:"pathDenyList,omitempty"`
+	// The paths to apps in the deny list. This property is deprecated in macOS 10.15 and later - use
+	// `pathDenyList` instead.
 	PathBlackList []string `plist:"pathBlackList,omitempty" json:"pathBlackList,omitempty"`
-	// The paths to apps in the allow list. This property is deprecated in macOS 10.15 and later.
+	// The paths to apps in the allow list.
+	PathAllowList []string `plist:"pathAllowList,omitempty" json:"pathAllowList,omitempty"`
+	// The paths to apps in the allow list. This property is deprecated in macOS 10.15 and later - use
+	// `pathAllowList` instead.
 	PathWhiteList []string `plist:"pathWhiteList,omitempty" json:"pathWhiteList,omitempty"`
 }
 
-// ApplicationaccessNewWhiteListItem is the whiteListItem dictionary.
+// ApplicationaccessNewAllowListItem is the allowListItem dictionary.
 // A dictionary defining an app for parental control.
-type ApplicationaccessNewWhiteListItem struct {
+type ApplicationaccessNewAllowListItem struct {
 	// The bundle ID of the app.
 	BundleID string `plist:"bundleID" json:"bundleID"`
 	// The identifier of the app. Obtain this value from the Security framework using

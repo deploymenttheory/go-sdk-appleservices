@@ -59,7 +59,7 @@
               "key": "Kind",
               "type": "\u003cstring\u003e",
               "presence": "optional",
-              "content": "The kind of the media, which is one of the following values:\n\n- `pdf`: A PDF file\n- `epub`: An EPUB file in `gzip` format\n- `ibooks`: An iBooks Author file in `gzip` format\n- The file extension in the URL\n\nThis value is available in iOS 8 and later."
+              "content": "The kind of the media, which is one of the following values:\n\n- `pdf`: A PDF file\n- `epub`: An EPUB file in `gzip` format\n- `ibooks`: An iBooks Author file in `gzip` format\n- The file extension in the URL"
             },
             {
               "key": "Version",

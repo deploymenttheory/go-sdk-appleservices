@@ -26,28 +26,28 @@
   "payloadkeys": [
     {
       "key": "CalDAVAccountDescription",
-      "title": "Account Description",
+      "title": "Account description",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The description of the account."
     },
     {
       "key": "CalDAVHostName",
-      "title": "Account Hostname",
+      "title": "Account hostname",
       "type": "\u003cstring\u003e",
       "presence": "required",
       "content": "The server's address."
     },
     {
       "key": "CalDAVUsername",
-      "title": "Account Username",
+      "title": "Account username",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user name for logins. If this profile is part of a non-interactive install, the system requires this field."
     },
     {
       "key": "CalDAVPassword",
-      "title": "Account Password",
+      "title": "Account password",
       "type": "\u003cstring\u003e",
       "presence": "optional",
       "content": "The user's password. Only use this in encrypted profiles."
@@ -69,7 +69,7 @@
     },
     {
       "key": "CalDAVPort",
-      "title": "Port Number",
+      "title": "Port number",
       "type": "\u003cinteger\u003e",
       "presence": "optional",
       "content": "The server's port."
@@ -79,7 +79,7 @@
       "title": "VPNUUID",
       "type": "\u003cstring\u003e",
       "presence": "optional",
-      "content": "The VPNUUID of the per-app VPN the account uses for network communication. Available in iOS 14 and later.",
+      "content": "The VPNUUID of the per-app VPN the account uses for network communication.",
       "supportedOS": {
         "iOS": {
           "introduced": "14.0"
