@@ -1,0 +1,35 @@
+{
+  "category": "declarative/status",
+  "name": "enhanced-logging.noninteractive-eligibility",
+  "title": "Status Enhanced Logging Non-Interactive Eligibility",
+  "description": "The status item that reports whether the device is eligible to run a non-interactive enhanced log collection session.",
+  "payload": {
+    "statusitemtype": "enhanced-logging.noninteractive-eligibility",
+    "supportedOS": {
+      "iOS": {
+        "introduced": "27.2"
+      },
+      "macOS": {
+        "introduced": "27.2"
+      },
+      "tvOS": {
+        "introduced": "27.2"
+      },
+      "visionOS": {
+        "introduced": "n/a"
+      },
+      "watchOS": {
+        "introduced": "n/a"
+      }
+    }
+  },
+  "payloadkeys": [
+    {
+      "key": "enhanced-logging.noninteractive-eligibility",
+      "title": "Status item value.",
+      "type": "\u003cboolean\u003e",
+      "presence": "required",
+      "content": "If `true`, the device is eligible to run a non-interactive enhanced log collection session."
+    }
+  ]
+}

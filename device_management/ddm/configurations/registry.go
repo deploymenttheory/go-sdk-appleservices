@@ -16,6 +16,7 @@ var ByDeclarationType = map[string]func() ddm.DeclarationPayload{
 	"com.apple.configuration.account.google":                      func() ddm.DeclarationPayload { return new(AccountGoogle) },
 	"com.apple.configuration.account.ldap":                        func() ddm.DeclarationPayload { return new(AccountLdap) },
 	"com.apple.configuration.account.mail":                        func() ddm.DeclarationPayload { return new(AccountMail) },
+	"com.apple.configuration.account.settings":                    func() ddm.DeclarationPayload { return new(AccountSettings) },
 	"com.apple.configuration.account.subscribed-calendar":         func() ddm.DeclarationPayload { return new(AccountSubscribedCalendar) },
 	"com.apple.configuration.app.managed":                         func() ddm.DeclarationPayload { return new(AppManaged) },
 	"com.apple.configuration.app.settings":                        func() ddm.DeclarationPayload { return new(AppSettings) },

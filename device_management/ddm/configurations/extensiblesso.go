@@ -162,6 +162,11 @@ type ExtensibleSsoPlatformSSOPolicies struct {
 	Login []string `plist:"Login,omitempty" json:"Login,omitempty"`
 	// The policy to apply when using Platform SSO at screensaver unlock.
 	Unlock []string `plist:"Unlock,omitempty" json:"Unlock,omitempty"`
+	// If `true`, the system uses the Platform SSO login UI at the Login Window, screensaver unlock,
+	// and FileVault unlock for every configuration that supports it.
+	//
+	// Default: false.
+	AlwaysUseLoginUI *bool `plist:"AlwaysUseLoginUI,omitempty" json:"AlwaysUseLoginUI,omitempty"`
 	// The amount of time (in seconds) after the last successful Platform SSO login for using a local
 	// account password offline. Required when setting `AllowOfflineGracePeriod`.
 	OfflineGracePeriod *int64 `plist:"OfflineGracePeriod,omitempty" json:"OfflineGracePeriod,omitempty"`
@@ -186,6 +191,17 @@ type ExtensibleSsoPlatformSSOWebAuthentication struct {
 	//
 	// Default: false.
 	AllowPasswordSync *bool `plist:"AllowPasswordSync,omitempty" json:"AllowPasswordSync,omitempty"`
+}
+
+// ExtensibleSsoPlatformSSOAdditionalHTTPHeaders is the AdditionalHTTPHeaders dictionary.
+// A dictionary with keys and values that are strings. The keys are HTTP header names, and the
+// values are HTTP header values. The device adds these headers to nonce, pre-authentication,
+// login, key and key exchange requests for Platform SSO. The device limits the number of headers
+// to 20, the length of the header name to 128 characters, and the length of the header value to
+// 2048 characters.
+type ExtensibleSsoPlatformSSOAdditionalHTTPHeaders struct {
+	// Keys and values to pass as HTTP headers to the identity provider.
+	ANY *string `plist:"ANY,omitempty" json:"ANY,omitempty"`
 }
 
 // ExtensibleSsoPlatformSSO is the PlatformSSO dictionary.
@@ -222,4 +238,10 @@ type ExtensibleSsoPlatformSSO struct {
 	Policies *ExtensibleSsoPlatformSSOPolicies `plist:"Policies,omitempty" json:"Policies,omitempty"`
 	// Settings for web authentication behavior.
 	WebAuthentication *ExtensibleSsoPlatformSSOWebAuthentication `plist:"WebAuthentication,omitempty" json:"WebAuthentication,omitempty"`
+	// A dictionary with keys and values that are strings. The keys are HTTP header names, and the
+	// values are HTTP header values. The device adds these headers to nonce, pre-authentication,
+	// login, key and key exchange requests for Platform SSO. The device limits the number of headers
+	// to 20, the length of the header name to 128 characters, and the length of the header value to
+	// 2048 characters.
+	AdditionalHTTPHeaders *ExtensibleSsoPlatformSSOAdditionalHTTPHeaders `plist:"AdditionalHTTPHeaders,omitempty" json:"AdditionalHTTPHeaders,omitempty"`
 }

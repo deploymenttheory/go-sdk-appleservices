@@ -510,6 +510,18 @@
               ]
             },
             {
+              "key": "AlwaysUseLoginUI",
+              "type": "\u003cboolean\u003e",
+              "presence": "optional",
+              "default": false,
+              "content": "If `true`, the system uses the Platform SSO login UI at the Login Window, screensaver unlock, and FileVault unlock for every configuration that supports it.\nIf `false`, the system uses the Platform SSO login UI only when `AuthenticationMethod` is set to `OpenID`, or when `LoginPolicy`, `UnlockPolicy` or `FileVaultPolicy` are set to `RequireTouchID` or `RequireTouchIDOrWatch`.",
+              "supportedOS": {
+                "macOS": {
+                  "introduced": "27.2"
+                }
+              }
+            },
+            {
               "key": "OfflineGracePeriod",
               "title": "Offline grace period",
               "type": "\u003cinteger\u003e",
@@ -574,6 +586,25 @@
           "supportedOS": {
             "macOS": {
               "introduced": "27.0"
+            }
+          }
+        },
+        {
+          "key": "AdditionalHTTPHeaders",
+          "type": "\u003cdictionary\u003e",
+          "presence": "optional",
+          "content": "A dictionary with keys and values that are strings. The keys are HTTP header names, and the values are HTTP header values. The device adds these headers to nonce, pre-authentication, login, key and key exchange requests for Platform SSO. The device limits the number of headers to 20, the length of the header name to 128 characters, and the length of the header value to 2048 characters.",
+          "subkeys": [
+            {
+              "key": "ANY",
+              "type": "\u003cstring\u003e",
+              "presence": "optional",
+              "content": "Keys and values to pass as HTTP headers to the identity provider."
+            }
+          ],
+          "supportedOS": {
+            "macOS": {
+              "introduced": "27.2"
             }
           }
         }

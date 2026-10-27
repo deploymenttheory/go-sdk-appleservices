@@ -122,6 +122,10 @@ func (p *ExtensibleSsoPlatformSSOPolicies) Validate() error {
 // constraints beyond its field types.
 func (p *ExtensibleSsoPlatformSSOWebAuthentication) Validate() error { return nil }
 
+// Validate checks the payload against Apple's spec. ExtensibleSsoPlatformSSOAdditionalHTTPHeaders has no
+// constraints beyond its field types.
+func (p *ExtensibleSsoPlatformSSOAdditionalHTTPHeaders) Validate() error { return nil }
+
 // Validate checks the payload against Apple's spec: required keys,
 // allowed values, ranges, formats and nested payload keys.
 func (p *ExtensibleSsoPlatformSSO) Validate() error {
@@ -164,6 +168,11 @@ func (p *ExtensibleSsoPlatformSSO) Validate() error {
 	if p.WebAuthentication != nil {
 		if err := p.WebAuthentication.Validate(); err != nil {
 			errs = append(errs, validate.Nested("WebAuthentication", err))
+		}
+	}
+	if p.AdditionalHTTPHeaders != nil {
+		if err := p.AdditionalHTTPHeaders.Validate(); err != nil {
+			errs = append(errs, validate.Nested("AdditionalHTTPHeaders", err))
 		}
 	}
 	return errors.Join(errs...)
