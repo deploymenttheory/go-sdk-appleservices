@@ -5,7 +5,7 @@
   "description": "The declaration to configure DNS proxy settings.",
   "payload": {
     "declarationtype": "com.apple.configuration.network.dns-proxy",
-    "apply": "multiple",
+    "apply": "single",
     "supportedOS": {
       "iOS": {
         "introduced": "27.0"

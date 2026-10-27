@@ -54,6 +54,10 @@ func (p *ExtensiblessoPlatformSSOTokenToUserMapping) Validate() error { return n
 // constraints beyond its field types.
 func (p *ExtensiblessoPlatformSSOAuthorizationGroups) Validate() error { return nil }
 
+// Validate checks the payload against Apple's spec. ExtensiblessoPlatformSSOAdditionalHTTPHeaders has no
+// constraints beyond its field types.
+func (p *ExtensiblessoPlatformSSOAdditionalHTTPHeaders) Validate() error { return nil }
+
 // Validate checks the payload against Apple's spec: required keys,
 // allowed values, ranges, formats and nested payload keys.
 func (p *ExtensiblessoPlatformSSO) Validate() error {
@@ -106,6 +110,11 @@ func (p *ExtensiblessoPlatformSSO) Validate() error {
 	for i := range p.UnlockPolicy {
 		if err := validate.InList("UnlockPolicy", p.UnlockPolicy[i], []string{"AttemptAuthentication", "RequireAuthentication", "AllowOfflineGracePeriod", "AllowAuthenticationGracePeriod", "AllowTouchIDOrWatchForUnlock", "RequireTouchID", "RequireTouchIDOrWatch", "AllowOpenIDForTouchIDFallback"}); err != nil {
 			errs = append(errs, err)
+		}
+	}
+	if p.AdditionalHTTPHeaders != nil {
+		if err := p.AdditionalHTTPHeaders.Validate(); err != nil {
+			errs = append(errs, validate.Nested("AdditionalHTTPHeaders", err))
 		}
 	}
 	return errors.Join(errs...)

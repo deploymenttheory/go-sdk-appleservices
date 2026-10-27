@@ -29,7 +29,7 @@
       "title": "Status item value.",
       "type": "\u003cdictionary\u003e",
       "presence": "required",
-      "content": "A dictionary where each key represents a hardware component name and each value is a string indicating the component's health status, which has the following values:\n\n- `ok`: The component is operating normally.\n- `error`: The component has a detected error or failure.\n- `non-genuine`: The component isn't a genuine Apple component.\n\nNot all keys are supported on each device. The dictionary includes only components that are present and reportable on the device.",
+      "content": "A dictionary where each key represents a hardware component name and each value is a string indicating the component's health status, which has the following values:\n\n- `ok`: The component is operating normally.\n- `error`: The component has a detected error or failure.\n- `non-genuine`: The component isn't a genuine Apple component.\n- `pending-repair`: The component is a genuine Apple component that requires a restart to finish its repair.\n\nNot all keys are supported on each device. The dictionary includes only components that are present and reportable on the device.",
       "subkeys": [
         {
           "key": "Baseband",
@@ -50,9 +50,10 @@
           "rangelist": [
             "ok",
             "error",
-            "non-genuine"
+            "non-genuine",
+            "pending-repair"
           ],
-          "content": "The camera health status, which has the following values:\n\n- `ok`: The component is operating normally.\n- `error`: The component has a detected error or failure.\n- `non-genuine`: The component isn't a genuine Apple component."
+          "content": "The camera health status, which has the following values:\n\n- `ok`: The component is operating normally.\n- `error`: The component has a detected error or failure.\n- `non-genuine`: The component isn't a genuine Apple component.\n- `pending-repair`: The component is a genuine Apple component that requires a restart to finish its repair."
         },
         {
           "key": "Display",
@@ -62,9 +63,10 @@
           "rangelist": [
             "ok",
             "error",
-            "non-genuine"
+            "non-genuine",
+            "pending-repair"
           ],
-          "content": "The display health status, which has the following values:\n\n- `ok`: The component is operating normally.\n- `error`: The component has a detected error or failure.\n- `non-genuine`: The component isn't a genuine Apple component."
+          "content": "The display health status, which has the following values:\n\n- `ok`: The component is operating normally.\n- `error`: The component has a detected error or failure.\n- `non-genuine`: The component isn't a genuine Apple component.\n- `pending-repair`: The component is a genuine Apple component that requires a restart to finish its repair."
         },
         {
           "key": "FaceID",
@@ -73,9 +75,10 @@
           "presence": "optional",
           "rangelist": [
             "ok",
-            "error"
+            "error",
+            "pending-repair"
           ],
-          "content": "The Face ID health status, which has the following values:\n\n- `ok`: The component is operating normally.\n- `error`: The component has a detected error or failure."
+          "content": "The Face ID health status, which has the following values:\n\n- `ok`: The component is operating normally.\n- `error`: The component has a detected error or failure.\n- `pending-repair`: The component is a genuine Apple component that requires a restart to finish its repair."
         },
         {
           "key": "NFC",
@@ -95,9 +98,10 @@
           "presence": "optional",
           "rangelist": [
             "ok",
-            "error"
+            "error",
+            "pending-repair"
           ],
-          "content": "The Touch ID health status, which has the following values:\n\n- `ok`: The component is operating normally.\n- `error`: The component has a detected error or failure."
+          "content": "The Touch ID health status, which has the following values:\n\n- `ok`: The component is operating normally.\n- `error`: The component has a detected error or failure.\n- `pending-repair`: The component is a genuine Apple component that requires a restart to finish its repair."
         },
         {
           "key": "UWB",
