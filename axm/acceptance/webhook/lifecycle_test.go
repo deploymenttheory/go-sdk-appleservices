@@ -101,13 +101,16 @@ func TestAcceptance_WebhookLifecycle(t *testing.T) {
 		assert.Equal(t, enabled, updated.Data.Attributes.Enabled)
 	}
 	t.Log("UpdateByWebhookIDV1: 200; disabled and re-enabled")
+	beforePing := receiver.count()
 	ping, resp, err := svc.CreatePingV1(ctx, &webhooks.WebhookPingCreateRequest{Data: webhooks.WebhookPingCreateRequestData{Type: webhooks.ResourceTypeWebhookPings, Relationships: webhooks.WebhookPingCreateRelationships{Webhook: webhooks.ResourceRelationship{Data: webhooks.ResourceIdentifier{Type: webhooks.ResourceTypeWebhooks, ID: id}}}}})
 	require.NoError(t, err)
 	require.Equal(t, 201, resp.StatusCode())
 	require.NotEmpty(t, ping.Data.ID)
 	pingCtx, stopPing := context.WithTimeout(ctx, 90*time.Second)
 	defer stopPing()
-	note, err := receiver.wait(pingCtx, 0, func(n notification) bool { return n.Data.Type == "webhookPingCreated" })
+	note, err := receiver.wait(pingCtx, beforePing, func(n notification) bool {
+		return n.Data.Type == "webhookPingCreated" && n.Data.ID == ping.Data.ID
+	})
 	require.NoError(t, err, "signed ping was not received")
 	t.Log("CreatePingV1: 201; signed webhookPingCreated received")
 	var original webhooks.WebhookDelivery
@@ -125,22 +128,9 @@ func TestAcceptance_WebhookLifecycle(t *testing.T) {
 		if r.StatusCode() != 200 {
 			return false, nil
 		}
-		for _, event := range result.Included {
-			if event.Attributes == nil || !event.Attributes.IsPingEvent {
-				continue
-			}
-			var payload notification
-			if json.Unmarshal([]byte(event.Attributes.Payload), &payload) != nil || payload.Data.ID != note.Data.ID {
-				continue
-			}
-			for _, d := range result.Data {
-				if d.Relationships != nil && d.Relationships.Event != nil && d.Relationships.Event.Data.ID == event.ID && d.Attributes != nil && d.Attributes.DeliveryState == webhooks.DeliveryStateSucceeded {
-					original = d
-					return true, nil
-				}
-			}
-		}
-		return false, nil
+		var found bool
+		original, found = succeededPingDelivery(result, note)
+		return found, nil
 	}), "ping delivery did not reach SUCCEEDED")
 	t.Log("GetDeliveriesByWebhookIDV1: 200; ping event correlated and SUCCEEDED")
 	before := receiver.count()
@@ -154,6 +144,8 @@ func TestAcceptance_WebhookLifecycle(t *testing.T) {
 	require.NoError(t, err, "signed redelivery was not received")
 	require.NoError(t, poll(replayCtx, func() (bool, error) {
 		result, r, e := svc.GetDeliveriesByWebhookIDV1(replayCtx, id, &webhooks.DeliveryQueryOptions{
+			Include:                        []string{webhooks.IncludeEvent},
+			EventFields:                    []string{webhooks.FieldEventIsPingEvent},
 			Fields:                         []string{webhooks.FieldDeliveryState, webhooks.FieldDeliveryRedelivery, webhooks.FieldDeliveryEvent},
 			FilterCreatedDateTimeAtOrAfter: []string{deliveryStart},
 			FilterCreatedDateTimeAtBefore:  []string{time.Now().UTC().Format(time.RFC3339)},
@@ -174,4 +166,32 @@ func TestAcceptance_WebhookLifecycle(t *testing.T) {
 	require.Equal(t, 204, resp.StatusCode())
 	deleted = true
 	t.Log("DeleteByWebhookIDV1: 204")
+}
+
+func succeededPingDelivery(result *webhooks.WebhookDeliveriesResponse, note notification) (webhooks.WebhookDelivery, bool) {
+	for _, event := range result.Included {
+		if event.Attributes == nil || !event.Attributes.IsPingEvent {
+			continue
+		}
+		var payload notification
+		if json.Unmarshal([]byte(event.Attributes.Payload), &payload) != nil || payload.Data.Type != "webhookPingCreated" || payload.Data.Type != note.Data.Type {
+			continue
+		}
+		if payload.Data.ID == "" {
+			// Apple stores a ping template with an empty ID; the signed callback
+			// supplies the created ping ID and preserves the template timestamp.
+			created := payload.Data.Attributes.CreatedDateTime
+			if created.IsZero() || !created.Equal(note.Data.Attributes.CreatedDateTime) {
+				continue
+			}
+		} else if payload.Data.ID != note.Data.ID {
+			continue
+		}
+		for _, delivery := range result.Data {
+			if delivery.Relationships != nil && delivery.Relationships.Event != nil && delivery.Relationships.Event.Data.ID == event.ID && delivery.Attributes != nil && delivery.Attributes.DeliveryState == webhooks.DeliveryStateSucceeded {
+				return delivery, true
+			}
+		}
+	}
+	return webhooks.WebhookDelivery{}, false
 }
