@@ -518,6 +518,50 @@ See full example: [GetOrgDeviceActivity/main.go](./devicemanagement/GetOrgDevice
 
 ---
 
+## Webhooks API
+
+Import `github.com/deploymenttheory/go-sdk-appleservices/axm/axm_api/webhooks`
+and access all operations through `c.AXMAPI.Webhooks`:
+
+| Operation | Example |
+|---|---|
+| List subscriptions | [GetWebhooks](./webhooks/GetWebhooks/main.go) |
+| Read a subscription | [GetWebhookInformation](./webhooks/GetWebhookInformation/main.go) |
+| Create a subscription | [CreateWebhook](./webhooks/CreateWebhook/main.go) |
+| Update a subscription | [UpdateWebhook](./webhooks/UpdateWebhook/main.go) |
+| Delete a subscription | [DeleteWebhook](./webhooks/DeleteWebhook/main.go) |
+| List deliveries and included events | [GetWebhookDeliveries](./webhooks/GetWebhookDeliveries/main.go) |
+| Replay an existing delivery | [CreateWebhookDelivery](./webhooks/CreateWebhookDelivery/main.go) |
+| Send a test ping | [CreateWebhookPing](./webhooks/CreateWebhookPing/main.go) |
+
+The examples use the standard `APPLE_*` credentials. Set `WEBHOOK_ID` for operations
+on an existing subscription, `WEBHOOK_URL` and `WEBHOOK_SECRET` for creation, and
+`WEBHOOK_DELIVERY_ID` to replay a delivery. Creation sends `enabled` even when false.
+Update attributes use pointers: `Enabled: &enabled` with `enabled := false` disables
+the subscription; a nil pointer leaves its value unchanged.
+
+List methods fetch all pages automatically. `Limit` controls page size (maximum
+1,000), and `Cursor` optionally chooses the starting page. `RequestQueryOptions.Fields`
+selects webhook fields; only `Fields` applies when reading a single webhook.
+`DeliveryQueryOptions` supports delivery fields, `EventFields`, `Include`,
+`FilterDeliveryState`, `FilterCreatedDateTimeAtOrAfter`, and
+`FilterCreatedDateTimeAtBefore`. Date-filter slices contain RFC3339 timestamp strings;
+the latter uses Apple's exact `filter[createdDateTimeAtBefore]` spelling.
+Apple's live service currently requires both date filters even though its endpoint
+documentation marks them optional. Supply a bounded interval, as in the delivery
+listing example; omitting either filter produces a structured 400 API error.
+
+Request `Include: []string{webhooks.IncludeEvent}` to populate `Included` with typed
+events. Events are merged across pages and their `Payload` remains a JSON string.
+`CreateDeliveryV1` takes the original delivery ID in `relationships.template`; it
+replays that event. `CreatePingV1` sends a new test event to the related webhook.
+Webhook signing secrets are write-only and absent from response models.
+
+For a temporary receiver, HMAC signature checks, HTTPS tunnel, and complete live
+lifecycle, see [webhook acceptance testing](../../axm/acceptance/webhook/README.md).
+
+---
+
 ## Error Handling
 
 ```go
