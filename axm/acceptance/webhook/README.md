@@ -54,6 +54,14 @@ infrastructure when the account lacks permission. It then:
    succeeded for the original event.
 7. Deletes the test webhook and confirms that reading it returns 404.
 
+The signed ping must carry the ID returned by `CreatePingV1`. Apple's stored
+ping event payload can contain an empty ID; in that case the test matches its
+nonzero creation timestamp and notification type to the signed receipt. It then
+checks the delivery's event relationship and `SUCCEEDED` state. A nonempty,
+different stored ping ID never matches.
+Both delivery polling phases request `include=event`; the live API omits the
+event relationship without it, even when `event` is in the delivery field list.
+
 Each delivery phase polls every two seconds for up to 90 seconds. The default
 Apple request timeout is 30 seconds (`AXM_REQUEST_TIMEOUT` overrides it).
 Delivery polling honors `Retry-After` when Apple responds with HTTP 429, while

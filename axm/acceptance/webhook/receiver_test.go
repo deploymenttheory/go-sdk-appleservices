@@ -23,8 +23,11 @@ const maxNotificationBytes = 1 << 20
 
 type notification struct {
 	Data struct {
-		ID   string `json:"id"`
-		Type string `json:"type"`
+		ID         string `json:"id"`
+		Type       string `json:"type"`
+		Attributes struct {
+			CreatedDateTime time.Time `json:"createdDateTime"`
+		} `json:"attributes"`
 	} `json:"data"`
 }
 
