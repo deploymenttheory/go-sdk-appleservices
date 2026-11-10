@@ -23,4 +23,7 @@ const (
 	EndpointPackages            = APIVersionV1 + "/packages"
 	EndpointConfigurations      = APIVersionV1 + "/configurations"
 	EndpointBlueprints          = APIVersionV1 + "/blueprints"
+	EndpointWebhooks            = APIVersionV1 + "/webhooks"
+	EndpointWebhookDeliveries   = APIVersionV1 + "/webhookDeliveries"
+	EndpointWebhookPings        = APIVersionV1 + "/webhookPings"
 )

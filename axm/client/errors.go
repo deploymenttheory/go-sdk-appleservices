@@ -53,6 +53,16 @@ type Parameter struct {
 	Parameter string `json:"parameter"`
 }
 
+// UnmarshalJSON accepts Apple's string source.parameter and the legacy object
+// representation, preserving the existing public Parameter type.
+func (p *Parameter) UnmarshalJSON(data []byte) error {
+	if len(data) > 0 && data[0] == '"' {
+		return json.Unmarshal(data, &p.Parameter)
+	}
+	type parameter Parameter
+	return json.Unmarshal(data, (*parameter)(p))
+}
+
 // ErrorLinks contains error-related links
 type ErrorLinks struct {
 	About      string                `json:"about,omitempty"`

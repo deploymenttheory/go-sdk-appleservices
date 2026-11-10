@@ -1,10 +1,32 @@
 package client
 
 import (
+	"encoding/json"
 	"testing"
 
 	"go.uber.org/zap"
 )
+
+func TestAPIErrorSourceParameterFormats(t *testing.T) {
+	for _, tc := range []struct{ name, source string }{
+		{"string", `{"parameter":"include"}`},
+		{"legacy object", `{"parameter":{"parameter":"include"}}`},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			var response ErrorResponse
+			data := `{"errors":[{"status":"400","code":"PARAMETER_ERROR.INVALID","detail":"Invalid query parameter","source":` + tc.source + `}]}`
+			if err := json.Unmarshal([]byte(data), &response); err != nil {
+				t.Fatal(err)
+			}
+			if len(response.Errors) != 1 || response.Errors[0].Source == nil || response.Errors[0].Source.Parameter == nil {
+				t.Fatal("missing structured error source")
+			}
+			if got := response.Errors[0].Source.Parameter.Parameter; got != "include" {
+				t.Fatalf("parameter = %q, want include", got)
+			}
+		})
+	}
+}
 
 func TestNewErrorHandler(t *testing.T) {
 	logger := zap.NewNop()

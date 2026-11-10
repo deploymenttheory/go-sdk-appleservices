@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-sdk-appleservices/axm/axm_api/packages"
 	"github.com/deploymenttheory/go-sdk-appleservices/axm/axm_api/usergroups"
 	"github.com/deploymenttheory/go-sdk-appleservices/axm/axm_api/users"
+	"github.com/deploymenttheory/go-sdk-appleservices/axm/axm_api/webhooks"
 	"github.com/deploymenttheory/go-sdk-appleservices/axm/client"
 )
 
@@ -32,6 +33,7 @@ type AXMAPIClient struct {
 	Packages            *packages.Packages
 	Configurations      *configurations.Configurations
 	Blueprints          *blueprints.Blueprints
+	Webhooks            *webhooks.Webhooks
 }
 
 // NewClient creates a new Apple Business Manager client.
@@ -59,6 +61,7 @@ func NewClient(keyID, issuerID string, privateKey any, options ...client.ClientO
 			Packages:            packages.NewService(transport),
 			Configurations:      configurations.NewService(transport),
 			Blueprints:          blueprints.NewService(transport),
+			Webhooks:            webhooks.NewService(transport),
 		},
 	}, nil
 }
@@ -100,6 +103,7 @@ func NewClientFromEnv(options ...client.ClientOption) (*Client, error) {
 			Packages:            packages.NewService(transport),
 			Configurations:      configurations.NewService(transport),
 			Blueprints:          blueprints.NewService(transport),
+			Webhooks:            webhooks.NewService(transport),
 		},
 	}, nil
 }

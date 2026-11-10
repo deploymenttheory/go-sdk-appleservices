@@ -63,7 +63,14 @@ Complete implementation of the [Apple Business Manager API](https://developer.ap
 - Typed event payloads for all 17 identity events added in Apple Business API 2.6, including account, role, identity provider, federation and terms changes
 - Constants for event types, field selection, identity provider vendors and federation protocols
 
+**Webhooks API:** create, list, read, update, and delete webhook configurations;
+inspect deliveries with included events; replay a delivery; and send a test ping.
+Includes automatic pagination and typed request/response models.
+See the [webhook examples](./examples/axm/webhooks) and
+[temporary receiver and lab tests](./axm/acceptance/webhook/README.md).
+
 **Key Features:**
+
 - JWT authentication — built-in Apple JWT token generation and management
 - Structured logging — comprehensive request/response logging with zap
 - Type-safe structured response models
