@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.0](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.11.0...v0.12.0) (2026-11-10)
+
+
+### Features
+
+* **axm:** add webhook management, deliveries and pings ([ec48788](https://github.com/deploymenttheory/go-sdk-appleservices/commit/ec48788fbf8cd40022041229fb30ed561b18e0aa))
+* **axm:** add webhook management, deliveries and pings ([b614f9c](https://github.com/deploymenttheory/go-sdk-appleservices/commit/b614f9c2c7858b1e9015f38e1125cab8516c7add))
+
+
+### Bug Fixes
+
+* **axm:** correlate live webhook ping and replay deliveries ([5e1d37c](https://github.com/deploymenttheory/go-sdk-appleservices/commit/5e1d37c1db13be84957f3a82aded3277549712fe))
+* **axm:** correlate live webhook ping and replay deliveries ([05804f1](https://github.com/deploymenttheory/go-sdk-appleservices/commit/05804f19bafcc2a3aaad67406a05bcc221d43825))
+
 ## [0.11.0](https://github.com/deploymenttheory/go-sdk-appleservices/compare/v0.10.0...v0.11.0) (2026-10-24)
 
 
